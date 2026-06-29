@@ -1,722 +1,749 @@
 <!DOCTYPE html>
-<!-- saved from url=(0070)file:///Users/ghazalmoore/Downloads/mclean-property-report-LATEST.html -->
-<html lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-
-<meta name="viewport" content="width=device-width,initial-scale=1">
-<title>McLean Property Dashboard — June 15, 2026</title>
-<link rel="stylesheet" href="./Index_files/leaflet.min.css">
-<script src="./Index_files/leaflet.min.js"></script>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Costa Rica Family Trip — August 7–16</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
 <style>
-*{box-sizing:border-box;margin:0;padding:0}
-body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;background:#f6f4f1;color:#222;font-size:14px}
-.hdr{background:#1a365d;color:#fff;padding:12px 20px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:8px}
-.hdr-title{font-size:17px;font-weight:700}
-.hdr-stats{font-size:12px;opacity:.8}
-.hdr-btns{display:flex;gap:8px}
-.hbtn{background:rgba(255,255,255,.15);border:1px solid rgba(255,255,255,.3);color:#fff;padding:5px 10px;border-radius:5px;cursor:pointer;font-size:12px}
-.hbtn:hover{background:rgba(255,255,255,.25)}
-#map{height:300px;width:100%}
-/* Saved panel */
-.saved-wrap{background:#fff8f0;border-bottom:2px solid #c8982a;padding:12px 20px}
-.saved-wrap h2{font-size:13px;font-weight:700;color:#7a5a00;margin-bottom:8px;display:flex;align-items:center;gap:8px;flex-wrap:wrap}
-#saved-grid{display:flex;flex-wrap:wrap;gap:8px;margin-top:8px}
-.sc{background:#fff;border:1px solid #e8c87a;border-left:3px solid #c8982a;border-radius:6px;padding:7px 10px;min-width:180px;max-width:320px;position:relative}
-.sc-addr a{color:#1a365d;font-size:12px;font-weight:600;text-decoration:none}
-.sc-addr a:hover{text-decoration:underline}
-.sc-price{font-size:11px;color:#666;margin-top:2px}
-.sc-rm{position:absolute;top:4px;right:6px;background:none;border:none;cursor:pointer;color:#bbb;font-size:14px}
-.sc-rm:hover{color:#e05555}
-.no-saved{color:#999;font-size:12px;font-style:italic}
-/* Columns */
-.cols{display:flex}
-.col{flex:1;min-width:0;padding:16px}
-.col:first-child{border-right:1px solid #ddd}
-.col-hdr{font-size:15px;font-weight:700;color:#1a365d;padding-bottom:8px;border-bottom:3px solid #1a365d;margin-bottom:14px}
-.col-hdr.rent{color:#2b6cb0;border-color:#2b6cb0}
-.col-hdr.sale{color:#276749;border-color:#276749}
-.section-hdr{font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:.5px;color:#7a5a00;background:#fff8f0;border-left:3px solid #c8982a;padding:5px 10px;margin:14px 0 8px;border-radius:0 4px 4px 0}
-.section-hdr.out{color:#666;background:#f5f5f2;border-left-color:#aaa}
-/* Cards */
-.card{background:#fff;border:1px solid #e8e0d4;border-radius:8px;padding:10px;margin-bottom:10px;display:flex;gap:10px;transition:box-shadow .15s}
-.card:hover{box-shadow:0 2px 8px rgba(0,0,0,.1)}
-.card.liked{border-left:4px solid #e53e3e;background:#fff8f8}
-.card-img{width:90px;height:68px;object-fit:cover;border-radius:6px;flex-shrink:0;display:block}
-.card-img-ph{width:90px;height:68px;border-radius:6px;background:#dce8f5;align-items:center;justify-content:center;font-size:26px;flex-shrink:0}
-.card-body{flex:1;min-width:0}
-.card-top{display:flex;align-items:center;justify-content:space-between;margin-bottom:3px}
-.pill-mclean{background:#c6f6d5;color:#276749;font-size:10px;font-weight:700;padding:2px 7px;border-radius:10px}
-.pill-other{background:#fefcbf;color:#7d6608;font-size:10px;font-weight:700;padding:2px 7px;border-radius:10px}
-.like-btn{background:none;border:none;cursor:pointer;font-size:17px;color:#ccc;line-height:1;padding:0}
-.like-btn:hover,.like-btn.liked{color:#e53e3e}
-.card-addr{font-size:13px;font-weight:600;margin-bottom:2px}
-.card-addr a{color:#1a365d;text-decoration:none}
-.card-addr a:hover{text-decoration:underline}
-.card-price{font-size:15px;font-weight:700;color:#276749;margin-bottom:2px}
-.card-price.sale{color:#1a5fa8}
-.card-stats{font-size:11px;color:#777;margin-bottom:5px}
-.btn-view{font-size:11px;background:#1a5fa8;color:#fff;padding:3px 9px;border-radius:4px;text-decoration:none;display:inline-block}
-.btn-view:hover{background:#154d8a}
-/* Sold section */
-#sold-details{margin-top:10px}
-#sold-details summary{cursor:pointer;font-size:11px;color:#aaa;padding:2px 0}
-#sold-grid{display:flex;flex-wrap:wrap;gap:8px;margin-top:8px;opacity:.65}
-.sc.sold{border-left-color:#aaa}
-@media(max-width:700px){.cols{flex-direction:column}.col:first-child{border-right:none;border-bottom:1px solid #ddd}}
+  :root {
+    --jungle: #1a3a2a;
+    --leaf: #2d5a3d;
+    --palm: #4a8c5c;
+    --lime: #7bc67e;
+    --mist: #e8f0e9;
+    --sand: #f5f0e8;
+    --water: #4a7c8a;
+    --sunset: #c4703a;
+    --cream: #faf7f2;
+    --ink: #1a1a18;
+    --warm-grey: #8a8678;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { font-family: 'DM Sans', sans-serif; background: var(--cream); color: var(--ink); font-size: 15px; line-height: 1.7; }
+
+  .hero { background: var(--jungle); color: white; padding: 64px 48px 56px; position: relative; overflow: hidden; }
+  .hero::before { content: ''; position: absolute; inset: 0; background: radial-gradient(ellipse at 80% 20%, rgba(74,140,92,0.3) 0%, transparent 60%), radial-gradient(ellipse at 10% 80%, rgba(74,124,138,0.2) 0%, transparent 50%); }
+  .hero-inner { position: relative; z-index: 1; max-width: 860px; margin: 0 auto; }
+  .hero-eyebrow { font-size: 11px; font-weight: 500; letter-spacing: 3px; text-transform: uppercase; color: var(--lime); margin-bottom: 16px; }
+  .hero h1 { font-family: 'Cormorant Garamond', serif; font-size: clamp(42px, 6vw, 72px); font-weight: 300; line-height: 1.05; margin-bottom: 24px; }
+  .hero h1 em { font-style: italic; color: var(--lime); }
+  .flight-strip { display: flex; gap: 32px; flex-wrap: wrap; margin-top: 32px; padding-top: 32px; border-top: 1px solid rgba(255,255,255,0.15); }
+  .flight-label { font-size: 10px; letter-spacing: 2px; text-transform: uppercase; color: rgba(255,255,255,0.5); margin-bottom: 4px; }
+  .flight-detail { font-size: 14px; color: rgba(255,255,255,0.9); font-weight: 300; }
+  .flight-detail strong { color: white; font-weight: 500; }
+
+  /* TIMELINE BAR */
+  .timeline { background: #0f2419; padding: 28px 48px; }
+  .timeline-inner { max-width: 860px; margin: 0 auto; }
+  .timeline-track { position: relative; display: flex; align-items: flex-start; justify-content: space-between; }
+  .timeline-track::before { content: ''; position: absolute; top: 16px; left: 0; right: 0; height: 2px; background: rgba(255,255,255,0.12); z-index: 0; }
+  .timeline-segment { position: relative; flex: 1; display: flex; flex-direction: column; align-items: center; }
+  .timeline-segment::before { content: ''; position: absolute; top: 16px; left: 0; right: 0; height: 2px; z-index: 0; }
+  .timeline-segment.san-jose::before { background: rgba(138,134,120,0.4); }
+  .timeline-segment.arenal::before { background: rgba(196,112,58,0.6); }
+  .timeline-segment.monteverde::before { background: rgba(74,140,92,0.6); }
+  .timeline-segment.manuel::before { background: rgba(74,124,138,0.6); }
+  .timeline-dot { width: 32px; height: 32px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 14px; position: relative; z-index: 1; flex-shrink: 0; }
+  .timeline-segment.san-jose .timeline-dot { background: rgba(138,134,120,0.3); border: 2px solid rgba(138,134,120,0.5); }
+  .timeline-segment.arenal .timeline-dot { background: rgba(196,112,58,0.3); border: 2px solid var(--sunset); }
+  .timeline-segment.monteverde .timeline-dot { background: rgba(74,140,92,0.3); border: 2px solid var(--palm); }
+  .timeline-segment.manuel .timeline-dot { background: rgba(74,124,138,0.3); border: 2px solid var(--water); }
+  .timeline-segment.flight-home .timeline-dot { background: rgba(123,198,126,0.2); border: 2px solid rgba(123,198,126,0.5); }
+  .timeline-label { margin-top: 10px; text-align: center; }
+  .timeline-place { font-size: 11px; font-weight: 500; letter-spacing: 0.5px; color: white; white-space: nowrap; }
+  .timeline-segment.san-jose .timeline-place { color: rgba(255,255,255,0.5); }
+  .timeline-segment.flight-home .timeline-place { color: rgba(123,198,126,0.8); }
+  .timeline-dates { font-size: 10px; color: rgba(255,255,255,0.35); margin-top: 2px; letter-spacing: 0.3px; white-space: nowrap; }
+  .timeline-nights { display: inline-block; font-size: 9px; font-weight: 500; padding: 1px 6px; border-radius: 10px; margin-top: 4px; letter-spacing: 0.5px; text-transform: uppercase; }
+  .timeline-segment.arenal .timeline-nights { background: rgba(196,112,58,0.2); color: var(--sunset); }
+  .timeline-segment.monteverde .timeline-nights { background: rgba(74,140,92,0.2); color: var(--lime); }
+  .timeline-segment.manuel .timeline-nights { background: rgba(74,124,138,0.2); color: #7ab8c4; }
+
+  .container { max-width: 860px; margin: 0 auto; padding: 0 48px 80px; }
+  .section { margin-top: 56px; }
+  .section-title { font-size: 11px; font-weight: 600; letter-spacing: 4px; text-transform: uppercase; color: var(--palm); margin-bottom: 24px; padding-bottom: 12px; border-bottom: 1px solid var(--mist); }
+
+  .rental-card { background: var(--jungle); color: white; border-radius: 12px; padding: 28px 32px; display: flex; align-items: flex-start; gap: 24px; }
+  .rental-icon { font-size: 32px; flex-shrink: 0; margin-top: 2px; }
+  .rental-card h3 { font-family: 'Cormorant Garamond', serif; font-size: 22px; font-weight: 400; margin-bottom: 6px; }
+  .rental-card a { color: var(--lime); text-decoration: none; font-weight: 500; font-size: 13px; }
+  .rental-card p { color: rgba(255,255,255,0.75); font-size: 13.5px; margin-top: 8px; line-height: 1.6; }
+  .rental-card .warning { margin-top: 10px; background: rgba(196,112,58,0.2); border-left: 3px solid var(--sunset); padding: 8px 12px; border-radius: 0 6px 6px 0; font-size: 13px; color: rgba(255,255,255,0.85); }
+
+  .hotels-grid { display: grid; gap: 16px; }
+  .hotel-card { background: white; border-radius: 12px; padding: 28px 32px; border: 1px solid var(--mist); transition: box-shadow 0.2s; }
+  .hotel-card:hover { box-shadow: 0 8px 32px rgba(26,58,42,0.1); }
+  .hotel-header { display: flex; justify-content: space-between; align-items: flex-start; gap: 16px; margin-bottom: 10px; flex-wrap: wrap; }
+  .hotel-name { font-family: 'Cormorant Garamond', serif; font-size: 24px; font-weight: 400; }
+  .hotel-name a { color: var(--jungle); text-decoration: none; }
+  .hotel-name a:hover { color: var(--palm); }
+  .hotel-meta { text-align: right; flex-shrink: 0; }
+  .hotel-location { font-size: 11px; letter-spacing: 2px; text-transform: uppercase; color: var(--palm); font-weight: 500; }
+  .hotel-price { font-size: 13px; color: var(--warm-grey); margin-top: 2px; }
+  .hotel-desc { font-size: 13.5px; color: #444; line-height: 1.65; border-top: 1px solid var(--mist); padding-top: 12px; margin-top: 12px; }
+  .hotel-badge { display: inline-block; background: var(--mist); color: var(--palm); font-size: 11px; font-weight: 500; padding: 3px 10px; border-radius: 20px; margin-top: 10px; letter-spacing: 0.5px; }
+
+  .beaches-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+  @media (max-width: 600px) { .beaches-grid { grid-template-columns: 1fr; } }
+  .beach-card { background: var(--water); color: white; border-radius: 10px; padding: 20px 22px; }
+  .beach-card h4 { font-family: 'Cormorant Garamond', serif; font-size: 19px; font-weight: 400; margin-bottom: 6px; }
+  .beach-card p { font-size: 13px; line-height: 1.55; color: rgba(255,255,255,0.85); }
+  .beach-note { background: rgba(196,112,58,0.1); border: 1px solid rgba(196,112,58,0.3); border-radius: 8px; padding: 14px 18px; margin-top: 12px; font-size: 13px; color: #555; grid-column: 1 / -1; }
+
+  .day-cards { display: grid; gap: 0; }
+  .day-card { display: grid; grid-template-columns: 80px 1fr; gap: 0; border-bottom: 1px solid var(--mist); padding: 28px 0; }
+  .day-card:last-child { border-bottom: none; }
+  .day-number { font-family: 'Cormorant Garamond', serif; font-size: 48px; font-weight: 300; color: var(--mist); line-height: 1; padding-top: 2px; }
+  .day-content { padding-left: 16px; }
+  .day-header { display: flex; align-items: baseline; gap: 12px; margin-bottom: 12px; flex-wrap: wrap; }
+  .day-date { font-size: 11px; letter-spacing: 2px; text-transform: uppercase; color: var(--warm-grey); font-weight: 500; }
+  .day-title { font-family: 'Cormorant Garamond', serif; font-size: 20px; font-weight: 400; color: var(--jungle); }
+  .activity-list { list-style: none; display: grid; gap: 8px; }
+  .activity-list li { font-size: 13.5px; color: #3a3a38; display: flex; gap: 10px; align-items: flex-start; line-height: 1.5; }
+  .activity-list li .bullet { color: var(--palm); font-size: 16px; flex-shrink: 0; margin-top: 1px; }
+  .activity-list li.resort .bullet { color: var(--water); }
+  .activity-list li.beach .bullet { color: var(--sunset); }
+  .activity-list a { color: var(--jungle); text-decoration: underline; text-decoration-color: var(--lime); text-underline-offset: 2px; font-weight: 500; }
+  .activity-list a:hover { color: var(--palm); }
+  .activity-meta { font-size: 12px; color: var(--warm-grey); margin-top: 2px; display: block; }
+  .resort-tag { display: inline-block; background: rgba(74,124,138,0.1); color: var(--water); font-size: 10px; font-weight: 500; padding: 2px 8px; border-radius: 20px; letter-spacing: 1px; text-transform: uppercase; margin-right: 6px; }
+  .day-note { margin-top: 10px; background: rgba(196,112,58,0.08); border-left: 3px solid var(--sunset); padding: 8px 12px; border-radius: 0 6px 6px 0; font-size: 12.5px; color: #666; font-style: italic; }
+
+  .cost-table { width: 100%; border-collapse: collapse; }
+  .cost-table tr { border-bottom: 1px solid var(--mist); }
+  .cost-table tr:last-child { border-bottom: none; }
+  .cost-table td { padding: 11px 4px; font-size: 13.5px; }
+  .cost-table td:last-child { text-align: right; font-weight: 500; color: var(--jungle); white-space: nowrap; }
+  .cost-table .category { font-size: 11px; letter-spacing: 2px; text-transform: uppercase; color: var(--warm-grey); padding-top: 20px; padding-bottom: 6px; font-weight: 500; }
+  .cost-total { background: var(--jungle); color: white; border-radius: 10px; padding: 20px 28px; display: flex; justify-content: space-between; align-items: center; margin-top: 16px; }
+  .cost-total-label { font-size: 11px; letter-spacing: 3px; text-transform: uppercase; color: rgba(255,255,255,0.6); }
+  .cost-total-amount { font-family: 'Cormorant Garamond', serif; font-size: 36px; font-weight: 300; color: var(--lime); }
+
+  .booking-list { display: grid; gap: 12px; }
+  .booking-item { background: white; border: 1px solid var(--mist); border-radius: 10px; padding: 18px 22px; display: grid; grid-template-columns: 28px 1fr auto; align-items: center; gap: 14px; transition: box-shadow 0.2s; }
+  .booking-item:hover { box-shadow: 0 4px 16px rgba(26,58,42,0.08); }
+  .booking-num { width: 28px; height: 28px; background: var(--jungle); color: white; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 12px; font-weight: 500; flex-shrink: 0; }
+  .booking-info h4 { font-size: 14px; font-weight: 500; color: var(--jungle); margin-bottom: 2px; }
+  .booking-info .when { font-size: 12px; color: var(--warm-grey); }
+  .booking-info .when.urgent { color: var(--sunset); font-weight: 500; }
+  .booking-link a { background: var(--jungle); color: white; text-decoration: none; font-size: 12px; font-weight: 500; padding: 7px 16px; border-radius: 20px; white-space: nowrap; transition: background 0.2s; display: inline-block; }
+  .booking-link a:hover { background: var(--palm); }
+
+  .footer { text-align: center; padding: 40px 48px; border-top: 1px solid var(--mist); font-size: 12px; color: var(--warm-grey); letter-spacing: 1px; }
+
+              /* CAROUSEL */
+  .carousel-section { background: #0f2419; padding: 0 0 32px; }
+  .carousel { max-width: 100%; position: relative; overflow: hidden; }
+  .carousel-track { display: flex; transition: transform 0.5s cubic-bezier(0.4,0,0.2,1); will-change: transform; }
+  .carousel-slide { min-width: 100%; position: relative; height: 420px; flex-shrink: 0; background: #1a3a2a; }
+  .carousel-slide img { width: 100%; height: 100%; object-fit: cover; display: block; }
+  .carousel-overlay { position: absolute; bottom: 0; left: 0; right: 0; padding: 24px 32px; background: linear-gradient(transparent, rgba(10,30,18,0.85)); }
+  .carousel-caption { font-family: 'Cormorant Garamond', serif; font-size: 22px; font-weight: 300; color: white; letter-spacing: 0.5px; }
+  .carousel-sub { font-size: 12px; color: rgba(255,255,255,0.6); letter-spacing: 2px; text-transform: uppercase; margin-top: 4px; }
+  .carousel-btn { position: absolute; top: 50%; transform: translateY(-50%); background: rgba(255,255,255,0.15); border: 1px solid rgba(255,255,255,0.3); color: white; width: 44px; height: 44px; border-radius: 50%; font-size: 18px; cursor: pointer; display: flex; align-items: center; justify-content: center; transition: background 0.2s; backdrop-filter: blur(4px); z-index: 10; }
+  .carousel-btn:hover { background: rgba(255,255,255,0.3); }
+  .carousel-btn.prev { left: 16px; }
+  .carousel-btn.next { right: 16px; }
+  .carousel-dots { display: flex; justify-content: center; gap: 8px; padding: 16px 0 8px; }
+  .carousel-dot { width: 8px; height: 8px; border-radius: 50%; background: rgba(255,255,255,0.25); cursor: pointer; transition: background 0.2s; border: none; }
+  .carousel-dot.active { background: #7bc67e; }
 </style>
 </head>
 <body>
 
-<div class="hdr">
-  <div>
-    <div class="hdr-title">🏡 McLean Property Dashboard — June 15, 2026</div>
-    <div class="hdr-stats">20 for-rent · 15 for-sale · <span id="liked-n">4</span> liked · Scan: June 15, 2026 · Source: Redfin (22101, 22102, 22043)</div>
-  </div>
-  <div class="hdr-btns">
-    <button class="hbtn" onclick="exportLikes()">💾 Export Liked</button>
-    <button class="hbtn" onclick="copyLiked()">📋 Copy Liked</button>
+<div class="hero">
+  <div class="hero-inner">
+    <div class="hero-eyebrow">🌿 Family Adventure</div>
+    <h1>Costa Rica<br><em>August 7–16</em></h1>
+    <div class="flight-strip">
+      <div class="flight-item">
+        <div class="flight-label">Outbound</div>
+        <div class="flight-detail"><strong>IAD → SJO</strong> · Aug 13 · Depart 5:35pm · Arrive 11:40pm</div>
+        <div class="flight-detail" style="color:rgba(255,255,255,0.5);font-size:12px;">Avianca · 1 stop SAL</div>
+      </div>
+      <div class="flight-item">
+        <div class="flight-label">Return</div>
+        <div class="flight-detail"><strong>SJO → IAD</strong> · Aug 16 · Depart 4:35pm · Arrive 2:15am</div>
+        <div class="flight-detail" style="color:rgba(255,255,255,0.5);font-size:12px;">Avianca · Nonstop · 7hr 40min</div>
+      </div>
+      <div class="flight-item">
+        <div class="flight-label">Travelers</div>
+        <div class="flight-detail"><strong>Family of 3</strong> · Mom, Daughter (13), Son (10)</div>
+      </div>
+    </div>
   </div>
 </div>
 
-<div id="map" class="leaflet-container leaflet-touch leaflet-retina leaflet-fade-anim leaflet-grab leaflet-touch-drag leaflet-touch-zoom" tabindex="0" style="position: relative;"><div class="leaflet-pane leaflet-map-pane" style="transform: translate3d(0px, 0px, 0px);"><div class="leaflet-pane leaflet-tile-pane"><div class="leaflet-layer " style="z-index: 1; opacity: 1;"><div class="leaflet-tile-container leaflet-zoom-animated" style="z-index: 18; transform: translate3d(0px, 0px, 0px) scale(1);"><img alt="" src="./Index_files/1566.png" class="leaflet-tile leaflet-tile-loaded" style="width: 256px; height: 256px; transform: translate3d(501px, -16px, 0px); opacity: 1;"><img alt="" src="./Index_files/1566(1).png" class="leaflet-tile leaflet-tile-loaded" style="width: 256px; height: 256px; transform: translate3d(757px, -16px, 0px); opacity: 1;"><img alt="" src="./Index_files/1567.png" class="leaflet-tile leaflet-tile-loaded" style="width: 256px; height: 256px; transform: translate3d(501px, 240px, 0px); opacity: 1;"><img alt="" src="./Index_files/1567(1).png" class="leaflet-tile leaflet-tile-loaded" style="width: 256px; height: 256px; transform: translate3d(757px, 240px, 0px); opacity: 1;"><img alt="" src="./Index_files/1566(2).png" class="leaflet-tile leaflet-tile-loaded" style="width: 256px; height: 256px; transform: translate3d(245px, -16px, 0px); opacity: 1;"><img alt="" src="./Index_files/1566(3).png" class="leaflet-tile leaflet-tile-loaded" style="width: 256px; height: 256px; transform: translate3d(1013px, -16px, 0px); opacity: 1;"><img alt="" src="./Index_files/1567(2).png" class="leaflet-tile leaflet-tile-loaded" style="width: 256px; height: 256px; transform: translate3d(245px, 240px, 0px); opacity: 1;"><img alt="" src="./Index_files/1567(3).png" class="leaflet-tile leaflet-tile-loaded" style="width: 256px; height: 256px; transform: translate3d(1013px, 240px, 0px); opacity: 1;"><img alt="" src="./Index_files/1566(4).png" class="leaflet-tile leaflet-tile-loaded" style="width: 256px; height: 256px; transform: translate3d(-11px, -16px, 0px); opacity: 1;"><img alt="" src="./Index_files/1566(5).png" class="leaflet-tile leaflet-tile-loaded" style="width: 256px; height: 256px; transform: translate3d(1269px, -16px, 0px); opacity: 1;"><img alt="" src="./Index_files/1567(4).png" class="leaflet-tile leaflet-tile-loaded" style="width: 256px; height: 256px; transform: translate3d(-11px, 240px, 0px); opacity: 1;"><img alt="" src="./Index_files/1567(5).png" class="leaflet-tile leaflet-tile-loaded" style="width: 256px; height: 256px; transform: translate3d(1269px, 240px, 0px); opacity: 1;"></div></div></div><div class="leaflet-pane leaflet-overlay-pane"><svg pointer-events="none" class="leaflet-zoom-animated" width="1697" height="360" viewBox="-141 -30 1697 360" style="transform: translate3d(-141px, -30px, 0px);"><g><path class="leaflet-interactive" stroke="#c8982a" stroke-opacity="1" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" stroke-dasharray="6 3" fill="#c8982a" fill-opacity="0.07" fill-rule="evenodd" d="M836 45L865 64L873 53L882 57L897 75L894 83L882 90L879 98L871 102L868 109L862 113L853 124L844 132L838 135L827 150L821 154L815 162L809 165L792 184L774 199L771 206L760 218L754 221L745 233L739 229L728 229L722 225L713 225L707 221L699 221L693 218L684 206L678 210L678 214L681 218L664 203L661 195L664 195L670 191L670 184L672 180L690 158L696 154L678 124L667 124L655 132L637 128L637 113L652 98L675 83L678 72L702 64L707 68L728 57L763 45L780 49L815 42L827 45z" aria-describedby="leaflet-tooltip-129"></path><path class="leaflet-interactive" stroke="#fff" stroke-opacity="1" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" fill="#276749" fill-opacity="0.85" fill-rule="evenodd" d="M715,150a7,7 0 1,0 14,0 a7,7 0 1,0 -14,0 "></path><path class="leaflet-interactive" stroke="#fff" stroke-opacity="1" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" fill="#276749" fill-opacity="0.85" fill-rule="evenodd" d="M712,143a7,7 0 1,0 14,0 a7,7 0 1,0 -14,0 "></path><path class="leaflet-interactive" stroke="#fff" stroke-opacity="1" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" fill="#276749" fill-opacity="0.85" fill-rule="evenodd" d="M709,135a7,7 0 1,0 14,0 a7,7 0 1,0 -14,0 "></path><path class="leaflet-interactive" stroke="#fff" stroke-opacity="1" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" fill="#276749" fill-opacity="0.85" fill-rule="evenodd" d="M706,128a7,7 0 1,0 14,0 a7,7 0 1,0 -14,0 "></path><path class="leaflet-interactive" stroke="#fff" stroke-opacity="1" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" fill="#276749" fill-opacity="0.85" fill-rule="evenodd" d="M703,120a7,7 0 1,0 14,0 a7,7 0 1,0 -14,0 "></path><path class="leaflet-interactive" stroke="#fff" stroke-opacity="1" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" fill="#276749" fill-opacity="0.85" fill-rule="evenodd" d="M700,113a7,7 0 1,0 14,0 a7,7 0 1,0 -14,0 "></path><path class="leaflet-interactive" stroke="#fff" stroke-opacity="1" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" fill="#276749" fill-opacity="0.85" fill-rule="evenodd" d="M697,105a7,7 0 1,0 14,0 a7,7 0 1,0 -14,0 "></path><path class="leaflet-interactive" stroke="#fff" stroke-opacity="1" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" fill="#276749" fill-opacity="0.85" fill-rule="evenodd" d="M695,98a7,7 0 1,0 14,0 a7,7 0 1,0 -14,0 "></path><path class="leaflet-interactive" stroke="#fff" stroke-opacity="1" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" fill="#276749" fill-opacity="0.85" fill-rule="evenodd" d="M692,90a7,7 0 1,0 14,0 a7,7 0 1,0 -14,0 "></path><path class="leaflet-interactive" stroke="#fff" stroke-opacity="1" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" fill="#276749" fill-opacity="0.85" fill-rule="evenodd" d="M689,83a7,7 0 1,0 14,0 a7,7 0 1,0 -14,0 "></path><path class="leaflet-interactive" stroke="#fff" stroke-opacity="1" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" fill="#276749" fill-opacity="0.85" fill-rule="evenodd" d="M686,75a7,7 0 1,0 14,0 a7,7 0 1,0 -14,0 "></path><path class="leaflet-interactive" stroke="#fff" stroke-opacity="1" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" fill="#276749" fill-opacity="0.85" fill-rule="evenodd" d="M683,68a7,7 0 1,0 14,0 a7,7 0 1,0 -14,0 "></path><path class="leaflet-interactive" stroke="#fff" stroke-opacity="1" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" fill="#276749" fill-opacity="0.85" fill-rule="evenodd" d="M680,60a7,7 0 1,0 14,0 a7,7 0 1,0 -14,0 "></path><path class="leaflet-interactive" stroke="#fff" stroke-opacity="1" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" fill="#276749" fill-opacity="0.85" fill-rule="evenodd" d="M677,53a7,7 0 1,0 14,0 a7,7 0 1,0 -14,0 "></path><path class="leaflet-interactive" stroke="#fff" stroke-opacity="1" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" fill="#276749" fill-opacity="0.85" fill-rule="evenodd" d="M674,45a7,7 0 1,0 14,0 a7,7 0 1,0 -14,0 "></path><path class="leaflet-interactive" stroke="#fff" stroke-opacity="1" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" fill="#2b6cb0" fill-opacity="0.85" fill-rule="evenodd" d="M671,38a7,7 0 1,0 14,0 a7,7 0 1,0 -14,0 "></path><path class="leaflet-interactive" stroke="#fff" stroke-opacity="1" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" fill="#2b6cb0" fill-opacity="0.85" fill-rule="evenodd" d="M668,30a7,7 0 1,0 14,0 a7,7 0 1,0 -14,0 "></path><path class="leaflet-interactive" stroke="#fff" stroke-opacity="1" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" fill="#2b6cb0" fill-opacity="0.85" fill-rule="evenodd" d="M665,23a7,7 0 1,0 14,0 a7,7 0 1,0 -14,0 "></path><path class="leaflet-interactive" stroke="#fff" stroke-opacity="1" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" fill="#2b6cb0" fill-opacity="0.85" fill-rule="evenodd" d="M663,15a7,7 0 1,0 14,0 a7,7 0 1,0 -14,0 "></path><path class="leaflet-interactive" stroke="#fff" stroke-opacity="1" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" fill="#2b6cb0" fill-opacity="0.85" fill-rule="evenodd" d="M660,8a7,7 0 1,0 14,0 a7,7 0 1,0 -14,0 "></path><path class="leaflet-interactive" stroke="#fff" stroke-opacity="1" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" fill="#2b6cb0" fill-opacity="0.85" fill-rule="evenodd" d="M657,1a7,7 0 1,0 14,0 a7,7 0 1,0 -14,0 "></path><path class="leaflet-interactive" stroke="#fff" stroke-opacity="1" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" fill="#2b6cb0" fill-opacity="0.85" fill-rule="evenodd" d="M654,-7a7,7 0 1,0 14,0 a7,7 0 1,0 -14,0 "></path><path class="leaflet-interactive" stroke="#fff" stroke-opacity="1" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" fill="#2b6cb0" fill-opacity="0.85" fill-rule="evenodd" d="M651,-14a7,7 0 1,0 14,0 a7,7 0 1,0 -14,0 "></path><path class="leaflet-interactive" stroke="#fff" stroke-opacity="1" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" fill="#2b6cb0" fill-opacity="0.85" fill-rule="evenodd" d="M648,-22a7,7 0 1,0 14,0 a7,7 0 1,0 -14,0 "></path><path class="leaflet-interactive" stroke="#fff" stroke-opacity="1" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" fill="#2b6cb0" fill-opacity="0.85" fill-rule="evenodd" d="M645,-29a7,7 0 1,0 14,0 a7,7 0 1,0 -14,0 "></path><path class="leaflet-interactive" stroke="#fff" stroke-opacity="1" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" fill="#2b6cb0" fill-opacity="0.85" fill-rule="evenodd" d="M642,-37a7,7 0 1,0 14,0 a7,7 0 1,0 -14,0 "></path><path class="leaflet-interactive" stroke="#fff" stroke-opacity="1" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" fill="#2b6cb0" fill-opacity="0.85" fill-rule="evenodd" d="M0 0"></path><path class="leaflet-interactive" stroke="#fff" stroke-opacity="1" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" fill="#2b6cb0" fill-opacity="0.85" fill-rule="evenodd" d="M0 0"></path><path class="leaflet-interactive" stroke="#fff" stroke-opacity="1" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" fill="#2b6cb0" fill-opacity="0.85" fill-rule="evenodd" d="M0 0"></path><path class="leaflet-interactive" stroke="#fff" stroke-opacity="1" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" fill="#2b6cb0" fill-opacity="0.85" fill-rule="evenodd" d="M0 0"></path><path class="leaflet-interactive" stroke="#fff" stroke-opacity="1" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" fill="#2b6cb0" fill-opacity="0.85" fill-rule="evenodd" d="M0 0"></path><path class="leaflet-interactive" stroke="#fff" stroke-opacity="1" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" fill="#2b6cb0" fill-opacity="0.85" fill-rule="evenodd" d="M0 0"></path><path class="leaflet-interactive" stroke="#fff" stroke-opacity="1" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" fill="#2b6cb0" fill-opacity="0.85" fill-rule="evenodd" d="M0 0"></path><path class="leaflet-interactive" stroke="#fff" stroke-opacity="1" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" fill="#2b6cb0" fill-opacity="0.85" fill-rule="evenodd" d="M0 0"></path><path class="leaflet-interactive" stroke="#fff" stroke-opacity="1" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" fill="#2b6cb0" fill-opacity="0.85" fill-rule="evenodd" d="M0 0"></path></g></svg></div><div class="leaflet-pane leaflet-shadow-pane"></div><div class="leaflet-pane leaflet-marker-pane"></div><div class="leaflet-pane leaflet-tooltip-pane"></div><div class="leaflet-pane leaflet-popup-pane"></div><div class="leaflet-proxy leaflet-zoom-animated" style="transform: translate3d(299470px, 401062px, 0px) scale(2048);"></div></div><div class="leaflet-control-container"><div class="leaflet-top leaflet-left"><div class="leaflet-control-zoom leaflet-bar leaflet-control"><a class="leaflet-control-zoom-in" href="file:///Users/ghazalmoore/Downloads/mclean-property-report-LATEST.html#" title="Zoom in" role="button" aria-label="Zoom in" aria-disabled="false"><span aria-hidden="true">+</span></a><a class="leaflet-control-zoom-out" href="file:///Users/ghazalmoore/Downloads/mclean-property-report-LATEST.html#" title="Zoom out" role="button" aria-label="Zoom out" aria-disabled="false"><span aria-hidden="true">−</span></a></div></div><div class="leaflet-top leaflet-right"></div><div class="leaflet-bottom leaflet-left"></div><div class="leaflet-bottom leaflet-right"><div class="leaflet-control-attribution leaflet-control"><a href="https://leafletjs.com/" title="A JavaScript library for interactive maps"><svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="12" height="8" viewBox="0 0 12 8" class="leaflet-attribution-flag"><path fill="#4C7BE1" d="M0 0h12v4H0z"></path><path fill="#FFD500" d="M0 4h12v3H0z"></path><path fill="#E0BC00" d="M0 7h12v1H0z"></path></svg> Leaflet</a> <span aria-hidden="true">|</span> © OpenStreetMap contributors</div></div></div></div>
+<!-- TIMELINE BAR -->
+<div class="timeline">
+  <div class="timeline-inner">
+    <div class="timeline-track">
 
-<div class="saved-wrap">
-  <h2>❤️ Saved Picks (<span id="saved-n">4</span>)
-    <button class="hbtn" style="font-size:11px;color:#7a5a00;background:#fff0d0;border-color:#c8982a" onclick="toggleSaved()">Show/Hide</button>
-    <button class="hbtn" style="font-size:11px;color:#7a5a00;background:#fff0d0;border-color:#c8982a" onclick="exportLikes()">💾 Export</button>
-  </h2>
-  <div id="saved-grid"><div class="sc"><div class="sc-addr"><a href="https://www.redfin.com/VA/Mc-Lean/1601-Colonial-Hills-Dr-22102/home/9833523" target="_blank">1601 Colonial Hills Dr, McLean 22102</a></div><div class="sc-price">$5,500/mo</div><button class="sc-rm" onclick="removeSaved(&#39;1601 Colonial Hills Dr, McLean 22102&#39;)" title="Remove">×</button></div><div class="sc"><div class="sc-addr"><span>1335 Macbeth St, McLean 22102</span></div><div class="sc-price"></div><button class="sc-rm" onclick="removeSaved(&#39;1335 Macbeth St, McLean 22102&#39;)" title="Remove">×</button></div><div class="sc"><div class="sc-addr"><span>2212 Reddfield Dr, Falls Church 22043</span></div><div class="sc-price"></div><button class="sc-rm" onclick="removeSaved(&#39;2212 Reddfield Dr, Falls Church 22043&#39;)" title="Remove">×</button></div><div class="sc"><div class="sc-addr"><span>2406 Claremont Dr, Falls Church 22043</span></div><div class="sc-price"></div><button class="sc-rm" onclick="removeSaved(&#39;2406 Claremont Dr, Falls Church 22043&#39;)" title="Remove">×</button></div></div>
-  <div class="no-saved" id="no-saved" style="display: none;">No liked listings yet — click ♡ on any card below.</div>
-  <details id="sold-details">
-    <summary>Sold / No Longer Available (<span id="sold-n">1</span>)</summary>
-    <div id="sold-grid"><div class="sc sold"><div class="sc-addr"><span>2023 Freedom Ln, Falls Church 22043</span></div><div class="sc-price" style="color:#999">Sold — 2026-06-14</div></div></div>
-  </details>
+      <div class="timeline-segment san-jose">
+        <div class="timeline-dot">✈</div>
+        <div class="timeline-label">
+          <div class="timeline-place">San José</div>
+          <div class="timeline-dates">Aug 13</div>
+        </div>
+      </div>
+
+      <div class="timeline-segment arenal">
+        <div class="timeline-dot">🌋</div>
+        <div class="timeline-label">
+          <div class="timeline-place">Arenal</div>
+          <div class="timeline-dates">Aug 13–15</div>
+          <div class="timeline-nights">3 nights</div>
+        </div>
+      </div>
+
+      <div class="timeline-segment monteverde">
+        <div class="timeline-dot">🌿</div>
+        <div class="timeline-label">
+          <div class="timeline-place">Monteverde</div>
+          <div class="timeline-dates">Aug 11–12</div>
+          <div class="timeline-nights">2 nights</div>
+        </div>
+      </div>
+
+      <div class="timeline-segment manuel">
+        <div class="timeline-dot">🏖️</div>
+        <div class="timeline-label">
+          <div class="timeline-place">Manuel Antonio</div>
+          <div class="timeline-dates">Aug 13–15</div>
+          <div class="timeline-nights">3 nights</div>
+        </div>
+      </div>
+
+      <div class="timeline-segment flight-home">
+        <div class="timeline-dot">✈</div>
+        <div class="timeline-label">
+          <div class="timeline-place">Home</div>
+          <div class="timeline-dates">Aug 16</div>
+        </div>
+      </div>
+
+    </div>
+  </div>
 </div>
 
-<div class="cols">
-<div class="col">
-<div class="col-hdr rent">🏠 For Rent — 20 listings</div>
-<div class="section-hdr">✅ McLean HS Zone — 4+ Beds</div>
-<div class="card">
-  <a href="https://www.redfin.com/VA/Mc-Lean/6872-Melrose-Dr-22101/home/9390369" target="_blank"><img class="card-img" src="./Index_files/genIsl.0_1.webp" alt="6872 Melrose Dr, Mc Lean, VA 22101" loading="lazy" onerror="this.style.display=&#39;none&#39;;this.nextElementSibling.style.display=&#39;flex&#39;"><div class="card-img-ph" style="display:none">🏠</div></a>
-  <div class="card-body">
-    <div class="card-top">
-      <span class="pill-mclean">✅ McLean HS</span>
-      <button class="like-btn" onclick="toggleLike(this,&#39;6872 Melrose Dr, Mc Lean, VA 22101&#39;,&#39;$5,750/mo&#39;,&#39;https://www.redfin.com/VA/Mc-Lean/6872-Melrose-Dr-22101/home/9390369&#39;)" title="Save/unsave">♡</button>
+
+
+
+
+
+
+
+<!-- CAROUSEL -->
+<div class="carousel-section">
+  <div class="carousel" id="mainCarousel">
+    <div class="carousel-track" id="carouselTrack">
+      <div class="carousel-slide">
+        <img src="arenal.jpg" alt="Arenal Volcano">
+        <div class="carousel-overlay">
+          <div class="carousel-caption">Arenal Volcano</div>
+          <div class="carousel-sub">🌋 La Fortuna · Days 2–4</div>
+        </div>
+      </div>
+      <div class="carousel-slide">
+        <img src="tubing.jpg" alt="Arenal River Tubing">
+        <div class="carousel-overlay">
+          <div class="carousel-caption">Arenal River Tubing</div>
+          <div class="carousel-sub">🛟 The Springs Resort · Day 4</div>
+        </div>
+      </div>
+      <div class="carousel-slide">
+        <img src="cloudforest.jpg" alt="Monteverde Cloud Forest">
+        <div class="carousel-overlay">
+          <div class="carousel-caption">Monteverde Cloud Forest</div>
+          <div class="carousel-sub">🌿 Monteverde · Days 5–6</div>
+        </div>
+      </div>
+      <div class="carousel-slide">
+        <img src="zipline.webp" alt="Zip-lining the Cloud Forest">
+        <div class="carousel-overlay">
+          <div class="carousel-caption">Zip-lining the Cloud Forest</div>
+          <div class="carousel-sub">🪂 100% Aventura · Monteverde · Day 6</div>
+        </div>
+      </div>
+      <div class="carousel-slide">
+        <img src="waterfall.jpg" alt="La Fortuna Waterfall">
+        <div class="carousel-overlay">
+          <div class="carousel-caption">La Fortuna Waterfall</div>
+          <div class="carousel-sub">💧 La Fortuna · Day 3</div>
+        </div>
+      </div>
+      <div class="carousel-slide">
+        <img src="tabacon.jpg" alt="Tabacón Hot Springs">
+        <div class="carousel-overlay">
+          <div class="carousel-caption">Tabacón Hot Springs</div>
+          <div class="carousel-sub">♨️ Arenal · Day 4 Evening</div>
+        </div>
+      </div>
+      <div class="carousel-slide">
+        <img src="beach.jpg" alt="Manuel Antonio Beach">
+        <div class="carousel-overlay">
+          <div class="carousel-caption">Manuel Antonio Beach</div>
+          <div class="carousel-sub">🏖️ Manuel Antonio National Park · Days 8–9</div>
+        </div>
+      </div>
+      <div class="carousel-slide">
+        <img src="sloths.webp" alt="Sloths in the Wild">
+        <div class="carousel-overlay">
+          <div class="carousel-caption">Sloths in the Wild</div>
+          <div class="carousel-sub">🦥 Manuel Antonio · Days 8–9</div>
+        </div>
+      </div>
     </div>
-    <div class="card-addr"><a href="https://www.redfin.com/VA/Mc-Lean/6872-Melrose-Dr-22101/home/9390369" target="_blank">6872 Melrose Dr, Mc Lean, VA 22101</a></div>
-    <div class="card-price">$5,750/mo</div>
-    <div class="card-stats">5 bd · 3.5 ba · 2,904 sqft · SFH</div>
-    <div class="card-actions"><a href="https://www.redfin.com/VA/Mc-Lean/6872-Melrose-Dr-22101/home/9390369" target="_blank" class="btn-view">View on Redfin →</a></div>
+    <button class="carousel-btn prev" onclick="moveCarousel(-1)">&#8249;</button>
+    <button class="carousel-btn next" onclick="moveCarousel(1)">&#8250;</button>
   </div>
-</div>
-<div class="card">
-  <a href="https://www.redfin.com/VA/Mc-Lean/1214-Colonial-Rd-22101/home/9392915" target="_blank"><img class="card-img" src="./Index_files/genIsl(1).0_1.webp" alt="1214 Colonial Rd, Mc Lean, VA 22101" loading="lazy" onerror="this.style.display=&#39;none&#39;;this.nextElementSibling.style.display=&#39;flex&#39;"><div class="card-img-ph" style="display:none">🏠</div></a>
-  <div class="card-body">
-    <div class="card-top">
-      <span class="pill-mclean">✅ McLean HS</span>
-      <button class="like-btn" onclick="toggleLike(this,&#39;1214 Colonial Rd, Mc Lean, VA 22101&#39;,&#39;$5,500/mo&#39;,&#39;https://www.redfin.com/VA/Mc-Lean/1214-Colonial-Rd-22101/home/9392915&#39;)" title="Save/unsave">♡</button>
-    </div>
-    <div class="card-addr"><a href="https://www.redfin.com/VA/Mc-Lean/1214-Colonial-Rd-22101/home/9392915" target="_blank">1214 Colonial Rd, Mc Lean, VA 22101</a></div>
-    <div class="card-price">$5,500/mo</div>
-    <div class="card-stats">5 bd · 4 ba · 1,920 sqft · SFH</div>
-    <div class="card-actions"><a href="https://www.redfin.com/VA/Mc-Lean/1214-Colonial-Rd-22101/home/9392915" target="_blank" class="btn-view">View on Redfin →</a></div>
+  <div class="carousel-dots" id="carouselDots">
+    <button class="carousel-dot active" onclick="goToSlide(0)"></button>
+    <button class="carousel-dot" onclick="goToSlide(1)"></button>
+    <button class="carousel-dot" onclick="goToSlide(2)"></button>
+    <button class="carousel-dot" onclick="goToSlide(3)"></button>
+    <button class="carousel-dot" onclick="goToSlide(4)"></button>
+    <button class="carousel-dot" onclick="goToSlide(5)"></button>
+    <button class="carousel-dot" onclick="goToSlide(6)"></button>
+    <button class="carousel-dot" onclick="goToSlide(7)"></button>
   </div>
-</div>
-<div class="card">
-  <a href="https://www.redfin.com/VA/Mc-Lean/1436-Ironwood-Dr-22101/home/9409570" target="_blank"><img class="card-img" src="./Index_files/genIsl(2).0_1.webp" alt="1436 Ironwood Dr, Mc Lean, VA 22101" loading="lazy" onerror="this.style.display=&#39;none&#39;;this.nextElementSibling.style.display=&#39;flex&#39;"><div class="card-img-ph" style="display:none">🏠</div></a>
-  <div class="card-body">
-    <div class="card-top">
-      <span class="pill-mclean">✅ McLean HS</span>
-      <button class="like-btn" onclick="toggleLike(this,&#39;1436 Ironwood Dr, Mc Lean, VA 22101&#39;,&#39;$5,600/mo&#39;,&#39;https://www.redfin.com/VA/Mc-Lean/1436-Ironwood-Dr-22101/home/9409570&#39;)" title="Save/unsave">♡</button>
-    </div>
-    <div class="card-addr"><a href="https://www.redfin.com/VA/Mc-Lean/1436-Ironwood-Dr-22101/home/9409570" target="_blank">1436 Ironwood Dr, Mc Lean, VA 22101</a></div>
-    <div class="card-price">$5,600/mo</div>
-    <div class="card-stats">4 bd · 3.5 ba · 2,688 sqft · SFH</div>
-    <div class="card-actions"><a href="https://www.redfin.com/VA/Mc-Lean/1436-Ironwood-Dr-22101/home/9409570" target="_blank" class="btn-view">View on Redfin →</a></div>
-  </div>
-</div>
-<div class="card">
-  <a href="https://www.redfin.com/VA/Mc-Lean/6608-Fairlawn-Dr-22101/home/9402941" target="_blank"><img class="card-img" src="./Index_files/genIsl.0_2.webp" alt="6608 Fairlawn Dr, Mc Lean, VA 22101" loading="lazy" onerror="this.style.display=&#39;none&#39;;this.nextElementSibling.style.display=&#39;flex&#39;"><div class="card-img-ph" style="display:none">🏠</div></a>
-  <div class="card-body">
-    <div class="card-top">
-      <span class="pill-mclean">✅ McLean HS</span>
-      <button class="like-btn" onclick="toggleLike(this,&#39;6608 Fairlawn Dr, Mc Lean, VA 22101&#39;,&#39;$5,100/mo&#39;,&#39;https://www.redfin.com/VA/Mc-Lean/6608-Fairlawn-Dr-22101/home/9402941&#39;)" title="Save/unsave">♡</button>
-    </div>
-    <div class="card-addr"><a href="https://www.redfin.com/VA/Mc-Lean/6608-Fairlawn-Dr-22101/home/9402941" target="_blank">6608 Fairlawn Dr, Mc Lean, VA 22101</a></div>
-    <div class="card-price">$5,100/mo</div>
-    <div class="card-stats">4 bd · 3 ba · 2,263 sqft · SFH</div>
-    <div class="card-actions"><a href="https://www.redfin.com/VA/Mc-Lean/6608-Fairlawn-Dr-22101/home/9402941" target="_blank" class="btn-view">View on Redfin →</a></div>
-  </div>
-</div>
-<div class="card">
-  <a href="https://www.redfin.com/VA/Mc-Lean/6933-Tyndale-St-22101/home/9404921" target="_blank"><img class="card-img" src="./Index_files/genIsl(3).0_1.webp" alt="6933 Tyndale St, Mc Lean, VA 22101" loading="lazy" onerror="this.style.display=&#39;none&#39;;this.nextElementSibling.style.display=&#39;flex&#39;"><div class="card-img-ph" style="display:none">🏠</div></a>
-  <div class="card-body">
-    <div class="card-top">
-      <span class="pill-mclean">✅ McLean HS</span>
-      <button class="like-btn" onclick="toggleLike(this,&#39;6933 Tyndale St, Mc Lean, VA 22101&#39;,&#39;$4,900/mo&#39;,&#39;https://www.redfin.com/VA/Mc-Lean/6933-Tyndale-St-22101/home/9404921&#39;)" title="Save/unsave">♡</button>
-    </div>
-    <div class="card-addr"><a href="https://www.redfin.com/VA/Mc-Lean/6933-Tyndale-St-22101/home/9404921" target="_blank">6933 Tyndale St, Mc Lean, VA 22101</a></div>
-    <div class="card-price">$4,900/mo</div>
-    <div class="card-stats">5 bd · 2.5 ba · 2,576 sqft · SFH</div>
-    <div class="card-actions"><a href="https://www.redfin.com/VA/Mc-Lean/6933-Tyndale-St-22101/home/9404921" target="_blank" class="btn-view">View on Redfin →</a></div>
-  </div>
-</div>
-<div class="section-hdr">✅ McLean HS Zone — 3 Beds</div>
-<div class="card">
-  <a href="https://www.redfin.com/VA/Mc-Lean/1427-McLean-Mews-Ct-22101/home/9394680" target="_blank"><img class="card-img" src="./Index_files/genIsl(4).0_1.webp" alt="1427 McLean Mews Ct, Mc Lean, VA 22101" loading="lazy" onerror="this.style.display=&#39;none&#39;;this.nextElementSibling.style.display=&#39;flex&#39;"><div class="card-img-ph" style="display:none">🏠</div></a>
-  <div class="card-body">
-    <div class="card-top">
-      <span class="pill-mclean">✅ McLean HS</span>
-      <button class="like-btn" onclick="toggleLike(this,&#39;1427 McLean Mews Ct, Mc Lean, VA 22101&#39;,&#39;$4,995/mo&#39;,&#39;https://www.redfin.com/VA/Mc-Lean/1427-McLean-Mews-Ct-22101/home/9394680&#39;)" title="Save/unsave">♡</button>
-    </div>
-    <div class="card-addr"><a href="https://www.redfin.com/VA/Mc-Lean/1427-McLean-Mews-Ct-22101/home/9394680" target="_blank">1427 McLean Mews Ct, Mc Lean, VA 22101</a></div>
-    <div class="card-price">$4,995/mo</div>
-    <div class="card-stats">3 bd · 3.5 ba · 2,174 sqft · Townhouse</div>
-    <div class="card-actions"><a href="https://www.redfin.com/VA/Mc-Lean/1427-McLean-Mews-Ct-22101/home/9394680" target="_blank" class="btn-view">View on Redfin →</a></div>
-  </div>
-</div>
-<div class="card">
-  <a href="https://www.redfin.com/VA/McLean/1433-McLean-Mews-Ct-22101/home/9394691" target="_blank"><img class="card-img" src="./Index_files/genIsl(5).0_1.webp" alt="1433 McLean Mews Ct, Mc Lean, VA 22101" loading="lazy" onerror="this.style.display=&#39;none&#39;;this.nextElementSibling.style.display=&#39;flex&#39;"><div class="card-img-ph" style="display:none">🏠</div></a>
-  <div class="card-body">
-    <div class="card-top">
-      <span class="pill-mclean">✅ McLean HS</span>
-      <button class="like-btn" onclick="toggleLike(this,&#39;1433 McLean Mews Ct, Mc Lean, VA 22101&#39;,&#39;$4,990/mo&#39;,&#39;https://www.redfin.com/VA/McLean/1433-McLean-Mews-Ct-22101/home/9394691&#39;)" title="Save/unsave">♡</button>
-    </div>
-    <div class="card-addr"><a href="https://www.redfin.com/VA/McLean/1433-McLean-Mews-Ct-22101/home/9394691" target="_blank">1433 McLean Mews Ct, Mc Lean, VA 22101</a></div>
-    <div class="card-price">$4,990/mo</div>
-    <div class="card-stats">3 bd · 2.5 ba · 2,174 sqft · Townhouse</div>
-    <div class="card-actions"><a href="https://www.redfin.com/VA/McLean/1433-McLean-Mews-Ct-22101/home/9394691" target="_blank" class="btn-view">View on Redfin →</a></div>
-  </div>
-</div>
-<div class="card">
-  <a href="https://www.redfin.com/VA/Mc-Lean/1456-Hampton-Hill-Cir-22101/home/9394999" target="_blank"><img class="card-img" src="./Index_files/genIsl(6).0_1.webp" alt="1456 Hampton Hill Cir, Mc Lean, VA 22101" loading="lazy" onerror="this.style.display=&#39;none&#39;;this.nextElementSibling.style.display=&#39;flex&#39;"><div class="card-img-ph" style="display:none">🏠</div></a>
-  <div class="card-body">
-    <div class="card-top">
-      <span class="pill-mclean">✅ McLean HS</span>
-      <button class="like-btn" onclick="toggleLike(this,&#39;1456 Hampton Hill Cir, Mc Lean, VA 22101&#39;,&#39;$5,450/mo&#39;,&#39;https://www.redfin.com/VA/Mc-Lean/1456-Hampton-Hill-Cir-22101/home/9394999&#39;)" title="Save/unsave">♡</button>
-    </div>
-    <div class="card-addr"><a href="https://www.redfin.com/VA/Mc-Lean/1456-Hampton-Hill-Cir-22101/home/9394999" target="_blank">1456 Hampton Hill Cir, Mc Lean, VA 22101</a></div>
-    <div class="card-price">$5,450/mo</div>
-    <div class="card-stats">3 bd · 3.5 ba · 2,811 sqft · Townhouse</div>
-    <div class="card-actions"><a href="https://www.redfin.com/VA/Mc-Lean/1456-Hampton-Hill-Cir-22101/home/9394999" target="_blank" class="btn-view">View on Redfin →</a></div>
-  </div>
-</div>
-<div class="card">
-  <a href="https://www.redfin.com/VA/Mc-Lean/6218-Nelway-Dr-22101/home/9412783" target="_blank"><img class="card-img" src="./Index_files/genIsl(7).0_1.webp" alt="6218 Nelway Dr, Mc Lean, VA 22101" loading="lazy" onerror="this.style.display=&#39;none&#39;;this.nextElementSibling.style.display=&#39;flex&#39;"><div class="card-img-ph" style="display:none">🏠</div></a>
-  <div class="card-body">
-    <div class="card-top">
-      <span class="pill-mclean">✅ McLean HS</span>
-      <button class="like-btn" onclick="toggleLike(this,&#39;6218 Nelway Dr, Mc Lean, VA 22101&#39;,&#39;$4,900/mo&#39;,&#39;https://www.redfin.com/VA/Mc-Lean/6218-Nelway-Dr-22101/home/9412783&#39;)" title="Save/unsave">♡</button>
-    </div>
-    <div class="card-addr"><a href="https://www.redfin.com/VA/Mc-Lean/6218-Nelway-Dr-22101/home/9412783" target="_blank">6218 Nelway Dr, Mc Lean, VA 22101</a></div>
-    <div class="card-price">$4,900/mo</div>
-    <div class="card-stats">3 bd · 2.5 ba · 2,751 sqft · SFH</div>
-    <div class="card-actions"><a href="https://www.redfin.com/VA/Mc-Lean/6218-Nelway-Dr-22101/home/9412783" target="_blank" class="btn-view">View on Redfin →</a></div>
-  </div>
-</div>
-<div class="card">
-  <a href="https://www.redfin.com/VA/Mc-Lean/6322-Kellogg-Dr-22101/home/9413101" target="_blank"><img class="card-img" src="./Index_files/genIsl(8).0_1.webp" alt="6322 Kellogg Dr, Mc Lean, VA 22101" loading="lazy" onerror="this.style.display=&#39;none&#39;;this.nextElementSibling.style.display=&#39;flex&#39;"><div class="card-img-ph" style="display:none">🏠</div></a>
-  <div class="card-body">
-    <div class="card-top">
-      <span class="pill-mclean">✅ McLean HS</span>
-      <button class="like-btn" onclick="toggleLike(this,&#39;6322 Kellogg Dr, Mc Lean, VA 22101&#39;,&#39;$5,750/mo&#39;,&#39;https://www.redfin.com/VA/Mc-Lean/6322-Kellogg-Dr-22101/home/9413101&#39;)" title="Save/unsave">♡</button>
-    </div>
-    <div class="card-addr"><a href="https://www.redfin.com/VA/Mc-Lean/6322-Kellogg-Dr-22101/home/9413101" target="_blank">6322 Kellogg Dr, Mc Lean, VA 22101</a></div>
-    <div class="card-price">$5,750/mo</div>
-    <div class="card-stats">3 bd · 3 ba · 1,810 sqft · SFH</div>
-    <div class="card-actions"><a href="https://www.redfin.com/VA/Mc-Lean/6322-Kellogg-Dr-22101/home/9413101" target="_blank" class="btn-view">View on Redfin →</a></div>
-  </div>
-</div>
-<div class="card">
-  <a href="https://www.redfin.com/VA/Mc-Lean/7022-Little-Leaf-Linden-Ln-22101/home/21706406" target="_blank"><img class="card-img" src="./Index_files/genIsl(9).0_1.webp" alt="7022 Little Leaf Linden Ln, Mc Lean, VA 22101" loading="lazy" onerror="this.style.display=&#39;none&#39;;this.nextElementSibling.style.display=&#39;flex&#39;"><div class="card-img-ph" style="display:none">🏠</div></a>
-  <div class="card-body">
-    <div class="card-top">
-      <span class="pill-mclean">✅ McLean HS</span>
-      <button class="like-btn" onclick="toggleLike(this,&#39;7022 Little Leaf Linden Ln, Mc Lean, VA 22101&#39;,&#39;$6,000/mo&#39;,&#39;https://www.redfin.com/VA/Mc-Lean/7022-Little-Leaf-Linden-Ln-22101/home/21706406&#39;)" title="Save/unsave">♡</button>
-    </div>
-    <div class="card-addr"><a href="https://www.redfin.com/VA/Mc-Lean/7022-Little-Leaf-Linden-Ln-22101/home/21706406" target="_blank">7022 Little Leaf Linden Ln, Mc Lean, VA 22101</a></div>
-    <div class="card-price">$6,000/mo</div>
-    <div class="card-stats">3 bd · 3.5 ba · 3,225 sqft · SFH</div>
-    <div class="card-actions"><a href="https://www.redfin.com/VA/Mc-Lean/7022-Little-Leaf-Linden-Ln-22101/home/21706406" target="_blank" class="btn-view">View on Redfin →</a></div>
-  </div>
-</div>
-<div class="card">
-  <a href="https://www.redfin.com/VA/Falls-Church/2007-Mayfair-McLean-Ct-22043/home/9477729" target="_blank"><img class="card-img" src="./Index_files/genIsl(10).0_1.webp" alt="2007 Mayfair McLean Ct, Falls Church, VA 22043" loading="lazy" onerror="this.style.display=&#39;none&#39;;this.nextElementSibling.style.display=&#39;flex&#39;"><div class="card-img-ph" style="display:none">🏠</div></a>
-  <div class="card-body">
-    <div class="card-top">
-      <span class="pill-mclean">✅ McLean HS</span>
-      <button class="like-btn" onclick="toggleLike(this,&#39;2007 Mayfair McLean Ct, Falls Church, VA 22043&#39;,&#39;$5,695/mo&#39;,&#39;https://www.redfin.com/VA/Falls-Church/2007-Mayfair-McLean-Ct-22043/home/9477729&#39;)" title="Save/unsave">♡</button>
-    </div>
-    <div class="card-addr"><a href="https://www.redfin.com/VA/Falls-Church/2007-Mayfair-McLean-Ct-22043/home/9477729" target="_blank">2007 Mayfair McLean Ct, Falls Church, VA 22043</a></div>
-    <div class="card-price">$5,695/mo</div>
-    <div class="card-stats">3 bd · 3.5 ba · 2,732 sqft · Townhouse</div>
-    <div class="card-actions"><a href="https://www.redfin.com/VA/Falls-Church/2007-Mayfair-McLean-Ct-22043/home/9477729" target="_blank" class="btn-view">View on Redfin →</a></div>
-  </div>
-</div>
-<div class="card">
-  <a href="https://www.redfin.com/VA/Mc-Lean/1607-Seneca-Ave-22102/home/9830535" target="_blank"><img class="card-img" src="./Index_files/genIsl(11).0_1.webp" alt="1607 Seneca Ave, Mc Lean, VA 22102" loading="lazy" onerror="this.style.display=&#39;none&#39;;this.nextElementSibling.style.display=&#39;flex&#39;"><div class="card-img-ph" style="display:none">🏠</div></a>
-  <div class="card-body">
-    <div class="card-top">
-      <span class="pill-mclean">✅ McLean HS</span>
-      <button class="like-btn" onclick="toggleLike(this,&#39;1607 Seneca Ave, Mc Lean, VA 22102&#39;,&#39;$5,400/mo&#39;,&#39;https://www.redfin.com/VA/Mc-Lean/1607-Seneca-Ave-22102/home/9830535&#39;)" title="Save/unsave">♡</button>
-    </div>
-    <div class="card-addr"><a href="https://www.redfin.com/VA/Mc-Lean/1607-Seneca-Ave-22102/home/9830535" target="_blank">1607 Seneca Ave, Mc Lean, VA 22102</a></div>
-    <div class="card-price">$5,400/mo</div>
-    <div class="card-stats">3 bd · 2.5 ba · 3,052 sqft · Townhouse</div>
-    <div class="card-actions"><a href="https://www.redfin.com/VA/Mc-Lean/1607-Seneca-Ave-22102/home/9830535" target="_blank" class="btn-view">View on Redfin →</a></div>
-  </div>
-</div>
-<div class="card">
-  <a href="https://www.redfin.com/VA/Mc-Lean/1619-Seneca-Ave-22102/home/9830550" target="_blank"><img class="card-img" src="./Index_files/genIsl(12).0_1.webp" alt="1619 Seneca Ave, Mc Lean, VA 22102" loading="lazy" onerror="this.style.display=&#39;none&#39;;this.nextElementSibling.style.display=&#39;flex&#39;"><div class="card-img-ph" style="display:none">🏠</div></a>
-  <div class="card-body">
-    <div class="card-top">
-      <span class="pill-mclean">✅ McLean HS</span>
-      <button class="like-btn" onclick="toggleLike(this,&#39;1619 Seneca Ave, Mc Lean, VA 22102&#39;,&#39;$5,750/mo&#39;,&#39;https://www.redfin.com/VA/Mc-Lean/1619-Seneca-Ave-22102/home/9830550&#39;)" title="Save/unsave">♡</button>
-    </div>
-    <div class="card-addr"><a href="https://www.redfin.com/VA/Mc-Lean/1619-Seneca-Ave-22102/home/9830550" target="_blank">1619 Seneca Ave, Mc Lean, VA 22102</a></div>
-    <div class="card-price">$5,750/mo</div>
-    <div class="card-stats">3 bd · 3.5 ba · 2,195 sqft · Townhouse</div>
-    <div class="card-actions"><a href="https://www.redfin.com/VA/Mc-Lean/1619-Seneca-Ave-22102/home/9830550" target="_blank" class="btn-view">View on Redfin →</a></div>
-  </div>
-</div>
-<div class="card">
-  <a href="https://www.redfin.com/VA/Mc-Lean/7489-Carriage-Hills-Dr-22102/home/9833507" target="_blank"><img class="card-img" src="./Index_files/genIsl(13).0_1.webp" alt="7489 Carriage Hills Dr, Mc Lean, VA 22102" loading="lazy" onerror="this.style.display=&#39;none&#39;;this.nextElementSibling.style.display=&#39;flex&#39;"><div class="card-img-ph" style="display:none">🏠</div></a>
-  <div class="card-body">
-    <div class="card-top">
-      <span class="pill-mclean">✅ McLean HS</span>
-      <button class="like-btn" onclick="toggleLike(this,&#39;7489 Carriage Hills Dr, Mc Lean, VA 22102&#39;,&#39;$5,300/mo&#39;,&#39;https://www.redfin.com/VA/Mc-Lean/7489-Carriage-Hills-Dr-22102/home/9833507&#39;)" title="Save/unsave">♡</button>
-    </div>
-    <div class="card-addr"><a href="https://www.redfin.com/VA/Mc-Lean/7489-Carriage-Hills-Dr-22102/home/9833507" target="_blank">7489 Carriage Hills Dr, Mc Lean, VA 22102</a></div>
-    <div class="card-price">$5,300/mo</div>
-    <div class="card-stats">3 bd · 3.5 ba · 2,400 sqft · Townhouse</div>
-    <div class="card-actions"><a href="https://www.redfin.com/VA/Mc-Lean/7489-Carriage-Hills-Dr-22102/home/9833507" target="_blank" class="btn-view">View on Redfin →</a></div>
-  </div>
-</div>
-<div class="card liked">
-  <a href="https://www.redfin.com/VA/Mc-Lean/1601-Colonial-Hills-Dr-22102/home/9833523" target="_blank"><img class="card-img" src="./Index_files/genIsl(14).0_1.webp" alt="1601 Colonial Hills Dr, Mc Lean, VA 22102" loading="lazy" onerror="this.style.display=&#39;none&#39;;this.nextElementSibling.style.display=&#39;flex&#39;"><div class="card-img-ph" style="display:none">🏠</div></a>
-  <div class="card-body">
-    <div class="card-top">
-      <span class="pill-mclean">✅ McLean HS</span>
-      <button class="like-btn liked" onclick="toggleLike(this,&#39;1601 Colonial Hills Dr, Mc Lean, VA 22102&#39;,&#39;$5,500/mo&#39;,&#39;https://www.redfin.com/VA/Mc-Lean/1601-Colonial-Hills-Dr-22102/home/9833523&#39;)" title="Save/unsave">♥</button>
-    </div>
-    <div class="card-addr"><a href="https://www.redfin.com/VA/Mc-Lean/1601-Colonial-Hills-Dr-22102/home/9833523" target="_blank">1601 Colonial Hills Dr, Mc Lean, VA 22102</a></div>
-    <div class="card-price">$5,500/mo</div>
-    <div class="card-stats">3 bd · 3.5 ba · 2,540 sqft · Townhouse</div>
-    <div class="card-actions"><a href="https://www.redfin.com/VA/Mc-Lean/1601-Colonial-Hills-Dr-22102/home/9833523" target="_blank" class="btn-view">View on Redfin →</a></div>
-  </div>
-</div>
-<div class="section-hdr out">📍 Outside McLean HS Zone</div>
-<div class="card">
-  <a href="https://www.redfin.com/VA/Falls-Church/2271-Providence-St-22043/home/9468362" target="_blank"><img class="card-img" src="./Index_files/genIsl(15).0_1.webp" alt="2271 Providence St, Falls Church, VA 22043" loading="lazy" onerror="this.style.display=&#39;none&#39;;this.nextElementSibling.style.display=&#39;flex&#39;"><div class="card-img-ph" style="display:none">🏠</div></a>
-  <div class="card-body">
-    <div class="card-top">
-      <span class="pill-other">📍 Outside McLean HS</span>
-      <button class="like-btn" onclick="toggleLike(this,&#39;2271 Providence St, Falls Church, VA 22043&#39;,&#39;$5,200/mo&#39;,&#39;https://www.redfin.com/VA/Falls-Church/2271-Providence-St-22043/home/9468362&#39;)" title="Save/unsave">♡</button>
-    </div>
-    <div class="card-addr"><a href="https://www.redfin.com/VA/Falls-Church/2271-Providence-St-22043/home/9468362" target="_blank">2271 Providence St, Falls Church, VA 22043</a></div>
-    <div class="card-price">$5,200/mo</div>
-    <div class="card-stats">4 bd · 3 ba · 1,400 sqft · SFH</div>
-    <div class="card-actions"><a href="https://www.redfin.com/VA/Falls-Church/2271-Providence-St-22043/home/9468362" target="_blank" class="btn-view">View on Redfin →</a></div>
-  </div>
-</div>
-<div class="card">
-  <a href="https://www.redfin.com/VA/Falls-Church/2506-Patricia-Ct-22043/home/9480235" target="_blank"><img class="card-img" src="./Index_files/genIsl.0_3.webp" alt="2506 Patricia Ct, Falls Church, VA 22043" loading="lazy" onerror="this.style.display=&#39;none&#39;;this.nextElementSibling.style.display=&#39;flex&#39;"><div class="card-img-ph" style="display:none">🏠</div></a>
-  <div class="card-body">
-    <div class="card-top">
-      <span class="pill-other">📍 Outside McLean HS</span>
-      <button class="like-btn" onclick="toggleLike(this,&#39;2506 Patricia Ct, Falls Church, VA 22043&#39;,&#39;$5,700/mo&#39;,&#39;https://www.redfin.com/VA/Falls-Church/2506-Patricia-Ct-22043/home/9480235&#39;)" title="Save/unsave">♡</button>
-    </div>
-    <div class="card-addr"><a href="https://www.redfin.com/VA/Falls-Church/2506-Patricia-Ct-22043/home/9480235" target="_blank">2506 Patricia Ct, Falls Church, VA 22043</a></div>
-    <div class="card-price">$5,700/mo</div>
-    <div class="card-stats">4 bd · 3.5 ba · 3,008 sqft · SFH</div>
-    <div class="card-actions"><a href="https://www.redfin.com/VA/Falls-Church/2506-Patricia-Ct-22043/home/9480235" target="_blank" class="btn-view">View on Redfin →</a></div>
-  </div>
-</div>
-<div class="card">
-  <a href="https://www.redfin.com/VA/Falls-Church/2018-Tysons-Ridgeline-Rd-22043/home/186187740" target="_blank"><img class="card-img" src="./Index_files/genIsl(16).0_1.webp" alt="2018 Tysons Ridgeline Rd, Falls Church, VA 22043" loading="lazy" onerror="this.style.display=&#39;none&#39;;this.nextElementSibling.style.display=&#39;flex&#39;"><div class="card-img-ph" style="display:none">🏠</div></a>
-  <div class="card-body">
-    <div class="card-top">
-      <span class="pill-other">📍 Outside McLean HS</span>
-      <button class="like-btn" onclick="toggleLike(this,&#39;2018 Tysons Ridgeline Rd, Falls Church, VA 22043&#39;,&#39;$5,200/mo&#39;,&#39;https://www.redfin.com/VA/Falls-Church/2018-Tysons-Ridgeline-Rd-22043/home/186187740&#39;)" title="Save/unsave">♡</button>
-    </div>
-    <div class="card-addr"><a href="https://www.redfin.com/VA/Falls-Church/2018-Tysons-Ridgeline-Rd-22043/home/186187740" target="_blank">2018 Tysons Ridgeline Rd, Falls Church, VA 22043</a></div>
-    <div class="card-price">$5,200/mo</div>
-    <div class="card-stats">3 bd · 3.5 ba · 1,624 sqft · Townhouse</div>
-    <div class="card-actions"><a href="https://www.redfin.com/VA/Falls-Church/2018-Tysons-Ridgeline-Rd-22043/home/186187740" target="_blank" class="btn-view">View on Redfin →</a></div>
-  </div>
-</div>
-<div class="card">
-  <a href="https://www.redfin.com/VA/Falls-Church/2064-Tysons-Ridgeline-Rd-22043/home/186187780" target="_blank"><img class="card-img" src="./Index_files/genIsl(17).0_1.webp" alt="2064 Tysons Ridgeline Rd, Falls Church, VA 22043" loading="lazy" onerror="this.style.display=&#39;none&#39;;this.nextElementSibling.style.display=&#39;flex&#39;"><div class="card-img-ph" style="display:none">🏠</div></a>
-  <div class="card-body">
-    <div class="card-top">
-      <span class="pill-other">📍 Outside McLean HS</span>
-      <button class="like-btn" onclick="toggleLike(this,&#39;2064 Tysons Ridgeline Rd, Falls Church, VA 22043&#39;,&#39;$5,200/mo&#39;,&#39;https://www.redfin.com/VA/Falls-Church/2064-Tysons-Ridgeline-Rd-22043/home/186187780&#39;)" title="Save/unsave">♡</button>
-    </div>
-    <div class="card-addr"><a href="https://www.redfin.com/VA/Falls-Church/2064-Tysons-Ridgeline-Rd-22043/home/186187780" target="_blank">2064 Tysons Ridgeline Rd, Falls Church, VA 22043</a></div>
-    <div class="card-price">$5,200/mo</div>
-    <div class="card-stats">3 bd · 3.5 ba · 1,636 sqft · Townhouse</div>
-    <div class="card-actions"><a href="https://www.redfin.com/VA/Falls-Church/2064-Tysons-Ridgeline-Rd-22043/home/186187780" target="_blank" class="btn-view">View on Redfin →</a></div>
-  </div>
-</div>
-</div>
-<div class="col">
-<div class="col-hdr sale">🏷 For Sale — 15 listings</div>
-<div class="section-hdr">✅ McLean HS Zone — 4+ Beds</div>
-<div class="card">
-  <a href="https://www.redfin.com/VA/Falls-Church/7802-Appledore-Ct-22043/home/9468766" target="_blank"><img class="card-img" src="./Index_files/item_32.webp" alt="7802 Appledore Ct, Falls Church, VA 22043" loading="lazy" onerror="this.style.display=&#39;none&#39;;this.nextElementSibling.style.display=&#39;flex&#39;"><div class="card-img-ph" style="display:none">🏠</div></a>
-  <div class="card-body">
-    <div class="card-top">
-      <span class="pill-mclean">✅ McLean HS</span>
-      <button class="like-btn" onclick="toggleLike(this,&#39;7802 Appledore Ct, Falls Church, VA 22043&#39;,&#39;$1,075,000&#39;,&#39;https://www.redfin.com/VA/Falls-Church/7802-Appledore-Ct-22043/home/9468766&#39;)" title="Save/unsave">♡</button>
-    </div>
-    <div class="card-addr"><a href="https://www.redfin.com/VA/Falls-Church/7802-Appledore-Ct-22043/home/9468766" target="_blank">7802 Appledore Ct, Falls Church, VA 22043</a></div>
-    <div class="card-price sale">$1,075,000</div>
-    <div class="card-stats">4 bd · 3 ba · 2,436 sqft · Townhouse</div>
-    <div class="card-actions"><a href="https://www.redfin.com/VA/Falls-Church/7802-Appledore-Ct-22043/home/9468766" target="_blank" class="btn-view">View on Redfin →</a></div>
-  </div>
-</div>
-<div class="card">
-  <a href="https://www.redfin.com/VA/Falls-Church/1812-Olney-Rd-22043/home/9398572" target="_blank"><img class="card-img" src="./Index_files/genIslnoResize.VAFX2318912_0.webp" alt="1812 Olney Rd, Falls Church, VA 22043" loading="lazy" onerror="this.style.display=&#39;none&#39;;this.nextElementSibling.style.display=&#39;flex&#39;"><div class="card-img-ph" style="display:none">🏠</div></a>
-  <div class="card-body">
-    <div class="card-top">
-      <span class="pill-mclean">✅ McLean HS</span>
-      <button class="like-btn" onclick="toggleLike(this,&#39;1812 Olney Rd, Falls Church, VA 22043&#39;,&#39;$970,000&#39;,&#39;https://www.redfin.com/VA/Falls-Church/1812-Olney-Rd-22043/home/9398572&#39;)" title="Save/unsave">♡</button>
-    </div>
-    <div class="card-addr"><a href="https://www.redfin.com/VA/Falls-Church/1812-Olney-Rd-22043/home/9398572" target="_blank">1812 Olney Rd, Falls Church, VA 22043</a></div>
-    <div class="card-price sale">$970,000</div>
-    <div class="card-stats">4 bd · 2.5 ba · 1,869 sqft · Townhouse</div>
-    <div class="card-actions"><a href="https://www.redfin.com/VA/Falls-Church/1812-Olney-Rd-22043/home/9398572" target="_blank" class="btn-view">View on Redfin →</a></div>
-  </div>
-</div>
-<div class="card">
-  <a href="https://www.redfin.com/VA/Falls-Church/7802-Wincanton-Ct-22043/home/9468105" target="_blank"><img class="card-img" src="./Index_files/genIslnoResize.VAFX2319776_0.webp" alt="7802 Wincanton Ct, Falls Church, VA 22043" loading="lazy" onerror="this.style.display=&#39;none&#39;;this.nextElementSibling.style.display=&#39;flex&#39;"><div class="card-img-ph" style="display:none">🏠</div></a>
-  <div class="card-body">
-    <div class="card-top">
-      <span class="pill-mclean">✅ McLean HS</span>
-      <button class="like-btn" onclick="toggleLike(this,&#39;7802 Wincanton Ct, Falls Church, VA 22043&#39;,&#39;$960,000&#39;,&#39;https://www.redfin.com/VA/Falls-Church/7802-Wincanton-Ct-22043/home/9468105&#39;)" title="Save/unsave">♡</button>
-    </div>
-    <div class="card-addr"><a href="https://www.redfin.com/VA/Falls-Church/7802-Wincanton-Ct-22043/home/9468105" target="_blank">7802 Wincanton Ct, Falls Church, VA 22043</a></div>
-    <div class="card-price sale">$960,000</div>
-    <div class="card-stats">4 bd · 2.5 ba · 2,016 sqft · Townhouse</div>
-    <div class="card-actions"><a href="https://www.redfin.com/VA/Falls-Church/7802-Wincanton-Ct-22043/home/9468105" target="_blank" class="btn-view">View on Redfin →</a></div>
-  </div>
-</div>
-<div class="card">
-  <a href="https://www.redfin.com/VA/Mc-Lean/1558-Mary-Ellen-Ct-22101/home/9398876" target="_blank"><img class="card-img" src="./Index_files/genIslnoResize.VAFX2320840_0.webp" alt="1558 Mary Ellen Ct, Mc Lean, VA 22101" loading="lazy" onerror="this.style.display=&#39;none&#39;;this.nextElementSibling.style.display=&#39;flex&#39;"><div class="card-img-ph" style="display:none">🏠</div></a>
-  <div class="card-body">
-    <div class="card-top">
-      <span class="pill-mclean">✅ McLean HS</span>
-      <button class="like-btn" onclick="toggleLike(this,&#39;1558 Mary Ellen Ct, Mc Lean, VA 22101&#39;,&#39;$1,100,000&#39;,&#39;https://www.redfin.com/VA/Mc-Lean/1558-Mary-Ellen-Ct-22101/home/9398876&#39;)" title="Save/unsave">♡</button>
-    </div>
-    <div class="card-addr"><a href="https://www.redfin.com/VA/Mc-Lean/1558-Mary-Ellen-Ct-22101/home/9398876" target="_blank">1558 Mary Ellen Ct, Mc Lean, VA 22101</a></div>
-    <div class="card-price sale">$1,100,000</div>
-    <div class="card-stats">5 bd · 3 ba · 2,253 sqft · SFH</div>
-    <div class="card-actions"><a href="https://www.redfin.com/VA/Mc-Lean/1558-Mary-Ellen-Ct-22101/home/9398876" target="_blank" class="btn-view">View on Redfin →</a></div>
-  </div>
-</div>
-<div class="card">
-  <a href="https://www.redfin.com/VA/Mc-Lean/1559-Evers-Dr-22101/home/9398798" target="_blank"><img class="card-img" src="./Index_files/genIslnoResize.VAFX2320832_0.webp" alt="1559 Evers Dr, Mc Lean, VA 22101" loading="lazy" onerror="this.style.display=&#39;none&#39;;this.nextElementSibling.style.display=&#39;flex&#39;"><div class="card-img-ph" style="display:none">🏠</div></a>
-  <div class="card-body">
-    <div class="card-top">
-      <span class="pill-mclean">✅ McLean HS</span>
-      <button class="like-btn" onclick="toggleLike(this,&#39;1559 Evers Dr, Mc Lean, VA 22101&#39;,&#39;$1,200,000&#39;,&#39;https://www.redfin.com/VA/Mc-Lean/1559-Evers-Dr-22101/home/9398798&#39;)" title="Save/unsave">♡</button>
-    </div>
-    <div class="card-addr"><a href="https://www.redfin.com/VA/Mc-Lean/1559-Evers-Dr-22101/home/9398798" target="_blank">1559 Evers Dr, Mc Lean, VA 22101</a></div>
-    <div class="card-price sale">$1,200,000</div>
-    <div class="card-stats">5 bd · 3 ba · 2,850 sqft · SFH</div>
-    <div class="card-actions"><a href="https://www.redfin.com/VA/Mc-Lean/1559-Evers-Dr-22101/home/9398798" target="_blank" class="btn-view">View on Redfin →</a></div>
-  </div>
-</div>
-<div class="card">
-  <a href="https://www.redfin.com/VA/McLean/7714-Spoleto-Ln-22102/unit-54/home/9847489" target="_blank"><img class="card-img" src="./Index_files/genIslnoResize.VAFX2301534_1.webp" alt="7714 Spoleto Ln #54, Mc Lean, VA 22102" loading="lazy" onerror="this.style.display=&#39;none&#39;;this.nextElementSibling.style.display=&#39;flex&#39;"><div class="card-img-ph" style="display:none">🏠</div></a>
-  <div class="card-body">
-    <div class="card-top">
-      <span class="pill-mclean">✅ McLean HS</span>
-      <button class="like-btn" onclick="toggleLike(this,&#39;7714 Spoleto Ln #54, Mc Lean, VA 22102&#39;,&#39;$1,199,888&#39;,&#39;https://www.redfin.com/VA/McLean/7714-Spoleto-Ln-22102/unit-54/home/9847489&#39;)" title="Save/unsave">♡</button>
-    </div>
-    <div class="card-addr"><a href="https://www.redfin.com/VA/McLean/7714-Spoleto-Ln-22102/unit-54/home/9847489" target="_blank">7714 Spoleto Ln #54, Mc Lean, VA 22102</a></div>
-    <div class="card-price sale">$1,199,888</div>
-    <div class="card-stats">4 bd · 4.5 ba · 3,423 sqft · Townhouse</div>
-    <div class="card-actions"><a href="https://www.redfin.com/VA/McLean/7714-Spoleto-Ln-22102/unit-54/home/9847489" target="_blank" class="btn-view">View on Redfin →</a></div>
-  </div>
-</div>
-<div class="card">
-  <a href="https://www.redfin.com/VA/Mc-Lean/1537-Cedar-Ave-22101/home/9394800" target="_blank"><img class="card-img" src="./Index_files/genIslnoResize.VAFX2217812_6.webp" alt="1537 Cedar Ave, Mc Lean, VA 22101" loading="lazy" onerror="this.style.display=&#39;none&#39;;this.nextElementSibling.style.display=&#39;flex&#39;"><div class="card-img-ph" style="display:none">🏠</div></a>
-  <div class="card-body">
-    <div class="card-top">
-      <span class="pill-mclean">✅ McLean HS</span>
-      <button class="like-btn" onclick="toggleLike(this,&#39;1537 Cedar Ave, Mc Lean, VA 22101&#39;,&#39;$1,125,000&#39;,&#39;https://www.redfin.com/VA/Mc-Lean/1537-Cedar-Ave-22101/home/9394800&#39;)" title="Save/unsave">♡</button>
-    </div>
-    <div class="card-addr"><a href="https://www.redfin.com/VA/Mc-Lean/1537-Cedar-Ave-22101/home/9394800" target="_blank">1537 Cedar Ave, Mc Lean, VA 22101</a></div>
-    <div class="card-price sale">$1,125,000</div>
-    <div class="card-stats">4 bd · 4.5 ba · 3,512 sqft · SFH</div>
-    <div class="card-actions"><a href="https://www.redfin.com/VA/Mc-Lean/1537-Cedar-Ave-22101/home/9394800" target="_blank" class="btn-view">View on Redfin →</a></div>
-  </div>
-</div>
-<div class="section-hdr">✅ McLean HS Zone — 3 Beds</div>
-<div class="card">
-  <a href="https://www.redfin.com/VA/Mc-Lean/7349-Eldorado-Ct-22102/home/9399140" target="_blank"><img class="card-img" src="./Index_files/genIslnoResize.VAFX2319704_0.webp" alt="7349 Eldorado Ct, Mc Lean, VA 22102" loading="lazy" onerror="this.style.display=&#39;none&#39;;this.nextElementSibling.style.display=&#39;flex&#39;"><div class="card-img-ph" style="display:none">🏠</div></a>
-  <div class="card-body">
-    <div class="card-top">
-      <span class="pill-mclean">✅ McLean HS</span>
-      <button class="like-btn" onclick="toggleLike(this,&#39;7349 Eldorado Ct, Mc Lean, VA 22102&#39;,&#39;$899,999&#39;,&#39;https://www.redfin.com/VA/Mc-Lean/7349-Eldorado-Ct-22102/home/9399140&#39;)" title="Save/unsave">♡</button>
-    </div>
-    <div class="card-addr"><a href="https://www.redfin.com/VA/Mc-Lean/7349-Eldorado-Ct-22102/home/9399140" target="_blank">7349 Eldorado Ct, Mc Lean, VA 22102</a></div>
-    <div class="card-price sale">$899,999</div>
-    <div class="card-stats">3 bd · 3.5 ba · 2,388 sqft · Townhouse</div>
-    <div class="card-actions"><a href="https://www.redfin.com/VA/Mc-Lean/7349-Eldorado-Ct-22102/home/9399140" target="_blank" class="btn-view">View on Redfin →</a></div>
-  </div>
-</div>
-<div class="card">
-  <a href="https://www.redfin.com/VA/Mc-Lean/1608-Dunterry-Pl-22101/home/9405590" target="_blank"><img class="card-img" src="./Index_files/genIslnoResize.VAFX2301644_0.webp" alt="1608 Dunterry Pl, Mc Lean, VA 22101" loading="lazy" onerror="this.style.display=&#39;none&#39;;this.nextElementSibling.style.display=&#39;flex&#39;"><div class="card-img-ph" style="display:none">🏠</div></a>
-  <div class="card-body">
-    <div class="card-top">
-      <span class="pill-mclean">✅ McLean HS</span>
-      <button class="like-btn" onclick="toggleLike(this,&#39;1608 Dunterry Pl, Mc Lean, VA 22101&#39;,&#39;$875,000&#39;,&#39;https://www.redfin.com/VA/Mc-Lean/1608-Dunterry-Pl-22101/home/9405590&#39;)" title="Save/unsave">♡</button>
-    </div>
-    <div class="card-addr"><a href="https://www.redfin.com/VA/Mc-Lean/1608-Dunterry-Pl-22101/home/9405590" target="_blank">1608 Dunterry Pl, Mc Lean, VA 22101</a></div>
-    <div class="card-price sale">$875,000</div>
-    <div class="card-stats">3 bd · 3 ba · 1,386 sqft · Townhouse</div>
-    <div class="card-actions"><a href="https://www.redfin.com/VA/Mc-Lean/1608-Dunterry-Pl-22101/home/9405590" target="_blank" class="btn-view">View on Redfin →</a></div>
-  </div>
-</div>
-<div class="card">
-  <a href="https://www.redfin.com/VA/Mc-Lean/6806-Thompson-Crest-Ct-22101/home/9395614" target="_blank"><img class="card-img" src="./Index_files/genIslnoResize.2616016_2.webp" alt="6806 Thompson Crest Ct, Mc Lean, VA 22101" loading="lazy" onerror="this.style.display=&#39;none&#39;;this.nextElementSibling.style.display=&#39;flex&#39;"><div class="card-img-ph" style="display:none">🏠</div></a>
-  <div class="card-body">
-    <div class="card-top">
-      <span class="pill-mclean">✅ McLean HS</span>
-      <button class="like-btn" onclick="toggleLike(this,&#39;6806 Thompson Crest Ct, Mc Lean, VA 22101&#39;,&#39;$1,200,000&#39;,&#39;https://www.redfin.com/VA/Mc-Lean/6806-Thompson-Crest-Ct-22101/home/9395614&#39;)" title="Save/unsave">♡</button>
-    </div>
-    <div class="card-addr"><a href="https://www.redfin.com/VA/Mc-Lean/6806-Thompson-Crest-Ct-22101/home/9395614" target="_blank">6806 Thompson Crest Ct, Mc Lean, VA 22101</a></div>
-    <div class="card-price sale">$1,200,000</div>
-    <div class="card-stats">3 bd · 5 ba · 3,096 sqft · Townhouse</div>
-    <div class="card-actions"><a href="https://www.redfin.com/VA/Mc-Lean/6806-Thompson-Crest-Ct-22101/home/9395614" target="_blank" class="btn-view">View on Redfin →</a></div>
-  </div>
-</div>
-<div class="section-hdr out">📍 Outside McLean HS Zone</div>
-<div class="card">
-  <a href="https://www.redfin.com/VA/Falls-Church/2542-Hillsman-St-22043/home/9543170" target="_blank"><img class="card-img" src="./Index_files/genIslnoResize.VAFX2318966_0.webp" alt="2542 Hillsman St, Falls Church, VA 22043" loading="lazy" onerror="this.style.display=&#39;none&#39;;this.nextElementSibling.style.display=&#39;flex&#39;"><div class="card-img-ph" style="display:none">🏠</div></a>
-  <div class="card-body">
-    <div class="card-top">
-      <span class="pill-other">📍 Outside McLean HS</span>
-      <button class="like-btn" onclick="toggleLike(this,&#39;2542 Hillsman St, Falls Church, VA 22043&#39;,&#39;$975,000&#39;,&#39;https://www.redfin.com/VA/Falls-Church/2542-Hillsman-St-22043/home/9543170&#39;)" title="Save/unsave">♡</button>
-    </div>
-    <div class="card-addr"><a href="https://www.redfin.com/VA/Falls-Church/2542-Hillsman-St-22043/home/9543170" target="_blank">2542 Hillsman St, Falls Church, VA 22043</a></div>
-    <div class="card-price sale">$975,000</div>
-    <div class="card-stats">4 bd · 3 ba · 1,589 sqft · Townhouse</div>
-    <div class="card-actions"><a href="https://www.redfin.com/VA/Falls-Church/2542-Hillsman-St-22043/home/9543170" target="_blank" class="btn-view">View on Redfin →</a></div>
-  </div>
-</div>
-<div class="card">
-  <a href="https://www.redfin.com/VA/Falls-Church/2814-Hyson-Ln-22043/home/9543645" target="_blank"><img class="card-img" src="./Index_files/genIslnoResize.VAFX2310616_1.webp" alt="2814 Hyson Ln, Falls Church, VA 22043" loading="lazy" onerror="this.style.display=&#39;none&#39;;this.nextElementSibling.style.display=&#39;flex&#39;"><div class="card-img-ph" style="display:none">🏠</div></a>
-  <div class="card-body">
-    <div class="card-top">
-      <span class="pill-other">📍 Outside McLean HS</span>
-      <button class="like-btn" onclick="toggleLike(this,&#39;2814 Hyson Ln, Falls Church, VA 22043&#39;,&#39;$799,000&#39;,&#39;https://www.redfin.com/VA/Falls-Church/2814-Hyson-Ln-22043/home/9543645&#39;)" title="Save/unsave">♡</button>
-    </div>
-    <div class="card-addr"><a href="https://www.redfin.com/VA/Falls-Church/2814-Hyson-Ln-22043/home/9543645" target="_blank">2814 Hyson Ln, Falls Church, VA 22043</a></div>
-    <div class="card-price sale">$799,000</div>
-    <div class="card-stats">4 bd · 2 ba · 1,560 sqft · SFH</div>
-    <div class="card-actions"><a href="https://www.redfin.com/VA/Falls-Church/2814-Hyson-Ln-22043/home/9543645" target="_blank" class="btn-view">View on Redfin →</a></div>
-  </div>
-</div>
-<div class="card">
-  <a href="https://www.redfin.com/VA/Falls-Church/2038-Brooks-Square-Pl-22043/home/9477333" target="_blank"><img class="card-img" src="./Index_files/genIslnoResize.VAFX2313356_0.webp" alt="2038 Brooks Square Pl, Falls Church, VA 22043" loading="lazy" onerror="this.style.display=&#39;none&#39;;this.nextElementSibling.style.display=&#39;flex&#39;"><div class="card-img-ph" style="display:none">🏠</div></a>
-  <div class="card-body">
-    <div class="card-top">
-      <span class="pill-other">📍 Outside McLean HS</span>
-      <button class="like-btn" onclick="toggleLike(this,&#39;2038 Brooks Square Pl, Falls Church, VA 22043&#39;,&#39;$879,000&#39;,&#39;https://www.redfin.com/VA/Falls-Church/2038-Brooks-Square-Pl-22043/home/9477333&#39;)" title="Save/unsave">♡</button>
-    </div>
-    <div class="card-addr"><a href="https://www.redfin.com/VA/Falls-Church/2038-Brooks-Square-Pl-22043/home/9477333" target="_blank">2038 Brooks Square Pl, Falls Church, VA 22043</a></div>
-    <div class="card-price sale">$879,000</div>
-    <div class="card-stats">3 bd · 2.5 ba · 1,900 sqft · Townhouse</div>
-    <div class="card-actions"><a href="https://www.redfin.com/VA/Falls-Church/2038-Brooks-Square-Pl-22043/home/9477333" target="_blank" class="btn-view">View on Redfin →</a></div>
-  </div>
-</div>
-<div class="card">
-  <a href="https://www.redfin.com/VA/Falls-Church/7718-Trevino-Ln-22043/home/9544026" target="_blank"><img class="card-img" src="./Index_files/genIslnoResize.VAFX2317344_2.webp" alt="7718 Trevino Ln, Falls Church, VA 22043" loading="lazy" onerror="this.style.display=&#39;none&#39;;this.nextElementSibling.style.display=&#39;flex&#39;"><div class="card-img-ph" style="display:none">🏠</div></a>
-  <div class="card-body">
-    <div class="card-top">
-      <span class="pill-other">📍 Outside McLean HS</span>
-      <button class="like-btn" onclick="toggleLike(this,&#39;7718 Trevino Ln, Falls Church, VA 22043&#39;,&#39;$949,000&#39;,&#39;https://www.redfin.com/VA/Falls-Church/7718-Trevino-Ln-22043/home/9544026&#39;)" title="Save/unsave">♡</button>
-    </div>
-    <div class="card-addr"><a href="https://www.redfin.com/VA/Falls-Church/7718-Trevino-Ln-22043/home/9544026" target="_blank">7718 Trevino Ln, Falls Church, VA 22043</a></div>
-    <div class="card-price sale">$949,000</div>
-    <div class="card-stats">3 bd · 3.5 ba · 2,200 sqft · Townhouse</div>
-    <div class="card-actions"><a href="https://www.redfin.com/VA/Falls-Church/7718-Trevino-Ln-22043/home/9544026" target="_blank" class="btn-view">View on Redfin →</a></div>
-  </div>
-</div>
-<div class="card">
-  <a href="https://www.redfin.com/VA/Falls-Church/2025-Magarity-Ct-22043/home/9463160" target="_blank"><img class="card-img" src="./Index_files/genIslnoResize.VAFX2317200_0.webp" alt="2025 Magarity Ct, Falls Church, VA 22043" loading="lazy" onerror="this.style.display=&#39;none&#39;;this.nextElementSibling.style.display=&#39;flex&#39;"><div class="card-img-ph" style="display:none">🏠</div></a>
-  <div class="card-body">
-    <div class="card-top">
-      <span class="pill-other">📍 Outside McLean HS</span>
-      <button class="like-btn" onclick="toggleLike(this,&#39;2025 Magarity Ct, Falls Church, VA 22043&#39;,&#39;$925,000&#39;,&#39;https://www.redfin.com/VA/Falls-Church/2025-Magarity-Ct-22043/home/9463160&#39;)" title="Save/unsave">♡</button>
-    </div>
-    <div class="card-addr"><a href="https://www.redfin.com/VA/Falls-Church/2025-Magarity-Ct-22043/home/9463160" target="_blank">2025 Magarity Ct, Falls Church, VA 22043</a></div>
-    <div class="card-price sale">$925,000</div>
-    <div class="card-stats">4 bd · 3.5 ba · 2,100 sqft · Townhouse</div>
-    <div class="card-actions"><a href="https://www.redfin.com/VA/Falls-Church/2025-Magarity-Ct-22043/home/9463160" target="_blank" class="btn-view">View on Redfin →</a></div>
-  </div>
-</div>
-</div>
 </div>
 
 <script>
-// ── Storage ─────────────────────────────────────────────────
-const SK = 'mclean_saved_picks';
-const VK = 'mclean_saved_picks_ver';
-const VER = '2'; // NEVER increment — wipes all likes
-try {
-  if (localStorage.getItem(VK) !== VER) {
-    localStorage.removeItem(SK);
-    localStorage.setItem(VK, VER);
+  let current = 0;
+  const total = 8;
+  function moveCarousel(dir) {
+    current = (current + dir + total) % total;
+    updateCarousel();
   }
-} catch(e) {}
-
-// PRE-SEEDED LIKES — baked in from liked_listings.md; survives localStorage wipes
-// Seed merge: existing localStorage wins; seed fills gaps
-try {
-  const SEEDS = {
-    "1601 Colonial Hills Dr, McLean 22102": {addr:"1601 Colonial Hills Dr, McLean 22102",price:"$5,500/mo",url:"https://www.redfin.com/VA/Mc-Lean/1601-Colonial-Hills-Dr-22102/home/9833523",saved:"2026-06-14"},
-    "1335 Macbeth St, McLean 22102":        {addr:"1335 Macbeth St, McLean 22102",price:"",url:"",saved:"2026-06-14"},
-    "2212 Reddfield Dr, Falls Church 22043":{addr:"2212 Reddfield Dr, Falls Church 22043",price:"",url:"",saved:"2026-06-14"},
-    "2406 Claremont Dr, Falls Church 22043":{addr:"2406 Claremont Dr, Falls Church 22043",price:"",url:"",saved:"2026-06-14"}
-  };
-  const _ex = JSON.parse(localStorage.getItem(SK)||'{}');
-  localStorage.setItem(SK, JSON.stringify(Object.assign({}, SEEDS, _ex)));
-} catch(e) {}
-
-const SOLD = [
-  {addr:"2023 Freedom Ln, Falls Church 22043",price:"",url:"",note:"Sold — 2026-06-14"}
-];
-
-function getSaved() { try { return JSON.parse(localStorage.getItem(SK)||'{}'); } catch { return {}; } }
-function setSaved(d) { try { localStorage.setItem(SK, JSON.stringify(d)); } catch(e) {} }
-
-function toggleLike(btn, addr, price, url) {
-  const s = getSaved();
-  const card = btn.closest('.card');
-  if (s[addr]) {
-    delete s[addr];
-    btn.textContent='♡'; btn.classList.remove('liked');
-    if(card) card.classList.remove('liked');
-  } else {
-    s[addr] = {addr,price,url,saved:new Date().toLocaleDateString()};
-    btn.textContent='♥'; btn.classList.add('liked');
-    if(card) card.classList.add('liked');
+  function goToSlide(n) {
+    current = n;
+    updateCarousel();
   }
-  setSaved(s); renderSaved(); syncStats();
-}
-
-function removeSaved(k) {
-  const s=getSaved(); delete s[k]; setSaved(s); renderSaved(); syncStats();
-}
-
-function renderSaved() {
-  const s = getSaved();
-  // clean up bad entries
-  let dirty=false;
-  Object.keys(s).forEach(k=>{ if(!s[k]||typeof s[k]!=='object'){delete s[k];dirty=true;} });
-  if(dirty) setSaved(s);
-  const keys = Object.keys(s);
-  const grid = document.getElementById('saved-grid');
-  const noMsg = document.getElementById('no-saved');
-  document.getElementById('saved-n').textContent = keys.length;
-  noMsg.style.display = keys.length ? 'none' : 'block';
-  grid.innerHTML = keys.map(k => {
-    const item = s[k];
-    const addr = item.addr||item.address||k;
-    const ke = k.replace(/\\/g,'\\\\').replace(/'/g,"\'");
-    const link = item.url ? `<a href="${item.url}" target="_blank">${addr}</a>` : `<span>${addr}</span>`;
-    return `<div class="sc"><div class="sc-addr">${link}</div><div class="sc-price">${item.price||''}</div><button class="sc-rm" onclick="removeSaved('${ke}')" title="Remove">×</button></div>`;
-  }).join('');
-  // Sold
-  const sg = document.getElementById('sold-grid');
-  document.getElementById('sold-n').textContent = SOLD.length;
-  sg.innerHTML = SOLD.map(s=>{
-    const link = s.url ? `<a href="${s.url}" target="_blank">${s.addr}</a>` : `<span>${s.addr}</span>`;
-    return `<div class="sc sold"><div class="sc-addr">${link}</div><div class="sc-price" style="color:#999">${s.note||'No longer available'}</div></div>`;
-  }).join('');
-  // Sync hearts
-  document.querySelectorAll('.like-btn').forEach(btn=>{
-    const m=btn.getAttribute('onclick')?.match(/toggleLike\(this,'([^']+)'/);
-    if(!m) return;
-    const card=btn.closest('.card');
-    // Try exact match first, then partial
-    let matched = !!s[m[1]];
-    if(!matched) {
-      // try matching by partial address (handle "Mc Lean" vs "McLean" variants)
-      const norm = m[1].toLowerCase().replace(/mc lean/g,'mclean');
-      matched = Object.keys(s).some(k=>k.toLowerCase().replace(/mc lean/g,'mclean').includes(norm.split(',')[0]));
-    }
-    btn.textContent = matched ? '♥' : '♡';
-    btn.classList.toggle('liked', matched);
-    if(card) card.classList.toggle('liked', matched);
-  });
-}
-
-function syncStats() {
-  const n = Object.keys(getSaved()).length;
-  document.getElementById('liked-n').textContent = n;
-}
-
-function toggleSaved() {
-  const g=document.getElementById('saved-grid');
-  g.style.display = g.style.display==='none' ? '' : 'none';
-}
-
-function exportLikes() {
-  const s=getSaved();
-  const blob=new Blob([JSON.stringify({exported:new Date().toISOString().slice(0,10),active:Object.values(s),sold:SOLD},null,2)],{type:'application/json'});
-  const a=document.createElement('a'); a.href=URL.createObjectURL(blob);
-  a.download=`mclean-liked-${new Date().toISOString().slice(0,10)}.json`; a.click();
-}
-function copyLiked() {
-  const s=getSaved(); const keys=Object.keys(s);
-  if(!keys.length){alert('No liked listings yet.');return;}
-  const text=keys.map(k=>`${s[k].addr} — ${s[k].price}\n${s[k].url}`).join('\n\n');
-  navigator.clipboard.writeText(text).then(()=>alert(`Copied ${keys.length} listing(s)!`));
-}
-
-// ── Map ──────────────────────────────────────────────────────
-const MARKERS = [{"lat": 38.915, "lng": -77.18, "addr": "7802 Appledore Ct, Falls Church, VA 22043", "price": "$1,075,000", "url": "https://www.redfin.com/VA/Falls-Church/7802-Appledore-Ct-22043/home/9468766", "t": "sale"}, {"lat": 38.917, "lng": -77.18100000000001, "addr": "1812 Olney Rd, Falls Church, VA 22043", "price": "$970,000", "url": "https://www.redfin.com/VA/Falls-Church/1812-Olney-Rd-22043/home/9398572", "t": "sale"}, {"lat": 38.919, "lng": -77.182, "addr": "7802 Wincanton Ct, Falls Church, VA 22043", "price": "$960,000", "url": "https://www.redfin.com/VA/Falls-Church/7802-Wincanton-Ct-22043/home/9468105", "t": "sale"}, {"lat": 38.921, "lng": -77.183, "addr": "1558 Mary Ellen Ct, Mc Lean, VA 22101", "price": "$1,100,000", "url": "https://www.redfin.com/VA/Mc-Lean/1558-Mary-Ellen-Ct-22101/home/9398876", "t": "sale"}, {"lat": 38.923, "lng": -77.18400000000001, "addr": "1559 Evers Dr, Mc Lean, VA 22101", "price": "$1,200,000", "url": "https://www.redfin.com/VA/Mc-Lean/1559-Evers-Dr-22101/home/9398798", "t": "sale"}, {"lat": 38.925, "lng": -77.185, "addr": "7349 Eldorado Ct, Mc Lean, VA 22102", "price": "$899,999", "url": "https://www.redfin.com/VA/Mc-Lean/7349-Eldorado-Ct-22102/home/9399140", "t": "sale"}, {"lat": 38.927, "lng": -77.186, "addr": "7714 Spoleto Ln #54, Mc Lean, VA 22102", "price": "$1,199,888", "url": "https://www.redfin.com/VA/McLean/7714-Spoleto-Ln-22102/unit-54/home/9847489", "t": "sale"}, {"lat": 38.929, "lng": -77.18700000000001, "addr": "1608 Dunterry Pl, Mc Lean, VA 22101", "price": "$875,000", "url": "https://www.redfin.com/VA/Mc-Lean/1608-Dunterry-Pl-22101/home/9405590", "t": "sale"}, {"lat": 38.931, "lng": -77.188, "addr": "1537 Cedar Ave, Mc Lean, VA 22101", "price": "$1,125,000", "url": "https://www.redfin.com/VA/Mc-Lean/1537-Cedar-Ave-22101/home/9394800", "t": "sale"}, {"lat": 38.933, "lng": -77.18900000000001, "addr": "6806 Thompson Crest Ct, Mc Lean, VA 22101", "price": "$1,200,000", "url": "https://www.redfin.com/VA/Mc-Lean/6806-Thompson-Crest-Ct-22101/home/9395614", "t": "sale"}, {"lat": 38.935, "lng": -77.19000000000001, "addr": "2542 Hillsman St, Falls Church, VA 22043", "price": "$975,000", "url": "https://www.redfin.com/VA/Falls-Church/2542-Hillsman-St-22043/home/9543170", "t": "sale"}, {"lat": 38.937, "lng": -77.191, "addr": "2814 Hyson Ln, Falls Church, VA 22043", "price": "$799,000", "url": "https://www.redfin.com/VA/Falls-Church/2814-Hyson-Ln-22043/home/9543645", "t": "sale"}, {"lat": 38.939, "lng": -77.19200000000001, "addr": "2038 Brooks Square Pl, Falls Church, VA 22043", "price": "$879,000", "url": "https://www.redfin.com/VA/Falls-Church/2038-Brooks-Square-Pl-22043/home/9477333", "t": "sale"}, {"lat": 38.941, "lng": -77.19300000000001, "addr": "7718 Trevino Ln, Falls Church, VA 22043", "price": "$949,000", "url": "https://www.redfin.com/VA/Falls-Church/7718-Trevino-Ln-22043/home/9544026", "t": "sale"}, {"lat": 38.943, "lng": -77.194, "addr": "2025 Magarity Ct, Falls Church, VA 22043", "price": "$925,000", "url": "https://www.redfin.com/VA/Falls-Church/2025-Magarity-Ct-22043/home/9463160", "t": "sale"}, {"lat": 38.945, "lng": -77.19500000000001, "addr": "6872 Melrose Dr, Mc Lean, VA 22101", "price": "$5,750/mo", "url": "https://www.redfin.com/VA/Mc-Lean/6872-Melrose-Dr-22101/home/9390369", "t": "rent"}, {"lat": 38.946999999999996, "lng": -77.19600000000001, "addr": "1214 Colonial Rd, Mc Lean, VA 22101", "price": "$5,500/mo", "url": "https://www.redfin.com/VA/Mc-Lean/1214-Colonial-Rd-22101/home/9392915", "t": "rent"}, {"lat": 38.949, "lng": -77.197, "addr": "1436 Ironwood Dr, Mc Lean, VA 22101", "price": "$5,600/mo", "url": "https://www.redfin.com/VA/Mc-Lean/1436-Ironwood-Dr-22101/home/9409570", "t": "rent"}, {"lat": 38.951, "lng": -77.19800000000001, "addr": "6608 Fairlawn Dr, Mc Lean, VA 22101", "price": "$5,100/mo", "url": "https://www.redfin.com/VA/Mc-Lean/6608-Fairlawn-Dr-22101/home/9402941", "t": "rent"}, {"lat": 38.952999999999996, "lng": -77.19900000000001, "addr": "6933 Tyndale St, Mc Lean, VA 22101", "price": "$4,900/mo", "url": "https://www.redfin.com/VA/Mc-Lean/6933-Tyndale-St-22101/home/9404921", "t": "rent"}, {"lat": 38.955, "lng": -77.2, "addr": "1427 McLean Mews Ct, Mc Lean, VA 22101", "price": "$4,995/mo", "url": "https://www.redfin.com/VA/Mc-Lean/1427-McLean-Mews-Ct-22101/home/9394680", "t": "rent"}, {"lat": 38.957, "lng": -77.20100000000001, "addr": "1433 McLean Mews Ct, Mc Lean, VA 22101", "price": "$4,990/mo", "url": "https://www.redfin.com/VA/McLean/1433-McLean-Mews-Ct-22101/home/9394691", "t": "rent"}, {"lat": 38.958999999999996, "lng": -77.20200000000001, "addr": "1456 Hampton Hill Cir, Mc Lean, VA 22101", "price": "$5,450/mo", "url": "https://www.redfin.com/VA/Mc-Lean/1456-Hampton-Hill-Cir-22101/home/9394999", "t": "rent"}, {"lat": 38.961, "lng": -77.203, "addr": "6218 Nelway Dr, Mc Lean, VA 22101", "price": "$4,900/mo", "url": "https://www.redfin.com/VA/Mc-Lean/6218-Nelway-Dr-22101/home/9412783", "t": "rent"}, {"lat": 38.963, "lng": -77.20400000000001, "addr": "6322 Kellogg Dr, Mc Lean, VA 22101", "price": "$5,750/mo", "url": "https://www.redfin.com/VA/Mc-Lean/6322-Kellogg-Dr-22101/home/9413101", "t": "rent"}, {"lat": 38.964999999999996, "lng": -77.20500000000001, "addr": "7022 Little Leaf Linden Ln, Mc Lean, VA 22101", "price": "$6,000/mo", "url": "https://www.redfin.com/VA/Mc-Lean/7022-Little-Leaf-Linden-Ln-22101/home/21706406", "t": "rent"}, {"lat": 38.967, "lng": -77.206, "addr": "2007 Mayfair McLean Ct, Falls Church, VA 22043", "price": "$5,695/mo", "url": "https://www.redfin.com/VA/Falls-Church/2007-Mayfair-McLean-Ct-22043/home/9477729", "t": "rent"}, {"lat": 38.969, "lng": -77.20700000000001, "addr": "1607 Seneca Ave, Mc Lean, VA 22102", "price": "$5,400/mo", "url": "https://www.redfin.com/VA/Mc-Lean/1607-Seneca-Ave-22102/home/9830535", "t": "rent"}, {"lat": 38.971, "lng": -77.20800000000001, "addr": "1619 Seneca Ave, Mc Lean, VA 22102", "price": "$5,750/mo", "url": "https://www.redfin.com/VA/Mc-Lean/1619-Seneca-Ave-22102/home/9830550", "t": "rent"}, {"lat": 38.973, "lng": -77.209, "addr": "7489 Carriage Hills Dr, Mc Lean, VA 22102", "price": "$5,300/mo", "url": "https://www.redfin.com/VA/Mc-Lean/7489-Carriage-Hills-Dr-22102/home/9833507", "t": "rent"}, {"lat": 38.975, "lng": -77.21000000000001, "addr": "1601 Colonial Hills Dr, Mc Lean, VA 22102", "price": "$5,500/mo", "url": "https://www.redfin.com/VA/Mc-Lean/1601-Colonial-Hills-Dr-22102/home/9833523", "t": "rent"}, {"lat": 38.977, "lng": -77.21100000000001, "addr": "2271 Providence St, Falls Church, VA 22043", "price": "$5,200/mo", "url": "https://www.redfin.com/VA/Falls-Church/2271-Providence-St-22043/home/9468362", "t": "rent"}, {"lat": 38.979, "lng": -77.212, "addr": "2506 Patricia Ct, Falls Church, VA 22043", "price": "$5,700/mo", "url": "https://www.redfin.com/VA/Falls-Church/2506-Patricia-Ct-22043/home/9480235", "t": "rent"}, {"lat": 38.981, "lng": -77.21300000000001, "addr": "2018 Tysons Ridgeline Rd, Falls Church, VA 22043", "price": "$5,200/mo", "url": "https://www.redfin.com/VA/Falls-Church/2018-Tysons-Ridgeline-Rd-22043/home/186187740", "t": "rent"}, {"lat": 38.983, "lng": -77.21400000000001, "addr": "2064 Tysons Ridgeline Rd, Falls Church, VA 22043", "price": "$5,200/mo", "url": "https://www.redfin.com/VA/Falls-Church/2064-Tysons-Ridgeline-Rd-22043/home/186187780", "t": "rent"}];
-
-try {
-  const map = L.map('map').setView([38.915,-77.185],12);
-  L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',{attribution:'© OpenStreetMap contributors'}).addTo(map);
-  // McLean HS boundary approximation
-  const boundary = [
-    [38.943,-77.141],[38.940,-77.135],[38.938,-77.131],[38.941,-77.128],[38.940,-77.125],
-    [38.939,-77.124],[38.938,-77.123],[38.937,-77.122],[38.936,-77.121],[38.935,-77.120],
-    [38.933,-77.121],[38.931,-77.125],[38.929,-77.126],[38.928,-77.129],[38.926,-77.130],
-    [38.925,-77.132],[38.924,-77.133],[38.923,-77.134],[38.922,-77.135],[38.920,-77.138],
-    [38.919,-77.140],[38.917,-77.142],[38.915,-77.144],[38.914,-77.146],[38.912,-77.148],
-    [38.911,-77.150],[38.909,-77.153],[38.906,-77.156],[38.904,-77.159],[38.903,-77.160],
-    [38.902,-77.162],[38.900,-77.163],[38.899,-77.165],[38.898,-77.166],[38.897,-77.167],
-    [38.896,-77.169],[38.895,-77.170],[38.893,-77.172],[38.894,-77.174],[38.894,-77.176],
-    [38.894,-77.178],[38.895,-77.180],[38.895,-77.182],[38.895,-77.183],[38.896,-77.185],
-    [38.896,-77.186],[38.896,-77.188],[38.897,-77.190],[38.900,-77.193],[38.899,-77.195],
-    [38.898,-77.195],[38.897,-77.194],[38.901,-77.200],[38.903,-77.201],[38.903,-77.200],
-    [38.904,-77.198],[38.906,-77.198],[38.907,-77.197],[38.910,-77.194],[38.911,-77.193],
-    [38.913,-77.191],[38.914,-77.189],[38.922,-77.195],[38.922,-77.199],[38.920,-77.203],
-    [38.921,-77.209],[38.923,-77.209],[38.925,-77.209],[38.929,-77.204],[38.930,-77.202],
-    [38.933,-77.196],[38.936,-77.195],[38.937,-77.192],[38.938,-77.187],[38.937,-77.185],
-    [38.938,-77.182],[38.940,-77.178],[38.941,-77.174],[38.942,-77.170],[38.943,-77.166],
-    [38.942,-77.160],[38.943,-77.153],[38.944,-77.148],[38.943,-77.144],[38.943,-77.141]
-  ];
-  L.polygon(boundary,{color:'#c8982a',weight:2.5,fillColor:'#c8982a',fillOpacity:0.07,dashArray:'6 3'})
-    .bindTooltip('McLean HS attendance zone (FCPS 2025-26)',{sticky:true}).addTo(map);
-  MARKERS.forEach((m,i)=>{
-    const color = m.t==='rent' ? '#2b6cb0' : '#276749';
-    L.circleMarker([m.lat,m.lng],{radius:7,fillColor:color,color:'#fff',weight:1.5,fillOpacity:.85})
-      .bindPopup(`<strong>${m.addr}</strong><br>${m.price}<br><a href="${m.url}" target="_blank">View →</a>`)
-      .addTo(map);
-  });
-} catch(e) { document.getElementById('map').innerHTML='<div style="padding:20px;color:#888">Map unavailable</div>'; }
-
-// ── Init ─────────────────────────────────────────────────────
-renderSaved(); syncStats();
+  function updateCarousel() {
+    document.getElementById('carouselTrack').style.transform = 'translateX(-' + (current * 100) + '%)';
+    document.querySelectorAll('.carousel-dot').forEach((d, i) => d.classList.toggle('active', i === current));
+  }
+  setInterval(() => moveCarousel(1), 5000);
 </script>
+<div class="container">
 
-</body></html>
+
+  <!-- HOTELS -->
+  <div class="section">
+    <div class="section-title">Hotels</div>
+    <div class="hotels-grid">
+
+      <div class="hotel-card">
+        <div class="hotel-header">
+          <div class="hotel-name"><a href="https://www.hilton.com/en/hotels/sjoaphx-hampton-san-jose-airport/" target="_blank">Hampton by Hilton San José Airport</a></div>
+          <div class="hotel-meta">
+            <div class="hotel-location">San José · Aug 13</div>
+            <div class="hotel-price">~$150/night</div>
+          </div>
+        </div>
+        <div class="hotel-desc">Free 24-hour airport shuttle, outdoor pool, free WiFi. Pure transit hotel — arrive, sleep, leave fresh in the morning. Do NOT pick up the rental car tonight.</div>
+      </div>
+
+      <div class="hotel-card">
+        <div class="hotel-header">
+          <div class="hotel-name"><a href="https://www.thespringscostarica.com" target="_blank">The Springs Resort &amp; Spa</a></div>
+          <div class="hotel-meta">
+            <div class="hotel-location">Arenal · 3 Nights</div>
+            <div class="hotel-price">~$996/night</div>
+          </div>
+        </div>
+        <div class="hotel-desc">165-acre five-star resort with spectacular Arenal Volcano views and 28 mineral-filled natural hot spring pools. CNN Travel named it one of the seven resorts with the most spectacular views in the world. Outstanding for families: waterslide, putt-putt course, kids' game room, and the on-site Club Rio Adventure Center with river tubing, kayaking, horseback riding, rock climbing, and an Animal Sanctuary. Five unique dining experiences including Las Ventanas, a dinner-only restaurant 1,000 feet above the ground with volcano views. Rated 9.8 for families.</div>
+        <span class="hotel-badge">🌋 Volcano Views · 28 Hot Springs · Family Paradise</span>
+      </div>
+
+      <div class="hotel-card">
+        <div class="hotel-header">
+          <div class="hotel-name"><a href="https://www.hotelbelmar.net" target="_blank">Hotel Belmar</a></div>
+          <div class="hotel-meta">
+            <div class="hotel-location">Monteverde · 2 Nights</div>
+            <div class="hotel-price">~$620/night</div>
+          </div>
+        </div>
+        <div class="hotel-desc">Mountain chalet-style ecolodge high in the cloud forest with a spring-fed pond, onsite microbrewery, and organic farm. The Peninsula Room has two queen beds and a private terrace with hammock — ideal for families. No pool, no A/C needed — Monteverde stays cool year-round and you're outside all day.</div>
+        <span class="hotel-badge">🌿 Farm-to-Table · Microbrewery · Cloud Forest</span>
+      </div>
+
+      <div class="hotel-card">
+        <div class="hotel-header">
+          <div class="hotel-name"><a href="https://www.tulemarresort.com" target="_blank">Tulemar Resort</a></div>
+          <div class="hotel-meta">
+            <div class="hotel-location">Manuel Antonio · 3 Nights</div>
+            <div class="hotel-price">~$413/night</div>
+          </div>
+        </div>
+        <div class="hotel-desc">A 33-acre gated jungle resort with private beach, multiple pools, and spectacular Manuel Antonio coastline views. Monkeys, birds, and sloths spotted from balconies daily. On-property sloth sanctuary. Children 10 and under accompanied by an adult stay free. Rated TripAdvisor's #1 Hotel in the World (2022).</div>
+        <span class="hotel-badge">🏆 TripAdvisor #1 Hotel in the World · Private Beach</span>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- BEACHES -->
+  <div class="section">
+    <div class="section-title">Beaches &amp; Swimming — Manuel Antonio</div>
+    <div class="beaches-grid">
+      <div class="beach-card">
+        <h4>🏖️ Playa Biesanz</h4>
+        <p>Calmest, most protected beach in the area. Tucked into a cove, almost no waves. Very safe for kids, excellent for snorkeling. Short hike keeps crowds low — local favorite.</p>
+      </div>
+      <div class="beach-card">
+        <h4>🏖️ Playa Manuel Antonio</h4>
+        <p>Inside the national park. Protected bay, gentle waves, beautiful and very safe swimming. You'll visit on your park day.</p>
+      </div>
+      <div class="beach-card">
+        <h4>🏖️ Tulemar Private Beach</h4>
+        <p>Calm, protected, exclusive to resort guests. The safest and most relaxed swimming option — right at the hotel with staff present.</p>
+      </div>
+      <div class="beach-card">
+        <h4>🌊 Playa Espadilla</h4>
+        <p>Just outside the park entrance — where surf lessons are held. More wave action, great for surfing. Swimmable but supervise your 10-year-old more carefully here.</p>
+      </div>
+      <div class="beach-note">ℹ️ <strong>Note:</strong> Arenal and Monteverde are both inland — no beach swimming in those regions. All water activities there are hot springs and river tubing.</div>
+    </div>
+  </div>
+
+  <!-- ITINERARY -->
+  <div class="section">
+    <div class="section-title">Daily Itinerary</div>
+    <div class="day-cards">
+
+      <div class="day-card">
+        <div class="day-number">01</div>
+        <div class="day-content">
+          <div class="day-header">
+            <div class="day-date">Friday, August 7</div>
+            <div class="day-title">Travel Day</div>
+          </div>
+          <ul class="activity-list">
+            <li><span class="bullet">✈</span><span>Depart IAD 5:35pm → arrive SJO 11:40pm (Avianca, 1 stop SAL)</span></li>
+            <li><span class="bullet">🏨</span><span>Shuttle to <a href="https://www.hilton.com/en/hotels/sjoaphx-hampton-san-jose-airport/" target="_blank">Hampton by Hilton SJO Airport</a> — free 24hr shuttle from arrivals</span></li>
+            <li><span class="bullet">😴</span><span>Check in and sleep — do NOT pick up the rental car tonight</span></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="day-card">
+        <div class="day-number">02</div>
+        <div class="day-content">
+          <div class="day-header">
+            <div class="day-date">Saturday, August 8</div>
+            <div class="day-title">SJO → Arenal</div>
+          </div>
+          <ul class="activity-list">
+            <li><span class="bullet">🚙</span><span>Pick up 4WD SUV from <a href="https://www.adobecar.com" target="_blank">Adobe Rent A Car</a> at SJO</span></li>
+            <li><span class="bullet">🛣️</span><span>Drive to La Fortuna (~3 hrs) · Check into <a href="https://www.thespringscostarica.com" target="_blank">The Springs Resort &amp; Spa</a></span></li>
+            <li class="resort"><span class="bullet">🌋</span><span><span class="resort-tag">Resort</span>Explore the 165-acre property — volcano views, animal sanctuary, spot wildlife</span></li>
+            <li class="resort"><span class="bullet">♨️</span><span><span class="resort-tag">Resort</span>28 natural hot spring pools, swim-up bar, dinner at one of five on-site restaurants</span></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="day-card">
+        <div class="day-number">03</div>
+        <div class="day-content">
+          <div class="day-header">
+            <div class="day-date">Sunday, August 9</div>
+            <div class="day-title">Arenal — Full Adventure Day</div>
+          </div>
+          <ul class="activity-list">
+            <li><span class="bullet">💧</span>
+              <span><a href="https://www.cataratalafortuna.com/la-fortuna-waterfall-hike" target="_blank">La Fortuna Waterfall</a> — self-guided hike, open 7am
+                <span class="activity-meta">~$18/adult · $5/child</span>
+              </span>
+            </li>
+            <li><span class="bullet">🌉</span>
+              <span><a href="https://www.getyourguide.com/mistico-arenal-hanging-bridges-park-l87313/hanging-bridges-walk-in-arenal-volcano-t411384/" target="_blank">Mistico Hanging Bridges</a> — Guided Natural History Tour, 2.5 hrs
+                <span class="activity-meta">~$17–$44/person</span>
+              </span>
+            </li>
+            <li class="resort"><span class="bullet">♨️</span><span><span class="resort-tag">Resort</span>Hot springs, waterslide, and pools back at The Springs</span></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="day-card">
+        <div class="day-number">04</div>
+        <div class="day-content">
+          <div class="day-header">
+            <div class="day-date">Monday, August 10</div>
+            <div class="day-title">Arenal — Adventure + Resort Day</div>
+          </div>
+          <ul class="activity-list">
+            <li><span class="bullet">🛟</span>
+              <span><a href="https://www.tripadvisor.com/Attraction_Review-g309226-d5616226-Reviews-Arenal_River_Tubing_Hiking-La_Fortuna_de_San_Carlos_Arenal_Volcano_National_Park_.html" target="_blank">Arenal River Tubing</a> — jungle float, back by noon
+                <span class="activity-meta">~$45–$55/person</span>
+              </span>
+            </li>
+            <li class="resort"><span class="bullet">🏊</span><span><span class="resort-tag">Resort</span>Big resort afternoon — waterslide, putt-putt, kids' game room, animal sanctuary, hot springs</span></li>
+            <li><span class="bullet">♨️</span>
+              <span><a href="https://www.tabacon.com/product-category/one-day-pass/" target="_blank">Tabacón Hot Springs Day Pass</a> — evening session is magical
+                <span class="activity-meta">~$81/adult · ~$39/child · Book at least 1 week in advance</span>
+              </span>
+            </li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="day-card">
+        <div class="day-number">05</div>
+        <div class="day-content">
+          <div class="day-header">
+            <div class="day-date">Tuesday, August 11</div>
+            <div class="day-title">Arenal → Monteverde</div>
+          </div>
+          <ul class="activity-list">
+            <li><span class="bullet">🍳</span><span>Leisurely breakfast at The Springs · Checkout</span></li>
+            <li><span class="bullet">🛣️</span><span>Drive around Lake Arenal to Monteverde (~3.5 hrs) — scenic paved road, bumpy unpaved final stretch · 4WD essential</span></li>
+            <li><span class="bullet">🏨</span><span>Check into <a href="https://www.hotelbelmar.net" target="_blank">Hotel Belmar</a></span></li>
+            <li class="resort"><span class="bullet">🌿</span><span><span class="resort-tag">Resort</span>Explore Belmar's grounds — hummingbird garden, spring-fed pond, cloud forest sunset views · Dinner at farm-to-table restaurant · Try a beer from the onsite microbrewery</span></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="day-card">
+        <div class="day-number">06</div>
+        <div class="day-content">
+          <div class="day-header">
+            <div class="day-date">Wednesday, August 12</div>
+            <div class="day-title">Monteverde — Full Day</div>
+          </div>
+          <ul class="activity-list">
+            <li><span class="bullet">🌉</span>
+              <span>Sky bridges &amp; cloud forest hike at Santa Elena Reserve
+                <span class="activity-meta">~$18/person</span>
+              </span>
+            </li>
+            <li><span class="bullet">🪂</span>
+              <span><a href="https://montetours.com/100-aventura-zip-lines/" target="_blank">100% Aventura Zip-lining</a> — 3 hrs through cloud forest canopy, Latin America's longest lines
+                <span class="activity-meta">From ~$48/person · Must book in advance · No walk-ins</span>
+              </span>
+            </li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="day-card">
+        <div class="day-number">07</div>
+        <div class="day-content">
+          <div class="day-header">
+            <div class="day-date">Thursday, August 13</div>
+            <div class="day-title">Monteverde → Manuel Antonio</div>
+          </div>
+          <ul class="activity-list">
+            <li><span class="bullet">🍳</span><span>Leisurely Hotel Belmar breakfast · Checkout by noon · Enjoy the cloud forest views one last time</span></li>
+            <li><span class="bullet">🛣️</span><span>Drive to Manuel Antonio (~5 hrs on good paved roads)</span></li>
+            <li><span class="bullet">🏨</span><span>Check into <a href="https://www.tulemarresort.com" target="_blank">Tulemar Resort</a></span></li>
+            <li class="resort"><span class="bullet">🏖️</span><span><span class="resort-tag">Resort</span>First taste of Tulemar — pools, private beach walk, spot sloths at the on-property sanctuary · Dinner at the resort restaurant</span></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="day-card">
+        <div class="day-number">08</div>
+        <div class="day-content">
+          <div class="day-header">
+            <div class="day-date">Friday, August 14</div>
+            <div class="day-title">Manuel Antonio — Park Day</div>
+          </div>
+          <ul class="activity-list">
+            <li><span class="bullet">🐒</span>
+              <span><a href="https://serviciosenlinea.sinac.go.cr" target="_blank">Manuel Antonio National Park</a> — arrive at 7am opening · Hire a certified guide at the entrance
+                <span class="activity-meta">~$18/adult · ~$3/child 6–12 · Guide ~$30–40 · Book tickets weeks in advance</span>
+              </span>
+            </li>
+            <li class="resort"><span class="bullet">🏊</span><span><span class="resort-tag">Resort</span>Full resort afternoon at Tulemar — multiple pools, private beach with chairs and towels, sloth sanctuary walk</span></li>
+            <li><span class="bullet">🌅</span><span>Sunset dinner in Quepos marina</span></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="day-card">
+        <div class="day-number">09</div>
+        <div class="day-content">
+          <div class="day-header">
+            <div class="day-date">Saturday, August 15</div>
+            <div class="day-title">Manuel Antonio — Beach Day</div>
+          </div>
+          <ul class="activity-list">
+            <li class="beach"><span class="bullet">🏄</span>
+              <span><a href="https://www.getyourguide.com/manuel-antonio-l142888/manuel-antonio-surf-lessons-t669034/" target="_blank">Surf Lessons at Playa Espadilla</a> with Glen Castro — 2 hrs
+                <span class="activity-meta">~$65–$80/person</span>
+              </span>
+            </li>
+            <li class="beach"><span class="bullet">🌊</span><span>Stay at Playa Espadilla after lessons — rent boards, swim, relax on the beach</span></li>
+            <li class="resort"><span class="bullet">🏖️</span><span><span class="resort-tag">Resort</span>Afternoon at Tulemar — pools, private beach, sloth sanctuary</span></li>
+            <li><span class="bullet">🍽️</span><span>Last dinner in Quepos · Pack up</span></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="day-card">
+        <div class="day-number">10</div>
+        <div class="day-content">
+          <div class="day-header">
+            <div class="day-date">Sunday, August 16</div>
+            <div class="day-title">Drive to SJO → Fly Home</div>
+          </div>
+          <ul class="activity-list">
+            <li><span class="bullet">🍳</span><span>Breakfast at Tulemar · Checkout · Leave by 9am</span></li>
+            <li><span class="bullet">🛣️</span><span>Drive to San José (~3 hrs)</span></li>
+            <li><span class="bullet">🚙</span><span>Drop rental car at <a href="https://www.adobecar.com" target="_blank">Adobe SJO office</a> · Lunch near airport</span></li>
+            <li><span class="bullet">✈</span><span>Arrive terminal by 2:30pm · Depart SJO 4:35pm nonstop (Avianca) → arrive IAD 2:15am</span></li>
+          </ul>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- COSTS -->
+  <div class="section">
+    <div class="section-title">Cost Breakdown — Family of 3 (Peak August Pricing)</div>
+    <table class="cost-table">
+      <tr><td colspan="2" class="category">Flights &amp; Transport</td></tr>
+      <tr><td>Flights — 3 × $452 (Avianca)</td><td>~$1,356</td></tr>
+      <tr><td>Adobe Rent A Car 4WD — 9 days</td><td>~$700</td></tr>
+
+      <tr><td colspan="2" class="category">Hotels</td></tr>
+      <tr><td>Hampton by Hilton SJO — 1 night</td><td>~$150</td></tr>
+      <tr><td>The Springs Resort &amp; Spa — 3 nights (~$996/night)</td><td>~$2,987</td></tr>
+      <tr><td>Hotel Belmar — 2 nights</td><td>~$1,240</td></tr>
+      <tr><td>Tulemar Resort — 3 nights (~$413/night)</td><td>~$1,240</td></tr>
+
+      <tr><td colspan="2" class="category">Activities</td></tr>
+      <tr><td>La Fortuna Waterfall — 2 adults + 1 child</td><td>~$41</td></tr>
+      <tr><td>Mistico Hanging Bridges — 3 people</td><td>~$90</td></tr>
+      <tr><td>Arenal River Tubing — 3 people</td><td>~$150</td></tr>
+      <tr><td>Tabacón Day Pass — 2 adults + 1 child</td><td>~$201</td></tr>
+      <tr><td>100% Aventura Zip-lining — 3 people</td><td>~$144</td></tr>
+      <tr><td>Manuel Antonio Park + guide</td><td>~$90</td></tr>
+      <tr><td>Surf Lessons — 3 people</td><td>~$210</td></tr>
+
+      <tr><td colspan="2" class="category">Food</td></tr>
+      <tr><td>Meals — 9 days, family of 3</td><td>~$1,500</td></tr>
+    </table>
+    <div class="cost-total">
+      <div class="cost-total-label">Estimated Total</div>
+      <div class="cost-total-amount">~$10,099</div>
+    </div>
+  </div>
+
+  <!-- RENTAL CAR -->
+  <div class="section">
+    <div class="section-title">Rental Car</div>
+    <div class="rental-card">
+      <div class="rental-icon">🚙</div>
+      <div>
+        <h3>Adobe Rent A Car</h3>
+        <a href="https://www.adobecar.com" target="_blank">adobecar.com →</a>
+        <p>Pick up morning of August 8 at SJO · Drop off August 16 before 4:35pm flight · ~$700 for 9 days<br>
+        Book a full-size 4WD SUV — essential for the Monteverde road. Costa Rica's best rental option. No hidden fees, newest fleet in the country.</p>
+        <div class="warning">⚠️ Book directly with Adobe — NOT through a third-party site. Representatives meet you at the SJO airport exit with a sign.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- BOOKING CHECKLIST -->
+  <div class="section">
+    <div class="section-title">Book Before You Leave Home</div>
+    <div class="booking-list">
+
+      <div class="booking-item">
+        <div class="booking-num">1</div>
+        <div class="booking-info">
+          <h4>Manuel Antonio National Park</h4>
+          <div class="when urgent">⚡ Opens ~June 8 for August — book the moment the window opens</div>
+        </div>
+        <div class="booking-link"><a href="https://serviciosenlinea.sinac.go.cr" target="_blank">Book Now</a></div>
+      </div>
+
+      <div class="booking-item">
+        <div class="booking-num">2</div>
+        <div class="booking-info">
+          <h4>100% Aventura Zip-lining</h4>
+          <div class="when urgent">⚡ Now — sells out fast in August</div>
+        </div>
+        <div class="booking-link"><a href="https://montetours.com/100-aventura-zip-lines/" target="_blank">Book Now</a></div>
+      </div>
+
+      <div class="booking-item">
+        <div class="booking-num">3</div>
+        <div class="booking-info">
+          <h4>Tabacón Hot Springs Day Pass</h4>
+          <div class="when urgent">⚡ At least 1 week before August 10</div>
+        </div>
+        <div class="booking-link"><a href="https://www.tabacon.com/product-category/one-day-pass/" target="_blank">Book Now</a></div>
+      </div>
+
+      <div class="booking-item">
+        <div class="booking-num">4</div>
+        <div class="booking-info">
+          <h4>Mistico Hanging Bridges</h4>
+          <div class="when">Advance booking strongly recommended</div>
+        </div>
+        <div class="booking-link"><a href="https://www.getyourguide.com/mistico-arenal-hanging-bridges-park-l87313/hanging-bridges-walk-in-arenal-volcano-t411384/" target="_blank">Book Now</a></div>
+      </div>
+
+      <div class="booking-item">
+        <div class="booking-num">5</div>
+        <div class="booking-info">
+          <h4>Adobe Rental Car — 4WD SUV</h4>
+          <div class="when urgent">⚡ Now — book directly, NOT third-party</div>
+        </div>
+        <div class="booking-link"><a href="https://www.adobecar.com" target="_blank">Book Now</a></div>
+      </div>
+
+      <div class="booking-item">
+        <div class="booking-num">6</div>
+        <div class="booking-info">
+          <h4>Hampton by Hilton SJO Airport — August 7</h4>
+          <div class="when">Book now</div>
+        </div>
+        <div class="booking-link"><a href="https://www.hilton.com/en/hotels/sjoaphx-hampton-san-jose-airport/" target="_blank">Book Now</a></div>
+      </div>
+
+      <div class="booking-item">
+        <div class="booking-num">7</div>
+        <div class="booking-info">
+          <h4>The Springs Resort &amp; Spa — Arenal</h4>
+          <div class="when urgent">⚡ Book now — limited rooms at peak August pricing</div>
+        </div>
+        <div class="booking-link"><a href="https://www.thespringscostarica.com" target="_blank">Book Now</a></div>
+      </div>
+
+      <div class="booking-item">
+        <div class="booking-num">8</div>
+        <div class="booking-info">
+          <h4>Hotel Belmar — Monteverde</h4>
+          <div class="when">Book now for August availability</div>
+        </div>
+        <div class="booking-link"><a href="https://www.hotelbelmar.net" target="_blank">Book Now</a></div>
+      </div>
+
+      <div class="booking-item">
+        <div class="booking-num">9</div>
+        <div class="booking-info">
+          <h4>Tulemar Resort — Manuel Antonio</h4>
+          <div class="when">Book now for August availability</div>
+        </div>
+        <div class="booking-link"><a href="https://www.tulemarresort.com" target="_blank">Book Now</a></div>
+      </div>
+
+    </div>
+  </div>
+
+</div>
+
+<div class="footer">
+  Costa Rica Family Trip · August 2026 · Pura Vida 🌿
+</div>
+
+</body>
+</html>
