@@ -265,30 +265,41 @@ function sectionHtml(title, items, muted) {
 }
 
 function renderColumn(containerId, listings, label, total) {
-  const inZone = listings.filter(l => l.zone_group === 'in_zone');
-  const outside = listings.filter(l => l.zone_group === 'outside');
-  const unknown = listings.filter(l => l.zone_group === 'unknown');
-  const fourplus = sortListings(inZone.filter(l => (l.beds || 0) >= 4), sortMode);
-  const threebd = sortListings(inZone.filter(l => (l.beds || 0) === 3), sortMode);
-  const outsideSorted = sortListings(outside, sortMode);
-  const unknownSorted = sortListings(unknown, sortMode);
-
   let html = `<h2 class="col-title">${label} <span class="col-count">(${total})</span></h2>`;
-  if (fourplus.length || threebd.length) {
-    html += '<div class="zone-block"><h3 class="zone-head">✅ In McLean HS Zone</h3>';
-    html += sectionHtml('4+ Bedrooms', fourplus, false);
-    html += sectionHtml('3 Bedrooms', threebd, false);
+
+  if (sortMode === 'price') {
+    // Price mode: one flat list, cheapest first — no zone/bed-count sub-sections.
+    // Zone is still visible via the pill badge on each card.
+    const allSorted = sortListings(listings, 'price');
+    html += '<div class="zone-block"><h3 class="zone-head">💲 All listings — cheapest first</h3>';
+    html += '<div class="section"><div class="card-grid">' + allSorted.map(cardHtml).join('\n') + '</div></div>';
     html += '</div>';
-  }
-  if (outsideSorted.length) {
-    html += '<div class="zone-block outside-block"><h3 class="zone-head muted">📍 Outside McLean HS Zone</h3>';
-    html += sectionHtml('Listings', outsideSorted, true);
-    html += '</div>';
-  }
-  if (unknownSorted.length) {
-    html += '<div class="zone-block"><h3 class="zone-head muted">❓ Zone Unknown</h3>';
-    html += sectionHtml('Listings', unknownSorted, true);
-    html += '</div>';
+  } else {
+    // Newest mode: structured view grouped by zone + bed-count.
+    const inZone = listings.filter(l => l.zone_group === 'in_zone');
+    const outside = listings.filter(l => l.zone_group === 'outside');
+    const unknown = listings.filter(l => l.zone_group === 'unknown');
+    const fourplus = sortListings(inZone.filter(l => (l.beds || 0) >= 4), sortMode);
+    const threebd = sortListings(inZone.filter(l => (l.beds || 0) === 3), sortMode);
+    const outsideSorted = sortListings(outside, sortMode);
+    const unknownSorted = sortListings(unknown, sortMode);
+
+    if (fourplus.length || threebd.length) {
+      html += '<div class="zone-block"><h3 class="zone-head">✅ In McLean HS Zone</h3>';
+      html += sectionHtml('4+ Bedrooms', fourplus, false);
+      html += sectionHtml('3 Bedrooms', threebd, false);
+      html += '</div>';
+    }
+    if (outsideSorted.length) {
+      html += '<div class="zone-block outside-block"><h3 class="zone-head muted">📍 Outside McLean HS Zone</h3>';
+      html += sectionHtml('Listings', outsideSorted, true);
+      html += '</div>';
+    }
+    if (unknownSorted.length) {
+      html += '<div class="zone-block"><h3 class="zone-head muted">❓ Zone Unknown</h3>';
+      html += sectionHtml('Listings', unknownSorted, true);
+      html += '</div>';
+    }
   }
   document.getElementById(containerId).innerHTML = html;
 }
