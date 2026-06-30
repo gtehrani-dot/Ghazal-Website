@@ -75,15 +75,14 @@ table td{padding:8px;border-bottom:1px solid var(--border);vertical-align:top;}
 .todoist-col.right{background:#fafbfd;border-left:1px solid var(--border);}
 .col-head{display:flex;justify-content:space-between;align-items:center;margin-bottom:10px;}
 .count-badge{background:var(--accent);color:#fff;font-size:11px;border-radius:10px;padding:2px 8px;}
-.task-card{display:flex;gap:8px;align-items:flex-start;padding:10px 8px;border-radius:6px;margin-bottom:8px;border-left:4px solid var(--border);background:#fff;}
-.task-card.p1{border-left-color:var(--red);} .task-card.p2{border-left-color:var(--amber);} .task-card.p3{border-left-color:#a8a285;} .task-card.p4{border-left-color:#d1d5db;}
+.task-card{display:flex;gap:8px;align-items:flex-start;padding:10px 8px;border-radius:6px;margin-bottom:8px;border-left:3px solid var(--border);background:#fff;}
 .task-fields{flex:1;display:flex;flex-direction:column;gap:4px;}
 .task-title{border:none;font-size:13px;font-weight:500;background:transparent;width:100%;padding:2px 0;}
 .task-row{display:flex;gap:6px;align-items:center;font-size:11.5px;}
 .task-row select,.task-row input[type=date]{font-size:11.5px;border:1px solid var(--border);border-radius:4px;padding:2px 4px;}
 .task-footer{display:flex;gap:8px;font-size:11.5px;align-items:center;margin-top:2px;}
-.overdue-badge{background:var(--red);color:#fff;border-radius:4px;padding:1px 6px;font-size:10.5px;}
-.today-badge{background:var(--accent);color:#fff;border-radius:4px;padding:1px 6px;font-size:10.5px;}
+.overdue-badge{background:#eceeef;color:#5b5f66;border-radius:4px;padding:1px 6px;font-size:10.5px;font-weight:600;}
+.today-badge{background:#eceeef;color:var(--accent);border-radius:4px;padding:1px 6px;font-size:10.5px;font-weight:600;}
 .done-btn{background:none;border:1px solid var(--green);color:var(--green);border-radius:4px;font-size:11px;padding:1px 6px;cursor:pointer;}
 .proj-label{color:var(--muted);font-size:11px;}
 .proj-unset{color:var(--amber);}
@@ -122,7 +121,7 @@ footer{text-align:center;color:var(--muted);font-size:11px;padding:20px;}
     <button class="tab-btn active" data-tab="home" onclick="showTab('home')">🏠 Home</button>
     <button class="tab-btn" data-tab="inbox" onclick="showTab('inbox')">📬 Inbox <span class="badge badge-red">3</span></button>
     <button class="tab-btn" data-tab="calendar" onclick="showTab('calendar')">📅 Calendar <span class="badge badge-amber">1</span></button>
-    <button class="tab-btn" data-tab="todoist" onclick="showTab('todoist')">✅ Todoist <span class="badge badge-red">51</span></button>
+    <button class="tab-btn" data-tab="todoist" onclick="showTab('todoist')">✅ Todoist <span class="badge badge-red">34</span></button>
     <button class="tab-btn" data-tab="news" onclick="showTab('news')">📰 News</button>
     <button class="tab-btn" data-tab="recipes" onclick="showTab('recipes')">🍽️ Recipes</button>
     <button class="tab-btn" data-tab="trash" onclick="showTab('trash')">🗑️ Trash <span class="badge badge-blue">38</span></button>
@@ -321,37 +320,40 @@ footer{text-align:center;color:var(--muted);font-size:11px;padding:20px;}
     <div>
       <div class="card">
         <h2>📥 New Invites & Flagged Dates</h2>
-        <div class="cal-event">
-          <b>Virtual Parent Intake – L.M.</b> <span style="color:var(--muted)">(past — Jun 22, already occurred)</span>
-          <div class="cal-time">From Ellie Zadeh (Wise Mind Psychotherapy) · Mon Jun 22, 11am–12pm ET</div>
-          <a href="https://mail.google.com/mail/u/0/#all/19ec90ad3ee983e6" target="_blank">Open in Gmail ↗</a>
-        </div>
-        <div class="cal-event">
-          <b>TBD B20 @ Commerce</b> <span class="warnbadge">needs response</span>
-          <div class="cal-time">From Ben Moore · Nov 8–11, 2026, all day</div>
-          <a href="#" target="_blank">Open in Gmail ↗</a>
-        </div>
         <div class="cal-event" style="border-top:1px dashed var(--border);margin-top:6px;padding-top:8px">
           <b>School newsletter dates (Franklin Sherman PTA + Longfellow Lancer)</b>
-          <div class="email-summary">Scanned both newsletters for field days, classroom parties, and other dated events — none upcoming right now since school is out for summer. Last item was Franklin Sherman's outdoor picnic on Jun 12, already past. This section will surface new dates (field days, parties, PTA events) as soon as either newsletter posts them.</div>
+          <div class="email-summary">Scanned both newsletters for field days, classroom parties, and other dated events — none upcoming right now since school is out for summer. Last item was Franklin Sherman's outdoor picnic on Jun 12, already past. This section will surface new dates (field days, parties, PTA events) as soon as either newsletter posts them, including a downloadable .ics for any newsletter-sourced invite.</div>
         </div>
+        <p style="font-size:12px;color:var(--muted);margin-top:8px">The Wise Mind Psychotherapy intake invite (Jun 22, already accepted by both you and Ben) has been cleared from this list now that the date has passed.</p>
       </div>
       <div class="card">
-        <h3>💡 Calendar Suggestions</h3>
-        <p style="font-size:13px">You haven't responded to Ben's Jul 26–29 Atlanta trip invites (still "needsAction") — accept/decline and arrange Liam/Ella coverage for those 4 days. The Nov "TBD B20 @ Commerce" invite is also unanswered but far out.</p>
-      </div>
-      <div class="card">
-        <h3>✈️ Ben's Away Dates (60-day window)</h3>
+        <h3>✈️ Ben's dates & invites — needs your response</h3>
         <table>
-          <tr><th>Event</th><th>Dates</th><th>Kid Coverage</th><th>Notes</th><th>Link</th></tr>
-          <tr style="background:#fef2f2">
+          <tr><th>Event</th><th>Dates</th><th>Kid coverage</th><th>Notes</th><th>Respond</th></tr>
+          <tr>
             <td>Democratic Mayors Assoc. (Atlanta)</td>
             <td>Jul 26–29</td>
-            <td><span class="grade-low">Needed — 4 days</span></td>
-            <td>Ben flies home by 9pm Jul 29; no response from you yet</td>
-            <td><a href="#" target="_blank">open</a></td>
+            <td>Needed — 4 days</td>
+            <td>Ben flies home by 9pm Jul 29 · still "needsAction" on your calendar</td>
+            <td>
+              <a href="https://www.google.com/calendar/event?eid=Xzhvb2s4Y2E1OGtzNDZiOW82OTI0OGI5azYwb2tjYmEyNjUzMzZiYTI4OHI0MmdxNjhvbzM4Y2kzODggdGVocmFuaS5naGF6YWxAbQ" target="_blank">open</a> ·
+              <button class="done-btn" onclick="sendPrompt('Accept Ben Moore\'s Democratic Mayors Assoc. Atlanta trip invites (Jul 26-29) on my Google Calendar')">Accept</button>
+              <button class="done-btn" style="border-color:var(--muted);color:var(--muted)" onclick="sendPrompt('Decline Ben Moore\'s Democratic Mayors Assoc. Atlanta trip invites (Jul 26-29) on my Google Calendar')">Decline</button>
+            </td>
+          </tr>
+          <tr>
+            <td>TBD B20 @ Commerce</td>
+            <td>Nov 8–11</td>
+            <td>TBD — far out</td>
+            <td>Also unanswered, lower urgency given the date</td>
+            <td>
+              <a href="#" target="_blank">open</a> ·
+              <button class="done-btn" onclick="sendPrompt('Accept Ben Moore\'s TBD B20 @ Commerce invite (Nov 8-11, 2026) on my Google Calendar')">Accept</button>
+              <button class="done-btn" style="border-color:var(--muted);color:var(--muted)" onclick="sendPrompt('Decline Ben Moore\'s TBD B20 @ Commerce invite (Nov 8-11, 2026) on my Google Calendar')">Decline</button>
+            </td>
           </tr>
         </table>
+        <p style="font-size:12px;color:var(--muted);margin-top:8px">Accept/decline here sends the request to chat, where I make the actual calendar change and confirm back to you.</p>
       </div>
     </div>
   </div>
@@ -362,7 +364,7 @@ footer{text-align:center;color:var(--muted);font-size:11px;padding:20px;}
 <section class="tab-section" id="tab-todoist">
   <div class="todoist-grid">
     <div class="todoist-col">
-      <div class="col-head"><h2 style="margin:0">📋 In Todoist</h2><span class="count-badge">52 tasks · 51 overdue</span></div>
+      <div class="col-head"><h2 style="margin:0">📋 In Todoist — P1 only</h2><span class="count-badge">34 tasks · 33 overdue</span></div>
 
       <div class="task-card p1" data-id="6gwh72v3Ghg2FRx2">
         <input type="checkbox" class="task-approve" data-mode="update">
@@ -429,20 +431,7 @@ footer{text-align:center;color:var(--muted);font-size:11px;padding:20px;}
         </div>
       </div>
 
-      <div class="task-card p2" data-id="vegus001">
-        <input type="checkbox" class="task-approve" data-mode="update">
-        <div class="task-fields">
-          <input class="task-title" value="Vegus Nerve exercises">
-          <div class="task-row">
-            <select class="task-priority" onchange="restripe(this)"><option value="1">🔴 P1</option><option value="2" selected>🟠 P2</option><option value="3">🟡 P3</option><option value="4">⚪ P4</option></select>
-            <input type="date" class="task-due" value="2026-06-28">
-            <span class="proj-label">Wellness</span>
-          </div>
-          <div class="task-footer"><span class="overdue-badge">OVERDUE</span><a href="#" target="_blank">Open ↗</a><button class="done-btn" onclick="sendPrompt('Mark Todoist task vegus001 complete via MCP')">✓ Done</button></div>
-        </div>
-      </div>
-
-      <p style="font-size:12px;color:var(--muted);margin:10px 0 0">+ 46 more tasks (29 additional P1, 13 more P2, 3 P4) — mostly small personal/household to-dos dated 06/28, all overdue by one day. Full list available in Todoist.</p>
+      <p style="font-size:12px;color:var(--muted);margin:10px 0 0">+ 29 more P1 tasks — mostly small personal/household to-dos dated 06/28, all overdue by one day except today's Meditation. Full list available in Todoist. (P2/P3/P4 tasks are hidden from this view by request.)</p>
 
       <div class="action-bar"><button class="action-btn" onclick="pushUpdates()">Push Updates</button></div>
     </div>
@@ -556,13 +545,20 @@ footer{text-align:center;color:var(--muted);font-size:11px;padding:20px;}
   </div>
 
   <div class="sub2-section active" id="sub2-ai">
-    <div class="card"><a href="#" target="_blank"><b>AI news roundup</b></a><div class="email-meta">Various sources · Jun 29</div><div class="email-summary">Fresh AI headlines were gathered via web search this run; see chat citations for direct source links.</div></div>
+    <div class="card"><a href="https://www.whitehouse.gov/presidential-actions/2026/06/promoting-advanced-artificial-intelligence-innovation-and-security/" target="_blank"><b>OpenAI previews GPT-5.6 tiers; Claude Mythos 5 export ban partially lifted</b></a><div class="email-meta">Various sources · Jun 26–29</div><div class="email-summary">OpenAI previewed three GPT-5.6 tiers (Sol, Terra, Luna) with government-gated access; the US government partially lifted the export-control ban on Claude Mythos 5 for critical-infrastructure defenders.</div></div>
+    <div class="card"><a href="https://www.bgr.com/2201667/biggest-tech-controversies-of-the-year/" target="_blank"><b>Google restricts Meta's Gemini compute access</b></a><div class="email-meta">Various sources · Jun 2026</div><div class="email-summary">Google capped Meta's use of its Gemini models after Meta requested more compute than Google could supply, delaying some of Meta's internal AI projects.</div></div>
+    <div class="card"><a href="https://www.deltek.com/en/blog/10-key-consulting-moves" target="_blank"><b>South Korea unveils chip & AI infrastructure investment plan</b></a><div class="email-meta">Various sources · Jun 2026</div><div class="email-summary">A new investment plan centers on Samsung and SK Hynix, expanding fabs, HBM memory production, AI data centers, and robotics to strengthen South Korea's place in the AI chip supply chain.</div></div>
+    <div class="email-summary" style="margin-top:6px">Anthropic–DOD litigation over AI export/access rules is ongoing as of Jun 29.</div>
   </div>
   <div class="sub2-section" id="sub2-tech" style="display:none">
-    <div class="card"><a href="#" target="_blank"><b>Tech news roundup</b></a><div class="email-meta">Various sources · Jun 29</div><div class="email-summary">Fresh tech headlines gathered via web search this run; see chat citations for direct source links.</div></div>
+    <div class="card"><a href="https://techstartups.com/2026/06/29/top-tech-news-today-june-29-2026/" target="_blank"><b>Rocket Lab to acquire Iridium for ~$8B</b></a><div class="email-meta">Tech Startups · Jun 29</div><div class="email-summary">Cash-and-stock deal — one of the biggest consolidation moves in commercial space this year.</div></div>
+    <div class="card"><a href="https://techstartups.com/2026/06/29/top-tech-news-today-june-29-2026/" target="_blank"><b>Comcast to split media and tech operations</b></a><div class="email-meta">Tech Startups · Jun 29</div><div class="email-summary">Comcast plans to separate into two distinct publicly traded entities, aiming to let each business pursue more focused strategy.</div></div>
+    <div class="card"><a href="https://techstartups.com/2026/06/29/top-tech-news-today-june-29-2026/" target="_blank"><b>KDDI discloses breach exposing up to 14.2M email logins</b></a><div class="email-meta">Tech Startups · Jun 29</div><div class="email-summary">The Japanese telecom's breach hit an email system shared by multiple internet service providers.</div></div>
   </div>
   <div class="sub2-section" id="sub2-ps" style="display:none">
-    <div class="card"><a href="#" target="_blank"><b>PS Strategy news roundup</b></a><div class="email-meta">Various sources · Jun 29</div><div class="email-summary">Fresh professional-services/strategy headlines gathered via web search this run; see chat citations for direct source links.</div></div>
+    <div class="card"><a href="https://www.deltek.com/en/blog/10-key-consulting-moves" target="_blank"><b>Consulting firms shift from AI pilots to embedded, agentic delivery</b></a><div class="email-meta">Deltek · Jun 2026</div><div class="email-summary">Leading firms are building agentic AI and governed workflows directly into delivery rather than selling AI as a standalone service; market is bifurcating between scaled integrators and narrow specialists.</div></div>
+    <div class="card"><a href="https://www.deltek.com/en/blog/10-key-consulting-moves" target="_blank"><b>Grant Thornton ties partner bonuses to AI adoption, expands lateral hiring</b></a><div class="email-meta">Deltek · Jun 2026</div><div class="email-summary">The firm is recruiting partners from Deloitte, KPMG, Accenture, and AlixPartners while linking compensation to AI delivery metrics.</div></div>
+    <div class="card"><a href="https://www.deltek.com/en/blog/10-key-consulting-moves" target="_blank"><b>North Highland names Anthony Shaw as CEO</b></a><div class="email-meta">Deltek · Effective Jun 1, 2026</div><div class="email-summary">Leadership change at the Atlanta-headquartered management consulting firm.</div></div>
   </div>
 
   <button class="refresh-btn" onclick="sendPrompt('Please refresh my morning briefing — News tab. Fetch fresh AI, Tech, and PS Strategy articles and rebuild.')">↻ Refresh News</button>
@@ -570,8 +566,21 @@ footer{text-align:center;color:var(--muted);font-size:11px;padding:20px;}
 
 <!-- ================= TAB 6: RECIPES ================= -->
 <section class="tab-section" id="tab-recipes">
+  <p style="font-size:13px;color:var(--muted);margin:0 0 12px">3 picks from your starred recipe emails — pick one and I'll pull up the full recipe.</p>
   <div class="card">
-    <p class="empty-state">No starred recipe emails found in this run.</p>
+    <a href="https://mail.google.com/mail/u/0/#all/19af3c05d0a2e68f" target="_blank"><b>Brussels sprouts pasta with sausage</b></a>
+    <div class="email-meta">Bon Appétit · starred Dec 6, 2025</div>
+    <div class="email-summary">Weeknight pasta with Brussels sprouts and sausage — one of the "recipes we made this week" picks.</div>
+  </div>
+  <div class="card">
+    <a href="https://mail.google.com/mail/u/0/#all/19a879c804bb812b" target="_blank"><b>Cheesy roasted cabbage wedges</b></a>
+    <div class="email-meta">Bon Appétit · starred Nov 15, 2025</div>
+    <div class="email-summary">Roasted cabbage wedges with cheese — simple side or light main.</div>
+  </div>
+  <div class="card">
+    <a href="https://mail.google.com/mail/u/0/#all/19d15e01d8709291" target="_blank"><b>Want more fiber and protein? — 5 weeknight dishes</b></a>
+    <div class="email-meta">NYT Cooking · starred Mar 22, 2026</div>
+    <div class="email-summary">Five higher-fiber, higher-protein dinner ideas from NYT Cooking's weeknight roundup.</div>
   </div>
   <button class="refresh-btn" onclick="sendPrompt('Please refresh my morning briefing — Recipes tab. Rebuild and overwrite the dashboard.')">↻ Refresh Recipes</button>
 </section>
