@@ -15,6 +15,9 @@
   header .actions { margin-top: 10px; }
   header button { background: #2e7d32; color: white; border: none; padding: 6px 12px; border-radius: 6px; cursor: pointer; font-size: 13px; margin-right: 8px; }
   header button:hover { background: #256528; }
+  .sort-toggle { display: inline-flex; gap: 6px; }
+  .sort-btn { opacity: 0.6; }
+  .sort-btn.active { opacity: 1; box-shadow: inset 0 0 0 2px rgba(255,255,255,0.6); }
   .low-inv-note { background: #fff3cd; color: #6b5400; padding: 8px 16px; margin: 0; font-size: 13px; }
   #map { height: 320px; width: 100%; }
   .columns { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; padding: 20px; }
@@ -64,12 +67,15 @@
   <h1>McLean Property Dashboard — June 29, 2026</h1>
   <div class="stats">29 for-rent · 13 for-sale · 2 liked · Scan: June 29, 2026 · Sources: Redfin, HotPads, Craigslist · 15 outside McLean HS zone</div>
   <div class="actions">
-    <button onclick="copyLikes()">📋 Copy Liked</button>
+    <span class="sort-toggle" id="global-sort-toggle">
+      <button class="sort-btn active" id="sort-btn-newest" onclick="setSortMode('newest')">🕐 Newest</button>
+      <button class="sort-btn" id="sort-btn-price" onclick="setSortMode('price')">💲 Price</button>
+    </span>
   </div>
 </header>
 
 <div id="saved-panel">
-  <h2>Saved Picks <span><button onclick="exportLikes()">💾 Export</button> <button onclick="toggleSavedPanel()">Hide/Show</button></span></h2>
+  <h2>Saved Picks <span><button onclick="copyLikes()">📋 Copy Liked</button> <button onclick="toggleSavedPanel()">Hide/Show</button></span></h2>
   <div class="saved-grid" id="saved-grid"></div>
   <details id="sold-section" style="margin-top:10px">
     <summary>⬇ Previously Liked — No Longer Available (<span id="sold-count">0</span>)</summary>
@@ -78,814 +84,8 @@
 </div>
 <div id="map"></div>
 <div class="columns">
-  <div><h2 class="col-title">FOR RENT <span class="col-count">(29)</span></h2>
-<div class="zone-block"><h3 class="zone-head">✅ In McLean HS Zone</h3>
-<div class="section "><h3>4+ Bedrooms (11)</h3><div class="card-grid">
-    <div class="card starred" data-addr="6933 Tyndale St, McLean, VA 22101">
-      <a href="https://www.redfin.com/VA/Mc-Lean/6933-Tyndale-St-22101/home/9404921" target="_blank" rel="noopener"><img src="https://ssl.cdn-redfin.com/photo/rent/ad5fc044-4365-484b-ad7d-3c1ba0d96307/islphoto/genIsl.0_1.webp" data-staticmap="https://staticmap.openstreetmap.de/staticmap.php?center=38.95,-77.185&amp;zoom=15&amp;size=240x180&amp;maptype=mapnik&amp;markers=38.95,-77.185,lightblue1" data-svg="data:image/svg+xml;charset=utf-8,%3Csvg%20xmlns%3D%27http%3A//www.w3.org/2000/svg%27%20width%3D%27240%27%20height%3D%27180%27%3E%3Crect%20width%3D%27100%25%27%20height%3D%27100%25%27%20fill%3D%27%23eef0f3%27/%3E%3Ctext%20x%3D%2750%25%27%20y%3D%2744%25%27%20font-size%3D%2726%27%20text-anchor%3D%27middle%27%3E%F0%9F%93%8D%3C/text%3E%3Ctext%20x%3D%2750%25%27%20y%3D%2766%25%27%20font-size%3D%2712%27%20fill%3D%27%237c8694%27%20text-anchor%3D%27middle%27%20font-family%3D%27sans-serif%27%3E6933%20Tyndale%20St%3C/text%3E%3C/svg%3E" onerror="mclThumbFallback(this)" alt="" class="thumb" loading="lazy"></a>
-      <div class="card-body">
-        <div class="card-head">
-          <span class="addr">⭐ 6933 Tyndale St, McLean, VA 22101</span>
-          <span class="pill pill-green">✅ in McLean HS zone</span>
-        </div>
-        <div class="price-line">$4,900/mo</div>
-        <div class="stats-line">5 bd / 2.5 ba · 2,576 sqft · SFH · via Redfin</div>
-        <div class="schools-line">🏫 HS not confirmed</div>
-        <div class="highlights">✨ renovated/new, backyard</div>
-        <div class="card-actions">
-          <button class="like-btn" onclick="toggleLike(this,'6933 Tyndale St, McLean, VA 22101','$4,900/mo','https://www.redfin.com/VA/Mc-Lean/6933-Tyndale-St-22101/home/9404921')">♡</button>
-          <a class="btn" href="https://www.redfin.com/VA/Mc-Lean/6933-Tyndale-St-22101/home/9404921" target="_blank" rel="noopener">View listing →</a>
-          <a class="btn btn-secondary" href="https://www.redfin.com/VA/Mc-Lean/6933-Tyndale-St-22101/home/9404921" target="_blank" rel="noopener">📷 Photos</a>
-        </div>
-      </div>
-    </div>
-
-    <div class="card starred" data-addr="6519 Engel Dr, McLean, VA 22101">
-      <a href="https://www.redfin.com/VA/Mc-Lean/6519-Engel-Dr-22101/home/9405092" target="_blank" rel="noopener"><img src="https://ssl.cdn-redfin.com/photo/rent/3f91dec0-3bcb-481e-9e0b-22ab2cfc74be/islphoto/genIsl.0_1.webp" data-staticmap="https://staticmap.openstreetmap.de/staticmap.php?center=38.945,-77.18&amp;zoom=15&amp;size=240x180&amp;maptype=mapnik&amp;markers=38.945,-77.18,lightblue1" data-svg="data:image/svg+xml;charset=utf-8,%3Csvg%20xmlns%3D%27http%3A//www.w3.org/2000/svg%27%20width%3D%27240%27%20height%3D%27180%27%3E%3Crect%20width%3D%27100%25%27%20height%3D%27100%25%27%20fill%3D%27%23eef0f3%27/%3E%3Ctext%20x%3D%2750%25%27%20y%3D%2744%25%27%20font-size%3D%2726%27%20text-anchor%3D%27middle%27%3E%F0%9F%93%8D%3C/text%3E%3Ctext%20x%3D%2750%25%27%20y%3D%2766%25%27%20font-size%3D%2712%27%20fill%3D%27%237c8694%27%20text-anchor%3D%27middle%27%20font-family%3D%27sans-serif%27%3E6519%20Engel%20Dr%3C/text%3E%3C/svg%3E" onerror="mclThumbFallback(this)" alt="" class="thumb" loading="lazy"></a>
-      <div class="card-body">
-        <div class="card-head">
-          <span class="addr">⭐ 6519 Engel Dr, McLean, VA 22101</span>
-          <span class="pill pill-green">✅ in McLean HS zone</span>
-        </div>
-        <div class="price-line">$5,300/mo</div>
-        <div class="stats-line">5 bd / 3 ba · 2,534 sqft · SFH · via Redfin</div>
-        <div class="schools-line">🏫 HS not confirmed</div>
-        <div class="highlights">✨ renovated/new, backyard</div>
-        <div class="card-actions">
-          <button class="like-btn" onclick="toggleLike(this,'6519 Engel Dr, McLean, VA 22101','$5,300/mo','https://www.redfin.com/VA/Mc-Lean/6519-Engel-Dr-22101/home/9405092')">♡</button>
-          <a class="btn" href="https://www.redfin.com/VA/Mc-Lean/6519-Engel-Dr-22101/home/9405092" target="_blank" rel="noopener">View listing →</a>
-          <a class="btn btn-secondary" href="https://www.redfin.com/VA/Mc-Lean/6519-Engel-Dr-22101/home/9405092" target="_blank" rel="noopener">📷 Photos</a>
-        </div>
-      </div>
-    </div>
-
-    <div class="card starred" data-addr="1436 Ironwood Dr, McLean, VA 22101">
-      <a href="https://www.redfin.com/VA/Mc-Lean/1436-Ironwood-Dr-22101/home/9409570" target="_blank" rel="noopener"><img src="https://ssl.cdn-redfin.com/photo/rent/a671af54-889b-4820-8391-82ed6cf90f9b/islphoto/genIsl.0_1.webp" data-staticmap="https://staticmap.openstreetmap.de/staticmap.php?center=38.936,-77.183&amp;zoom=15&amp;size=240x180&amp;maptype=mapnik&amp;markers=38.936,-77.183,lightblue1" data-svg="data:image/svg+xml;charset=utf-8,%3Csvg%20xmlns%3D%27http%3A//www.w3.org/2000/svg%27%20width%3D%27240%27%20height%3D%27180%27%3E%3Crect%20width%3D%27100%25%27%20height%3D%27100%25%27%20fill%3D%27%23eef0f3%27/%3E%3Ctext%20x%3D%2750%25%27%20y%3D%2744%25%27%20font-size%3D%2726%27%20text-anchor%3D%27middle%27%3E%F0%9F%93%8D%3C/text%3E%3Ctext%20x%3D%2750%25%27%20y%3D%2766%25%27%20font-size%3D%2712%27%20fill%3D%27%237c8694%27%20text-anchor%3D%27middle%27%20font-family%3D%27sans-serif%27%3E1436%20Ironwood%20Dr%3C/text%3E%3C/svg%3E" onerror="mclThumbFallback(this)" alt="" class="thumb" loading="lazy"></a>
-      <div class="card-body">
-        <div class="card-head">
-          <span class="addr">⭐ 1436 Ironwood Dr, McLean, VA 22101</span>
-          <span class="pill pill-green">✅ in McLean HS zone</span>
-        </div>
-        <div class="price-line">$5,600/mo</div>
-        <div class="stats-line">4 bd / 3.5 ba · 2,688 sqft · SFH · via Redfin</div>
-        <div class="schools-line">🏫 HS not confirmed</div>
-        <div class="highlights">✨ garage, renovated/new</div>
-        <div class="card-actions">
-          <button class="like-btn" onclick="toggleLike(this,'1436 Ironwood Dr, McLean, VA 22101','$5,600/mo','https://www.redfin.com/VA/Mc-Lean/1436-Ironwood-Dr-22101/home/9409570')">♡</button>
-          <a class="btn" href="https://www.redfin.com/VA/Mc-Lean/1436-Ironwood-Dr-22101/home/9409570" target="_blank" rel="noopener">View listing →</a>
-          <a class="btn btn-secondary" href="https://www.redfin.com/VA/Mc-Lean/1436-Ironwood-Dr-22101/home/9409570" target="_blank" rel="noopener">📷 Photos</a>
-        </div>
-      </div>
-    </div>
-
-    <div class="card starred" data-addr="6522 Truman Ln, Falls Church, VA 22043">
-      <a href="https://www.redfin.com/VA/Falls-Church/6522-Truman-Ln-22043/home/9474738" target="_blank" rel="noopener"><img src="https://ssl.cdn-redfin.com/photo/rent/d8fdd246-a82b-404a-ab64-29afb69f2edf/islphoto/genIsl.0_1.webp" data-staticmap="https://staticmap.openstreetmap.de/staticmap.php?center=38.925,-77.195&amp;zoom=15&amp;size=240x180&amp;maptype=mapnik&amp;markers=38.925,-77.195,lightblue1" data-svg="data:image/svg+xml;charset=utf-8,%3Csvg%20xmlns%3D%27http%3A//www.w3.org/2000/svg%27%20width%3D%27240%27%20height%3D%27180%27%3E%3Crect%20width%3D%27100%25%27%20height%3D%27100%25%27%20fill%3D%27%23eef0f3%27/%3E%3Ctext%20x%3D%2750%25%27%20y%3D%2744%25%27%20font-size%3D%2726%27%20text-anchor%3D%27middle%27%3E%F0%9F%93%8D%3C/text%3E%3Ctext%20x%3D%2750%25%27%20y%3D%2766%25%27%20font-size%3D%2712%27%20fill%3D%27%237c8694%27%20text-anchor%3D%27middle%27%20font-family%3D%27sans-serif%27%3E6522%20Truman%20Ln%3C/text%3E%3C/svg%3E" onerror="mclThumbFallback(this)" alt="" class="thumb" loading="lazy"></a>
-      <div class="card-body">
-        <div class="card-head">
-          <span class="addr">⭐ 6522 Truman Ln, Falls Church, VA 22043</span>
-          <span class="pill pill-green">✅ in McLean HS zone</span>
-        </div>
-        <div class="price-line">$5,790/mo</div>
-        <div class="stats-line">5 bd / 3.5 ba · 2,456 sqft · SFH · via Redfin</div>
-        <div class="schools-line">🏫 HS not confirmed</div>
-        <div class="highlights">✨ garage, cul-de-sac, renovated/new</div>
-        <div class="card-actions">
-          <button class="like-btn" onclick="toggleLike(this,'6522 Truman Ln, Falls Church, VA 22043','$5,790/mo','https://www.redfin.com/VA/Falls-Church/6522-Truman-Ln-22043/home/9474738')">♡</button>
-          <a class="btn" href="https://www.redfin.com/VA/Falls-Church/6522-Truman-Ln-22043/home/9474738" target="_blank" rel="noopener">View listing →</a>
-          <a class="btn btn-secondary" href="https://www.redfin.com/VA/Falls-Church/6522-Truman-Ln-22043/home/9474738" target="_blank" rel="noopener">📷 Photos</a>
-        </div>
-      </div>
-    </div>
-
-    <div class="card starred" data-addr="6217 Park Rd, McLean, VA 22101">
-      <a href="https://www.redfin.com/VA/Mc-Lean/6217-Park-Rd-22101/home/9483801" target="_blank" rel="noopener"><img src="https://ssl.cdn-redfin.com/photo/rent/2778f7c3-6756-4ac8-9f62-c99b655ab438/islphoto/genIsl.0_1.webp" data-staticmap="https://staticmap.openstreetmap.de/staticmap.php?center=38.939,-77.188&amp;zoom=15&amp;size=240x180&amp;maptype=mapnik&amp;markers=38.939,-77.188,lightblue1" data-svg="data:image/svg+xml;charset=utf-8,%3Csvg%20xmlns%3D%27http%3A//www.w3.org/2000/svg%27%20width%3D%27240%27%20height%3D%27180%27%3E%3Crect%20width%3D%27100%25%27%20height%3D%27100%25%27%20fill%3D%27%23eef0f3%27/%3E%3Ctext%20x%3D%2750%25%27%20y%3D%2744%25%27%20font-size%3D%2726%27%20text-anchor%3D%27middle%27%3E%F0%9F%93%8D%3C/text%3E%3Ctext%20x%3D%2750%25%27%20y%3D%2766%25%27%20font-size%3D%2712%27%20fill%3D%27%237c8694%27%20text-anchor%3D%27middle%27%20font-family%3D%27sans-serif%27%3E6217%20Park%20Rd%3C/text%3E%3C/svg%3E" onerror="mclThumbFallback(this)" alt="" class="thumb" loading="lazy"></a>
-      <div class="card-body">
-        <div class="card-head">
-          <span class="addr">⭐ 6217 Park Rd, McLean, VA 22101</span>
-          <span class="pill pill-green">✅ in McLean HS zone</span>
-        </div>
-        <div class="price-line">$6,000/mo</div>
-        <div class="stats-line">4 bd / 2.5 ba · 1,920 sqft · SFH · via Redfin</div>
-        <div class="schools-line">🏫 HS not confirmed</div>
-        <div class="highlights">✨ garage, renovated/new, backyard</div>
-        <div class="card-actions">
-          <button class="like-btn" onclick="toggleLike(this,'6217 Park Rd, McLean, VA 22101','$6,000/mo','https://www.redfin.com/VA/Mc-Lean/6217-Park-Rd-22101/home/9483801')">♡</button>
-          <a class="btn" href="https://www.redfin.com/VA/Mc-Lean/6217-Park-Rd-22101/home/9483801" target="_blank" rel="noopener">View listing →</a>
-          <a class="btn btn-secondary" href="https://www.redfin.com/VA/Mc-Lean/6217-Park-Rd-22101/home/9483801" target="_blank" rel="noopener">📷 Photos</a>
-        </div>
-      </div>
-    </div>
-
-    <div class="card " data-addr="7018 Westbury Rd, McLean, VA 22101">
-      <a href="https://hotpads.com/7018-westbury-rd-mc-lean-va-22101-vxkrzd/pad" target="_blank" rel="noopener"><img src="https://staticmap.openstreetmap.de/staticmap.php?center=38.948,-77.183&amp;zoom=15&amp;size=240x180&amp;maptype=mapnik&amp;markers=38.948,-77.183,lightblue1" data-staticmap="https://staticmap.openstreetmap.de/staticmap.php?center=38.948,-77.183&amp;zoom=15&amp;size=240x180&amp;maptype=mapnik&amp;markers=38.948,-77.183,lightblue1" data-svg="data:image/svg+xml;charset=utf-8,%3Csvg%20xmlns%3D%27http%3A//www.w3.org/2000/svg%27%20width%3D%27240%27%20height%3D%27180%27%3E%3Crect%20width%3D%27100%25%27%20height%3D%27100%25%27%20fill%3D%27%23eef0f3%27/%3E%3Ctext%20x%3D%2750%25%27%20y%3D%2744%25%27%20font-size%3D%2726%27%20text-anchor%3D%27middle%27%3E%F0%9F%93%8D%3C/text%3E%3Ctext%20x%3D%2750%25%27%20y%3D%2766%25%27%20font-size%3D%2712%27%20fill%3D%27%237c8694%27%20text-anchor%3D%27middle%27%20font-family%3D%27sans-serif%27%3E7018%20Westbury%20Rd%3C/text%3E%3C/svg%3E" onerror="mclThumbFallback(this)" alt="" class="thumb" loading="lazy"></a>
-      <div class="card-body">
-        <div class="card-head">
-          <span class="addr">7018 Westbury Rd, McLean, VA 22101</span>
-          <span class="pill pill-green">✅ in McLean HS zone</span>
-        </div>
-        <div class="price-line">$4,950/mo</div>
-        <div class="stats-line">5 bd / 3 ba · sqft n/a · SFH · via HotPads</div>
-        <div class="schools-line">🏫 HS not confirmed</div>
-        
-        <div class="card-actions">
-          <button class="like-btn" onclick="toggleLike(this,'7018 Westbury Rd, McLean, VA 22101','$4,950/mo','https://hotpads.com/7018-westbury-rd-mc-lean-va-22101-vxkrzd/pad')">♡</button>
-          <a class="btn" href="https://hotpads.com/7018-westbury-rd-mc-lean-va-22101-vxkrzd/pad" target="_blank" rel="noopener">View listing →</a>
-          <a class="btn btn-secondary" href="https://hotpads.com/7018-westbury-rd-mc-lean-va-22101-vxkrzd/pad" target="_blank" rel="noopener">📷 Photos</a>
-        </div>
-      </div>
-    </div>
-
-    <div class="card " data-addr="1819 Westmoreland St, McLean, VA 22101">
-      <a href="https://hotpads.com/1819-westmoreland-st-mc-lean-va-22101-wd59vw/pad" target="_blank" rel="noopener"><img src="https://staticmap.openstreetmap.de/staticmap.php?center=38.926,-77.179&amp;zoom=15&amp;size=240x180&amp;maptype=mapnik&amp;markers=38.926,-77.179,lightblue1" data-staticmap="https://staticmap.openstreetmap.de/staticmap.php?center=38.926,-77.179&amp;zoom=15&amp;size=240x180&amp;maptype=mapnik&amp;markers=38.926,-77.179,lightblue1" data-svg="data:image/svg+xml;charset=utf-8,%3Csvg%20xmlns%3D%27http%3A//www.w3.org/2000/svg%27%20width%3D%27240%27%20height%3D%27180%27%3E%3Crect%20width%3D%27100%25%27%20height%3D%27100%25%27%20fill%3D%27%23eef0f3%27/%3E%3Ctext%20x%3D%2750%25%27%20y%3D%2744%25%27%20font-size%3D%2726%27%20text-anchor%3D%27middle%27%3E%F0%9F%93%8D%3C/text%3E%3Ctext%20x%3D%2750%25%27%20y%3D%2766%25%27%20font-size%3D%2712%27%20fill%3D%27%237c8694%27%20text-anchor%3D%27middle%27%20font-family%3D%27sans-serif%27%3E1819%20Westmoreland%20St%3C/text%3E%3C/svg%3E" onerror="mclThumbFallback(this)" alt="" class="thumb" loading="lazy"></a>
-      <div class="card-body">
-        <div class="card-head">
-          <span class="addr">1819 Westmoreland St, McLean, VA 22101</span>
-          <span class="pill pill-green">✅ in McLean HS zone</span>
-        </div>
-        <div class="price-line">$4,995/mo</div>
-        <div class="stats-line">5 bd / 3 ba · sqft n/a · SFH · via HotPads</div>
-        <div class="schools-line">🏫 HS not confirmed</div>
-        <div class="highlights">✨ renovated/new</div>
-        <div class="card-actions">
-          <button class="like-btn" onclick="toggleLike(this,'1819 Westmoreland St, McLean, VA 22101','$4,995/mo','https://hotpads.com/1819-westmoreland-st-mc-lean-va-22101-wd59vw/pad')">♡</button>
-          <a class="btn" href="https://hotpads.com/1819-westmoreland-st-mc-lean-va-22101-wd59vw/pad" target="_blank" rel="noopener">View listing →</a>
-          <a class="btn btn-secondary" href="https://hotpads.com/1819-westmoreland-st-mc-lean-va-22101-wd59vw/pad" target="_blank" rel="noopener">📷 Photos</a>
-        </div>
-      </div>
-    </div>
-
-    <div class="card " data-addr="7220 Vistas Ln, McLean, VA 22101">
-      <a href="https://hotpads.com/7220-vistas-ln-mc-lean-va-22101-vxngkf/pad" target="_blank" rel="noopener"><img src="https://staticmap.openstreetmap.de/staticmap.php?center=38.945,-77.187&amp;zoom=15&amp;size=240x180&amp;maptype=mapnik&amp;markers=38.945,-77.187,lightblue1" data-staticmap="https://staticmap.openstreetmap.de/staticmap.php?center=38.945,-77.187&amp;zoom=15&amp;size=240x180&amp;maptype=mapnik&amp;markers=38.945,-77.187,lightblue1" data-svg="data:image/svg+xml;charset=utf-8,%3Csvg%20xmlns%3D%27http%3A//www.w3.org/2000/svg%27%20width%3D%27240%27%20height%3D%27180%27%3E%3Crect%20width%3D%27100%25%27%20height%3D%27100%25%27%20fill%3D%27%23eef0f3%27/%3E%3Ctext%20x%3D%2750%25%27%20y%3D%2744%25%27%20font-size%3D%2726%27%20text-anchor%3D%27middle%27%3E%F0%9F%93%8D%3C/text%3E%3Ctext%20x%3D%2750%25%27%20y%3D%2766%25%27%20font-size%3D%2712%27%20fill%3D%27%237c8694%27%20text-anchor%3D%27middle%27%20font-family%3D%27sans-serif%27%3E7220%20Vistas%20Ln%3C/text%3E%3C/svg%3E" onerror="mclThumbFallback(this)" alt="" class="thumb" loading="lazy"></a>
-      <div class="card-body">
-        <div class="card-head">
-          <span class="addr">7220 Vistas Ln, McLean, VA 22101</span>
-          <span class="pill pill-green">✅ in McLean HS zone</span>
-        </div>
-        <div class="price-line">$5,150/mo</div>
-        <div class="stats-line">4 bd / 3.5 ba · sqft n/a · Townhouse · via HotPads</div>
-        <div class="schools-line">🏫 HS not confirmed</div>
-        
-        <div class="card-actions">
-          <button class="like-btn" onclick="toggleLike(this,'7220 Vistas Ln, McLean, VA 22101','$5,150/mo','https://hotpads.com/7220-vistas-ln-mc-lean-va-22101-vxngkf/pad')">♡</button>
-          <a class="btn" href="https://hotpads.com/7220-vistas-ln-mc-lean-va-22101-vxngkf/pad" target="_blank" rel="noopener">View listing →</a>
-          <a class="btn btn-secondary" href="https://hotpads.com/7220-vistas-ln-mc-lean-va-22101-vxngkf/pad" target="_blank" rel="noopener">📷 Photos</a>
-        </div>
-      </div>
-    </div>
-
-    <div class="card " data-addr="1442 Colleen Ln, McLean, VA 22101">
-      <a href="https://hotpads.com/1442-colleen-ln-mc-lean-va-22101-1jmp1nw/pad" target="_blank" rel="noopener"><img src="https://staticmap.openstreetmap.de/staticmap.php?center=38.934,-77.176&amp;zoom=15&amp;size=240x180&amp;maptype=mapnik&amp;markers=38.934,-77.176,lightblue1" data-staticmap="https://staticmap.openstreetmap.de/staticmap.php?center=38.934,-77.176&amp;zoom=15&amp;size=240x180&amp;maptype=mapnik&amp;markers=38.934,-77.176,lightblue1" data-svg="data:image/svg+xml;charset=utf-8,%3Csvg%20xmlns%3D%27http%3A//www.w3.org/2000/svg%27%20width%3D%27240%27%20height%3D%27180%27%3E%3Crect%20width%3D%27100%25%27%20height%3D%27100%25%27%20fill%3D%27%23eef0f3%27/%3E%3Ctext%20x%3D%2750%25%27%20y%3D%2744%25%27%20font-size%3D%2726%27%20text-anchor%3D%27middle%27%3E%F0%9F%93%8D%3C/text%3E%3Ctext%20x%3D%2750%25%27%20y%3D%2766%25%27%20font-size%3D%2712%27%20fill%3D%27%237c8694%27%20text-anchor%3D%27middle%27%20font-family%3D%27sans-serif%27%3E1442%20Colleen%20Ln%3C/text%3E%3C/svg%3E" onerror="mclThumbFallback(this)" alt="" class="thumb" loading="lazy"></a>
-      <div class="card-body">
-        <div class="card-head">
-          <span class="addr">1442 Colleen Ln, McLean, VA 22101</span>
-          <span class="pill pill-green">✅ in McLean HS zone</span>
-        </div>
-        <div class="price-line">$5,495/mo</div>
-        <div class="stats-line">4 bd / 3 ba · sqft n/a · SFH · via HotPads</div>
-        <div class="schools-line">🏫 HS not confirmed</div>
-        <div class="highlights">✨ renovated/new</div>
-        <div class="card-actions">
-          <button class="like-btn" onclick="toggleLike(this,'1442 Colleen Ln, McLean, VA 22101','$5,495/mo','https://hotpads.com/1442-colleen-ln-mc-lean-va-22101-1jmp1nw/pad')">♡</button>
-          <a class="btn" href="https://hotpads.com/1442-colleen-ln-mc-lean-va-22101-1jmp1nw/pad" target="_blank" rel="noopener">View listing →</a>
-          <a class="btn btn-secondary" href="https://hotpads.com/1442-colleen-ln-mc-lean-va-22101-1jmp1nw/pad" target="_blank" rel="noopener">📷 Photos</a>
-        </div>
-      </div>
-    </div>
-
-    <div class="card " data-addr="6520 Beverly Ave, McLean, VA 22101">
-      <a href="https://hotpads.com/6520-beverly-ave-mc-lean-va-22101-1jmp5tc/pad" target="_blank" rel="noopener"><img src="https://photos.zillowstatic.com/fp/284c63fc128ea2aff20a137f8f60c13f-rentals_medium_500_500.webp" data-staticmap="https://staticmap.openstreetmap.de/staticmap.php?center=38.937,-77.181&amp;zoom=15&amp;size=240x180&amp;maptype=mapnik&amp;markers=38.937,-77.181,lightblue1" data-svg="data:image/svg+xml;charset=utf-8,%3Csvg%20xmlns%3D%27http%3A//www.w3.org/2000/svg%27%20width%3D%27240%27%20height%3D%27180%27%3E%3Crect%20width%3D%27100%25%27%20height%3D%27100%25%27%20fill%3D%27%23eef0f3%27/%3E%3Ctext%20x%3D%2750%25%27%20y%3D%2744%25%27%20font-size%3D%2726%27%20text-anchor%3D%27middle%27%3E%F0%9F%93%8D%3C/text%3E%3Ctext%20x%3D%2750%25%27%20y%3D%2766%25%27%20font-size%3D%2712%27%20fill%3D%27%237c8694%27%20text-anchor%3D%27middle%27%20font-family%3D%27sans-serif%27%3E6520%20Beverly%20Ave%3C/text%3E%3C/svg%3E" onerror="mclThumbFallback(this)" alt="" class="thumb" loading="lazy"></a>
-      <div class="card-body">
-        <div class="card-head">
-          <span class="addr">6520 Beverly Ave, McLean, VA 22101</span>
-          <span class="pill pill-green">✅ in McLean HS zone</span>
-        </div>
-        <div class="price-line">$5,700/mo</div>
-        <div class="stats-line">5 bd / 4 ba · sqft n/a · SFH · via HotPads</div>
-        <div class="schools-line">🏫 HS not confirmed</div>
-        <div class="highlights">✨ renovated/new</div>
-        <div class="card-actions">
-          <button class="like-btn" onclick="toggleLike(this,'6520 Beverly Ave, McLean, VA 22101','$5,700/mo','https://hotpads.com/6520-beverly-ave-mc-lean-va-22101-1jmp5tc/pad')">♡</button>
-          <a class="btn" href="https://hotpads.com/6520-beverly-ave-mc-lean-va-22101-1jmp5tc/pad" target="_blank" rel="noopener">View listing →</a>
-          <a class="btn btn-secondary" href="https://hotpads.com/6520-beverly-ave-mc-lean-va-22101-1jmp5tc/pad" target="_blank" rel="noopener">📷 Photos</a>
-        </div>
-      </div>
-    </div>
-
-    <div class="card " data-addr="1650 La Salle Ave, McLean, VA 22102">
-      <a href="https://hotpads.com/1650-la-salle-ave-mc-lean-va-22102-1jmpbep/pad" target="_blank" rel="noopener"><img src="https://photos.zillowstatic.com/fp/178d1aebafc159999e7383b68e8358ef-rentals_medium_500_500.webp" data-staticmap="https://staticmap.openstreetmap.de/staticmap.php?center=38.95,-77.182&amp;zoom=15&amp;size=240x180&amp;maptype=mapnik&amp;markers=38.95,-77.182,lightblue1" data-svg="data:image/svg+xml;charset=utf-8,%3Csvg%20xmlns%3D%27http%3A//www.w3.org/2000/svg%27%20width%3D%27240%27%20height%3D%27180%27%3E%3Crect%20width%3D%27100%25%27%20height%3D%27100%25%27%20fill%3D%27%23eef0f3%27/%3E%3Ctext%20x%3D%2750%25%27%20y%3D%2744%25%27%20font-size%3D%2726%27%20text-anchor%3D%27middle%27%3E%F0%9F%93%8D%3C/text%3E%3Ctext%20x%3D%2750%25%27%20y%3D%2766%25%27%20font-size%3D%2712%27%20fill%3D%27%237c8694%27%20text-anchor%3D%27middle%27%20font-family%3D%27sans-serif%27%3E1650%20La%20Salle%20Ave%3C/text%3E%3C/svg%3E" onerror="mclThumbFallback(this)" alt="" class="thumb" loading="lazy"></a>
-      <div class="card-body">
-        <div class="card-head">
-          <span class="addr">1650 La Salle Ave, McLean, VA 22102</span>
-          <span class="pill pill-green">✅ in McLean HS zone</span>
-        </div>
-        <div class="price-line">$5,800/mo</div>
-        <div class="stats-line">5 bd / 3 ba · sqft n/a · SFH · via HotPads</div>
-        <div class="schools-line">🏫 HS not confirmed</div>
-        <div class="highlights">✨ renovated/new</div>
-        <div class="card-actions">
-          <button class="like-btn" onclick="toggleLike(this,'1650 La Salle Ave, McLean, VA 22102','$5,800/mo','https://hotpads.com/1650-la-salle-ave-mc-lean-va-22102-1jmpbep/pad')">♡</button>
-          <a class="btn" href="https://hotpads.com/1650-la-salle-ave-mc-lean-va-22102-1jmpbep/pad" target="_blank" rel="noopener">View listing →</a>
-          <a class="btn btn-secondary" href="https://hotpads.com/1650-la-salle-ave-mc-lean-va-22102-1jmpbep/pad" target="_blank" rel="noopener">📷 Photos</a>
-        </div>
-      </div>
-    </div></div></div>
-<div class="section "><h3>3 Bedrooms (9)</h3><div class="card-grid">
-    <div class="card starred" data-addr="6218 Nelway Dr, McLean, VA 22101">
-      <a href="https://www.redfin.com/VA/Mc-Lean/6218-Nelway-Dr-22101/home/9412783" target="_blank" rel="noopener"><img src="https://ssl.cdn-redfin.com/photo/rent/a3d1c31b-6156-416e-9b19-7df67731f181/islphoto/genIsl.0_1.webp" data-staticmap="https://staticmap.openstreetmap.de/staticmap.php?center=38.94,-77.19&amp;zoom=15&amp;size=240x180&amp;maptype=mapnik&amp;markers=38.94,-77.19,lightblue1" data-svg="data:image/svg+xml;charset=utf-8,%3Csvg%20xmlns%3D%27http%3A//www.w3.org/2000/svg%27%20width%3D%27240%27%20height%3D%27180%27%3E%3Crect%20width%3D%27100%25%27%20height%3D%27100%25%27%20fill%3D%27%23eef0f3%27/%3E%3Ctext%20x%3D%2750%25%27%20y%3D%2744%25%27%20font-size%3D%2726%27%20text-anchor%3D%27middle%27%3E%F0%9F%93%8D%3C/text%3E%3Ctext%20x%3D%2750%25%27%20y%3D%2766%25%27%20font-size%3D%2712%27%20fill%3D%27%237c8694%27%20text-anchor%3D%27middle%27%20font-family%3D%27sans-serif%27%3E6218%20Nelway%20Dr%3C/text%3E%3C/svg%3E" onerror="mclThumbFallback(this)" alt="" class="thumb" loading="lazy"></a>
-      <div class="card-body">
-        <div class="card-head">
-          <span class="addr">⭐ 6218 Nelway Dr, McLean, VA 22101</span>
-          <span class="pill pill-green">✅ in McLean HS zone</span>
-        </div>
-        <div class="price-line">$4,900/mo</div>
-        <div class="stats-line">3 bd / 2.5 ba · 2,751 sqft · SFH · via Redfin</div>
-        <div class="schools-line">🏫 HS not confirmed</div>
-        <div class="highlights">✨ garage, renovated/new, backyard</div>
-        <div class="card-actions">
-          <button class="like-btn" onclick="toggleLike(this,'6218 Nelway Dr, McLean, VA 22101','$4,900/mo','https://www.redfin.com/VA/Mc-Lean/6218-Nelway-Dr-22101/home/9412783')">♡</button>
-          <a class="btn" href="https://www.redfin.com/VA/Mc-Lean/6218-Nelway-Dr-22101/home/9412783" target="_blank" rel="noopener">View listing →</a>
-          <a class="btn btn-secondary" href="https://www.redfin.com/VA/Mc-Lean/6218-Nelway-Dr-22101/home/9412783" target="_blank" rel="noopener">📷 Photos</a>
-        </div>
-      </div>
-    </div>
-
-    <div class="card " data-addr="1454 McLean Mews Ct, McLean, VA 22101">
-      <a href="https://hotpads.com/1454-mclean-mews-ct-mc-lean-va-22101-w8kr46/pad" target="_blank" rel="noopener"><img src="https://staticmap.openstreetmap.de/staticmap.php?center=38.934,-77.178&amp;zoom=15&amp;size=240x180&amp;maptype=mapnik&amp;markers=38.934,-77.178,lightblue1" data-staticmap="https://staticmap.openstreetmap.de/staticmap.php?center=38.934,-77.178&amp;zoom=15&amp;size=240x180&amp;maptype=mapnik&amp;markers=38.934,-77.178,lightblue1" data-svg="data:image/svg+xml;charset=utf-8,%3Csvg%20xmlns%3D%27http%3A//www.w3.org/2000/svg%27%20width%3D%27240%27%20height%3D%27180%27%3E%3Crect%20width%3D%27100%25%27%20height%3D%27100%25%27%20fill%3D%27%23eef0f3%27/%3E%3Ctext%20x%3D%2750%25%27%20y%3D%2744%25%27%20font-size%3D%2726%27%20text-anchor%3D%27middle%27%3E%F0%9F%93%8D%3C/text%3E%3Ctext%20x%3D%2750%25%27%20y%3D%2766%25%27%20font-size%3D%2712%27%20fill%3D%27%237c8694%27%20text-anchor%3D%27middle%27%20font-family%3D%27sans-serif%27%3E1454%20McLean%20Mews%20Ct%3C/text%3E%3C/svg%3E" onerror="mclThumbFallback(this)" alt="" class="thumb" loading="lazy"></a>
-      <div class="card-body">
-        <div class="card-head">
-          <span class="addr">1454 McLean Mews Ct, McLean, VA 22101</span>
-          <span class="pill pill-green">✅ in McLean HS zone</span>
-        </div>
-        <div class="price-line">$4,900/mo</div>
-        <div class="stats-line">3 bd / 4.5 ba · sqft n/a · Townhouse · via HotPads</div>
-        <div class="schools-line">🏫 HS not confirmed</div>
-        
-        <div class="card-actions">
-          <button class="like-btn" onclick="toggleLike(this,'1454 McLean Mews Ct, McLean, VA 22101','$4,900/mo','https://hotpads.com/1454-mclean-mews-ct-mc-lean-va-22101-w8kr46/pad')">♡</button>
-          <a class="btn" href="https://hotpads.com/1454-mclean-mews-ct-mc-lean-va-22101-w8kr46/pad" target="_blank" rel="noopener">View listing →</a>
-          <a class="btn btn-secondary" href="https://hotpads.com/1454-mclean-mews-ct-mc-lean-va-22101-w8kr46/pad" target="_blank" rel="noopener">📷 Photos</a>
-        </div>
-      </div>
-    </div>
-
-    <div class="card " data-addr="1433 McLean Mews Ct, McLean, VA 22101">
-      <a href="https://www.redfin.com/VA/McLean/1433-McLean-Mews-Ct-22101/home/9394691" target="_blank" rel="noopener"><img src="https://ssl.cdn-redfin.com/photo/rent/db2ed49d-e65f-44de-ae56-19908804a64a/islphoto/genIsl.0_1.webp" data-staticmap="https://staticmap.openstreetmap.de/staticmap.php?center=38.934,-77.178&amp;zoom=15&amp;size=240x180&amp;maptype=mapnik&amp;markers=38.934,-77.178,lightblue1" data-svg="data:image/svg+xml;charset=utf-8,%3Csvg%20xmlns%3D%27http%3A//www.w3.org/2000/svg%27%20width%3D%27240%27%20height%3D%27180%27%3E%3Crect%20width%3D%27100%25%27%20height%3D%27100%25%27%20fill%3D%27%23eef0f3%27/%3E%3Ctext%20x%3D%2750%25%27%20y%3D%2744%25%27%20font-size%3D%2726%27%20text-anchor%3D%27middle%27%3E%F0%9F%93%8D%3C/text%3E%3Ctext%20x%3D%2750%25%27%20y%3D%2766%25%27%20font-size%3D%2712%27%20fill%3D%27%237c8694%27%20text-anchor%3D%27middle%27%20font-family%3D%27sans-serif%27%3E1433%20McLean%20Mews%20Ct%3C/text%3E%3C/svg%3E" onerror="mclThumbFallback(this)" alt="" class="thumb" loading="lazy"></a>
-      <div class="card-body">
-        <div class="card-head">
-          <span class="addr">1433 McLean Mews Ct, McLean, VA 22101</span>
-          <span class="pill pill-green">✅ in McLean HS zone</span>
-        </div>
-        <div class="price-line">$4,990/mo</div>
-        <div class="stats-line">3 bd / 2.5 ba · 2,174 sqft · Townhouse · via Redfin</div>
-        <div class="schools-line">🏫 HS not confirmed</div>
-        
-        <div class="card-actions">
-          <button class="like-btn" onclick="toggleLike(this,'1433 McLean Mews Ct, McLean, VA 22101','$4,990/mo','https://www.redfin.com/VA/McLean/1433-McLean-Mews-Ct-22101/home/9394691')">♡</button>
-          <a class="btn" href="https://www.redfin.com/VA/McLean/1433-McLean-Mews-Ct-22101/home/9394691" target="_blank" rel="noopener">View listing →</a>
-          <a class="btn btn-secondary" href="https://www.redfin.com/VA/McLean/1433-McLean-Mews-Ct-22101/home/9394691" target="_blank" rel="noopener">📷 Photos</a>
-        </div>
-      </div>
-    </div>
-
-    <div class="card " data-addr="1427 McLean Mews Ct, McLean, VA 22101">
-      <a href="https://hotpads.com/1427-mclean-mews-ct-mc-lean-va-22101-1jmp1g9/pad" target="_blank" rel="noopener"><img src="https://ssl.cdn-redfin.com/photo/rent/9c3c49ad-bbb6-44c3-851e-7b7f300d0435/islphoto/genIsl.0_1.webp" data-staticmap="https://staticmap.openstreetmap.de/staticmap.php?center=38.934,-77.178&amp;zoom=15&amp;size=240x180&amp;maptype=mapnik&amp;markers=38.934,-77.178,lightblue1" data-svg="data:image/svg+xml;charset=utf-8,%3Csvg%20xmlns%3D%27http%3A//www.w3.org/2000/svg%27%20width%3D%27240%27%20height%3D%27180%27%3E%3Crect%20width%3D%27100%25%27%20height%3D%27100%25%27%20fill%3D%27%23eef0f3%27/%3E%3Ctext%20x%3D%2750%25%27%20y%3D%2744%25%27%20font-size%3D%2726%27%20text-anchor%3D%27middle%27%3E%F0%9F%93%8D%3C/text%3E%3Ctext%20x%3D%2750%25%27%20y%3D%2766%25%27%20font-size%3D%2712%27%20fill%3D%27%237c8694%27%20text-anchor%3D%27middle%27%20font-family%3D%27sans-serif%27%3E1427%20McLean%20Mews%20Ct%3C/text%3E%3C/svg%3E" onerror="mclThumbFallback(this)" alt="" class="thumb" loading="lazy"></a>
-      <div class="card-body">
-        <div class="card-head">
-          <span class="addr">1427 McLean Mews Ct, McLean, VA 22101</span>
-          <span class="pill pill-green">✅ in McLean HS zone</span>
-        </div>
-        <div class="price-line">$4,995/mo</div>
-        <div class="stats-line">3 bd / 3.5 ba · 2,174 sqft · Townhouse · via Redfin</div>
-        <div class="schools-line">🏫 HS not confirmed</div>
-        <div class="highlights">✨ renovated/new</div>
-        <div class="card-actions">
-          <button class="like-btn" onclick="toggleLike(this,'1427 McLean Mews Ct, McLean, VA 22101','$4,995/mo','https://hotpads.com/1427-mclean-mews-ct-mc-lean-va-22101-1jmp1g9/pad')">♡</button>
-          <a class="btn" href="https://hotpads.com/1427-mclean-mews-ct-mc-lean-va-22101-1jmp1g9/pad" target="_blank" rel="noopener">View listing →</a>
-          <a class="btn btn-secondary" href="https://hotpads.com/1427-mclean-mews-ct-mc-lean-va-22101-1jmp1g9/pad" target="_blank" rel="noopener">📷 Photos</a>
-        </div>
-      </div>
-    </div>
-
-    <div class="card " data-addr="1607 Seneca Ave, McLean, VA 22102">
-      <a href="https://www.redfin.com/VA/Mc-Lean/1607-Seneca-Ave-22102/home/9830535" target="_blank" rel="noopener"><img src="https://ssl.cdn-redfin.com/photo/rent/64ab77cd-a7a5-4392-9aa0-053696a7f847/islphoto/genIsl.0_1.webp" data-staticmap="https://staticmap.openstreetmap.de/staticmap.php?center=38.93,-77.19&amp;zoom=15&amp;size=240x180&amp;maptype=mapnik&amp;markers=38.93,-77.19,lightblue1" data-svg="data:image/svg+xml;charset=utf-8,%3Csvg%20xmlns%3D%27http%3A//www.w3.org/2000/svg%27%20width%3D%27240%27%20height%3D%27180%27%3E%3Crect%20width%3D%27100%25%27%20height%3D%27100%25%27%20fill%3D%27%23eef0f3%27/%3E%3Ctext%20x%3D%2750%25%27%20y%3D%2744%25%27%20font-size%3D%2726%27%20text-anchor%3D%27middle%27%3E%F0%9F%93%8D%3C/text%3E%3Ctext%20x%3D%2750%25%27%20y%3D%2766%25%27%20font-size%3D%2712%27%20fill%3D%27%237c8694%27%20text-anchor%3D%27middle%27%20font-family%3D%27sans-serif%27%3E1607%20Seneca%20Ave%3C/text%3E%3C/svg%3E" onerror="mclThumbFallback(this)" alt="" class="thumb" loading="lazy"></a>
-      <div class="card-body">
-        <div class="card-head">
-          <span class="addr">1607 Seneca Ave, McLean, VA 22102</span>
-          <span class="pill pill-green">✅ in McLean HS zone</span>
-        </div>
-        <div class="price-line">$5,400/mo</div>
-        <div class="stats-line">3 bd / 2.5 ba · 3,052 sqft · SFH · via Redfin</div>
-        <div class="schools-line">🏫 HS not confirmed</div>
-        
-        <div class="card-actions">
-          <button class="like-btn" onclick="toggleLike(this,'1607 Seneca Ave, McLean, VA 22102','$5,400/mo','https://www.redfin.com/VA/Mc-Lean/1607-Seneca-Ave-22102/home/9830535')">♡</button>
-          <a class="btn" href="https://www.redfin.com/VA/Mc-Lean/1607-Seneca-Ave-22102/home/9830535" target="_blank" rel="noopener">View listing →</a>
-          <a class="btn btn-secondary" href="https://www.redfin.com/VA/Mc-Lean/1607-Seneca-Ave-22102/home/9830535" target="_blank" rel="noopener">📷 Photos</a>
-        </div>
-      </div>
-    </div>
-
-    <div class="card " data-addr="2007 Mayfair McLean Ct, Falls Church, VA 22043">
-      <a href="https://www.redfin.com/VA/Falls-Church/2007-Mayfair-McLean-Ct-22043/home/9477729" target="_blank" rel="noopener"><img src="https://ssl.cdn-redfin.com/photo/rent/ba557c4a-9db2-49cd-bb5e-2a9ce0bb2dd2/islphoto/genIsl.0_1.webp" data-staticmap="https://staticmap.openstreetmap.de/staticmap.php?center=38.928,-77.198&amp;zoom=15&amp;size=240x180&amp;maptype=mapnik&amp;markers=38.928,-77.198,lightblue1" data-svg="data:image/svg+xml;charset=utf-8,%3Csvg%20xmlns%3D%27http%3A//www.w3.org/2000/svg%27%20width%3D%27240%27%20height%3D%27180%27%3E%3Crect%20width%3D%27100%25%27%20height%3D%27100%25%27%20fill%3D%27%23eef0f3%27/%3E%3Ctext%20x%3D%2750%25%27%20y%3D%2744%25%27%20font-size%3D%2726%27%20text-anchor%3D%27middle%27%3E%F0%9F%93%8D%3C/text%3E%3Ctext%20x%3D%2750%25%27%20y%3D%2766%25%27%20font-size%3D%2712%27%20fill%3D%27%237c8694%27%20text-anchor%3D%27middle%27%20font-family%3D%27sans-serif%27%3E2007%20Mayfair%20McLean%20Ct%3C/text%3E%3C/svg%3E" onerror="mclThumbFallback(this)" alt="" class="thumb" loading="lazy"></a>
-      <div class="card-body">
-        <div class="card-head">
-          <span class="addr">2007 Mayfair McLean Ct, Falls Church, VA 22043</span>
-          <span class="pill pill-green">✅ in McLean HS zone</span>
-        </div>
-        <div class="price-line">$5,695/mo</div>
-        <div class="stats-line">3 bd / 3.5 ba · 2,732 sqft · Townhouse · via Redfin</div>
-        <div class="schools-line">🏫 HS not confirmed</div>
-        
-        <div class="card-actions">
-          <button class="like-btn" onclick="toggleLike(this,'2007 Mayfair McLean Ct, Falls Church, VA 22043','$5,695/mo','https://www.redfin.com/VA/Falls-Church/2007-Mayfair-McLean-Ct-22043/home/9477729')">♡</button>
-          <a class="btn" href="https://www.redfin.com/VA/Falls-Church/2007-Mayfair-McLean-Ct-22043/home/9477729" target="_blank" rel="noopener">View listing →</a>
-          <a class="btn btn-secondary" href="https://www.redfin.com/VA/Falls-Church/2007-Mayfair-McLean-Ct-22043/home/9477729" target="_blank" rel="noopener">📷 Photos</a>
-        </div>
-      </div>
-    </div>
-
-    <div class="card " data-addr="6630 Hampton View Pl, McLean, VA 22101">
-      <a href="https://hotpads.com/6630-hampton-view-pl-mc-lean-va-22101-tn3b51/pad" target="_blank" rel="noopener"><img src="https://photos.zillowstatic.com/fp/6345fa0d3d6203899c2d902363d61c42-rentals_medium_500_500.webp" data-staticmap="https://staticmap.openstreetmap.de/staticmap.php?center=38.933,-77.177&amp;zoom=15&amp;size=240x180&amp;maptype=mapnik&amp;markers=38.933,-77.177,lightblue1" data-svg="data:image/svg+xml;charset=utf-8,%3Csvg%20xmlns%3D%27http%3A//www.w3.org/2000/svg%27%20width%3D%27240%27%20height%3D%27180%27%3E%3Crect%20width%3D%27100%25%27%20height%3D%27100%25%27%20fill%3D%27%23eef0f3%27/%3E%3Ctext%20x%3D%2750%25%27%20y%3D%2744%25%27%20font-size%3D%2726%27%20text-anchor%3D%27middle%27%3E%F0%9F%93%8D%3C/text%3E%3Ctext%20x%3D%2750%25%27%20y%3D%2766%25%27%20font-size%3D%2712%27%20fill%3D%27%237c8694%27%20text-anchor%3D%27middle%27%20font-family%3D%27sans-serif%27%3E6630%20Hampton%20View%20Pl%3C/text%3E%3C/svg%3E" onerror="mclThumbFallback(this)" alt="" class="thumb" loading="lazy"></a>
-      <div class="card-body">
-        <div class="card-head">
-          <span class="addr">6630 Hampton View Pl, McLean, VA 22101</span>
-          <span class="pill pill-green">✅ in McLean HS zone</span>
-        </div>
-        <div class="price-line">$5,700/mo</div>
-        <div class="stats-line">3 bd / 3.5 ba · sqft n/a · Townhouse · via HotPads</div>
-        <div class="schools-line">🏫 HS not confirmed</div>
-        
-        <div class="card-actions">
-          <button class="like-btn" onclick="toggleLike(this,'6630 Hampton View Pl, McLean, VA 22101','$5,700/mo','https://hotpads.com/6630-hampton-view-pl-mc-lean-va-22101-tn3b51/pad')">♡</button>
-          <a class="btn" href="https://hotpads.com/6630-hampton-view-pl-mc-lean-va-22101-tn3b51/pad" target="_blank" rel="noopener">View listing →</a>
-          <a class="btn btn-secondary" href="https://hotpads.com/6630-hampton-view-pl-mc-lean-va-22101-tn3b51/pad" target="_blank" rel="noopener">📷 Photos</a>
-        </div>
-      </div>
-    </div>
-
-    <div class="card " data-addr="1619 Seneca Ave, McLean, VA 22102">
-      <a href="https://www.redfin.com/VA/Mc-Lean/1619-Seneca-Ave-22102/home/9830550" target="_blank" rel="noopener"><img src="https://ssl.cdn-redfin.com/photo/rent/56ffbc2c-b3c9-460c-8a03-db4c7039c75f/islphoto/genIsl.0_1.webp" data-staticmap="https://staticmap.openstreetmap.de/staticmap.php?center=38.93,-77.19&amp;zoom=15&amp;size=240x180&amp;maptype=mapnik&amp;markers=38.93,-77.19,lightblue1" data-svg="data:image/svg+xml;charset=utf-8,%3Csvg%20xmlns%3D%27http%3A//www.w3.org/2000/svg%27%20width%3D%27240%27%20height%3D%27180%27%3E%3Crect%20width%3D%27100%25%27%20height%3D%27100%25%27%20fill%3D%27%23eef0f3%27/%3E%3Ctext%20x%3D%2750%25%27%20y%3D%2744%25%27%20font-size%3D%2726%27%20text-anchor%3D%27middle%27%3E%F0%9F%93%8D%3C/text%3E%3Ctext%20x%3D%2750%25%27%20y%3D%2766%25%27%20font-size%3D%2712%27%20fill%3D%27%237c8694%27%20text-anchor%3D%27middle%27%20font-family%3D%27sans-serif%27%3E1619%20Seneca%20Ave%3C/text%3E%3C/svg%3E" onerror="mclThumbFallback(this)" alt="" class="thumb" loading="lazy"></a>
-      <div class="card-body">
-        <div class="card-head">
-          <span class="addr">1619 Seneca Ave, McLean, VA 22102</span>
-          <span class="pill pill-green">✅ in McLean HS zone</span>
-        </div>
-        <div class="price-line">$5,750/mo</div>
-        <div class="stats-line">3 bd / 3.5 ba · 2,195 sqft · SFH · via Redfin</div>
-        <div class="schools-line">🏫 HS not confirmed</div>
-        
-        <div class="card-actions">
-          <button class="like-btn" onclick="toggleLike(this,'1619 Seneca Ave, McLean, VA 22102','$5,750/mo','https://www.redfin.com/VA/Mc-Lean/1619-Seneca-Ave-22102/home/9830550')">♡</button>
-          <a class="btn" href="https://www.redfin.com/VA/Mc-Lean/1619-Seneca-Ave-22102/home/9830550" target="_blank" rel="noopener">View listing →</a>
-          <a class="btn btn-secondary" href="https://www.redfin.com/VA/Mc-Lean/1619-Seneca-Ave-22102/home/9830550" target="_blank" rel="noopener">📷 Photos</a>
-        </div>
-      </div>
-    </div>
-
-    <div class="card " data-addr="7449 Carriage Hills Dr, McLean, VA 22102">
-      <a href="https://hotpads.com/7449-carriage-hills-dr-mc-lean-va-22102-vxpwdf/pad" target="_blank" rel="noopener"><img src="https://photos.zillowstatic.com/fp/04df4c35ca4a0f3aa42df90bcc5ae704-rentals_medium_500_500.webp" data-staticmap="https://staticmap.openstreetmap.de/staticmap.php?center=38.952,-77.19&amp;zoom=15&amp;size=240x180&amp;maptype=mapnik&amp;markers=38.952,-77.19,lightblue1" data-svg="data:image/svg+xml;charset=utf-8,%3Csvg%20xmlns%3D%27http%3A//www.w3.org/2000/svg%27%20width%3D%27240%27%20height%3D%27180%27%3E%3Crect%20width%3D%27100%25%27%20height%3D%27100%25%27%20fill%3D%27%23eef0f3%27/%3E%3Ctext%20x%3D%2750%25%27%20y%3D%2744%25%27%20font-size%3D%2726%27%20text-anchor%3D%27middle%27%3E%F0%9F%93%8D%3C/text%3E%3Ctext%20x%3D%2750%25%27%20y%3D%2766%25%27%20font-size%3D%2712%27%20fill%3D%27%237c8694%27%20text-anchor%3D%27middle%27%20font-family%3D%27sans-serif%27%3E7449%20Carriage%20Hills%20Dr%3C/text%3E%3C/svg%3E" onerror="mclThumbFallback(this)" alt="" class="thumb" loading="lazy"></a>
-      <div class="card-body">
-        <div class="card-head">
-          <span class="addr">7449 Carriage Hills Dr, McLean, VA 22102</span>
-          <span class="pill pill-green">✅ in McLean HS zone</span>
-        </div>
-        <div class="price-line">$5,850/mo</div>
-        <div class="stats-line">3 bd / 4 ba · sqft n/a · Townhouse · via HotPads</div>
-        <div class="schools-line">🏫 HS not confirmed</div>
-        
-        <div class="card-actions">
-          <button class="like-btn" onclick="toggleLike(this,'7449 Carriage Hills Dr, McLean, VA 22102','$5,850/mo','https://hotpads.com/7449-carriage-hills-dr-mc-lean-va-22102-vxpwdf/pad')">♡</button>
-          <a class="btn" href="https://hotpads.com/7449-carriage-hills-dr-mc-lean-va-22102-vxpwdf/pad" target="_blank" rel="noopener">View listing →</a>
-          <a class="btn btn-secondary" href="https://hotpads.com/7449-carriage-hills-dr-mc-lean-va-22102-vxpwdf/pad" target="_blank" rel="noopener">📷 Photos</a>
-        </div>
-      </div>
-    </div></div></div>
-</div>
-<div class="zone-block outside-block"><h3 class="zone-head muted">📍 Outside McLean HS Zone</h3>
-<div class="section section-muted"><h3>Listings (9)</h3><div class="card-grid">
-    <div class="card " data-addr="1049 Balls Hill Rd, McLean, VA 22101">
-      <a href="https://www.redfin.com/VA/Mc-Lean/1049-Balls-Hill-Rd-22101/home/9272801" target="_blank" rel="noopener"><img src="https://ssl.cdn-redfin.com/photo/rent/42576814-5801-4478-ab6f-515557f3abd8/islphoto/genIsl.0_1.webp" data-staticmap="https://staticmap.openstreetmap.de/staticmap.php?center=38.9655,-77.178&amp;zoom=15&amp;size=240x180&amp;maptype=mapnik&amp;markers=38.9655,-77.178,lightblue1" data-svg="data:image/svg+xml;charset=utf-8,%3Csvg%20xmlns%3D%27http%3A//www.w3.org/2000/svg%27%20width%3D%27240%27%20height%3D%27180%27%3E%3Crect%20width%3D%27100%25%27%20height%3D%27100%25%27%20fill%3D%27%23eef0f3%27/%3E%3Ctext%20x%3D%2750%25%27%20y%3D%2744%25%27%20font-size%3D%2726%27%20text-anchor%3D%27middle%27%3E%F0%9F%93%8D%3C/text%3E%3Ctext%20x%3D%2750%25%27%20y%3D%2766%25%27%20font-size%3D%2712%27%20fill%3D%27%237c8694%27%20text-anchor%3D%27middle%27%20font-family%3D%27sans-serif%27%3E1049%20Balls%20Hill%20Rd%3C/text%3E%3C/svg%3E" onerror="mclThumbFallback(this)" alt="" class="thumb" loading="lazy"></a>
-      <div class="card-body">
-        <div class="card-head">
-          <span class="addr">1049 Balls Hill Rd, McLean, VA 22101</span>
-          <span class="pill pill-amber">📍 Langley HS (different HS)</span>
-        </div>
-        <div class="price-line">$4,900/mo</div>
-        <div class="stats-line">4 bd / 2.5 ba · 2,332 sqft · SFH · via Redfin</div>
-        <div class="schools-line">🏫 HS not confirmed</div>
-        
-        <div class="card-actions">
-          <button class="like-btn" onclick="toggleLike(this,'1049 Balls Hill Rd, McLean, VA 22101','$4,900/mo','https://www.redfin.com/VA/Mc-Lean/1049-Balls-Hill-Rd-22101/home/9272801')">♡</button>
-          <a class="btn" href="https://www.redfin.com/VA/Mc-Lean/1049-Balls-Hill-Rd-22101/home/9272801" target="_blank" rel="noopener">View listing →</a>
-          <a class="btn btn-secondary" href="https://www.redfin.com/VA/Mc-Lean/1049-Balls-Hill-Rd-22101/home/9272801" target="_blank" rel="noopener">📷 Photos</a>
-        </div>
-      </div>
-    </div>
-
-    <div class="card " data-addr="7755 Legere Ct, McLean, VA 22102">
-      <a href="https://hotpads.com/7755-legere-ct-mc-lean-va-22102-242ayt2/pad" target="_blank" rel="noopener"><img src="https://staticmap.openstreetmap.de/staticmap.php?center=38.918,-77.225&amp;zoom=15&amp;size=240x180&amp;maptype=mapnik&amp;markers=38.918,-77.225,lightblue1" data-staticmap="https://staticmap.openstreetmap.de/staticmap.php?center=38.918,-77.225&amp;zoom=15&amp;size=240x180&amp;maptype=mapnik&amp;markers=38.918,-77.225,lightblue1" data-svg="data:image/svg+xml;charset=utf-8,%3Csvg%20xmlns%3D%27http%3A//www.w3.org/2000/svg%27%20width%3D%27240%27%20height%3D%27180%27%3E%3Crect%20width%3D%27100%25%27%20height%3D%27100%25%27%20fill%3D%27%23eef0f3%27/%3E%3Ctext%20x%3D%2750%25%27%20y%3D%2744%25%27%20font-size%3D%2726%27%20text-anchor%3D%27middle%27%3E%F0%9F%93%8D%3C/text%3E%3Ctext%20x%3D%2750%25%27%20y%3D%2766%25%27%20font-size%3D%2712%27%20fill%3D%27%237c8694%27%20text-anchor%3D%27middle%27%20font-family%3D%27sans-serif%27%3E7755%20Legere%20Ct%3C/text%3E%3C/svg%3E" onerror="mclThumbFallback(this)" alt="" class="thumb" loading="lazy"></a>
-      <div class="card-body">
-        <div class="card-head">
-          <span class="addr">7755 Legere Ct, McLean, VA 22102</span>
-          <span class="pill pill-amber">📍 Marshall HS (different HS)</span>
-        </div>
-        <div class="price-line">$4,900/mo</div>
-        <div class="stats-line">3 bd / 4.5 ba · sqft n/a · Townhouse · via HotPads</div>
-        <div class="schools-line">🏫 HS not confirmed</div>
-        
-        <div class="card-actions">
-          <button class="like-btn" onclick="toggleLike(this,'7755 Legere Ct, McLean, VA 22102','$4,900/mo','https://hotpads.com/7755-legere-ct-mc-lean-va-22102-242ayt2/pad')">♡</button>
-          <a class="btn" href="https://hotpads.com/7755-legere-ct-mc-lean-va-22102-242ayt2/pad" target="_blank" rel="noopener">View listing →</a>
-          <a class="btn btn-secondary" href="https://hotpads.com/7755-legere-ct-mc-lean-va-22102-242ayt2/pad" target="_blank" rel="noopener">📷 Photos</a>
-        </div>
-      </div>
-    </div>
-
-    <div class="card " data-addr="7720 Spoleto Ln, McLean, VA 22102">
-      <a href="https://hotpads.com/7720-spoleto-ln-mc-lean-va-22102-1jmpds6/pad" target="_blank" rel="noopener"><img src="https://staticmap.openstreetmap.de/staticmap.php?center=38.918,-77.225&amp;zoom=15&amp;size=240x180&amp;maptype=mapnik&amp;markers=38.918,-77.225,lightblue1" data-staticmap="https://staticmap.openstreetmap.de/staticmap.php?center=38.918,-77.225&amp;zoom=15&amp;size=240x180&amp;maptype=mapnik&amp;markers=38.918,-77.225,lightblue1" data-svg="data:image/svg+xml;charset=utf-8,%3Csvg%20xmlns%3D%27http%3A//www.w3.org/2000/svg%27%20width%3D%27240%27%20height%3D%27180%27%3E%3Crect%20width%3D%27100%25%27%20height%3D%27100%25%27%20fill%3D%27%23eef0f3%27/%3E%3Ctext%20x%3D%2750%25%27%20y%3D%2744%25%27%20font-size%3D%2726%27%20text-anchor%3D%27middle%27%3E%F0%9F%93%8D%3C/text%3E%3Ctext%20x%3D%2750%25%27%20y%3D%2766%25%27%20font-size%3D%2712%27%20fill%3D%27%237c8694%27%20text-anchor%3D%27middle%27%20font-family%3D%27sans-serif%27%3E7720%20Spoleto%20Ln%3C/text%3E%3C/svg%3E" onerror="mclThumbFallback(this)" alt="" class="thumb" loading="lazy"></a>
-      <div class="card-body">
-        <div class="card-head">
-          <span class="addr">7720 Spoleto Ln, McLean, VA 22102</span>
-          <span class="pill pill-amber">📍 Marshall HS (different HS)</span>
-        </div>
-        <div class="price-line">$4,995/mo</div>
-        <div class="stats-line">3 bd / 5 ba · sqft n/a · Townhouse · via HotPads</div>
-        <div class="schools-line">🏫 HS not confirmed</div>
-        
-        <div class="card-actions">
-          <button class="like-btn" onclick="toggleLike(this,'7720 Spoleto Ln, McLean, VA 22102','$4,995/mo','https://hotpads.com/7720-spoleto-ln-mc-lean-va-22102-1jmpds6/pad')">♡</button>
-          <a class="btn" href="https://hotpads.com/7720-spoleto-ln-mc-lean-va-22102-1jmpds6/pad" target="_blank" rel="noopener">View listing →</a>
-          <a class="btn btn-secondary" href="https://hotpads.com/7720-spoleto-ln-mc-lean-va-22102-1jmpds6/pad" target="_blank" rel="noopener">📷 Photos</a>
-        </div>
-      </div>
-    </div>
-
-    <div class="card " data-addr="2271 Providence St, Falls Church, VA 22043">
-      <a href="https://www.redfin.com/VA/Falls-Church/2271-Providence-St-22043/home/9468362" target="_blank" rel="noopener"><img src="https://ssl.cdn-redfin.com/photo/rent/75a149d3-93f4-42e8-9c47-e14352aea84e/islphoto/genIsl.0_1.webp" data-staticmap="https://staticmap.openstreetmap.de/staticmap.php?center=38.913,-77.21&amp;zoom=15&amp;size=240x180&amp;maptype=mapnik&amp;markers=38.913,-77.21,lightblue1" data-svg="data:image/svg+xml;charset=utf-8,%3Csvg%20xmlns%3D%27http%3A//www.w3.org/2000/svg%27%20width%3D%27240%27%20height%3D%27180%27%3E%3Crect%20width%3D%27100%25%27%20height%3D%27100%25%27%20fill%3D%27%23eef0f3%27/%3E%3Ctext%20x%3D%2750%25%27%20y%3D%2744%25%27%20font-size%3D%2726%27%20text-anchor%3D%27middle%27%3E%F0%9F%93%8D%3C/text%3E%3Ctext%20x%3D%2750%25%27%20y%3D%2766%25%27%20font-size%3D%2712%27%20fill%3D%27%237c8694%27%20text-anchor%3D%27middle%27%20font-family%3D%27sans-serif%27%3E2271%20Providence%20St%3C/text%3E%3C/svg%3E" onerror="mclThumbFallback(this)" alt="" class="thumb" loading="lazy"></a>
-      <div class="card-body">
-        <div class="card-head">
-          <span class="addr">2271 Providence St, Falls Church, VA 22043</span>
-          <span class="pill pill-amber">📍 Marshall HS (different HS)</span>
-        </div>
-        <div class="price-line">$5,000/mo</div>
-        <div class="stats-line">4 bd / 3 ba · 2,800 sqft · SFH · via Redfin</div>
-        <div class="schools-line">🏫 HS not confirmed</div>
-        
-        <div class="card-actions">
-          <button class="like-btn" onclick="toggleLike(this,'2271 Providence St, Falls Church, VA 22043','$5,000/mo','https://www.redfin.com/VA/Falls-Church/2271-Providence-St-22043/home/9468362')">♡</button>
-          <a class="btn" href="https://www.redfin.com/VA/Falls-Church/2271-Providence-St-22043/home/9468362" target="_blank" rel="noopener">View listing →</a>
-          <a class="btn btn-secondary" href="https://www.redfin.com/VA/Falls-Church/2271-Providence-St-22043/home/9468362" target="_blank" rel="noopener">📷 Photos</a>
-        </div>
-      </div>
-    </div>
-
-    <div class="card " data-addr="2018 Tysons Ridgeline Rd, Falls Church, VA 22043">
-      <a href="https://www.redfin.com/VA/Falls-Church/2018-Tysons-Ridgeline-Rd-22043/home/186187740" target="_blank" rel="noopener"><img src="https://ssl.cdn-redfin.com/photo/rent/024bc3a1-228c-4a9e-820f-f91aa70fbcc9/islphoto/genIsl.0_1.webp" data-staticmap="https://staticmap.openstreetmap.de/staticmap.php?center=38.917,-77.226&amp;zoom=15&amp;size=240x180&amp;maptype=mapnik&amp;markers=38.917,-77.226,lightblue1" data-svg="data:image/svg+xml;charset=utf-8,%3Csvg%20xmlns%3D%27http%3A//www.w3.org/2000/svg%27%20width%3D%27240%27%20height%3D%27180%27%3E%3Crect%20width%3D%27100%25%27%20height%3D%27100%25%27%20fill%3D%27%23eef0f3%27/%3E%3Ctext%20x%3D%2750%25%27%20y%3D%2744%25%27%20font-size%3D%2726%27%20text-anchor%3D%27middle%27%3E%F0%9F%93%8D%3C/text%3E%3Ctext%20x%3D%2750%25%27%20y%3D%2766%25%27%20font-size%3D%2712%27%20fill%3D%27%237c8694%27%20text-anchor%3D%27middle%27%20font-family%3D%27sans-serif%27%3E2018%20Tysons%20Ridgeline%20Rd%3C/text%3E%3C/svg%3E" onerror="mclThumbFallback(this)" alt="" class="thumb" loading="lazy"></a>
-      <div class="card-body">
-        <div class="card-head">
-          <span class="addr">2018 Tysons Ridgeline Rd, Falls Church, VA 22043</span>
-          <span class="pill pill-amber">📍 Marshall HS (different HS)</span>
-        </div>
-        <div class="price-line">$5,200/mo</div>
-        <div class="stats-line">3 bd / 3.5 ba · 1,624 sqft · Townhouse · via Redfin</div>
-        <div class="schools-line">🏫 HS not confirmed</div>
-        <div class="highlights">✨ newer construction</div>
-        <div class="card-actions">
-          <button class="like-btn" onclick="toggleLike(this,'2018 Tysons Ridgeline Rd, Falls Church, VA 22043','$5,200/mo','https://www.redfin.com/VA/Falls-Church/2018-Tysons-Ridgeline-Rd-22043/home/186187740')">♡</button>
-          <a class="btn" href="https://www.redfin.com/VA/Falls-Church/2018-Tysons-Ridgeline-Rd-22043/home/186187740" target="_blank" rel="noopener">View listing →</a>
-          <a class="btn btn-secondary" href="https://www.redfin.com/VA/Falls-Church/2018-Tysons-Ridgeline-Rd-22043/home/186187740" target="_blank" rel="noopener">📷 Photos</a>
-        </div>
-      </div>
-    </div>
-
-    <div class="card " data-addr="2064 Tysons Ridgeline Rd, Falls Church, VA 22043">
-      <a href="https://www.redfin.com/VA/Falls-Church/2064-Tysons-Ridgeline-Rd-22043/home/186187780" target="_blank" rel="noopener"><img src="https://ssl.cdn-redfin.com/photo/rent/d67eff66-74c3-4fdf-899c-e4dcdb5bd359/islphoto/genIsl.0_1.webp" data-staticmap="https://staticmap.openstreetmap.de/staticmap.php?center=38.917,-77.226&amp;zoom=15&amp;size=240x180&amp;maptype=mapnik&amp;markers=38.917,-77.226,lightblue1" data-svg="data:image/svg+xml;charset=utf-8,%3Csvg%20xmlns%3D%27http%3A//www.w3.org/2000/svg%27%20width%3D%27240%27%20height%3D%27180%27%3E%3Crect%20width%3D%27100%25%27%20height%3D%27100%25%27%20fill%3D%27%23eef0f3%27/%3E%3Ctext%20x%3D%2750%25%27%20y%3D%2744%25%27%20font-size%3D%2726%27%20text-anchor%3D%27middle%27%3E%F0%9F%93%8D%3C/text%3E%3Ctext%20x%3D%2750%25%27%20y%3D%2766%25%27%20font-size%3D%2712%27%20fill%3D%27%237c8694%27%20text-anchor%3D%27middle%27%20font-family%3D%27sans-serif%27%3E2064%20Tysons%20Ridgeline%20Rd%3C/text%3E%3C/svg%3E" onerror="mclThumbFallback(this)" alt="" class="thumb" loading="lazy"></a>
-      <div class="card-body">
-        <div class="card-head">
-          <span class="addr">2064 Tysons Ridgeline Rd, Falls Church, VA 22043</span>
-          <span class="pill pill-amber">📍 Marshall HS (different HS)</span>
-        </div>
-        <div class="price-line">$5,200/mo</div>
-        <div class="stats-line">3 bd / 3.5 ba · 1,636 sqft · Townhouse · via Redfin</div>
-        <div class="schools-line">🏫 HS not confirmed</div>
-        <div class="highlights">✨ newer construction</div>
-        <div class="card-actions">
-          <button class="like-btn" onclick="toggleLike(this,'2064 Tysons Ridgeline Rd, Falls Church, VA 22043','$5,200/mo','https://www.redfin.com/VA/Falls-Church/2064-Tysons-Ridgeline-Rd-22043/home/186187780')">♡</button>
-          <a class="btn" href="https://www.redfin.com/VA/Falls-Church/2064-Tysons-Ridgeline-Rd-22043/home/186187780" target="_blank" rel="noopener">View listing →</a>
-          <a class="btn btn-secondary" href="https://www.redfin.com/VA/Falls-Church/2064-Tysons-Ridgeline-Rd-22043/home/186187780" target="_blank" rel="noopener">📷 Photos</a>
-        </div>
-      </div>
-    </div>
-
-    <div class="card " data-addr="2506 Patricia Ct, Falls Church, VA 22043">
-      <a href="https://www.redfin.com/VA/Falls-Church/2506-Patricia-Ct-22043/home/9480235" target="_blank" rel="noopener"><img src="https://ssl.cdn-redfin.com/photo/rent/f969db2e-ed6d-4b7e-9972-4fd42d274a69/islphoto/genIsl.0_5.webp" data-staticmap="https://staticmap.openstreetmap.de/staticmap.php?center=38.91,-77.2&amp;zoom=15&amp;size=240x180&amp;maptype=mapnik&amp;markers=38.91,-77.2,lightblue1" data-svg="data:image/svg+xml;charset=utf-8,%3Csvg%20xmlns%3D%27http%3A//www.w3.org/2000/svg%27%20width%3D%27240%27%20height%3D%27180%27%3E%3Crect%20width%3D%27100%25%27%20height%3D%27100%25%27%20fill%3D%27%23eef0f3%27/%3E%3Ctext%20x%3D%2750%25%27%20y%3D%2744%25%27%20font-size%3D%2726%27%20text-anchor%3D%27middle%27%3E%F0%9F%93%8D%3C/text%3E%3Ctext%20x%3D%2750%25%27%20y%3D%2766%25%27%20font-size%3D%2712%27%20fill%3D%27%237c8694%27%20text-anchor%3D%27middle%27%20font-family%3D%27sans-serif%27%3E2506%20Patricia%20Ct%3C/text%3E%3C/svg%3E" onerror="mclThumbFallback(this)" alt="" class="thumb" loading="lazy"></a>
-      <div class="card-body">
-        <div class="card-head">
-          <span class="addr">2506 Patricia Ct, Falls Church, VA 22043</span>
-          <span class="pill pill-amber">📍 Marshall HS (different HS)</span>
-        </div>
-        <div class="price-line">$5,700/mo</div>
-        <div class="stats-line">4 bd / 3.5 ba · 3,008 sqft · SFH · via Redfin</div>
-        <div class="schools-line">🏫 HS not confirmed</div>
-        
-        <div class="card-actions">
-          <button class="like-btn" onclick="toggleLike(this,'2506 Patricia Ct, Falls Church, VA 22043','$5,700/mo','https://www.redfin.com/VA/Falls-Church/2506-Patricia-Ct-22043/home/9480235')">♡</button>
-          <a class="btn" href="https://www.redfin.com/VA/Falls-Church/2506-Patricia-Ct-22043/home/9480235" target="_blank" rel="noopener">View listing →</a>
-          <a class="btn btn-secondary" href="https://www.redfin.com/VA/Falls-Church/2506-Patricia-Ct-22043/home/9480235" target="_blank" rel="noopener">📷 Photos</a>
-        </div>
-      </div>
-    </div>
-
-    <div class="card " data-addr="6872 Melrose Dr, McLean, VA 22101">
-      <a href="https://www.redfin.com/VA/Mc-Lean/6872-Melrose-Dr-22101/home/9390369" target="_blank" rel="noopener"><img src="https://ssl.cdn-redfin.com/photo/rent/db5ce6d4-dc12-42a7-b67d-4037cea0fc77/islphoto/genIsl.0_1.webp" data-staticmap="https://staticmap.openstreetmap.de/staticmap.php?center=38.961,-77.172&amp;zoom=15&amp;size=240x180&amp;maptype=mapnik&amp;markers=38.961,-77.172,lightblue1" data-svg="data:image/svg+xml;charset=utf-8,%3Csvg%20xmlns%3D%27http%3A//www.w3.org/2000/svg%27%20width%3D%27240%27%20height%3D%27180%27%3E%3Crect%20width%3D%27100%25%27%20height%3D%27100%25%27%20fill%3D%27%23eef0f3%27/%3E%3Ctext%20x%3D%2750%25%27%20y%3D%2744%25%27%20font-size%3D%2726%27%20text-anchor%3D%27middle%27%3E%F0%9F%93%8D%3C/text%3E%3Ctext%20x%3D%2750%25%27%20y%3D%2766%25%27%20font-size%3D%2712%27%20fill%3D%27%237c8694%27%20text-anchor%3D%27middle%27%20font-family%3D%27sans-serif%27%3E6872%20Melrose%20Dr%3C/text%3E%3C/svg%3E" onerror="mclThumbFallback(this)" alt="" class="thumb" loading="lazy"></a>
-      <div class="card-body">
-        <div class="card-head">
-          <span class="addr">6872 Melrose Dr, McLean, VA 22101</span>
-          <span class="pill pill-amber">📍 Langley HS (different HS)</span>
-        </div>
-        <div class="price-line">$5,750/mo</div>
-        <div class="stats-line">5 bd / 3.5 ba · 2,904 sqft · SFH · via Redfin</div>
-        <div class="schools-line">🏫 HS not confirmed</div>
-        
-        <div class="card-actions">
-          <button class="like-btn" onclick="toggleLike(this,'6872 Melrose Dr, McLean, VA 22101','$5,750/mo','https://www.redfin.com/VA/Mc-Lean/6872-Melrose-Dr-22101/home/9390369')">♡</button>
-          <a class="btn" href="https://www.redfin.com/VA/Mc-Lean/6872-Melrose-Dr-22101/home/9390369" target="_blank" rel="noopener">View listing →</a>
-          <a class="btn btn-secondary" href="https://www.redfin.com/VA/Mc-Lean/6872-Melrose-Dr-22101/home/9390369" target="_blank" rel="noopener">📷 Photos</a>
-        </div>
-      </div>
-    </div>
-
-    <div class="card " data-addr="1197 Meadow Green Ln, McLean, VA 22102">
-      <a href="https://www.redfin.com/VA/Mc-Lean/1197-Meadow-Green-Ln-22102/home/9377391" target="_blank" rel="noopener"><img src="https://ssl.cdn-redfin.com/photo/rent/dd1f5fce-aa11-4b23-9ad9-aaa9e349e035/islphoto/genIsl.0_1.webp" data-staticmap="https://staticmap.openstreetmap.de/staticmap.php?center=38.958,-77.205&amp;zoom=15&amp;size=240x180&amp;maptype=mapnik&amp;markers=38.958,-77.205,lightblue1" data-svg="data:image/svg+xml;charset=utf-8,%3Csvg%20xmlns%3D%27http%3A//www.w3.org/2000/svg%27%20width%3D%27240%27%20height%3D%27180%27%3E%3Crect%20width%3D%27100%25%27%20height%3D%27100%25%27%20fill%3D%27%23eef0f3%27/%3E%3Ctext%20x%3D%2750%25%27%20y%3D%2744%25%27%20font-size%3D%2726%27%20text-anchor%3D%27middle%27%3E%F0%9F%93%8D%3C/text%3E%3Ctext%20x%3D%2750%25%27%20y%3D%2766%25%27%20font-size%3D%2712%27%20fill%3D%27%237c8694%27%20text-anchor%3D%27middle%27%20font-family%3D%27sans-serif%27%3E1197%20Meadow%20Green%20Ln%3C/text%3E%3C/svg%3E" onerror="mclThumbFallback(this)" alt="" class="thumb" loading="lazy"></a>
-      <div class="card-body">
-        <div class="card-head">
-          <span class="addr">1197 Meadow Green Ln, McLean, VA 22102</span>
-          <span class="pill pill-amber">📍 Langley HS (different HS)</span>
-        </div>
-        <div class="price-line">$6,000/mo</div>
-        <div class="stats-line">4 bd / 2.5 ba · 4,199 sqft · SFH · via Redfin</div>
-        <div class="schools-line">🏫 HS not confirmed</div>
-        
-        <div class="card-actions">
-          <button class="like-btn" onclick="toggleLike(this,'1197 Meadow Green Ln, McLean, VA 22102','$6,000/mo','https://www.redfin.com/VA/Mc-Lean/1197-Meadow-Green-Ln-22102/home/9377391')">♡</button>
-          <a class="btn" href="https://www.redfin.com/VA/Mc-Lean/1197-Meadow-Green-Ln-22102/home/9377391" target="_blank" rel="noopener">View listing →</a>
-          <a class="btn btn-secondary" href="https://www.redfin.com/VA/Mc-Lean/1197-Meadow-Green-Ln-22102/home/9377391" target="_blank" rel="noopener">📷 Photos</a>
-        </div>
-      </div>
-    </div></div></div>
-</div></div>
-  <div><h2 class="col-title">FOR SALE <span class="col-count">(13)</span></h2>
-<div class="zone-block"><h3 class="zone-head">✅ In McLean HS Zone</h3>
-<div class="section "><h3>4+ Bedrooms (4)</h3><div class="card-grid">
-    <div class="card starred" data-addr="1537 Cedar Ave, McLean, VA 22101">
-      <a href="https://www.redfin.com/VA/Mc-Lean/1537-Cedar-Ave-22101/home/9394800" target="_blank" rel="noopener"><img src="https://ssl.cdn-redfin.com/photo/235/islphoto/812/genIslnoResize.VAFX2217812_6.webp" data-staticmap="https://staticmap.openstreetmap.de/staticmap.php?center=38.933,-77.175&amp;zoom=15&amp;size=240x180&amp;maptype=mapnik&amp;markers=38.933,-77.175,lightblue1" data-svg="data:image/svg+xml;charset=utf-8,%3Csvg%20xmlns%3D%27http%3A//www.w3.org/2000/svg%27%20width%3D%27240%27%20height%3D%27180%27%3E%3Crect%20width%3D%27100%25%27%20height%3D%27100%25%27%20fill%3D%27%23eef0f3%27/%3E%3Ctext%20x%3D%2750%25%27%20y%3D%2744%25%27%20font-size%3D%2726%27%20text-anchor%3D%27middle%27%3E%F0%9F%93%8D%3C/text%3E%3Ctext%20x%3D%2750%25%27%20y%3D%2766%25%27%20font-size%3D%2712%27%20fill%3D%27%237c8694%27%20text-anchor%3D%27middle%27%20font-family%3D%27sans-serif%27%3E1537%20Cedar%20Ave%3C/text%3E%3C/svg%3E" onerror="mclThumbFallback(this)" alt="" class="thumb" loading="lazy"></a>
-      <div class="card-body">
-        <div class="card-head">
-          <span class="addr">⭐ 1537 Cedar Ave, McLean, VA 22101</span>
-          <span class="pill pill-green">✅ in McLean HS zone</span>
-        </div>
-        <div class="price-line">$1,125,000</div>
-        <div class="stats-line">4 bd / 4.5 ba · 3,512 sqft · SFH · via Redfin</div>
-        <div class="schools-line">🏫 HS not confirmed</div>
-        <div class="highlights">✨ garage, renovated/new, high ceilings</div>
-        <div class="card-actions">
-          <button class="like-btn" onclick="toggleLike(this,'1537 Cedar Ave, McLean, VA 22101','$1,125,000','https://www.redfin.com/VA/Mc-Lean/1537-Cedar-Ave-22101/home/9394800')">♡</button>
-          <a class="btn" href="https://www.redfin.com/VA/Mc-Lean/1537-Cedar-Ave-22101/home/9394800" target="_blank" rel="noopener">View listing →</a>
-          <a class="btn btn-secondary" href="https://www.redfin.com/VA/Mc-Lean/1537-Cedar-Ave-22101/home/9394800" target="_blank" rel="noopener">📷 Photos</a>
-        </div>
-      </div>
-    </div>
-
-    <div class="card starred" data-addr="1644 La Salle Ave, McLean, VA 22102">
-      <a href="https://www.redfin.com/VA/Mc-Lean/1644-La-Salle-Ave-22102/home/9396414" target="_blank" rel="noopener"><img src="https://ssl.cdn-redfin.com/photo/235/islphoto/200/genIslnoResize.VAFX2323200_2.webp" data-staticmap="https://staticmap.openstreetmap.de/staticmap.php?center=38.95,-77.182&amp;zoom=15&amp;size=240x180&amp;maptype=mapnik&amp;markers=38.95,-77.182,lightblue1" data-svg="data:image/svg+xml;charset=utf-8,%3Csvg%20xmlns%3D%27http%3A//www.w3.org/2000/svg%27%20width%3D%27240%27%20height%3D%27180%27%3E%3Crect%20width%3D%27100%25%27%20height%3D%27100%25%27%20fill%3D%27%23eef0f3%27/%3E%3Ctext%20x%3D%2750%25%27%20y%3D%2744%25%27%20font-size%3D%2726%27%20text-anchor%3D%27middle%27%3E%F0%9F%93%8D%3C/text%3E%3Ctext%20x%3D%2750%25%27%20y%3D%2766%25%27%20font-size%3D%2712%27%20fill%3D%27%237c8694%27%20text-anchor%3D%27middle%27%20font-family%3D%27sans-serif%27%3E1644%20La%20Salle%20Ave%3C/text%3E%3C/svg%3E" onerror="mclThumbFallback(this)" alt="" class="thumb" loading="lazy"></a>
-      <div class="card-body">
-        <div class="card-head">
-          <span class="addr">⭐ 1644 La Salle Ave, McLean, VA 22102</span>
-          <span class="pill pill-green">✅ in McLean HS zone</span>
-        </div>
-        <div class="price-line">$1,150,000</div>
-        <div class="stats-line">4 bd / 3 ba · 2,640 sqft · SFH · via Redfin</div>
-        <div class="schools-line">🏫 HS not confirmed</div>
-        <div class="highlights">✨ garage, renovated/new</div>
-        <div class="card-actions">
-          <button class="like-btn" onclick="toggleLike(this,'1644 La Salle Ave, McLean, VA 22102','$1,150,000','https://www.redfin.com/VA/Mc-Lean/1644-La-Salle-Ave-22102/home/9396414')">♡</button>
-          <a class="btn" href="https://www.redfin.com/VA/Mc-Lean/1644-La-Salle-Ave-22102/home/9396414" target="_blank" rel="noopener">View listing →</a>
-          <a class="btn btn-secondary" href="https://www.redfin.com/VA/Mc-Lean/1644-La-Salle-Ave-22102/home/9396414" target="_blank" rel="noopener">📷 Photos</a>
-        </div>
-      </div>
-    </div>
-
-    <div class="card starred" data-addr="1646 La Salle Ave, McLean, VA 22102">
-      <a href="https://www.redfin.com/VA/Mc-Lean/1646-La-Salle-Ave-22102/home/9396416" target="_blank" rel="noopener"><img src="https://ssl.cdn-redfin.com/photo/235/islphoto/256/genIslnoResize.VAFX2323256_2.webp" data-staticmap="https://staticmap.openstreetmap.de/staticmap.php?center=38.95,-77.182&amp;zoom=15&amp;size=240x180&amp;maptype=mapnik&amp;markers=38.95,-77.182,lightblue1" data-svg="data:image/svg+xml;charset=utf-8,%3Csvg%20xmlns%3D%27http%3A//www.w3.org/2000/svg%27%20width%3D%27240%27%20height%3D%27180%27%3E%3Crect%20width%3D%27100%25%27%20height%3D%27100%25%27%20fill%3D%27%23eef0f3%27/%3E%3Ctext%20x%3D%2750%25%27%20y%3D%2744%25%27%20font-size%3D%2726%27%20text-anchor%3D%27middle%27%3E%F0%9F%93%8D%3C/text%3E%3Ctext%20x%3D%2750%25%27%20y%3D%2766%25%27%20font-size%3D%2712%27%20fill%3D%27%237c8694%27%20text-anchor%3D%27middle%27%20font-family%3D%27sans-serif%27%3E1646%20La%20Salle%20Ave%3C/text%3E%3C/svg%3E" onerror="mclThumbFallback(this)" alt="" class="thumb" loading="lazy"></a>
-      <div class="card-body">
-        <div class="card-head">
-          <span class="addr">⭐ 1646 La Salle Ave, McLean, VA 22102</span>
-          <span class="pill pill-green">✅ in McLean HS zone</span>
-        </div>
-        <div class="price-line">$1,150,000</div>
-        <div class="stats-line">4 bd / 3 ba · 2,640 sqft · SFH · via Redfin</div>
-        <div class="schools-line">🏫 HS not confirmed</div>
-        <div class="highlights">✨ garage, renovated/new</div>
-        <div class="card-actions">
-          <button class="like-btn" onclick="toggleLike(this,'1646 La Salle Ave, McLean, VA 22102','$1,150,000','https://www.redfin.com/VA/Mc-Lean/1646-La-Salle-Ave-22102/home/9396416')">♡</button>
-          <a class="btn" href="https://www.redfin.com/VA/Mc-Lean/1646-La-Salle-Ave-22102/home/9396416" target="_blank" rel="noopener">View listing →</a>
-          <a class="btn btn-secondary" href="https://www.redfin.com/VA/Mc-Lean/1646-La-Salle-Ave-22102/home/9396416" target="_blank" rel="noopener">📷 Photos</a>
-        </div>
-      </div>
-    </div>
-
-    <div class="card starred" data-addr="7328 Aynsley Ln, McLean, VA 22102">
-      <a href="https://www.redfin.com/VA/Mc-Lean/7328-Aynsley-Ln-22102/home/9400964" target="_blank" rel="noopener"><img src="https://ssl.cdn-redfin.com/photo/235/islphoto/604/genIslnoResize.VAFX2321604_0.webp" data-staticmap="https://staticmap.openstreetmap.de/staticmap.php?center=38.945,-77.19&amp;zoom=15&amp;size=240x180&amp;maptype=mapnik&amp;markers=38.945,-77.19,lightblue1" data-svg="data:image/svg+xml;charset=utf-8,%3Csvg%20xmlns%3D%27http%3A//www.w3.org/2000/svg%27%20width%3D%27240%27%20height%3D%27180%27%3E%3Crect%20width%3D%27100%25%27%20height%3D%27100%25%27%20fill%3D%27%23eef0f3%27/%3E%3Ctext%20x%3D%2750%25%27%20y%3D%2744%25%27%20font-size%3D%2726%27%20text-anchor%3D%27middle%27%3E%F0%9F%93%8D%3C/text%3E%3Ctext%20x%3D%2750%25%27%20y%3D%2766%25%27%20font-size%3D%2712%27%20fill%3D%27%237c8694%27%20text-anchor%3D%27middle%27%20font-family%3D%27sans-serif%27%3E7328%20Aynsley%20Ln%3C/text%3E%3C/svg%3E" onerror="mclThumbFallback(this)" alt="" class="thumb" loading="lazy"></a>
-      <div class="card-body">
-        <div class="card-head">
-          <span class="addr">⭐ 7328 Aynsley Ln, McLean, VA 22102</span>
-          <span class="pill pill-green">✅ in McLean HS zone</span>
-        </div>
-        <div class="price-line">$1,175,000</div>
-        <div class="stats-line">4 bd / 3.5 ba · 2,178 sqft · SFH · via Redfin</div>
-        <div class="schools-line">🏫 HS not confirmed</div>
-        <div class="highlights">✨ garage, renovated/new, high ceilings</div>
-        <div class="card-actions">
-          <button class="like-btn" onclick="toggleLike(this,'7328 Aynsley Ln, McLean, VA 22102','$1,175,000','https://www.redfin.com/VA/Mc-Lean/7328-Aynsley-Ln-22102/home/9400964')">♡</button>
-          <a class="btn" href="https://www.redfin.com/VA/Mc-Lean/7328-Aynsley-Ln-22102/home/9400964" target="_blank" rel="noopener">View listing →</a>
-          <a class="btn btn-secondary" href="https://www.redfin.com/VA/Mc-Lean/7328-Aynsley-Ln-22102/home/9400964" target="_blank" rel="noopener">📷 Photos</a>
-        </div>
-      </div>
-    </div></div></div>
-<div class="section "><h3>3 Bedrooms (3)</h3><div class="card-grid">
-    <div class="card starred" data-addr="2038 Brooks Square Pl, Falls Church, VA 22043">
-      <a href="https://www.redfin.com/VA/Falls-Church/2038-Brooks-Square-Pl-22043/home/9477333" target="_blank" rel="noopener"><img src="https://ssl.cdn-redfin.com/photo/235/islphoto/356/genIslnoResize.VAFX2313356_0.webp" data-staticmap="https://staticmap.openstreetmap.de/staticmap.php?center=38.928,-77.198&amp;zoom=15&amp;size=240x180&amp;maptype=mapnik&amp;markers=38.928,-77.198,lightblue1" data-svg="data:image/svg+xml;charset=utf-8,%3Csvg%20xmlns%3D%27http%3A//www.w3.org/2000/svg%27%20width%3D%27240%27%20height%3D%27180%27%3E%3Crect%20width%3D%27100%25%27%20height%3D%27100%25%27%20fill%3D%27%23eef0f3%27/%3E%3Ctext%20x%3D%2750%25%27%20y%3D%2744%25%27%20font-size%3D%2726%27%20text-anchor%3D%27middle%27%3E%F0%9F%93%8D%3C/text%3E%3Ctext%20x%3D%2750%25%27%20y%3D%2766%25%27%20font-size%3D%2712%27%20fill%3D%27%237c8694%27%20text-anchor%3D%27middle%27%20font-family%3D%27sans-serif%27%3E2038%20Brooks%20Square%20Pl%3C/text%3E%3C/svg%3E" onerror="mclThumbFallback(this)" alt="" class="thumb" loading="lazy"></a>
-      <div class="card-body">
-        <div class="card-head">
-          <span class="addr">⭐ 2038 Brooks Square Pl, Falls Church, VA 22043</span>
-          <span class="pill pill-green">✅ in McLean HS zone</span>
-        </div>
-        <div class="price-line">$795,000</div>
-        <div class="stats-line">3 bd / 2.5 ba · 1,444 sqft · Townhouse · via Redfin</div>
-        <div class="schools-line">🏫 HS not confirmed</div>
-        <div class="highlights">✨ garage, renovated/new</div>
-        <div class="card-actions">
-          <button class="like-btn" onclick="toggleLike(this,'2038 Brooks Square Pl, Falls Church, VA 22043','$795,000','https://www.redfin.com/VA/Falls-Church/2038-Brooks-Square-Pl-22043/home/9477333')">♡</button>
-          <a class="btn" href="https://www.redfin.com/VA/Falls-Church/2038-Brooks-Square-Pl-22043/home/9477333" target="_blank" rel="noopener">View listing →</a>
-          <a class="btn btn-secondary" href="https://www.redfin.com/VA/Falls-Church/2038-Brooks-Square-Pl-22043/home/9477333" target="_blank" rel="noopener">📷 Photos</a>
-        </div>
-      </div>
-    </div>
-
-    <div class="card " data-addr="7556 Sawyer Farm Way, McLean, VA 22102">
-      <a href="https://www.redfin.com/VA/McLean/7556-Sawyer-Farm-Way-22102/home/187344814" target="_blank" rel="noopener"><img src="https://ssl.cdn-redfin.com/photo/235/islphoto/758/genIslnoResize.VAFX2321758_0.webp" data-staticmap="https://staticmap.openstreetmap.de/staticmap.php?center=38.942,-77.196&amp;zoom=15&amp;size=240x180&amp;maptype=mapnik&amp;markers=38.942,-77.196,lightblue1" data-svg="data:image/svg+xml;charset=utf-8,%3Csvg%20xmlns%3D%27http%3A//www.w3.org/2000/svg%27%20width%3D%27240%27%20height%3D%27180%27%3E%3Crect%20width%3D%27100%25%27%20height%3D%27100%25%27%20fill%3D%27%23eef0f3%27/%3E%3Ctext%20x%3D%2750%25%27%20y%3D%2744%25%27%20font-size%3D%2726%27%20text-anchor%3D%27middle%27%3E%F0%9F%93%8D%3C/text%3E%3Ctext%20x%3D%2750%25%27%20y%3D%2766%25%27%20font-size%3D%2712%27%20fill%3D%27%237c8694%27%20text-anchor%3D%27middle%27%20font-family%3D%27sans-serif%27%3E7556%20Sawyer%20Farm%20Way%3C/text%3E%3C/svg%3E" onerror="mclThumbFallback(this)" alt="" class="thumb" loading="lazy"></a>
-      <div class="card-body">
-        <div class="card-head">
-          <span class="addr">7556 Sawyer Farm Way, McLean, VA 22102</span>
-          <span class="pill pill-green">✅ in McLean HS zone</span>
-        </div>
-        <div class="price-line">$885,000</div>
-        <div class="stats-line">3 bd / 2.5 ba · 1,588 sqft · Townhouse · via Redfin</div>
-        <div class="schools-line">🏫 HS not confirmed</div>
-        
-        <div class="card-actions">
-          <button class="like-btn" onclick="toggleLike(this,'7556 Sawyer Farm Way, McLean, VA 22102','$885,000','https://www.redfin.com/VA/McLean/7556-Sawyer-Farm-Way-22102/home/187344814')">♡</button>
-          <a class="btn" href="https://www.redfin.com/VA/McLean/7556-Sawyer-Farm-Way-22102/home/187344814" target="_blank" rel="noopener">View listing →</a>
-          <a class="btn btn-secondary" href="https://www.redfin.com/VA/McLean/7556-Sawyer-Farm-Way-22102/home/187344814" target="_blank" rel="noopener">📷 Photos</a>
-        </div>
-      </div>
-    </div>
-
-    <div class="card " data-addr="2087 Hopewood Dr, Falls Church, VA 22043">
-      <a href="https://www.redfin.com/VA/Falls-Church/2087-Hopewood-Dr-22043/home/9475146" target="_blank" rel="noopener"><img src="https://ssl.cdn-redfin.com/photo/235/islphoto/368/genIslnoResize.VAFX2321368_3.webp" data-staticmap="https://staticmap.openstreetmap.de/staticmap.php?center=38.92,-77.2&amp;zoom=15&amp;size=240x180&amp;maptype=mapnik&amp;markers=38.92,-77.2,lightblue1" data-svg="data:image/svg+xml;charset=utf-8,%3Csvg%20xmlns%3D%27http%3A//www.w3.org/2000/svg%27%20width%3D%27240%27%20height%3D%27180%27%3E%3Crect%20width%3D%27100%25%27%20height%3D%27100%25%27%20fill%3D%27%23eef0f3%27/%3E%3Ctext%20x%3D%2750%25%27%20y%3D%2744%25%27%20font-size%3D%2726%27%20text-anchor%3D%27middle%27%3E%F0%9F%93%8D%3C/text%3E%3Ctext%20x%3D%2750%25%27%20y%3D%2766%25%27%20font-size%3D%2712%27%20fill%3D%27%237c8694%27%20text-anchor%3D%27middle%27%20font-family%3D%27sans-serif%27%3E2087%20Hopewood%20Dr%3C/text%3E%3C/svg%3E" onerror="mclThumbFallback(this)" alt="" class="thumb" loading="lazy"></a>
-      <div class="card-body">
-        <div class="card-head">
-          <span class="addr">2087 Hopewood Dr, Falls Church, VA 22043</span>
-          <span class="pill pill-green">✅ in McLean HS zone</span>
-        </div>
-        <div class="price-line">$929,000</div>
-        <div class="stats-line">3 bd / 3.5 ba · 2,504 sqft · Townhouse · via Redfin</div>
-        <div class="schools-line">🏫 HS not confirmed</div>
-        <div class="highlights">✨ newer construction</div>
-        <div class="card-actions">
-          <button class="like-btn" onclick="toggleLike(this,'2087 Hopewood Dr, Falls Church, VA 22043','$929,000','https://www.redfin.com/VA/Falls-Church/2087-Hopewood-Dr-22043/home/9475146')">♡</button>
-          <a class="btn" href="https://www.redfin.com/VA/Falls-Church/2087-Hopewood-Dr-22043/home/9475146" target="_blank" rel="noopener">View listing →</a>
-          <a class="btn btn-secondary" href="https://www.redfin.com/VA/Falls-Church/2087-Hopewood-Dr-22043/home/9475146" target="_blank" rel="noopener">📷 Photos</a>
-        </div>
-      </div>
-    </div></div></div>
-</div>
-<div class="zone-block outside-block"><h3 class="zone-head muted">📍 Outside McLean HS Zone</h3>
-<div class="section section-muted"><h3>Listings (6)</h3><div class="card-grid">
-    <div class="card " data-addr="7718 Trevino Ln, Falls Church, VA 22043">
-      <a href="https://www.redfin.com/VA/Falls-Church/7718-Trevino-Ln-22043/home/9544026" target="_blank" rel="noopener"><img src="https://ssl.cdn-redfin.com/photo/235/islphoto/344/genIslnoResize.VAFX2317344_2.webp" data-staticmap="https://staticmap.openstreetmap.de/staticmap.php?center=38.91,-77.21&amp;zoom=15&amp;size=240x180&amp;maptype=mapnik&amp;markers=38.91,-77.21,lightblue1" data-svg="data:image/svg+xml;charset=utf-8,%3Csvg%20xmlns%3D%27http%3A//www.w3.org/2000/svg%27%20width%3D%27240%27%20height%3D%27180%27%3E%3Crect%20width%3D%27100%25%27%20height%3D%27100%25%27%20fill%3D%27%23eef0f3%27/%3E%3Ctext%20x%3D%2750%25%27%20y%3D%2744%25%27%20font-size%3D%2726%27%20text-anchor%3D%27middle%27%3E%F0%9F%93%8D%3C/text%3E%3Ctext%20x%3D%2750%25%27%20y%3D%2766%25%27%20font-size%3D%2712%27%20fill%3D%27%237c8694%27%20text-anchor%3D%27middle%27%20font-family%3D%27sans-serif%27%3E7718%20Trevino%20Ln%3C/text%3E%3C/svg%3E" onerror="mclThumbFallback(this)" alt="" class="thumb" loading="lazy"></a>
-      <div class="card-body">
-        <div class="card-head">
-          <span class="addr">7718 Trevino Ln, Falls Church, VA 22043</span>
-          <span class="pill pill-amber">📍 Marshall HS (different HS)</span>
-        </div>
-        <div class="price-line">$649,900</div>
-        <div class="stats-line">4 bd / 3.5 ba · 1,386 sqft · Townhouse · via Redfin</div>
-        <div class="schools-line">🏫 HS not confirmed</div>
-        
-        <div class="card-actions">
-          <button class="like-btn" onclick="toggleLike(this,'7718 Trevino Ln, Falls Church, VA 22043','$649,900','https://www.redfin.com/VA/Falls-Church/7718-Trevino-Ln-22043/home/9544026')">♡</button>
-          <a class="btn" href="https://www.redfin.com/VA/Falls-Church/7718-Trevino-Ln-22043/home/9544026" target="_blank" rel="noopener">View listing →</a>
-          <a class="btn btn-secondary" href="https://www.redfin.com/VA/Falls-Church/7718-Trevino-Ln-22043/home/9544026" target="_blank" rel="noopener">📷 Photos</a>
-        </div>
-      </div>
-    </div>
-
-    <div class="card " data-addr="2814 Hyson Ln, Falls Church, VA 22043">
-      <a href="https://www.redfin.com/VA/Falls-Church/2814-Hyson-Ln-22043/home/9543645" target="_blank" rel="noopener"><img src="https://ssl.cdn-redfin.com/photo/235/islphoto/616/genIslnoResize.VAFX2310616_1.webp" data-staticmap="https://staticmap.openstreetmap.de/staticmap.php?center=38.9,-77.205&amp;zoom=15&amp;size=240x180&amp;maptype=mapnik&amp;markers=38.9,-77.205,lightblue1" data-svg="data:image/svg+xml;charset=utf-8,%3Csvg%20xmlns%3D%27http%3A//www.w3.org/2000/svg%27%20width%3D%27240%27%20height%3D%27180%27%3E%3Crect%20width%3D%27100%25%27%20height%3D%27100%25%27%20fill%3D%27%23eef0f3%27/%3E%3Ctext%20x%3D%2750%25%27%20y%3D%2744%25%27%20font-size%3D%2726%27%20text-anchor%3D%27middle%27%3E%F0%9F%93%8D%3C/text%3E%3Ctext%20x%3D%2750%25%27%20y%3D%2766%25%27%20font-size%3D%2712%27%20fill%3D%27%237c8694%27%20text-anchor%3D%27middle%27%20font-family%3D%27sans-serif%27%3E2814%20Hyson%20Ln%3C/text%3E%3C/svg%3E" onerror="mclThumbFallback(this)" alt="" class="thumb" loading="lazy"></a>
-      <div class="card-body">
-        <div class="card-head">
-          <span class="addr">2814 Hyson Ln, Falls Church, VA 22043</span>
-          <span class="pill pill-amber">📍 Marshall HS (different HS)</span>
-        </div>
-        <div class="price-line">$675,000</div>
-        <div class="stats-line">4 bd / 3.5 ba · 2,016 sqft · Townhouse · via Redfin</div>
-        <div class="schools-line">🏫 HS not confirmed</div>
-        
-        <div class="card-actions">
-          <button class="like-btn" onclick="toggleLike(this,'2814 Hyson Ln, Falls Church, VA 22043','$675,000','https://www.redfin.com/VA/Falls-Church/2814-Hyson-Ln-22043/home/9543645')">♡</button>
-          <a class="btn" href="https://www.redfin.com/VA/Falls-Church/2814-Hyson-Ln-22043/home/9543645" target="_blank" rel="noopener">View listing →</a>
-          <a class="btn btn-secondary" href="https://www.redfin.com/VA/Falls-Church/2814-Hyson-Ln-22043/home/9543645" target="_blank" rel="noopener">📷 Photos</a>
-        </div>
-      </div>
-    </div>
-
-    <div class="card " data-addr="7802 Wincanton Ct, Falls Church, VA 22043">
-      <a href="https://www.redfin.com/VA/Falls-Church/7802-Wincanton-Ct-22043/home/9468105" target="_blank" rel="noopener"><img src="https://ssl.cdn-redfin.com/photo/235/islphoto/776/genIslnoResize.VAFX2319776_0.webp" data-staticmap="https://staticmap.openstreetmap.de/staticmap.php?center=38.91,-77.21&amp;zoom=15&amp;size=240x180&amp;maptype=mapnik&amp;markers=38.91,-77.21,lightblue1" data-svg="data:image/svg+xml;charset=utf-8,%3Csvg%20xmlns%3D%27http%3A//www.w3.org/2000/svg%27%20width%3D%27240%27%20height%3D%27180%27%3E%3Crect%20width%3D%27100%25%27%20height%3D%27100%25%27%20fill%3D%27%23eef0f3%27/%3E%3Ctext%20x%3D%2750%25%27%20y%3D%2744%25%27%20font-size%3D%2726%27%20text-anchor%3D%27middle%27%3E%F0%9F%93%8D%3C/text%3E%3Ctext%20x%3D%2750%25%27%20y%3D%2766%25%27%20font-size%3D%2712%27%20fill%3D%27%237c8694%27%20text-anchor%3D%27middle%27%20font-family%3D%27sans-serif%27%3E7802%20Wincanton%20Ct%3C/text%3E%3C/svg%3E" onerror="mclThumbFallback(this)" alt="" class="thumb" loading="lazy"></a>
-      <div class="card-body">
-        <div class="card-head">
-          <span class="addr">7802 Wincanton Ct, Falls Church, VA 22043</span>
-          <span class="pill pill-amber">📍 Marshall HS (different HS)</span>
-        </div>
-        <div class="price-line">$960,000</div>
-        <div class="stats-line">4 bd / 2.5 ba · 2,496 sqft · SFH · via Redfin</div>
-        <div class="schools-line">🏫 HS not confirmed</div>
-        
-        <div class="card-actions">
-          <button class="like-btn" onclick="toggleLike(this,'7802 Wincanton Ct, Falls Church, VA 22043','$960,000','https://www.redfin.com/VA/Falls-Church/7802-Wincanton-Ct-22043/home/9468105')">♡</button>
-          <a class="btn" href="https://www.redfin.com/VA/Falls-Church/7802-Wincanton-Ct-22043/home/9468105" target="_blank" rel="noopener">View listing →</a>
-          <a class="btn btn-secondary" href="https://www.redfin.com/VA/Falls-Church/7802-Wincanton-Ct-22043/home/9468105" target="_blank" rel="noopener">📷 Photos</a>
-        </div>
-      </div>
-    </div>
-
-    <div class="card " data-addr="1812 Olney Rd, Falls Church, VA 22043">
-      <a href="https://www.redfin.com/VA/Falls-Church/1812-Olney-Rd-22043/home/9398572" target="_blank" rel="noopener"><img src="https://ssl.cdn-redfin.com/photo/235/islphoto/912/genIslnoResize.VAFX2318912_2.webp" data-staticmap="https://staticmap.openstreetmap.de/staticmap.php?center=38.9,-77.2&amp;zoom=15&amp;size=240x180&amp;maptype=mapnik&amp;markers=38.9,-77.2,lightblue1" data-svg="data:image/svg+xml;charset=utf-8,%3Csvg%20xmlns%3D%27http%3A//www.w3.org/2000/svg%27%20width%3D%27240%27%20height%3D%27180%27%3E%3Crect%20width%3D%27100%25%27%20height%3D%27100%25%27%20fill%3D%27%23eef0f3%27/%3E%3Ctext%20x%3D%2750%25%27%20y%3D%2744%25%27%20font-size%3D%2726%27%20text-anchor%3D%27middle%27%3E%F0%9F%93%8D%3C/text%3E%3Ctext%20x%3D%2750%25%27%20y%3D%2766%25%27%20font-size%3D%2712%27%20fill%3D%27%237c8694%27%20text-anchor%3D%27middle%27%20font-family%3D%27sans-serif%27%3E1812%20Olney%20Rd%3C/text%3E%3C/svg%3E" onerror="mclThumbFallback(this)" alt="" class="thumb" loading="lazy"></a>
-      <div class="card-body">
-        <div class="card-head">
-          <span class="addr">1812 Olney Rd, Falls Church, VA 22043</span>
-          <span class="pill pill-amber">📍 Marshall HS (different HS)</span>
-        </div>
-        <div class="price-line">$970,000</div>
-        <div class="stats-line">4 bd / 2.5 ba · 1,869 sqft · SFH · via Redfin</div>
-        <div class="schools-line">🏫 HS not confirmed</div>
-        
-        <div class="card-actions">
-          <button class="like-btn" onclick="toggleLike(this,'1812 Olney Rd, Falls Church, VA 22043','$970,000','https://www.redfin.com/VA/Falls-Church/1812-Olney-Rd-22043/home/9398572')">♡</button>
-          <a class="btn" href="https://www.redfin.com/VA/Falls-Church/1812-Olney-Rd-22043/home/9398572" target="_blank" rel="noopener">View listing →</a>
-          <a class="btn btn-secondary" href="https://www.redfin.com/VA/Falls-Church/1812-Olney-Rd-22043/home/9398572" target="_blank" rel="noopener">📷 Photos</a>
-        </div>
-      </div>
-    </div>
-
-    <div class="card " data-addr="2542 Hillsman St, Falls Church, VA 22043">
-      <a href="https://www.redfin.com/VA/Falls-Church/2542-Hillsman-St-22043/home/9543170" target="_blank" rel="noopener"><img src="https://ssl.cdn-redfin.com/photo/235/islphoto/966/genIslnoResize.VAFX2318966_2.webp" data-staticmap="https://staticmap.openstreetmap.de/staticmap.php?center=38.9,-77.2&amp;zoom=15&amp;size=240x180&amp;maptype=mapnik&amp;markers=38.9,-77.2,lightblue1" data-svg="data:image/svg+xml;charset=utf-8,%3Csvg%20xmlns%3D%27http%3A//www.w3.org/2000/svg%27%20width%3D%27240%27%20height%3D%27180%27%3E%3Crect%20width%3D%27100%25%27%20height%3D%27100%25%27%20fill%3D%27%23eef0f3%27/%3E%3Ctext%20x%3D%2750%25%27%20y%3D%2744%25%27%20font-size%3D%2726%27%20text-anchor%3D%27middle%27%3E%F0%9F%93%8D%3C/text%3E%3Ctext%20x%3D%2750%25%27%20y%3D%2766%25%27%20font-size%3D%2712%27%20fill%3D%27%237c8694%27%20text-anchor%3D%27middle%27%20font-family%3D%27sans-serif%27%3E2542%20Hillsman%20St%3C/text%3E%3C/svg%3E" onerror="mclThumbFallback(this)" alt="" class="thumb" loading="lazy"></a>
-      <div class="card-body">
-        <div class="card-head">
-          <span class="addr">2542 Hillsman St, Falls Church, VA 22043</span>
-          <span class="pill pill-amber">📍 Marshall HS (different HS)</span>
-        </div>
-        <div class="price-line">$975,000</div>
-        <div class="stats-line">4 bd / 3 ba · 1,589 sqft · SFH · via Redfin</div>
-        <div class="schools-line">🏫 HS not confirmed</div>
-        
-        <div class="card-actions">
-          <button class="like-btn" onclick="toggleLike(this,'2542 Hillsman St, Falls Church, VA 22043','$975,000','https://www.redfin.com/VA/Falls-Church/2542-Hillsman-St-22043/home/9543170')">♡</button>
-          <a class="btn" href="https://www.redfin.com/VA/Falls-Church/2542-Hillsman-St-22043/home/9543170" target="_blank" rel="noopener">View listing →</a>
-          <a class="btn btn-secondary" href="https://www.redfin.com/VA/Falls-Church/2542-Hillsman-St-22043/home/9543170" target="_blank" rel="noopener">📷 Photos</a>
-        </div>
-      </div>
-    </div>
-
-    <div class="card " data-addr="6740 Towne Lane Rd, McLean, VA 22101">
-      <a href="https://www.redfin.com/VA/Mc-Lean/6740-Towne-Lane-Rd-22101/home/9278003" target="_blank" rel="noopener"><img src="https://ssl.cdn-redfin.com/photo/235/islphoto/940/genIslnoResize.VAFX2318940_1.webp" data-staticmap="https://staticmap.openstreetmap.de/staticmap.php?center=38.965,-77.175&amp;zoom=15&amp;size=240x180&amp;maptype=mapnik&amp;markers=38.965,-77.175,lightblue1" data-svg="data:image/svg+xml;charset=utf-8,%3Csvg%20xmlns%3D%27http%3A//www.w3.org/2000/svg%27%20width%3D%27240%27%20height%3D%27180%27%3E%3Crect%20width%3D%27100%25%27%20height%3D%27100%25%27%20fill%3D%27%23eef0f3%27/%3E%3Ctext%20x%3D%2750%25%27%20y%3D%2744%25%27%20font-size%3D%2726%27%20text-anchor%3D%27middle%27%3E%F0%9F%93%8D%3C/text%3E%3Ctext%20x%3D%2750%25%27%20y%3D%2766%25%27%20font-size%3D%2712%27%20fill%3D%27%237c8694%27%20text-anchor%3D%27middle%27%20font-family%3D%27sans-serif%27%3E6740%20Towne%20Lane%20Rd%3C/text%3E%3C/svg%3E" onerror="mclThumbFallback(this)" alt="" class="thumb" loading="lazy"></a>
-      <div class="card-body">
-        <div class="card-head">
-          <span class="addr">6740 Towne Lane Rd, McLean, VA 22101</span>
-          <span class="pill pill-amber">📍 Langley HS (different HS)</span>
-        </div>
-        <div class="price-line">$1,159,900</div>
-        <div class="stats-line">4 bd / 3 ba · 2,268 sqft · SFH · via Redfin</div>
-        <div class="schools-line">🏫 HS not confirmed</div>
-        
-        <div class="card-actions">
-          <button class="like-btn" onclick="toggleLike(this,'6740 Towne Lane Rd, McLean, VA 22101','$1,159,900','https://www.redfin.com/VA/Mc-Lean/6740-Towne-Lane-Rd-22101/home/9278003')">♡</button>
-          <a class="btn" href="https://www.redfin.com/VA/Mc-Lean/6740-Towne-Lane-Rd-22101/home/9278003" target="_blank" rel="noopener">View listing →</a>
-          <a class="btn btn-secondary" href="https://www.redfin.com/VA/Mc-Lean/6740-Towne-Lane-Rd-22101/home/9278003" target="_blank" rel="noopener">📷 Photos</a>
-        </div>
-      </div>
-    </div></div></div>
-</div></div>
+  <div id="rent-col"></div>
+  <div id="sale-col"></div>
 </div>
 <footer>
   <h3>Source Coverage Log</h3>
@@ -958,17 +158,11 @@ function renderSavedPanel() {
   });
 }
 function toggleSavedPanel() { const grid = document.getElementById('saved-grid'); grid.style.display = grid.style.display === 'none' ? 'flex' : 'none'; }
-function exportLikes() {
-  const saved = getSaved();
-  const blob = new Blob([JSON.stringify({ exported: new Date().toISOString().slice(0,10), active: Object.values(saved), sold: SOLD_PICKS }, null, 2)], {type:'application/json'});
-  const a = document.createElement('a'); a.href = URL.createObjectURL(blob); a.download = `mclean-liked-listings-${new Date().toISOString().slice(0,10)}.json`; a.click();
-}
 function copyLikes() {
   const saved = getSaved();
   const lines = Object.values(saved).map(s => `${s.addr||''} — ${s.price||''} — ${s.url||''}`);
   navigator.clipboard.writeText(lines.join('\n')).then(() => alert('Copied ' + lines.length + ' liked listings to clipboard.'));
 }
-renderSavedPanel();
 
 function staticMapUrl(lat, lng) {
   if (!lat || !lng) return '';
@@ -990,6 +184,117 @@ function mclThumbFallback(img) {
     img.src = img.dataset.svg;
   }
 }
+
+// --- Listing cards + the single global Newest/Price sort toggle ---
+// Cards render entirely client-side from LISTINGS so the sort toggle can re-render
+// every section instantly without a page reload.
+const LISTINGS = [{"key": "1049 balls hill rd", "address": "1049 Balls Hill Rd, McLean, VA 22101", "price": "$4,900/mo", "beds": 4, "baths": 2.5, "sqft": 2332, "type": "rent", "homeType": "SFH", "source": "Redfin", "fsbo": false, "url": "https://www.redfin.com/VA/Mc-Lean/1049-Balls-Hill-Rd-22101/home/9272801", "thumb": "https://ssl.cdn-redfin.com/photo/rent/42576814-5801-4478-ab6f-515557f3abd8/islphoto/genIsl.0_1.webp", "zone_group": "outside", "pill": "\ud83d\udccd Langley HS (different HS)", "schools_line": "HS not confirmed", "highlights": "", "starred": false, "lat": 38.9655, "lng": -77.178, "isNew": false, "firstSeen": "2026-06-28"}, {"key": "6872 melrose dr", "address": "6872 Melrose Dr, McLean, VA 22101", "price": "$5,750/mo", "beds": 5, "baths": 3.5, "sqft": 2904, "type": "rent", "homeType": "SFH", "source": "Redfin", "fsbo": false, "url": "https://www.redfin.com/VA/Mc-Lean/6872-Melrose-Dr-22101/home/9390369", "thumb": "https://ssl.cdn-redfin.com/photo/rent/db5ce6d4-dc12-42a7-b67d-4037cea0fc77/islphoto/genIsl.0_1.webp", "zone_group": "outside", "pill": "\ud83d\udccd Langley HS (different HS)", "schools_line": "HS not confirmed", "highlights": "", "starred": false, "lat": 38.961, "lng": -77.172, "isNew": false, "firstSeen": "2026-06-28"}, {"key": "1427 mclean mews ct", "address": "1427 McLean Mews Ct, McLean, VA 22101", "price": "$4,995/mo", "beds": 3, "baths": 3.5, "sqft": 2174, "type": "rent", "homeType": "Townhouse", "source": "Redfin", "fsbo": false, "url": "https://hotpads.com/1427-mclean-mews-ct-mc-lean-va-22101-1jmp1g9/pad", "thumb": "https://ssl.cdn-redfin.com/photo/rent/9c3c49ad-bbb6-44c3-851e-7b7f300d0435/islphoto/genIsl.0_1.webp", "zone_group": "in_zone", "pill": "\u2705 in McLean HS zone", "schools_line": "HS not confirmed", "highlights": "renovated/new", "starred": false, "lat": 38.934, "lng": -77.178, "isNew": false, "firstSeen": "2026-06-28"}, {"key": "1433 mclean mews ct", "address": "1433 McLean Mews Ct, McLean, VA 22101", "price": "$4,990/mo", "beds": 3, "baths": 2.5, "sqft": 2174, "type": "rent", "homeType": "Townhouse", "source": "Redfin", "fsbo": false, "url": "https://www.redfin.com/VA/McLean/1433-McLean-Mews-Ct-22101/home/9394691", "thumb": "https://ssl.cdn-redfin.com/photo/rent/db2ed49d-e65f-44de-ae56-19908804a64a/islphoto/genIsl.0_1.webp", "zone_group": "in_zone", "pill": "\u2705 in McLean HS zone", "schools_line": "HS not confirmed", "highlights": "", "starred": false, "lat": 38.934, "lng": -77.178, "isNew": false, "firstSeen": "2026-06-28"}, {"key": "6933 tyndale st", "address": "6933 Tyndale St, McLean, VA 22101", "price": "$4,900/mo", "beds": 5, "baths": 2.5, "sqft": 2576, "type": "rent", "homeType": "SFH", "source": "Redfin", "fsbo": false, "url": "https://www.redfin.com/VA/Mc-Lean/6933-Tyndale-St-22101/home/9404921", "thumb": "https://ssl.cdn-redfin.com/photo/rent/ad5fc044-4365-484b-ad7d-3c1ba0d96307/islphoto/genIsl.0_1.webp", "zone_group": "in_zone", "pill": "\u2705 in McLean HS zone", "schools_line": "HS not confirmed", "highlights": "renovated/new, backyard", "starred": true, "lat": 38.95, "lng": -77.185, "isNew": false, "firstSeen": "2026-06-28"}, {"key": "6519 engel dr", "address": "6519 Engel Dr, McLean, VA 22101", "price": "$5,300/mo", "beds": 5, "baths": 3, "sqft": 2534, "type": "rent", "homeType": "SFH", "source": "Redfin", "fsbo": false, "url": "https://www.redfin.com/VA/Mc-Lean/6519-Engel-Dr-22101/home/9405092", "thumb": "https://ssl.cdn-redfin.com/photo/rent/3f91dec0-3bcb-481e-9e0b-22ab2cfc74be/islphoto/genIsl.0_1.webp", "zone_group": "in_zone", "pill": "\u2705 in McLean HS zone", "schools_line": "HS not confirmed", "highlights": "renovated/new, backyard", "starred": true, "lat": 38.945, "lng": -77.18, "isNew": false, "firstSeen": "2026-06-28"}, {"key": "1436 ironwood dr", "address": "1436 Ironwood Dr, McLean, VA 22101", "price": "$5,600/mo", "beds": 4, "baths": 3.5, "sqft": 2688, "type": "rent", "homeType": "SFH", "source": "Redfin", "fsbo": false, "url": "https://www.redfin.com/VA/Mc-Lean/1436-Ironwood-Dr-22101/home/9409570", "thumb": "https://ssl.cdn-redfin.com/photo/rent/a671af54-889b-4820-8391-82ed6cf90f9b/islphoto/genIsl.0_1.webp", "zone_group": "in_zone", "pill": "\u2705 in McLean HS zone", "schools_line": "HS not confirmed", "highlights": "garage, renovated/new", "starred": true, "lat": 38.936, "lng": -77.183, "isNew": false, "firstSeen": "2026-06-28"}, {"key": "6218 nelway dr", "address": "6218 Nelway Dr, McLean, VA 22101", "price": "$4,900/mo", "beds": 3, "baths": 2.5, "sqft": 2751, "type": "rent", "homeType": "SFH", "source": "Redfin", "fsbo": false, "url": "https://www.redfin.com/VA/Mc-Lean/6218-Nelway-Dr-22101/home/9412783", "thumb": "https://ssl.cdn-redfin.com/photo/rent/a3d1c31b-6156-416e-9b19-7df67731f181/islphoto/genIsl.0_1.webp", "zone_group": "in_zone", "pill": "\u2705 in McLean HS zone", "schools_line": "HS not confirmed", "highlights": "garage, renovated/new, backyard", "starred": true, "lat": 38.94, "lng": -77.19, "isNew": false, "firstSeen": "2026-06-28"}, {"key": "6217 park rd", "address": "6217 Park Rd, McLean, VA 22101", "price": "$6,000/mo", "beds": 4, "baths": 2.5, "sqft": 1920, "type": "rent", "homeType": "SFH", "source": "Redfin", "fsbo": false, "url": "https://www.redfin.com/VA/Mc-Lean/6217-Park-Rd-22101/home/9483801", "thumb": "https://ssl.cdn-redfin.com/photo/rent/2778f7c3-6756-4ac8-9f62-c99b655ab438/islphoto/genIsl.0_1.webp", "zone_group": "in_zone", "pill": "\u2705 in McLean HS zone", "schools_line": "HS not confirmed", "highlights": "garage, renovated/new, backyard", "starred": true, "lat": 38.939, "lng": -77.188, "isNew": false, "firstSeen": "2026-06-28"}, {"key": "1197 meadow green ln", "address": "1197 Meadow Green Ln, McLean, VA 22102", "price": "$6,000/mo", "beds": 4, "baths": 2.5, "sqft": 4199, "type": "rent", "homeType": "SFH", "source": "Redfin", "fsbo": false, "url": "https://www.redfin.com/VA/Mc-Lean/1197-Meadow-Green-Ln-22102/home/9377391", "thumb": "https://ssl.cdn-redfin.com/photo/rent/dd1f5fce-aa11-4b23-9ad9-aaa9e349e035/islphoto/genIsl.0_1.webp", "zone_group": "outside", "pill": "\ud83d\udccd Langley HS (different HS)", "schools_line": "HS not confirmed", "highlights": "", "starred": false, "lat": 38.958, "lng": -77.205, "isNew": false, "firstSeen": "2026-06-28"}, {"key": "1607 seneca ave", "address": "1607 Seneca Ave, McLean, VA 22102", "price": "$5,400/mo", "beds": 3, "baths": 2.5, "sqft": 3052, "type": "rent", "homeType": "SFH", "source": "Redfin", "fsbo": false, "url": "https://www.redfin.com/VA/Mc-Lean/1607-Seneca-Ave-22102/home/9830535", "thumb": "https://ssl.cdn-redfin.com/photo/rent/64ab77cd-a7a5-4392-9aa0-053696a7f847/islphoto/genIsl.0_1.webp", "zone_group": "in_zone", "pill": "\u2705 in McLean HS zone", "schools_line": "HS not confirmed", "highlights": "", "starred": false, "lat": 38.93, "lng": -77.19, "isNew": false, "firstSeen": "2026-06-28"}, {"key": "1619 seneca ave", "address": "1619 Seneca Ave, McLean, VA 22102", "price": "$5,750/mo", "beds": 3, "baths": 3.5, "sqft": 2195, "type": "rent", "homeType": "SFH", "source": "Redfin", "fsbo": false, "url": "https://www.redfin.com/VA/Mc-Lean/1619-Seneca-Ave-22102/home/9830550", "thumb": "https://ssl.cdn-redfin.com/photo/rent/56ffbc2c-b3c9-460c-8a03-db4c7039c75f/islphoto/genIsl.0_1.webp", "zone_group": "in_zone", "pill": "\u2705 in McLean HS zone", "schools_line": "HS not confirmed", "highlights": "", "starred": false, "lat": 38.93, "lng": -77.19, "isNew": false, "firstSeen": "2026-06-28"}, {"key": "2271 providence st", "address": "2271 Providence St, Falls Church, VA 22043", "price": "$5,000/mo", "beds": 4, "baths": 3, "sqft": 2800, "type": "rent", "homeType": "SFH", "source": "Redfin", "fsbo": false, "url": "https://www.redfin.com/VA/Falls-Church/2271-Providence-St-22043/home/9468362", "thumb": "https://ssl.cdn-redfin.com/photo/rent/75a149d3-93f4-42e8-9c47-e14352aea84e/islphoto/genIsl.0_1.webp", "zone_group": "outside", "pill": "\ud83d\udccd Marshall HS (different HS)", "schools_line": "HS not confirmed", "highlights": "", "starred": false, "lat": 38.913, "lng": -77.21, "isNew": false, "firstSeen": "2026-06-28"}, {"key": "6522 truman ln", "address": "6522 Truman Ln, Falls Church, VA 22043", "price": "$5,790/mo", "beds": 5, "baths": 3.5, "sqft": 2456, "type": "rent", "homeType": "SFH", "source": "Redfin", "fsbo": false, "url": "https://www.redfin.com/VA/Falls-Church/6522-Truman-Ln-22043/home/9474738", "thumb": "https://ssl.cdn-redfin.com/photo/rent/d8fdd246-a82b-404a-ab64-29afb69f2edf/islphoto/genIsl.0_1.webp", "zone_group": "in_zone", "pill": "\u2705 in McLean HS zone", "schools_line": "HS not confirmed", "highlights": "garage, cul-de-sac, renovated/new", "starred": true, "lat": 38.925, "lng": -77.195, "isNew": false, "firstSeen": "2026-06-28"}, {"key": "2007 mayfair mclean ct", "address": "2007 Mayfair McLean Ct, Falls Church, VA 22043", "price": "$5,695/mo", "beds": 3, "baths": 3.5, "sqft": 2732, "type": "rent", "homeType": "Townhouse", "source": "Redfin", "fsbo": false, "url": "https://www.redfin.com/VA/Falls-Church/2007-Mayfair-McLean-Ct-22043/home/9477729", "thumb": "https://ssl.cdn-redfin.com/photo/rent/ba557c4a-9db2-49cd-bb5e-2a9ce0bb2dd2/islphoto/genIsl.0_1.webp", "zone_group": "in_zone", "pill": "\u2705 in McLean HS zone", "schools_line": "HS not confirmed", "highlights": "", "starred": false, "lat": 38.928, "lng": -77.198, "isNew": false, "firstSeen": "2026-06-28"}, {"key": "2506 patricia ct", "address": "2506 Patricia Ct, Falls Church, VA 22043", "price": "$5,700/mo", "beds": 4, "baths": 3.5, "sqft": 3008, "type": "rent", "homeType": "SFH", "source": "Redfin", "fsbo": false, "url": "https://www.redfin.com/VA/Falls-Church/2506-Patricia-Ct-22043/home/9480235", "thumb": "https://ssl.cdn-redfin.com/photo/rent/f969db2e-ed6d-4b7e-9972-4fd42d274a69/islphoto/genIsl.0_5.webp", "zone_group": "outside", "pill": "\ud83d\udccd Marshall HS (different HS)", "schools_line": "HS not confirmed", "highlights": "", "starred": false, "lat": 38.91, "lng": -77.2, "isNew": false, "firstSeen": "2026-06-28"}, {"key": "2018 tysons ridgeline rd", "address": "2018 Tysons Ridgeline Rd, Falls Church, VA 22043", "price": "$5,200/mo", "beds": 3, "baths": 3.5, "sqft": 1624, "type": "rent", "homeType": "Townhouse", "source": "Redfin", "fsbo": false, "url": "https://www.redfin.com/VA/Falls-Church/2018-Tysons-Ridgeline-Rd-22043/home/186187740", "thumb": "https://ssl.cdn-redfin.com/photo/rent/024bc3a1-228c-4a9e-820f-f91aa70fbcc9/islphoto/genIsl.0_1.webp", "zone_group": "outside", "pill": "\ud83d\udccd Marshall HS (different HS)", "schools_line": "HS not confirmed", "highlights": "newer construction", "starred": false, "lat": 38.917, "lng": -77.226, "isNew": false, "firstSeen": "2026-06-28"}, {"key": "2064 tysons ridgeline rd", "address": "2064 Tysons Ridgeline Rd, Falls Church, VA 22043", "price": "$5,200/mo", "beds": 3, "baths": 3.5, "sqft": 1636, "type": "rent", "homeType": "Townhouse", "source": "Redfin", "fsbo": false, "url": "https://www.redfin.com/VA/Falls-Church/2064-Tysons-Ridgeline-Rd-22043/home/186187780", "thumb": "https://ssl.cdn-redfin.com/photo/rent/d67eff66-74c3-4fdf-899c-e4dcdb5bd359/islphoto/genIsl.0_1.webp", "zone_group": "outside", "pill": "\ud83d\udccd Marshall HS (different HS)", "schools_line": "HS not confirmed", "highlights": "newer construction", "starred": false, "lat": 38.917, "lng": -77.226, "isNew": false, "firstSeen": "2026-06-28"}, {"key": "1650 la salle ave", "address": "1650 La Salle Ave, McLean, VA 22102", "price": "$5,800/mo", "beds": 5, "baths": 3, "sqft": 0, "type": "rent", "homeType": "SFH", "source": "HotPads", "fsbo": false, "url": "https://hotpads.com/1650-la-salle-ave-mc-lean-va-22102-1jmpbep/pad", "thumb": "https://photos.zillowstatic.com/fp/178d1aebafc159999e7383b68e8358ef-rentals_medium_500_500.webp", "zone_group": "in_zone", "pill": "\u2705 in McLean HS zone", "schools_line": "HS not confirmed", "highlights": "renovated/new", "starred": false, "lat": 38.95, "lng": -77.182, "isNew": false, "firstSeen": "2026-06-28"}, {"key": "6520 beverly ave", "address": "6520 Beverly Ave, McLean, VA 22101", "price": "$5,700/mo", "beds": 5, "baths": 4, "sqft": 0, "type": "rent", "homeType": "SFH", "source": "HotPads", "fsbo": false, "url": "https://hotpads.com/6520-beverly-ave-mc-lean-va-22101-1jmp5tc/pad", "thumb": "https://photos.zillowstatic.com/fp/284c63fc128ea2aff20a137f8f60c13f-rentals_medium_500_500.webp", "zone_group": "in_zone", "pill": "\u2705 in McLean HS zone", "schools_line": "HS not confirmed", "highlights": "renovated/new", "starred": false, "lat": 38.937, "lng": -77.181, "isNew": false, "firstSeen": "2026-06-28"}, {"key": "7018 westbury rd", "address": "7018 Westbury Rd, McLean, VA 22101", "price": "$4,950/mo", "beds": 5, "baths": 3, "sqft": 0, "type": "rent", "homeType": "SFH", "source": "HotPads", "fsbo": false, "url": "https://hotpads.com/7018-westbury-rd-mc-lean-va-22101-vxkrzd/pad", "thumb": "", "zone_group": "in_zone", "pill": "\u2705 in McLean HS zone", "schools_line": "HS not confirmed", "highlights": "", "starred": false, "lat": 38.948, "lng": -77.183, "isNew": false, "firstSeen": "2026-06-28"}, {"key": "1819 westmoreland st", "address": "1819 Westmoreland St, McLean, VA 22101", "price": "$4,995/mo", "beds": 5, "baths": 3, "sqft": 0, "type": "rent", "homeType": "SFH", "source": "HotPads", "fsbo": false, "url": "https://hotpads.com/1819-westmoreland-st-mc-lean-va-22101-wd59vw/pad", "thumb": "", "zone_group": "in_zone", "pill": "\u2705 in McLean HS zone", "schools_line": "HS not confirmed", "highlights": "renovated/new", "starred": false, "lat": 38.926, "lng": -77.179, "isNew": false, "firstSeen": "2026-06-28"}, {"key": "7449 carriage hills dr", "address": "7449 Carriage Hills Dr, McLean, VA 22102", "price": "$5,850/mo", "beds": 3, "baths": 4, "sqft": 0, "type": "rent", "homeType": "Townhouse", "source": "HotPads", "fsbo": false, "url": "https://hotpads.com/7449-carriage-hills-dr-mc-lean-va-22102-vxpwdf/pad", "thumb": "https://photos.zillowstatic.com/fp/04df4c35ca4a0f3aa42df90bcc5ae704-rentals_medium_500_500.webp", "zone_group": "in_zone", "pill": "\u2705 in McLean HS zone", "schools_line": "HS not confirmed", "highlights": "", "starred": false, "lat": 38.952, "lng": -77.19, "isNew": false, "firstSeen": "2026-06-28"}, {"key": "6630 hampton view pl", "address": "6630 Hampton View Pl, McLean, VA 22101", "price": "$5,700/mo", "beds": 3, "baths": 3.5, "sqft": 0, "type": "rent", "homeType": "Townhouse", "source": "HotPads", "fsbo": false, "url": "https://hotpads.com/6630-hampton-view-pl-mc-lean-va-22101-tn3b51/pad", "thumb": "https://photos.zillowstatic.com/fp/6345fa0d3d6203899c2d902363d61c42-rentals_medium_500_500.webp", "zone_group": "in_zone", "pill": "\u2705 in McLean HS zone", "schools_line": "HS not confirmed", "highlights": "", "starred": false, "lat": 38.933, "lng": -77.177, "isNew": false, "firstSeen": "2026-06-28"}, {"key": "1454 mclean mews ct", "address": "1454 McLean Mews Ct, McLean, VA 22101", "price": "$4,900/mo", "beds": 3, "baths": 4.5, "sqft": 0, "type": "rent", "homeType": "Townhouse", "source": "HotPads", "fsbo": false, "url": "https://hotpads.com/1454-mclean-mews-ct-mc-lean-va-22101-w8kr46/pad", "thumb": "", "zone_group": "in_zone", "pill": "\u2705 in McLean HS zone", "schools_line": "HS not confirmed", "highlights": "", "starred": false, "lat": 38.934, "lng": -77.178, "isNew": false, "firstSeen": "2026-06-28"}, {"key": "7220 vistas ln", "address": "7220 Vistas Ln, McLean, VA 22101", "price": "$5,150/mo", "beds": 4, "baths": 3.5, "sqft": 0, "type": "rent", "homeType": "Townhouse", "source": "HotPads", "fsbo": false, "url": "https://hotpads.com/7220-vistas-ln-mc-lean-va-22101-vxngkf/pad", "thumb": "", "zone_group": "in_zone", "pill": "\u2705 in McLean HS zone", "schools_line": "HS not confirmed", "highlights": "", "starred": false, "lat": 38.945, "lng": -77.187, "isNew": false, "firstSeen": "2026-06-28"}, {"key": "7720 spoleto ln", "address": "7720 Spoleto Ln, McLean, VA 22102", "price": "$4,995/mo", "beds": 3, "baths": 5, "sqft": 0, "type": "rent", "homeType": "Townhouse", "source": "HotPads", "fsbo": false, "url": "https://hotpads.com/7720-spoleto-ln-mc-lean-va-22102-1jmpds6/pad", "thumb": "", "zone_group": "outside", "pill": "\ud83d\udccd Marshall HS (different HS)", "schools_line": "HS not confirmed", "highlights": "", "starred": false, "lat": 38.918, "lng": -77.225, "isNew": false, "firstSeen": "2026-06-28"}, {"key": "7755 legere ct", "address": "7755 Legere Ct, McLean, VA 22102", "price": "$4,900/mo", "beds": 3, "baths": 4.5, "sqft": 0, "type": "rent", "homeType": "Townhouse", "source": "HotPads", "fsbo": false, "url": "https://hotpads.com/7755-legere-ct-mc-lean-va-22102-242ayt2/pad", "thumb": "", "zone_group": "outside", "pill": "\ud83d\udccd Marshall HS (different HS)", "schools_line": "HS not confirmed", "highlights": "", "starred": false, "lat": 38.918, "lng": -77.225, "isNew": false, "firstSeen": "2026-06-28"}, {"key": "1442 colleen ln", "address": "1442 Colleen Ln, McLean, VA 22101", "price": "$5,495/mo", "beds": 4, "baths": 3, "sqft": 0, "type": "rent", "homeType": "SFH", "source": "HotPads", "fsbo": false, "url": "https://hotpads.com/1442-colleen-ln-mc-lean-va-22101-1jmp1nw/pad", "thumb": "", "zone_group": "in_zone", "pill": "\u2705 in McLean HS zone", "schools_line": "HS not confirmed", "highlights": "renovated/new", "starred": false, "lat": 38.934, "lng": -77.176, "isNew": false, "firstSeen": "2026-06-28"}, {"key": "6740 towne lane rd", "address": "6740 Towne Lane Rd, McLean, VA 22101", "price": "$1,159,900", "beds": 4, "baths": 3, "sqft": 2268, "type": "sale", "homeType": "SFH", "source": "Redfin", "fsbo": false, "url": "https://www.redfin.com/VA/Mc-Lean/6740-Towne-Lane-Rd-22101/home/9278003", "thumb": "https://ssl.cdn-redfin.com/photo/235/islphoto/940/genIslnoResize.VAFX2318940_1.webp", "zone_group": "outside", "pill": "\ud83d\udccd Langley HS (different HS)", "schools_line": "HS not confirmed", "highlights": "", "starred": false, "lat": 38.965, "lng": -77.175, "isNew": false, "firstSeen": "2026-06-28"}, {"key": "1537 cedar ave", "address": "1537 Cedar Ave, McLean, VA 22101", "price": "$1,125,000", "beds": 4, "baths": 4.5, "sqft": 3512, "type": "sale", "homeType": "SFH", "source": "Redfin", "fsbo": false, "url": "https://www.redfin.com/VA/Mc-Lean/1537-Cedar-Ave-22101/home/9394800", "thumb": "https://ssl.cdn-redfin.com/photo/235/islphoto/812/genIslnoResize.VAFX2217812_6.webp", "zone_group": "in_zone", "pill": "\u2705 in McLean HS zone", "schools_line": "HS not confirmed", "highlights": "garage, renovated/new, high ceilings", "starred": true, "lat": 38.933, "lng": -77.175, "isNew": false, "firstSeen": "2026-06-28"}, {"key": "1644 la salle ave", "address": "1644 La Salle Ave, McLean, VA 22102", "price": "$1,150,000", "beds": 4, "baths": 3, "sqft": 2640, "type": "sale", "homeType": "SFH", "source": "Redfin", "fsbo": false, "url": "https://www.redfin.com/VA/Mc-Lean/1644-La-Salle-Ave-22102/home/9396414", "thumb": "https://ssl.cdn-redfin.com/photo/235/islphoto/200/genIslnoResize.VAFX2323200_2.webp", "zone_group": "in_zone", "pill": "\u2705 in McLean HS zone", "schools_line": "HS not confirmed", "highlights": "garage, renovated/new", "starred": true, "lat": 38.95, "lng": -77.182, "isNew": false, "firstSeen": "2026-06-28"}, {"key": "1646 la salle ave", "address": "1646 La Salle Ave, McLean, VA 22102", "price": "$1,150,000", "beds": 4, "baths": 3, "sqft": 2640, "type": "sale", "homeType": "SFH", "source": "Redfin", "fsbo": false, "url": "https://www.redfin.com/VA/Mc-Lean/1646-La-Salle-Ave-22102/home/9396416", "thumb": "https://ssl.cdn-redfin.com/photo/235/islphoto/256/genIslnoResize.VAFX2323256_2.webp", "zone_group": "in_zone", "pill": "\u2705 in McLean HS zone", "schools_line": "HS not confirmed", "highlights": "garage, renovated/new", "starred": true, "lat": 38.95, "lng": -77.182, "isNew": false, "firstSeen": "2026-06-28"}, {"key": "7328 aynsley ln", "address": "7328 Aynsley Ln, McLean, VA 22102", "price": "$1,175,000", "beds": 4, "baths": 3.5, "sqft": 2178, "type": "sale", "homeType": "SFH", "source": "Redfin", "fsbo": false, "url": "https://www.redfin.com/VA/Mc-Lean/7328-Aynsley-Ln-22102/home/9400964", "thumb": "https://ssl.cdn-redfin.com/photo/235/islphoto/604/genIslnoResize.VAFX2321604_0.webp", "zone_group": "in_zone", "pill": "\u2705 in McLean HS zone", "schools_line": "HS not confirmed", "highlights": "garage, renovated/new, high ceilings", "starred": true, "lat": 38.945, "lng": -77.19, "isNew": false, "firstSeen": "2026-06-28"}, {"key": "7556 sawyer farm way", "address": "7556 Sawyer Farm Way, McLean, VA 22102", "price": "$885,000", "beds": 3, "baths": 2.5, "sqft": 1588, "type": "sale", "homeType": "Townhouse", "source": "Redfin", "fsbo": false, "url": "https://www.redfin.com/VA/McLean/7556-Sawyer-Farm-Way-22102/home/187344814", "thumb": "https://ssl.cdn-redfin.com/photo/235/islphoto/758/genIslnoResize.VAFX2321758_0.webp", "zone_group": "in_zone", "pill": "\u2705 in McLean HS zone", "schools_line": "HS not confirmed", "highlights": "", "starred": false, "lat": 38.942, "lng": -77.196, "isNew": false, "firstSeen": "2026-06-28"}, {"key": "2087 hopewood dr", "address": "2087 Hopewood Dr, Falls Church, VA 22043", "price": "$929,000", "beds": 3, "baths": 3.5, "sqft": 2504, "type": "sale", "homeType": "Townhouse", "source": "Redfin", "fsbo": false, "url": "https://www.redfin.com/VA/Falls-Church/2087-Hopewood-Dr-22043/home/9475146", "thumb": "https://ssl.cdn-redfin.com/photo/235/islphoto/368/genIslnoResize.VAFX2321368_3.webp", "zone_group": "in_zone", "pill": "\u2705 in McLean HS zone", "schools_line": "HS not confirmed", "highlights": "newer construction", "starred": false, "lat": 38.92, "lng": -77.2, "isNew": false, "firstSeen": "2026-06-28"}, {"key": "2814 hyson ln", "address": "2814 Hyson Ln, Falls Church, VA 22043", "price": "$675,000", "beds": 4, "baths": 3.5, "sqft": 2016, "type": "sale", "homeType": "Townhouse", "source": "Redfin", "fsbo": false, "url": "https://www.redfin.com/VA/Falls-Church/2814-Hyson-Ln-22043/home/9543645", "thumb": "https://ssl.cdn-redfin.com/photo/235/islphoto/616/genIslnoResize.VAFX2310616_1.webp", "zone_group": "outside", "pill": "\ud83d\udccd Marshall HS (different HS)", "schools_line": "HS not confirmed", "highlights": "", "starred": false, "lat": 38.9, "lng": -77.205, "isNew": false, "firstSeen": "2026-06-28"}, {"key": "1812 olney rd", "address": "1812 Olney Rd, Falls Church, VA 22043", "price": "$970,000", "beds": 4, "baths": 2.5, "sqft": 1869, "type": "sale", "homeType": "SFH", "source": "Redfin", "fsbo": false, "url": "https://www.redfin.com/VA/Falls-Church/1812-Olney-Rd-22043/home/9398572", "thumb": "https://ssl.cdn-redfin.com/photo/235/islphoto/912/genIslnoResize.VAFX2318912_2.webp", "zone_group": "outside", "pill": "\ud83d\udccd Marshall HS (different HS)", "schools_line": "HS not confirmed", "highlights": "", "starred": false, "lat": 38.9, "lng": -77.2, "isNew": false, "firstSeen": "2026-06-28"}, {"key": "2542 hillsman st", "address": "2542 Hillsman St, Falls Church, VA 22043", "price": "$975,000", "beds": 4, "baths": 3, "sqft": 1589, "type": "sale", "homeType": "SFH", "source": "Redfin", "fsbo": false, "url": "https://www.redfin.com/VA/Falls-Church/2542-Hillsman-St-22043/home/9543170", "thumb": "https://ssl.cdn-redfin.com/photo/235/islphoto/966/genIslnoResize.VAFX2318966_2.webp", "zone_group": "outside", "pill": "\ud83d\udccd Marshall HS (different HS)", "schools_line": "HS not confirmed", "highlights": "", "starred": false, "lat": 38.9, "lng": -77.2, "isNew": false, "firstSeen": "2026-06-28"}, {"key": "7802 wincanton ct", "address": "7802 Wincanton Ct, Falls Church, VA 22043", "price": "$960,000", "beds": 4, "baths": 2.5, "sqft": 2496, "type": "sale", "homeType": "SFH", "source": "Redfin", "fsbo": false, "url": "https://www.redfin.com/VA/Falls-Church/7802-Wincanton-Ct-22043/home/9468105", "thumb": "https://ssl.cdn-redfin.com/photo/235/islphoto/776/genIslnoResize.VAFX2319776_0.webp", "zone_group": "outside", "pill": "\ud83d\udccd Marshall HS (different HS)", "schools_line": "HS not confirmed", "highlights": "", "starred": false, "lat": 38.91, "lng": -77.21, "isNew": false, "firstSeen": "2026-06-28"}, {"key": "7718 trevino ln", "address": "7718 Trevino Ln, Falls Church, VA 22043", "price": "$649,900", "beds": 4, "baths": 3.5, "sqft": 1386, "type": "sale", "homeType": "Townhouse", "source": "Redfin", "fsbo": false, "url": "https://www.redfin.com/VA/Falls-Church/7718-Trevino-Ln-22043/home/9544026", "thumb": "https://ssl.cdn-redfin.com/photo/235/islphoto/344/genIslnoResize.VAFX2317344_2.webp", "zone_group": "outside", "pill": "\ud83d\udccd Marshall HS (different HS)", "schools_line": "HS not confirmed", "highlights": "", "starred": false, "lat": 38.91, "lng": -77.21, "isNew": false, "firstSeen": "2026-06-28"}, {"key": "2038 brooks square pl", "address": "2038 Brooks Square Pl, Falls Church, VA 22043", "price": "$795,000", "beds": 3, "baths": 2.5, "sqft": 1444, "type": "sale", "homeType": "Townhouse", "source": "Redfin", "fsbo": false, "url": "https://www.redfin.com/VA/Falls-Church/2038-Brooks-Square-Pl-22043/home/9477333", "thumb": "https://ssl.cdn-redfin.com/photo/235/islphoto/356/genIslnoResize.VAFX2313356_0.webp", "zone_group": "in_zone", "pill": "\u2705 in McLean HS zone", "schools_line": "HS not confirmed", "highlights": "garage, renovated/new", "starred": true, "lat": 38.928, "lng": -77.198, "isNew": false, "firstSeen": "2026-06-28"}];
+const TOTAL_RENT = 29;
+const TOTAL_SALE = 13;
+let sortMode = 'newest';
+
+function escHtml(s) { return String(s == null ? '' : s).replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c])); }
+function escJs(s) { return String(s == null ? '' : s).replace(/\\/g, '\\\\').replace(/'/g, "\\'"); }
+
+function parsePrice(price) {
+  const m = (price || '').match(/[\d,]+/);
+  return m ? parseInt(m[0].replace(/,/g, ''), 10) : 0;
+}
+function sortListings(arr, mode) {
+  const copy = arr.slice();
+  if (mode === 'price') {
+    copy.sort((a, b) => parsePrice(a.price) - parsePrice(b.price));
+  } else {
+    copy.sort((a, b) => (b.firstSeen || '').localeCompare(a.firstSeen || '') || parsePrice(a.price) - parsePrice(b.price));
+  }
+  return copy;
+}
+function setSortMode(mode) {
+  sortMode = mode;
+  document.getElementById('sort-btn-newest').classList.toggle('active', mode === 'newest');
+  document.getElementById('sort-btn-price').classList.toggle('active', mode === 'price');
+  renderRent();
+  renderSale();
+  renderSavedPanel();
+}
+
+function cardHtml(l) {
+  const star = l.starred ? '⭐ ' : '';
+  const newBadge = l.isNew ? '<span class="new-badge">NEW</span> ' : '';
+  const fsboBadge = l.fsbo ? ' <span class="fsbo-badge">FSBO</span>' : '';
+  const beds = (l.beds === null || l.beds === undefined) ? '?' : l.beds;
+  const baths = (l.baths === null || l.baths === undefined) ? '?' : l.baths;
+  const sqft = l.sqft ? l.sqft.toLocaleString() + ' sqft' : 'sqft n/a';
+  const staticMap = staticMapUrl(l.lat, l.lng);
+  const svgFallback = svgPlaceholder(l.address);
+  const initialSrc = l.thumb || staticMap || svgFallback;
+  const thumbHtml = `<a href="${l.url || ''}" target="_blank" rel="noopener"><img src="${initialSrc}" data-staticmap="${staticMap}" data-svg="${svgFallback}" onerror="mclThumbFallback(this)" alt="" class="thumb" loading="lazy"></a>`;
+  const highlightsHtml = l.highlights ? `<div class="highlights">✨ ${escHtml(l.highlights)}</div>` : '';
+  const viewBtn = l.url ? `<a class="btn" href="${l.url}" target="_blank" rel="noopener">View listing →</a>` : '';
+  const photosBtn = l.url ? `<a class="btn btn-secondary" href="${l.url}" target="_blank" rel="noopener">📷 Photos</a>` : '';
+  const pillClass = ({in_zone: 'pill-green', outside: 'pill-amber', unknown: 'pill-gray'})[l.zone_group] || 'pill-gray';
+  return `
+    <div class="card ${l.starred ? 'starred' : ''}" data-addr="${escHtml(l.address)}">
+      ${thumbHtml}
+      <div class="card-body">
+        <div class="card-head">
+          <span class="addr">${star}${newBadge}${escHtml(l.address)}</span>
+          <span class="pill ${pillClass}">${escHtml(l.pill)}</span>
+        </div>
+        <div class="price-line">${escHtml(l.price)}${fsboBadge}</div>
+        <div class="stats-line">${beds} bd / ${baths} ba · ${sqft} · ${escHtml(l.homeType || '')} · via ${escHtml(l.source || '')}</div>
+        <div class="schools-line">🏫 ${escHtml(l.schools_line || '')}</div>
+        ${highlightsHtml}
+        <div class="card-actions">
+          <button class="like-btn" onclick="toggleLike(this,'${escJs(l.address)}','${escJs(l.price)}','${escJs(l.url || '')}')">♡</button>
+          ${viewBtn}
+          ${photosBtn}
+        </div>
+      </div>
+    </div>`;
+}
+
+function sectionHtml(title, items, muted) {
+  if (!items.length) return '';
+  const cls = muted ? 'section-muted' : '';
+  const cards = items.map(cardHtml).join('\n');
+  return `<div class="section ${cls}"><h3>${title} (${items.length})</h3><div class="card-grid">${cards}</div></div>`;
+}
+
+function renderColumn(containerId, listings, label, total) {
+  const inZone = listings.filter(l => l.zone_group === 'in_zone');
+  const outside = listings.filter(l => l.zone_group === 'outside');
+  const unknown = listings.filter(l => l.zone_group === 'unknown');
+  const fourplus = sortListings(inZone.filter(l => (l.beds || 0) >= 4), sortMode);
+  const threebd = sortListings(inZone.filter(l => (l.beds || 0) === 3), sortMode);
+  const outsideSorted = sortListings(outside, sortMode);
+  const unknownSorted = sortListings(unknown, sortMode);
+
+  let html = `<h2 class="col-title">${label} <span class="col-count">(${total})</span></h2>`;
+  if (fourplus.length || threebd.length) {
+    html += '<div class="zone-block"><h3 class="zone-head">✅ In McLean HS Zone</h3>';
+    html += sectionHtml('4+ Bedrooms', fourplus, false);
+    html += sectionHtml('3 Bedrooms', threebd, false);
+    html += '</div>';
+  }
+  if (outsideSorted.length) {
+    html += '<div class="zone-block outside-block"><h3 class="zone-head muted">📍 Outside McLean HS Zone</h3>';
+    html += sectionHtml('Listings', outsideSorted, true);
+    html += '</div>';
+  }
+  if (unknownSorted.length) {
+    html += '<div class="zone-block"><h3 class="zone-head muted">❓ Zone Unknown</h3>';
+    html += sectionHtml('Listings', unknownSorted, true);
+    html += '</div>';
+  }
+  document.getElementById(containerId).innerHTML = html;
+}
+function renderRent() { renderColumn('rent-col', LISTINGS.filter(l => l.type === 'rent'), 'FOR RENT', TOTAL_RENT); }
+function renderSale() { renderColumn('sale-col', LISTINGS.filter(l => l.type === 'sale'), 'FOR SALE', TOTAL_SALE); }
+
+renderRent();
+renderSale();
+renderSavedPanel();
 
 let map, boundaryLayer;
 try {
