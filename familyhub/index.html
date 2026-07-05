@@ -195,6 +195,10 @@ a { color: inherit; }
 <!--  KIDS                                        -->
 <!-- ═══════════════════════════════════════════ -->
 <div id="tab-kids" class="tab-pane active">
+  <div class="card" style="margin-bottom:20px">
+    <div class="section-heading">🏕️ Camp schedule — this week through school start</div>
+    <div id="camp-schedule"><p class="empty">Loading camp schedule…</p></div>
+  </div>
   <div class="kids-grid">
     <div class="card kid-card ella">
       <div class="kid-banner">
@@ -205,10 +209,10 @@ a { color: inherit; }
         </div>
       </div>
       <div class="kid-body">
-        <div class="section-heading">Upcoming activities</div>
-        <div id="ella-cal"></div>
-        <div class="section-heading" style="margin-top:20px">Recent grade emails</div>
+        <div class="section-heading">Recent grade emails</div>
         <div id="ella-grades"></div>
+        <div class="section-heading" style="margin-top:20px">Other upcoming events</div>
+        <div id="ella-cal"></div>
       </div>
     </div>
     <div class="card kid-card liam">
@@ -220,10 +224,10 @@ a { color: inherit; }
         </div>
       </div>
       <div class="kid-body">
-        <div class="section-heading">Upcoming activities</div>
-        <div id="liam-cal"></div>
-        <div class="section-heading" style="margin-top:20px">School reminders</div>
+        <div class="section-heading">School reminders</div>
         <div id="liam-school"></div>
+        <div class="section-heading" style="margin-top:20px">Other upcoming events</div>
+        <div id="liam-cal"></div>
       </div>
     </div>
   </div>
@@ -691,32 +695,146 @@ function gradeRowHtmlFH(cfg, m, body) {
   if (!notes) notes = (m.snippet||'').replace(/&#39;/g,"'").replace(/&amp;/g,'&').trim().slice(0,140);
   return '<div class="event-row"><div class="event-dot ella"></div><div style="flex:1"><div class="event-title"><a href="https://mail.google.com/mail/u/0/#all/'+m.id+'" target="_blank" style="color:inherit;text-decoration:none">'+esc(cfg.cls)+'</a> <b style="color:var(--ella)">'+esc(letter)+'</b></div><div class="event-meta">'+esc(cfg.teacher)+' · '+esc(notes)+(notes.length>=140?'…':'')+'</div></div></div>';
 }
-function dedupeRecurringFH(events) {
-  const groups = {};
-  events.forEach(e => { const k = e.summary||'(untitled)'; (groups[k]=groups[k]||[]).push(e); });
-  let out = [];
-  Object.keys(groups).forEach(k => {
-    const g = groups[k].sort((a,b) => (a.start.date||a.start.dateTime).localeCompare(b.start.date||b.start.dateTime));
-    if (g.length <= 3) { out = out.concat(g); }
-    else {
-      out = out.concat(g.slice(0,3));
-      out.push({ _isNote:true, _summaryNote: (g.length-3) + ' more ' + '"' + k + '"' + ' occurrences (recurring)' });
-    }
-  });
-  out.sort((a,b) => {
-    if (a._isNote) return 1;
-    if (b._isNote) return -1;
-    return (a.start.date||a.start.dateTime).localeCompare(b.start.date||b.start.dateTime);
-  });
-  return out;
+// ── Robust date parsing for Google Calendar all-day events ──
+// All-day `start.date` sometimes comes back as a plain "YYYY-MM-DD" and
+// sometimes as a full ISO string like "2026-07-06T00:00:00Z" — naively
+// appending "T12:00:00" to the latter produced "Invalid Date". Always
+// slice to the first 10 chars (the date portion) before parsing.
+function parseEventDate(startObj) {
+  if (!startObj) return null;
+  if (startObj.dateTime) return new Date(startObj.dateTime);
+  if (startObj.date) return new Date(startObj.date.slice(0,10) + 'T00:00:00');
+  return null;
 }
-function kidEventRowFH(e, dotClass) {
-  if (e._isNote) return '<div class="event-row"><div class="event-dot '+dotClass+'" style="opacity:.25"></div><div class="event-meta" style="font-style:italic">+ '+esc(e._summaryNote)+'</div></div>';
-  const dt = e.start.date ? new Date(e.start.date+'T12:00:00') : new Date(e.start.dateTime);
-  const dateStr = dt.toLocaleDateString('en-US',{weekday:'short',month:'short',day:'numeric'});
+function eventRangeDays(e) {
+  const s = parseEventDate(e.start);
+  let en = null;
+  if (e.end) {
+    if (e.end.date) en = new Date(e.end.date.slice(0,10) + 'T00:00:00');
+    else if (e.end.dateTime) en = new Date(e.end.dateTime);
+  }
+  return [s, en || s];
+}
+function mondayOnOrAfter(d) {
+  const dt = new Date(d); dt.setHours(0,0,0,0);
+  const day = dt.getDay();
+  const add = day === 1 ? 0 : (day === 0 ? 1 : (8 - day));
+  dt.setDate(dt.getDate() + add);
+  return dt;
+}
+function fmtWeekRange(ws, we) {
+  const opt = {month:'short', day:'numeric'};
+  return ws.toLocaleDateString('en-US', opt) + ' – ' + we.toLocaleDateString('en-US', opt);
+}
+
+// ── Camp schedule (weekly, Ella | Liam, through FCPS school start) ──
+const CAMP_PREFIX_RE = /^(ELLA|LIAM)\s*-+\s*(.+)$/i;
+const VACATION_RE = /vacation/i;
+const SCHOOL_START = new Date('2026-08-24T00:00:00');
+
+function campNameFromSummary(summary) {
+  const m = CAMP_PREFIX_RE.exec((summary||'').trim());
+  return m ? m[2].trim() : (summary||'');
+}
+function parseDropoffPickup(desc) {
+  if (!desc) return null;
+  const drop = desc.match(/drop.?off\s*:?\s*([\d:]+\s*[ap]\.?m\.?)/i);
+  const pick = desc.match(/pick.?up\s*:?\s*([\d:]+\s*[ap]\.?m\.?)/i);
+  if (!drop && !pick) return null;
+  return { drop: drop ? drop[1].toUpperCase() : null, pick: pick ? pick[1].toUpperCase() : null };
+}
+function campCellHtml(e) {
+  if (!e) return '<span style="color:var(--faint);font-size:12px;font-style:italic">— no camp scheduled —</span>';
+  const name = esc(campNameFromSummary(e.summary));
+  const times = parseDropoffPickup(e.description);
+  const loc = (e.location||'').split('\n')[0];
+  let timeStr = '';
+  if (times) timeStr = (times.drop ? 'Drop-off ' + esc(times.drop) : '') + (times.drop && times.pick ? ' · ' : '') + (times.pick ? 'Pickup ' + esc(times.pick) : '');
+  return '<div><b>'+name+'</b>' +
+    (timeStr ? '<div class="event-meta">'+timeStr+'</div>' : '<div class="event-meta" style="font-style:italic;color:var(--faint)">No drop-off/pickup time on the calendar invite</div>') +
+    (loc ? '<div class="event-meta">📍 '+esc(loc)+'</div>' : '') +
+  '</div>';
+}
+function buildCampSchedule(allEvents) {
+  const campEvents = allEvents.filter(e => e.start && e.start.date && CAMP_PREFIX_RE.test((e.summary||'').trim()));
+  const vacationEvents = allEvents.filter(e => e.start && e.start.date && VACATION_RE.test(e.summary||''));
+  const today = new Date(); today.setHours(0,0,0,0);
+  let weekStart = mondayOnOrAfter(today);
+  const weeks = [];
+  let guard = 0;
+  while (weekStart < SCHOOL_START && guard < 30) {
+    guard++;
+    const weekEnd = new Date(weekStart); weekEnd.setDate(weekEnd.getDate()+4); // Friday
+    const weekEndExclusive = new Date(weekStart); weekEndExclusive.setDate(weekEndExclusive.getDate()+5); // Saturday
+    const findCamp = (kid) => campEvents.find(e => {
+      const m = CAMP_PREFIX_RE.exec(e.summary.trim());
+      if (!m || m[1].toUpperCase() !== kid) return false;
+      const [es, eEx] = eventRangeDays(e);
+      return es < weekEndExclusive && eEx > weekStart;
+    });
+    const onVacation = vacationEvents.some(e => {
+      const [vs, vEx] = eventRangeDays(e);
+      return vs <= weekStart && vEx >= weekEndExclusive;
+    });
+    weeks.push({ weekStart: new Date(weekStart), weekEnd, ella: findCamp('ELLA'), liam: findCamp('LIAM'), onVacation });
+    weekStart = new Date(weekStart); weekStart.setDate(weekStart.getDate()+7);
+  }
+  return weeks;
+}
+function renderCampSchedule(weeks) {
+  if (!weeks.length) return '<p class="empty">School starts before any camp weeks remain — nothing to schedule.</p>';
+  const tdStyle = 'padding:8px;border-bottom:1px solid var(--border-light);vertical-align:top';
+  const rows = weeks.map(w => {
+    const missing = !w.onVacation && (!w.ella || !w.liam);
+    const rowBg = w.onVacation ? '#eff6ff' : (missing ? '#fff7ed' : 'transparent');
+    let body;
+    if (w.onVacation) {
+      body = '<td colspan="2" style="'+tdStyle+';text-align:center;color:var(--muted);font-style:italic">🧳 Family vacation — no camp needed</td>';
+    } else {
+      body = '<td style="'+tdStyle+'">'+campCellHtml(w.ella)+'</td><td style="'+tdStyle+'">'+campCellHtml(w.liam)+'</td>';
+    }
+    return '<tr style="background:'+rowBg+'"><td style="'+tdStyle+';white-space:nowrap;font-weight:600">'+fmtWeekRange(w.weekStart,w.weekEnd)+(missing?' ⚠️':'')+'</td>'+body+'</tr>';
+  }).join('');
+  const gaps = weeks.filter(w => !w.onVacation && (!w.ella || !w.liam));
+  const gapNote = gaps.length
+    ? '<p style="color:#b45309;font-size:13px;margin-top:10px">⚠️ ' + gaps.map(w => {
+        const who = [!w.ella?'Ella':null, !w.liam?'Liam':null].filter(Boolean).join(' & ');
+        return esc(fmtWeekRange(w.weekStart,w.weekEnd)) + ': ' + who + ' need' + (who.indexOf('&')>-1?'':'s') + ' a camp booked';
+      }).join(' &nbsp;|&nbsp; ') + '</p>'
+    : '<p style="color:#166534;font-size:13px;margin-top:10px">✓ Every week through school start (Mon, Aug 24) has a camp scheduled for both kids.</p>';
+  return '<table style="width:100%;border-collapse:collapse;font-size:13px"><thead><tr style="text-align:left;color:var(--muted);font-size:11px;text-transform:uppercase;letter-spacing:.03em"><th style="padding:6px 8px 6px 0">Week</th><th style="padding:6px 8px">Ella</th><th style="padding:6px 8px">Liam</th></tr></thead><tbody>' + rows + '</tbody></table>' + gapNote;
+}
+
+// ── Other upcoming events (non-camp) — recurring series collapse to ONE entry ──
+function buildOtherUpcoming(allEvents, kidRegex) {
+  const nonCamp = allEvents.filter(e => !(e.start && e.start.date && CAMP_PREFIX_RE.test((e.summary||'').trim())) && !VACATION_RE.test(e.summary||''));
+  const relevant = nonCamp.filter(e => kidRegex.test((e.summary||'')+' '+(e.location||'')));
+  const groups = {};
+  const singles = [];
+  relevant.forEach(e => {
+    if (e.recurringEventId) (groups[e.recurringEventId] = groups[e.recurringEventId] || []).push(e);
+    else singles.push(e);
+  });
+  const recurringEntries = Object.keys(groups).map(rid => {
+    const g = groups[rid].sort((a,b) => parseEventDate(a.start) - parseEventDate(b.start));
+    return { type:'recurring', next: g[0], count: g.length };
+  });
+  const singleEntries = singles.map(e => ({ type:'single', e }));
+  return recurringEntries.concat(singleEntries).sort((a,b) => {
+    const da = parseEventDate(a.type==='recurring' ? a.next.start : a.e.start);
+    const db = parseEventDate(b.type==='recurring' ? b.next.start : b.e.start);
+    return da - db;
+  });
+}
+function otherEventRowHtml(entry, dotClass) {
+  const e = entry.type==='recurring' ? entry.next : entry.e;
+  const dt = parseEventDate(e.start);
+  const dateStr = dt ? dt.toLocaleDateString('en-US',{weekday:'short',month:'short',day:'numeric'}) : '';
   const time = e.start.dateTime ? ' · '+dt.toLocaleTimeString('en-US',{hour:'numeric',minute:'2-digit'}) : '';
+  const recurTag = entry.type==='recurring' ? ' <span style="color:var(--muted);font-size:11px;font-weight:400">(recurring weekly — next of '+entry.count+')</span>' : '';
   const titleHtml = e.htmlLink ? '<a href="'+e.htmlLink+'" target="_blank" style="color:inherit;text-decoration:none">'+esc(e.summary||'(untitled)')+'</a>' : esc(e.summary||'(untitled)');
-  return '<div class="event-row"><div class="event-dot '+dotClass+'"></div><div><div class="event-title">'+titleHtml+'</div><div class="event-meta">'+dateStr+time+(e.location?' · '+esc(e.location):'')+'</div></div></div>';
+  const loc = e.location ? ' · '+esc(e.location.split('\n')[0]) : '';
+  return '<div class="event-row"><div class="event-dot '+dotClass+'"></div><div><div class="event-title">'+titleHtml+recurTag+'</div><div class="event-meta">'+dateStr+time+loc+'</div></div></div>';
 }
 
 async function loadKidsLive() {
@@ -756,14 +874,22 @@ async function loadKidsLive() {
     const gradeRows = gradeThreadMeta.map((r,i) => gradeRowHtmlFH(r.cfg, r.m, bodies[i])).join('') + pvRowHtml;
     document.getElementById('ella-grades').innerHTML = gradeRows || '<p class="empty">No recent grade emails found.</p>';
 
-    // Both kids — live calendar lookahead (Family calendar), deduped so
-    // weekly-recurring items (allergy shots, therapist, dance) collapse to
-    // their next 3 dates + a "more occurrences" note instead of one row per week.
+    // Camp schedule — one row per week (through FCPS school start, Aug 24),
+    // Ella + Liam side by side, with drop-off/pickup time + location parsed
+    // from the event's description/location, and a gap warning for any week
+    // that's missing a camp for either kid (family vacation weeks excused).
     const allEvents = calData.events || [];
-    const ellaEvents = dedupeRecurringFH(allEvents.filter(e => /ella|longfellow/i.test((e.summary||'')+' '+(e.location||''))));
-    const liamEvents = dedupeRecurringFH(allEvents.filter(e => /liam|franklin\s*sherman/i.test((e.summary||'')+' '+(e.location||''))));
-    document.getElementById('ella-cal').innerHTML = ellaEvents.length ? ellaEvents.map(e=>kidEventRowFH(e,'ella')).join('') : '<p class="empty">No upcoming activities found on the calendar.</p>';
-    document.getElementById('liam-cal').innerHTML = liamEvents.length ? liamEvents.map(e=>kidEventRowFH(e,'liam')).join('') : '<p class="empty">No upcoming activities found on the calendar.</p>';
+    const campWeeks = buildCampSchedule(allEvents);
+    document.getElementById('camp-schedule').innerHTML = renderCampSchedule(campWeeks);
+
+    // Other upcoming events (non-camp) — weekly-recurring invites (therapist,
+    // allergy shots, dance class) collapse to a SINGLE entry showing the next
+    // date, instead of one row per future occurrence. One-off events (parties,
+    // wellness visits, tryouts) still show individually.
+    const ellaOther = buildOtherUpcoming(allEvents, /ella|longfellow/i);
+    const liamOther = buildOtherUpcoming(allEvents, /liam|franklin\s*sherman/i);
+    document.getElementById('ella-cal').innerHTML = ellaOther.length ? ellaOther.map(e=>otherEventRowHtml(e,'ella')).join('') : '<p class="empty">No other upcoming events found on the calendar.</p>';
+    document.getElementById('liam-cal').innerHTML = liamOther.length ? liamOther.map(e=>otherEventRowHtml(e,'liam')).join('') : '<p class="empty">No other upcoming events found on the calendar.</p>';
 
     // Liam — best-effort school emails (no per-class gradebook at elementary level)
     const liamThreads = (liamMailData.threads||[]).slice(0,5);
