@@ -605,6 +605,178 @@ document.getElementById('ella-grades').innerHTML = `<p class="empty">No recent g
 document.getElementById('liam-cal').innerHTML = `<div class="event-row"><div class="event-dot liam"></div><div><div class="event-title">Liam's Birthday</div><div class="event-meta">Tue, Jul 14</div></div></div><div class="event-row"><div class="event-dot liam"></div><div><div class="event-title">Liam's B-day!!!</div><div class="event-meta">Tue, Jul 14</div></div></div>`;
 document.getElementById('liam-school').innerHTML = `<p class="empty">No recent school emails found in the last 30 days.</p>`;
 
+// ═══════════════════════════════════════════════
+//  KIDS — LIVE enhancement (Cowork only). Overwrites the static
+//  snapshot above with live Gmail/Calendar data when this artifact is
+//  opened inside Cowork (window.cowork.callMcpTool available). On the
+//  public static site / plain browser there is no MCP access, so the
+//  static snapshot above is left in place untouched — same behavior
+//  as before.
+// ═══════════════════════════════════════════════
+const GMAIL = 'mcp__bc83c882-b0ee-407c-ac74-e1b9df988dd8__search_threads';
+const GMAIL_THREAD = 'mcp__bc83c882-b0ee-407c-ac74-e1b9df988dd8__get_thread';
+const GMAIL_UNLABEL = 'mcp__bc83c882-b0ee-407c-ac74-e1b9df988dd8__unlabel_thread';
+const GMAIL_LABEL = 'mcp__bc83c882-b0ee-407c-ac74-e1b9df988dd8__label_thread';
+const CAL_LIST = 'mcp__481ccd8d-c298-4afc-af30-5b95ba82d481__list_events';
+const FAMILY_CAL_ID = 'family10128225910182038014@group.calendar.google.com';
+const KIDS_LOOKAHEAD_DAYS = 270;
+
+async function callMcp(name, args) {
+  const r = await window.cowork.callMcpTool(name, args);
+  if (r.isError) {
+    const msg = (r.content && r.content[0] && r.content[0].text) || 'Connector error';
+    throw new Error(msg);
+  }
+  return r.structuredContent ?? JSON.parse(r.content[0].text);
+}
+function stripHtmlFH(html) {
+  return (html||'')
+    .replace(/<style[\s\S]*?<\/style>/gi,' ')
+    .replace(/<script[\s\S]*?<\/script>/gi,' ')
+    .replace(/<[^>]+>/g,' ')
+    .replace(/&nbsp;/g,' ').replace(/&amp;/g,'&').replace(/&#39;/g,"'").replace(/&quot;/g,'"')
+    .replace(/\s+/g,' ').trim();
+}
+function pctToLetterFH(pct) {
+  if (pct>=97) return 'A+'; if (pct>=93) return 'A'; if (pct>=90) return 'A-';
+  if (pct>=87) return 'B+'; if (pct>=83) return 'B'; if (pct>=80) return 'B-';
+  if (pct>=77) return 'C+'; if (pct>=73) return 'C'; if (pct>=70) return 'C-';
+  if (pct>=67) return 'D+'; if (pct>=63) return 'D'; if (pct>=60) return 'D-';
+  return 'F';
+}
+function computeLetterGradeFH(text) {
+  if (!text) return null;
+  const clean = text.replace(/\s+/g,' ').trim();
+  let m = clean.match(/\b([A-F][+-]?)\s*[\(\[]\s*[\d,.]+\s*\/\s*[\d,.]+\s*[\)\]]/i);
+  if (m) return m[1].toUpperCase();
+  m = clean.match(/\b([A-F][+-]?)\s*[\(\[]\s*[\d.]+\s*%\s*[\)\]]/i);
+  if (m) return m[1].toUpperCase();
+  m = clean.match(/(?:overall\s+class\s+grade|current\s+grade|grade|mark)[\s:=]+([A-F][+-]?)\b/i);
+  if (m) return m[1].toUpperCase();
+  m = clean.match(/\b([\d,]+(?:\.\d+)?)\s*\/\s*([\d,]+(?:\.\d+)?)\b/);
+  if (m) { const num=parseFloat(m[1].replace(/,/g,'')), den=parseFloat(m[2].replace(/,/g,'')); if (den>0) return pctToLetterFH((num/den)*100); }
+  m = clean.match(/\b(\d{1,3}(?:\.\d+)?)\s*%/);
+  if (m) return pctToLetterFH(parseFloat(m[1]));
+  return null;
+}
+async function fetchBodyFromThreadFH(threadId, isInTrash) {
+  let full = {};
+  if (!isInTrash) {
+    try { full = await callMcp(GMAIL_THREAD, {threadId, messageFormat:'FULL_CONTENT'}); } catch(e){}
+    if (full && full.messages && full.messages.length) return full;
+  }
+  try {
+    await callMcp(GMAIL_UNLABEL, {threadId, labelIds:['TRASH']});
+    try { full = await callMcp(GMAIL_THREAD, {threadId, messageFormat:'FULL_CONTENT'}); } catch(e){}
+    await callMcp(GMAIL_LABEL, {threadId, labelIds:['TRASH']}).catch(()=>{});
+  } catch(e){}
+  return full || {};
+}
+const ELLA_CLASSES = [
+  {cls:'English 7 HN',        teacher:'Sylvia Maldonado',  from:'smaldonado1@fcps.edu'},
+  {cls:'Soprano Alto Chorus', teacher:'Kimberly Dawson',   from:'kmdawson@fcps.edu'},
+  {cls:'Health & PE 7',       teacher:'Katherine Shapiro', from:'klshapiro@fcps.edu'},
+  {cls:'US History 7 HN',     teacher:'Jane Layton',       from:'jhlayton@fcps.edu'},
+  {cls:'Life Science HN',     teacher:'Beth Schinstock',   from:'elschinstock@fcps.edu'}
+];
+const PARENTVUE_QUERY = 'in:anywhere from:noreply@fcps.edu subject:"Grade Book Summary"';
+const LIAM_SCHOOL_QUERY = 'in:anywhere from:fcps.edu newer_than:30d -from:smaldonado1@fcps.edu -from:kmdawson@fcps.edu -from:klshapiro@fcps.edu -from:jhlayton@fcps.edu -from:elschinstock@fcps.edu -from:noreply@fcps.edu';
+
+function gradeRowHtmlFH(cfg, m, body) {
+  if (!m) return '<div class="event-row"><div class="event-dot ella" style="opacity:.3"></div><div><div class="event-title">'+esc(cfg.cls)+'</div><div class="event-meta">'+esc(cfg.teacher)+' — no email found</div></div></div>';
+  const msgText = body ? stripHtmlFH(body) : '';
+  const letter = computeLetterGradeFH(msgText) || computeLetterGradeFH(m.snippet||'') || '—';
+  const commentIdx = msgText.search(/teacher.?comment|note[s]?:|comment/i);
+  let notes = commentIdx>-1 ? msgText.slice(commentIdx, commentIdx+180).replace(/^[^:]+:\s*/,'').trim() : '';
+  if (!notes) notes = (m.snippet||'').replace(/&#39;/g,"'").replace(/&amp;/g,'&').trim().slice(0,140);
+  return '<div class="event-row"><div class="event-dot ella"></div><div style="flex:1"><div class="event-title"><a href="https://mail.google.com/mail/u/0/#all/'+m.id+'" target="_blank" style="color:inherit;text-decoration:none">'+esc(cfg.cls)+'</a> <b style="color:var(--ella)">'+esc(letter)+'</b></div><div class="event-meta">'+esc(cfg.teacher)+' · '+esc(notes)+(notes.length>=140?'…':'')+'</div></div></div>';
+}
+function dedupeRecurringFH(events) {
+  const groups = {};
+  events.forEach(e => { const k = e.summary||'(untitled)'; (groups[k]=groups[k]||[]).push(e); });
+  let out = [];
+  Object.keys(groups).forEach(k => {
+    const g = groups[k].sort((a,b) => (a.start.date||a.start.dateTime).localeCompare(b.start.date||b.start.dateTime));
+    if (g.length <= 3) { out = out.concat(g); }
+    else {
+      out = out.concat(g.slice(0,3));
+      out.push({ _isNote:true, _summaryNote: (g.length-3) + ' more ' + '"' + k + '"' + ' occurrences (recurring)' });
+    }
+  });
+  out.sort((a,b) => {
+    if (a._isNote) return 1;
+    if (b._isNote) return -1;
+    return (a.start.date||a.start.dateTime).localeCompare(b.start.date||b.start.dateTime);
+  });
+  return out;
+}
+function kidEventRowFH(e, dotClass) {
+  if (e._isNote) return '<div class="event-row"><div class="event-dot '+dotClass+'" style="opacity:.25"></div><div class="event-meta" style="font-style:italic">+ '+esc(e._summaryNote)+'</div></div>';
+  const dt = e.start.date ? new Date(e.start.date+'T12:00:00') : new Date(e.start.dateTime);
+  const dateStr = dt.toLocaleDateString('en-US',{weekday:'short',month:'short',day:'numeric'});
+  const time = e.start.dateTime ? ' · '+dt.toLocaleTimeString('en-US',{hour:'numeric',minute:'2-digit'}) : '';
+  const titleHtml = e.htmlLink ? '<a href="'+e.htmlLink+'" target="_blank" style="color:inherit;text-decoration:none">'+esc(e.summary||'(untitled)')+'</a>' : esc(e.summary||'(untitled)');
+  return '<div class="event-row"><div class="event-dot '+dotClass+'"></div><div><div class="event-title">'+titleHtml+'</div><div class="event-meta">'+dateStr+time+(e.location?' · '+esc(e.location):'')+'</div></div></div>';
+}
+
+async function loadKidsLive() {
+  if (!(window.cowork && window.cowork.callMcpTool)) return; // leave static fallback in place
+  try {
+    const [classSearches, pvData, calData, liamMailData] = await Promise.all([
+      Promise.all(ELLA_CLASSES.map(c => callMcp(GMAIL, {query:'in:anywhere from:'+c.from, pageSize:1, includeTrash:true}).catch(()=>({threads:[]})))),
+      callMcp(GMAIL, {query: PARENTVUE_QUERY, pageSize:1, includeTrash:true}).catch(()=>({threads:[]})),
+      callMcp(CAL_LIST, {calendarId: FAMILY_CAL_ID, startTime: new Date().toISOString(), endTime: new Date(Date.now()+KIDS_LOOKAHEAD_DAYS*86400000).toISOString(), pageSize:250, orderBy:'startTime'}).catch(()=>({events:[]})),
+      callMcp(GMAIL, {query: LIAM_SCHOOL_QUERY, pageSize:5}).catch(()=>({threads:[]}))
+    ]);
+
+    // Ella — live per-class grades + ParentVUE summary
+    const gradeThreadMeta = classSearches.map((data,i) => {
+      const t = (data.threads||[])[0];
+      const m = t && t.messages && t.messages[t.messages.length-1];
+      return { cfg: ELLA_CLASSES[i], t: t||null, m: m||null, inTrash: !!(m && (m.labelIds||[]).includes('TRASH')) };
+    });
+    const bodies = await Promise.all(gradeThreadMeta.map(async r => {
+      if (!r.t) return null;
+      const full = await fetchBodyFromThreadFH(r.t.id, r.inTrash).catch(()=>({}));
+      const msgs = (full && full.messages) || [];
+      const bodyMsg = msgs[msgs.length-1];
+      return bodyMsg ? (bodyMsg.htmlBody||'') : '';
+    }));
+    const pvThread = (pvData.threads||[])[0];
+    const pvMsg = pvThread && pvThread.messages && pvThread.messages[pvThread.messages.length-1];
+    let pvRowHtml = '';
+    if (pvThread && pvMsg) {
+      const pvInTrash = (pvMsg.labelIds||[]).includes('TRASH');
+      const pvFull = await fetchBodyFromThreadFH(pvThread.id, pvInTrash).catch(()=>({}));
+      const pvMsgs = (pvFull && pvFull.messages)||[];
+      const pvBody = pvMsgs.length ? (pvMsgs[pvMsgs.length-1].htmlBody||'') : '';
+      const pvLetter = computeLetterGradeFH(pvBody?stripHtmlFH(pvBody):'') || '—';
+      pvRowHtml = '<div class="event-row"><div class="event-dot ella"></div><div><div class="event-title"><a href="https://mail.google.com/mail/u/0/#all/'+pvMsg.id+'" target="_blank" style="color:inherit;text-decoration:none">ParentVUE summary</a> <b style="color:var(--ella)">'+esc(pvLetter)+'</b></div><div class="event-meta">Full grade book — '+esc(new Date(pvMsg.date).toLocaleDateString('en-US',{month:'short',day:'numeric'}))+'</div></div></div>';
+    }
+    const gradeRows = gradeThreadMeta.map((r,i) => gradeRowHtmlFH(r.cfg, r.m, bodies[i])).join('') + pvRowHtml;
+    document.getElementById('ella-grades').innerHTML = gradeRows || '<p class="empty">No recent grade emails found.</p>';
+
+    // Both kids — live calendar lookahead (Family calendar), deduped so
+    // weekly-recurring items (allergy shots, therapist, dance) collapse to
+    // their next 3 dates + a "more occurrences" note instead of one row per week.
+    const allEvents = calData.events || [];
+    const ellaEvents = dedupeRecurringFH(allEvents.filter(e => /ella|longfellow/i.test((e.summary||'')+' '+(e.location||''))));
+    const liamEvents = dedupeRecurringFH(allEvents.filter(e => /liam|franklin\s*sherman/i.test((e.summary||'')+' '+(e.location||''))));
+    document.getElementById('ella-cal').innerHTML = ellaEvents.length ? ellaEvents.map(e=>kidEventRowFH(e,'ella')).join('') : '<p class="empty">No upcoming activities found on the calendar.</p>';
+    document.getElementById('liam-cal').innerHTML = liamEvents.length ? liamEvents.map(e=>kidEventRowFH(e,'liam')).join('') : '<p class="empty">No upcoming activities found on the calendar.</p>';
+
+    // Liam — best-effort school emails (no per-class gradebook at elementary level)
+    const liamThreads = (liamMailData.threads||[]).slice(0,5);
+    const liamRows = liamThreads.map(t => {
+      const m = t.messages && t.messages[t.messages.length-1];
+      if (!m) return '';
+      return '<div class="event-row"><div class="event-dot liam"></div><div><div class="event-title"><a href="https://mail.google.com/mail/u/0/#all/'+m.id+'" target="_blank" style="color:inherit;text-decoration:none">'+esc(m.subject||'(no subject)')+'</a></div><div class="event-meta">'+esc(new Date(m.date).toLocaleDateString('en-US',{month:'short',day:'numeric'}))+' · '+esc((m.snippet||'').slice(0,100))+'</div></div></div>';
+    }).join('');
+    document.getElementById('liam-school').innerHTML = liamRows || '<p class="empty">No recent school emails found in the last 30 days.</p>';
+  } catch(e) { /* any error: leave the static snapshot above in place */ }
+}
+loadKidsLive();
+
 // ── Boot: recipes ────────────────────────────────
 renderCatBar();
 renderGrid();
@@ -613,17 +785,26 @@ renderGrid();
 //  NEWS — RSS (live fetch via CORS proxy)
 // ═══════════════════════════════════════════════
 async function fetchRSS(url) {
-  const proxy = 'https://corsproxy.io/?' + encodeURIComponent(url);
-  const r = await fetch(proxy, { signal: AbortSignal.timeout(12000) });
-  if (!r.ok) throw new Error('HTTP ' + r.status);
-  const text = await r.text();
-  const doc = new DOMParser().parseFromString(text, 'text/xml');
-  const items = Array.from(doc.querySelectorAll('item'));
-  if (!items.length) throw new Error('Empty feed');
-  return items.slice(0,7).map(i => {
-    let link = (i.querySelector('link')?.textContent || i.querySelector('guid')?.textContent || '').trim();
-    return { title: (i.querySelector('title')?.textContent||'').replace(/<!\[CDATA\[|\]\]>/g,'').trim(), link, pubDate: i.querySelector('pubDate')?.textContent||'' };
-  }).filter(x => x.title);
+  const proxies = [
+    'https://corsproxy.io/?url=' + encodeURIComponent(url),
+    'https://api.allorigins.win/raw?url=' + encodeURIComponent(url)
+  ];
+  let lastErr;
+  for (const proxy of proxies) {
+    try {
+      const r = await fetch(proxy, { signal: AbortSignal.timeout(12000) });
+      if (!r.ok) throw new Error('HTTP ' + r.status);
+      const text = await r.text();
+      const doc = new DOMParser().parseFromString(text, 'text/xml');
+      const items = Array.from(doc.querySelectorAll('item'));
+      if (!items.length) throw new Error('Empty feed');
+      return items.slice(0,7).map(i => {
+        let link = (i.querySelector('link')?.textContent || i.querySelector('guid')?.textContent || '').trim();
+        return { title: (i.querySelector('title')?.textContent||'').replace(/<!\[CDATA\[|\]\]>/g,'').trim(), link, pubDate: i.querySelector('pubDate')?.textContent||'' };
+      }).filter(x => x.title);
+    } catch (e) { lastErr = e; }
+  }
+  throw lastErr || new Error('All proxies failed');
 }
 function fmtAgo(s) {
   if (!s) return '';
