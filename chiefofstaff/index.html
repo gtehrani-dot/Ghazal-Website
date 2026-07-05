@@ -113,6 +113,14 @@ select,input[type=date]{font-size:11.5px;border:1px solid var(--border);border-r
 .trash-reason.digest{background:#fef3c7;color:#92400e;}
 .trash-reason.deal{background:#fce7f3;color:#9d174d;}
 .errcard{background:#fee2e2;border:1px solid var(--red);color:#7f1d1d;border-radius:8px;padding:14px;margin-bottom:14px;font-size:13.5px;}
+.info-card{border-left:4px solid #6d5dfc!important;background:#f4f2ff;}
+.info-card h3{color:#4b3fc7;font-size:15.5px;}
+.navbadge{font-size:10px;font-weight:700;background:#6d5dfc;color:#fff;border-radius:8px;padding:1px 6px;margin-left:5px;vertical-align:middle;}
+.chev{font-size:11px;color:var(--muted);margin-left:5px;cursor:pointer;}
+.email-detail{margin-top:4px;display:none;}
+.inbox-toolbar{display:flex;justify-content:flex-end;gap:8px;margin-bottom:10px;}
+.inbox-toolbar button{border:1px solid var(--border);background:#fff;border-radius:6px;padding:5px 10px;font-size:12px;font-weight:600;cursor:pointer;}
+.pill.replied{background:#e8f4ec;color:var(--green);font-size:10px;font-weight:700;padding:1px 6px;border-radius:4px;}
 </style>
 </head>
 <body>
@@ -125,11 +133,12 @@ select,input[type=date]{font-size:11.5px;border:1px solid var(--border);border-r
 
 <div class="tabbar" id="tabbar">
   <button class="tab-btn active" data-tab="home" onclick="showTab('home')">🏠 Home</button>
-  <button class="tab-btn" data-tab="inbox" onclick="showTab('inbox')">📬 Inbox<span class="badge red">3</span></button>
+  <button class="tab-btn" data-tab="inbox" onclick="showTab('inbox')">📬 Inbox<span class="badge red">3</span><span class="navbadge" id="nb-info"></span></button>
   <button class="tab-btn" data-tab="calendar" onclick="showTab('calendar')">📅 Calendar</button>
   <button class="tab-btn" data-tab="todoist" onclick="showTab('todoist')">✅ Todoist<span class="badge red">28</span></button>
   <button class="tab-btn" data-tab="news" onclick="showTab('news')">📰 News</button>
   <button class="tab-btn" data-tab="trash" onclick="showTab('trash')">🗑️ Trash<span class="badge blue">26</span></button>
+  <button class="tab-btn" data-tab="file" onclick="showTab('file')">📁 File</button>
 </div>
 
 <div class="wrap">
@@ -171,17 +180,21 @@ select,input[type=date]{font-size:11.5px;border:1px solid var(--border);border-r
 
 <!-- TAB 2: INBOX -->
 <div class="tab-section" id="tab-inbox">
-  <div class="section-head"><div></div><button class="refresh-btn" onclick="sendPrompt('Please refresh my morning briefing — Inbox tab (High/Medium/School/Social). Rebuild and overwrite /Users/ghazalmoore/Dropbox/Personal/Claude/MorningBriefing/index.html.')">↻ Refresh Inbox</button></div>
+  <div class="section-head"><div></div><button class="refresh-btn" onclick="sendPrompt('Please refresh my morning briefing — Inbox tab (Informational/High/Medium/School/Social). Rebuild and overwrite /Users/ghazalmoore/Dropbox/Personal/Claude/MorningBriefing/index.html.')">↻ Refresh Inbox</button></div>
+  <div class="inbox-toolbar"><button onclick="expandAllEmails()">Expand all</button><button onclick="collapseAllEmails()">Collapse all</button></div>
+  <div class="card info-card" style="margin-bottom:14px">
+    <h3 style="margin:0 0 8px">ℹ️ INFORMATIONAL — already handled (<span id="infoCount">0</span>)</h3>
+    <p class="muted" style="margin:-4px 0 8px">These looked like High/Medium priority, but someone already replied that it's done — nothing to action, just pick where each one should move.</p>
+    <div id="sub-info"></div>
+  </div>
   <div class="subtabs">
     <button class="subtab-btn active" data-sub="high" onclick="showSub('high')">🔴 High Priority</button>
     <button class="subtab-btn" data-sub="medium" onclick="showSub('medium')">🟠 Medium</button>
-    <button class="subtab-btn" data-sub="info" onclick="showSub('info')">ℹ️ Informational</button>
     <button class="subtab-btn" data-sub="school" onclick="showSub('school')">🏫 School</button>
     <button class="subtab-btn" data-sub="social" onclick="showSub('social')">💬 Social</button>
   </div>
   <div class="card subtab-panel active" id="sub-high"></div>
   <div class="card subtab-panel" id="sub-medium"></div>
-  <div class="card subtab-panel" id="sub-info"></div>
   <div class="card subtab-panel" id="sub-school"></div>
   <div class="card subtab-panel" id="sub-social"></div>
 </div>
@@ -243,10 +256,27 @@ select,input[type=date]{font-size:11.5px;border:1px solid var(--border);border-r
     </div>
   </div>
   <div id="trashGroups"></div>
-  <div class="card" style="background:#eef5ee;margin-top:14px">
-    <h3 style="margin:0 0 8px;font-size:13px;color:#3f6b41;text-transform:uppercase;letter-spacing:.03em">Recipes &amp; food newsletters (<span id="recipeCount">0</span>)</h3>
+</div>
+
+<!-- TAB 7: FILE -->
+<div class="tab-section" id="tab-file">
+  <p class="muted" style="margin-bottom:12px">Pick a destination — Recipes, Archive, or Trash — for each group below.</p>
+  <div class="card" style="background:#eef5ee">
+    <h3 style="margin:0 0 8px">Recipes &amp; food newsletters (<span id="recipeCount">0</span>)</h3>
     <div id="recipeList"></div>
-    <button class="push-btn" style="margin-top:10px" onclick="fileRecipes()">File to Recipes →</button>
+    <button class="push-btn" style="margin-top:10px" onclick="fileRecipes()">Move to Recipes →</button>
+  </div>
+  <div class="card" style="background:#f5f5f0;margin-top:14px">
+    <h3 style="margin:0 0 8px">Stale — no longer relevant (<span id="staleCount">0</span>)</h3>
+    <p class="muted" style="margin:-4px 0 8px">10+ days old and not acted on, or already show a reply resolving them — likely stale because the date has passed and/or it's already handled.</p>
+    <div id="staleList"></div>
+    <div style="margin-top:10px;display:flex;gap:8px;align-items:center">
+      <select id="staleDest">
+        <option value="TRASH">🗑️ Trash</option>
+        <option value="ARCHIVE">Archive (no label)</option>
+      </select>
+      <button class="push-btn" style="margin-top:0" onclick="fileStale()">Move/Trash checked →</button>
+    </div>
   </div>
 </div>
 
@@ -399,6 +429,9 @@ const recipeEmails = [
   {subj:"Very good cheese boards for your next party", from:"email@newsletter.bonappetit.com", date:"May 19", id:"19e401cbe73b2c27"},
   {subj:"The Buffalo chicken dip I make for every party", from:"email@newsletter.bonappetit.com", date:"Jan 29", id:"19c09d807737fd00"},
 ];
+// Stale — 10+ days old, not acted on, or already resolved. This run didn't have a stale-scan
+// pass yet (added just now) — tomorrow's 7am run will populate this from the updated skill.
+const staleEmails = [];
 
 // ---------- RENDER ----------
 function showTab(id){
@@ -429,17 +462,31 @@ function toggleStar(btn){
   sendPrompt(action + ' Gmail message ID ' + btn.dataset.msgId + ' via Gmail MCP');
 }
 
+function toggleDetail(id){
+  const d = document.getElementById('detail-'+id);
+  const c = document.getElementById('chev-'+id);
+  if(!d) return;
+  const open = d.style.display !== 'none';
+  d.style.display = open ? 'none' : 'block';
+  if(c) c.textContent = open ? '▸ more' : '▾ less';
+}
+function expandAllEmails(){ document.querySelectorAll('.email-detail').forEach(d=>d.style.display='block'); document.querySelectorAll('.chev').forEach(c=>c.textContent='▾ less'); }
+function collapseAllEmails(){ document.querySelectorAll('.email-detail').forEach(d=>d.style.display='none'); document.querySelectorAll('.chev').forEach(c=>c.textContent='▸ more'); }
+
 function renderEmailList(container, list, highlight){
   if(!list.length){container.innerHTML='<div class="empty-state">No items in this category today.</div>';return;}
-  container.innerHTML = list.map(e=>`
+  container.innerHTML = list.map((e,i)=>{
+    const id = e.msgId || e.threadId || ('row'+i);
+    return `
     <div class="email-item ${highlight?'high':''}">
       <div style="flex:1">
-        <div><a href="${e.link}" target="_blank">${e.subj}</a>${e.noreply?'<span class="noreply-badge">⚠️ No reply</span>':''}</div>
+        <div><a href="${e.link}" target="_blank">${e.subj}</a> <span class="chev" id="chev-${id}" onclick="toggleDetail('${id}')">▸ more</span>${e.noreply?'<span class="noreply-badge">⚠️ No reply</span>':''}</div>
         <div class="email-meta">${e.from} &middot; ${e.date}</div>
-        <div class="email-summary">${e.summary}</div>
+        <div class="email-summary email-detail" id="detail-${id}">${e.summary}</div>
       </div>
       <button class="star-btn" data-msg-id="${e.msgId}" data-starred="${e.starred}" onclick="toggleStar(this)" title="${e.starred?'Unstar':'Star'} this email">${e.starred?'★':'☆'}</button>
-    </div>`).join('');
+    </div>`;
+  }).join('');
 }
 renderEmailList(document.getElementById('sub-high'), highEmails, true);
 renderEmailList(document.getElementById('sub-medium'), mediumEmails, false);
@@ -447,21 +494,24 @@ renderEmailList(document.getElementById('sub-medium'), mediumEmails, false);
 // Informational — already-resolved threads pulled out of High/Medium so nothing duplicates
 function renderInformational(){
   const el = document.getElementById('sub-info');
+  document.getElementById('infoCount').textContent = informationalEmails.length;
+  const nb = document.getElementById('nb-info');
+  if(informationalEmails.length){ nb.textContent = informationalEmails.length; nb.style.display='inline-block'; } else { nb.style.display='none'; }
   if(!informationalEmails.length){ el.innerHTML = '<div class="empty-state">Nothing already-handled to file away right now.</div>'; return; }
   el.innerHTML = informationalEmails.map(e=>`
     <div class="email-item" style="border-left:3px solid #8a8fa3;padding-left:10px" id="inforow-${e.threadId}">
       <div style="flex:1">
-        <div><a href="${e.link}" target="_blank">${e.subj}</a></div>
+        <div><a href="${e.link}" target="_blank">${e.subj}</a> <span class="chev" id="chev-${e.threadId}" onclick="toggleDetail('${e.threadId}')">▸ more</span></div>
         <div class="email-meta">${e.from} &middot; ${e.date}</div>
-        <div class="email-summary">${e.summary}</div>
+        <div class="email-summary email-detail" id="detail-${e.threadId}">${e.summary}</div>
       </div>
       <div style="display:flex;gap:6px;align-items:center;flex-wrap:wrap">
         <select id="inforoute-${e.threadId}">
-          <option value="TRASH">Trash</option>
-          <option value="ARCHIVE">Archive</option>
           <option value="Personal Gmail/Recipes">Recipes</option>
+          <option value="ARCHIVE">Archive</option>
+          <option value="TRASH">Trash</option>
         </select>
-        <button onclick="routeInformational('${e.threadId}')">Route</button>
+        <button onclick="routeInformational('${e.threadId}')">Move</button>
       </div>
     </div>`).join('');
 }
@@ -492,6 +542,30 @@ function fileRecipes(){
   sendPrompt('Apply the Gmail label "Personal Gmail/Recipes" to these thread IDs and archive them out of the inbox (remove the INBOX label) via Gmail MCP: ' + JSON.stringify(ids));
 }
 renderRecipeFiling();
+
+// Stale — 10+ days old and either not acted on, or already resolved (dates passed / handled)
+function renderStale(){
+  document.getElementById('staleCount').textContent = staleEmails.length;
+  document.getElementById('staleList').innerHTML = staleEmails.map(e=>`
+    <div class="trash-item" style="cursor:default">
+      <input type="checkbox" class="chk stalechk" checked data-id="${e.id}">
+      <div class="trash-item-body">
+        <div class="trash-item-subject">${e.subj}${e.replied?' <span class="pill replied">already replied</span>':''}</div>
+        <div class="trash-item-meta"><span>${e.from}</span><span>${e.date}</span></div>
+      </div>
+    </div>`).join('') || '<div class="empty-state">Nothing stale right now — inbox is current.</div>';
+}
+function fileStale(){
+  const ids = [];
+  document.querySelectorAll('.stalechk:checked').forEach(cb => ids.push(cb.dataset.id));
+  if (!ids.length){ alert('Nothing checked.'); return; }
+  const dest = document.getElementById('staleDest').value;
+  const action = dest === 'TRASH'
+    ? 'Move these Gmail thread IDs to trash via Gmail MCP: ' + JSON.stringify(ids)
+    : 'Archive these Gmail thread IDs (remove the INBOX label) via Gmail MCP: ' + JSON.stringify(ids);
+  sendPrompt(action);
+}
+renderStale();
 
 document.getElementById('sub-social').innerHTML = socialEmails.length ? socialEmails.map(e=>`
   <div class="email-item"><div style="flex:1">
