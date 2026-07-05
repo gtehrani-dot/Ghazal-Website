@@ -129,7 +129,7 @@ select,input[type=date]{font-size:11.5px;border:1px solid var(--border);border-r
   <button class="tab-btn" data-tab="calendar" onclick="showTab('calendar')">📅 Calendar</button>
   <button class="tab-btn" data-tab="todoist" onclick="showTab('todoist')">✅ Todoist<span class="badge red">28</span></button>
   <button class="tab-btn" data-tab="news" onclick="showTab('news')">📰 News</button>
-  <button class="tab-btn" data-tab="trash" onclick="showTab('trash')">🗑️ Trash<span class="badge blue">31</span></button>
+  <button class="tab-btn" data-tab="trash" onclick="showTab('trash')">🗑️ Trash<span class="badge blue">26</span></button>
 </div>
 
 <div class="wrap">
@@ -175,11 +175,13 @@ select,input[type=date]{font-size:11.5px;border:1px solid var(--border);border-r
   <div class="subtabs">
     <button class="subtab-btn active" data-sub="high" onclick="showSub('high')">🔴 High Priority</button>
     <button class="subtab-btn" data-sub="medium" onclick="showSub('medium')">🟠 Medium</button>
+    <button class="subtab-btn" data-sub="info" onclick="showSub('info')">ℹ️ Informational</button>
     <button class="subtab-btn" data-sub="school" onclick="showSub('school')">🏫 School</button>
     <button class="subtab-btn" data-sub="social" onclick="showSub('social')">💬 Social</button>
   </div>
   <div class="card subtab-panel active" id="sub-high"></div>
   <div class="card subtab-panel" id="sub-medium"></div>
+  <div class="card subtab-panel" id="sub-info"></div>
   <div class="card subtab-panel" id="sub-school"></div>
   <div class="card subtab-panel" id="sub-social"></div>
 </div>
@@ -241,6 +243,11 @@ select,input[type=date]{font-size:11.5px;border:1px solid var(--border);border-r
     </div>
   </div>
   <div id="trashGroups"></div>
+  <div class="card" style="background:#eef5ee;margin-top:14px">
+    <h3 style="margin:0 0 8px;font-size:13px;color:#3f6b41;text-transform:uppercase;letter-spacing:.03em">Recipes &amp; food newsletters (<span id="recipeCount">0</span>)</h3>
+    <div id="recipeList"></div>
+    <button class="push-btn" style="margin-top:10px" onclick="fileRecipes()">File to Recipes →</button>
+  </div>
 </div>
 
 </div>
@@ -253,10 +260,12 @@ const highEmails = [
   {subj:"RE: Appraisal Request", from:"appraisals@cwealthappraisals.com (Tom Kirchner)", date:"Jul 1", summary:"Appraiser can't reach you by phone — asks you to call 571-223-0311 re: the home purchase appraisal.", link:"https://mail.google.com/mail/u/0/#all/19f1ecb7f02280d4", msgId:"19f1ed0057a30e1b", starred:false, noreply:true},
 ];
 const mediumEmails = [
-  {subj:"Calleva Summer Camp — Bus Route Form", from:"registration@calleva.org", date:"Jul 2", summary:"Bus/drop-off form for Liam flagged incomplete; Ben replied \"This is done\" on Jul 3 — worth confirming it actually went through.", link:"https://mail.google.com/mail/u/0/#all/19f24369ef81f268", msgId:"19f24369ef81f268", starred:false},
   {subj:"Ghazal, I'm still waiting for your response", from:"LinkedIn — Theo Papadopoulos (Engagement Manager)", date:"Jul 2", summary:"A recruiter/engagement manager is following up again — worth a reply given active job search.", link:"https://mail.google.com/mail/u/0/#all/19f22afd92cdc8cf", msgId:"19f22afd92cdc8cf", starred:false},
   {subj:"Confidential: Ada — Separation Agreement", from:"judy.liang@ada.cx", date:"Jun 29", summary:"Severance confirmed: 3 equal installments plus bonus on the 4th scheduled payroll date. No action needed unless you have questions.", link:"https://mail.google.com/mail/u/0/#all/19f056c9602e4c81", msgId:"19f1578a525e75bd", starred:false},
   {subj:"Re: Cobra Sign Up", from:"judy.liang@ada.cx", date:"Jun 30", summary:"Sterling will mail COBRA sign-up instructions; coverage retroactive to July 1.", link:"https://mail.google.com/mail/u/0/#all/19f162e6b3c4b5ee", msgId:"19f195e6b0965a60", starred:false},
+];
+const informationalEmails = [
+  {subj:"Calleva Summer Camp — Bus Route Form", from:"registration@calleva.org", date:"Jul 2", summary:"Bus/drop-off form for Liam was flagged incomplete; Ben replied \"This is done\" on Jul 3 — already handled, no action needed. Route this away once you've glanced at it.", link:"https://mail.google.com/mail/u/0/#all/19f24369ef81f268", threadId:"19f24369ef81f268"},
 ];
 const socialEmails = [
   {subj:"Field hockey camps in July and August", from:"mcleanfieldhockey@gmail.com", date:"Jul 4", status:"Informational", link:"https://mail.google.com/mail/u/0/#all/19f2e36f498819c8"},
@@ -373,20 +382,23 @@ const trashData = {
     {subj:"The 7: Reflecting Pool vandalism, cannabis safety & more", from:"info@nl.mail.washingtonpost.com", date:"Jul 3", reason:"digest", id:"19f27a2ed918cc39"},
     {subj:"FOLLOW UP: dogs locked in van", from:"no-reply@rs.email.nextdoor.com", date:"Jul 5", reason:"digest", id:"19f303951b6d74c9"},
     {subj:"Teenager who disappeared in Potomac found dead", from:"reply@rs.email.nextdoor.com", date:"Jul 4", reason:"digest", id:"19f2e45c29b36f34"},
-    {subj:"Miso-peanut chicken", from:"email@newsletter.bonappetit.com", date:"Jul 4", reason:"digest", id:"19f2d002d326ae11"},
-    {subj:"A cookout menu that's as breezy as summer", from:"email@newsletter.bonappetit.com", date:"Jul 3", reason:"digest", id:"19f28be4dbe2224a"},
-    {subj:"Recipe: Easy Cherry Berry Pie", from:"coachelissa@substack.com", date:"Jul 3", reason:"digest", id:"19f28e09519cf5d8"},
-    {subj:"This July 4, we salute America the Barbecue", from:"email@newsletter.bonappetit.com", date:"Jul 3", reason:"digest", id:"19f27a2fce7e6c81"},
-    {subj:"Banana Pudding Cake & more", from:"email@newsletter.bonappetit.com", date:"Jul 2", reason:"digest", id:"19f24340b829a8a4"},
-    {subj:"25 easy weeknight dinners we're making in June", from:"email@newsletter.bonappetit.com", date:"Jun 5", reason:"digest", id:"19e999658ccde654"},
     {subj:"The Morning: Look closely", from:"nytdirect@nytimes.com", date:"Jun 4", reason:"digest", id:"19e923b08443c5ce"},
-    {subj:"Knockout carrot sheet cake", from:"email@newsletter.bonappetit.com", date:"May 30", reason:"digest", id:"19e78c8ac5e5e7a4"},
-    {subj:"Miso chicken soba bowls", from:"email@newsletter.bonappetit.com", date:"May 25", reason:"digest", id:"19e5f029c3a7356a"},
-    {subj:"No-fail roast chicken with lemon and garlic", from:"email@newsletter.bonappetit.com", date:"May 20", reason:"digest", id:"19e45439207f214e"},
-    {subj:"Very good cheese boards for your next party", from:"email@newsletter.bonappetit.com", date:"May 19", reason:"digest", id:"19e401cbe73b2c27"},
-    {subj:"The Buffalo chicken dip I make for every party", from:"email@newsletter.bonappetit.com", date:"Jan 29", reason:"digest", id:"19c09d807737fd00"},
   ],
 };
+// Recipe / food newsletters — excluded from Trash, filed to the Recipes label instead
+const recipeEmails = [
+  {subj:"Miso-peanut chicken", from:"email@newsletter.bonappetit.com", date:"Jul 4", id:"19f2d002d326ae11"},
+  {subj:"A cookout menu that's as breezy as summer", from:"email@newsletter.bonappetit.com", date:"Jul 3", id:"19f28be4dbe2224a"},
+  {subj:"Recipe: Easy Cherry Berry Pie", from:"coachelissa@substack.com", date:"Jul 3", id:"19f28e09519cf5d8"},
+  {subj:"This July 4, we salute America the Barbecue", from:"email@newsletter.bonappetit.com", date:"Jul 3", id:"19f27a2fce7e6c81"},
+  {subj:"Banana Pudding Cake & more", from:"email@newsletter.bonappetit.com", date:"Jul 2", id:"19f24340b829a8a4"},
+  {subj:"25 easy weeknight dinners we're making in June", from:"email@newsletter.bonappetit.com", date:"Jun 5", id:"19e999658ccde654"},
+  {subj:"Knockout carrot sheet cake", from:"email@newsletter.bonappetit.com", date:"May 30", id:"19e78c8ac5e5e7a4"},
+  {subj:"Miso chicken soba bowls", from:"email@newsletter.bonappetit.com", date:"May 25", id:"19e5f029c3a7356a"},
+  {subj:"No-fail roast chicken with lemon and garlic", from:"email@newsletter.bonappetit.com", date:"May 20", id:"19e45439207f214e"},
+  {subj:"Very good cheese boards for your next party", from:"email@newsletter.bonappetit.com", date:"May 19", id:"19e401cbe73b2c27"},
+  {subj:"The Buffalo chicken dip I make for every party", from:"email@newsletter.bonappetit.com", date:"Jan 29", id:"19c09d807737fd00"},
+];
 
 // ---------- RENDER ----------
 function showTab(id){
@@ -431,6 +443,55 @@ function renderEmailList(container, list, highlight){
 }
 renderEmailList(document.getElementById('sub-high'), highEmails, true);
 renderEmailList(document.getElementById('sub-medium'), mediumEmails, false);
+
+// Informational — already-resolved threads pulled out of High/Medium so nothing duplicates
+function renderInformational(){
+  const el = document.getElementById('sub-info');
+  if(!informationalEmails.length){ el.innerHTML = '<div class="empty-state">Nothing already-handled to file away right now.</div>'; return; }
+  el.innerHTML = informationalEmails.map(e=>`
+    <div class="email-item" style="border-left:3px solid #8a8fa3;padding-left:10px" id="inforow-${e.threadId}">
+      <div style="flex:1">
+        <div><a href="${e.link}" target="_blank">${e.subj}</a></div>
+        <div class="email-meta">${e.from} &middot; ${e.date}</div>
+        <div class="email-summary">${e.summary}</div>
+      </div>
+      <div style="display:flex;gap:6px;align-items:center;flex-wrap:wrap">
+        <select id="inforoute-${e.threadId}">
+          <option value="TRASH">Trash</option>
+          <option value="ARCHIVE">Archive</option>
+          <option value="Personal Gmail/Recipes">Recipes</option>
+        </select>
+        <button onclick="routeInformational('${e.threadId}')">Route</button>
+      </div>
+    </div>`).join('');
+}
+function routeInformational(threadId){
+  const sel = document.getElementById('inforoute-'+threadId);
+  const dest = sel ? sel.value : 'TRASH';
+  const action = dest === 'TRASH' ? 'Move Gmail thread ' + threadId + ' to trash'
+    : dest === 'ARCHIVE' ? 'Archive Gmail thread ' + threadId + ' (remove the INBOX label)'
+    : 'Apply the Gmail label "' + dest + '" to thread ' + threadId + ' and archive it out of the inbox';
+  sendPrompt(action + ' via Gmail MCP.');
+}
+renderInformational();
+
+// Recipes & food newsletters filing card (Trash tab)
+function renderRecipeFiling(){
+  document.getElementById('recipeCount').textContent = recipeEmails.length;
+  document.getElementById('recipeList').innerHTML = recipeEmails.map(e=>`
+    <div class="trash-item" style="cursor:default">
+      <div class="trash-item-body">
+        <div class="trash-item-subject">${e.subj}</div>
+        <div class="trash-item-meta"><span>${e.from}</span><span>${e.date}</span></div>
+      </div>
+    </div>`).join('') || '<div class="empty-state">No recipe/food newsletters found.</div>';
+}
+function fileRecipes(){
+  const ids = recipeEmails.map(e => e.id);
+  if (!ids.length) return;
+  sendPrompt('Apply the Gmail label "Personal Gmail/Recipes" to these thread IDs and archive them out of the inbox (remove the INBOX label) via Gmail MCP: ' + JSON.stringify(ids));
+}
+renderRecipeFiling();
 
 document.getElementById('sub-social').innerHTML = socialEmails.length ? socialEmails.map(e=>`
   <div class="email-item"><div style="flex:1">
