@@ -6,6 +6,7 @@
 <style>
 :root{
   --bg:#f5f6f8; --card:#ffffff; --accent:#4A6FA5; --amber:#F59E0B; --red:#EF4444; --green:#10B981;
+  --purple:#6d5dfc; --purplebg:#f4f2ff; --purpletext:#4b3fc7;
   --border:#e5e7eb; --text:#1f2937; --muted:#6b7280;
 }
 *{box-sizing:border-box;}
@@ -18,7 +19,7 @@ header.top .sub{color:var(--muted);font-size:13px;}
 .tab-btn{border:none;background:none;padding:14px 18px;font-size:14px;font-weight:600;color:var(--muted);cursor:pointer;border-bottom:3px solid transparent;white-space:nowrap;position:relative;}
 .tab-btn.active{color:var(--accent);border-bottom-color:var(--accent);}
 .badge{display:inline-block;min-width:16px;padding:1px 5px;border-radius:8px;font-size:10px;font-weight:700;color:#fff;margin-left:5px;vertical-align:middle;}
-.badge.red{background:var(--red);} .badge.blue{background:var(--accent);} .badge.amber{background:var(--amber);}
+.badge.red{background:var(--red);} .badge.blue{background:var(--accent);} .badge.amber{background:var(--amber);} .badge.purple{background:var(--purple);}
 .tab-section{display:none;padding-top:20px;}
 .tab-section.active{display:block;}
 .card{background:var(--card);border-radius:8px;box-shadow:0 1px 3px rgba(0,0,0,.08);padding:16px 20px;margin-bottom:14px;}
@@ -32,6 +33,7 @@ header.top .sub{color:var(--muted);font-size:13px;}
 .pill{background:#fff;border:1px solid var(--border);border-radius:20px;padding:8px 16px;font-size:13px;font-weight:600;cursor:pointer;box-shadow:0 1px 3px rgba(0,0,0,.06);}
 .pill:hover{border-color:var(--accent);}
 .pill .n{color:var(--red);}
+.pill.info .n{color:var(--purple);}
 h2.col-title{font-size:15px;margin:0 0 12px;color:var(--text);}
 .flag-row{display:flex;gap:10px;padding:10px 0;border-bottom:1px solid var(--border);font-size:13.5px;}
 .flag-row:last-child{border-bottom:none;}
@@ -49,25 +51,29 @@ h2.col-title{font-size:15px;margin:0 0 12px;color:var(--text);}
 .insight-label{font-weight:700;font-size:11px;text-transform:uppercase;letter-spacing:.03em;margin-bottom:4px;}
 .insight-title{font-weight:700;margin-bottom:4px;}
 .insight-card a{color:var(--accent);}
-.subtabs{display:flex;gap:6px;margin-bottom:16px;flex-wrap:wrap;}
+.subtabs{display:flex;gap:6px;margin-bottom:16px;flex-wrap:wrap;align-items:center;}
 .subtab-btn{border:1px solid var(--border);background:#fff;border-radius:20px;padding:6px 14px;font-size:13px;font-weight:600;cursor:pointer;color:var(--muted);}
 .subtab-btn.active{background:var(--accent);color:#fff;border-color:var(--accent);}
 .subtab-panel{display:none;}
 .subtab-panel.active{display:block;}
+.toolbar-row{display:flex;justify-content:space-between;align-items:center;margin-bottom:14px;flex-wrap:wrap;gap:8px;}
+.expand-controls button{border:1px solid var(--border);background:#fff;border-radius:6px;padding:5px 11px;font-size:12px;font-weight:600;cursor:pointer;color:var(--accent);margin-left:6px;}
 .email-item{display:flex;gap:10px;align-items:flex-start;padding:12px 0;border-bottom:1px solid var(--border);font-size:13.5px;}
 .email-item:last-child{border-bottom:none;}
 .email-item.high{border-left:3px solid var(--amber);padding-left:10px;}
 .email-item a{color:var(--accent);text-decoration:none;font-weight:600;}
 .email-meta{color:var(--muted);font-size:12px;margin-top:2px;}
-.email-summary{margin-top:4px;color:#374151;}
+.email-detail{margin-top:6px;color:#374151;background:#f8f9fb;border-radius:6px;padding:8px 10px;font-size:12.5px;}
+.chev{cursor:pointer;color:var(--accent);font-size:11.5px;font-weight:700;margin-left:4px;user-select:none;}
 .noreply-badge{color:var(--red);font-size:11px;font-weight:700;margin-left:6px;}
+.replied-pill{background:#d1fae5;color:#065f46;font-size:10px;font-weight:700;padding:2px 7px;border-radius:10px;margin-left:6px;}
 .star-btn{border:none;background:none;font-size:18px;cursor:pointer;color:var(--amber);flex-shrink:0;}
 .empty-state{color:var(--muted);font-size:13.5px;padding:20px 0;text-align:center;}
 table{width:100%;border-collapse:collapse;font-size:13px;}
 th{text-align:left;color:var(--muted);font-size:11px;text-transform:uppercase;letter-spacing:.03em;padding:6px 8px;border-bottom:2px solid var(--border);}
 td{padding:8px;border-bottom:1px solid var(--border);vertical-align:top;}
 .grade-flag{color:var(--red);font-weight:700;}
-.refresh-btn{border:1px solid var(--border);background:#fff;border-radius:6px;padding:6px 12px;font-size:12px;font-weight:600;cursor:pointer;color:var(--accent);float:right;}
+.refresh-btn{border:1px solid var(--border);background:#fff;border-radius:6px;padding:6px 12px;font-size:12px;font-weight:600;cursor:pointer;color:var(--accent);}
 .section-head{display:flex;justify-content:space-between;align-items:center;margin-bottom:12px;}
 .event-card{border-bottom:1px solid var(--border);padding:12px 0;font-size:13.5px;}
 .event-card:last-child{border-bottom:none;}
@@ -113,6 +119,21 @@ select,input[type=date]{font-size:11.5px;border:1px solid var(--border);border-r
 .trash-reason.digest{background:#fef3c7;color:#92400e;}
 .trash-reason.deal{background:#fce7f3;color:#9d174d;}
 .errcard{background:#fee2e2;border:1px solid var(--red);color:#7f1d1d;border-radius:8px;padding:14px;margin-bottom:14px;font-size:13.5px;}
+.info-card{border-left:4px solid var(--purple);background:var(--purplebg);}
+.info-card h3{color:var(--purpletext);font-size:19px;margin:0 0 6px;display:flex;align-items:center;gap:8px;}
+.info-card h3 .icon{font-size:26px;}
+.info-card p.muted{color:#5b5680;font-size:13px;margin:0 0 14px;}
+.info-row{display:flex;gap:10px;align-items:flex-start;padding:12px 0;border-bottom:1px solid #ded9ff;font-size:13.5px;}
+.info-row:last-child{border-bottom:none;}
+.info-row a{color:var(--purpletext);font-weight:700;text-decoration:none;}
+.file-group{background:#fff;border-radius:8px;box-shadow:0 1px 3px rgba(0,0,0,.08);padding:16px 20px;margin-bottom:16px;}
+.file-group h3{font-size:14px;margin:0 0 4px;}
+.file-group .grouphint{color:var(--muted);font-size:12.5px;margin:0 0 12px;}
+.file-row{display:flex;align-items:flex-start;gap:10px;padding:10px 0;border-bottom:1px solid var(--border);}
+.file-row:last-child{border-bottom:none;}
+.file-row .subj{font-size:13.5px;font-weight:600;}
+.file-row .meta{font-size:12px;color:var(--muted);margin-top:2px;}
+.file-actions{display:flex;gap:14px;margin-top:12px;}
 </style>
 </head>
 <body>
@@ -125,11 +146,12 @@ select,input[type=date]{font-size:11.5px;border:1px solid var(--border);border-r
 
 <div class="tabbar" id="tabbar">
   <button class="tab-btn active" data-tab="home" onclick="showTab('home')">🏠 Home</button>
-  <button class="tab-btn" data-tab="inbox" onclick="showTab('inbox')">📬 Inbox<span class="badge red">3</span></button>
+  <button class="tab-btn" data-tab="inbox" onclick="showTab('inbox')">📬 Inbox<span class="badge red">2</span><span class="badge purple">2</span></button>
   <button class="tab-btn" data-tab="calendar" onclick="showTab('calendar')">📅 Calendar</button>
   <button class="tab-btn" data-tab="todoist" onclick="showTab('todoist')">✅ Todoist<span class="badge red">28</span></button>
   <button class="tab-btn" data-tab="news" onclick="showTab('news')">📰 News</button>
-  <button class="tab-btn" data-tab="trash" onclick="showTab('trash')">🗑️ Trash<span class="badge blue">31</span></button>
+  <button class="tab-btn" data-tab="trash" onclick="showTab('trash')">🗑️ Trash<span class="badge blue">20</span></button>
+  <button class="tab-btn" data-tab="file" onclick="showTab('file')">📁 File<span class="badge amber">14</span></button>
 </div>
 
 <div class="wrap">
@@ -151,7 +173,8 @@ select,input[type=date]{font-size:11.5px;border:1px solid var(--border);border-r
   </div>
 
   <div class="pills">
-    <div class="pill" onclick="showTab('inbox')">🔴 High Priority Emails <span class="n">3</span></div>
+    <div class="pill" onclick="showTab('inbox');showSub('high')">🔴 High Priority Emails <span class="n">2</span></div>
+    <div class="pill info" onclick="showTab('inbox');showSub('info')">ℹ️ Informational <span class="n">2</span></div>
     <div class="pill" onclick="showTab('calendar')">📅 Meetings Today <span>0</span></div>
     <div class="pill" onclick="showTab('todoist')">✅ P1 Tasks <span class="n">28 overdue</span></div>
     <div class="pill" onclick="showTab('calendar')">👤 Ben's Next Away <span>Jul 26</span></div>
@@ -171,7 +194,13 @@ select,input[type=date]{font-size:11.5px;border:1px solid var(--border);border-r
 
 <!-- TAB 2: INBOX -->
 <div class="tab-section" id="tab-inbox">
-  <div class="section-head"><div></div><button class="refresh-btn" onclick="sendPrompt('Please refresh my morning briefing — Inbox tab (High/Medium/School/Social). Rebuild and overwrite /Users/ghazalmoore/Dropbox/Personal/Claude/MorningBriefing/index.html.')">↻ Refresh Inbox</button></div>
+  <div class="toolbar-row">
+    <div class="expand-controls"><button onclick="expandAllEmails()">Expand all</button><button onclick="collapseAllEmails()">Collapse all</button></div>
+    <button class="refresh-btn" onclick="sendPrompt('Please refresh my morning briefing — Inbox tab (Informational/High/Medium/School/Social). Rebuild and overwrite /Users/ghazalmoore/Dropbox/Personal/Claude/MorningBriefing/index.html.')">↻ Refresh Inbox</button>
+  </div>
+
+  <div class="card info-card" id="infoCard"></div>
+
   <div class="subtabs">
     <button class="subtab-btn active" data-sub="high" onclick="showSub('high')">🔴 High Priority</button>
     <button class="subtab-btn" data-sub="medium" onclick="showSub('medium')">🟠 Medium</button>
@@ -232,34 +261,64 @@ select,input[type=date]{font-size:11.5px;border:1px solid var(--border);border-r
 
 <!-- TAB 6: TRASH -->
 <div class="tab-section" id="tab-trash">
+  <div class="toolbar-row">
+    <div class="expand-controls"><button onclick="expandAllEmails()">Expand all</button><button onclick="collapseAllEmails()">Collapse all</button></div>
+  </div>
   <div class="trash-toolbar">
-    <div><span id="trashCountLine">31 of 31 selected for trash · 0 kept</span></div>
+    <div><span id="trashCountLine">20 of 20 selected for trash · 0 kept</span></div>
     <div>
       <button onclick="trashSelectAll()">Select all</button>
       <button onclick="trashDeselectAll()">Deselect all</button>
-      <button id="sendTrashBtn" onclick="sendToTrash()">🗑️ Send to Trash (31)</button>
+      <button id="sendTrashBtn" onclick="sendToTrash()">🗑️ Send to Trash (20)</button>
     </div>
   </div>
   <div id="trashGroups"></div>
 </div>
 
+<!-- TAB 7: FILE -->
+<div class="tab-section" id="tab-file">
+  <div class="toolbar-row">
+    <div class="expand-controls"><button onclick="expandAllEmails()">Expand all</button><button onclick="collapseAllEmails()">Collapse all</button></div>
+    <button class="refresh-btn" onclick="sendPrompt('Please refresh my morning briefing — File tab. Rebuild and overwrite /Users/ghazalmoore/Dropbox/Personal/Claude/MorningBriefing/index.html.')">↻ Refresh File</button>
+  </div>
+  <div id="fileGroups"></div>
+</div>
+
 </div>
 
 <script>
+// ---------- SHARED EXPAND/COLLAPSE ----------
+function toggleDetail(id){
+  const d = document.getElementById('detail-'+id);
+  const c = document.getElementById('chev-'+id);
+  if(!d) return;
+  const open = d.style.display !== 'none';
+  d.style.display = open ? 'none' : 'block';
+  if(c) c.textContent = open ? '▸ more' : '▾ less';
+}
+function expandAllEmails(){ document.querySelectorAll('.email-detail').forEach(d=>d.style.display='block'); document.querySelectorAll('.chev').forEach(c=>c.textContent='▾ less'); }
+function collapseAllEmails(){ document.querySelectorAll('.email-detail').forEach(d=>d.style.display='none'); document.querySelectorAll('.chev').forEach(c=>c.textContent='▸ more'); }
+
 // ---------- DATA ----------
+// HIGH: unresolved, in:inbox, no reply sent
 const highEmails = [
-  {subj:"Appraisals, Next Steps", from:"ben@allcrewingdc.com", date:"Jun 25", summary:"Ben confirmed July 13 @ 1:00pm for the mediation slot with Brian Hirsch — awaiting your reply to lock it in.", link:"https://mail.google.com/mail/u/0/#all/19ef4a8bdb050c4a", msgId:"19f010558281644a", starred:true, noreply:true},
-  {subj:"Fwd: Dr. Sethi Form (4th request)", from:"ben@allcrewingdc.com", date:"Jun 22", summary:"Fourth email from Ben asking for the signed ADHD medication form for Ella — needs to reach Sandy Hill.", link:"https://mail.google.com/mail/u/0/#all/19e9cf07a4756044", msgId:"19eef8c24df47256", starred:true, noreply:true},
-  {subj:"RE: Appraisal Request", from:"appraisals@cwealthappraisals.com (Tom Kirchner)", date:"Jul 1", summary:"Appraiser can't reach you by phone — asks you to call 571-223-0311 re: the home purchase appraisal.", link:"https://mail.google.com/mail/u/0/#all/19f1ecb7f02280d4", msgId:"19f1ed0057a30e1b", starred:false, noreply:true},
+  {subj:"Appraisals, Next Steps", from:"ben@allcrewingdc.com", date:"Jun 25", summary:"Ben confirmed July 13 @ 1:00pm for the mediation slot with Brian Hirsch — awaiting your reply to lock it in. No reply sent since.", link:"https://mail.google.com/mail/u/0/#all/19ef4a8bdb050c4a", id:"19ef4a8bdb050c4a", starred:true, noreply:true},
+  {subj:"Fwd: Dr. Sethi Form (4th request)", from:"ben@allcrewingdc.com", date:"Jun 22", summary:"Fourth email from Ben asking for the signed ADHD medication form for Ella — needs to reach Sandy Hill. No reply sent since.", link:"https://mail.google.com/mail/u/0/#all/19e9cf07a4756044", id:"19eef8c24df47256", starred:true, noreply:true},
 ];
+// MEDIUM: in:inbox, <=10 days old, actionable but not urgent-critical
 const mediumEmails = [
-  {subj:"Calleva Summer Camp — Bus Route Form", from:"registration@calleva.org", date:"Jul 2", summary:"Bus/drop-off form for Liam flagged incomplete; Ben replied \"This is done\" on Jul 3 — worth confirming it actually went through.", link:"https://mail.google.com/mail/u/0/#all/19f24369ef81f268", msgId:"19f24369ef81f268", starred:false},
-  {subj:"Ghazal, I'm still waiting for your response", from:"LinkedIn — Theo Papadopoulos (Engagement Manager)", date:"Jul 2", summary:"A recruiter/engagement manager is following up again — worth a reply given active job search.", link:"https://mail.google.com/mail/u/0/#all/19f22afd92cdc8cf", msgId:"19f22afd92cdc8cf", starred:false},
-  {subj:"Confidential: Ada — Separation Agreement", from:"judy.liang@ada.cx", date:"Jun 29", summary:"Severance confirmed: 3 equal installments plus bonus on the 4th scheduled payroll date. No action needed unless you have questions.", link:"https://mail.google.com/mail/u/0/#all/19f056c9602e4c81", msgId:"19f1578a525e75bd", starred:false},
-  {subj:"Re: Cobra Sign Up", from:"judy.liang@ada.cx", date:"Jun 30", summary:"Sterling will mail COBRA sign-up instructions; coverage retroactive to July 1.", link:"https://mail.google.com/mail/u/0/#all/19f162e6b3c4b5ee", msgId:"19f195e6b0965a60", starred:false},
+  {subj:"RE: Appraisal Request", from:"appraisals@cwealthappraisals.com (Tom Kirchner)", date:"Jul 5", summary:"Tom says the report won't be ready by Jul 13 after all. You already replied twice today offering a call — waiting on him to call back, nothing further needed from you right now.", link:"https://mail.google.com/mail/u/0/#all/19f1ecb7f02280d4", id:"19f3291e6ab25e91", starred:false},
+  {subj:"Ghazal, I'm still waiting for your response", from:"LinkedIn — Theo Papadopoulos (Engagement Manager)", date:"Jul 2", summary:"A recruiter/engagement manager is following up again — worth a reply given active job search.", link:"https://mail.google.com/mail/u/0/#all/19f22afd92cdc8cf", id:"19f22afd92cdc8cf", starred:false},
+  {subj:"Confidential: Ada — Separation Agreement", from:"judy.liang@ada.cx", date:"Jun 29", summary:"Severance confirmed: 3 equal installments plus bonus on the 4th scheduled payroll date. No action needed unless you have questions.", link:"https://mail.google.com/mail/u/0/#all/19f056c9602e4c81", id:"19f1578a525e75bd", starred:false},
+  {subj:"Re: Cobra Sign Up", from:"judy.liang@ada.cx", date:"Jun 30", summary:"Sterling will mail COBRA sign-up instructions; coverage retroactive to July 1.", link:"https://mail.google.com/mail/u/0/#all/19f162e6b3c4b5ee", id:"19f195e6b0965a60", starred:false},
+];
+// INFORMATIONAL: already resolved with a reply that reads as "done" — nothing to action, just file it
+const infoEmails = [
+  {subj:"Calleva Summer Camp — Bus Route Form", from:"registration@calleva.org / Ben", date:"Jul 2–3", summary:"Camp flagged Liam's bus/drop-off form as incomplete on Jul 2 — Ben replied \"This is done\" on Jul 3. Resolved, nothing further needed.", link:"https://mail.google.com/mail/u/0/#all/19f24369ef81f268", id:"19f24369ef81f268"},
+  {subj:"Virtual Parent Intake — L.M. (Ellie Zadeh)", from:"ellie@wisemindpsychotherapy.net", date:"Jun 19–22", summary:"Liam's virtual parent intake appointment for therapy took place Jun 22 as scheduled — worth knowing it happened, no action pending.", link:"https://mail.google.com/mail/u/0/#all/19ee10e577c2c9ac", id:"19ee10e577c2c9ac"},
 ];
 const socialEmails = [
-  {subj:"Field hockey camps in July and August", from:"mcleanfieldhockey@gmail.com", date:"Jul 4", status:"Informational", link:"https://mail.google.com/mail/u/0/#all/19f2e36f498819c8"},
+  {subj:"Field hockey camps in July and August", from:"mcleanfieldhockey@gmail.com", date:"Jul 4", status:"Informational", link:"https://mail.google.com/mail/u/0/#all/19f2e36f498819c8", id:"social1"},
 ];
 const grades = [
   {cls:"English 7 HN (S. Maldonado)", grade:"Not retrievable this run — flagged for Monday's full review", last:"Jun 12", link:"https://mail.google.com/mail/u/0/#all/19ebd7c15de2f07c"},
@@ -342,51 +401,56 @@ const newsPS = [
   {title:"A perfect storm is coming for legacy consulting firms", src:"Fast Company", date:"2026", link:"https://www.fastcompany.com/91528872/a-perfect-storm-is-coming-for-legacy-consulting-firms-management-consulting-ai-transformation-technology", take:"Clients now expect measurable ROI, not just decks and research — pressuring legacy firm margins."},
   {title:"The Year So Far: PS Industry Predictions at Mid-2026", src:"mcgowanprofessional.com", date:"2026", link:"https://mcgowanprofessional.com/the-year-so-far-understanding-how-professional-services-industry-predictions-and-trends-are-playing-out-halfway-through-2026/", take:"Checks 2026 predictions against reality at the halfway mark for professional services firms."},
 ];
+// TRASH: unread low-signal only (recipe/food newsletters excluded — those live in File tab now)
 const trashData = {
   "Promotions & Marketing":[
-    {subj:"Don't Miss Our Largest Sample Sale Yet", from:"shop@jadeswim.com", date:"Jul 5", reason:"deal", id:"19f31efbfe5204e7"},
-    {subj:"Don't Miss These Fourth of July Savings!", from:"hello@style.dillards.com", date:"Jul 4", reason:"deal", id:"19f2e636420396a2"},
-    {subj:"Happy July 4th from MYB!", from:"no-reply@ottosportmail.ai", date:"Jul 4", reason:"promo", id:"19f2d5b1595c61ed"},
-    {subj:"A Journey Into The Sacred Realms Of Healing", from:"info@thesacredscience.com", date:"Jul 2", reason:"promo", id:"19f226128e0bf3b7"},
-    {subj:"what's the plan, Ghazal", from:"douglas_fisher@franchiseopportunitieshub.com", date:"Jul 1", reason:"promo", id:"19f1eb306d63afc9"},
-    {subj:"Making Life More Affordable for America's Seniors", from:"Information@update.ssa.gov", date:"Jul 2", reason:"promo", id:"19f23bbfde9826da"},
-    {subj:"unimproved land in Madison", from:"bright@mtxmsg.brightmls.com", date:"Jul 2", reason:"promo", id:"19f2418bf17e4869"},
-    {subj:"New rental in McLean at $5,400/mo", from:"listings@redfin.com", date:"Jul 1", reason:"promo", id:"19f1e851dad3ba0f"},
-    {subj:"Helping Your Daughter Build Responsibility", from:"laura=thebravegirlproject.com@c.kajabimail.net", date:"Jul 5", reason:"promo", id:"19f31efe06025cb2"},
+    {subj:"Don't Miss Our Largest Sample Sale Yet", from:"shop@jadeswim.com", date:"Jul 5", reason:"deal", id:"19f31efbfe5204e7", snippet:"Styles priced $15-$60. Limited-time sample sale."},
+    {subj:"Don't Miss These Fourth of July Savings!", from:"hello@style.dillards.com", date:"Jul 4", reason:"deal", id:"19f2e636420396a2", snippet:"Save on women's shoes, dresses, handbags, men's sportswear."},
+    {subj:"Happy July 4th from MYB!", from:"no-reply@ottosportmail.ai", date:"Jul 4", reason:"promo", id:"19f2d5b1595c61ed", snippet:"Holiday greeting newsletter from MYB community."},
+    {subj:"A Journey Into The Sacred Realms Of Healing", from:"info@thesacredscience.com", date:"Jul 2", reason:"promo", id:"19f226128e0bf3b7", snippet:"Webinar follow-up marketing email."},
+    {subj:"what's the plan, Ghazal", from:"douglas_fisher@franchiseopportunitieshub.com", date:"Jul 1", reason:"promo", id:"19f1eb306d63afc9", snippet:"Unsolicited franchise ownership pitch."},
+    {subj:"Making Life More Affordable for America's Seniors", from:"Information@update.ssa.gov", date:"Jul 2", reason:"promo", id:"19f23bbfde9826da", snippet:"SSA promotional newsletter."},
+    {subj:"unimproved land in Madison", from:"bright@mtxmsg.brightmls.com", date:"Jul 2", reason:"promo", id:"19f2418bf17e4869", snippet:"Bright MLS property alert — land listing."},
+    {subj:"New rental in McLean at $5,400/mo", from:"listings@redfin.com", date:"Jul 1", reason:"promo", id:"19f1e851dad3ba0f", snippet:"Redfin rental alert."},
+    {subj:"Helping Your Daughter Build Responsibility", from:"laura=thebravegirlproject.com@c.kajabimail.net", date:"Jul 5", reason:"promo", id:"19f31efe06025cb2", snippet:"Parenting newsletter marketing email."},
   ],
   "Automated Notifications":[
-    {subj:"Thanks for using AutoPay — your bill is available", from:"Electronic_billingEB@domenergyvanceb.com", date:"Jul 3", reason:"auto", id:"19f27e5fa676c269"},
-    {subj:"Your new subscription", from:"no-reply@amazon.com", date:"Jun 30", reason:"auto", id:"19f1938cab7a6bd4"},
-    {subj:"Receipt from The Organic Butcher of McLean", from:"messenger@messaging.squareup.com", date:"Jun 29", reason:"auto", id:"19f154b404931342"},
-    {subj:"Reminder: Survey for SACC and Beyond the Bell Families", from:"member@surveymonkeyuser.com", date:"Jul 2", reason:"auto", id:"19f22eea49b25549"},
-    {subj:"Your tracked flight to San José is now $1,148", from:"noreply-travel@google.com", date:"Jul 2", reason:"auto", id:"19f232f71fe83fec"},
-    {subj:"Top suggestions for Ghazal", from:"info@members.netflix.com", date:"Jul 4", reason:"auto", id:"19f2ea4c76b1bfe7"},
-    {subj:"Order #515170 Confirmed", from:"hello@revisionskincare.com", date:"Apr 20", reason:"auto", id:"19dac5685bd79236"},
-    {subj:"Shipped! Your order 357464748", from:"crateandbarrel@mail.crateandbarrel.com", date:"Apr 7", reason:"auto", id:"19d68944db309360"},
-    {subj:"Your order 357464748 is confirmed!", from:"crateandbarrel@mail.crateandbarrel.com", date:"Apr 5", reason:"auto", id:"19d5efb8323d5201"},
-    {subj:"Your order #352318971 has been processed", from:"sales@t.revolve.com", date:"Mar 7", reason:"auto", id:"19cca3740369d36d"},
+    {subj:"Thanks for using AutoPay — your bill is available", from:"Electronic_billingEB@domenergyvanceb.com", date:"Jul 3", reason:"auto", id:"19f27e5fa676c269", snippet:"Dominion Energy AutoPay bill notification."},
+    {subj:"Your new subscription", from:"no-reply@amazon.com", date:"Jun 30", reason:"auto", id:"19f1938cab7a6bd4", snippet:"Amazon Subscribe & Save confirmation."},
+    {subj:"Receipt from The Organic Butcher of McLean", from:"messenger@messaging.squareup.com", date:"Jun 29", reason:"auto", id:"19f154b404931342", snippet:"Square receipt, $40.00."},
+    {subj:"Reminder: Survey for SACC and Beyond the Bell Families", from:"member@surveymonkeyuser.com", date:"Jul 2", reason:"auto", id:"19f22eea49b25549", snippet:"FCPS survey reminder."},
+    {subj:"Your tracked flight to San José is now $1,148", from:"noreply-travel@google.com", date:"Jul 2", reason:"auto", id:"19f232f71fe83fec", snippet:"Google Flights price alert."},
+    {subj:"Top suggestions for Ghazal", from:"info@members.netflix.com", date:"Jul 4", reason:"auto", id:"19f2ea4c76b1bfe7", snippet:"Netflix recommendation nudge."},
   ],
   "Newsletters & Digests":[
-    {subj:"Word of the Day: Truculent", from:"hello@worddaily.com", date:"Jul 5", reason:"digest", id:"19f31fbce28d342d"},
-    {subj:"The Week In Ideas", from:"info@nl.mail.washingtonpost.com", date:"Jul 5", reason:"digest", id:"19f31f8491e0b4fb"},
-    {subj:"Global Frequency — 5 July 2026", from:"globalfrequency1001@substack.com", date:"Jul 5", reason:"digest", id:"19f31f70cf357771"},
-    {subj:"The 7: Reflecting Pool vandalism, cannabis safety & more", from:"info@nl.mail.washingtonpost.com", date:"Jul 3", reason:"digest", id:"19f27a2ed918cc39"},
-    {subj:"FOLLOW UP: dogs locked in van", from:"no-reply@rs.email.nextdoor.com", date:"Jul 5", reason:"digest", id:"19f303951b6d74c9"},
-    {subj:"Teenager who disappeared in Potomac found dead", from:"reply@rs.email.nextdoor.com", date:"Jul 4", reason:"digest", id:"19f2e45c29b36f34"},
-    {subj:"Miso-peanut chicken", from:"email@newsletter.bonappetit.com", date:"Jul 4", reason:"digest", id:"19f2d002d326ae11"},
-    {subj:"A cookout menu that's as breezy as summer", from:"email@newsletter.bonappetit.com", date:"Jul 3", reason:"digest", id:"19f28be4dbe2224a"},
-    {subj:"Recipe: Easy Cherry Berry Pie", from:"coachelissa@substack.com", date:"Jul 3", reason:"digest", id:"19f28e09519cf5d8"},
-    {subj:"This July 4, we salute America the Barbecue", from:"email@newsletter.bonappetit.com", date:"Jul 3", reason:"digest", id:"19f27a2fce7e6c81"},
-    {subj:"Banana Pudding Cake & more", from:"email@newsletter.bonappetit.com", date:"Jul 2", reason:"digest", id:"19f24340b829a8a4"},
-    {subj:"25 easy weeknight dinners we're making in June", from:"email@newsletter.bonappetit.com", date:"Jun 5", reason:"digest", id:"19e999658ccde654"},
-    {subj:"The Morning: Look closely", from:"nytdirect@nytimes.com", date:"Jun 4", reason:"digest", id:"19e923b08443c5ce"},
-    {subj:"Knockout carrot sheet cake", from:"email@newsletter.bonappetit.com", date:"May 30", reason:"digest", id:"19e78c8ac5e5e7a4"},
-    {subj:"Miso chicken soba bowls", from:"email@newsletter.bonappetit.com", date:"May 25", reason:"digest", id:"19e5f029c3a7356a"},
-    {subj:"No-fail roast chicken with lemon and garlic", from:"email@newsletter.bonappetit.com", date:"May 20", reason:"digest", id:"19e45439207f214e"},
-    {subj:"Very good cheese boards for your next party", from:"email@newsletter.bonappetit.com", date:"May 19", reason:"digest", id:"19e401cbe73b2c27"},
-    {subj:"The Buffalo chicken dip I make for every party", from:"email@newsletter.bonappetit.com", date:"Jan 29", reason:"digest", id:"19c09d807737fd00"},
+    {subj:"Word of the Day: Truculent", from:"hello@worddaily.com", date:"Jul 5", reason:"digest", id:"19f31fbce28d342d", snippet:"Daily vocabulary newsletter."},
+    {subj:"The Week In Ideas", from:"info@nl.mail.washingtonpost.com", date:"Jul 5", reason:"digest", id:"19f31f8491e0b4fb", snippet:"WaPo weekly ideas digest."},
+    {subj:"Global Frequency — 5 July 2026", from:"globalfrequency1001@substack.com", date:"Jul 5", reason:"digest", id:"19f31f70cf357771", snippet:"Substack newsletter."},
+    {subj:"The 7: Reflecting Pool vandalism, cannabis safety & more", from:"info@nl.mail.washingtonpost.com", date:"Jul 3", reason:"digest", id:"19f27a2ed918cc39", snippet:"WaPo quick-digest newsletter."},
+    {subj:"FOLLOW UP: dogs locked in van", from:"no-reply@rs.email.nextdoor.com", date:"Jul 5", reason:"digest", id:"19f303951b6d74c9", snippet:"Nextdoor neighborhood digest."},
+    {subj:"Teenager who disappeared in Potomac found dead", from:"reply@rs.email.nextdoor.com", date:"Jul 4", reason:"digest", id:"19f2e45c29b36f34", snippet:"Nextdoor local news digest."},
   ],
 };
+// FILE — Recipes & food newsletters (moved out of Trash per rule)
+const fileRecipes = [
+  {subj:"Miso-peanut chicken", from:"email@newsletter.bonappetit.com", date:"Jul 4", id:"19f2d002d326ae11"},
+  {subj:"A cookout menu that's as breezy as summer", from:"email@newsletter.bonappetit.com", date:"Jul 3", id:"19f28be4dbe2224a"},
+  {subj:"Recipe: Easy Cherry Berry Pie", from:"coachelissa@substack.com", date:"Jul 3", id:"19f28e09519cf5d8"},
+  {subj:"This July 4, we salute America the Barbecue", from:"email@newsletter.bonappetit.com", date:"Jul 3", id:"19f27a2fce7e6c81"},
+  {subj:"Banana Pudding Cake & more", from:"email@newsletter.bonappetit.com", date:"Jul 2", id:"19f24340b829a8a4"},
+  {subj:"25 easy weeknight dinners we're making in June", from:"email@newsletter.bonappetit.com", date:"Jun 5", id:"19e999658ccde654"},
+  {subj:"Knockout carrot sheet cake", from:"email@newsletter.bonappetit.com", date:"May 30", id:"19e78c8ac5e5e7a4"},
+  {subj:"Miso chicken soba bowls", from:"email@newsletter.bonappetit.com", date:"May 25", id:"19e5f029c3a7356a"},
+  {subj:"No-fail roast chicken with lemon and garlic", from:"email@newsletter.bonappetit.com", date:"May 20", id:"19e45439207f214e"},
+  {subj:"Very good cheese boards for your next party", from:"email@newsletter.bonappetit.com", date:"May 19", id:"19e401cbe73b2c27"},
+  {subj:"The Buffalo chicken dip I make for every party", from:"email@newsletter.bonappetit.com", date:"Jan 29", id:"19c09d807737fd00"},
+];
+// FILE — Stale: 10+ days old, no longer relevant, and/or already replied
+const fileStale = [
+  {subj:"RE: Mediation Appt with Brian Hirsch", from:"ayeager@novafamilylaw.com", date:"Jun 12", id:"19ebc1598284deab", replied:true, note:"Superseded by the later \"Appraisals, Next Steps\" thread, which locked in Jul 13 @ 1pm. Nothing further to act on here."},
+  {subj:"4682 Sales Since 2014 !!", from:"ANorton@cbmove.com (Coldwell Banker)", date:"Jun 24", id:"19ef9d587a512340", replied:false, note:"Unsolicited realtor marketing email that landed in the inbox — not tied to your active appraisal/purchase search."},
+  {subj:"INFO (secure Hushmail message)", from:"info@speerprimarycare.com", date:"Apr 8", id:"19d6d72d3b6020b2", replied:false, note:"Secure-message notification — if this was ever going to be opened, it likely already would have been by now."},
+];
 
 // ---------- RENDER ----------
 function showTab(id){
@@ -398,6 +462,7 @@ function showTab(id){
 function showSub(id){
   document.querySelectorAll('.subtab-panel').forEach(s=>{if(s.id.startsWith('sub-'))s.classList.remove('active');});
   document.querySelectorAll('.subtab-btn[data-sub]').forEach(b=>b.classList.remove('active'));
+  if(id==='info'){ document.getElementById('infoCard').scrollIntoView({behavior:'smooth'}); return; }
   document.getElementById('sub-'+id).classList.add('active');
   document.querySelector('[data-sub="'+id+'"]').classList.add('active');
 }
@@ -422,11 +487,11 @@ function renderEmailList(container, list, highlight){
   container.innerHTML = list.map(e=>`
     <div class="email-item ${highlight?'high':''}">
       <div style="flex:1">
-        <div><a href="${e.link}" target="_blank">${e.subj}</a>${e.noreply?'<span class="noreply-badge">⚠️ No reply</span>':''}</div>
+        <div><a href="${e.link}" target="_blank">${e.subj}</a> <span class="chev" id="chev-${e.id}" onclick="toggleDetail('${e.id}')">▸ more</span>${e.noreply?'<span class="noreply-badge">⚠️ No reply</span>':''}</div>
         <div class="email-meta">${e.from} &middot; ${e.date}</div>
-        <div class="email-summary">${e.summary}</div>
+        <div class="email-detail" id="detail-${e.id}" style="display:none">${e.summary}</div>
       </div>
-      <button class="star-btn" data-msg-id="${e.msgId}" data-starred="${e.starred}" onclick="toggleStar(this)" title="${e.starred?'Unstar':'Star'} this email">${e.starred?'★':'☆'}</button>
+      <button class="star-btn" data-msg-id="${e.id}" data-starred="${e.starred}" onclick="toggleStar(this)" title="${e.starred?'Unstar':'Star'} this email">${e.starred?'★':'☆'}</button>
     </div>`).join('');
 }
 renderEmailList(document.getElementById('sub-high'), highEmails, true);
@@ -434,8 +499,9 @@ renderEmailList(document.getElementById('sub-medium'), mediumEmails, false);
 
 document.getElementById('sub-social').innerHTML = socialEmails.length ? socialEmails.map(e=>`
   <div class="email-item"><div style="flex:1">
-    <div><a href="${e.link}" target="_blank">${e.subj}</a></div>
+    <div><a href="${e.link}" target="_blank">${e.subj}</a> <span class="chev" onclick="toggleDetail('${e.id}')">▸ more</span></div>
     <div class="email-meta">${e.from} &middot; ${e.date} &middot; ${e.status}</div>
+    <div class="email-detail" id="detail-${e.id}" style="display:none">Community/personal email — no action required.</div>
   </div></div>`).join('') : '<div class="empty-state">No items in this category today.</div>';
 
 document.getElementById('sub-school').innerHTML = `
@@ -444,12 +510,47 @@ document.getElementById('sub-school').innerHTML = `
   ${grades.map(g=>`<tr><td>${g.cls}</td><td>${g.grade==='A'?'<b>A</b>':g.grade}</td><td>${g.last}</td><td><a href="${g.link}" target="_blank" style="color:var(--accent);">Open ↗</a></td></tr>`).join('')}
   </tbody></table>`;
 
-// Action Flags (Home)
+// Informational card
+function renderInfoCard(){
+  const card = document.getElementById('infoCard');
+  let html = `<h3><span class="icon">ℹ️</span> INFORMATIONAL — already handled (${infoEmails.length})</h3>
+  <p class="muted">These looked like High/Medium priority, but someone already replied that it's done — e.g. Ben confirming a camp form is taken care of. Nothing to action; just pick where each one should move and click Move.</p>`;
+  if(!infoEmails.length){
+    html += `<div class="empty-state">Nothing already-handled to file away right now.</div>`;
+  } else {
+    html += infoEmails.map(e=>`
+      <div class="info-row">
+        <div style="flex:1">
+          <div><a href="${e.link}" target="_blank">${e.subj}</a> <span class="chev" onclick="toggleDetail('${e.id}')">▸ more</span></div>
+          <div class="email-meta">${e.from} &middot; ${e.date}</div>
+          <div class="email-detail" id="detail-${e.id}" style="display:none">${e.summary}</div>
+        </div>
+        <select id="inforoute-${e.id}">
+          <option value="" selected disabled>Move to…</option>
+          <option value="ARCHIVE">Archive</option>
+          <option value="TRASH">Trash</option>
+        </select>
+        <button onclick="routeInformational('${e.id}')" style="border:1px solid var(--border);background:#fff;border-radius:6px;padding:6px 12px;font-size:12px;font-weight:600;cursor:pointer;">Move</button>
+      </div>`).join('');
+  }
+  card.innerHTML = html;
+}
+renderInfoCard();
+function routeInformational(threadId){
+  const sel = document.getElementById('inforoute-'+threadId);
+  const dest = sel.value;
+  if(!dest){ alert('Pick a destination first.'); return; }
+  const action = dest === 'TRASH' ? 'Move Gmail thread ' + threadId + ' to trash'
+    : dest === 'ARCHIVE' ? 'Archive Gmail thread ' + threadId + ' (remove INBOX label)'
+    : 'Apply Gmail label "' + dest + '" to thread ' + threadId + ' and archive it out of the inbox';
+  sendPrompt(action + ' via Gmail MCP.');
+}
+
+// Action Flags (Home) — excludes anything now in Informational
 const actionFlags = [
   {tag:"EMAIL",cls:"",html:`<a href="https://mail.google.com/mail/u/0/#all/19ef4a8bdb050c4a" target="_blank">Appraisals, Next Steps</a> — Ben awaiting your confirmation on the July 13 @ 1:00pm mediation slot, no reply sent since Jun 25.`},
   {tag:"EMAIL",cls:"",html:`<a href="https://mail.google.com/mail/u/0/#all/19e9cf07a4756044" target="_blank">Dr. Sethi Form</a> — Ben's 4th request for Ella's ADHD medication form signature, no reply sent since Jun 22.`},
-  {tag:"EMAIL",cls:"",html:`<a href="https://mail.google.com/mail/u/0/#all/19f1ecb7f02280d4" target="_blank">Appraisal Request</a> — Tom Kirchner asking you to call 571-223-0311 re: home purchase appraisal (Jul 1).`},
-  {tag:"EMAIL",cls:"",html:`<a href="https://mail.google.com/mail/u/0/#all/19f24369ef81f268" target="_blank">Calleva Bus Route Form</a> — flagged incomplete for Liam; Ben says "done" Jul 3 — worth verifying.`},
+  {tag:"EMAIL",cls:"",html:`<a href="https://mail.google.com/mail/u/0/#all/19f1ecb7f02280d4" target="_blank">Appraisal Request</a> — Tom Kirchner says the report won't be ready by Jul 13; you offered a call today, waiting on him.`},
   {tag:"EMAIL",cls:"",html:`<a href="https://mail.google.com/mail/u/0/#all/19f22afd92cdc8cf" target="_blank">LinkedIn — Theo Papadopoulos</a> still waiting on your response (Jul 2).`},
   {tag:"OVERDUE TASK",cls:"overdue",html:`<a href="javascript:showTab('todoist')">Will / trust</a> — due today, P1.`},
   {tag:"OVERDUE TASK",cls:"overdue",html:`<a href="javascript:showTab('todoist')">G Appraisal finalized</a> — overdue since Jul 1, P1.`},
@@ -468,7 +569,7 @@ const insights = [
   {type:"watch",label:"🟡 Watch",title:"Ella's ADHD medication form unresolved",body:`Ben has emailed four times since Jun 12 about the Dr. Sethi signature needed before Ella can take her medication (<a href="https://mail.google.com/mail/u/0/#all/19e9cf07a4756044" target="_blank">link</a>), with no reply visible in Sent mail. Worth resolving before camp/travel needs it.`},
   {type:"pattern",label:"🔵 Pattern",title:"Todoist backlog has calcified",body:`28 P1 tasks are overdue, almost all dated Jul 1 — four days stale. Suggests the list isn't getting triaged daily rather than a true one-off backlog.`},
   {type:"opp",label:"🟢 Opportunity",title:"Two live job-search threads",body:`Granola notes from the Jun 28 Cindy Wallace call flag a job lead expected mid-August via a trusted contact, and LinkedIn's Theo Papadopoulos is still waiting on a reply from Jul 2 (<a href="https://mail.google.com/mail/u/0/#all/19f22afd92cdc8cf" target="_blank">link</a>). With the Ada severance now finalized, this is a good moment to re-engage both.`},
-  {type:"pattern",label:"🔵 Pattern",title:"Parallel house-hunting activity",body:`A new appraiser contact (Tom Kirchner) is asking for a callback (<a href="https://mail.google.com/mail/u/0/#all/19f1ecb7f02280d4" target="_blank">link</a>) alongside fresh Redfin/Bright MLS alerts this week — the land/home search is active and the appraisal callback is time-sensitive.`},
+  {type:"pattern",label:"🔵 Pattern",title:"Home appraisal timeline slipping",body:`Tom Kirchner now says his report won't be ready by Jul 13 after all (<a href="https://mail.google.com/mail/u/0/#all/19f1ecb7f02280d4" target="_blank">link</a>) — worth flagging if that date matters for financing or an offer deadline.`},
 ];
 document.getElementById('insights').innerHTML = insights.map(i=>`
   <div class="insight-card ${i.type}"><div class="insight-label">${i.label}</div><div class="insight-title">${i.title}</div><div>${i.body}</div></div>`).join('');
@@ -599,8 +700,9 @@ function renderTrash(){
       <div class="trash-item" onclick="trashToggle(this, event)">
         <input type="checkbox" class="trash-check" data-msg-id="${e.id}" checked onclick="event.stopPropagation();updateTrashCount();">
         <div class="trash-item-body">
-          <div class="trash-item-subject">${e.subj}</div>
+          <div class="trash-item-subject">${e.subj} <span class="chev" onclick="event.stopPropagation();toggleDetail('${e.id}')">▸ more</span></div>
           <div class="trash-item-meta"><span>${e.from}</span><span>${e.date}</span><span>Unread</span></div>
+          <div class="email-detail" id="detail-${e.id}" style="display:none">${e.snippet}</div>
         </div>
         <span class="trash-reason ${e.reason}">${e.reason.charAt(0).toUpperCase()+e.reason.slice(1)}</span>
       </div>`).join('')}
@@ -628,6 +730,64 @@ function sendToTrash(){
   sendPrompt('Move these Gmail message IDs to trash via Gmail MCP: ' + JSON.stringify(ids));
 }
 renderTrash();
+
+// File tab
+function renderFile(){
+  let html = '';
+  html += `<div class="file-group" data-group="recipes">
+    <h3>🍽️ Recipes &amp; food newsletters (${fileRecipes.length})</h3>
+    <div class="grouphint">Recipe/food newsletters never go to Trash — file them here instead. Defaults to your "Personal Gmail/Recipes" label.</div>
+    ${fileRecipes.map(e=>`
+      <div class="file-row">
+        <input type="checkbox" class="file-check" data-group="recipes" data-id="${e.id}" checked>
+        <div style="flex:1">
+          <div class="subj">${e.subj} <span class="chev" onclick="toggleDetail('${e.id}')">▸ more</span></div>
+          <div class="meta">${e.from} &middot; ${e.date}</div>
+          <div class="email-detail" id="detail-${e.id}" style="display:none">Food/recipe newsletter — filed under Recipes, not deleted.</div>
+        </div>
+      </div>`).join('')}
+    <div class="file-actions">
+      <select id="dest-recipes"><option value="Personal Gmail/Recipes" selected>Personal Gmail/Recipes</option><option value="ARCHIVE">Archive (no label)</option><option value="TRASH">🗑️ Trash</option></select>
+      <button onclick="fileGroup('recipes')" style="border:1px solid var(--border);background:#fff;border-radius:6px;padding:7px 14px;font-size:12.5px;font-weight:600;cursor:pointer;">Move checked →</button>
+    </div>
+  </div>`;
+
+  html += `<div class="file-group" data-group="stale">
+    <h3>🕓 Stale — no longer relevant (${fileStale.length})</h3>
+    <div class="grouphint">These are 10+ days old and haven't been acted on, or already show a reply resolving them — likely stale because the date has passed and/or it's already handled. Pick Trash or a folder for each.</div>
+    ${fileStale.map(e=>`
+      <div class="file-row">
+        <input type="checkbox" class="file-check" data-group="stale" data-id="${e.id}" checked>
+        <div style="flex:1">
+          <div class="subj">${e.subj}${e.replied?'<span class="replied-pill">already replied</span>':''} <span class="chev" onclick="toggleDetail('${e.id}')">▸ more</span></div>
+          <div class="meta">${e.from} &middot; ${e.date}</div>
+          <div class="email-detail" id="detail-${e.id}" style="display:none">${e.note}</div>
+        </div>
+      </div>`).join('')}
+    <div class="file-actions">
+      <select id="dest-stale"><option value="" selected disabled>Choose…</option><option value="ARCHIVE">Archive (no label)</option><option value="TRASH">🗑️ Trash</option></select>
+      <button onclick="fileGroup('stale')" style="border:1px solid var(--border);background:#fff;border-radius:6px;padding:7px 14px;font-size:12.5px;font-weight:600;cursor:pointer;">Move checked →</button>
+    </div>
+  </div>`;
+
+  document.getElementById('fileGroups').innerHTML = html;
+}
+renderFile();
+function fileGroup(groupId){
+  const ids = [];
+  document.querySelectorAll(`.file-check[data-group="${groupId}"]:checked`).forEach(cb => ids.push(cb.dataset.id));
+  if(!ids.length){ alert('Nothing checked in this group.'); return; }
+  const sel = document.getElementById('dest-'+groupId);
+  const dest = sel.value;
+  if(!dest){ alert('Pick a destination first.'); return; }
+  if(dest === 'TRASH'){
+    sendPrompt('Move these Gmail thread IDs to trash via Gmail MCP: ' + JSON.stringify(ids));
+  } else if(dest === 'ARCHIVE'){
+    sendPrompt('Archive these Gmail thread IDs (remove INBOX label) via Gmail MCP: ' + JSON.stringify(ids));
+  } else {
+    sendPrompt('Apply the Gmail label "' + dest + '" to these thread IDs and archive them out of the inbox via Gmail MCP: ' + JSON.stringify(ids));
+  }
+}
 </script>
 </body>
 </html>
