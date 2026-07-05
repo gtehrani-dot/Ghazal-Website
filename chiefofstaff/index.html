@@ -2,601 +2,393 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>Morning Briefing — Ghazal Moore — Jun 29, 2026</title>
+<title>Ghazal's Morning Briefing</title>
 <style>
 :root{
-  --accent:#5b6472; --amber:#b8863f; --red:#b8554f; --green:#5f9272;
-  --bg:#f6f6f5; --card:#ffffff; --border:#e3e3e1; --text:#2b2d33; --muted:#7a7d85;
+  --bg:#f5f6f8; --card:#ffffff; --accent:#4A6FA5; --amber:#F59E0B; --red:#EF4444; --green:#10B981;
+  --border:#e5e7eb; --text:#1f2937; --muted:#6b7280;
 }
 *{box-sizing:border-box;}
-body{margin:0;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;background:var(--bg);color:var(--text);}
-header{position:sticky;top:0;z-index:20;background:#fff;border-bottom:1px solid var(--border);padding:14px 24px;}
-header .hwrap{max-width:1240px;margin:0 auto;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:6px;}
-header h1{font-size:18px;margin:0;}
-header .sub{font-size:12px;color:var(--muted);}
-nav{position:sticky;top:57px;z-index:19;background:#fff;border-bottom:1px solid var(--border);overflow-x:auto;}
-nav .nwrap{max-width:1240px;margin:0 auto;display:flex;gap:4px;padding:0 24px;}
-.tab-btn{border:none;background:none;padding:12px 14px;font-size:14px;cursor:pointer;color:var(--muted);border-bottom:3px solid transparent;white-space:nowrap;position:relative;}
-.tab-btn.active{color:var(--accent);border-bottom-color:var(--accent);font-weight:600;}
-.tab-btn .badge{display:inline-block;margin-left:5px;font-size:10.5px;padding:1px 6px;border-radius:10px;background:#eceeef;color:var(--muted);font-weight:600;}
-.badge-red{color:var(--red);} .badge-blue{color:var(--accent);} .badge-amber{color:var(--amber);}
-main{max-width:1240px;margin:0 auto;padding:20px 24px 60px;}
-.tab-section{display:none;}
+body{margin:0;background:var(--bg);color:var(--text);font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;}
+.wrap{max-width:1240px;margin:0 auto;padding:0 20px 60px;}
+header.top{background:#fff;border-bottom:1px solid var(--border);padding:14px 20px;display:flex;justify-content:space-between;align-items:center;}
+header.top h1{font-size:18px;margin:0;}
+header.top .sub{color:var(--muted);font-size:13px;}
+.tabbar{position:sticky;top:0;background:#fff;border-bottom:1px solid var(--border);z-index:50;display:flex;gap:4px;overflow-x:auto;}
+.tab-btn{border:none;background:none;padding:14px 18px;font-size:14px;font-weight:600;color:var(--muted);cursor:pointer;border-bottom:3px solid transparent;white-space:nowrap;position:relative;}
+.tab-btn.active{color:var(--accent);border-bottom-color:var(--accent);}
+.badge{display:inline-block;min-width:16px;padding:1px 5px;border-radius:8px;font-size:10px;font-weight:700;color:#fff;margin-left:5px;vertical-align:middle;}
+.badge.red{background:var(--red);} .badge.blue{background:var(--accent);} .badge.amber{background:var(--amber);}
+.tab-section{display:none;padding-top:20px;}
 .tab-section.active{display:block;}
-.card{background:var(--card);border-radius:8px;box-shadow:0 1px 3px rgba(0,0,0,.08);padding:16px 20px;margin-bottom:16px;}
-.grid2{display:grid;grid-template-columns:1fr 1fr;gap:16px;}
-@media(max-width:860px){.grid2{grid-template-columns:1fr;}}
-h2{font-size:16px;margin:0 0 12px;}
-h3{font-size:14px;margin:0 0 8px;}
-a{color:var(--accent);text-decoration:none;}
-a:hover{text-decoration:underline;}
-.weather-card{background:linear-gradient(135deg,#5b6472,#80868f);color:#fff;border-radius:8px;padding:20px 24px;margin-bottom:16px;display:flex;align-items:center;gap:20px;flex-wrap:wrap;box-shadow:0 1px 3px rgba(0,0,0,.08);}
-.weather-icon{font-size:42px;}
-.weather-temp{font-size:32px;font-weight:700;}
-.weather-meta{font-size:13px;opacity:.92;}
-.pills{display:flex;gap:12px;flex-wrap:wrap;margin-bottom:16px;}
-.pill{background:#fff;border-radius:8px;box-shadow:0 1px 3px rgba(0,0,0,.08);padding:10px 16px;cursor:pointer;display:flex;align-items:center;gap:8px;font-size:13px;border:none;}
-.pill b{font-size:16px;}
-.pill .red{color:var(--red);}
-.flag-line{padding:8px 0;border-bottom:1px solid var(--border);font-size:13px;}
-.flag-line:last-child{border-bottom:none;}
-.flag-tag{display:inline-block;font-size:10px;font-weight:700;padding:2px 6px;border-radius:4px;margin-right:6px;color:#fff;letter-spacing:.3px;}
-.tag-email{background:var(--accent);} .tag-task{background:var(--red);} .tag-cal{background:var(--green);} .tag-conflict{background:var(--amber);}
-.insight{border-left:4px solid var(--border);padding:8px 12px;margin-bottom:10px;border-radius:0 6px 6px 0;background:#fafbfd;}
-.insight.risk{border-color:var(--red);} .insight.watch{border-color:var(--amber);} .insight.pattern{border-color:var(--accent);} .insight.opp{border-color:var(--green);}
-.insight .ititle{font-weight:600;font-size:13px;margin-bottom:3px;}
-.insight .ibody{font-size:12.5px;color:#444;}
-.subtabs{display:flex;gap:6px;margin-bottom:14px;flex-wrap:wrap;}
-.subtab-btn{border:1px solid var(--border);background:#fff;padding:6px 12px;border-radius:20px;font-size:12.5px;cursor:pointer;color:var(--muted);}
+.card{background:var(--card);border-radius:8px;box-shadow:0 1px 3px rgba(0,0,0,.08);padding:16px 20px;margin-bottom:14px;}
+.grid2{display:grid;grid-template-columns:1.05fr .95fr;gap:20px;}
+@media(max-width:900px){.grid2{grid-template-columns:1fr;}}
+.weather-strip{background:linear-gradient(135deg,#4A6FA5,#6b8cc4);color:#fff;border-radius:8px;padding:20px 24px;margin-bottom:18px;display:flex;align-items:center;gap:20px;flex-wrap:wrap;}
+.weather-strip .temp{font-size:40px;font-weight:700;}
+.weather-strip .cond{font-size:15px;opacity:.95;}
+.alert-banner{background:#fee2e2;border:1px solid var(--red);color:#7f1d1d;border-radius:8px;padding:12px 16px;margin-bottom:14px;font-size:14px;font-weight:600;}
+.pills{display:flex;gap:12px;margin-bottom:20px;flex-wrap:wrap;}
+.pill{background:#fff;border:1px solid var(--border);border-radius:20px;padding:8px 16px;font-size:13px;font-weight:600;cursor:pointer;box-shadow:0 1px 3px rgba(0,0,0,.06);}
+.pill:hover{border-color:var(--accent);}
+.pill .n{color:var(--red);}
+h2.col-title{font-size:15px;margin:0 0 12px;color:var(--text);}
+.flag-row{display:flex;gap:10px;padding:10px 0;border-bottom:1px solid var(--border);font-size:13.5px;}
+.flag-row:last-child{border-bottom:none;}
+.flag-tag{flex-shrink:0;font-size:10px;font-weight:700;padding:2px 6px;border-radius:4px;background:#eef1f6;color:var(--accent);height:fit-content;}
+.flag-tag.overdue{background:#fee2e2;color:var(--red);}
+.flag-tag.cal{background:#fef3c7;color:#92400e;}
+.flag-body a{color:var(--accent);text-decoration:none;font-weight:600;}
+.flag-body a:hover{text-decoration:underline;}
+.flag-meta{color:var(--muted);font-size:12px;margin-top:2px;}
+.insight-card{border-radius:8px;padding:14px 16px;margin-bottom:12px;border-left:4px solid;font-size:13.5px;}
+.insight-card.risk{border-color:var(--red);background:#fef2f2;}
+.insight-card.watch{border-color:var(--amber);background:#fffbeb;}
+.insight-card.pattern{border-color:var(--accent);background:#eff4fb;}
+.insight-card.opp{border-color:var(--green);background:#ecfdf5;}
+.insight-label{font-weight:700;font-size:11px;text-transform:uppercase;letter-spacing:.03em;margin-bottom:4px;}
+.insight-title{font-weight:700;margin-bottom:4px;}
+.insight-card a{color:var(--accent);}
+.subtabs{display:flex;gap:6px;margin-bottom:16px;flex-wrap:wrap;}
+.subtab-btn{border:1px solid var(--border);background:#fff;border-radius:20px;padding:6px 14px;font-size:13px;font-weight:600;cursor:pointer;color:var(--muted);}
 .subtab-btn.active{background:var(--accent);color:#fff;border-color:var(--accent);}
-.sub-section{display:none;} .sub-section.active{display:block;}
-.email-item{padding:10px 0;border-bottom:1px solid var(--border);font-size:13px;}
+.subtab-panel{display:none;}
+.subtab-panel.active{display:block;}
+.email-item{display:flex;gap:10px;align-items:flex-start;padding:12px 0;border-bottom:1px solid var(--border);font-size:13.5px;}
 .email-item:last-child{border-bottom:none;}
 .email-item.high{border-left:3px solid var(--amber);padding-left:10px;}
-.email-meta{color:var(--muted);font-size:12px;margin:2px 0;}
-.email-summary{font-size:12.5px;color:#444;}
-.noreply{color:var(--red);font-size:11px;font-weight:600;}
-.star-btn{background:none;border:none;font-size:16px;cursor:pointer;color:#ccc;}
-.star-btn.starred{color:var(--amber);}
+.email-item a{color:var(--accent);text-decoration:none;font-weight:600;}
+.email-meta{color:var(--muted);font-size:12px;margin-top:2px;}
+.email-summary{margin-top:4px;color:#374151;}
+.noreply-badge{color:var(--red);font-size:11px;font-weight:700;margin-left:6px;}
+.star-btn{border:none;background:none;font-size:18px;cursor:pointer;color:var(--amber);flex-shrink:0;}
+.empty-state{color:var(--muted);font-size:13.5px;padding:20px 0;text-align:center;}
 table{width:100%;border-collapse:collapse;font-size:13px;}
-table th{text-align:left;color:var(--muted);font-weight:600;font-size:11.5px;text-transform:uppercase;padding:6px 8px;border-bottom:1px solid var(--border);}
-table td{padding:8px;border-bottom:1px solid var(--border);vertical-align:top;}
-.empty-state{color:var(--muted);font-size:13px;padding:16px 0;}
-.refresh-btn{font-size:12px;background:#fff;border:1px solid var(--border);border-radius:6px;padding:6px 12px;cursor:pointer;color:var(--accent);margin-top:8px;}
-.cal-event{padding:8px 0;border-bottom:1px solid var(--border);font-size:13px;}
-.cal-event:last-child{border-bottom:none;}
-.cal-time{color:var(--muted);font-size:12px;}
-.warnbadge{display:inline-block;font-size:10px;background:var(--red);color:#fff;border-radius:4px;padding:1px 5px;margin-left:5px;}
-.grade-low{color:var(--red);font-weight:600;}
-/* Todoist */
-.todoist-grid{display:grid;grid-template-columns:1fr 1fr;gap:0;border-radius:8px;overflow:hidden;box-shadow:0 1px 3px rgba(0,0,0,.08);}
-@media(max-width:860px){.todoist-grid{grid-template-columns:1fr;}}
-.todoist-col{background:#fff;padding:16px 18px;}
-.todoist-col.right{background:#fafbfd;border-left:1px solid var(--border);}
-.col-head{display:flex;justify-content:space-between;align-items:center;margin-bottom:10px;}
-.count-badge{background:var(--accent);color:#fff;font-size:11px;border-radius:10px;padding:2px 8px;}
-.task-card{display:flex;gap:8px;align-items:flex-start;padding:10px 8px;border-radius:6px;margin-bottom:8px;border-left:3px solid var(--border);background:#fff;}
-.task-fields{flex:1;display:flex;flex-direction:column;gap:4px;}
-.task-title{border:none;font-size:13px;font-weight:500;background:transparent;width:100%;padding:2px 0;}
-.task-row{display:flex;gap:6px;align-items:center;font-size:11.5px;}
-.task-row select,.task-row input[type=date]{font-size:11.5px;border:1px solid var(--border);border-radius:4px;padding:2px 4px;}
-.task-footer{display:flex;gap:8px;font-size:11.5px;align-items:center;margin-top:2px;}
-.overdue-badge{background:#eceeef;color:#5b5f66;border-radius:4px;padding:1px 6px;font-size:10.5px;font-weight:600;}
-.today-badge{background:#eceeef;color:var(--accent);border-radius:4px;padding:1px 6px;font-size:10.5px;font-weight:600;}
-.done-btn{background:none;border:1px solid var(--green);color:var(--green);border-radius:4px;font-size:11px;padding:1px 6px;cursor:pointer;}
-.proj-label{color:var(--muted);font-size:11px;}
-.proj-unset{color:var(--amber);}
-.action-bar{margin-top:10px;}
-.action-btn{background:var(--accent);color:#fff;border:none;border-radius:6px;padding:8px 14px;font-size:12.5px;cursor:pointer;}
-.banner-red{background:#fef2f2;border:1px solid var(--red);color:#991b1b;padding:10px 14px;border-radius:6px;font-size:13px;margin-bottom:14px;}
-.source-link{font-size:11px;color:var(--muted);margin-top:4px;}
-/* Trash */
-.trash-toolbar{position:sticky;top:114px;background:#fff;border:1px solid var(--border);border-radius:8px;padding:10px 16px;display:flex;justify-content:space-between;align-items:center;margin-bottom:14px;font-size:13px;flex-wrap:wrap;gap:8px;z-index:5;}
-.trash-toolbar button{font-size:12px;border-radius:6px;padding:6px 12px;cursor:pointer;border:1px solid var(--border);background:#fff;}
-.trash-send{background:var(--red)!important;color:#fff!important;border:none!important;}
-.trash-send:disabled{background:#fca5a5!important;cursor:not-allowed;}
-.trash-group h3{margin-top:18px;}
-.trash-item{display:flex;align-items:center;gap:10px;padding:8px 0;border-bottom:1px solid var(--border);cursor:pointer;font-size:13px;}
-.trash-item:last-child{border-bottom:none;}
-.trash-item.deselected{opacity:.4;text-decoration:line-through;}
+th{text-align:left;color:var(--muted);font-size:11px;text-transform:uppercase;letter-spacing:.03em;padding:6px 8px;border-bottom:2px solid var(--border);}
+td{padding:8px;border-bottom:1px solid var(--border);vertical-align:top;}
+.grade-flag{color:var(--red);font-weight:700;}
+.refresh-btn{border:1px solid var(--border);background:#fff;border-radius:6px;padding:6px 12px;font-size:12px;font-weight:600;cursor:pointer;color:var(--accent);float:right;}
+.section-head{display:flex;justify-content:space-between;align-items:center;margin-bottom:12px;}
+.event-card{border-bottom:1px solid var(--border);padding:12px 0;font-size:13.5px;}
+.event-card:last-child{border-bottom:none;}
+.event-time{font-weight:700;color:var(--accent);font-size:12px;}
+.event-card a{color:var(--text);text-decoration:none;font-weight:600;}
+.newcontact{color:var(--muted);font-style:italic;font-size:12.5px;}
+.newsgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:14px;}
+.news-card{background:#fff;border-radius:8px;box-shadow:0 1px 3px rgba(0,0,0,.08);padding:14px 16px;font-size:13px;}
+.news-card a{color:var(--accent);text-decoration:none;font-weight:700;display:block;margin-bottom:4px;}
+.news-meta{color:var(--muted);font-size:11.5px;margin-bottom:6px;}
+.todoist-wrap{display:grid;grid-template-columns:1fr 1fr;gap:0;background:#fff;border-radius:8px;overflow:hidden;box-shadow:0 1px 3px rgba(0,0,0,.08);}
+@media(max-width:900px){.todoist-wrap{grid-template-columns:1fr;}}
+.td-col{padding:18px 20px;}
+.td-col.right{background:#fafbfd;}
+.td-task{display:flex;gap:8px;align-items:flex-start;padding:10px 0;border-bottom:1px solid var(--border);position:relative;}
+.td-task:last-child{border-bottom:none;}
+.stripe{width:4px;align-self:stretch;border-radius:2px;flex-shrink:0;}
+.stripe.p1{background:var(--red);} .stripe.p2{background:var(--amber);} .stripe.p3{background:#fde68a;} .stripe.p4{background:#d1d5db;}
+.td-content{flex:1;font-size:13px;}
+.td-title{font-weight:600;border:none;background:none;width:100%;font-size:13.5px;color:var(--text);padding:2px 0;}
+.td-row2{display:flex;gap:6px;margin-top:4px;flex-wrap:wrap;align-items:center;}
+select,input[type=date]{font-size:11.5px;border:1px solid var(--border);border-radius:4px;padding:3px 5px;background:#fff;}
+.proj-tag{font-size:10.5px;background:#eef1f6;color:var(--accent);padding:2px 6px;border-radius:4px;}
+.proj-tag.unset{background:#fef3c7;color:#92400e;}
+.overdue-badge{font-size:10.5px;font-weight:700;color:var(--red);background:#fee2e2;padding:1px 6px;border-radius:4px;}
+.today-badge{font-size:10.5px;font-weight:700;color:var(--accent);background:#eef1f6;padding:1px 6px;border-radius:4px;}
+.done-btn{border:none;background:var(--green);color:#fff;font-size:11px;font-weight:700;border-radius:4px;padding:3px 8px;cursor:pointer;}
+.push-btn{background:var(--accent);color:#fff;border:none;border-radius:6px;padding:9px 18px;font-size:13px;font-weight:700;cursor:pointer;margin-top:14px;}
+.count-line{color:var(--muted);font-size:12px;margin-bottom:4px;}
+.trash-toolbar{display:flex;justify-content:space-between;align-items:center;background:#fff;border-radius:8px;padding:12px 18px;margin-bottom:14px;box-shadow:0 1px 3px rgba(0,0,0,.08);flex-wrap:wrap;gap:10px;}
+.trash-toolbar button{border:1px solid var(--border);background:#fff;border-radius:6px;padding:6px 12px;font-size:12.5px;font-weight:600;cursor:pointer;}
+#sendTrashBtn{background:var(--red);color:#fff;border-color:var(--red);}
+#sendTrashBtn:disabled{background:#fca5a5;border-color:#fca5a5;cursor:not-allowed;}
+.trash-group h3{font-size:13px;color:var(--muted);text-transform:uppercase;letter-spacing:.03em;margin:20px 0 8px;}
+.trash-item{display:flex;align-items:center;gap:10px;background:#fff;border-radius:6px;padding:10px 14px;margin-bottom:6px;box-shadow:0 1px 2px rgba(0,0,0,.05);cursor:pointer;}
+.trash-item.deselected{opacity:.45;text-decoration:line-through;}
 .trash-item-body{flex:1;}
-.trash-item-subject{font-weight:500;}
-.trash-item-meta{color:var(--muted);font-size:11.5px;display:flex;gap:10px;}
-.trash-reason{font-size:10px;font-weight:700;border-radius:4px;padding:2px 6px;color:#fff;}
-.trash-reason.promo{background:#8b8d93;} .trash-reason.auto{background:#787b82;} .trash-reason.digest{background:#9a9c9f;} .trash-reason.deal{background:#6e7178;}
-footer{text-align:center;color:var(--muted);font-size:11px;padding:20px;}
+.trash-item-subject{font-size:13px;font-weight:600;}
+.trash-item-meta{font-size:11.5px;color:var(--muted);display:flex;gap:10px;margin-top:2px;}
+.trash-reason{font-size:10px;font-weight:700;padding:2px 7px;border-radius:4px;}
+.trash-reason.promo{background:#fee2e2;color:#7f1d1d;}
+.trash-reason.auto{background:#e0e7ff;color:#3730a3;}
+.trash-reason.digest{background:#fef3c7;color:#92400e;}
+.trash-reason.deal{background:#fce7f3;color:#9d174d;}
+.errcard{background:#fee2e2;border:1px solid var(--red);color:#7f1d1d;border-radius:8px;padding:14px;margin-bottom:14px;font-size:13.5px;}
 </style>
 </head>
 <body>
-
-<header>
-  <div class="hwrap">
-    <h1>🏠 Morning Briefing — Ghazal Moore</h1>
-    <div class="sub">Monday, June 29, 2026 · Last updated 9:15 AM ET</div>
+<header class="top">
+  <div>
+    <h1>Good morning, Ghazal</h1>
+    <div class="sub">Sunday, July 5, 2026 &middot; McLean, VA</div>
   </div>
 </header>
 
-<nav>
-  <div class="nwrap">
-    <button class="tab-btn active" data-tab="home" onclick="showTab('home')">🏠 Home</button>
-    <button class="tab-btn" data-tab="inbox" onclick="showTab('inbox')">📬 Inbox <span class="badge badge-red">3</span></button>
-    <button class="tab-btn" data-tab="calendar" onclick="showTab('calendar')">📅 Calendar <span class="badge badge-amber">1</span></button>
-    <button class="tab-btn" data-tab="todoist" onclick="showTab('todoist')">✅ Todoist <span class="badge badge-red">34</span></button>
-    <button class="tab-btn" data-tab="news" onclick="showTab('news')">📰 News</button>
-    <button class="tab-btn" data-tab="recipes" onclick="showTab('recipes')">🍽️ Recipes</button>
-    <button class="tab-btn" data-tab="trash" onclick="showTab('trash')">🗑️ Trash <span class="badge badge-blue">38</span></button>
-  </div>
-</nav>
+<div class="tabbar" id="tabbar">
+  <button class="tab-btn active" data-tab="home" onclick="showTab('home')">🏠 Home</button>
+  <button class="tab-btn" data-tab="inbox" onclick="showTab('inbox')">📬 Inbox<span class="badge red">3</span></button>
+  <button class="tab-btn" data-tab="calendar" onclick="showTab('calendar')">📅 Calendar</button>
+  <button class="tab-btn" data-tab="todoist" onclick="showTab('todoist')">✅ Todoist<span class="badge red">28</span></button>
+  <button class="tab-btn" data-tab="news" onclick="showTab('news')">📰 News</button>
+  <button class="tab-btn" data-tab="trash" onclick="showTab('trash')">🗑️ Trash<span class="badge blue">31</span></button>
+</div>
 
-<main>
+<div class="wrap">
 
-<!-- ================= TAB 1: HOME ================= -->
-<section class="tab-section active" id="tab-home">
-
-  <div class="weather-card">
-    <div class="weather-icon">☀️</div>
+<!-- TAB 1: HOME -->
+<div class="tab-section active" id="tab-home">
+  <div class="alert-banner">⚠️ Severe thunderstorm risk this afternoon with dangerous heat (high 100°F) — damaging winds, downpours and hail possible. Keep outdoor plans flexible.</div>
+  <div class="weather-strip">
+    <div style="font-size:38px;">⛈️</div>
     <div>
-      <div class="weather-temp">88°F</div>
-      <div class="weather-meta">Sunny · McLean, VA</div>
+      <div class="temp">100°F</div>
+      <div class="cond">Partly sunny &amp; hot &middot; Severe PM thunderstorms possible</div>
     </div>
-    <div class="weather-meta">High 88° / Low 69° &nbsp;·&nbsp; Rain 22% &nbsp;·&nbsp; Wind light</div>
+    <div style="margin-left:auto;font-size:13px;line-height:1.6;">
+      High 100°F / Low 73°F<br>
+      Rain chance: high (severe risk)<br>
+      Wind: gusty in storms
+    </div>
   </div>
 
   <div class="pills">
-    <button class="pill" onclick="showTab('inbox')">🔴 <b>3</b> High Priority Emails</button>
-    <button class="pill" onclick="showTab('inbox');showSub('starred')">⭐ <b>26</b> Starred Inbox</button>
-    <button class="pill" onclick="showTab('calendar')">📅 <b>0</b> Meetings Today</button>
-    <button class="pill" onclick="showTab('todoist')">✅ <b>34</b> P1 Tasks (<span class="red">33 overdue</span>)</button>
-    <button class="pill" onclick="showTab('calendar')">👤 Ben away: <b>Jul 26–29</b></button>
+    <div class="pill" onclick="showTab('inbox')">🔴 High Priority Emails <span class="n">3</span></div>
+    <div class="pill" onclick="showTab('calendar')">📅 Meetings Today <span>0</span></div>
+    <div class="pill" onclick="showTab('todoist')">✅ P1 Tasks <span class="n">28 overdue</span></div>
+    <div class="pill" onclick="showTab('calendar')">👤 Ben's Next Away <span>Jul 26</span></div>
   </div>
 
   <div class="grid2">
-    <div class="card">
-      <h2>🚩 Action Flags</h2>
-      <div class="flag-line"><span class="flag-tag tag-task">OVERDUE TASK</span><b>Dr. Sethi ADHD med form</b> — Ben's 4th request since Jun 6, still unsigned. Sandy Hill needs it for Ella to take medication. <a href="https://mail.google.com/mail/u/0/#all/19eef8c24df47256" target="_blank">Open thread ↗</a></div>
-      <div class="flag-line"><span class="flag-tag tag-email">EMAIL</span><b>Mediation slot unconfirmed</b> — Ben said "13th @ 1pm works for me — GHAZAL?" on Jun 25; no reply sent in 4 days. <a href="#" target="_blank">Open thread ↗</a></div>
-      <div class="flag-line"><span class="flag-tag tag-email">EMAIL</span><b>Ada separation agreement</b> — Judy Liang sent redline answers at 5:45 AM today; your questions from last night need a follow-up reply. <a href="https://mail.google.com/mail/u/0/#all/19f056c9602e4c81" target="_blank">Open thread ↗</a></div>
-      <div class="flag-line"><span class="flag-tag tag-cal">CALENDAR</span><b>No RSVP</b> — Ben's "Democratic Mayors Assoc." trip (Jul 26–29) is still "needsAction" on your calendar — accept/decline + line up kid coverage.</div>
-      <div class="flag-line"><span class="flag-tag tag-conflict">CALENDAR CONFLICT</span><b>Liam's Birthday is Jul 14</b> — falls inside no other conflicts found, but confirm plans now while calendar is open.</div>
-      <div class="flag-line"><span class="flag-tag tag-task">OVERDUE TASK</span><b>33 Todoist P1 tasks overdue</b> since yesterday (06/28) — mostly small personal to-dos that piled up. <a href="#" onclick="showTab('todoist')" style="cursor:pointer">Review in Todoist ↗</a></div>
+    <div>
+      <h2 class="col-title">Action Flags</h2>
+      <div class="card" id="actionFlags"></div>
     </div>
-
-    <div class="card">
-      <h2>🧭 Strategic Insights</h2>
-      <div class="insight risk">
-        <div class="ititle">🔴 Risk — Health item stalling on you, not Ben</div>
-        <div class="ibody">Ben has emailed four times since Jun 6 about Dr. Sethi's ADHD medication form for Ella, with escalating urgency in the last note. This is now a 23-day-old health-access blocker — worth closing today regardless of co-parenting friction. <a href="https://mail.google.com/mail/u/0/#all/19eef8c24df47256" target="_blank">See thread</a></div>
-      </div>
-      <div class="insight watch">
-        <div class="ititle">🟡 Watch — Mediation date decision is the long pole</div>
-        <div class="ibody">Brian Hirsch's office offered Jul 13 (1pm) or Jul 28 (3:30pm) for the next mediation session. Ben already confirmed Jul 13 works for him; your reply has been outstanding since Jun 25. Locking this in unblocks the appraisal/valuation conversation too.</div>
-      </div>
-      <div class="insight pattern">
-        <div class="ititle">🔵 Pattern — Household vendor threads moving in parallel</div>
-        <div class="ibody">Both the patio-door replacement (Tri-State Screens, install window mid-July) and the Pella quote thread are progressing independently of the divorce timeline — no conflicts, but worth batching decisions before Ben's Atlanta trip removes him from the loop for 4 days.</div>
-      </div>
-      <div class="insight opp">
-        <div class="ititle">🟢 Opportunity — Quiet calendar window today</div>
-        <div class="ibody">No timed meetings today or tomorrow — only personal markers (Recycle, "Ghazal Off?"). A good window to clear the Sethi form, the mediation reply, and the Todoist backlog before the week fills in.</div>
-      </div>
+    <div>
+      <h2 class="col-title">Strategic Insights</h2>
+      <div id="insights"></div>
     </div>
   </div>
+</div>
 
-  <button class="refresh-btn" onclick="sendPrompt('Please refresh my morning briefing — Home tab. Rebuild and overwrite the dashboard.')">↻ Refresh Home</button>
-</section>
-
-<!-- ================= TAB 2: INBOX ================= -->
-<section class="tab-section" id="tab-inbox">
+<!-- TAB 2: INBOX -->
+<div class="tab-section" id="tab-inbox">
+  <div class="section-head"><div></div><button class="refresh-btn" onclick="sendPrompt('Please refresh my morning briefing — Inbox tab (High/Medium/School/Social). Rebuild and overwrite /Users/ghazalmoore/Dropbox/Personal/Claude/MorningBriefing/index.html.')">↻ Refresh Inbox</button></div>
   <div class="subtabs">
     <button class="subtab-btn active" data-sub="high" onclick="showSub('high')">🔴 High Priority</button>
     <button class="subtab-btn" data-sub="medium" onclick="showSub('medium')">🟠 Medium</button>
-    <button class="subtab-btn" data-sub="starred" onclick="showSub('starred')">⭐ Starred</button>
     <button class="subtab-btn" data-sub="school" onclick="showSub('school')">🏫 School</button>
     <button class="subtab-btn" data-sub="social" onclick="showSub('social')">💬 Social</button>
   </div>
+  <div class="card subtab-panel active" id="sub-high"></div>
+  <div class="card subtab-panel" id="sub-medium"></div>
+  <div class="card subtab-panel" id="sub-school"></div>
+  <div class="card subtab-panel" id="sub-social"></div>
+</div>
 
-  <div class="sub-section active" id="sub-high">
-    <div class="card">
-      <div class="email-item high" style="display:flex;gap:10px;align-items:flex-start">
-        <div style="flex:1">
-          <div><a href="https://mail.google.com/mail/u/0/#all/19eef8c24df47256" target="_blank">Re: Dr. Sethi Form</a> <span class="noreply">⚠️ No reply sent (23 days)</span></div>
-          <div class="email-meta">Ben Moore (ben@allcrewingdc.com) · Jun 22 — 4th request</div>
-          <div class="email-summary">Ben needs the ADHD medication form signed and sent to Sandy Hill so Ella can take her medication. No reply found in sent mail since Jun 6.</div>
-        </div>
-        <button class="star-btn" data-msg-id="19eef8c24df47256" data-starred="false" onclick="toggleStar(this)" title="Star this email">☆</button>
-      </div>
-      <div class="email-item high" style="display:flex;gap:10px;align-items:flex-start">
-        <div style="flex:1">
-          <div><a href="https://mail.google.com/mail/u/0/#all/19eb6c1598284deab" target="_blank">RE: Mediation Appt — Appraisals, Next Steps</a> <span class="noreply">⚠️ No reply sent (4 days)</span></div>
-          <div class="email-meta">April Yeager / Ben Moore (NOVAFamilyLaw.com) · Jun 25</div>
-          <div class="email-summary">Ben confirmed Jul 13 @ 1pm works for him for the next mediation slot (alternative: Jul 28 @ 3:30pm); awaiting your confirmation.</div>
-        </div>
-        <button class="star-btn" data-msg-id="19eb6c1598284deab" data-starred="true" onclick="toggleStar(this)" title="Unstar this email">★</button>
-      </div>
-      <div class="email-item high" style="display:flex;gap:10px;align-items:flex-start">
-        <div style="flex:1">
-          <div><a href="https://mail.google.com/mail/u/0/#all/19f056c9602e4c81" target="_blank">Re: Separation Agreement — Employment Verification Clause</a></div>
-          <div class="email-meta">Judy Liang (Ada / judy.liang@ada.cx) · Today, 5:45 AM</div>
-          <div class="email-summary">Redline answers to your Jun 28 questions; thread is active and needs a same-day follow-up.</div>
-        </div>
-        <button class="star-btn" data-msg-id="19f056c9602e4c81" data-starred="false" onclick="toggleStar(this)" title="Star this email">☆</button>
-      </div>
-    </div>
-  </div>
-
-  <div class="sub-section" id="sub-medium">
-    <div class="card">
-      <div class="email-item">
-        <a href="https://mail.google.com/mail/u/0/#all/19f123be8af13e67" target="_blank">Your June 2026 Statement is Ready</a>
-        <div class="email-meta">American Express · Today · Statement posted, no action required unless reviewing charges.</div>
-      </div>
-      <div class="email-item">
-        <a href="https://mail.google.com/mail/u/0/#all/19f1299573aa186a" target="_blank">Your credit card statement is available</a>
-        <div class="email-meta">Chase · Today, 8:57 AM · Balance $2,367.24, due Jul 25, auto-pay enabled — informational only.</div>
-      </div>
-      <div class="email-item">
-        <a href="#" target="_blank">RE: Home Value Comps — 1502 Linden Hurst Ave</a>
-        <div class="email-meta">Realtor (A. Norton) · Jun 23–24 · Comps shared to support the appraisal/listing-price discussion for the divorce process.</div>
-      </div>
-      <div class="email-item">
-        <a href="#" target="_blank">Liam — Neuro-Psych Evaluation (forwarded to therapist)</a>
-        <div class="email-meta">Ben Moore → Ellie Zadeh, cc you · Jun 22 · FYI forward, no action needed from you right now.</div>
-      </div>
-    </div>
-  </div>
-
-  <div class="sub-section" id="sub-starred">
-    <div class="card">
-      <table>
-        <tr><th>Date Starred</th><th>From</th><th>Subject</th><th>Open</th></tr>
-        <tr><td>Jun 22</td><td>PracticePanther / Roop Law</td><td><a href="https://mail.google.com/mail/u/0/#all/19ef14e52a42fe64" target="_blank">Invoice from Roop Law</a></td><td><a href="https://mail.google.com/mail/u/0/#all/19ef14e52a42fe64" target="_blank">open</a></td></tr>
-        <tr><td>Jun 12–22</td><td>Ben Moore / Sandy Hill</td><td><a href="https://mail.google.com/mail/u/0/#all/19eef8c24df47256" target="_blank">Fwd: Dr. Sethi Form (4-msg thread)</a></td><td><a href="https://mail.google.com/mail/u/0/#all/19eef8c24df47256" target="_blank">open</a></td></tr>
-        <tr><td>Jun 12</td><td>Google Flights</td><td><a href="https://mail.google.com/mail/u/0/#all/19ebc6f636bdee28" target="_blank">Tracked flight to San José — price change</a></td><td><a href="https://mail.google.com/mail/u/0/#all/19ebc6f636bdee28" target="_blank">open</a></td></tr>
-        <tr><td>Jun 12</td><td>April Yeager (NOVAFamilyLaw)</td><td><a href="https://mail.google.com/mail/u/0/#all/19ebc1598284deab" target="_blank">RE: Mediation Appt with Brian Hirsch</a></td><td><a href="https://mail.google.com/mail/u/0/#all/19ebc1598284deab" target="_blank">open</a></td></tr>
-        <tr><td>Jun 11–12</td><td>Scott Ralston (FCPS AP)</td><td><a href="https://mail.google.com/mail/u/0/#all/19eb867135d8bc92" target="_blank">Liam in cafe today (resolved)</a></td><td><a href="https://mail.google.com/mail/u/0/#all/19eb867135d8bc92" target="_blank">open</a></td></tr>
-        <tr><td>Jun 9</td><td>Calleva Camp Registration</td><td><a href="https://mail.google.com/mail/u/0/#all/19eac993f0e0cb8d" target="_blank">Bus Route/Drop-Off Form Required</a></td><td><a href="https://mail.google.com/mail/u/0/#all/19eac993f0e0cb8d" target="_blank">open</a></td></tr>
-        <tr><td>Jun 8–15</td><td>Wise Mind Psychotherapy</td><td><a href="https://mail.google.com/mail/u/0/#all/19ea6dec3a93cb6c" target="_blank">Liam therapy intake coordination</a></td><td><a href="https://mail.google.com/mail/u/0/#all/19ea6dec3a93cb6c" target="_blank">open</a></td></tr>
-        <tr><td>Jun 7–12</td><td>Tri-State Screens</td><td><a href="https://mail.google.com/mail/u/0/#all/19ea359b042831cc" target="_blank">Patio door install scheduling</a></td><td><a href="https://mail.google.com/mail/u/0/#all/19ea359b042831cc" target="_blank">open</a></td></tr>
-        <tr><td>May 31</td><td>Ben Moore</td><td><a href="https://mail.google.com/mail/u/0/#all/19e7f4ee6288b2bc" target="_blank">Fwd: Parents-Kids Game Tomorrow</a></td><td><a href="https://mail.google.com/mail/u/0/#all/19e7f4ee6288b2bc" target="_blank">open</a></td></tr>
-        <tr><td>May 21</td><td>Calleva Camp</td><td><a href="https://mail.google.com/mail/u/0/#all/19e4b3d3dae572cb" target="_blank">CORRECTED Bus Info</a></td><td><a href="https://mail.google.com/mail/u/0/#all/19e4b3d3dae572cb" target="_blank">open</a></td></tr>
-        <tr><td>May 11</td><td>Sachin Fierro Kori (legal)</td><td><a href="https://mail.google.com/mail/u/0/#all/19e16eed5fe99b9a" target="_blank">Fwd: New submission from Get In Touch</a></td><td><a href="https://mail.google.com/mail/u/0/#all/19e16eed5fe99b9a" target="_blank">open</a></td></tr>
-        <tr><td>May 8</td><td>ShareFile / Brian Hirsch</td><td><a href="https://mail.google.com/mail/u/0/#all/19e08ead76b3db4c" target="_blank">Folder shared: Moore Mediation (Ben + Ghazal)</a></td><td><a href="https://mail.google.com/mail/u/0/#all/19e08ead76b3db4c" target="_blank">open</a></td></tr>
-        <tr><td>May 8</td><td>Ben Moore</td><td><a href="https://mail.google.com/mail/u/0/#all/19e084d4bf27124d" target="_blank">Fwd: Real Estate Appraisers list</a></td><td><a href="https://mail.google.com/mail/u/0/#all/19e084d4bf27124d" target="_blank">open</a></td></tr>
-        <tr><td>Apr 24</td><td>Pella Mid-Atlantic</td><td><a href="https://mail.google.com/mail/u/0/#all/19dc023c9aa6bf37" target="_blank">1502 Linden Hurst Ave — Door Quote</a></td><td><a href="https://mail.google.com/mail/u/0/#all/19dc023c9aa6bf37" target="_blank">open</a></td></tr>
-        <tr><td>+11 more</td><td colspan="2" style="color:var(--muted)">Older starred items (Apr–Mar): LinkedIn digest, festival ticket promo, NYT recipes newsletter, Apple receipt, Stacees order-issue thread, field hockey scheduling, FCPS 504 newsletter, and 4 others.</td><td>—</td></tr>
-      </table>
-    </div>
-  </div>
-
-  <div class="sub-section" id="sub-school">
-    <div class="card">
-      <p style="font-size:13px">School is out for summer — no new FCPS emails in the last 7 days.</p>
-      <div class="email-item">
-        <a href="https://mail.google.com/mail/u/0/#all/19eb867135d8bc92" target="_blank">Liam in cafe today</a> — resolved
-        <div class="email-meta">Scott Ralston, Assistant Principal, Franklin Sherman ES · Jun 11–12 · You requested he eat alone for the remainder of the year; school confirmed and noted the outdoor picnic.</div>
-      </div>
-    </div>
-    <div class="card">
-      <h3>Ella's Grade Snapshot — Longfellow MS, 7th grade</h3>
-      <table>
-        <tr><th>Class</th><th>Teacher</th><th>Last Email</th><th>Source</th></tr>
-        <tr><td>English 7 HN</td><td>Sylvia Maldonado</td><td>Jun 12</td><td><a href="https://mail.google.com/mail/u/0/#all/19ebd7c15de2f07c" target="_blank">Open email</a></td></tr>
-        <tr><td>US History 7 HN</td><td>Jane Layton</td><td>Jun 3</td><td><a href="https://mail.google.com/mail/u/0/#all/19e8eb0d14208911" target="_blank">Open email</a></td></tr>
-        <tr><td>Health & PE 7</td><td>Katherine Shapiro</td><td>Jun 8</td><td><a href="https://mail.google.com/mail/u/0/#all/19ea86a53ef9501e" target="_blank">Open email</a></td></tr>
-        <tr><td>Soprano/Alto Chorus 8</td><td>Kimberly Dawson</td><td>Jun 10</td><td><a href="https://mail.google.com/mail/u/0/#all/19eb32d59ad94298" target="_blank">Open email</a></td></tr>
-        <tr><td>Life Science HN</td><td>Beth Schinstock</td><td>May 22</td><td><a href="https://mail.google.com/mail/u/0/#all/19e50a4596ea387b" target="_blank">Open email</a></td></tr>
-      </table>
-      <p style="font-size:12px;color:var(--muted);margin-top:8px">Letter grades couldn't be auto-extracted from these emails (extraction failed twice) — open the email or check ParentVUE directly for the current value. ⚠️ flag below B− once confirmed.</p>
-    </div>
-  </div>
-
-  <div class="sub-section" id="sub-social">
-    <div class="card">
-      <table>
-        <tr><th>Subject</th><th>From</th><th>Date</th><th>Status</th></tr>
-        <tr><td><a href="#" target="_blank">Notes and facts</a></td><td>Ian Walsh</td><td>Jun 26</td><td>Action needed</td></tr>
-      </table>
-    </div>
-  </div>
-
-  <button class="refresh-btn" onclick="sendPrompt('Please refresh my morning briefing — Inbox tab. Rebuild and overwrite the dashboard.')">↻ Refresh Inbox</button>
-</section>
-
-<!-- ================= TAB 3: CALENDAR ================= -->
-<section class="tab-section" id="tab-calendar">
+<!-- TAB 3: CALENDAR -->
+<div class="tab-section" id="tab-calendar">
+  <div class="section-head"><div></div><button class="refresh-btn" onclick="sendPrompt('Please refresh my morning briefing — Calendar tab. Rebuild and overwrite /Users/ghazalmoore/Dropbox/Personal/Claude/MorningBriefing/index.html.')">↻ Refresh Calendar</button></div>
   <div class="grid2">
     <div>
-      <div class="card">
-        <h2>Today — Mon, Jun 29</h2>
-        <div class="cal-event"><span class="cal-time">All day</span> — Recycle</div>
-        <div class="cal-event"><span class="cal-time">All day</span> — Ghazal Off?</div>
-        <p style="font-size:12.5px;color:var(--muted);margin-top:8px">No timed meetings today — no Meeting Prep needed.</p>
-      </div>
-      <div class="card">
-        <h2>Tomorrow — Tue, Jun 30</h2>
-        <p class="empty-state">No events found for tomorrow.</p>
-      </div>
+      <h2 class="col-title">Today &amp; Tomorrow</h2>
+      <div class="card" id="calToday"></div>
     </div>
     <div>
-      <div class="card">
-        <h2>📥 New Invites & Flagged Dates</h2>
-        <div class="cal-event" style="border-top:1px dashed var(--border);margin-top:6px;padding-top:8px">
-          <b>School newsletter dates (Franklin Sherman PTA + Longfellow Lancer)</b>
-          <div class="email-summary">Scanned both newsletters for field days, classroom parties, and other dated events — none upcoming right now since school is out for summer. Last item was Franklin Sherman's outdoor picnic on Jun 12, already past. This section will surface new dates (field days, parties, PTA events) as soon as either newsletter posts them, including a downloadable .ics for any newsletter-sourced invite.</div>
-        </div>
-        <p style="font-size:12px;color:var(--muted);margin-top:8px">The Wise Mind Psychotherapy intake invite (Jun 22, already accepted by both you and Ben) has been cleared from this list now that the date has passed.</p>
-      </div>
-      <div class="card">
-        <h3>✈️ Ben's dates & invites — needs your response</h3>
-        <table>
-          <tr><th>Event</th><th>Dates</th><th>Kid coverage</th><th>Notes</th><th>Respond</th></tr>
-          <tr>
-            <td>Democratic Mayors Assoc. (Atlanta)</td>
-            <td>Jul 26–29</td>
-            <td>Needed — 4 days</td>
-            <td>Ben flies home by 9pm Jul 29 · still "needsAction" on your calendar</td>
-            <td>
-              <a href="https://www.google.com/calendar/event?eid=Xzhvb2s4Y2E1OGtzNDZiOW82OTI0OGI5azYwb2tjYmEyNjUzMzZiYTI4OHI0MmdxNjhvbzM4Y2kzODggdGVocmFuaS5naGF6YWxAbQ" target="_blank">open</a> ·
-              <button class="done-btn" onclick="sendPrompt('Accept Ben Moore\'s Democratic Mayors Assoc. Atlanta trip invites (Jul 26-29) on my Google Calendar')">Accept</button>
-              <button class="done-btn" style="border-color:var(--muted);color:var(--muted)" onclick="sendPrompt('Decline Ben Moore\'s Democratic Mayors Assoc. Atlanta trip invites (Jul 26-29) on my Google Calendar')">Decline</button>
-            </td>
-          </tr>
-          <tr>
-            <td>TBD B20 @ Commerce</td>
-            <td>Nov 8–11</td>
-            <td>TBD — far out</td>
-            <td>Also unanswered, lower urgency given the date</td>
-            <td>
-              <a href="#" target="_blank">open</a> ·
-              <button class="done-btn" onclick="sendPrompt('Accept Ben Moore\'s TBD B20 @ Commerce invite (Nov 8-11, 2026) on my Google Calendar')">Accept</button>
-              <button class="done-btn" style="border-color:var(--muted);color:var(--muted)" onclick="sendPrompt('Decline Ben Moore\'s TBD B20 @ Commerce invite (Nov 8-11, 2026) on my Google Calendar')">Decline</button>
-            </td>
-          </tr>
-        </table>
-        <p style="font-size:12px;color:var(--muted);margin-top:8px">Accept/decline here sends the request to chat, where I make the actual calendar change and confirm back to you.</p>
-      </div>
+      <h2 class="col-title">New Invites &amp; Suggestions</h2>
+      <div class="card" id="calInvites"></div>
+      <h2 class="col-title" style="margin-top:18px;">Ben's Away Dates (60-day window)</h2>
+      <div class="card"><table id="bensAway"><thead><tr><th>Event</th><th>Dates</th><th>Kid Coverage</th><th>Notes</th></tr></thead><tbody></tbody></table></div>
     </div>
   </div>
-  <button class="refresh-btn" onclick="sendPrompt('Please refresh my morning briefing — Calendar tab. Rebuild and overwrite the dashboard.')">↻ Refresh Calendar</button>
-</section>
+</div>
 
-<!-- ================= TAB 4: TODOIST ================= -->
-<section class="tab-section" id="tab-todoist">
-  <div class="todoist-grid">
-    <div class="todoist-col">
-      <div class="col-head"><h2 style="margin:0">📋 In Todoist — P1 only</h2><span class="count-badge">34 tasks · 33 overdue</span></div>
-
-      <div class="task-card p1" data-id="6gwh72v3Ghg2FRx2">
-        <input type="checkbox" class="task-approve" data-mode="update">
-        <div class="task-fields">
-          <input class="task-title" value="G Appraisal finalized">
-          <div class="task-row">
-            <select class="task-priority" onchange="restripe(this)"><option value="1" selected>🔴 P1</option><option value="2">🟠 P2</option><option value="3">🟡 P3</option><option value="4">⚪ P4</option></select>
-            <input type="date" class="task-due" value="2026-06-28">
-            <span class="proj-label">Divorce / Legal</span>
-          </div>
-          <div class="task-footer"><span class="overdue-badge">OVERDUE</span><a href="#" target="_blank">Open ↗</a><button class="done-btn" onclick="sendPrompt('Mark Todoist task 6gwh72v3Ghg2FRx2 complete via MCP')">✓ Done</button></div>
-        </div>
-      </div>
-
-      <div class="task-card p1" data-id="6gwh4jc4227H5H22">
-        <input type="checkbox" class="task-approve" data-mode="update">
-        <div class="task-fields">
-          <input class="task-title" value="Reschedule Neha">
-          <div class="task-row">
-            <select class="task-priority" onchange="restripe(this)"><option value="1" selected>🔴 P1</option><option value="2">🟠 P2</option><option value="3">🟡 P3</option><option value="4">⚪ P4</option></select>
-            <input type="date" class="task-due" value="2026-06-28">
-            <span class="proj-label">Personal</span>
-          </div>
-          <div class="task-footer"><span class="overdue-badge">OVERDUE</span><a href="#" target="_blank">Open ↗</a><button class="done-btn" onclick="sendPrompt('Mark Todoist task 6gwh4jc4227H5H22 complete via MCP')">✓ Done</button></div>
-        </div>
-      </div>
-
-      <div class="task-card p1" data-id="6gcjrFpP2fHV5vP2">
-        <input type="checkbox" class="task-approve" data-mode="update">
-        <div class="task-fields">
-          <input class="task-title" value="Call Fidelity">
-          <div class="task-row">
-            <select class="task-priority" onchange="restripe(this)"><option value="1" selected>🔴 P1</option><option value="2">🟠 P2</option><option value="3">🟡 P3</option><option value="4">⚪ P4</option></select>
-            <input type="date" class="task-due" value="2026-06-28">
-            <span class="proj-label">Finance</span>
-          </div>
-          <div class="task-footer"><span class="overdue-badge">OVERDUE</span><a href="#" target="_blank">Open ↗</a><button class="done-btn" onclick="sendPrompt('Mark Todoist task 6gcjrFpP2fHV5vP2 complete via MCP')">✓ Done</button></div>
-        </div>
-      </div>
-
-      <div class="task-card p1" data-id="6gh55hPQhxGVjJv2">
-        <input type="checkbox" class="task-approve" data-mode="update">
-        <div class="task-fields">
-          <input class="task-title" value="Call eTrade">
-          <div class="task-row">
-            <select class="task-priority" onchange="restripe(this)"><option value="1" selected>🔴 P1</option><option value="2">🟠 P2</option><option value="3">🟡 P3</option><option value="4">⚪ P4</option></select>
-            <input type="date" class="task-due" value="2026-06-28">
-            <span class="proj-label">Finance</span>
-          </div>
-          <div class="task-footer"><span class="overdue-badge">OVERDUE</span><a href="#" target="_blank">Open ↗</a><button class="done-btn" onclick="sendPrompt('Mark Todoist task 6gh55hPQhxGVjJv2 complete via MCP')">✓ Done</button></div>
-        </div>
-      </div>
-
-      <div class="task-card p1" data-id="6f2Q4vvP97GJCrWR">
-        <input type="checkbox" class="task-approve" data-mode="update">
-        <div class="task-fields">
-          <input class="task-title" value="Meditation">
-          <div class="task-row">
-            <select class="task-priority" onchange="restripe(this)"><option value="1" selected>🔴 P1</option><option value="2">🟠 P2</option><option value="3">🟡 P3</option><option value="4">⚪ P4</option></select>
-            <input type="date" class="task-due" value="2026-06-29">
-            <span class="proj-label">Wellness</span>
-          </div>
-          <div class="task-footer"><span class="today-badge">Due today</span><a href="#" target="_blank">Open ↗</a><button class="done-btn" onclick="sendPrompt('Mark Todoist task 6f2Q4vvP97GJCrWR complete via MCP')">✓ Done</button></div>
-        </div>
-      </div>
-
-      <p style="font-size:12px;color:var(--muted);margin:10px 0 0">+ 29 more P1 tasks — mostly small personal/household to-dos dated 06/28, all overdue by one day except today's Meditation. Full list available in Todoist. (P2/P3/P4 tasks are hidden from this view by request.)</p>
-
-      <div class="action-bar"><button class="action-btn" onclick="pushUpdates()">Push Updates</button></div>
+<!-- TAB 4: TODOIST -->
+<div class="tab-section" id="tab-todoist">
+  <div class="section-head"><div></div><button class="refresh-btn" onclick="sendPrompt('Please refresh my morning briefing — Todoist tab. Rebuild and overwrite /Users/ghazalmoore/Dropbox/Personal/Claude/MorningBriefing/index.html.')">↻ Refresh Todoist</button></div>
+  <div class="todoist-wrap">
+    <div class="td-col">
+      <div class="count-line" id="todoCount">📋 In Todoist</div>
+      <div id="todoList"></div>
+      <button class="push-btn" onclick="pushTodoistUpdates()">Push Updates</button>
     </div>
-
-    <div class="todoist-col right">
-      <div class="col-head"><h2 style="margin:0">💡 Suggested from Starred Inbox Email</h2><span class="count-badge">3 open loops</span></div>
-      <p style="font-size:12px;color:var(--muted);margin:0 0 10px">Sourced only from emails that are both starred AND currently in your Inbox.</p>
-
-      <div class="task-card p1">
-        <input type="checkbox" class="task-approve" data-mode="create">
-        <div class="task-fields">
-          <input class="task-title" value="Confirm Tri-State Screens door install — Jul 1, 11am–3pm window">
-          <div class="task-row">
-            <select class="task-priority"><option value="1" selected>🔴 P1</option><option value="2">🟠 P2</option><option value="3">🟡 P3</option><option value="4">⚪ P4</option></select>
-            <input type="date" class="task-due" value="2026-06-29">
-            <select class="task-project-picker"><option value="">— select project —</option><option value="household">Household</option></select>
-          </div>
-          <div class="source-link">Source: <a href="https://mail.google.com/mail/u/0/#all/19eb1c0f2135b422" target="_blank">RE: Tri-State Screens — Jun 10</a></div>
-        </div>
-      </div>
-
-      <div class="task-card p2">
-        <input type="checkbox" class="task-approve" data-mode="create">
-        <div class="task-fields">
-          <input class="task-title" value="Decide whether to move mediation appointment up (Brian Hirsch has earlier openings)">
-          <div class="task-row">
-            <select class="task-priority"><option value="1">🔴 P1</option><option value="2" selected>🟠 P2</option><option value="3">🟡 P3</option><option value="4">⚪ P4</option></select>
-            <input type="date" class="task-due" value="2026-06-29">
-            <select class="task-project-picker"><option value="">— select project —</option><option value="legal">Divorce / Legal</option></select>
-          </div>
-          <div class="source-link">Source: <a href="https://mail.google.com/mail/u/0/#all/19ebc1598284deab" target="_blank">RE: Mediation Appt with Brian Hirsch — Jun 12</a></div>
-        </div>
-      </div>
-
-      <div class="task-card p2">
-        <input type="checkbox" class="task-approve" data-mode="create">
-        <div class="task-fields">
-          <input class="task-title" value="Complete Calleva Bus Route/Car Drop-Off form for Liam">
-          <div class="task-row">
-            <select class="task-priority"><option value="1">🔴 P1</option><option value="2" selected>🟠 P2</option><option value="3">🟡 P3</option><option value="4">⚪ P4</option></select>
-            <input type="date" class="task-due" value="2026-06-29">
-            <select class="task-project-picker"><option value="">— select project —</option><option value="kids">Kids / Liam</option></select>
-          </div>
-          <div class="source-link">Source: <a href="https://mail.google.com/mail/u/0/#all/19eac993f0e0cb8d" target="_blank">Calleva Summer Camp — Bus Route Form Required — Jun 9</a></div>
-        </div>
-      </div>
-
-      <div class="action-bar"><button class="action-btn" onclick="addSuggested()">Add Approved to Todoist</button></div>
+    <div class="td-col right">
+      <div class="count-line" id="suggCount">💡 Suggested from Email &amp; Calendar</div>
+      <div id="suggList"></div>
+      <button class="push-btn" onclick="addApprovedTasks()">Add Approved to Todoist</button>
     </div>
   </div>
-  <button class="refresh-btn" onclick="sendPrompt('Please refresh my morning briefing — Todoist tab. Rebuild and overwrite the dashboard.')">↻ Refresh Todoist</button>
-</section>
+</div>
 
-<!-- ================= TAB 5: NEWS ================= -->
-<section class="tab-section" id="tab-news">
+<!-- TAB 5: NEWS -->
+<div class="tab-section" id="tab-news">
   <div class="subtabs">
-    <button class="subtab-btn active" data-sub2="ai" onclick="showSub2('ai')">🤖 AI</button>
-    <button class="subtab-btn" data-sub2="tech" onclick="showSub2('tech')">💻 Tech</button>
-    <button class="subtab-btn" data-sub2="ps" onclick="showSub2('ps')">📊 PS Strategy</button>
+    <button class="subtab-btn active" data-nsub="ai" onclick="showNews('ai')">🤖 AI</button>
+    <button class="subtab-btn" data-nsub="tech" onclick="showNews('tech')">💻 Tech</button>
+    <button class="subtab-btn" data-nsub="ps" onclick="showNews('ps')">📊 PS Strategy</button>
   </div>
+  <div class="subtab-panel active newsgrid" id="news-ai"></div>
+  <div class="subtab-panel newsgrid" id="news-tech"></div>
+  <div class="subtab-panel newsgrid" id="news-ps"></div>
+</div>
 
-  <div class="sub2-section active" id="sub2-ai">
-    <div class="card"><a href="https://www.whitehouse.gov/presidential-actions/2026/06/promoting-advanced-artificial-intelligence-innovation-and-security/" target="_blank"><b>OpenAI previews GPT-5.6 tiers; Claude Mythos 5 export ban partially lifted</b></a><div class="email-meta">Various sources · Jun 26–29</div><div class="email-summary">OpenAI previewed three GPT-5.6 tiers (Sol, Terra, Luna) with government-gated access; the US government partially lifted the export-control ban on Claude Mythos 5 for critical-infrastructure defenders.</div></div>
-    <div class="card"><a href="https://www.bgr.com/2201667/biggest-tech-controversies-of-the-year/" target="_blank"><b>Google restricts Meta's Gemini compute access</b></a><div class="email-meta">Various sources · Jun 2026</div><div class="email-summary">Google capped Meta's use of its Gemini models after Meta requested more compute than Google could supply, delaying some of Meta's internal AI projects.</div></div>
-    <div class="card"><a href="https://www.deltek.com/en/blog/10-key-consulting-moves" target="_blank"><b>South Korea unveils chip & AI infrastructure investment plan</b></a><div class="email-meta">Various sources · Jun 2026</div><div class="email-summary">A new investment plan centers on Samsung and SK Hynix, expanding fabs, HBM memory production, AI data centers, and robotics to strengthen South Korea's place in the AI chip supply chain.</div></div>
-    <div class="email-summary" style="margin-top:6px">Anthropic–DOD litigation over AI export/access rules is ongoing as of Jun 29.</div>
-  </div>
-  <div class="sub2-section" id="sub2-tech" style="display:none">
-    <div class="card"><a href="https://techstartups.com/2026/06/29/top-tech-news-today-june-29-2026/" target="_blank"><b>Rocket Lab to acquire Iridium for ~$8B</b></a><div class="email-meta">Tech Startups · Jun 29</div><div class="email-summary">Cash-and-stock deal — one of the biggest consolidation moves in commercial space this year.</div></div>
-    <div class="card"><a href="https://techstartups.com/2026/06/29/top-tech-news-today-june-29-2026/" target="_blank"><b>Comcast to split media and tech operations</b></a><div class="email-meta">Tech Startups · Jun 29</div><div class="email-summary">Comcast plans to separate into two distinct publicly traded entities, aiming to let each business pursue more focused strategy.</div></div>
-    <div class="card"><a href="https://techstartups.com/2026/06/29/top-tech-news-today-june-29-2026/" target="_blank"><b>KDDI discloses breach exposing up to 14.2M email logins</b></a><div class="email-meta">Tech Startups · Jun 29</div><div class="email-summary">The Japanese telecom's breach hit an email system shared by multiple internet service providers.</div></div>
-  </div>
-  <div class="sub2-section" id="sub2-ps" style="display:none">
-    <div class="card"><a href="https://www.deltek.com/en/blog/10-key-consulting-moves" target="_blank"><b>Consulting firms shift from AI pilots to embedded, agentic delivery</b></a><div class="email-meta">Deltek · Jun 2026</div><div class="email-summary">Leading firms are building agentic AI and governed workflows directly into delivery rather than selling AI as a standalone service; market is bifurcating between scaled integrators and narrow specialists.</div></div>
-    <div class="card"><a href="https://www.deltek.com/en/blog/10-key-consulting-moves" target="_blank"><b>Grant Thornton ties partner bonuses to AI adoption, expands lateral hiring</b></a><div class="email-meta">Deltek · Jun 2026</div><div class="email-summary">The firm is recruiting partners from Deloitte, KPMG, Accenture, and AlixPartners while linking compensation to AI delivery metrics.</div></div>
-    <div class="card"><a href="https://www.deltek.com/en/blog/10-key-consulting-moves" target="_blank"><b>North Highland names Anthony Shaw as CEO</b></a><div class="email-meta">Deltek · Effective Jun 1, 2026</div><div class="email-summary">Leadership change at the Atlanta-headquartered management consulting firm.</div></div>
-  </div>
-
-  <button class="refresh-btn" onclick="sendPrompt('Please refresh my morning briefing — News tab. Fetch fresh AI, Tech, and PS Strategy articles and rebuild.')">↻ Refresh News</button>
-</section>
-
-<!-- ================= TAB 6: RECIPES ================= -->
-<section class="tab-section" id="tab-recipes">
-  <p style="font-size:13px;color:var(--muted);margin:0 0 12px">3 picks from your starred recipe emails — pick one and I'll pull up the full recipe.</p>
-  <div class="card">
-    <a href="https://mail.google.com/mail/u/0/#all/19af3c05d0a2e68f" target="_blank"><b>Brussels sprouts pasta with sausage</b></a>
-    <div class="email-meta">Bon Appétit · starred Dec 6, 2025</div>
-    <div class="email-summary">Weeknight pasta with Brussels sprouts and sausage — one of the "recipes we made this week" picks.</div>
-  </div>
-  <div class="card">
-    <a href="https://mail.google.com/mail/u/0/#all/19a879c804bb812b" target="_blank"><b>Cheesy roasted cabbage wedges</b></a>
-    <div class="email-meta">Bon Appétit · starred Nov 15, 2025</div>
-    <div class="email-summary">Roasted cabbage wedges with cheese — simple side or light main.</div>
-  </div>
-  <div class="card">
-    <a href="https://mail.google.com/mail/u/0/#all/19d15e01d8709291" target="_blank"><b>Want more fiber and protein? — 5 weeknight dishes</b></a>
-    <div class="email-meta">NYT Cooking · starred Mar 22, 2026</div>
-    <div class="email-summary">Five higher-fiber, higher-protein dinner ideas from NYT Cooking's weeknight roundup.</div>
-  </div>
-  <button class="refresh-btn" onclick="sendPrompt('Please refresh my morning briefing — Recipes tab. Rebuild and overwrite the dashboard.')">↻ Refresh Recipes</button>
-</section>
-
-<!-- ================= TAB 7: TRASH ================= -->
-<section class="tab-section" id="tab-trash">
+<!-- TAB 6: TRASH -->
+<div class="tab-section" id="tab-trash">
   <div class="trash-toolbar">
-    <span id="trash-count">38 of 38 selected for trash · 0 kept</span>
-    <div style="display:flex;gap:8px">
-      <button onclick="trashSelectAll(true)">Select all</button>
-      <button onclick="trashSelectAll(false)">Deselect all</button>
-      <button class="trash-send" id="trash-send-btn" onclick="sendToTrash()">🗑️ Send to Trash (38)</button>
+    <div><span id="trashCountLine">31 of 31 selected for trash · 0 kept</span></div>
+    <div>
+      <button onclick="trashSelectAll()">Select all</button>
+      <button onclick="trashDeselectAll()">Deselect all</button>
+      <button id="sendTrashBtn" onclick="sendToTrash()">🗑️ Send to Trash (31)</button>
     </div>
   </div>
+  <div id="trashGroups"></div>
+</div>
 
-  <div class="card trash-group">
-    <h3>🏷️ Promotions & Marketing</h3>
-    <div class="trash-item" onclick="trashToggle(this)"><input type="checkbox" class="trash-check" data-msg-id="rh-gap" checked><div class="trash-item-body"><div class="trash-item-subject">60% Off Everything — Gap</div><div class="trash-item-meta"><span>Gap</span><span>old</span><span>Unread</span></div></div><span class="trash-reason promo">Promo</span></div>
-    <div class="trash-item" onclick="trashToggle(this)"><input type="checkbox" class="trash-check" data-msg-id="rh-rh" checked><div class="trash-item-body"><div class="trash-item-subject">Restoration Hardware Sale</div><div class="trash-item-meta"><span>Restoration Hardware</span><span>old</span><span>Unread</span></div></div><span class="trash-reason promo">Promo</span></div>
-    <div class="trash-item" onclick="trashToggle(this)"><input type="checkbox" class="trash-check" data-msg-id="rh-saks" checked><div class="trash-item-body"><div class="trash-item-subject">Saks Fifth Avenue — Spring Whites</div><div class="trash-item-meta"><span>Saks Fifth Avenue</span><span>old</span><span>Unread</span></div></div><span class="trash-reason promo">Promo</span></div>
-    <div class="trash-item" onclick="trashToggle(this)"><input type="checkbox" class="trash-check" data-msg-id="rh-br" checked><div class="trash-item-body"><div class="trash-item-subject">41% Off Everything — Banana Republic</div><div class="trash-item-meta"><span>Banana Republic</span><span>old</span><span>Unread</span></div></div><span class="trash-reason promo">Promo</span></div>
-    <div class="trash-item" onclick="trashToggle(this)"><input type="checkbox" class="trash-check" data-msg-id="rh-over" checked><div class="trash-item-body"><div class="trash-item-subject">Save Big — Overstock</div><div class="trash-item-meta"><span>Overstock</span><span>old</span><span>Unread</span></div></div><span class="trash-reason deal">Deal</span></div>
-    <div class="trash-item" onclick="trashToggle(this)"><input type="checkbox" class="trash-check" data-msg-id="rh-groupon" checked><div class="trash-item-body"><div class="trash-item-subject">IPL Photofacials Deal</div><div class="trash-item-meta"><span>Groupon</span><span>old</span><span>Unread</span></div></div><span class="trash-reason deal">Deal</span></div>
-    <div class="trash-item" onclick="trashToggle(this)"><input type="checkbox" class="trash-check" data-msg-id="rh-dvf" checked><div class="trash-item-body"><div class="trash-item-subject">Last Call — DVF Sale</div><div class="trash-item-meta"><span>Last Call</span><span>old</span><span>Unread</span></div></div><span class="trash-reason promo">Promo</span></div>
-    <div class="trash-item" onclick="trashToggle(this)"><input type="checkbox" class="trash-check" data-msg-id="rh-haute" checked><div class="trash-item-body"><div class="trash-item-subject">HauteLook Sale Alert</div><div class="trash-item-meta"><span>HauteLook</span><span>old</span><span>Unread</span></div></div><span class="trash-reason promo">Promo</span></div>
-    <div class="trash-item" onclick="trashToggle(this)"><input type="checkbox" class="trash-check" data-msg-id="rh-zulily" checked><div class="trash-item-body"><div class="trash-item-subject">Easter Sale — Zulily</div><div class="trash-item-meta"><span>Zulily</span><span>old</span><span>Unread</span></div></div><span class="trash-reason promo">Promo</span></div>
-    <div class="trash-item" onclick="trashToggle(this)"><input type="checkbox" class="trash-check" data-msg-id="rh-aa" checked><div class="trash-item-body"><div class="trash-item-subject">Welcome to oneworld — American Airlines</div><div class="trash-item-meta"><span>American Airlines</span><span>old</span><span>Unread</span></div></div><span class="trash-reason promo">Promo</span></div>
-    <div class="trash-item" onclick="trashToggle(this)"><input type="checkbox" class="trash-check" data-msg-id="rh-spotify" checked><div class="trash-item-body"><div class="trash-item-subject">Concert Recommendations Near You</div><div class="trash-item-meta"><span>Spotify</span><span>old</span><span>Unread</span></div></div><span class="trash-reason promo">Promo</span></div>
-    <div class="trash-item" onclick="trashToggle(this)"><input type="checkbox" class="trash-check" data-msg-id="rh-wolftrap" checked><div class="trash-item-body"><div class="trash-item-subject">Summer Shows at Wolf Trap</div><div class="trash-item-meta"><span>Wolf Trap</span><span>old</span><span>Unread</span></div></div><span class="trash-reason promo">Promo</span></div>
-    <div class="trash-item" onclick="trashToggle(this)"><input type="checkbox" class="trash-check" data-msg-id="rh-gilt" checked><div class="trash-item-body"><div class="trash-item-subject">You're Invited — Gilt</div><div class="trash-item-meta"><span>Gilt</span><span>old</span><span>Unread</span></div></div><span class="trash-reason promo">Promo</span></div>
-    <div class="trash-item" onclick="trashToggle(this)"><input type="checkbox" class="trash-check" data-msg-id="rh-urbandaddy1" checked><div class="trash-item-body"><div class="trash-item-subject">UrbanDaddy Weekend Picks</div><div class="trash-item-meta"><span>UrbanDaddy</span><span>old</span><span>Unread</span></div></div><span class="trash-reason promo">Promo</span></div>
-    <div class="trash-item" onclick="trashToggle(this)"><input type="checkbox" class="trash-check" data-msg-id="rh-urbandaddy2" checked><div class="trash-item-body"><div class="trash-item-subject">UrbanDaddy — DC Events</div><div class="trash-item-meta"><span>UrbanDaddy</span><span>old</span><span>Unread</span></div></div><span class="trash-reason promo">Promo</span></div>
-  </div>
-
-  <div class="card trash-group">
-    <h3>🤖 Automated Notifications</h3>
-    <div class="trash-item" onclick="trashToggle(this)"><input type="checkbox" class="trash-check" data-msg-id="auto-godaddy1" checked><div class="trash-item-body"><div class="trash-item-subject">Your GoDaddy order confirmation</div><div class="trash-item-meta"><span>GoDaddy</span><span>Today</span><span>Unread</span></div></div><span class="trash-reason auto">Auto</span></div>
-    <div class="trash-item" onclick="trashToggle(this)"><input type="checkbox" class="trash-check" data-msg-id="auto-godaddy2" checked><div class="trash-item-body"><div class="trash-item-subject">Welcome to GoDaddy — account created</div><div class="trash-item-meta"><span>GoDaddy</span><span>Today</span><span>Unread</span></div></div><span class="trash-reason auto">Auto</span></div>
-    <div class="trash-item" onclick="trashToggle(this)"><input type="checkbox" class="trash-check" data-msg-id="auto-amazon" checked><div class="trash-item-body"><div class="trash-item-subject">We sent an email in error (Japanese content)</div><div class="trash-item-meta"><span>Amazon</span><span>Today</span><span>Unread</span></div></div><span class="trash-reason auto">Auto</span></div>
-    <div class="trash-item" onclick="trashToggle(this)"><input type="checkbox" class="trash-check" data-msg-id="auto-revision" checked><div class="trash-item-body"><div class="trash-item-subject">Order Confirmed</div><div class="trash-item-meta"><span>Revision Skincare</span><span>old</span><span>Unread</span></div></div><span class="trash-reason auto">Auto</span></div>
-    <div class="trash-item" onclick="trashToggle(this)"><input type="checkbox" class="trash-check" data-msg-id="auto-cb1" checked><div class="trash-item-body"><div class="trash-item-subject">Your order has shipped</div><div class="trash-item-meta"><span>Crate & Barrel</span><span>old</span><span>Unread</span></div></div><span class="trash-reason auto">Auto</span></div>
-    <div class="trash-item" onclick="trashToggle(this)"><input type="checkbox" class="trash-check" data-msg-id="auto-cb2" checked><div class="trash-item-body"><div class="trash-item-subject">Order Confirmed</div><div class="trash-item-meta"><span>Crate & Barrel</span><span>old</span><span>Unread</span></div></div><span class="trash-reason auto">Auto</span></div>
-    <div class="trash-item" onclick="trashToggle(this)"><input type="checkbox" class="trash-check" data-msg-id="auto-revolve" checked><div class="trash-item-body"><div class="trash-item-subject">Order Processed</div><div class="trash-item-meta"><span>Revolve</span><span>old</span><span>Unread</span></div></div><span class="trash-reason auto">Auto</span></div>
-    <div class="trash-item" onclick="trashToggle(this)"><input type="checkbox" class="trash-check" data-msg-id="auto-janie" checked><div class="trash-item-body"><div class="trash-item-subject">Order Confirmation</div><div class="trash-item-meta"><span>Janie & Jack</span><span>old</span><span>Unread</span></div></div><span class="trash-reason auto">Auto</span></div>
-    <div class="trash-item" onclick="trashToggle(this)"><input type="checkbox" class="trash-check" data-msg-id="auto-birk" checked><div class="trash-item-body"><div class="trash-item-subject">Order Confirmation</div><div class="trash-item-meta"><span>Birkenstock</span><span>old</span><span>Unread</span></div></div><span class="trash-reason auto">Auto</span></div>
-    <div class="trash-item" onclick="trashToggle(this)"><input type="checkbox" class="trash-check" data-msg-id="auto-square" checked><div class="trash-item-body"><div class="trash-item-subject">Your receipt — Organic Butcher</div><div class="trash-item-meta"><span>Square</span><span>old</span><span>Unread</span></div></div><span class="trash-reason auto">Auto</span></div>
-    <div class="trash-item" onclick="trashToggle(this)"><input type="checkbox" class="trash-check" data-msg-id="auto-twitter" checked><div class="trash-item-body"><div class="trash-item-subject">We missed you</div><div class="trash-item-meta"><span>Twitter</span><span>old</span><span>Unread</span></div></div><span class="trash-reason auto">Auto</span></div>
-    <div class="trash-item" onclick="trashToggle(this)"><input type="checkbox" class="trash-check" data-msg-id="auto-rise" checked><div class="trash-item-body"><div class="trash-item-subject">Rise Gardens support threads (6, resolved 2024)</div><div class="trash-item-meta"><span>Rise Gardens</span><span>old</span><span>Unread</span></div></div><span class="trash-reason auto">Auto</span></div>
-  </div>
-
-  <div class="card trash-group">
-    <h3>📰 Newsletters & Digests</h3>
-    <div class="trash-item" onclick="trashToggle(this)"><input type="checkbox" class="trash-check" data-msg-id="news-ba1" checked><div class="trash-item-body"><div class="trash-item-subject">Bon Appétit Weekly Newsletter (8 unread issues)</div><div class="trash-item-meta"><span>Bon Appétit</span><span>various</span><span>Unread</span></div></div><span class="trash-reason digest">Digest</span></div>
-    <div class="trash-item" onclick="trashToggle(this)"><input type="checkbox" class="trash-check" data-msg-id="news-nyt" checked><div class="trash-item-body"><div class="trash-item-subject">"The Morning" Newsletter</div><div class="trash-item-meta"><span>NYTimes</span><span>old</span><span>Unread</span></div></div><span class="trash-reason digest">Digest</span></div>
-    <div class="trash-item" onclick="trashToggle(this)"><input type="checkbox" class="trash-check" data-msg-id="news-pinterest" checked><div class="trash-item-body"><div class="trash-item-subject">Top 10 Salad Recipes</div><div class="trash-item-meta"><span>Pinterest</span><span>old</span><span>Unread</span></div></div><span class="trash-reason digest">Digest</span></div>
-  </div>
-
-  <p style="font-size:11.5px;color:var(--muted);margin-top:10px">Excluded from this list: the "Appraisals, Next Steps" legal thread and the 5-message "Moore Patio Doors / Door Quotes" household thread — both matched the promo/deal search keywords but are active, important threads.</p>
-
-  <button class="refresh-btn" onclick="sendPrompt('Please refresh my morning briefing — Trash tab. Rebuild and overwrite the dashboard.')">↻ Refresh Trash</button>
-</section>
-
-</main>
-
-<footer>Morning Briefing · Generated 2026-06-29 · Saved to outputs folder (see chat note on Dropbox path)</footer>
+</div>
 
 <script>
+// ---------- DATA ----------
+const highEmails = [
+  {subj:"Appraisals, Next Steps", from:"ben@allcrewingdc.com", date:"Jun 25", summary:"Ben confirmed July 13 @ 1:00pm for the mediation slot with Brian Hirsch — awaiting your reply to lock it in.", link:"https://mail.google.com/mail/u/0/#all/19ef4a8bdb050c4a", msgId:"19f010558281644a", starred:true, noreply:true},
+  {subj:"Fwd: Dr. Sethi Form (4th request)", from:"ben@allcrewingdc.com", date:"Jun 22", summary:"Fourth email from Ben asking for the signed ADHD medication form for Ella — needs to reach Sandy Hill.", link:"https://mail.google.com/mail/u/0/#all/19e9cf07a4756044", msgId:"19eef8c24df47256", starred:true, noreply:true},
+  {subj:"RE: Appraisal Request", from:"appraisals@cwealthappraisals.com (Tom Kirchner)", date:"Jul 1", summary:"Appraiser can't reach you by phone — asks you to call 571-223-0311 re: the home purchase appraisal.", link:"https://mail.google.com/mail/u/0/#all/19f1ecb7f02280d4", msgId:"19f1ed0057a30e1b", starred:false, noreply:true},
+];
+const mediumEmails = [
+  {subj:"Calleva Summer Camp — Bus Route Form", from:"registration@calleva.org", date:"Jul 2", summary:"Bus/drop-off form for Liam flagged incomplete; Ben replied \"This is done\" on Jul 3 — worth confirming it actually went through.", link:"https://mail.google.com/mail/u/0/#all/19f24369ef81f268", msgId:"19f24369ef81f268", starred:false},
+  {subj:"Ghazal, I'm still waiting for your response", from:"LinkedIn — Theo Papadopoulos (Engagement Manager)", date:"Jul 2", summary:"A recruiter/engagement manager is following up again — worth a reply given active job search.", link:"https://mail.google.com/mail/u/0/#all/19f22afd92cdc8cf", msgId:"19f22afd92cdc8cf", starred:false},
+  {subj:"Confidential: Ada — Separation Agreement", from:"judy.liang@ada.cx", date:"Jun 29", summary:"Severance confirmed: 3 equal installments plus bonus on the 4th scheduled payroll date. No action needed unless you have questions.", link:"https://mail.google.com/mail/u/0/#all/19f056c9602e4c81", msgId:"19f1578a525e75bd", starred:false},
+  {subj:"Re: Cobra Sign Up", from:"judy.liang@ada.cx", date:"Jun 30", summary:"Sterling will mail COBRA sign-up instructions; coverage retroactive to July 1.", link:"https://mail.google.com/mail/u/0/#all/19f162e6b3c4b5ee", msgId:"19f195e6b0965a60", starred:false},
+];
+const socialEmails = [
+  {subj:"Field hockey camps in July and August", from:"mcleanfieldhockey@gmail.com", date:"Jul 4", status:"Informational", link:"https://mail.google.com/mail/u/0/#all/19f2e36f498819c8"},
+];
+const grades = [
+  {cls:"English 7 HN (S. Maldonado)", grade:"Not retrievable this run — flagged for Monday's full review", last:"Jun 12", link:"https://mail.google.com/mail/u/0/#all/19ebd7c15de2f07c"},
+  {cls:"Soprano Alto Chorus (K. Dawson)", grade:"Not retrievable this run — flagged for Monday's full review", last:"Jun 10", link:"https://mail.google.com/mail/u/0/#all/19eb32d59ad94298"},
+  {cls:"Health &amp; PE 7 (K. Shapiro)", grade:"A", last:"Jun 8", link:"https://mail.google.com/mail/u/0/#all/19ea86a53ef9501e"},
+  {cls:"US History 7 HN (J. Layton)", grade:"Not retrievable this run — flagged for Monday's full review", last:"Jun 3", link:"https://mail.google.com/mail/u/0/#all/19e8eb0d14208911"},
+  {cls:"Life Science HN (B. Schinstock)", grade:"Not retrievable this run — flagged for Monday's full review", last:"May 22", link:"https://mail.google.com/mail/u/0/#all/19e50a4596ea387b"},
+];
+const bensAway = [
+  {event:"Democratic Mayors Assoc. (Atlanta)", dates:"Jul 26 – Jul 29", coverage:"Not noted — confirm with Ben", notes:"Ben flies home by 9:00pm on the 29th. No overlap found with your own calendar.", link:"https://www.google.com/calendar/event?eid=Xzhvb2s4Y2E1OGtzNDZiOW82OTI0OGI5azYwb2tjYmEyNjUzMzZiYTI4OHI0MmdxNjhvbzM4Y2kzODggdGVocmFuaS5naGF6YWxAbQ&ctz=America/New_York"},
+];
+const todoistTasks = [
+  {id:"6crj774qV3Q5J77J", title:"Will / trust", pr:"p1", due:"2026-07-05", overdue:false, project:"Home / Kids / Life", label:"Ben & Ghazal"},
+  {id:"6g9JH85RmPwW36xR", title:"Levitating lotus", pr:"p1", due:"2026-07-05", overdue:false, project:"Inbox"},
+  {id:"68hmXVXrqRGqfqH3", title:"Laundry", pr:"p1", due:"2026-07-02", overdue:true, project:"Home / Kids / Life"},
+  {id:"6gHpRPPpwGm7W2mR", title:"Take iron and D", pr:"p1", due:"2026-07-02", overdue:true, project:"Inbox"},
+  {id:"68hphRMP985rgPQc", title:"Emergency Plan: fire extinguisher, no-cell plan", pr:"p1", due:"2026-07-01", overdue:true, project:"Home / Kids / Life"},
+  {id:"6XJ47qf7VjXcH8gR", title:"iMovie Liam one year", pr:"p1", due:"2026-07-01", overdue:true, project:"Inbox"},
+  {id:"6crj4wqfjgFQmqXJ", title:"Liam frames", pr:"p1", due:"2026-07-01", overdue:true, project:"Home / Kids / Life"},
+  {id:"6f2Q4vvP97GJCrWR", title:"Meditation", pr:"p1", due:"2026-07-01", overdue:true, project:"Inbox"},
+  {id:"6f4XVHfq77253FW2", title:"Paint and finish table", pr:"p1", due:"2026-07-01", overdue:true, project:"Home / Kids / Life"},
+  {id:"6fGWWvMWF2Mp4qgR", title:"Clean Walls", pr:"p1", due:"2026-07-01", overdue:true, project:"Home / Kids / Life"},
+  {id:"6fXhGF4f83GXGpF2", title:"Swap patch", pr:"p1", due:"2026-07-01", overdue:true, project:"Inbox"},
+  {id:"6fj8cqgMXrCx3GWR", title:"Call Pat", pr:"p1", due:"2026-07-01", overdue:true, project:"Inbox"},
+  {id:"6g4PcJ3WWV7F6cCR", title:"Farsi", pr:"p1", due:"2026-07-01", overdue:true, project:"Inbox"},
+  {id:"6g9JF7rwJWV6hhgR", title:"Plan summer vacation", pr:"p1", due:"2026-07-01", overdue:true, project:"Inbox"},
+  {id:"6gHpCQWqW9vr68H2", title:"Decide on Ocean's Calling", pr:"p1", due:"2026-07-01", overdue:true, project:"Inbox"},
+  {id:"6gHpV2Q5wVJx9QVR", title:"Take vitamin D", pr:"p1", due:"2026-07-01", overdue:true, project:"Inbox"},
+  {id:"6gJCjq9mMGWXmGQR", title:"Rise seeds", pr:"p1", due:"2026-07-01", overdue:true, project:"Inbox"},
+  {id:"6gJCmQGrrWWGMr3R", title:"Spend Nordstrom gift card", pr:"p1", due:"2026-07-01", overdue:true, project:"Inbox"},
+  {id:"6gJwQcJ6jRjJ2Xf2", title:"Schedule Great Falls Eye Center / Ophthalmologist", pr:"p1", due:"2026-07-01", overdue:true, project:"Inbox"},
+  {id:"6gP562FJchv6rHmR", title:"Monitors and desk", pr:"p1", due:"2026-07-01", overdue:true, project:"Inbox"},
+  {id:"6gRxh7rF2vVc9q72", title:"Claude training", pr:"p1", due:"2026-07-01", overdue:true, project:"Inbox"},
+  {id:"6gXGmQWMJ7vFVP6R", title:"Jeweler to sell diamond", pr:"p1", due:"2026-07-01", overdue:true, project:"Inbox"},
+  {id:"6gcjrFpP2fHV5vP2", title:"Call Fidelity — 800-544-0003 (Transition Services)", pr:"p1", due:"2026-07-01", overdue:true, project:"Inbox"},
+  {id:"6ggmfvq58FM3rrq2", title:"Reimbursement for SACC (Apr/May/June)", pr:"p1", due:"2026-07-01", overdue:true, project:"Inbox"},
+  {id:"6ggrP53rg8JHXjMR", title:"Look up 2011–2014 IRA", pr:"p1", due:"2026-07-01", overdue:true, project:"Inbox"},
+  {id:"6gwh5CP2wH9g79mR", title:"Mind Vida", pr:"p1", due:"2026-07-01", overdue:true, project:"Inbox"},
+  {id:"6gwh72v3Ghg2FRx2", title:"G Appraisal finalized", pr:"p1", due:"2026-07-01", overdue:true, project:"Inbox"},
+  {id:"6h2CR9MFPC6q77g2", title:"Fwd: Williams-Sonoma B2B account", pr:"p1", due:"2026-07-01", overdue:true, project:"Inbox"},
+  {id:"6h2CRF9gGMXfHjXR", title:"Mediated MSA — draft #1", pr:"p1", due:"2026-07-01", overdue:true, project:"Inbox"},
+  {id:"6h2JP4W2VRXMfhgJ", title:"Calleva Summer Camp — Bus Route Form", pr:"p1", due:"2026-07-01", overdue:true, project:"Home / Kids / Life"},
+  {id:"6WgFC8jCQfWq9FwR", title:"Playlists", pr:"p2", due:"2026-07-01", overdue:true, project:"Ghazal"},
+  {id:"6WgFPC8643PHJpw2", title:"Pictures 2020–2025 clean up", pr:"p2", due:"2026-07-01", overdue:true, project:"Media"},
+  {id:"6WpPqH9j2gG2gr5R", title:"Buy chair for guest room", pr:"p2", due:"2026-07-01", overdue:true, project:"Buy List"},
+  {id:"6WpPqHmg54Wr3WpR", title:"Buy mirrors for guest room", pr:"p2", due:"2026-07-01", overdue:true, project:"Buy List"},
+  {id:"6WpgCQV92MCwHFwV", title:"iPhoto cleanup", pr:"p2", due:"2026-07-01", overdue:true, project:"Apple Care List"},
+  {id:"6Wr4RfJHm9VqvR87", title:"Picture org 2020 and beyond", pr:"p2", due:"2026-07-01", overdue:true, project:"Media"},
+  {id:"6Wr4rwGchWV7mrmP", title:"Add missing 2017 videos to Dropbox", pr:"p2", due:"2026-07-01", overdue:true, project:"Media"},
+  {id:"6X94m3fJQVcVQpVR", title:"Vagus nerve exercises", pr:"p2", due:"2026-07-01", overdue:true, project:"Inbox"},
+  {id:"6X9VGcXJhQqfMRJR", title:"Japanese pancakes", pr:"p2", due:"2026-07-01", overdue:true, project:"Ghazal"},
+  {id:"6c57hWWJ4gv2CvhR", title:"Work on pitch deck (comparables, wellness/hospitality, AI format)", pr:"p2", due:"2026-07-01", overdue:true, project:"Amaterra"},
+  {id:"6crCgwmPfvFFPRX2", title:"Acres report?", pr:"p2", due:"2026-07-01", overdue:true, project:"Inbox"},
+  {id:"6crVC589mX3xJFcf", title:"Desk for G office", pr:"p2", due:"2026-07-01", overdue:true, project:"Buy List"},
+  {id:"6crVCJ8VpCF2hvP7", title:"Bathroom chair / bench", pr:"p2", due:"2026-07-01", overdue:true, project:"Buy List"},
+  {id:"6crVCQ2q3C8gmQMf", title:"Master couch", pr:"p2", due:"2026-07-01", overdue:true, project:"Buy List"},
+  {id:"6ggMvHWq99jq56C2", title:"Look for 2015/2016 Form 5498", pr:"p4", due:"2026-07-01", overdue:true, project:"Inbox"},
+];
+const projects = ["Inbox","Home / Kids / Life","Personal","Ghazal","Media","Buy List","Jobby Job","Ada","Amaterra","Apple Care List"];
+const suggestedTasks = [
+  {title:"Reply to Ben — confirm July 13 @ 1:00pm mediation slot", pr:"p1", project:"Home / Kids / Life", source:"https://mail.google.com/mail/u/0/#all/19ef4a8bdb050c4a"},
+  {title:"Sign & send Dr. Sethi ADHD medication form for Ella", pr:"p1", project:"Home / Kids / Life", source:"https://mail.google.com/mail/u/0/#all/19e9cf07a4756044"},
+  {title:"Follow up with Theo Papadopoulos on LinkedIn (job lead)", pr:"p2", project:"Jobby Job", source:"https://mail.google.com/mail/u/0/#all/19f22afd92cdc8cf"},
+];
+const newsAI = [
+  {title:"Claude Sonnet 5 becomes default for all Free & Pro users", src:"buildfastwithai.com", date:"Jul 3, 2026", link:"https://www.buildfastwithai.com/blogs/ai-news-today-july-3-2026", take:"Anthropic's most agentic Sonnet yet performs close to flagship Opus 4.8, at introductory pricing through August 31."},
+  {title:"TLT's AI Brief: July 2026", src:"tlt.com", date:"Jul 2026", link:"https://www.tlt.com/insights-and-events/insight/tlts-ai-brief-july-2026", take:"Legal/regulatory roundup of the month's key AI developments for enterprises."},
+  {title:"UN Global Dialogue on AI Governance opens in Geneva", src:"news.un.org", date:"Jul 2026", link:"https://news.un.org/en/story/2026/07/1167848", take:"Member states begin talks July 6 on international approaches to managing AI."},
+  {title:"Latest AI model releases tracked", src:"llm-stats.com", date:"Jul 2026", link:"https://llm-stats.com/llm-updates", take:"Includes Fable 5's return to all users after export controls were lifted July 1."},
+];
+const newsTech = [
+  {title:"Top Tech News Today, July 3 2026", src:"techstartups.com", date:"Jul 3, 2026", link:"https://techstartups.com/2026/07/03/top-tech-news-today-july-3-2026/", take:"Microsoft launches Frontier Company, a $2.5B unit embedding ~6,000 AI specialists with enterprise clients."},
+  {title:"Top Tech News Today, July 2 2026", src:"techstartups.com", date:"Jul 2, 2026", link:"https://techstartups.com/2026/07/02/top-tech-news-today-july-2-2026/", take:"Bloom Energy and Brookfield expand their AI infrastructure power partnership from $5B to $25B."},
+  {title:"Top Tech News Today, July 1 2026", src:"techstartups.com", date:"Jul 1, 2026", link:"https://techstartups.com/2026/07/01/top-tech-news-today-july-1-2026/", take:"OpenAI floats an equity stake to the US government as Meta preps renting out its own AI compute."},
+  {title:"SciTechDaily — Science, Space & Technology News", src:"scitechdaily.com", date:"Ongoing", link:"https://scitechdaily.com/", take:"Rolling coverage hub for the latest science and technology research stories."},
+];
+const newsPS = [
+  {title:"2026 Consulting Trends: Uncertainty and AI Disruption", src:"deltek.com", date:"2026", link:"https://www.deltek.com/en/blog/10-key-consulting-moves", take:"Firms are shifting from deliverable-based pricing toward outcome-based, client-KPI pricing models."},
+  {title:"Professional Services Industry Outlook 2026", src:"bpm.com", date:"2026", link:"https://www.bpm.com/insights/professional-services-industry-outlook-2026/", take:"AI adoption in professional services has roughly doubled in 2026, reaching 40% of revenue in AI consulting."},
+  {title:"A perfect storm is coming for legacy consulting firms", src:"Fast Company", date:"2026", link:"https://www.fastcompany.com/91528872/a-perfect-storm-is-coming-for-legacy-consulting-firms-management-consulting-ai-transformation-technology", take:"Clients now expect measurable ROI, not just decks and research — pressuring legacy firm margins."},
+  {title:"The Year So Far: PS Industry Predictions at Mid-2026", src:"mcgowanprofessional.com", date:"2026", link:"https://mcgowanprofessional.com/the-year-so-far-understanding-how-professional-services-industry-predictions-and-trends-are-playing-out-halfway-through-2026/", take:"Checks 2026 predictions against reality at the halfway mark for professional services firms."},
+];
+const trashData = {
+  "Promotions & Marketing":[
+    {subj:"Don't Miss Our Largest Sample Sale Yet", from:"shop@jadeswim.com", date:"Jul 5", reason:"deal", id:"19f31efbfe5204e7"},
+    {subj:"Don't Miss These Fourth of July Savings!", from:"hello@style.dillards.com", date:"Jul 4", reason:"deal", id:"19f2e636420396a2"},
+    {subj:"Happy July 4th from MYB!", from:"no-reply@ottosportmail.ai", date:"Jul 4", reason:"promo", id:"19f2d5b1595c61ed"},
+    {subj:"A Journey Into The Sacred Realms Of Healing", from:"info@thesacredscience.com", date:"Jul 2", reason:"promo", id:"19f226128e0bf3b7"},
+    {subj:"what's the plan, Ghazal", from:"douglas_fisher@franchiseopportunitieshub.com", date:"Jul 1", reason:"promo", id:"19f1eb306d63afc9"},
+    {subj:"Making Life More Affordable for America's Seniors", from:"Information@update.ssa.gov", date:"Jul 2", reason:"promo", id:"19f23bbfde9826da"},
+    {subj:"unimproved land in Madison", from:"bright@mtxmsg.brightmls.com", date:"Jul 2", reason:"promo", id:"19f2418bf17e4869"},
+    {subj:"New rental in McLean at $5,400/mo", from:"listings@redfin.com", date:"Jul 1", reason:"promo", id:"19f1e851dad3ba0f"},
+    {subj:"Helping Your Daughter Build Responsibility", from:"laura=thebravegirlproject.com@c.kajabimail.net", date:"Jul 5", reason:"promo", id:"19f31efe06025cb2"},
+  ],
+  "Automated Notifications":[
+    {subj:"Thanks for using AutoPay — your bill is available", from:"Electronic_billingEB@domenergyvanceb.com", date:"Jul 3", reason:"auto", id:"19f27e5fa676c269"},
+    {subj:"Your new subscription", from:"no-reply@amazon.com", date:"Jun 30", reason:"auto", id:"19f1938cab7a6bd4"},
+    {subj:"Receipt from The Organic Butcher of McLean", from:"messenger@messaging.squareup.com", date:"Jun 29", reason:"auto", id:"19f154b404931342"},
+    {subj:"Reminder: Survey for SACC and Beyond the Bell Families", from:"member@surveymonkeyuser.com", date:"Jul 2", reason:"auto", id:"19f22eea49b25549"},
+    {subj:"Your tracked flight to San José is now $1,148", from:"noreply-travel@google.com", date:"Jul 2", reason:"auto", id:"19f232f71fe83fec"},
+    {subj:"Top suggestions for Ghazal", from:"info@members.netflix.com", date:"Jul 4", reason:"auto", id:"19f2ea4c76b1bfe7"},
+    {subj:"Order #515170 Confirmed", from:"hello@revisionskincare.com", date:"Apr 20", reason:"auto", id:"19dac5685bd79236"},
+    {subj:"Shipped! Your order 357464748", from:"crateandbarrel@mail.crateandbarrel.com", date:"Apr 7", reason:"auto", id:"19d68944db309360"},
+    {subj:"Your order 357464748 is confirmed!", from:"crateandbarrel@mail.crateandbarrel.com", date:"Apr 5", reason:"auto", id:"19d5efb8323d5201"},
+    {subj:"Your order #352318971 has been processed", from:"sales@t.revolve.com", date:"Mar 7", reason:"auto", id:"19cca3740369d36d"},
+  ],
+  "Newsletters & Digests":[
+    {subj:"Word of the Day: Truculent", from:"hello@worddaily.com", date:"Jul 5", reason:"digest", id:"19f31fbce28d342d"},
+    {subj:"The Week In Ideas", from:"info@nl.mail.washingtonpost.com", date:"Jul 5", reason:"digest", id:"19f31f8491e0b4fb"},
+    {subj:"Global Frequency — 5 July 2026", from:"globalfrequency1001@substack.com", date:"Jul 5", reason:"digest", id:"19f31f70cf357771"},
+    {subj:"The 7: Reflecting Pool vandalism, cannabis safety & more", from:"info@nl.mail.washingtonpost.com", date:"Jul 3", reason:"digest", id:"19f27a2ed918cc39"},
+    {subj:"FOLLOW UP: dogs locked in van", from:"no-reply@rs.email.nextdoor.com", date:"Jul 5", reason:"digest", id:"19f303951b6d74c9"},
+    {subj:"Teenager who disappeared in Potomac found dead", from:"reply@rs.email.nextdoor.com", date:"Jul 4", reason:"digest", id:"19f2e45c29b36f34"},
+    {subj:"Miso-peanut chicken", from:"email@newsletter.bonappetit.com", date:"Jul 4", reason:"digest", id:"19f2d002d326ae11"},
+    {subj:"A cookout menu that's as breezy as summer", from:"email@newsletter.bonappetit.com", date:"Jul 3", reason:"digest", id:"19f28be4dbe2224a"},
+    {subj:"Recipe: Easy Cherry Berry Pie", from:"coachelissa@substack.com", date:"Jul 3", reason:"digest", id:"19f28e09519cf5d8"},
+    {subj:"This July 4, we salute America the Barbecue", from:"email@newsletter.bonappetit.com", date:"Jul 3", reason:"digest", id:"19f27a2fce7e6c81"},
+    {subj:"Banana Pudding Cake & more", from:"email@newsletter.bonappetit.com", date:"Jul 2", reason:"digest", id:"19f24340b829a8a4"},
+    {subj:"25 easy weeknight dinners we're making in June", from:"email@newsletter.bonappetit.com", date:"Jun 5", reason:"digest", id:"19e999658ccde654"},
+    {subj:"The Morning: Look closely", from:"nytdirect@nytimes.com", date:"Jun 4", reason:"digest", id:"19e923b08443c5ce"},
+    {subj:"Knockout carrot sheet cake", from:"email@newsletter.bonappetit.com", date:"May 30", reason:"digest", id:"19e78c8ac5e5e7a4"},
+    {subj:"Miso chicken soba bowls", from:"email@newsletter.bonappetit.com", date:"May 25", reason:"digest", id:"19e5f029c3a7356a"},
+    {subj:"No-fail roast chicken with lemon and garlic", from:"email@newsletter.bonappetit.com", date:"May 20", reason:"digest", id:"19e45439207f214e"},
+    {subj:"Very good cheese boards for your next party", from:"email@newsletter.bonappetit.com", date:"May 19", reason:"digest", id:"19e401cbe73b2c27"},
+    {subj:"The Buffalo chicken dip I make for every party", from:"email@newsletter.bonappetit.com", date:"Jan 29", reason:"digest", id:"19c09d807737fd00"},
+  ],
+};
+
+// ---------- RENDER ----------
 function showTab(id){
   document.querySelectorAll('.tab-section').forEach(s=>s.classList.remove('active'));
   document.querySelectorAll('.tab-btn').forEach(b=>b.classList.remove('active'));
@@ -604,91 +396,238 @@ function showTab(id){
   document.querySelector('[data-tab="'+id+'"]').classList.add('active');
 }
 function showSub(id){
-  document.querySelectorAll('.sub-section').forEach(s=>s.classList.remove('active'));
-  document.querySelectorAll('#tab-inbox .subtab-btn').forEach(b=>b.classList.remove('active'));
+  document.querySelectorAll('.subtab-panel').forEach(s=>{if(s.id.startsWith('sub-'))s.classList.remove('active');});
+  document.querySelectorAll('.subtab-btn[data-sub]').forEach(b=>b.classList.remove('active'));
   document.getElementById('sub-'+id).classList.add('active');
   document.querySelector('[data-sub="'+id+'"]').classList.add('active');
 }
-function showSub2(id){
-  document.querySelectorAll('.sub2-section').forEach(s=>s.style.display='none');
-  document.querySelectorAll('#tab-news .subtab-btn').forEach(b=>b.classList.remove('active'));
-  document.getElementById('sub2-'+id).style.display='block';
-  document.querySelector('[data-sub2="'+id+'"]').classList.add('active');
+function showNews(id){
+  document.querySelectorAll('.subtab-panel').forEach(s=>{if(s.id.startsWith('news-'))s.classList.remove('active');});
+  document.querySelectorAll('.subtab-btn[data-nsub]').forEach(b=>b.classList.remove('active'));
+  document.getElementById('news-'+id).classList.add('active');
+  document.querySelector('[data-nsub="'+id+'"]').classList.add('active');
 }
+
 function toggleStar(btn){
   const newState = btn.dataset.starred !== 'true';
   btn.dataset.starred = String(newState);
   btn.textContent = newState ? '★' : '☆';
-  btn.classList.toggle('starred', newState);
   btn.title = newState ? 'Unstar this email' : 'Star this email';
   const action = newState ? 'Star' : 'Unstar';
   sendPrompt(action + ' Gmail message ID ' + btn.dataset.msgId + ' via Gmail MCP');
 }
-function restripe(sel){
-  const card = sel.closest('.task-card');
-  card.classList.remove('p1','p2','p3','p4');
-  card.classList.add('p'+sel.value);
+
+function renderEmailList(container, list, highlight){
+  if(!list.length){container.innerHTML='<div class="empty-state">No items in this category today.</div>';return;}
+  container.innerHTML = list.map(e=>`
+    <div class="email-item ${highlight?'high':''}">
+      <div style="flex:1">
+        <div><a href="${e.link}" target="_blank">${e.subj}</a>${e.noreply?'<span class="noreply-badge">⚠️ No reply</span>':''}</div>
+        <div class="email-meta">${e.from} &middot; ${e.date}</div>
+        <div class="email-summary">${e.summary}</div>
+      </div>
+      <button class="star-btn" data-msg-id="${e.msgId}" data-starred="${e.starred}" onclick="toggleStar(this)" title="${e.starred?'Unstar':'Star'} this email">${e.starred?'★':'☆'}</button>
+    </div>`).join('');
 }
-function pushUpdates(){
+renderEmailList(document.getElementById('sub-high'), highEmails, true);
+renderEmailList(document.getElementById('sub-medium'), mediumEmails, false);
+
+document.getElementById('sub-social').innerHTML = socialEmails.length ? socialEmails.map(e=>`
+  <div class="email-item"><div style="flex:1">
+    <div><a href="${e.link}" target="_blank">${e.subj}</a></div>
+    <div class="email-meta">${e.from} &middot; ${e.date} &middot; ${e.status}</div>
+  </div></div>`).join('') : '<div class="empty-state">No items in this category today.</div>';
+
+document.getElementById('sub-school').innerHTML = `
+  <div class="empty-state" style="text-align:left;padding:6px 0 16px;">🏫 School is out for summer — no recent FCPS emails. Showing Ella's Grade Snapshot from the last known progress reports (inbox + trash, last 90 days).</div>
+  <table><thead><tr><th>Class</th><th>Final / Progress Grade</th><th>Last Email</th><th>Source</th></tr></thead><tbody>
+  ${grades.map(g=>`<tr><td>${g.cls}</td><td>${g.grade==='A'?'<b>A</b>':g.grade}</td><td>${g.last}</td><td><a href="${g.link}" target="_blank" style="color:var(--accent);">Open ↗</a></td></tr>`).join('')}
+  </tbody></table>`;
+
+// Action Flags (Home)
+const actionFlags = [
+  {tag:"EMAIL",cls:"",html:`<a href="https://mail.google.com/mail/u/0/#all/19ef4a8bdb050c4a" target="_blank">Appraisals, Next Steps</a> — Ben awaiting your confirmation on the July 13 @ 1:00pm mediation slot, no reply sent since Jun 25.`},
+  {tag:"EMAIL",cls:"",html:`<a href="https://mail.google.com/mail/u/0/#all/19e9cf07a4756044" target="_blank">Dr. Sethi Form</a> — Ben's 4th request for Ella's ADHD medication form signature, no reply sent since Jun 22.`},
+  {tag:"EMAIL",cls:"",html:`<a href="https://mail.google.com/mail/u/0/#all/19f1ecb7f02280d4" target="_blank">Appraisal Request</a> — Tom Kirchner asking you to call 571-223-0311 re: home purchase appraisal (Jul 1).`},
+  {tag:"EMAIL",cls:"",html:`<a href="https://mail.google.com/mail/u/0/#all/19f24369ef81f268" target="_blank">Calleva Bus Route Form</a> — flagged incomplete for Liam; Ben says "done" Jul 3 — worth verifying.`},
+  {tag:"EMAIL",cls:"",html:`<a href="https://mail.google.com/mail/u/0/#all/19f22afd92cdc8cf" target="_blank">LinkedIn — Theo Papadopoulos</a> still waiting on your response (Jul 2).`},
+  {tag:"OVERDUE TASK",cls:"overdue",html:`<a href="javascript:showTab('todoist')">Will / trust</a> — due today, P1.`},
+  {tag:"OVERDUE TASK",cls:"overdue",html:`<a href="javascript:showTab('todoist')">G Appraisal finalized</a> — overdue since Jul 1, P1.`},
+  {tag:"OVERDUE TASK",cls:"overdue",html:`<a href="javascript:showTab('todoist')">Mediated MSA — draft #1</a> — overdue since Jul 1, P1.`},
+  {tag:"OVERDUE TASK",cls:"overdue",html:`<a href="javascript:showTab('todoist')">Call Fidelity — Transition Services</a> — overdue since Jul 1, P1.`},
+  {tag:"OVERDUE TASK",cls:"overdue",html:`<a href="javascript:showTab('todoist')">Reimbursement for SACC</a> (Apr/May/June) — overdue since Jul 1, P1.`},
+  {tag:"CALENDAR",cls:"cal",html:`<a href="javascript:showTab('calendar')">Liam's Birthday</a> — Jul 13, no gift/plan task on Todoist yet.`},
+  {tag:"CALENDAR",cls:"cal",html:`<a href="javascript:showTab('calendar')">Ben in Atlanta</a> (Democratic Mayors Assoc.) — Jul 26–29, confirm kid coverage.`},
+];
+document.getElementById('actionFlags').innerHTML = actionFlags.map(f=>`
+  <div class="flag-row"><span class="flag-tag ${f.cls}">${f.tag}</span><div class="flag-body">${f.html}</div></div>`).join('');
+
+// Strategic Insights (Home)
+const insights = [
+  {type:"risk",label:"🔴 Risk",title:"Legal timeline stalling",body:`The mediation appraisal thread has been waiting on your confirmation since Jun 25 — Ben: "13th @ 1:00pm works for me — GHAZAL?" (<a href="https://mail.google.com/mail/u/0/#all/19ef4a8bdb050c4a" target="_blank">link</a>). Delaying risks losing the Jul 13 slot with Brian Hirsch and pushing the settlement timeline further.`},
+  {type:"watch",label:"🟡 Watch",title:"Ella's ADHD medication form unresolved",body:`Ben has emailed four times since Jun 12 about the Dr. Sethi signature needed before Ella can take her medication (<a href="https://mail.google.com/mail/u/0/#all/19e9cf07a4756044" target="_blank">link</a>), with no reply visible in Sent mail. Worth resolving before camp/travel needs it.`},
+  {type:"pattern",label:"🔵 Pattern",title:"Todoist backlog has calcified",body:`28 P1 tasks are overdue, almost all dated Jul 1 — four days stale. Suggests the list isn't getting triaged daily rather than a true one-off backlog.`},
+  {type:"opp",label:"🟢 Opportunity",title:"Two live job-search threads",body:`Granola notes from the Jun 28 Cindy Wallace call flag a job lead expected mid-August via a trusted contact, and LinkedIn's Theo Papadopoulos is still waiting on a reply from Jul 2 (<a href="https://mail.google.com/mail/u/0/#all/19f22afd92cdc8cf" target="_blank">link</a>). With the Ada severance now finalized, this is a good moment to re-engage both.`},
+  {type:"pattern",label:"🔵 Pattern",title:"Parallel house-hunting activity",body:`A new appraiser contact (Tom Kirchner) is asking for a callback (<a href="https://mail.google.com/mail/u/0/#all/19f1ecb7f02280d4" target="_blank">link</a>) alongside fresh Redfin/Bright MLS alerts this week — the land/home search is active and the appraisal callback is time-sensitive.`},
+];
+document.getElementById('insights').innerHTML = insights.map(i=>`
+  <div class="insight-card ${i.type}"><div class="insight-label">${i.label}</div><div class="insight-title">${i.title}</div><div>${i.body}</div></div>`).join('');
+
+// Calendar tab
+document.getElementById('calToday').innerHTML = `
+  <div class="event-card"><div class="event-time">Today, Jul 5 (all day)</div><a href="https://www.google.com/calendar/event?eid=XzZvcTQyY3BnNjEwa2FiOWs4bDBqOGI5azZoMzNhYjlvNmtvajJiYTU4Y3IzNGQxbDZrcms4aGkyNnNfMjAyNjA3MDUgdGVocmFuaS5naGF6YWxAbQ&ctz=America/New_York" target="_blank">Parees' Birthday</a></div>
+  <div class="event-card"><div style="color:var(--muted);">No work meetings today.</div></div>
+  <div class="event-card"><div class="event-time">Tomorrow, Jul 6 (all day)</div><a href="https://www.google.com/calendar/event?eid=XzZvb2o0aGE0Nm9yNDhiYTQ2Y3I0Y2I5azYwb2pjYjlvNnQxNGNiOWs2NG9rYWQyNTZncDM2Y3BtOGNfMjAyNjA3MDYgdGVocmFuaS5naGF6YWxAbQ&ctz=America/New_York" target="_blank">Recycle</a> (reminder)</div>
+  <div class="event-card"><span class="newcontact">No meetings scheduled — no meeting prep needed today.</span></div>`;
+
+document.getElementById('calInvites').innerHTML = `
+  <div style="margin-bottom:14px;"><b style="font-size:13px;">New .ics Invites</b><div class="empty-state" style="padding:10px 0;">No new calendar invites in the last 60 days.</div></div>
+  <div><b style="font-size:13px;">Calendar Suggestions</b>
+  <div class="flag-row"><span class="flag-tag cal">WEATHER</span><div class="flag-body">Severe thunderstorm + 100°F heat risk today — no outdoor items on your calendar, but keep plans flexible.</div></div>
+  <div class="flag-row"><span class="flag-tag cal">UPCOMING</span><div class="flag-body">Liam's Birthday is Jul 13 with no prep/gift task yet — consider adding one in Todoist.</div></div>
+  </div>`;
+
+document.getElementById('bensAway').querySelector('tbody').innerHTML = bensAway.map(b=>`
+  <tr><td><a href="${b.link}" target="_blank" style="color:var(--accent);">${b.event}</a></td><td>${b.dates}</td><td>${b.coverage}</td><td>${b.notes}</td></tr>`).join('');
+
+// Todoist tab
+function sortTasks(list){
+  const prOrder={p1:0,p2:1,p3:2,p4:3};
+  return [...list].sort((a,b)=>{
+    if(a.overdue!==b.overdue) return a.overdue?-1:1;
+    if(prOrder[a.pr]!==prOrder[b.pr]) return prOrder[a.pr]-prOrder[b.pr];
+    return a.due.localeCompare(b.due);
+  });
+}
+function renderTodoist(){
+  const sorted = sortTasks(todoistTasks);
+  const overdueCount = todoistTasks.filter(t=>t.overdue).length;
+  document.getElementById('todoCount').innerHTML = `📋 In Todoist &middot; ${todoistTasks.length} tasks &middot; <span style="color:var(--red);font-weight:700;">${overdueCount} overdue</span>`;
+  document.getElementById('todoList').innerHTML = sorted.map(t=>`
+    <div class="td-task" data-id="${t.id}">
+      <div class="stripe ${t.pr}"></div>
+      <div class="td-content">
+        <input class="td-title" value="${t.title.replace(/"/g,'&quot;')}">
+        <div class="td-row2">
+          <select onchange="updateStripe(this)">
+            <option value="p1" ${t.pr==='p1'?'selected':''}>P1</option>
+            <option value="p2" ${t.pr==='p2'?'selected':''}>P2</option>
+            <option value="p3" ${t.pr==='p3'?'selected':''}>P3</option>
+            <option value="p4" ${t.pr==='p4'?'selected':''}>P4</option>
+          </select>
+          <input type="date" value="${t.due}">
+          <span class="proj-tag">${t.project}</span>
+          ${t.overdue?'<span class="overdue-badge">Overdue</span>':'<span class="today-badge">Due today</span>'}
+          <a href="#" style="font-size:11px;color:var(--accent);">Open ↗</a>
+          <button class="done-btn" onclick="markDone('${t.id}')">✓ Done</button>
+        </div>
+      </div>
+    </div>`).join('');
+}
+function updateStripe(sel){
+  const stripe = sel.closest('.td-task').querySelector('.stripe');
+  stripe.className = 'stripe ' + sel.value;
+}
+function markDone(id){ sendPrompt('Mark Todoist task ' + id + ' complete via MCP'); }
+function pushTodoistUpdates(){
   const approved = [];
-  document.querySelectorAll('#tab-todoist .todoist-col:not(.right) .task-approve:checked').forEach(cb=>{
-    const card = cb.closest('.task-card');
+  document.querySelectorAll('#todoList .td-task').forEach(row=>{
     approved.push({
-      id: card.dataset.id,
-      content: card.querySelector('.task-title').value,
-      priority: parseInt(card.querySelector('.task-priority').value),
-      due_date: card.querySelector('.task-due').value
+      id: row.dataset.id,
+      title: row.querySelector('.td-title').value,
+      priority: row.querySelector('select').value,
+      due: row.querySelector('input[type=date]').value,
     });
   });
-  if(!approved.length){ alert('Check at least one task to update.'); return; }
   sendPrompt('Update these existing Todoist tasks via MCP: ' + JSON.stringify(approved));
 }
-function addSuggested(){
+renderTodoist();
+
+document.getElementById('suggCount').innerHTML = `💡 Suggested from Email &amp; Calendar &middot; ${suggestedTasks.length} open loops`;
+document.getElementById('suggList').innerHTML = suggestedTasks.map((t,i)=>`
+  <div class="td-task" data-idx="${i}">
+    <div class="stripe ${t.pr}"></div>
+    <div class="td-content">
+      <input class="td-title" value="${t.title.replace(/"/g,'&quot;')}">
+      <div class="td-row2">
+        <select onchange="updateStripe(this)">
+          <option value="p1" ${t.pr==='p1'?'selected':''}>P1</option>
+          <option value="p2" ${t.pr==='p2'?'selected':''}>P2</option>
+          <option value="p3" ${t.pr==='p3'?'selected':''}>P3</option>
+          <option value="p4" ${t.pr==='p4'?'selected':''}>P4</option>
+        </select>
+        <input type="date" value="2026-07-05">
+        <select class="proj-select">
+          ${projects.map(p=>`<option value="${p}" ${p===t.project?'selected':''}>${p}</option>`).join('')}
+        </select>
+        <a href="${t.source}" target="_blank" style="font-size:11px;color:var(--accent);">Source ↗</a>
+      </div>
+    </div>
+  </div>`).join('');
+function addApprovedTasks(){
   const toCreate = [];
-  let missingProject = false;
-  document.querySelectorAll('#tab-todoist .todoist-col.right .task-approve:checked').forEach(cb=>{
-    const card = cb.closest('.task-card');
-    const projectId = card.querySelector('.task-project-picker').value;
-    if(!projectId){ missingProject = true; return; }
+  document.querySelectorAll('#suggList .td-task').forEach(row=>{
     toCreate.push({
-      content: card.querySelector('.task-title').value,
-      priority: parseInt(card.querySelector('.task-priority').value),
-      due_date: card.querySelector('.task-due').value,
-      project_id: projectId
+      title: row.querySelector('.td-title').value,
+      priority: row.querySelector('select').value,
+      due: row.querySelector('input[type=date]').value,
+      project: row.querySelector('.proj-select').value,
     });
   });
-  if(missingProject){ alert('Please select a project for every checked task.'); return; }
-  if(!toCreate.length){ alert('Check at least one suggested task to add.'); return; }
   sendPrompt('Create these new Todoist tasks via MCP: ' + JSON.stringify(toCreate));
 }
-function trashToggle(row){
-  const cb = row.querySelector('.trash-check');
-  cb.checked = !cb.checked;
-  row.classList.toggle('deselected', !cb.checked);
+
+// News tab
+function renderNews(container, list){
+  container.innerHTML = list.length ? list.map(n=>`
+    <div class="news-card">
+      <a href="${n.link}" target="_blank">${n.title}</a>
+      <div class="news-meta">${n.src} &middot; ${n.date}</div>
+      <div>${n.take}</div>
+    </div>`).join('') : '<div class="empty-state">Could not fetch news today — try refreshing.</div>';
+}
+renderNews(document.getElementById('news-ai'), newsAI);
+renderNews(document.getElementById('news-tech'), newsTech);
+renderNews(document.getElementById('news-ps'), newsPS);
+
+// Trash tab
+function renderTrash(){
+  const groups = Object.keys(trashData);
+  document.getElementById('trashGroups').innerHTML = groups.map(g=>`
+    <div class="trash-group"><h3>${g}</h3>
+    ${trashData[g].map(e=>`
+      <div class="trash-item" onclick="trashToggle(this, event)">
+        <input type="checkbox" class="trash-check" data-msg-id="${e.id}" checked onclick="event.stopPropagation();updateTrashCount();">
+        <div class="trash-item-body">
+          <div class="trash-item-subject">${e.subj}</div>
+          <div class="trash-item-meta"><span>${e.from}</span><span>${e.date}</span><span>Unread</span></div>
+        </div>
+        <span class="trash-reason ${e.reason}">${e.reason.charAt(0).toUpperCase()+e.reason.slice(1)}</span>
+      </div>`).join('')}
+    </div>`).join('');
   updateTrashCount();
 }
-function trashSelectAll(state){
-  document.querySelectorAll('.trash-check').forEach(cb=>{
-    cb.checked = state;
-    cb.closest('.trash-item').classList.toggle('deselected', !state);
-  });
+function trashToggle(el, ev){
+  const cb = el.querySelector('.trash-check');
+  if(ev.target !== cb) cb.checked = !cb.checked;
+  el.classList.toggle('deselected', !cb.checked);
   updateTrashCount();
 }
+function trashSelectAll(){ document.querySelectorAll('.trash-check').forEach(cb=>{cb.checked=true;cb.closest('.trash-item').classList.remove('deselected');}); updateTrashCount(); }
+function trashDeselectAll(){ document.querySelectorAll('.trash-check').forEach(cb=>{cb.checked=false;cb.closest('.trash-item').classList.add('deselected');}); updateTrashCount(); }
 function updateTrashCount(){
-  const all = document.querySelectorAll('.trash-check').length;
-  const checked = document.querySelectorAll('.trash-check:checked').length;
-  document.getElementById('trash-count').textContent = checked + ' of ' + all + ' selected for trash · ' + (all-checked) + ' kept';
-  const btn = document.getElementById('trash-send-btn');
-  btn.textContent = '🗑️ Send to Trash (' + checked + ')';
-  btn.disabled = checked === 0;
+  const all = document.querySelectorAll('.trash-check');
+  const checked = document.querySelectorAll('.trash-check:checked');
+  document.getElementById('trashCountLine').textContent = `${checked.length} of ${all.length} selected for trash · ${all.length-checked.length} kept`;
+  document.getElementById('sendTrashBtn').textContent = `🗑️ Send to Trash (${checked.length})`;
+  document.getElementById('sendTrashBtn').disabled = checked.length===0;
 }
 function sendToTrash(){
   const ids = [];
   document.querySelectorAll('.trash-check:checked').forEach(cb => ids.push(cb.dataset.msgId));
   sendPrompt('Move these Gmail message IDs to trash via Gmail MCP: ' + JSON.stringify(ids));
 }
-document.querySelectorAll('.trash-item input').forEach(cb=>cb.addEventListener('click', e=>e.stopPropagation()));
-showTab('home');
+renderTrash();
 </script>
 </body>
 </html>
