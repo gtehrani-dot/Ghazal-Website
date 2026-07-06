@@ -690,7 +690,12 @@ const ELLA_CLASSES = [
   {cls:'Life Science HN',     teacher:'Beth Schinstock',   from:'elschinstock@fcps.edu'}
 ];
 const PARENTVUE_QUERY = 'in:anywhere from:noreply@fcps.edu subject:"Grade Book Summary"';
-const LIAM_SCHOOL_QUERY = 'in:anywhere from:fcps.edu newer_than:30d -from:smaldonado1@fcps.edu -from:kmdawson@fcps.edu -from:klshapiro@fcps.edu -from:jhlayton@fcps.edu -from:elschinstock@fcps.edu -from:noreply@fcps.edu';
+// Excludes e-Notify@fcps.edu — that's the district-wide mass-blast sender
+// (heat-advisory outdoor-activity closures, boundary studies, end-of-year
+// farewells) which floods this box with duplicative "closure" reminders
+// that have nothing to do with Liam specifically and don't affect his
+// (non-FCPS) summer camps. Also excludes Longfellow (Ella's school).
+const LIAM_SCHOOL_QUERY = 'in:anywhere from:fcps.edu newer_than:30d -from:e-Notify@fcps.edu -from:smaldonado1@fcps.edu -from:kmdawson@fcps.edu -from:klshapiro@fcps.edu -from:jhlayton@fcps.edu -from:elschinstock@fcps.edu -from:noreply@fcps.edu -from:LongfellowMiddle.Attendance@fcps.edu';
 
 // Only surfaces a genuine teacher-written comment (a real sentence found
 // after a "Teacher Comment(s)" label) — never falls back to the generic
@@ -763,16 +768,76 @@ function parseDropoffPickup(desc) {
   if (!drop && !pick) return null;
   return { drop: drop ? drop[1].toUpperCase() : null, pick: pick ? pick[1].toUpperCase() : null };
 }
-function campCellHtml(e) {
+// ── Camp Notes — recent vendor emails (bus-time changes, camp-title
+// hints) surfaced alongside the calendar invite, since the invite is
+// often stale once a camp sends a mid-week logistics update.
+const CAMP_INFO_SOURCES = [
+  { key:'potomac',   matchCamp:/potomac school/i,     query:'in:anywhere from:potomacschool.org newer_than:60d' },
+  { key:'calleva',   matchCamp:/calleva/i,             query:'in:anywhere from:calleva.org newer_than:60d' },
+  { key:'sandyhill', matchCamp:/sandy hill/i,          query:'in:anywhere "sandy hill" newer_than:60d' },
+  { key:'evolution', matchCamp:/evolution basketball/i,query:'in:anywhere "evolution basketball" newer_than:60d' },
+  { key:'mclean',    matchCamp:/mclean basketball/i,   query:'in:anywhere "mclean basketball" newer_than:60d' }
+];
+function extractCampTitleHint(subject) {
+  const m = (subject||'').match(/-\s*([A-Z][\w&'.]+(?:\s+[\w&'.]+){0,4}\s*Camps?)\s*$/i);
+  return m ? m[1].trim() : '';
+}
+function extractBusStopUpdate(bodyText) {
+  if (!bodyText || !/drop.?off|pick.?up|bus stop/i.test(bodyText)) return '';
+  const stops = [];
+  const re = /([A-Za-z][A-Za-z0-9&'".,()#\- ]{3,90}?)\s+(\d{1,2}:\d{2}\s*[ap]\.?m\.?)\b/g;
+  let m;
+  while ((m = re.exec(bodyText)) && stops.length < 4) {
+    const label = m[1].trim();
+    if (/route|stop|bank|church|school|road|\brd\b|blvd|street|\bst\b|ave|drop|pick/i.test(label)) {
+      stops.push(label.replace(/\s{2,}/g,' ') + ' ' + m[2].replace(/\s+/,'').toUpperCase());
+    }
+  }
+  return stops.length ? stops.join('; ') : '';
+}
+async function buildCampInfoNotes() {
+  return Promise.all(CAMP_INFO_SOURCES.map(async src => {
+    const out = { key: src.key, matchCamp: src.matchCamp, titleHint: '', timeUpdate: '', timeUpdateDateStr: '' };
+    try {
+      const data = await callMcp(GMAIL, {query: src.query, pageSize:6, includeTrash:true});
+      const items = (data.threads||[]).map(t => ({ t, m: t.messages && t.messages[t.messages.length-1] })).filter(x=>x.m);
+      items.sort((a,b) => new Date(a.m.date) - new Date(b.m.date)); // oldest→newest so the LAST update found wins
+      for (const {t, m} of items) {
+        if (!out.titleHint) {
+          const hint = extractCampTitleHint(m.subject||'');
+          if (hint) out.titleHint = hint;
+        }
+        const inTrash = (m.labelIds||[]).includes('TRASH');
+        const full = await fetchBodyFromThreadFH(t.id, inTrash).catch(()=>({}));
+        const msgs = (full && full.messages) || [];
+        const bodyMsg = msgs[msgs.length-1];
+        const bodyText = bodyMsg ? stripHtmlFH(bodyMsg.htmlBody||'') : stripHtmlFH(m.snippet||'');
+        const stopInfo = extractBusStopUpdate(bodyText);
+        if (stopInfo) {
+          out.timeUpdate = stopInfo;
+          out.timeUpdateDateStr = new Date(m.date).toLocaleDateString('en-US',{month:'short',day:'numeric'});
+        }
+      }
+    } catch(e) { /* leave this source's fields empty */ }
+    return out;
+  }));
+}
+function campCellHtml(e, campInfoList) {
   if (!e) return '<span style="color:var(--faint);font-size:12px;font-style:italic">— no camp scheduled —</span>';
   const name = esc(campNameFromSummary(e.summary));
   const times = parseDropoffPickup(e.description);
   const loc = (e.location||'').split('\n')[0];
   let timeStr = '';
   if (times) timeStr = (times.drop ? 'Drop-off ' + esc(times.drop) : '') + (times.drop && times.pick ? ' · ' : '') + (times.pick ? 'Pickup ' + esc(times.pick) : '');
+  const info = (campInfoList||[]).find(ci => ci.matchCamp.test(e.summary||''));
+  let extra = '';
+  if (info && info.titleHint) extra += '<div class="event-meta"><b>'+esc(info.titleHint)+'</b></div>';
+  if (times) extra += '<div class="event-meta" style="font-size:11px;color:var(--faint)">(per calendar invite)</div>';
+  if (info && info.timeUpdate) extra += '<div class="event-meta" style="color:#b45309">📧 Updated '+esc(info.timeUpdateDateStr)+' email: '+esc(info.timeUpdate)+'</div>';
   return '<div><b>'+name+'</b>' +
     (timeStr ? '<div class="event-meta">'+timeStr+'</div>' : '<div class="event-meta" style="font-style:italic;color:var(--faint)">No drop-off/pickup time on the calendar invite</div>') +
     (loc ? '<div class="event-meta">📍 '+esc(loc)+'</div>' : '') +
+    extra +
   '</div>';
 }
 function buildCampSchedule(allEvents) {
@@ -801,7 +866,7 @@ function buildCampSchedule(allEvents) {
   }
   return weeks;
 }
-function renderCampSchedule(weeks) {
+function renderCampSchedule(weeks, campInfoList) {
   if (!weeks.length) return '<p class="empty">School starts before any camp weeks remain — nothing to schedule.</p>';
   const tdStyle = 'padding:8px;border-bottom:1px solid var(--border-light);vertical-align:top';
   const rows = weeks.map(w => {
@@ -811,7 +876,7 @@ function renderCampSchedule(weeks) {
     if (w.onVacation) {
       body = '<td colspan="2" style="'+tdStyle+';text-align:center;color:var(--muted);font-style:italic">🧳 Family vacation — no camp needed</td>';
     } else {
-      body = '<td style="'+tdStyle+'">'+campCellHtml(w.ella)+'</td><td style="'+tdStyle+'">'+campCellHtml(w.liam)+'</td>';
+      body = '<td style="'+tdStyle+'">'+campCellHtml(w.ella, campInfoList)+'</td><td style="'+tdStyle+'">'+campCellHtml(w.liam, campInfoList)+'</td>';
     }
     return '<tr style="background:'+rowBg+'"><td style="'+tdStyle+';white-space:nowrap;font-weight:600">'+fmtWeekRange(w.weekStart,w.weekEnd)+(missing?' ⚠️':'')+'</td>'+body+'</tr>';
   }).join('');
@@ -921,7 +986,8 @@ async function loadKidsLive() {
     // that's missing a camp for either kid (family vacation weeks excused).
     const allEvents = calData.events || [];
     const campWeeks = buildCampSchedule(allEvents);
-    document.getElementById('camp-schedule').innerHTML = renderCampSchedule(campWeeks);
+    const campInfoList = await buildCampInfoNotes().catch(() => []);
+    document.getElementById('camp-schedule').innerHTML = renderCampSchedule(campWeeks, campInfoList);
 
     // Medical (doctors, therapists incl. Ella's Flow Psychotherapy, psychologists,
     // allergy shots, wellness visits) and Activities (sports/dance/tryouts) are
