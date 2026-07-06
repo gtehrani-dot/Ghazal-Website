@@ -2,476 +2,580 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>Ghazal's Morning Briefing</title>
+<title>Ghazal's Morning Briefing — Jul 6, 2026</title>
 <style>
-:root{
-  --bg:#f5f6f8; --card:#ffffff; --accent:#4A6FA5; --amber:#F59E0B; --red:#EF4444; --green:#10B981;
-  --purple:#6d5dfc; --purplebg:#f4f2ff; --purpletext:#4b3fc7;
-  --border:#e5e7eb; --text:#1f2937; --muted:#6b7280;
-}
-*{box-sizing:border-box;}
-body{margin:0;background:var(--bg);color:var(--text);font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;}
-.wrap{max-width:1240px;margin:0 auto;padding:0 20px 60px;}
-header.top{background:#fff;border-bottom:1px solid var(--border);padding:14px 20px;display:flex;justify-content:space-between;align-items:center;}
-header.top h1{font-size:18px;margin:0;}
-header.top .sub{color:var(--muted);font-size:13px;}
-.tabbar{position:sticky;top:0;background:#fff;border-bottom:1px solid var(--border);z-index:50;display:flex;gap:4px;overflow-x:auto;}
-.tab-btn{border:none;background:none;padding:14px 18px;font-size:14px;font-weight:600;color:var(--muted);cursor:pointer;border-bottom:3px solid transparent;white-space:nowrap;position:relative;}
-.tab-btn.active{color:var(--accent);border-bottom-color:var(--accent);}
-.badge{display:inline-block;min-width:16px;padding:1px 5px;border-radius:8px;font-size:10px;font-weight:700;color:#fff;margin-left:5px;vertical-align:middle;}
-.badge.red{background:var(--red);} .badge.blue{background:var(--accent);} .badge.amber{background:var(--amber);} .badge.purple{background:var(--purple);}
-.tab-section{display:none;padding-top:20px;}
-.tab-section.active{display:block;}
-.card{background:var(--card);border-radius:8px;box-shadow:0 1px 3px rgba(0,0,0,.08);padding:16px 20px;margin-bottom:14px;}
-.grid2{display:grid;grid-template-columns:1.05fr .95fr;gap:20px;}
-@media(max-width:900px){.grid2{grid-template-columns:1fr;}}
-.weather-strip{background:linear-gradient(135deg,#4A6FA5,#6b8cc4);color:#fff;border-radius:8px;padding:20px 24px;margin-bottom:18px;display:flex;align-items:center;gap:20px;flex-wrap:wrap;}
-.weather-strip .temp{font-size:40px;font-weight:700;}
-.weather-strip .cond{font-size:15px;opacity:.95;}
-.alert-banner{background:#fee2e2;border:1px solid var(--red);color:#7f1d1d;border-radius:8px;padding:12px 16px;margin-bottom:14px;font-size:14px;font-weight:600;}
-.pills{display:flex;gap:12px;margin-bottom:20px;flex-wrap:wrap;}
-.pill{background:#fff;border:1px solid var(--border);border-radius:20px;padding:8px 16px;font-size:13px;font-weight:600;cursor:pointer;box-shadow:0 1px 3px rgba(0,0,0,.06);}
-.pill:hover{border-color:var(--accent);}
-.pill .n{color:var(--red);}
-.pill.info .n{color:var(--purple);}
-h2.col-title{font-size:15px;margin:0 0 12px;color:var(--text);}
-.flag-row{display:flex;gap:10px;padding:10px 0;border-bottom:1px solid var(--border);font-size:13.5px;}
-.flag-row:last-child{border-bottom:none;}
-.flag-tag{flex-shrink:0;font-size:10px;font-weight:700;padding:2px 6px;border-radius:4px;background:#eef1f6;color:var(--accent);height:fit-content;}
-.flag-tag.overdue{background:#fee2e2;color:var(--red);}
-.flag-tag.cal{background:#fef3c7;color:#92400e;}
-.flag-body a{color:var(--accent);text-decoration:none;font-weight:600;}
-.flag-body a:hover{text-decoration:underline;}
-.flag-meta{color:var(--muted);font-size:12px;margin-top:2px;}
-.insight-card{border-radius:8px;padding:14px 16px;margin-bottom:12px;border-left:4px solid;font-size:13.5px;}
-.insight-card.risk{border-color:var(--red);background:#fef2f2;}
-.insight-card.watch{border-color:var(--amber);background:#fffbeb;}
-.insight-card.pattern{border-color:var(--accent);background:#eff4fb;}
-.insight-card.opp{border-color:var(--green);background:#ecfdf5;}
-.insight-label{font-weight:700;font-size:11px;text-transform:uppercase;letter-spacing:.03em;margin-bottom:4px;}
-.insight-title{font-weight:700;margin-bottom:4px;}
-.insight-card a{color:var(--accent);}
-.subtabs{display:flex;gap:6px;margin-bottom:16px;flex-wrap:wrap;align-items:center;}
-.subtab-btn{border:1px solid var(--border);background:#fff;border-radius:20px;padding:6px 14px;font-size:13px;font-weight:600;cursor:pointer;color:var(--muted);}
-.subtab-btn.active{background:var(--accent);color:#fff;border-color:var(--accent);}
-.subtab-panel{display:none;}
-.subtab-panel.active{display:block;}
-.toolbar-row{display:flex;justify-content:space-between;align-items:center;margin-bottom:14px;flex-wrap:wrap;gap:8px;}
-.expand-controls button{border:1px solid var(--border);background:#fff;border-radius:6px;padding:5px 11px;font-size:12px;font-weight:600;cursor:pointer;color:var(--accent);margin-left:6px;}
-.email-item{display:flex;gap:10px;align-items:flex-start;padding:12px 0;border-bottom:1px solid var(--border);font-size:13.5px;}
-.email-item:last-child{border-bottom:none;}
-.email-item.high{border-left:3px solid var(--amber);padding-left:10px;}
-.email-item a{color:var(--accent);text-decoration:none;font-weight:600;}
-.email-meta{color:var(--muted);font-size:12px;margin-top:2px;}
-.email-detail{margin-top:6px;color:#374151;background:#f8f9fb;border-radius:6px;padding:8px 10px;font-size:12.5px;}
-.chev{cursor:pointer;color:var(--accent);font-size:11.5px;font-weight:700;margin-left:4px;user-select:none;}
-.noreply-badge{color:var(--red);font-size:11px;font-weight:700;margin-left:6px;}
-.replied-pill{background:#d1fae5;color:#065f46;font-size:10px;font-weight:700;padding:2px 7px;border-radius:10px;margin-left:6px;}
-.star-btn{border:none;background:none;font-size:18px;cursor:pointer;color:var(--amber);flex-shrink:0;}
-.empty-state{color:var(--muted);font-size:13.5px;padding:20px 0;text-align:center;}
-table{width:100%;border-collapse:collapse;font-size:13px;}
-th{text-align:left;color:var(--muted);font-size:11px;text-transform:uppercase;letter-spacing:.03em;padding:6px 8px;border-bottom:2px solid var(--border);}
-td{padding:8px;border-bottom:1px solid var(--border);vertical-align:top;}
-.grade-flag{color:var(--red);font-weight:700;}
-.refresh-btn{border:1px solid var(--border);background:#fff;border-radius:6px;padding:6px 12px;font-size:12px;font-weight:600;cursor:pointer;color:var(--accent);}
-.section-head{display:flex;justify-content:space-between;align-items:center;margin-bottom:12px;}
-.event-card{border-bottom:1px solid var(--border);padding:12px 0;font-size:13.5px;}
-.event-card:last-child{border-bottom:none;}
-.event-time{font-weight:700;color:var(--accent);font-size:12px;}
-.event-card a{color:var(--text);text-decoration:none;font-weight:600;}
-.newcontact{color:var(--muted);font-style:italic;font-size:12.5px;}
-.newsgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:14px;}
-.news-card{background:#fff;border-radius:8px;box-shadow:0 1px 3px rgba(0,0,0,.08);padding:14px 16px;font-size:13px;}
-.news-card a{color:var(--accent);text-decoration:none;font-weight:700;display:block;margin-bottom:4px;}
-.news-meta{color:var(--muted);font-size:11.5px;margin-bottom:6px;}
-.todoist-wrap{display:grid;grid-template-columns:1fr 1fr;gap:0;background:#fff;border-radius:8px;overflow:hidden;box-shadow:0 1px 3px rgba(0,0,0,.08);}
-@media(max-width:900px){.todoist-wrap{grid-template-columns:1fr;}}
-.td-col{padding:18px 20px;}
-.td-col.right{background:#fafbfd;}
-.td-task{display:flex;gap:8px;align-items:flex-start;padding:10px 0;border-bottom:1px solid var(--border);position:relative;}
-.td-task:last-child{border-bottom:none;}
-.stripe{width:4px;align-self:stretch;border-radius:2px;flex-shrink:0;}
-.stripe.p1{background:var(--red);} .stripe.p2{background:var(--amber);} .stripe.p3{background:#fde68a;} .stripe.p4{background:#d1d5db;}
-.td-content{flex:1;font-size:13px;}
-.td-title{font-weight:600;border:none;background:none;width:100%;font-size:13.5px;color:var(--text);padding:2px 0;}
-.td-row2{display:flex;gap:6px;margin-top:4px;flex-wrap:wrap;align-items:center;}
-select,input[type=date]{font-size:11.5px;border:1px solid var(--border);border-radius:4px;padding:3px 5px;background:#fff;}
-.proj-tag{font-size:10.5px;background:#eef1f6;color:var(--accent);padding:2px 6px;border-radius:4px;}
-.proj-tag.unset{background:#fef3c7;color:#92400e;}
-.overdue-badge{font-size:10.5px;font-weight:700;color:var(--red);background:#fee2e2;padding:1px 6px;border-radius:4px;}
-.today-badge{font-size:10.5px;font-weight:700;color:var(--accent);background:#eef1f6;padding:1px 6px;border-radius:4px;}
-.done-btn{border:none;background:var(--green);color:#fff;font-size:11px;font-weight:700;border-radius:4px;padding:3px 8px;cursor:pointer;}
-.push-btn{background:var(--accent);color:#fff;border:none;border-radius:6px;padding:9px 18px;font-size:13px;font-weight:700;cursor:pointer;margin-top:14px;}
-.count-line{color:var(--muted);font-size:12px;margin-bottom:4px;}
-.trash-toolbar{display:flex;justify-content:space-between;align-items:center;background:#fff;border-radius:8px;padding:12px 18px;margin-bottom:14px;box-shadow:0 1px 3px rgba(0,0,0,.08);flex-wrap:wrap;gap:10px;}
-.trash-toolbar button{border:1px solid var(--border);background:#fff;border-radius:6px;padding:6px 12px;font-size:12.5px;font-weight:600;cursor:pointer;}
-#sendTrashBtn{background:var(--red);color:#fff;border-color:var(--red);}
-#sendTrashBtn:disabled{background:#fca5a5;border-color:#fca5a5;cursor:not-allowed;}
-.trash-group h3{font-size:13px;color:var(--muted);text-transform:uppercase;letter-spacing:.03em;margin:20px 0 8px;}
-.trash-item{display:flex;align-items:center;gap:10px;background:#fff;border-radius:6px;padding:10px 14px;margin-bottom:6px;box-shadow:0 1px 2px rgba(0,0,0,.05);cursor:pointer;}
-.trash-item.deselected{opacity:.45;text-decoration:line-through;}
-.trash-item-body{flex:1;}
-.trash-item-subject{font-size:13px;font-weight:600;}
-.trash-item-meta{font-size:11.5px;color:var(--muted);display:flex;gap:10px;margin-top:2px;}
-.trash-reason{font-size:10px;font-weight:700;padding:2px 7px;border-radius:4px;}
-.trash-reason.promo{background:#fee2e2;color:#7f1d1d;}
-.trash-reason.auto{background:#e0e7ff;color:#3730a3;}
-.trash-reason.digest{background:#fef3c7;color:#92400e;}
-.trash-reason.deal{background:#fce7f3;color:#9d174d;}
-.errcard{background:#fee2e2;border:1px solid var(--red);color:#7f1d1d;border-radius:8px;padding:14px;margin-bottom:14px;font-size:13.5px;}
-.info-card{border-left:4px solid var(--purple);background:var(--purplebg);}
-.info-card h3{color:var(--purpletext);font-size:19px;margin:0 0 6px;display:flex;align-items:center;gap:8px;}
-.info-card h3 .icon{font-size:26px;}
-.info-card p.muted{color:#5b5680;font-size:13px;margin:0 0 14px;}
-.info-row{display:flex;gap:10px;align-items:flex-start;padding:12px 0;border-bottom:1px solid #ded9ff;font-size:13.5px;}
-.info-row:last-child{border-bottom:none;}
-.info-row a{color:var(--purpletext);font-weight:700;text-decoration:none;}
-.file-group{background:#fff;border-radius:8px;box-shadow:0 1px 3px rgba(0,0,0,.08);padding:16px 20px;margin-bottom:16px;}
-.file-group h3{font-size:14px;margin:0 0 4px;}
-.file-group .grouphint{color:var(--muted);font-size:12.5px;margin:0 0 12px;}
-.file-row{display:flex;align-items:flex-start;gap:10px;padding:10px 0;border-bottom:1px solid var(--border);}
-.file-row:last-child{border-bottom:none;}
-.file-row .subj{font-size:13.5px;font-weight:600;}
-.file-row .meta{font-size:12px;color:var(--muted);margin-top:2px;}
-.file-actions{display:flex;gap:14px;margin-top:12px;}
+  :root{
+    --accent:#4A6FA5; --amber:#F59E0B; --red:#EF4444; --green:#10B981;
+    --purple:#6d5dfc; --purple-bg:#f4f2ff; --purple-text:#4b3fc7;
+    --bg:#f5f6f8; --card-shadow:0 1px 3px rgba(0,0,0,.08);
+  }
+  *{box-sizing:border-box;}
+  body{margin:0;background:var(--bg);font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;color:#1f2430;}
+  .wrap{max-width:1240px;margin:0 auto;padding:0 20px 60px;}
+  .tabbar{position:sticky;top:0;background:#fff;border-bottom:1px solid #e5e7eb;z-index:50;}
+  .tabbar-inner{max-width:1240px;margin:0 auto;display:flex;gap:4px;padding:0 20px;overflow-x:auto;}
+  .tab-btn{background:none;border:none;padding:14px 16px;font-size:14px;font-weight:600;color:#6b7280;cursor:pointer;border-bottom:3px solid transparent;white-space:nowrap;position:relative;}
+  .tab-btn.active{color:var(--accent);border-bottom-color:var(--accent);}
+  .badge{display:inline-block;min-width:18px;padding:1px 6px;border-radius:9px;font-size:11px;font-weight:700;color:#fff;margin-left:5px;vertical-align:middle;}
+  .badge.red{background:var(--red);} .badge.purple{background:var(--purple);} .badge.amber{background:var(--amber);}
+  .tab-section{display:none;padding-top:22px;} .tab-section.active{display:block;}
+  h1.page-title{font-size:22px;margin:0 0 4px;}
+  .sub{color:#6b7280;font-size:13px;margin-bottom:18px;}
+  .card{background:#fff;border-radius:8px;box-shadow:var(--card-shadow);padding:16px 20px;margin-bottom:16px;}
+  .grid2{display:grid;grid-template-columns:1fr 1fr;gap:20px;}
+  @media(max-width:900px){.grid2{grid-template-columns:1fr;}}
+  .toolbar{display:flex;justify-content:space-between;align-items:center;margin-bottom:14px;flex-wrap:wrap;gap:8px;}
+  .toolbar-actions button, .refresh-btn{background:#fff;border:1px solid #d7dbe3;border-radius:6px;padding:6px 12px;font-size:12.5px;cursor:pointer;color:#374151;}
+  .refresh-btn{float:right;}
+  .weather-strip{background:linear-gradient(135deg,#4A6FA5,#6d8fc7);color:#fff;border-radius:10px;padding:20px 24px;display:flex;align-items:center;gap:24px;margin-bottom:18px;flex-wrap:wrap;}
+  .weather-strip .temp{font-size:40px;font-weight:700;}
+  .weather-strip .meta{font-size:13px;opacity:.92;line-height:1.5;}
+  .pills-row{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:20px;}
+  .pill{background:#fff;border-radius:20px;box-shadow:var(--card-shadow);padding:8px 16px;font-size:13px;font-weight:600;cursor:pointer;display:flex;align-items:center;gap:6px;border:none;color:#1f2430;}
+  .pill .cnt{font-weight:800;} .pill.red .cnt{color:var(--red);} .pill.purple .cnt{color:var(--purple);}
+  .flag-line{padding:9px 0;border-bottom:1px solid #f0f1f4;font-size:13.5px;}
+  .flag-line:last-child{border-bottom:none;}
+  .tag{font-size:10.5px;font-weight:700;padding:2px 6px;border-radius:4px;background:#eef1f6;color:#4b5563;margin-right:6px;}
+  .insight-card{border-radius:8px;padding:14px 16px;margin-bottom:12px;font-size:13px;line-height:1.5;}
+  .insight-card.risk{background:#fef2f2;border-left:4px solid var(--red);}
+  .insight-card.watch{background:#fffbeb;border-left:4px solid var(--amber);}
+  .insight-card.pattern{background:#eff4fb;border-left:4px solid var(--accent);}
+  .insight-card.opp{background:#ecfdf5;border-left:4px solid var(--green);}
+  .insight-card .lbl{font-weight:700;font-size:12px;text-transform:uppercase;letter-spacing:.02em;margin-bottom:4px;}
+  a{color:var(--accent);text-decoration:none;} a:hover{text-decoration:underline;}
+  .muted{color:#6b7280;font-size:12.5px;}
+  .chev{color:var(--accent);font-size:12px;cursor:pointer;margin-left:6px;}
+  .email-item{padding:10px 0;border-bottom:1px solid #f0f1f4;display:flex;gap:10px;align-items:flex-start;}
+  .email-item:last-child{border-bottom:none;}
+  .email-item.high{border-left:3px solid var(--amber);padding-left:10px;}
+  .email-meta{color:#6b7280;font-size:12px;margin-top:2px;}
+  .email-detail{margin-top:6px;font-size:12.5px;color:#374151;background:#f8f9fb;padding:8px 10px;border-radius:6px;}
+  .subtabs{display:flex;gap:6px;margin:16px 0 12px;flex-wrap:wrap;}
+  .subtab-btn{background:#eef1f6;border:none;border-radius:6px;padding:6px 14px;font-size:12.5px;font-weight:600;cursor:pointer;color:#4b5563;}
+  .subtab-btn.active{background:var(--accent);color:#fff;}
+  .subtab-panel{display:none;} .subtab-panel.active{display:block;}
+  .star-btn{background:none;border:none;font-size:18px;cursor:pointer;color:var(--amber);}
+  select, input[type=date], input[type=text]{border:1px solid #d7dbe3;border-radius:6px;padding:5px 8px;font-size:12.5px;}
+  button.mini{background:var(--accent);color:#fff;border:none;border-radius:6px;padding:6px 12px;font-size:12.5px;cursor:pointer;}
+  button.mini.danger{background:var(--red);}
+  table{width:100%;border-collapse:collapse;font-size:13px;}
+  table th{text-align:left;color:#6b7280;font-size:11.5px;text-transform:uppercase;padding:6px 8px;border-bottom:1px solid #e5e7eb;}
+  table td{padding:8px;border-bottom:1px solid #f0f1f4;}
+  .empty-state{color:#6b7280;font-size:13.5px;padding:20px 0;text-align:center;}
+  .trash-item{display:flex;gap:10px;align-items:flex-start;padding:10px 6px;border-bottom:1px solid #f0f1f4;cursor:pointer;}
+  .trash-item.deselected{opacity:.45;text-decoration:line-through;}
+  .trash-item-subject{font-weight:600;font-size:13.5px;}
+  .trash-item-meta{display:flex;gap:10px;color:#6b7280;font-size:11.5px;margin-top:2px;}
+  .trash-reason{font-size:10.5px;font-weight:700;padding:2px 7px;border-radius:10px;height:fit-content;}
+  .trash-reason.promo{background:#fef3e2;color:#b45309;} .trash-reason.auto{background:#e0e7ff;color:#4338ca;}
+  .trash-reason.digest{background:#dcfce7;color:#166534;} .trash-reason.deal{background:#fee2e2;color:#b91c1c;}
+  .file-group{margin-bottom:22px;}
+  .file-row{display:flex;gap:10px;align-items:flex-start;padding:8px 4px;border-bottom:1px solid #f0f1f4;}
+  .file-group-actions{display:flex;gap:8px;align-items:center;margin-top:10px;}
+  .already-replied-pill{background:#dcfce7;color:#166534;font-size:10.5px;font-weight:700;padding:1px 7px;border-radius:9px;margin-left:6px;}
+  .error-banner{background:#fef2f2;color:#991b1b;border-radius:8px;padding:12px 16px;font-size:13px;margin-bottom:16px;}
+  .news-card{padding:12px 0;border-bottom:1px solid #f0f1f4;} .news-card:last-child{border-bottom:none;}
+  .news-card h4{margin:0 0 4px;font-size:14.5px;}
+  .news-src{color:#6b7280;font-size:11.5px;margin-bottom:4px;}
+  .todo-panel{display:grid;grid-template-columns:1fr 1fr;gap:0;}
+  @media(max-width:900px){.todo-panel{grid-template-columns:1fr;}}
+  .todo-col{padding:18px 20px;} .todo-col.left{background:#fff;} .todo-col.right{background:#fafbfd;}
+  .todo-card{background:#fff;border-radius:8px;box-shadow:var(--card-shadow);padding:12px 14px;margin-bottom:10px;display:flex;gap:10px;align-items:flex-start;position:relative;overflow:hidden;}
+  .p-stripe{position:absolute;left:0;top:0;bottom:0;width:4px;}
+  .p-stripe.p1{background:var(--red);} .p-stripe.p2{background:#f97316;} .p-stripe.p3{background:var(--amber);} .p-stripe.p4{background:#d1d5db;}
+  .todo-title{font-size:13.5px;font-weight:600;} .todo-meta{font-size:11.5px;color:#6b7280;margin-top:3px;display:flex;gap:8px;flex-wrap:wrap;}
 </style>
 </head>
 <body>
-<header class="top">
-  <div>
-    <h1>Good morning, Ghazal</h1>
-    <div class="sub">Sunday, July 5, 2026 &middot; McLean, VA</div>
-  </div>
-</header>
 
-<div class="tabbar" id="tabbar">
+<div class="tabbar"><div class="tabbar-inner">
   <button class="tab-btn active" data-tab="home" onclick="showTab('home')">🏠 Home</button>
-  <button class="tab-btn" data-tab="inbox" onclick="showTab('inbox')">📬 Inbox<span class="badge red">2</span><span class="badge purple">2</span></button>
+  <button class="tab-btn" data-tab="inbox" onclick="showTab('inbox')">📬 Inbox<span class="badge purple" id="nav-badge-info">5</span></button>
   <button class="tab-btn" data-tab="calendar" onclick="showTab('calendar')">📅 Calendar</button>
-  <button class="tab-btn" data-tab="todoist" onclick="showTab('todoist')">✅ Todoist<span class="badge red">28</span></button>
+  <button class="tab-btn" data-tab="todoist" onclick="showTab('todoist')">✅ Todoist</button>
   <button class="tab-btn" data-tab="news" onclick="showTab('news')">📰 News</button>
-  <button class="tab-btn" data-tab="trash" onclick="showTab('trash')">🗑️ Trash<span class="badge blue">20</span></button>
-  <button class="tab-btn" data-tab="file" onclick="showTab('file')">📁 File<span class="badge amber">14</span></button>
-</div>
+  <button class="tab-btn" data-tab="trash" onclick="showTab('trash')">🗑️ Trash</button>
+  <button class="tab-btn" data-tab="file" onclick="showTab('file')">📁 File</button>
+</div></div>
 
 <div class="wrap">
 
-<!-- TAB 1: HOME -->
+<!-- ============ TAB 1: HOME ============ -->
 <div class="tab-section active" id="tab-home">
-  <div class="alert-banner">⚠️ Severe thunderstorm risk this afternoon with dangerous heat (high 100°F) — damaging winds, downpours and hail possible. Keep outdoor plans flexible.</div>
+  <h1 class="page-title">Good morning, Ghazal</h1>
+  <div class="sub">Monday, July 6, 2026 · McLean, VA</div>
+
   <div class="weather-strip">
-    <div style="font-size:38px;">⛈️</div>
-    <div>
-      <div class="temp">100°F</div>
-      <div class="cond">Partly sunny &amp; hot &middot; Severe PM thunderstorms possible</div>
-    </div>
-    <div style="margin-left:auto;font-size:13px;line-height:1.6;">
-      High 100°F / Low 73°F<br>
-      Rain chance: high (severe risk)<br>
-      Wind: gusty in storms
-    </div>
+    <div>⛈️</div>
+    <div class="temp">88°F</div>
+    <div class="meta">Scattered thunderstorms this afternoon, some with strong gusty winds<br>Low tonight: 70°F · Rain chance: 50%</div>
   </div>
 
-  <div class="pills">
-    <div class="pill" onclick="showTab('inbox');showSub('high')">🔴 High Priority Emails <span class="n">2</span></div>
-    <div class="pill info" onclick="showTab('inbox');showSub('info')">ℹ️ Informational <span class="n">2</span></div>
-    <div class="pill" onclick="showTab('calendar')">📅 Meetings Today <span>0</span></div>
-    <div class="pill" onclick="showTab('todoist')">✅ P1 Tasks <span class="n">28 overdue</span></div>
-    <div class="pill" onclick="showTab('calendar')">👤 Ben's Next Away <span>Jul 26</span></div>
+  <div class="pills-row">
+    <button class="pill red" onclick="showTab('inbox');switchInboxSub('high')">🔴 High Priority <span class="cnt">4</span></button>
+    <button class="pill purple" onclick="showTab('inbox');switchInboxSub('info')">ℹ️ Informational <span class="cnt">5</span></button>
+    <button class="pill" onclick="showTab('calendar')">📅 Meetings Today <span class="cnt">1</span></button>
+    <button class="pill red" onclick="showTab('todoist')">✅ P1 Tasks <span class="cnt">28</span></button>
+    <button class="pill" onclick="showTab('calendar')">👤 Ben's Next Away <span class="cnt">Jul 26</span></button>
   </div>
 
   <div class="grid2">
     <div>
-      <h2 class="col-title">Action Flags</h2>
-      <div class="card" id="actionFlags"></div>
+      <div class="card">
+        <h3 style="margin-top:0;font-size:15px;">Action Flags</h3>
+        <div class="flag-line"><span class="tag">EMAIL</span><a href="https://mail.google.com/mail/u/0/#all/19ef4a8bdb050c4a" target="_blank">Appraisals, Next Steps</a> — Ben is waiting on Ghazal to confirm the July 13 @ 1pm mediation/appraisal slot. No reply sent in 11 days.</div>
+        <div class="flag-line"><span class="tag">EMAIL</span><a href="https://mail.google.com/mail/u/0/#all/19e9cf07a4756044" target="_blank">Dr. Sethi Form</a> — Ben's 4th follow-up asking whether Ella's ADHD medication form was signed/submitted. No reply sent.</div>
+        <div class="flag-line"><span class="tag">EMAIL</span><a href="https://mail.google.com/mail/u/0/#all/19f056c9602e4c81" target="_blank">Ada Separation Agreement</a> — awaiting Ada's confirmation on how expense reimbursement is treated in the severance terms.</div>
+        <div class="flag-line"><span class="tag">EMAIL</span><a href="https://mail.google.com/mail/u/0/#all/19d6d72d3b6020b2" target="_blank">Secure message from Speer Primary Care</a> — encrypted Hushmail notice from Apr 8, still unopened; health-related so worth a look.</div>
+        <div class="flag-line"><span class="tag">EMAIL</span><a href="https://mail.google.com/mail/u/0/#all/19f2e36f498819c8" target="_blank">Field hockey camps in July/August</a> — FYI on camp options; no reply needed unless Ghazal wants to sign up.</div>
+        <div class="flag-line"><span class="tag">CALENDAR</span><a href="https://www.google.com/calendar/event?eid=Xzhvb2s4Y2E1OGtzNDZiOW82OTI0OGI5azYwb2tjYmEyNjUzMzZiYTI4OHI0MmdxNjhvbzM4Y2kzODggdGVocmFuaS5naGF6YWxAbQ&ctz=America/New_York" target="_blank">Ben away Jul 26–29</a> (Democratic Mayors Assoc., Atlanta) — no kid-coverage plan noted yet.</div>
+        <div class="flag-line"><span class="tag">CALENDAR</span><a href="https://www.google.com/calendar/event?eid=XzhncWpjZGhqNm9wamViOWc3NG8zZ2I5azg4czNjYmEyNjEzMzRiOWc2aDMzZWQyMTY4cTMyZTlwNzAgdGVocmFuaS5naGF6YWxAbQ&ctz=America/New_York" target="_blank">Call with John Kirschner</a> — today 9:45–10:15am. New contact; Granola meeting-notes lookup timed out this run, so no prior context available.</div>
+        <div class="flag-line"><span class="tag">OVERDUE TASK</span>No Todoist tasks are overdue — all 43 open tasks are dated today (Jul 6).</div>
+      </div>
     </div>
     <div>
-      <h2 class="col-title">Strategic Insights</h2>
-      <div id="insights"></div>
+      <div class="card insight-card risk">
+        <div class="lbl">🔴 Risk</div>
+        <b>Mediation timeline stalling on your reply.</b> Ben asked "13th @ 1:00pm works for me — GHAZAL?" 11 days ago in <a href="https://mail.google.com/mail/u/0/#all/19ef4a8bdb050c4a" target="_blank">Appraisals, Next Steps</a> and nothing's gone back. April Yeager's only other opening was July 28 @ 3:30 — missing this window pushes the appraisal timeline further out.
+      </div>
+      <div class="card insight-card watch">
+        <div class="lbl">🟡 Watch</div>
+        <b>Ben's Atlanta trip has no visible coverage plan.</b> Three calendar placeholders show Ben traveling for the <a href="https://www.google.com/calendar/event?eid=Xzhvb2s4Y2E1OGtzNDZiOW82OTI0OGI5azYwb2tjYmEyNjUzMzZiYTI4OHI0MmdxNjhvbzM4Y2kzODggdGVocmFuaS5naGF6YWxAbQ&ctz=America/New_York" target="_blank">Democratic Mayors Assoc.</a>, July 26–29 — worth confirming Ella/Liam coverage now, especially with mediation demands stacking up the same month.
+      </div>
+      <div class="card insight-card pattern">
+        <div class="lbl">🔵 Pattern</div>
+        <b>Ada offboarding is wrapping up cleanly.</b> Device return and COBRA sign-up are both resolved (see Informational). The one open thread — <a href="https://mail.google.com/mail/u/0/#all/19f056c9602e4c81" target="_blank">severance reimbursement treatment</a> — is the last loose end before the separation is fully settled.
+      </div>
+      <div class="card insight-card opp">
+        <div class="lbl">🟢 Opportunity</div>
+        <b>Job search + AI momentum line up.</b> Today's Todoist list includes "Resume for Booz Jobs" and "Work on Pitch Deck" (Amaterra). Today's AI news — Claude Sonnet 5 now the default model, and enterprise AI-budget stories — could be useful talking points if either effort touches AI-forward positioning.
+      </div>
     </div>
   </div>
 </div>
 
-<!-- TAB 2: INBOX -->
+<!-- ============ TAB 2: INBOX ============ -->
 <div class="tab-section" id="tab-inbox">
-  <div class="toolbar-row">
-    <div class="expand-controls"><button onclick="expandAllEmails()">Expand all</button><button onclick="collapseAllEmails()">Collapse all</button></div>
-    <button class="refresh-btn" onclick="sendPrompt('Please refresh my morning briefing — Inbox tab (Informational/High/Medium/School/Social). Rebuild and overwrite /Users/ghazalmoore/Dropbox/Personal/Claude/MorningBriefing/index.html.')">↻ Refresh Inbox</button>
+  <h1 class="page-title">Inbox</h1>
+  <div class="toolbar">
+    <div class="sub" style="margin:0;">Scheduled run — full historical Starred review is handled by the separate Monday 5am task.</div>
+    <div class="toolbar-actions">
+      <button onclick="expandAllEmails()">Expand all</button>
+      <button onclick="collapseAllEmails()">Collapse all</button>
+      <button class="refresh-btn" onclick="sendPrompt('Please refresh my morning briefing — Inbox tab. Rebuild and overwrite /Users/ghazalmoore/Dropbox/Personal/Claude/MorningBriefing/index.html.')">↻ Refresh Inbox</button>
+    </div>
   </div>
 
-  <div class="card info-card" id="infoCard"></div>
+  <div class="card info-card" style="border-left:4px solid #6d5dfc;background:var(--purple-bg);">
+    <h3 style="color:var(--purple-text);font-size:18px;margin-top:0;">ℹ️ INFORMATIONAL — already handled (5)</h3>
+    <p class="muted">These looked like High/Medium priority, but someone already replied that it's done — e.g. Ben confirming a camp form is taken care of. Nothing to action; just pick where each one should move and click Move.</p>
+
+    <div class="email-item" style="border-left:3px solid #8a8fa3;padding-left:10px;">
+      <div style="flex:1">
+        <div><a href="https://mail.google.com/mail/u/0/#all/19f27eb22461a7a0" target="_blank">Re: Calleva Summer Camp - Bus Route/Car Drop-Off Selection Form Required</a> <span class="chev" onclick="toggleDetail('info1')">▸ more</span></div>
+        <div class="email-meta">ben@allcrewingdc.com · Jul 3, 2026</div>
+        <div class="email-detail" id="detail-info1" style="display:none">Ben replied "This is done" to Calleva's notice that Liam's bus route/drop-off form was incomplete.</div>
+      </div>
+      <select id="inforoute-info1"><option value="" selected disabled>Move to…</option><option value="ARCHIVE">Archive</option><option value="TRASH">Trash</option></select>
+      <button class="mini" onclick="routeInformational('info1','19f27eb22461a7a0')">Move</button>
+    </div>
+
+    <div class="email-item" style="border-left:3px solid #8a8fa3;padding-left:10px;">
+      <div style="flex:1">
+        <div><a href="https://mail.google.com/mail/u/0/#all/19f152f1ad24945a" target="_blank">Re: Ada Device Return</a> <span class="chev" onclick="toggleDetail('info2')">▸ more</span></div>
+        <div class="email-meta">it_support@ada.cx · Jun 30, 2026</div>
+        <div class="email-detail" id="detail-info2" style="display:none">IT confirmed Ghazal can use any box (not just the original) to return her laptop — nothing further needed.</div>
+      </div>
+      <select id="inforoute-info2"><option value="" selected disabled>Move to…</option><option value="ARCHIVE">Archive</option><option value="TRASH">Trash</option></select>
+      <button class="mini" onclick="routeInformational('info2','19f152f1ad24945a')">Move</button>
+    </div>
+
+    <div class="email-item" style="border-left:3px solid #8a8fa3;padding-left:10px;">
+      <div style="flex:1">
+        <div><a href="https://mail.google.com/mail/u/0/#all/19f162e6b3c4b5ee" target="_blank">Re: Cobra Sign Up</a> <span class="chev" onclick="toggleDetail('info3')">▸ more</span></div>
+        <div class="email-meta">judy.liang@ada.cx · Jun 30, 2026</div>
+        <div class="email-detail" id="detail-info3" style="display:none">Sterling will mail COBRA instructions directly; coverage is retroactive to July 1. Nothing to do until it arrives.</div>
+      </div>
+      <select id="inforoute-info3"><option value="" selected disabled>Move to…</option><option value="ARCHIVE">Archive</option><option value="TRASH">Trash</option></select>
+      <button class="mini" onclick="routeInformational('info3','19f162e6b3c4b5ee')">Move</button>
+    </div>
+
+    <div class="email-item" style="border-left:3px solid #8a8fa3;padding-left:10px;">
+      <div style="flex:1">
+        <div><a href="https://mail.google.com/mail/u/0/#all/19f0ed346d7feddf" target="_blank">Welcome to Summer@Potomac Week 4 - DEAN Adventure Camp</a> <span class="chev" onclick="toggleDetail('info4')">▸ more</span></div>
+        <div class="email-meta">summer@potomacschool.org · Jun 28, 2026</div>
+        <div class="email-detail" id="detail-info4" style="display:none">Logistics/prep info for camp week of July 6–10 — purely informational, no reply needed.</div>
+      </div>
+      <select id="inforoute-info4"><option value="" selected disabled>Move to…</option><option value="ARCHIVE">Archive</option><option value="TRASH">Trash</option></select>
+      <button class="mini" onclick="routeInformational('info4','19f0ed346d7feddf')">Move</button>
+    </div>
+
+    <div class="email-item" style="border-left:3px solid #8a8fa3;padding-left:10px;">
+      <div style="flex:1">
+        <div><a href="https://mail.google.com/mail/u/0/#all/19f1ecb7f02280d4" target="_blank">RE: Appraisal Request</a> <span class="chev" onclick="toggleDetail('info5')">▸ more</span></div>
+        <div class="email-meta">appraisals@cwealthappraisals.com · Jul 5, 2026</div>
+        <div class="email-detail" id="detail-info5" style="display:none">Tom can't finish the home-purchase appraisal report by July 13. Ghazal already replied offering a call — nothing further needed from her right now.</div>
+      </div>
+      <select id="inforoute-info5"><option value="" selected disabled>Move to…</option><option value="ARCHIVE">Archive</option><option value="TRASH">Trash</option></select>
+      <button class="mini" onclick="routeInformational('info5','19f1ecb7f02280d4')">Move</button>
+    </div>
+  </div>
 
   <div class="subtabs">
-    <button class="subtab-btn active" data-sub="high" onclick="showSub('high')">🔴 High Priority</button>
-    <button class="subtab-btn" data-sub="medium" onclick="showSub('medium')">🟠 Medium</button>
-    <button class="subtab-btn" data-sub="school" onclick="showSub('school')">🏫 School</button>
-    <button class="subtab-btn" data-sub="social" onclick="showSub('social')">💬 Social</button>
+    <button class="subtab-btn active" data-sub="high" onclick="switchInboxSub('high')">High Priority (4)</button>
+    <button class="subtab-btn" data-sub="medium" onclick="switchInboxSub('medium')">Medium (1)</button>
+    <button class="subtab-btn" data-sub="school" onclick="switchInboxSub('school')">School</button>
+    <button class="subtab-btn" data-sub="social" onclick="switchInboxSub('social')">Social</button>
   </div>
-  <div class="card subtab-panel active" id="sub-high"></div>
-  <div class="card subtab-panel" id="sub-medium"></div>
-  <div class="card subtab-panel" id="sub-school"></div>
-  <div class="card subtab-panel" id="sub-social"></div>
+
+  <div class="subtab-panel active" id="sub-high">
+    <div class="card">
+      <div class="email-item high">
+        <div style="flex:1">
+          <div><a href="https://mail.google.com/mail/u/0/#all/19ef4a8bdb050c4a" target="_blank">Re: Appraisals, Next Steps</a> <span class="chev" onclick="toggleDetail('h1')">▸ more</span> ⚠️ No reply</div>
+          <div class="email-meta">ben@allcrewingdc.com · Jun 25, 2026</div>
+          <div class="email-detail" id="detail-h1" style="display:none">Ben: "13th @ 1:00pm works for me — GHAZAL?" Mediation/appraisal follow-up with Brian Hirsch — next opening after this is July 28 @ 3:30 if missed.</div>
+        </div>
+        <button class="star-btn" data-msg-id="19ef4a8bdb050c4a" data-starred="false" onclick="toggleStar(this)" title="Star this email">☆</button>
+      </div>
+      <div class="email-item high">
+        <div style="flex:1">
+          <div><a href="https://mail.google.com/mail/u/0/#all/19e9cf07a4756044" target="_blank">Re: Dr. Sethi Form</a> <span class="chev" onclick="toggleDetail('h2')">▸ more</span> ⚠️ No reply</div>
+          <div class="email-meta">ben@allcrewingdc.com · Jun 22, 2026</div>
+          <div class="email-detail" id="detail-h2" style="display:none">"This is the fourth time I've emailed" — Ella's ADHD medication form still needs to go to Sandy Hill/Dr. Sethi.</div>
+        </div>
+        <button class="star-btn" data-msg-id="19e9cf07a4756044" data-starred="true" onclick="toggleStar(this)" title="Unstar this email">★</button>
+      </div>
+      <div class="email-item high">
+        <div style="flex:1">
+          <div><a href="https://mail.google.com/mail/u/0/#all/19f056c9602e4c81" target="_blank">Re: Confidential: Ada - Separation Agreement</a> <span class="chev" onclick="toggleDetail('h3')">▸ more</span></div>
+          <div class="email-meta">judy.liang@ada.cx · Jun 30, 2026</div>
+          <div class="email-detail" id="detail-h3" style="display:none">Ghazal asked whether the reimbursement is separate from the expense report already submitted via Ramp — awaiting Ada's confirmation on severance treatment.</div>
+        </div>
+        <button class="star-btn" data-msg-id="19f056c9602e4c81" data-starred="false" onclick="toggleStar(this)" title="Star this email">☆</button>
+      </div>
+      <div class="email-item high">
+        <div style="flex:1">
+          <div><a href="https://mail.google.com/mail/u/0/#all/19d6d72d3b6020b2" target="_blank">INFO (secure message)</a> <span class="chev" onclick="toggleDetail('h4')">▸ more</span></div>
+          <div class="email-meta">info@speerprimarycare.com · Apr 8, 2026</div>
+          <div class="email-detail" id="detail-h4" style="display:none">Encrypted Hushmail notice — content isn't visible without opening the secure link. Health-related sender, unopened; worth a quick check even though it's from April.</div>
+        </div>
+        <button class="star-btn" data-msg-id="19d6d72d3b6020b2" data-starred="false" onclick="toggleStar(this)" title="Star this email">☆</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="subtab-panel" id="sub-medium">
+    <div class="card">
+      <div class="email-item">
+        <div style="flex:1">
+          <div><a href="https://mail.google.com/mail/u/0/#all/19f2e36f498819c8" target="_blank">Field hockey camps in July and August</a> <span class="chev" onclick="toggleDetail('m1')">▸ more</span></div>
+          <div class="email-meta">mcleanfieldhockey@gmail.com · Jul 4, 2026</div>
+          <div class="email-detail" id="detail-m1" style="display:none">FYI on field hockey camp options for July/August — no reply needed unless interested in signing up.</div>
+        </div>
+        <button class="star-btn" data-msg-id="19f2e36f498819c8" data-starred="false" onclick="toggleStar(this)" title="Star this email">☆</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="subtab-panel" id="sub-school">
+    <div class="card">
+      <p style="font-weight:600;">School is out — no recent emails (Ella and Liam both on summer break).</p>
+      <p class="muted">Ella's Grade Snapshot — from last known progress-report emails (inbox + trash, last 90 days). Actual letter grades require the PVUE portal; snippets only confirm a report was sent.</p>
+      <table>
+        <tr><th>Class</th><th>Final Grade</th><th>Last Email</th><th>Source</th></tr>
+        <tr><td>English 7 HN (Maldonado)</td><td>See portal</td><td>Jun 12, 2026</td><td><a href="https://mail.google.com/mail/u/0/#all/19ebd7c15de2f07c" target="_blank">Open</a></td></tr>
+        <tr><td>Soprano Alto Chorus 8 (Dawson)</td><td>See portal</td><td>Jun 10, 2026</td><td><a href="https://mail.google.com/mail/u/0/#all/19eb32d59ad94298" target="_blank">Open</a></td></tr>
+        <tr><td>Health & PE 7 (Shapiro)</td><td>See portal</td><td>Jun 8, 2026</td><td><a href="https://mail.google.com/mail/u/0/#all/19ea86a53ef9501e" target="_blank">Open</a></td></tr>
+        <tr><td>US History 7 HN (Layton)</td><td>See portal</td><td>Jun 3, 2026</td><td><a href="https://mail.google.com/mail/u/0/#all/19e8eb0d14208911" target="_blank">Open</a></td></tr>
+        <tr><td>Life Science HN (Schinstock)</td><td>See portal</td><td>May 22, 2026</td><td><a href="https://mail.google.com/mail/u/0/#all/19e50a4596ea387b" target="_blank">Open</a></td></tr>
+      </table>
+      <p class="muted" style="margin-top:8px;">No grades below B− flaggable from available snippets — none of the letters themselves came through in these notification emails.</p>
+    </div>
+  </div>
+
+  <div class="subtab-panel" id="sub-social">
+    <div class="card"><div class="empty-state">No items in this category today.</div></div>
+  </div>
 </div>
 
-<!-- TAB 3: CALENDAR -->
+<!-- ============ TAB 3: CALENDAR ============ -->
 <div class="tab-section" id="tab-calendar">
-  <div class="section-head"><div></div><button class="refresh-btn" onclick="sendPrompt('Please refresh my morning briefing — Calendar tab. Rebuild and overwrite /Users/ghazalmoore/Dropbox/Personal/Claude/MorningBriefing/index.html.')">↻ Refresh Calendar</button></div>
+  <h1 class="page-title">Calendar</h1>
+  <div class="toolbar"><div></div><button class="refresh-btn" onclick="sendPrompt('Please refresh my morning briefing — Calendar tab. Rebuild and overwrite /Users/ghazalmoore/Dropbox/Personal/Claude/MorningBriefing/index.html.')">↻ Refresh Calendar</button></div>
   <div class="grid2">
     <div>
-      <h2 class="col-title">Today &amp; Tomorrow</h2>
-      <div class="card" id="calToday"></div>
+      <div class="card">
+        <h3 style="margin-top:0;font-size:15px;">Today — Monday, Jul 6</h3>
+        <div class="flag-line"><b>All day</b> — Recycle</div>
+        <div class="flag-line"><b>9:45–10:15am</b> — <a href="https://www.google.com/calendar/event?eid=XzhncWpjZGhqNm9wamViOWc3NG8zZ2I5azg4czNjYmEyNjEzMzRiOWc2aDMzZWQyMTY4cTMyZTlwNzAgdGVocmFuaS5naGF6YWxAbQ&ctz=America/New_York" target="_blank">Call with John Kirschner</a></div>
+        <div class="card" style="background:#f8f9fb;box-shadow:none;margin-top:10px;">
+          <b style="font-size:13px;">Meeting Prep — Call with John Kirschner</b>
+          <p class="muted" style="margin:6px 0 0;">New contact — no prior meeting history found in Gmail. Granola lookup ("meetings today and recent action items") timed out this run, so prior notes/action items could not be pulled — try refreshing this tab later in the day.</p>
+        </div>
+        <h3 style="font-size:15px;margin-top:18px;">Tomorrow — Tuesday, Jul 7</h3>
+        <p class="muted">Nothing on the calendar.</p>
+      </div>
     </div>
     <div>
-      <h2 class="col-title">New Invites &amp; Suggestions</h2>
-      <div class="card" id="calInvites"></div>
-      <h2 class="col-title" style="margin-top:18px;">Ben's Away Dates (60-day window)</h2>
-      <div class="card"><table id="bensAway"><thead><tr><th>Event</th><th>Dates</th><th>Kid Coverage</th><th>Notes</th></tr></thead><tbody></tbody></table></div>
+      <div class="card">
+        <h3 style="margin-top:0;font-size:15px;">New .ics Invites</h3>
+        <div class="flag-line"><a href="https://mail.google.com/mail/u/0/#all/19ee10e577c2c9ac" target="_blank">Virtual Parent Intake - L.M.</a> (Ellie Zadeh, wisemindpsychotherapy.net) — Jun 22, already occurred; informational only, no action needed. Open in Gmail ↗</div>
+      </div>
+      <div class="card">
+        <h3 style="margin-top:0;font-size:15px;">Calendar Suggestions</h3>
+        <div class="flag-line">Ben's Atlanta trip (Jul 26–29) has no kid-coverage note on the calendar — worth confirming before then, especially with mediation follow-up also pending this month.</div>
+      </div>
+      <div class="card">
+        <h3 style="margin-top:0;font-size:15px;">Ben's Away Dates (60-day window)</h3>
+        <table>
+          <tr><th>Event</th><th>Dates</th><th>Kid Coverage</th><th>Notes</th><th></th></tr>
+          <tr style="color:var(--red);">
+            <td>Democratic Mayors Assoc.</td>
+            <td>Jul 26 – Jul 29</td>
+            <td>TBD</td>
+            <td>Ben leaves for Atlanta Jul 26, flies home by 9pm Jul 29</td>
+            <td><a href="https://www.google.com/calendar/event?eid=Xzhvb2s4Y2E1OGtzNDZiOW82OTI0OGI5azYwb2tjYmEyNjUzMzZiYTI4OHI0MmdxNjhvbzM4Y2kzODggdGVocmFuaS5naGF6YWxAbQ&ctz=America/New_York" target="_blank">Open</a></td>
+          </tr>
+        </table>
+      </div>
     </div>
   </div>
 </div>
 
-<!-- TAB 4: TODOIST -->
+<!-- ============ TAB 4: TODOIST ============ -->
 <div class="tab-section" id="tab-todoist">
-  <div class="section-head"><div></div><button class="refresh-btn" onclick="sendPrompt('Please refresh my morning briefing — Todoist tab. Rebuild and overwrite /Users/ghazalmoore/Dropbox/Personal/Claude/MorningBriefing/index.html.')">↻ Refresh Todoist</button></div>
-  <div class="todoist-wrap">
-    <div class="td-col">
-      <div class="count-line" id="todoCount">📋 In Todoist</div>
-      <div id="todoList"></div>
-      <button class="push-btn" onclick="pushTodoistUpdates()">Push Updates</button>
+  <h1 class="page-title" style="padding-left:20px;">Todoist</h1>
+  <div style="padding:0 20px;"><button class="refresh-btn" onclick="sendPrompt('Please refresh my morning briefing — Todoist tab. Rebuild and overwrite /Users/ghazalmoore/Dropbox/Personal/Claude/MorningBriefing/index.html.')">↻ Refresh Todoist</button></div>
+  <div class="todo-panel">
+    <div class="todo-col left">
+      <h3>📋 In Todoist — 43 tasks · 0 overdue</h3>
+      <div class="muted" style="margin-bottom:10px;">All 43 are due today (Jul 6). Sorted P1 → P4.</div>
+      <button class="mini" onclick="sendPrompt('Update these existing Todoist tasks via MCP: ' + JSON.stringify(window.__todoistApproved||[]))">Push Updates</button>
+      <div style="margin-top:10px;max-height:640px;overflow-y:auto;">
+        <!-- P1 -->
+        <div class="todo-card"><div class="p-stripe p1"></div><input type="checkbox"><div style="flex:1"><div class="todo-title">🔴 Laundry <span class="muted">(recurring, every Thu)</span></div><div class="todo-meta"><span>Home / Kids / Life</span><span>Due today</span></div></div></div>
+        <div class="todo-card"><div class="p-stripe p1"></div><input type="checkbox"><div style="flex:1"><div class="todo-title">🔴 Emergency Plan: Fire extinguisher, plan with no cell, etc</div><div class="todo-meta"><span>Home / Kids / Life</span><span>Due today</span></div></div></div>
+        <div class="todo-card"><div class="p-stripe p1"></div><input type="checkbox"><div style="flex:1"><div class="todo-title">🔴 Liam frames</div><div class="todo-meta"><span>Home / Kids / Life</span><span>Due today</span></div></div></div>
+        <div class="todo-card"><div class="p-stripe p1"></div><input type="checkbox"><div style="flex:1"><div class="todo-title">🔴 Pottery barn account</div><div class="todo-meta"><span>Home / Kids / Life</span><span>Due today</span></div></div></div>
+        <div class="todo-card"><div class="p-stripe p1"></div><input type="checkbox"><div style="flex:1"><div class="todo-title">🔴 Meditation <span class="muted">(daily, 8:30am, 30m)</span></div><div class="todo-meta"><span>Standing Wellness</span><span>Due today</span></div></div></div>
+        <div class="todo-card"><div class="p-stripe p1"></div><input type="checkbox"><div style="flex:1"><div class="todo-title">🔴 Paint and finish table !!</div><div class="todo-meta"><span>Home / Kids / Life</span><span>Due today</span></div></div></div>
+        <div class="todo-card"><div class="p-stripe p1"></div><input type="checkbox"><div style="flex:1"><div class="todo-title">🔴 Clean Walls</div><div class="todo-meta"><span>Home / Kids / Life</span><span>Due today</span></div></div></div>
+        <div class="todo-card"><div class="p-stripe p1"></div><input type="checkbox"><div style="flex:1"><div class="todo-title">🔴 Swap patch <span class="muted">(recurring, Sun/Wed)</span></div><div class="todo-meta"><span>Standing Wellness</span><span>Due today</span></div></div></div>
+        <div class="todo-card"><div class="p-stripe p1"></div><input type="checkbox"><div style="flex:1"><div class="todo-title">🔴 Call Pat</div><div class="todo-meta"><span>Standing Wellness</span><span>Due today</span></div></div></div>
+        <div class="todo-card"><div class="p-stripe p1"></div><input type="checkbox"><div style="flex:1"><div class="todo-title">🔴 Plan summer vacation <span class="muted">(3:00pm)</span></div><div class="todo-meta"><span>Standing Wellness</span><span>Due today</span></div></div></div>
+        <div class="todo-card"><div class="p-stripe p1"></div><input type="checkbox"><div style="flex:1"><div class="todo-title">🔴 Levitating lotus <span class="muted">(5:00pm)</span></div><div class="todo-meta"><span>Standing Wellness</span><span>Due today</span></div></div></div>
+        <div class="todo-card"><div class="p-stripe p1"></div><input type="checkbox"><div style="flex:1"><div class="todo-title">🔴 Decide on Ocean's Calling</div><div class="todo-meta"><span>Standing Wellness</span><span>Due today</span></div></div></div>
+        <div class="todo-card"><div class="p-stripe p1"></div><input type="checkbox"><div style="flex:1"><div class="todo-title">🔴 Take iron and D <span class="muted">(every other day, noon)</span></div><div class="todo-meta"><span>Standing Wellness</span><span>Due today</span></div></div></div>
+        <div class="todo-card"><div class="p-stripe p1"></div><input type="checkbox"><div style="flex:1"><div class="todo-title">🔴 Rise seeds <span class="muted">(6:30pm)</span></div><div class="todo-meta"><span>Standing Wellness</span><span>Due today</span></div></div></div>
+        <div class="todo-card"><div class="p-stripe p1"></div><input type="checkbox"><div style="flex:1"><div class="todo-title">🔴 Monitors and desk</div><div class="todo-meta"><span>Standing Wellness</span><span>Due today</span></div></div></div>
+        <div class="todo-card"><div class="p-stripe p1"></div><input type="checkbox"><div style="flex:1"><div class="todo-title">🔴 Claude training</div><div class="todo-meta"><span>Standing Wellness</span><span>Due today</span></div></div></div>
+        <div class="todo-card"><div class="p-stripe p1"></div><input type="checkbox"><div style="flex:1"><div class="todo-title">🔴 Reimbursement for SACC <span class="muted">(Apr/May/Jun, 10:00am)</span></div><div class="todo-meta"><span>Standing Wellness</span><span>Due today</span></div></div></div>
+        <div class="todo-card"><div class="p-stripe p1"></div><input type="checkbox"><div style="flex:1"><div class="todo-title">🔴 Look up 2011–2014 IRA</div><div class="todo-meta"><span>Standing Wellness</span><span>Due today</span></div></div></div>
+        <div class="todo-card"><div class="p-stripe p1"></div><input type="checkbox"><div style="flex:1"><div class="todo-title">🔴 Mind Vida <span class="muted">(11:15am)</span></div><div class="todo-meta"><span>Standing Wellness</span><span>Due today</span></div></div></div>
+        <div class="todo-card"><div class="p-stripe p1"></div><input type="checkbox"><div style="flex:1"><div class="todo-title">🔴 G Appraisal finalized <span class="muted">(10:30am)</span></div><div class="todo-meta"><span>Standing Wellness</span><span>Due today</span></div></div></div>
+        <div class="todo-card"><div class="p-stripe p1"></div><input type="checkbox"><div style="flex:1"><div class="todo-title">🔴 Fwd: Meet Your B2B Support Team (Williams-Sonoma)</div><div class="todo-meta"><span>Standing Wellness</span><span>Due today</span></div></div></div>
+        <div class="todo-card"><div class="p-stripe p1"></div><input type="checkbox"><div style="flex:1"><div class="todo-title">🔴 Fix mom's jewelry <span class="muted">(11:30am)</span></div><div class="todo-meta"><span>Standing Wellness</span><span>Due today</span></div></div></div>
+        <div class="todo-card"><div class="p-stripe p1"></div><input type="checkbox"><div style="flex:1"><div class="todo-title">🔴 Cleaners - alteration <span class="muted">(8:45am)</span></div><div class="todo-meta"><span>Standing Wellness</span><span>Due today</span></div></div></div>
+        <div class="todo-card"><div class="p-stripe p1"></div><input type="checkbox"><div style="flex:1"><div class="todo-title">🔴 Update FSA reimbursement <span class="muted">(10:00am)</span></div><div class="todo-meta"><span>Standing Wellness</span><span>Due today</span></div></div></div>
+        <div class="todo-card"><div class="p-stripe p1"></div><input type="checkbox"><div style="flex:1"><div class="todo-title">🔴 Call Sterling re: FSA <span class="muted">(10:00am)</span></div><div class="todo-meta"><span>Standing Wellness</span><span>Due today</span></div></div></div>
+        <div class="todo-card"><div class="p-stripe p1"></div><input type="checkbox"><div style="flex:1"><div class="todo-title">🔴 Staples and progesterone <span class="muted">(12:30pm)</span></div><div class="todo-meta"><span>Standing Wellness</span><span>Due today</span></div></div></div>
+        <div class="todo-card"><div class="p-stripe p1"></div><input type="checkbox"><div style="flex:1"><div class="todo-title">🔴 Resume for Booz Jobs <span class="muted">(1:30pm)</span></div><div class="todo-meta"><span>Standing Wellness</span><span>Due today</span></div></div></div>
+        <div class="todo-card"><div class="p-stripe p1"></div><input type="checkbox"><div style="flex:1"><div class="todo-title">🔴 Upload form for Sethie <span class="muted">(9:00am)</span></div><div class="todo-meta"><span>Standing Wellness</span><span>Due today</span></div></div></div>
+        <!-- P2 -->
+        <div class="todo-card"><div class="p-stripe p2"></div><input type="checkbox"><div style="flex:1"><div class="todo-title">🟠 Playlists</div><div class="todo-meta"><span>Ghazal</span><span>Due today</span></div></div></div>
+        <div class="todo-card"><div class="p-stripe p2"></div><input type="checkbox"><div style="flex:1"><div class="todo-title">🟠 Pictures 2020–2025 Clean Up</div><div class="todo-meta"><span>Media</span><span>Due today</span></div></div></div>
+        <div class="todo-card"><div class="p-stripe p2"></div><input type="checkbox"><div style="flex:1"><div class="todo-title">🟠 Buy Chair for Guest Room</div><div class="todo-meta"><span>Buy List</span><span>Due today</span></div></div></div>
+        <div class="todo-card"><div class="p-stripe p2"></div><input type="checkbox"><div style="flex:1"><div class="todo-title">🟠 Buy Mirrors for Guest Room</div><div class="todo-meta"><span>Buy List</span><span>Due today</span></div></div></div>
+        <div class="todo-card"><div class="p-stripe p2"></div><input type="checkbox"><div style="flex:1"><div class="todo-title">🟠 iPHOTO</div><div class="todo-meta"><span>Apple Care List</span><span>Due today</span></div></div></div>
+        <div class="todo-card"><div class="p-stripe p2"></div><input type="checkbox"><div style="flex:1"><div class="todo-title">🟠 Picture Org 2020 and beyond</div><div class="todo-meta"><span>Media</span><span>Due today</span></div></div></div>
+        <div class="todo-card"><div class="p-stripe p2"></div><input type="checkbox"><div style="flex:1"><div class="todo-title">🟠 Add missing 2017 videos from photos to dropbox</div><div class="todo-meta"><span>Media</span><span>Due today</span></div></div></div>
+        <div class="todo-card"><div class="p-stripe p2"></div><input type="checkbox"><div style="flex:1"><div class="todo-title">🟠 Vagus Nerve exercises <span class="muted">(daily, 9:30pm)</span></div><div class="todo-meta"><span>Standing Wellness</span><span>Due today</span></div></div></div>
+        <div class="todo-card"><div class="p-stripe p2"></div><input type="checkbox"><div style="flex:1"><div class="todo-title">🟠 Japanese Pancakes</div><div class="todo-meta"><span>Ghazal</span><span>Due today</span></div></div></div>
+        <div class="todo-card"><div class="p-stripe p2"></div><input type="checkbox"><div style="flex:1"><div class="todo-title">🟠 Work on Pitch Deck <span class="muted">(comparables, wellness/hospitality, AI format)</span></div><div class="todo-meta"><span>Amaterra</span><span>Due today</span></div></div></div>
+        <div class="todo-card"><div class="p-stripe p2"></div><input type="checkbox"><div style="flex:1"><div class="todo-title">🟠 Acres report?</div><div class="todo-meta"><span>Standing Wellness</span><span>Due today</span></div></div></div>
+        <div class="todo-card"><div class="p-stripe p2"></div><input type="checkbox"><div style="flex:1"><div class="todo-title">🟠 Desk for G office</div><div class="todo-meta"><span>Buy List</span><span>Due today</span></div></div></div>
+        <div class="todo-card"><div class="p-stripe p2"></div><input type="checkbox"><div style="flex:1"><div class="todo-title">🟠 Bathroom chair / Bench</div><div class="todo-meta"><span>Buy List</span><span>Due today</span></div></div></div>
+        <div class="todo-card"><div class="p-stripe p2"></div><input type="checkbox"><div style="flex:1"><div class="todo-title">🟠 Master couch</div><div class="todo-meta"><span>Buy List</span><span>Due today</span></div></div></div>
+        <!-- P4 -->
+        <div class="todo-card"><div class="p-stripe p4"></div><input type="checkbox"><div style="flex:1"><div class="todo-title">⚪ Look for 2015/2016 Form 5498</div><div class="todo-meta"><span>Standing Wellness</span><span>Due today</span></div></div></div>
+      </div>
     </div>
-    <div class="td-col right">
-      <div class="count-line" id="suggCount">💡 Suggested from Email &amp; Calendar</div>
-      <div id="suggList"></div>
-      <button class="push-btn" onclick="addApprovedTasks()">Add Approved to Todoist</button>
+    <div class="todo-col right">
+      <h3>💡 Suggested from Email & Calendar — 6 open loops</h3>
+      <div class="muted" style="margin-bottom:10px;">Deduplicated against existing Todoist tasks (e.g. the Sethi form is already tracked as "Upload form for Sethie").</div>
+      <button class="mini" onclick="sendPrompt('Create these new Todoist tasks via MCP: ' + JSON.stringify(window.__todoistToCreate||[]))">Add Approved to Todoist</button>
+      <div style="margin-top:10px;">
+        <div class="todo-card"><div class="p-stripe p1"></div><input type="checkbox" checked><div style="flex:1"><div class="todo-title">Reply to Ben re: confirming Jul 13 @ 1pm mediation slot</div><div class="todo-meta"><span>P1</span><span>Today</span><a href="https://mail.google.com/mail/u/0/#all/19ef4a8bdb050c4a" target="_blank">Source</a></div></div></div>
+        <div class="todo-card"><div class="p-stripe p1"></div><input type="checkbox" checked><div style="flex:1"><div class="todo-title">Reply to Ada re: severance reimbursement question</div><div class="todo-meta"><span>P1</span><span>Today</span><a href="https://mail.google.com/mail/u/0/#all/19f056c9602e4c81" target="_blank">Source</a></div></div></div>
+        <div class="todo-card"><div class="p-stripe p1"></div><input type="checkbox" checked><div style="flex:1"><div class="todo-title">Confirm kid coverage for Ben's Atlanta trip (Jul 26–29)</div><div class="todo-meta"><span>P1</span><span>Today</span><a href="https://www.google.com/calendar/event?eid=Xzhvb2s4Y2E1OGtzNDZiOW82OTI0OGI5azYwb2tjYmEyNjUzMzZiYTI4OHI0MmdxNjhvbzM4Y2kzODggdGVocmFuaS5naGF6YWxAbQ&ctz=America/New_York" target="_blank">Source</a></div></div></div>
+        <div class="todo-card"><div class="p-stripe p2"></div><input type="checkbox" checked><div style="flex:1"><div class="todo-title">Open Speer Primary Care secure message</div><div class="todo-meta"><span>P2</span><span>Today</span><a href="https://mail.google.com/mail/u/0/#all/19d6d72d3b6020b2" target="_blank">Source</a></div></div></div>
+        <div class="todo-card"><div class="p-stripe p3"></div><input type="checkbox"><div style="flex:1"><div class="todo-title">Decide on field hockey camp signup (Jul/Aug)</div><div class="todo-meta"><span>P3</span><span>Today</span><a href="https://mail.google.com/mail/u/0/#all/19f2e36f498819c8" target="_blank">Source</a></div></div></div>
+        <div class="todo-card"><div class="p-stripe p3"></div><input type="checkbox"><div style="flex:1"><div class="todo-title">Follow up with Tom (appraiser) once he's back from delay</div><div class="todo-meta"><span>P3</span><span>Today</span><a href="https://mail.google.com/mail/u/0/#all/19f1ecb7f02280d4" target="_blank">Source</a></div></div></div>
+      </div>
     </div>
   </div>
 </div>
 
-<!-- TAB 5: NEWS -->
+<!-- ============ TAB 5: NEWS ============ -->
 <div class="tab-section" id="tab-news">
+  <h1 class="page-title">News</h1>
+  <div class="toolbar"><div></div><button class="refresh-btn" onclick="sendPrompt('Please refresh my morning briefing — News tab. Rebuild and overwrite /Users/ghazalmoore/Dropbox/Personal/Claude/MorningBriefing/index.html.')">↻ Refresh News</button></div>
   <div class="subtabs">
-    <button class="subtab-btn active" data-nsub="ai" onclick="showNews('ai')">🤖 AI</button>
-    <button class="subtab-btn" data-nsub="tech" onclick="showNews('tech')">💻 Tech</button>
-    <button class="subtab-btn" data-nsub="ps" onclick="showNews('ps')">📊 PS Strategy</button>
+    <button class="subtab-btn active" data-newssub="ai" onclick="switchNewsSub('ai')">🤖 AI</button>
+    <button class="subtab-btn" data-newssub="tech" onclick="switchNewsSub('tech')">💻 Tech</button>
+    <button class="subtab-btn" data-newssub="ps" onclick="switchNewsSub('ps')">📊 PS Strategy</button>
   </div>
-  <div class="subtab-panel active newsgrid" id="news-ai"></div>
-  <div class="subtab-panel newsgrid" id="news-tech"></div>
-  <div class="subtab-panel newsgrid" id="news-ps"></div>
+  <div class="subtab-panel active" id="news-ai">
+    <div class="card">
+      <div class="news-card"><h4><a href="https://news.un.org/en/story/2026/07/1167848" target="_blank">UN Global Dialogue on AI Governance begins in Geneva</a></h4><div class="news-src">UN News · Jul 6, 2026</div>Member states begin discussing international AI oversight as a UN scientific panel warns capabilities are outpacing regulation.</div>
+      <div class="news-card"><h4><a href="https://unrot.co/blogs/today-top-10-ai-news-july-4-2026" target="_blank">Tesla caps AI token spend at $200/week per employee</a></h4><div class="news-src">via unrot.co roundup · Jul 4–6, 2026</div>New internal policy starting Jul 6 reflects growing scrutiny of AI service costs across large employers.</div>
+      <div class="news-card"><h4>Uber burned $3.4B AI budget in 4 months</h4><div class="news-src">Reported alongside Tesla story</div>Deploying Claude Code to ~5,000 engineers without per-user guardrails drained the entire annual AI budget early.</div>
+      <div class="news-card"><h4><a href="https://blog.google/innovation-and-ai/technology/ai/google-ai-updates-june-2026/" target="_blank">Claude Sonnet 5 now the default model for Free/Pro users</a></h4><div class="news-src">Anthropic · rolled out Jul 1, 2026</div>Anthropic's most agentic Sonnet yet, performing close to flagship Opus 4.8 on many tasks.</div>
+    </div>
+  </div>
+  <div class="subtab-panel" id="news-tech">
+    <div class="card">
+      <div class="news-card"><h4><a href="https://techstartups.com/2026/07/03/top-tech-news-today-july-3-2026/" target="_blank">AeroVironment shares jump 10.7%</a></h4><div class="news-src">Tech Startups · early Jul 2026</div>Defense-tech company wins a $500M U.S. Army contract.</div>
+      <div class="news-card"><h4>Apple shares surge 4.8%</h4><div class="news-src">Company News, Jul 6, 2026</div>Report suggests Apple plans five new iPhone models.</div>
+      <div class="news-card"><h4><a href="https://sg.finance.yahoo.com/news/company-news-july-6-2026-065200730.html" target="_blank">Netflix up 4.7% on NBCUniversal bid pullback</a></h4><div class="news-src">Yahoo Finance · Jul 6, 2026</div>Netflix reportedly won't bid to acquire NBCUniversal any time soon.</div>
+      <div class="news-card"><h4>Alphabet down 0.4% after EU antitrust loss</h4><div class="news-src">Company News, Jul 6, 2026</div>Google lost a €4.1B European antitrust case.</div>
+      <div class="news-card"><h4><a href="https://news.un.org/en/story/2026/07/1167848" target="_blank">UN Global Dialogue on AI Governance begins in Geneva</a></h4><div class="news-src">UN News · Jul 6, 2026</div>Cross-listed with AI tab — international governance talks kick off today.</div>
+    </div>
+  </div>
+  <div class="subtab-panel" id="news-ps">
+    <div class="card">
+      <div class="news-card"><h4><a href="https://www.bpm.com/insights/professional-services-industry-outlook-2026/" target="_blank">Professional services leads all sectors in gen-AI adoption</a></h4><div class="news-src">BPM · 2026 Outlook</div>Implementation rates rose from 33% (2023) to 71% (2024); AI consulting projected to reach 40% of revenue by 2026.</div>
+      <div class="news-card"><h4><a href="https://www.mgocpa.com/perspective/strategic-priorities-professional-services-firms/" target="_blank">44% of workers' skills seen disrupted within 5 years</a></h4><div class="news-src">WEF, cited by MGO · 2026</div>Reskilling/upskilling now framed as existential for consulting firms; T-shaped talent commands a premium.</div>
+      <div class="news-card"><h4><a href="https://www.sphericalinsights.com/blogs/top-15-companies-in-global-strategic-consulting-services-market-2026-2035-expert-view-by-spherical-insights" target="_blank">Strategic consulting market to grow from $72.94B to $130.41B by 2035</a></h4><div class="news-src">Spherical Insights · 2026</div>Q1 2026 also saw 129 U.S. professional-services M&A deals, up 13% YoY.</div>
+      <div class="news-card"><h4>Outcome-based pricing pilots emerging</h4><div class="news-src">Industry roundup · 2026</div>Some firms are shifting from deliverable-based pricing to client-KPI-linked fees.</div>
+      <div class="news-card"><h4><a href="https://www.fastcompany.com/91528872/a-perfect-storm-is-coming-for-legacy-consulting-firms-management-consulting-ai-transformation-technology" target="_blank">"A perfect storm is coming for legacy consulting firms"</a></h4><div class="news-src">Fast Company · 2026</div>AI-driven transformation pressure is squeezing traditional consulting models.</div>
+    </div>
+  </div>
 </div>
 
-<!-- TAB 6: TRASH -->
+<!-- ============ TAB 6: TRASH ============ -->
 <div class="tab-section" id="tab-trash">
-  <div class="toolbar-row">
-    <div class="expand-controls"><button onclick="expandAllEmails()">Expand all</button><button onclick="collapseAllEmails()">Collapse all</button></div>
-  </div>
-  <div class="trash-toolbar">
-    <div><span id="trashCountLine">20 of 20 selected for trash · 0 kept</span></div>
+  <h1 class="page-title">Trash</h1>
+  <div class="toolbar">
     <div>
+      <span id="trash-count">25 of 25 selected for trash · 0 kept</span>
       <button onclick="trashSelectAll()">Select all</button>
       <button onclick="trashDeselectAll()">Deselect all</button>
-      <button id="sendTrashBtn" onclick="sendToTrash()">🗑️ Send to Trash (20)</button>
+      <button onclick="expandAllEmails()">Expand all</button>
+      <button onclick="collapseAllEmails()">Collapse all</button>
+    </div>
+    <div>
+      <button class="mini danger" id="trash-send-btn" onclick="sendToTrash()">🗑️ Send to Trash (25)</button>
+      <button class="refresh-btn" onclick="sendPrompt('Please refresh my morning briefing — Trash tab. Rebuild and overwrite /Users/ghazalmoore/Dropbox/Personal/Claude/MorningBriefing/index.html.')">↻ Refresh Trash</button>
     </div>
   </div>
-  <div id="trashGroups"></div>
+  <p class="muted">Recipe/food newsletters (Bon Appétit, NYT) are excluded here — they're filed under File → Recipes instead. ~176 additional very old (2014–2023) low-signal unread items also matched this query but are omitted from this list for length; the counts above reflect what's actually rendered.</p>
+
+  <div class="card">
+    <h3 style="font-size:15px;">Newsletters &amp; Digests</h3>
+    <div class="trash-item" onclick="trashToggle(this)"><input type="checkbox" class="trash-check" data-msg-id="19f37210b7fd7862" checked><div class="trash-item-body"><div class="trash-item-subject">The 7: Trump's unusual World Cup intervention; rising cancer rates; Goop Kitchen; and more <span class="chev" onclick="event.stopPropagation();toggleDetail('t1')">▸ more</span></div><div class="trash-item-meta"><span>info@nl.mail.washingtonpost.com</span><span>Jul 6, 2026</span><span>Unread</span></div><div class="email-detail" id="detail-t1" style="display:none">Catch up in minutes.</div></div><span class="trash-reason digest">Digest</span></div>
+  </div>
+
+  <div class="card">
+    <h3 style="font-size:15px;">Promotions &amp; Marketing</h3>
+    <div class="trash-item" onclick="trashToggle(this)"><input type="checkbox" class="trash-check" data-msg-id="19f226128e0bf3b7" checked><div class="trash-item-body"><div class="trash-item-subject">A Journey Into The Sacred Realms Of Healing <span class="chev" onclick="event.stopPropagation();toggleDetail('t2')">▸ more</span></div><div class="trash-item-meta"><span>info@thesacredscience.com</span><span>Jul 2, 2026</span><span>Unread</span></div><div class="email-detail" id="detail-t2" style="display:none">Webinar follow-up marketing email.</div></div><span class="trash-reason promo">Promo</span></div>
+    <div class="trash-item" onclick="trashToggle(this)"><input type="checkbox" class="trash-check" data-msg-id="19f1eb306d63afc9" checked><div class="trash-item-body"><div class="trash-item-subject">what's the plan, Ghazal <span class="chev" onclick="event.stopPropagation();toggleDetail('t3')">▸ more</span></div><div class="trash-item-meta"><span>douglas_fisher@franchiseopportunitieshub.com</span><span>Jul 1, 2026</span><span>Unread</span></div><div class="email-detail" id="detail-t3" style="display:none">Unsolicited franchise-ownership sales pitch.</div></div><span class="trash-reason promo">Promo</span></div>
+    <div class="trash-item" onclick="trashToggle(this)"><input type="checkbox" class="trash-check" data-msg-id="19dac5685bd79236" checked><div class="trash-item-body"><div class="trash-item-subject">Order #515170 Confirmed <span class="chev" onclick="event.stopPropagation();toggleDetail('t4')">▸ more</span></div><div class="trash-item-meta"><span>hello@revisionskincare.com</span><span>Apr 20, 2026</span><span>Unread</span></div><div class="email-detail" id="detail-t4" style="display:none">Order confirmation, already resolved.</div></div><span class="trash-reason auto">Auto</span></div>
+    <div class="trash-item" onclick="trashToggle(this)"><input type="checkbox" class="trash-check" data-msg-id="19d68944db309360" checked><div class="trash-item-body"><div class="trash-item-subject">Shipped! Your order 357464748 <span class="chev" onclick="event.stopPropagation();toggleDetail('t5')">▸ more</span></div><div class="trash-item-meta"><span>crateandbarrel@mail.crateandbarrel.com</span><span>Apr 7, 2026</span><span>Unread</span></div><div class="email-detail" id="detail-t5" style="display:none">Shipping notice, already resolved.</div></div><span class="trash-reason auto">Auto</span></div>
+    <div class="trash-item" onclick="trashToggle(this)"><input type="checkbox" class="trash-check" data-msg-id="19d5efb8323d5201" checked><div class="trash-item-body"><div class="trash-item-subject">Your order 357464748 is confirmed! <span class="chev" onclick="event.stopPropagation();toggleDetail('t6')">▸ more</span></div><div class="trash-item-meta"><span>crateandbarrel@mail.crateandbarrel.com</span><span>Apr 5, 2026</span><span>Unread</span></div><div class="email-detail" id="detail-t6" style="display:none">Order confirmation, already resolved.</div></div><span class="trash-reason auto">Auto</span></div>
+    <div class="trash-item" onclick="trashToggle(this)"><input type="checkbox" class="trash-check" data-msg-id="19cca3740369d36d" checked><div class="trash-item-body"><div class="trash-item-subject">Your order #352318971 has been processed <span class="chev" onclick="event.stopPropagation();toggleDetail('t7')">▸ more</span></div><div class="trash-item-meta"><span>sales@t.revolve.com</span><span>Mar 7, 2026</span><span>Unread</span></div><div class="email-detail" id="detail-t7" style="display:none">Order processed notice.</div></div><span class="trash-reason auto">Auto</span></div>
+    <div class="trash-item" onclick="trashToggle(this)"><input type="checkbox" class="trash-check" data-msg-id="19ba33eb6e63696f" checked><div class="trash-item-body"><div class="trash-item-subject">Los Lobos, Jack Johnson live: personalized concert recommendations <span class="chev" onclick="event.stopPropagation();toggleDetail('t8')">▸ more</span></div><div class="trash-item-meta"><span>no-reply@spotify.com</span><span>Jan 9, 2026</span><span>Unread</span></div><div class="email-detail" id="detail-t8" style="display:none">Concert recommendation marketing email.</div></div><span class="trash-reason promo">Promo</span></div>
+    <div class="trash-item" onclick="trashToggle(this)"><input type="checkbox" class="trash-check" data-msg-id="199a1ade7d3b68d9" checked><div class="trash-item-body"><div class="trash-item-subject">Your Order Confirmation <span class="chev" onclick="event.stopPropagation();toggleDetail('t9')">▸ more</span></div><div class="trash-item-meta"><span>janieandjack@email.janieandjack.com</span><span>Oct 1, 2025</span><span>Unread</span></div><div class="email-detail" id="detail-t9" style="display:none">Order confirmation, already resolved.</div></div><span class="trash-reason auto">Auto</span></div>
+    <div class="trash-item" onclick="trashToggle(this)"><input type="checkbox" class="trash-check" data-msg-id="19907a4d976d7f69" checked><div class="trash-item-body"><div class="trash-item-subject">Birkenstock.com order confirmation 515660614 <span class="chev" onclick="event.stopPropagation();toggleDetail('t10')">▸ more</span></div><div class="trash-item-meta"><span>noreply@birkenstock.com</span><span>Sep 1, 2025</span><span>Unread</span></div><div class="email-detail" id="detail-t10" style="display:none">Order confirmation, already resolved.</div></div><span class="trash-reason auto">Auto</span></div>
+    <div class="trash-item" onclick="trashToggle(this)"><input type="checkbox" class="trash-check" data-msg-id="194f4cc97372b197" checked><div class="trash-item-body"><div class="trash-item-subject">5 Signs You're Out Of Spiritual Alignment <span class="chev" onclick="event.stopPropagation();toggleDetail('t11')">▸ more</span></div><div class="trash-item-meta"><span>info@thesacredscience.com</span><span>Feb 11, 2025</span><span>Unread</span></div><div class="email-detail" id="detail-t11" style="display:none">Wellness marketing email.</div></div><span class="trash-reason promo">Promo</span></div>
+    <div class="trash-item" onclick="trashToggle(this)"><input type="checkbox" class="trash-check" data-msg-id="194835fe81ab2dd8" checked><div class="trash-item-body"><div class="trash-item-subject">A Natural Way To Balance Your Hormones <span class="chev" onclick="event.stopPropagation();toggleDetail('t12')">▸ more</span></div><div class="trash-item-meta"><span>info@thesacredscience.com</span><span>Jan 20, 2025</span><span>Unread</span></div><div class="email-detail" id="detail-t12" style="display:none">Wellness marketing email.</div></div><span class="trash-reason promo">Promo</span></div>
+    <div class="trash-item" onclick="trashToggle(this)"><input type="checkbox" class="trash-check" data-msg-id="182d047369bb6f52" checked><div class="trash-item-body"><div class="trash-item-subject">THE BOMBER JACKET <span class="chev" onclick="event.stopPropagation();toggleDetail('t13')">▸ more</span></div><div class="trash-item-meta"><span>gap@email.gap.com</span><span>Aug 2022</span><span>Unread</span></div><div class="email-detail" id="detail-t13" style="display:none">Sale promo, very old.</div></div><span class="trash-reason deal">Deal</span></div>
+    <div class="trash-item" onclick="trashToggle(this)"><input type="checkbox" class="trash-check" data-msg-id="182d02b2286f6f15" checked><div class="trash-item-body"><div class="trash-item-subject">I'm officially the Democratic nominee <span class="chev" onclick="event.stopPropagation();toggleDetail('t14')">▸ more</span></div><div class="trash-item-meta"><span>info@e.johnfetterman.com</span><span>Aug 2022</span><span>Unread</span></div><div class="email-detail" id="detail-t14" style="display:none">Old campaign email.</div></div><span class="trash-reason promo">Promo</span></div>
+    <div class="trash-item" onclick="trashToggle(this)"><input type="checkbox" class="trash-check" data-msg-id="147f8e0e37c08d1f" checked><div class="trash-item-body"><div class="trash-item-subject">Save Big! You Qualify For This Exclusive Savings Discount <span class="chev" onclick="event.stopPropagation();toggleDetail('t15')">▸ more</span></div><div class="trash-item-meta"><span>Sale@sales.overstock.com</span><span>2014</span><span>Unread</span></div><div class="email-detail" id="detail-t15" style="display:none">Very old retail promo.</div></div><span class="trash-reason deal">Deal</span></div>
+    <div class="trash-item" onclick="trashToggle(this)"><input type="checkbox" class="trash-check" data-msg-id="1451ea765e16e249" checked><div class="trash-item-body"><div class="trash-item-subject">The Most Romantic Coffee Shop You've Ever Seen <span class="chev" onclick="event.stopPropagation();toggleDetail('t16')">▸ more</span></div><div class="trash-item-meta"><span>editor@urbandaddy.com</span><span>2014</span><span>Unread</span></div><div class="email-detail" id="detail-t16" style="display:none">Very old lifestyle newsletter.</div></div><span class="trash-reason digest">Digest</span></div>
+    <div class="trash-item" onclick="trashToggle(this)"><input type="checkbox" class="trash-check" data-msg-id="1451ea0e4051cb61" checked><div class="trash-item-body"><div class="trash-item-subject">41% off? It's no joke! <span class="chev" onclick="event.stopPropagation();toggleDetail('t17')">▸ more</span></div><div class="trash-item-meta"><span>bananarepublic@email.bananarepublic.com</span><span>2014</span><span>Unread</span></div><div class="email-detail" id="detail-t17" style="display:none">Very old retail promo.</div></div><span class="trash-reason deal">Deal</span></div>
+    <div class="trash-item" onclick="trashToggle(this)"><input type="checkbox" class="trash-check" data-msg-id="1451e9ae42cd1280" checked><div class="trash-item-body"><div class="trash-item-subject">Take two minutes and get back on Twitter! <span class="chev" onclick="event.stopPropagation();toggleDetail('t18')">▸ more</span></div><div class="trash-item-meta"><span>info@twitter.com</span><span>2014</span><span>Unread</span></div><div class="email-detail" id="detail-t18" style="display:none">Re-engagement nudge.</div></div><span class="trash-reason auto">Auto</span></div>
+    <div class="trash-item" onclick="trashToggle(this)"><input type="checkbox" class="trash-check" data-msg-id="1451e826ff16e29f" checked><div class="trash-item-body"><div class="trash-item-subject">BREAKING NEWS: Canon to acquire Nikon :-( <span class="chev" onclick="event.stopPropagation();toggleDetail('t19')">▸ more</span></div><div class="trash-item-meta"><span>lyn@phototourdc.com</span><span>2014</span><span>Unread</span></div><div class="email-detail" id="detail-t19" style="display:none">April Fools' joke newsletter.</div></div><span class="trash-reason digest">Digest</span></div>
+    <div class="trash-item" onclick="trashToggle(this)"><input type="checkbox" class="trash-check" data-msg-id="1451e67d5182961e" checked><div class="trash-item-body"><div class="trash-item-subject">Top 10 salad recipes <span class="chev" onclick="event.stopPropagation();toggleDetail('t20')">▸ more</span></div><div class="trash-item-meta"><span>editorial@pinterest.com</span><span>2014</span><span>Unread</span></div><div class="email-detail" id="detail-t20" style="display:none">Pinterest digest (not a food-newsletter sender, kept here).</div></div><span class="trash-reason digest">Digest</span></div>
+    <div class="trash-item" onclick="trashToggle(this)"><input type="checkbox" class="trash-check" data-msg-id="1451e5d63cd6bf3d" checked><div class="trash-item-body"><div class="trash-item-subject">Welcome TAM Airlines to oneworld <span class="chev" onclick="event.stopPropagation();toggleDetail('t21')">▸ more</span></div><div class="trash-item-meta"><span>americanairlines@email.aa.com</span><span>2014</span><span>Unread</span></div><div class="email-detail" id="detail-t21" style="display:none">Airline marketing email.</div></div><span class="trash-reason promo">Promo</span></div>
+    <div class="trash-item" onclick="trashToggle(this)"><input type="checkbox" class="trash-check" data-msg-id="1451e09d992aa7f6" checked><div class="trash-item-body"><div class="trash-item-subject">Free April Wine & Food Tastings Every Saturday! <span class="chev" onclick="event.stopPropagation();toggleDetail('t22')">▸ more</span></div><div class="trash-item-meta"><span>contact@news.latienda.com</span><span>2014</span><span>Unread</span></div><div class="email-detail" id="detail-t22" style="display:none">Local retail event promo.</div></div><span class="trash-reason promo">Promo</span></div>
+    <div class="trash-item" onclick="trashToggle(this)"><input type="checkbox" class="trash-check" data-msg-id="1451df68a73c8a27" checked><div class="trash-item-body"><div class="trash-item-subject">Carolina Herrera, Young Fabulous & Broke... Start Today at Noon ET <span class="chev" onclick="event.stopPropagation();toggleDetail('t23')">▸ more</span></div><div class="trash-item-meta"><span>reminder@e.gilt.com</span><span>2014</span><span>Unread</span></div><div class="email-detail" id="detail-t23" style="display:none">Flash-sale marketing email.</div></div><span class="trash-reason deal">Deal</span></div>
+    <div class="trash-item" onclick="trashToggle(this)"><input type="checkbox" class="trash-check" data-msg-id="1451dd3277d14437" checked><div class="trash-item-body"><div class="trash-item-subject">A major closet upgrade is headed your way <span class="chev" onclick="event.stopPropagation();toggleDetail('t24')">▸ more</span></div><div class="trash-item-meta"><span>hautelook@e.hautelook.com</span><span>2014</span><span>Unread</span></div><div class="email-detail" id="detail-t24" style="display:none">Flash-sale marketing email.</div></div><span class="trash-reason deal">Deal</span></div>
+    <div class="trash-item" onclick="trashToggle(this)"><input type="checkbox" class="trash-check" data-msg-id="1451dcb63759d88e" checked><div class="trash-item-body"><div class="trash-item-subject">We Pity the Fool... <span class="chev" onclick="event.stopPropagation();toggleDetail('t25')">▸ more</span></div><div class="trash-item-meta"><span>service@southmoonunder.com</span><span>2014</span><span>Unread</span></div><div class="email-detail" id="detail-t25" style="display:none">Retail promo.</div></div><span class="trash-reason promo">Promo</span></div>
+  </div>
 </div>
 
-<!-- TAB 7: FILE -->
+<!-- ============ TAB 7: FILE ============ -->
 <div class="tab-section" id="tab-file">
-  <div class="toolbar-row">
-    <div class="expand-controls"><button onclick="expandAllEmails()">Expand all</button><button onclick="collapseAllEmails()">Collapse all</button></div>
-    <button class="refresh-btn" onclick="sendPrompt('Please refresh my morning briefing — File tab. Rebuild and overwrite /Users/ghazalmoore/Dropbox/Personal/Claude/MorningBriefing/index.html.')">↻ Refresh File</button>
+  <h1 class="page-title">File</h1>
+  <div class="toolbar"><div></div><button class="refresh-btn" onclick="sendPrompt('Please refresh my morning briefing — File tab. Rebuild and overwrite /Users/ghazalmoore/Dropbox/Personal/Claude/MorningBriefing/index.html.')">↻ Refresh File</button></div>
+
+  <div class="file-group card">
+    <h3 style="margin-top:0;font-size:15px;">1. Recipes &amp; food newsletters (10)</h3>
+    <div class="file-row"><input type="checkbox" class="file-check-recipes" checked><div style="flex:1"><a href="https://mail.google.com/mail/u/0/#all/19f2d002d326ae11" target="_blank">Miso-peanut chicken</a> <span class="chev" onclick="toggleDetail('r1')">▸ more</span><div class="muted">email@newsletter.bonappetit.com · Jul 4, 2026</div><div class="email-detail" id="detail-r1" style="display:none">Bon Appétit recipe newsletter.</div></div></div>
+    <div class="file-row"><input type="checkbox" class="file-check-recipes" checked><div style="flex:1"><a href="https://mail.google.com/mail/u/0/#all/19f28be4dbe2224a" target="_blank">A cookout menu that's as breezy as summer</a> <span class="chev" onclick="toggleDetail('r2')">▸ more</span><div class="muted">email@newsletter.bonappetit.com · Jul 3, 2026</div><div class="email-detail" id="detail-r2" style="display:none">Bon Appétit recipe newsletter.</div></div></div>
+    <div class="file-row"><input type="checkbox" class="file-check-recipes" checked><div style="flex:1"><a href="https://mail.google.com/mail/u/0/#all/19f3706fa62c1722" target="_blank">The Morning: The latest news</a> <span class="chev" onclick="toggleDetail('r3')">▸ more</span><div class="muted">nytdirect@nytimes.com · Jul 6, 2026</div><div class="email-detail" id="detail-r3" style="display:none">NYT newsletter (from:nytimes.com match).</div></div></div>
+    <div class="file-row"><input type="checkbox" class="file-check-recipes" checked><div style="flex:1"><a href="https://mail.google.com/mail/u/0/#all/19e923b08443c5ce" target="_blank">The Morning: Look closely</a> <span class="chev" onclick="toggleDetail('r4')">▸ more</span><div class="muted">nytdirect@nytimes.com · Jun 4, 2026</div><div class="email-detail" id="detail-r4" style="display:none">NYT newsletter (from:nytimes.com match).</div></div></div>
+    <div class="file-row"><input type="checkbox" class="file-check-recipes" checked><div style="flex:1"><a href="https://mail.google.com/mail/u/0/#all/19e999658ccde654" target="_blank">25 easy weeknight dinners we're making in June</a> <span class="chev" onclick="toggleDetail('r5')">▸ more</span><div class="muted">email@newsletter.bonappetit.com · Jun 5, 2026</div><div class="email-detail" id="detail-r5" style="display:none">Bon Appétit recipe newsletter.</div></div></div>
+    <div class="file-row"><input type="checkbox" class="file-check-recipes" checked><div style="flex:1"><a href="https://mail.google.com/mail/u/0/#all/19e78c8ac5e5e7a4" target="_blank">Knockout carrot sheet cake</a> <span class="chev" onclick="toggleDetail('r6')">▸ more</span><div class="muted">email@newsletter.bonappetit.com · May 30, 2026</div><div class="email-detail" id="detail-r6" style="display:none">Bon Appétit recipe newsletter.</div></div></div>
+    <div class="file-row"><input type="checkbox" class="file-check-recipes" checked><div style="flex:1"><a href="https://mail.google.com/mail/u/0/#all/19e5f029c3a7356a" target="_blank">Miso chicken soba bowls are a not-boring health food</a> <span class="chev" onclick="toggleDetail('r7')">▸ more</span><div class="muted">email@newsletter.bonappetit.com · May 25, 2026</div><div class="email-detail" id="detail-r7" style="display:none">Bon Appétit recipe newsletter.</div></div></div>
+    <div class="file-row"><input type="checkbox" class="file-check-recipes" checked><div style="flex:1"><a href="https://mail.google.com/mail/u/0/#all/19e45439207f214e" target="_blank">No-fail roast chicken with lemon and garlic</a> <span class="chev" onclick="toggleDetail('r8')">▸ more</span><div class="muted">email@newsletter.bonappetit.com · May 20, 2026</div><div class="email-detail" id="detail-r8" style="display:none">Bon Appétit recipe newsletter.</div></div></div>
+    <div class="file-row"><input type="checkbox" class="file-check-recipes" checked><div style="flex:1"><a href="https://mail.google.com/mail/u/0/#all/19e401cbe73b2c27" target="_blank">Very good cheese boards for your next party</a> <span class="chev" onclick="toggleDetail('r9')">▸ more</span><div class="muted">email@newsletter.bonappetit.com · May 19, 2026</div><div class="email-detail" id="detail-r9" style="display:none">Bon Appétit recipe newsletter.</div></div></div>
+    <div class="file-row"><input type="checkbox" class="file-check-recipes" checked><div style="flex:1"><a href="https://mail.google.com/mail/u/0/#all/19c09d807737fd00" target="_blank">The Buffalo chicken dip I make for every party</a> <span class="chev" onclick="toggleDetail('r10')">▸ more</span><div class="muted">email@newsletter.bonappetit.com · Jan 29, 2026</div><div class="email-detail" id="detail-r10" style="display:none">Bon Appétit recipe newsletter.</div></div></div>
+    <div class="file-group-actions">
+      <select id="dest-recipes"><option value="Personal Gmail/Recipes" selected>Personal Gmail/Recipes</option><option value="ARCHIVE">Archive (no label)</option><option value="TRASH">🗑️ Trash</option></select>
+      <button class="mini" onclick="fileGroup('recipes')">Move/Trash checked →</button>
+    </div>
   </div>
-  <div id="fileGroups"></div>
+
+  <div class="file-group card">
+    <h3 style="margin-top:0;font-size:15px;">2. Stale — no longer relevant</h3>
+    <p class="muted">These are 10+ days old and haven't been acted on, or already show a reply resolving them — likely stale because the date has passed and/or it's already handled. Pick Trash or a folder for each.</p>
+    <div class="file-row"><input type="checkbox" class="file-check-stale"><div style="flex:1"><a href="https://mail.google.com/mail/u/0/#all/19ef9d587a512340" target="_blank">4682 Sales Since 2014 !!</a> <span class="chev" onclick="toggleDetail('s1')">▸ more</span><div class="muted">ANorton@cbmove.com (realtor) · Jun 24, 2026</div><div class="email-detail" id="detail-s1" style="display:none">Unsolicited realtor marketing, old.</div></div></div>
+    <div class="file-row"><input type="checkbox" class="file-check-stale"><div style="flex:1"><a href="https://mail.google.com/mail/u/0/#all/19cbfb4556884cb6" target="_blank">Fw: Special Education and Section 504 Newsletter</a> <span class="chev" onclick="toggleDetail('s2')">▸ more</span><div class="muted">jkampf@ivymount.org · Mar 5, 2026</div><div class="email-detail" id="detail-s2" style="display:none">FYI forward about an executive-functioning webinar; never acted on.</div></div></div>
+    <div class="file-row"><input type="checkbox" class="file-check-stale"><div style="flex:1"><a href="https://mail.google.com/mail/u/0/#all/19d317bb4f343c93" target="_blank">Hi mommy</a> <span class="chev" onclick="toggleDetail('s3')">▸ more</span><div class="muted">tehrani.ghazal@gmail.com (self-sent) · Mar 27, 2026</div><div class="email-detail" id="detail-s3" style="display:none">Self-addressed note, no content shown in snippet.</div></div></div>
+    <div class="file-row"><input type="checkbox" class="file-check-stale"><div style="flex:1"><a href="https://mail.google.com/mail/u/0/#all/19c8add42144b1aa" target="_blank">RE: Meet Your B2B Support Team at Williams-Sonoma, Inc.</a> <span class="already-replied-pill">already replied</span> <span class="chev" onclick="toggleDetail('s4')">▸ more</span><div class="muted">wsib2bmidatlantic@wsgc.com · Mar 15, 2026</div><div class="email-detail" id="detail-s4" style="display:none">Login/account issue thread — Ghazal replied but no final resolution confirmed; effectively dormant.</div></div></div>
+    <div class="file-row"><input type="checkbox" class="file-check-stale"><div style="flex:1"><a href="https://mail.google.com/mail/u/0/#all/1965e492eda8e41c" target="_blank">Fw: "The Zones of Regulation® – Basic Training"</a> <span class="chev" onclick="toggleDetail('s5')">▸ more</span><div class="muted">jkampf@ivymount.org · Apr 22, 2025</div><div class="email-detail" id="detail-s5" style="display:none">Over a year old, FYI forward about Liam's regulation strategies.</div></div></div>
+    <div class="file-row"><input type="checkbox" class="file-check-stale"><div style="flex:1"><a href="https://mail.google.com/mail/u/0/#all/18cf4bad67552c2e" target="_blank">Re: Rise Gardens Follow-up</a> <span class="chev" onclick="toggleDetail('s6')">▸ more</span><div class="muted">support@risegardens.com / ben.c.moore@mac.com · Jan 2024</div><div class="email-detail" id="detail-s6" style="display:none">Long customer-support thread from 2024, presumably abandoned.</div></div></div>
+    <p class="muted" style="margin-top:8px;">~15 additional ancient items (2013–2023: Dropbox support tickets, old prescription email, self-forwarded notes) also matched this query and are omitted here for length — same disposition (Trash or Archive) would apply.</p>
+    <div class="file-group-actions">
+      <select id="dest-stale"><option value="" selected disabled>Choose…</option><option value="ARCHIVE">Archive (no label)</option><option value="TRASH">🗑️ Trash</option></select>
+      <button class="mini" onclick="fileGroup('stale')">Move/Trash checked →</button>
+    </div>
+  </div>
 </div>
 
 </div>
 
 <script>
-// ---------- SHARED EXPAND/COLLAPSE ----------
-function toggleDetail(id){
-  const d = document.getElementById('detail-'+id);
-  const c = document.getElementById('chev-'+id);
-  if(!d) return;
-  const open = d.style.display !== 'none';
-  d.style.display = open ? 'none' : 'block';
-  if(c) c.textContent = open ? '▸ more' : '▾ less';
-}
-function expandAllEmails(){ document.querySelectorAll('.email-detail').forEach(d=>d.style.display='block'); document.querySelectorAll('.chev').forEach(c=>c.textContent='▾ less'); }
-function collapseAllEmails(){ document.querySelectorAll('.email-detail').forEach(d=>d.style.display='none'); document.querySelectorAll('.chev').forEach(c=>c.textContent='▸ more'); }
-
-// ---------- DATA ----------
-// HIGH: unresolved, in:inbox, no reply sent
-const highEmails = [
-  {subj:"Appraisals, Next Steps", from:"ben@allcrewingdc.com", date:"Jun 25", summary:"Ben confirmed July 13 @ 1:00pm for the mediation slot with Brian Hirsch — awaiting your reply to lock it in. No reply sent since.", link:"https://mail.google.com/mail/u/0/#all/19ef4a8bdb050c4a", id:"19ef4a8bdb050c4a", starred:true, noreply:true},
-  {subj:"Fwd: Dr. Sethi Form (4th request)", from:"ben@allcrewingdc.com", date:"Jun 22", summary:"Fourth email from Ben asking for the signed ADHD medication form for Ella — needs to reach Sandy Hill. No reply sent since.", link:"https://mail.google.com/mail/u/0/#all/19e9cf07a4756044", id:"19eef8c24df47256", starred:true, noreply:true},
-];
-// MEDIUM: in:inbox, <=10 days old, actionable but not urgent-critical
-const mediumEmails = [
-  {subj:"RE: Appraisal Request", from:"appraisals@cwealthappraisals.com (Tom Kirchner)", date:"Jul 5", summary:"Tom says the report won't be ready by Jul 13 after all. You already replied twice today offering a call — waiting on him to call back, nothing further needed from you right now.", link:"https://mail.google.com/mail/u/0/#all/19f1ecb7f02280d4", id:"19f3291e6ab25e91", starred:false},
-  {subj:"Ghazal, I'm still waiting for your response", from:"LinkedIn — Theo Papadopoulos (Engagement Manager)", date:"Jul 2", summary:"A recruiter/engagement manager is following up again — worth a reply given active job search.", link:"https://mail.google.com/mail/u/0/#all/19f22afd92cdc8cf", id:"19f22afd92cdc8cf", starred:false},
-  {subj:"Confidential: Ada — Separation Agreement", from:"judy.liang@ada.cx", date:"Jun 29", summary:"Severance confirmed: 3 equal installments plus bonus on the 4th scheduled payroll date. No action needed unless you have questions.", link:"https://mail.google.com/mail/u/0/#all/19f056c9602e4c81", id:"19f1578a525e75bd", starred:false},
-  {subj:"Re: Cobra Sign Up", from:"judy.liang@ada.cx", date:"Jun 30", summary:"Sterling will mail COBRA sign-up instructions; coverage retroactive to July 1.", link:"https://mail.google.com/mail/u/0/#all/19f162e6b3c4b5ee", id:"19f195e6b0965a60", starred:false},
-];
-// INFORMATIONAL: already resolved with a reply that reads as "done" — nothing to action, just file it
-const infoEmails = [
-  {subj:"Calleva Summer Camp — Bus Route Form", from:"registration@calleva.org / Ben", date:"Jul 2–3", summary:"Camp flagged Liam's bus/drop-off form as incomplete on Jul 2 — Ben replied \"This is done\" on Jul 3. Resolved, nothing further needed.", link:"https://mail.google.com/mail/u/0/#all/19f24369ef81f268", id:"19f24369ef81f268"},
-  {subj:"Virtual Parent Intake — L.M. (Ellie Zadeh)", from:"ellie@wisemindpsychotherapy.net", date:"Jun 19–22", summary:"Liam's virtual parent intake appointment for therapy took place Jun 22 as scheduled — worth knowing it happened, no action pending.", link:"https://mail.google.com/mail/u/0/#all/19ee10e577c2c9ac", id:"19ee10e577c2c9ac"},
-];
-const socialEmails = [
-  {subj:"Field hockey camps in July and August", from:"mcleanfieldhockey@gmail.com", date:"Jul 4", status:"Informational", link:"https://mail.google.com/mail/u/0/#all/19f2e36f498819c8", id:"social1"},
-];
-const grades = [
-  {cls:"English 7 HN (S. Maldonado)", grade:"Not retrievable this run — flagged for Monday's full review", last:"Jun 12", link:"https://mail.google.com/mail/u/0/#all/19ebd7c15de2f07c"},
-  {cls:"Soprano Alto Chorus (K. Dawson)", grade:"Not retrievable this run — flagged for Monday's full review", last:"Jun 10", link:"https://mail.google.com/mail/u/0/#all/19eb32d59ad94298"},
-  {cls:"Health &amp; PE 7 (K. Shapiro)", grade:"A", last:"Jun 8", link:"https://mail.google.com/mail/u/0/#all/19ea86a53ef9501e"},
-  {cls:"US History 7 HN (J. Layton)", grade:"Not retrievable this run — flagged for Monday's full review", last:"Jun 3", link:"https://mail.google.com/mail/u/0/#all/19e8eb0d14208911"},
-  {cls:"Life Science HN (B. Schinstock)", grade:"Not retrievable this run — flagged for Monday's full review", last:"May 22", link:"https://mail.google.com/mail/u/0/#all/19e50a4596ea387b"},
-];
-const bensAway = [
-  {event:"Democratic Mayors Assoc. (Atlanta)", dates:"Jul 26 – Jul 29", coverage:"Not noted — confirm with Ben", notes:"Ben flies home by 9:00pm on the 29th. No overlap found with your own calendar.", link:"https://www.google.com/calendar/event?eid=Xzhvb2s4Y2E1OGtzNDZiOW82OTI0OGI5azYwb2tjYmEyNjUzMzZiYTI4OHI0MmdxNjhvbzM4Y2kzODggdGVocmFuaS5naGF6YWxAbQ&ctz=America/New_York"},
-];
-const todoistTasks = [
-  {id:"6crj774qV3Q5J77J", title:"Will / trust", pr:"p1", due:"2026-07-05", overdue:false, project:"Home / Kids / Life", label:"Ben & Ghazal"},
-  {id:"6g9JH85RmPwW36xR", title:"Levitating lotus", pr:"p1", due:"2026-07-05", overdue:false, project:"Inbox"},
-  {id:"68hmXVXrqRGqfqH3", title:"Laundry", pr:"p1", due:"2026-07-02", overdue:true, project:"Home / Kids / Life"},
-  {id:"6gHpRPPpwGm7W2mR", title:"Take iron and D", pr:"p1", due:"2026-07-02", overdue:true, project:"Inbox"},
-  {id:"68hphRMP985rgPQc", title:"Emergency Plan: fire extinguisher, no-cell plan", pr:"p1", due:"2026-07-01", overdue:true, project:"Home / Kids / Life"},
-  {id:"6XJ47qf7VjXcH8gR", title:"iMovie Liam one year", pr:"p1", due:"2026-07-01", overdue:true, project:"Inbox"},
-  {id:"6crj4wqfjgFQmqXJ", title:"Liam frames", pr:"p1", due:"2026-07-01", overdue:true, project:"Home / Kids / Life"},
-  {id:"6f2Q4vvP97GJCrWR", title:"Meditation", pr:"p1", due:"2026-07-01", overdue:true, project:"Inbox"},
-  {id:"6f4XVHfq77253FW2", title:"Paint and finish table", pr:"p1", due:"2026-07-01", overdue:true, project:"Home / Kids / Life"},
-  {id:"6fGWWvMWF2Mp4qgR", title:"Clean Walls", pr:"p1", due:"2026-07-01", overdue:true, project:"Home / Kids / Life"},
-  {id:"6fXhGF4f83GXGpF2", title:"Swap patch", pr:"p1", due:"2026-07-01", overdue:true, project:"Inbox"},
-  {id:"6fj8cqgMXrCx3GWR", title:"Call Pat", pr:"p1", due:"2026-07-01", overdue:true, project:"Inbox"},
-  {id:"6g4PcJ3WWV7F6cCR", title:"Farsi", pr:"p1", due:"2026-07-01", overdue:true, project:"Inbox"},
-  {id:"6g9JF7rwJWV6hhgR", title:"Plan summer vacation", pr:"p1", due:"2026-07-01", overdue:true, project:"Inbox"},
-  {id:"6gHpCQWqW9vr68H2", title:"Decide on Ocean's Calling", pr:"p1", due:"2026-07-01", overdue:true, project:"Inbox"},
-  {id:"6gHpV2Q5wVJx9QVR", title:"Take vitamin D", pr:"p1", due:"2026-07-01", overdue:true, project:"Inbox"},
-  {id:"6gJCjq9mMGWXmGQR", title:"Rise seeds", pr:"p1", due:"2026-07-01", overdue:true, project:"Inbox"},
-  {id:"6gJCmQGrrWWGMr3R", title:"Spend Nordstrom gift card", pr:"p1", due:"2026-07-01", overdue:true, project:"Inbox"},
-  {id:"6gJwQcJ6jRjJ2Xf2", title:"Schedule Great Falls Eye Center / Ophthalmologist", pr:"p1", due:"2026-07-01", overdue:true, project:"Inbox"},
-  {id:"6gP562FJchv6rHmR", title:"Monitors and desk", pr:"p1", due:"2026-07-01", overdue:true, project:"Inbox"},
-  {id:"6gRxh7rF2vVc9q72", title:"Claude training", pr:"p1", due:"2026-07-01", overdue:true, project:"Inbox"},
-  {id:"6gXGmQWMJ7vFVP6R", title:"Jeweler to sell diamond", pr:"p1", due:"2026-07-01", overdue:true, project:"Inbox"},
-  {id:"6gcjrFpP2fHV5vP2", title:"Call Fidelity — 800-544-0003 (Transition Services)", pr:"p1", due:"2026-07-01", overdue:true, project:"Inbox"},
-  {id:"6ggmfvq58FM3rrq2", title:"Reimbursement for SACC (Apr/May/June)", pr:"p1", due:"2026-07-01", overdue:true, project:"Inbox"},
-  {id:"6ggrP53rg8JHXjMR", title:"Look up 2011–2014 IRA", pr:"p1", due:"2026-07-01", overdue:true, project:"Inbox"},
-  {id:"6gwh5CP2wH9g79mR", title:"Mind Vida", pr:"p1", due:"2026-07-01", overdue:true, project:"Inbox"},
-  {id:"6gwh72v3Ghg2FRx2", title:"G Appraisal finalized", pr:"p1", due:"2026-07-01", overdue:true, project:"Inbox"},
-  {id:"6h2CR9MFPC6q77g2", title:"Fwd: Williams-Sonoma B2B account", pr:"p1", due:"2026-07-01", overdue:true, project:"Inbox"},
-  {id:"6h2CRF9gGMXfHjXR", title:"Mediated MSA — draft #1", pr:"p1", due:"2026-07-01", overdue:true, project:"Inbox"},
-  {id:"6h2JP4W2VRXMfhgJ", title:"Calleva Summer Camp — Bus Route Form", pr:"p1", due:"2026-07-01", overdue:true, project:"Home / Kids / Life"},
-  {id:"6WgFC8jCQfWq9FwR", title:"Playlists", pr:"p2", due:"2026-07-01", overdue:true, project:"Ghazal"},
-  {id:"6WgFPC8643PHJpw2", title:"Pictures 2020–2025 clean up", pr:"p2", due:"2026-07-01", overdue:true, project:"Media"},
-  {id:"6WpPqH9j2gG2gr5R", title:"Buy chair for guest room", pr:"p2", due:"2026-07-01", overdue:true, project:"Buy List"},
-  {id:"6WpPqHmg54Wr3WpR", title:"Buy mirrors for guest room", pr:"p2", due:"2026-07-01", overdue:true, project:"Buy List"},
-  {id:"6WpgCQV92MCwHFwV", title:"iPhoto cleanup", pr:"p2", due:"2026-07-01", overdue:true, project:"Apple Care List"},
-  {id:"6Wr4RfJHm9VqvR87", title:"Picture org 2020 and beyond", pr:"p2", due:"2026-07-01", overdue:true, project:"Media"},
-  {id:"6Wr4rwGchWV7mrmP", title:"Add missing 2017 videos to Dropbox", pr:"p2", due:"2026-07-01", overdue:true, project:"Media"},
-  {id:"6X94m3fJQVcVQpVR", title:"Vagus nerve exercises", pr:"p2", due:"2026-07-01", overdue:true, project:"Inbox"},
-  {id:"6X9VGcXJhQqfMRJR", title:"Japanese pancakes", pr:"p2", due:"2026-07-01", overdue:true, project:"Ghazal"},
-  {id:"6c57hWWJ4gv2CvhR", title:"Work on pitch deck (comparables, wellness/hospitality, AI format)", pr:"p2", due:"2026-07-01", overdue:true, project:"Amaterra"},
-  {id:"6crCgwmPfvFFPRX2", title:"Acres report?", pr:"p2", due:"2026-07-01", overdue:true, project:"Inbox"},
-  {id:"6crVC589mX3xJFcf", title:"Desk for G office", pr:"p2", due:"2026-07-01", overdue:true, project:"Buy List"},
-  {id:"6crVCJ8VpCF2hvP7", title:"Bathroom chair / bench", pr:"p2", due:"2026-07-01", overdue:true, project:"Buy List"},
-  {id:"6crVCQ2q3C8gmQMf", title:"Master couch", pr:"p2", due:"2026-07-01", overdue:true, project:"Buy List"},
-  {id:"6ggMvHWq99jq56C2", title:"Look for 2015/2016 Form 5498", pr:"p4", due:"2026-07-01", overdue:true, project:"Inbox"},
-];
-const projects = ["Inbox","Home / Kids / Life","Personal","Ghazal","Media","Buy List","Jobby Job","Ada","Amaterra","Apple Care List"];
-const suggestedTasks = [
-  {title:"Reply to Ben — confirm July 13 @ 1:00pm mediation slot", pr:"p1", project:"Home / Kids / Life", source:"https://mail.google.com/mail/u/0/#all/19ef4a8bdb050c4a"},
-  {title:"Sign & send Dr. Sethi ADHD medication form for Ella", pr:"p1", project:"Home / Kids / Life", source:"https://mail.google.com/mail/u/0/#all/19e9cf07a4756044"},
-  {title:"Follow up with Theo Papadopoulos on LinkedIn (job lead)", pr:"p2", project:"Jobby Job", source:"https://mail.google.com/mail/u/0/#all/19f22afd92cdc8cf"},
-];
-const newsAI = [
-  {title:"Claude Sonnet 5 becomes default for all Free & Pro users", src:"buildfastwithai.com", date:"Jul 3, 2026", link:"https://www.buildfastwithai.com/blogs/ai-news-today-july-3-2026", take:"Anthropic's most agentic Sonnet yet performs close to flagship Opus 4.8, at introductory pricing through August 31."},
-  {title:"TLT's AI Brief: July 2026", src:"tlt.com", date:"Jul 2026", link:"https://www.tlt.com/insights-and-events/insight/tlts-ai-brief-july-2026", take:"Legal/regulatory roundup of the month's key AI developments for enterprises."},
-  {title:"UN Global Dialogue on AI Governance opens in Geneva", src:"news.un.org", date:"Jul 2026", link:"https://news.un.org/en/story/2026/07/1167848", take:"Member states begin talks July 6 on international approaches to managing AI."},
-  {title:"Latest AI model releases tracked", src:"llm-stats.com", date:"Jul 2026", link:"https://llm-stats.com/llm-updates", take:"Includes Fable 5's return to all users after export controls were lifted July 1."},
-];
-const newsTech = [
-  {title:"Top Tech News Today, July 3 2026", src:"techstartups.com", date:"Jul 3, 2026", link:"https://techstartups.com/2026/07/03/top-tech-news-today-july-3-2026/", take:"Microsoft launches Frontier Company, a $2.5B unit embedding ~6,000 AI specialists with enterprise clients."},
-  {title:"Top Tech News Today, July 2 2026", src:"techstartups.com", date:"Jul 2, 2026", link:"https://techstartups.com/2026/07/02/top-tech-news-today-july-2-2026/", take:"Bloom Energy and Brookfield expand their AI infrastructure power partnership from $5B to $25B."},
-  {title:"Top Tech News Today, July 1 2026", src:"techstartups.com", date:"Jul 1, 2026", link:"https://techstartups.com/2026/07/01/top-tech-news-today-july-1-2026/", take:"OpenAI floats an equity stake to the US government as Meta preps renting out its own AI compute."},
-  {title:"SciTechDaily — Science, Space & Technology News", src:"scitechdaily.com", date:"Ongoing", link:"https://scitechdaily.com/", take:"Rolling coverage hub for the latest science and technology research stories."},
-];
-const newsPS = [
-  {title:"2026 Consulting Trends: Uncertainty and AI Disruption", src:"deltek.com", date:"2026", link:"https://www.deltek.com/en/blog/10-key-consulting-moves", take:"Firms are shifting from deliverable-based pricing toward outcome-based, client-KPI pricing models."},
-  {title:"Professional Services Industry Outlook 2026", src:"bpm.com", date:"2026", link:"https://www.bpm.com/insights/professional-services-industry-outlook-2026/", take:"AI adoption in professional services has roughly doubled in 2026, reaching 40% of revenue in AI consulting."},
-  {title:"A perfect storm is coming for legacy consulting firms", src:"Fast Company", date:"2026", link:"https://www.fastcompany.com/91528872/a-perfect-storm-is-coming-for-legacy-consulting-firms-management-consulting-ai-transformation-technology", take:"Clients now expect measurable ROI, not just decks and research — pressuring legacy firm margins."},
-  {title:"The Year So Far: PS Industry Predictions at Mid-2026", src:"mcgowanprofessional.com", date:"2026", link:"https://mcgowanprofessional.com/the-year-so-far-understanding-how-professional-services-industry-predictions-and-trends-are-playing-out-halfway-through-2026/", take:"Checks 2026 predictions against reality at the halfway mark for professional services firms."},
-];
-// TRASH: unread low-signal only (recipe/food newsletters excluded — those live in File tab now)
-const trashData = {
-  "Promotions & Marketing":[
-    {subj:"Don't Miss Our Largest Sample Sale Yet", from:"shop@jadeswim.com", date:"Jul 5", reason:"deal", id:"19f31efbfe5204e7", snippet:"Styles priced $15-$60. Limited-time sample sale."},
-    {subj:"Don't Miss These Fourth of July Savings!", from:"hello@style.dillards.com", date:"Jul 4", reason:"deal", id:"19f2e636420396a2", snippet:"Save on women's shoes, dresses, handbags, men's sportswear."},
-    {subj:"Happy July 4th from MYB!", from:"no-reply@ottosportmail.ai", date:"Jul 4", reason:"promo", id:"19f2d5b1595c61ed", snippet:"Holiday greeting newsletter from MYB community."},
-    {subj:"A Journey Into The Sacred Realms Of Healing", from:"info@thesacredscience.com", date:"Jul 2", reason:"promo", id:"19f226128e0bf3b7", snippet:"Webinar follow-up marketing email."},
-    {subj:"what's the plan, Ghazal", from:"douglas_fisher@franchiseopportunitieshub.com", date:"Jul 1", reason:"promo", id:"19f1eb306d63afc9", snippet:"Unsolicited franchise ownership pitch."},
-    {subj:"Making Life More Affordable for America's Seniors", from:"Information@update.ssa.gov", date:"Jul 2", reason:"promo", id:"19f23bbfde9826da", snippet:"SSA promotional newsletter."},
-    {subj:"unimproved land in Madison", from:"bright@mtxmsg.brightmls.com", date:"Jul 2", reason:"promo", id:"19f2418bf17e4869", snippet:"Bright MLS property alert — land listing."},
-    {subj:"New rental in McLean at $5,400/mo", from:"listings@redfin.com", date:"Jul 1", reason:"promo", id:"19f1e851dad3ba0f", snippet:"Redfin rental alert."},
-    {subj:"Helping Your Daughter Build Responsibility", from:"laura=thebravegirlproject.com@c.kajabimail.net", date:"Jul 5", reason:"promo", id:"19f31efe06025cb2", snippet:"Parenting newsletter marketing email."},
-  ],
-  "Automated Notifications":[
-    {subj:"Thanks for using AutoPay — your bill is available", from:"Electronic_billingEB@domenergyvanceb.com", date:"Jul 3", reason:"auto", id:"19f27e5fa676c269", snippet:"Dominion Energy AutoPay bill notification."},
-    {subj:"Your new subscription", from:"no-reply@amazon.com", date:"Jun 30", reason:"auto", id:"19f1938cab7a6bd4", snippet:"Amazon Subscribe & Save confirmation."},
-    {subj:"Receipt from The Organic Butcher of McLean", from:"messenger@messaging.squareup.com", date:"Jun 29", reason:"auto", id:"19f154b404931342", snippet:"Square receipt, $40.00."},
-    {subj:"Reminder: Survey for SACC and Beyond the Bell Families", from:"member@surveymonkeyuser.com", date:"Jul 2", reason:"auto", id:"19f22eea49b25549", snippet:"FCPS survey reminder."},
-    {subj:"Your tracked flight to San José is now $1,148", from:"noreply-travel@google.com", date:"Jul 2", reason:"auto", id:"19f232f71fe83fec", snippet:"Google Flights price alert."},
-    {subj:"Top suggestions for Ghazal", from:"info@members.netflix.com", date:"Jul 4", reason:"auto", id:"19f2ea4c76b1bfe7", snippet:"Netflix recommendation nudge."},
-  ],
-  "Newsletters & Digests":[
-    {subj:"Word of the Day: Truculent", from:"hello@worddaily.com", date:"Jul 5", reason:"digest", id:"19f31fbce28d342d", snippet:"Daily vocabulary newsletter."},
-    {subj:"The Week In Ideas", from:"info@nl.mail.washingtonpost.com", date:"Jul 5", reason:"digest", id:"19f31f8491e0b4fb", snippet:"WaPo weekly ideas digest."},
-    {subj:"Global Frequency — 5 July 2026", from:"globalfrequency1001@substack.com", date:"Jul 5", reason:"digest", id:"19f31f70cf357771", snippet:"Substack newsletter."},
-    {subj:"The 7: Reflecting Pool vandalism, cannabis safety & more", from:"info@nl.mail.washingtonpost.com", date:"Jul 3", reason:"digest", id:"19f27a2ed918cc39", snippet:"WaPo quick-digest newsletter."},
-    {subj:"FOLLOW UP: dogs locked in van", from:"no-reply@rs.email.nextdoor.com", date:"Jul 5", reason:"digest", id:"19f303951b6d74c9", snippet:"Nextdoor neighborhood digest."},
-    {subj:"Teenager who disappeared in Potomac found dead", from:"reply@rs.email.nextdoor.com", date:"Jul 4", reason:"digest", id:"19f2e45c29b36f34", snippet:"Nextdoor local news digest."},
-  ],
-};
-// FILE — Recipes & food newsletters (moved out of Trash per rule)
-const fileRecipes = [
-  {subj:"Miso-peanut chicken", from:"email@newsletter.bonappetit.com", date:"Jul 4", id:"19f2d002d326ae11"},
-  {subj:"A cookout menu that's as breezy as summer", from:"email@newsletter.bonappetit.com", date:"Jul 3", id:"19f28be4dbe2224a"},
-  {subj:"Recipe: Easy Cherry Berry Pie", from:"coachelissa@substack.com", date:"Jul 3", id:"19f28e09519cf5d8"},
-  {subj:"This July 4, we salute America the Barbecue", from:"email@newsletter.bonappetit.com", date:"Jul 3", id:"19f27a2fce7e6c81"},
-  {subj:"Banana Pudding Cake & more", from:"email@newsletter.bonappetit.com", date:"Jul 2", id:"19f24340b829a8a4"},
-  {subj:"25 easy weeknight dinners we're making in June", from:"email@newsletter.bonappetit.com", date:"Jun 5", id:"19e999658ccde654"},
-  {subj:"Knockout carrot sheet cake", from:"email@newsletter.bonappetit.com", date:"May 30", id:"19e78c8ac5e5e7a4"},
-  {subj:"Miso chicken soba bowls", from:"email@newsletter.bonappetit.com", date:"May 25", id:"19e5f029c3a7356a"},
-  {subj:"No-fail roast chicken with lemon and garlic", from:"email@newsletter.bonappetit.com", date:"May 20", id:"19e45439207f214e"},
-  {subj:"Very good cheese boards for your next party", from:"email@newsletter.bonappetit.com", date:"May 19", id:"19e401cbe73b2c27"},
-  {subj:"The Buffalo chicken dip I make for every party", from:"email@newsletter.bonappetit.com", date:"Jan 29", id:"19c09d807737fd00"},
-];
-// FILE — Stale: 10+ days old, no longer relevant, and/or already replied
-const fileStale = [
-  {subj:"RE: Mediation Appt with Brian Hirsch", from:"ayeager@novafamilylaw.com", date:"Jun 12", id:"19ebc1598284deab", replied:true, note:"Superseded by the later \"Appraisals, Next Steps\" thread, which locked in Jul 13 @ 1pm. Nothing further to act on here."},
-  {subj:"4682 Sales Since 2014 !!", from:"ANorton@cbmove.com (Coldwell Banker)", date:"Jun 24", id:"19ef9d587a512340", replied:false, note:"Unsolicited realtor marketing email that landed in the inbox — not tied to your active appraisal/purchase search."},
-  {subj:"INFO (secure Hushmail message)", from:"info@speerprimarycare.com", date:"Apr 8", id:"19d6d72d3b6020b2", replied:false, note:"Secure-message notification — if this was ever going to be opened, it likely already would have been by now."},
-];
-
-// ---------- RENDER ----------
 function showTab(id){
   document.querySelectorAll('.tab-section').forEach(s=>s.classList.remove('active'));
   document.querySelectorAll('.tab-btn').forEach(b=>b.classList.remove('active'));
   document.getElementById('tab-'+id).classList.add('active');
   document.querySelector('[data-tab="'+id+'"]').classList.add('active');
 }
-function showSub(id){
-  document.querySelectorAll('.subtab-panel').forEach(s=>{if(s.id.startsWith('sub-'))s.classList.remove('active');});
-  document.querySelectorAll('.subtab-btn[data-sub]').forEach(b=>b.classList.remove('active'));
-  if(id==='info'){ document.getElementById('infoCard').scrollIntoView({behavior:'smooth'}); return; }
-  document.getElementById('sub-'+id).classList.add('active');
-  document.querySelector('[data-sub="'+id+'"]').classList.add('active');
+function switchInboxSub(name){
+  showTab('inbox');
+  document.querySelectorAll('#tab-inbox .subtab-btn').forEach(b=>b.classList.remove('active'));
+  document.querySelectorAll('#tab-inbox .subtab-panel').forEach(p=>p.classList.remove('active'));
+  document.querySelector('#tab-inbox [data-sub="'+name+'"]')?.classList.add('active');
+  document.getElementById('sub-'+name)?.classList.add('active');
 }
-function showNews(id){
-  document.querySelectorAll('.subtab-panel').forEach(s=>{if(s.id.startsWith('news-'))s.classList.remove('active');});
-  document.querySelectorAll('.subtab-btn[data-nsub]').forEach(b=>b.classList.remove('active'));
-  document.getElementById('news-'+id).classList.add('active');
-  document.querySelector('[data-nsub="'+id+'"]').classList.add('active');
+function switchNewsSub(name){
+  document.querySelectorAll('#tab-news .subtab-btn').forEach(b=>b.classList.remove('active'));
+  document.querySelectorAll('#tab-news .subtab-panel').forEach(p=>p.classList.remove('active'));
+  document.querySelector('#tab-news [data-newssub="'+name+'"]').classList.add('active');
+  document.getElementById('news-'+name).classList.add('active');
 }
+function toggleDetail(id){
+  const d = document.getElementById('detail-'+id);
+  if(!d) return;
+  const open = d.style.display !== 'none';
+  d.style.display = open ? 'none' : 'block';
+}
+function expandAllEmails(){ document.querySelectorAll('.email-detail').forEach(d=>d.style.display='block'); }
+function collapseAllEmails(){ document.querySelectorAll('.email-detail').forEach(d=>d.style.display='none'); }
 
 function toggleStar(btn){
   const newState = btn.dataset.starred !== 'true';
@@ -482,62 +586,8 @@ function toggleStar(btn){
   sendPrompt(action + ' Gmail message ID ' + btn.dataset.msgId + ' via Gmail MCP');
 }
 
-function renderEmailList(container, list, highlight){
-  if(!list.length){container.innerHTML='<div class="empty-state">No items in this category today.</div>';return;}
-  container.innerHTML = list.map(e=>`
-    <div class="email-item ${highlight?'high':''}">
-      <div style="flex:1">
-        <div><a href="${e.link}" target="_blank">${e.subj}</a> <span class="chev" id="chev-${e.id}" onclick="toggleDetail('${e.id}')">▸ more</span>${e.noreply?'<span class="noreply-badge">⚠️ No reply</span>':''}</div>
-        <div class="email-meta">${e.from} &middot; ${e.date}</div>
-        <div class="email-detail" id="detail-${e.id}" style="display:none">${e.summary}</div>
-      </div>
-      <button class="star-btn" data-msg-id="${e.id}" data-starred="${e.starred}" onclick="toggleStar(this)" title="${e.starred?'Unstar':'Star'} this email">${e.starred?'★':'☆'}</button>
-    </div>`).join('');
-}
-renderEmailList(document.getElementById('sub-high'), highEmails, true);
-renderEmailList(document.getElementById('sub-medium'), mediumEmails, false);
-
-document.getElementById('sub-social').innerHTML = socialEmails.length ? socialEmails.map(e=>`
-  <div class="email-item"><div style="flex:1">
-    <div><a href="${e.link}" target="_blank">${e.subj}</a> <span class="chev" onclick="toggleDetail('${e.id}')">▸ more</span></div>
-    <div class="email-meta">${e.from} &middot; ${e.date} &middot; ${e.status}</div>
-    <div class="email-detail" id="detail-${e.id}" style="display:none">Community/personal email — no action required.</div>
-  </div></div>`).join('') : '<div class="empty-state">No items in this category today.</div>';
-
-document.getElementById('sub-school').innerHTML = `
-  <div class="empty-state" style="text-align:left;padding:6px 0 16px;">🏫 School is out for summer — no recent FCPS emails. Showing Ella's Grade Snapshot from the last known progress reports (inbox + trash, last 90 days).</div>
-  <table><thead><tr><th>Class</th><th>Final / Progress Grade</th><th>Last Email</th><th>Source</th></tr></thead><tbody>
-  ${grades.map(g=>`<tr><td>${g.cls}</td><td>${g.grade==='A'?'<b>A</b>':g.grade}</td><td>${g.last}</td><td><a href="${g.link}" target="_blank" style="color:var(--accent);">Open ↗</a></td></tr>`).join('')}
-  </tbody></table>`;
-
-// Informational card
-function renderInfoCard(){
-  const card = document.getElementById('infoCard');
-  let html = `<h3><span class="icon">ℹ️</span> INFORMATIONAL — already handled (${infoEmails.length})</h3>
-  <p class="muted">These looked like High/Medium priority, but someone already replied that it's done — e.g. Ben confirming a camp form is taken care of. Nothing to action; just pick where each one should move and click Move.</p>`;
-  if(!infoEmails.length){
-    html += `<div class="empty-state">Nothing already-handled to file away right now.</div>`;
-  } else {
-    html += infoEmails.map(e=>`
-      <div class="info-row">
-        <div style="flex:1">
-          <div><a href="${e.link}" target="_blank">${e.subj}</a> <span class="chev" onclick="toggleDetail('${e.id}')">▸ more</span></div>
-          <div class="email-meta">${e.from} &middot; ${e.date}</div>
-          <div class="email-detail" id="detail-${e.id}" style="display:none">${e.summary}</div>
-        </div>
-        <select id="inforoute-${e.id}">
-          <option value="" selected disabled>Move to…</option>
-          <option value="ARCHIVE">Archive</option>
-          <option value="TRASH">Trash</option>
-        </select>
-        <button onclick="routeInformational('${e.id}')" style="border:1px solid var(--border);background:#fff;border-radius:6px;padding:6px 12px;font-size:12px;font-weight:600;cursor:pointer;">Move</button>
-      </div>`).join('');
-  }
-  card.innerHTML = html;
-}
-renderInfoCard();
-function routeInformational(threadId){
-  const sel = document.getElementById('inforoute-'+threadId);
+function routeInformational(rowId, threadId){
+  const sel = document.getElementById('inforoute-'+rowId);
   const dest = sel.value;
   if(!dest){ alert('Pick a destination first.'); return; }
   const action = dest === 'TRASH' ? 'Move Gmail thread ' + threadId + ' to trash'
@@ -546,237 +596,42 @@ function routeInformational(threadId){
   sendPrompt(action + ' via Gmail MCP.');
 }
 
-// Action Flags (Home) — excludes anything now in Informational
-const actionFlags = [
-  {tag:"EMAIL",cls:"",html:`<a href="https://mail.google.com/mail/u/0/#all/19ef4a8bdb050c4a" target="_blank">Appraisals, Next Steps</a> — Ben awaiting your confirmation on the July 13 @ 1:00pm mediation slot, no reply sent since Jun 25.`},
-  {tag:"EMAIL",cls:"",html:`<a href="https://mail.google.com/mail/u/0/#all/19e9cf07a4756044" target="_blank">Dr. Sethi Form</a> — Ben's 4th request for Ella's ADHD medication form signature, no reply sent since Jun 22.`},
-  {tag:"EMAIL",cls:"",html:`<a href="https://mail.google.com/mail/u/0/#all/19f1ecb7f02280d4" target="_blank">Appraisal Request</a> — Tom Kirchner says the report won't be ready by Jul 13; you offered a call today, waiting on him.`},
-  {tag:"EMAIL",cls:"",html:`<a href="https://mail.google.com/mail/u/0/#all/19f22afd92cdc8cf" target="_blank">LinkedIn — Theo Papadopoulos</a> still waiting on your response (Jul 2).`},
-  {tag:"OVERDUE TASK",cls:"overdue",html:`<a href="javascript:showTab('todoist')">Will / trust</a> — due today, P1.`},
-  {tag:"OVERDUE TASK",cls:"overdue",html:`<a href="javascript:showTab('todoist')">G Appraisal finalized</a> — overdue since Jul 1, P1.`},
-  {tag:"OVERDUE TASK",cls:"overdue",html:`<a href="javascript:showTab('todoist')">Mediated MSA — draft #1</a> — overdue since Jul 1, P1.`},
-  {tag:"OVERDUE TASK",cls:"overdue",html:`<a href="javascript:showTab('todoist')">Call Fidelity — Transition Services</a> — overdue since Jul 1, P1.`},
-  {tag:"OVERDUE TASK",cls:"overdue",html:`<a href="javascript:showTab('todoist')">Reimbursement for SACC</a> (Apr/May/June) — overdue since Jul 1, P1.`},
-  {tag:"CALENDAR",cls:"cal",html:`<a href="javascript:showTab('calendar')">Liam's Birthday</a> — Jul 13, no gift/plan task on Todoist yet.`},
-  {tag:"CALENDAR",cls:"cal",html:`<a href="javascript:showTab('calendar')">Ben in Atlanta</a> (Democratic Mayors Assoc.) — Jul 26–29, confirm kid coverage.`},
-];
-document.getElementById('actionFlags').innerHTML = actionFlags.map(f=>`
-  <div class="flag-row"><span class="flag-tag ${f.cls}">${f.tag}</span><div class="flag-body">${f.html}</div></div>`).join('');
-
-// Strategic Insights (Home)
-const insights = [
-  {type:"risk",label:"🔴 Risk",title:"Legal timeline stalling",body:`The mediation appraisal thread has been waiting on your confirmation since Jun 25 — Ben: "13th @ 1:00pm works for me — GHAZAL?" (<a href="https://mail.google.com/mail/u/0/#all/19ef4a8bdb050c4a" target="_blank">link</a>). Delaying risks losing the Jul 13 slot with Brian Hirsch and pushing the settlement timeline further.`},
-  {type:"watch",label:"🟡 Watch",title:"Ella's ADHD medication form unresolved",body:`Ben has emailed four times since Jun 12 about the Dr. Sethi signature needed before Ella can take her medication (<a href="https://mail.google.com/mail/u/0/#all/19e9cf07a4756044" target="_blank">link</a>), with no reply visible in Sent mail. Worth resolving before camp/travel needs it.`},
-  {type:"pattern",label:"🔵 Pattern",title:"Todoist backlog has calcified",body:`28 P1 tasks are overdue, almost all dated Jul 1 — four days stale. Suggests the list isn't getting triaged daily rather than a true one-off backlog.`},
-  {type:"opp",label:"🟢 Opportunity",title:"Two live job-search threads",body:`Granola notes from the Jun 28 Cindy Wallace call flag a job lead expected mid-August via a trusted contact, and LinkedIn's Theo Papadopoulos is still waiting on a reply from Jul 2 (<a href="https://mail.google.com/mail/u/0/#all/19f22afd92cdc8cf" target="_blank">link</a>). With the Ada severance now finalized, this is a good moment to re-engage both.`},
-  {type:"pattern",label:"🔵 Pattern",title:"Home appraisal timeline slipping",body:`Tom Kirchner now says his report won't be ready by Jul 13 after all (<a href="https://mail.google.com/mail/u/0/#all/19f1ecb7f02280d4" target="_blank">link</a>) — worth flagging if that date matters for financing or an offer deadline.`},
-];
-document.getElementById('insights').innerHTML = insights.map(i=>`
-  <div class="insight-card ${i.type}"><div class="insight-label">${i.label}</div><div class="insight-title">${i.title}</div><div>${i.body}</div></div>`).join('');
-
-// Calendar tab
-document.getElementById('calToday').innerHTML = `
-  <div class="event-card"><div class="event-time">Today, Jul 5 (all day)</div><a href="https://www.google.com/calendar/event?eid=XzZvcTQyY3BnNjEwa2FiOWs4bDBqOGI5azZoMzNhYjlvNmtvajJiYTU4Y3IzNGQxbDZrcms4aGkyNnNfMjAyNjA3MDUgdGVocmFuaS5naGF6YWxAbQ&ctz=America/New_York" target="_blank">Parees' Birthday</a></div>
-  <div class="event-card"><div style="color:var(--muted);">No work meetings today.</div></div>
-  <div class="event-card"><div class="event-time">Tomorrow, Jul 6 (all day)</div><a href="https://www.google.com/calendar/event?eid=XzZvb2o0aGE0Nm9yNDhiYTQ2Y3I0Y2I5azYwb2pjYjlvNnQxNGNiOWs2NG9rYWQyNTZncDM2Y3BtOGNfMjAyNjA3MDYgdGVocmFuaS5naGF6YWxAbQ&ctz=America/New_York" target="_blank">Recycle</a> (reminder)</div>
-  <div class="event-card"><span class="newcontact">No meetings scheduled — no meeting prep needed today.</span></div>`;
-
-document.getElementById('calInvites').innerHTML = `
-  <div style="margin-bottom:14px;"><b style="font-size:13px;">New .ics Invites</b><div class="empty-state" style="padding:10px 0;">No new calendar invites in the last 60 days.</div></div>
-  <div><b style="font-size:13px;">Calendar Suggestions</b>
-  <div class="flag-row"><span class="flag-tag cal">WEATHER</span><div class="flag-body">Severe thunderstorm + 100°F heat risk today — no outdoor items on your calendar, but keep plans flexible.</div></div>
-  <div class="flag-row"><span class="flag-tag cal">UPCOMING</span><div class="flag-body">Liam's Birthday is Jul 13 with no prep/gift task yet — consider adding one in Todoist.</div></div>
-  </div>`;
-
-document.getElementById('bensAway').querySelector('tbody').innerHTML = bensAway.map(b=>`
-  <tr><td><a href="${b.link}" target="_blank" style="color:var(--accent);">${b.event}</a></td><td>${b.dates}</td><td>${b.coverage}</td><td>${b.notes}</td></tr>`).join('');
-
-// Todoist tab
-function sortTasks(list){
-  const prOrder={p1:0,p2:1,p3:2,p4:3};
-  return [...list].sort((a,b)=>{
-    if(a.overdue!==b.overdue) return a.overdue?-1:1;
-    if(prOrder[a.pr]!==prOrder[b.pr]) return prOrder[a.pr]-prOrder[b.pr];
-    return a.due.localeCompare(b.due);
-  });
-}
-function renderTodoist(){
-  const sorted = sortTasks(todoistTasks);
-  const overdueCount = todoistTasks.filter(t=>t.overdue).length;
-  document.getElementById('todoCount').innerHTML = `📋 In Todoist &middot; ${todoistTasks.length} tasks &middot; <span style="color:var(--red);font-weight:700;">${overdueCount} overdue</span>`;
-  document.getElementById('todoList').innerHTML = sorted.map(t=>`
-    <div class="td-task" data-id="${t.id}">
-      <div class="stripe ${t.pr}"></div>
-      <div class="td-content">
-        <input class="td-title" value="${t.title.replace(/"/g,'&quot;')}">
-        <div class="td-row2">
-          <select onchange="updateStripe(this)">
-            <option value="p1" ${t.pr==='p1'?'selected':''}>P1</option>
-            <option value="p2" ${t.pr==='p2'?'selected':''}>P2</option>
-            <option value="p3" ${t.pr==='p3'?'selected':''}>P3</option>
-            <option value="p4" ${t.pr==='p4'?'selected':''}>P4</option>
-          </select>
-          <input type="date" value="${t.due}">
-          <span class="proj-tag">${t.project}</span>
-          ${t.overdue?'<span class="overdue-badge">Overdue</span>':'<span class="today-badge">Due today</span>'}
-          <a href="#" style="font-size:11px;color:var(--accent);">Open ↗</a>
-          <button class="done-btn" onclick="markDone('${t.id}')">✓ Done</button>
-        </div>
-      </div>
-    </div>`).join('');
-}
-function updateStripe(sel){
-  const stripe = sel.closest('.td-task').querySelector('.stripe');
-  stripe.className = 'stripe ' + sel.value;
-}
-function markDone(id){ sendPrompt('Mark Todoist task ' + id + ' complete via MCP'); }
-function pushTodoistUpdates(){
-  const approved = [];
-  document.querySelectorAll('#todoList .td-task').forEach(row=>{
-    approved.push({
-      id: row.dataset.id,
-      title: row.querySelector('.td-title').value,
-      priority: row.querySelector('select').value,
-      due: row.querySelector('input[type=date]').value,
-    });
-  });
-  sendPrompt('Update these existing Todoist tasks via MCP: ' + JSON.stringify(approved));
-}
-renderTodoist();
-
-document.getElementById('suggCount').innerHTML = `💡 Suggested from Email &amp; Calendar &middot; ${suggestedTasks.length} open loops`;
-document.getElementById('suggList').innerHTML = suggestedTasks.map((t,i)=>`
-  <div class="td-task" data-idx="${i}">
-    <div class="stripe ${t.pr}"></div>
-    <div class="td-content">
-      <input class="td-title" value="${t.title.replace(/"/g,'&quot;')}">
-      <div class="td-row2">
-        <select onchange="updateStripe(this)">
-          <option value="p1" ${t.pr==='p1'?'selected':''}>P1</option>
-          <option value="p2" ${t.pr==='p2'?'selected':''}>P2</option>
-          <option value="p3" ${t.pr==='p3'?'selected':''}>P3</option>
-          <option value="p4" ${t.pr==='p4'?'selected':''}>P4</option>
-        </select>
-        <input type="date" value="2026-07-05">
-        <select class="proj-select">
-          ${projects.map(p=>`<option value="${p}" ${p===t.project?'selected':''}>${p}</option>`).join('')}
-        </select>
-        <a href="${t.source}" target="_blank" style="font-size:11px;color:var(--accent);">Source ↗</a>
-      </div>
-    </div>
-  </div>`).join('');
-function addApprovedTasks(){
-  const toCreate = [];
-  document.querySelectorAll('#suggList .td-task').forEach(row=>{
-    toCreate.push({
-      title: row.querySelector('.td-title').value,
-      priority: row.querySelector('select').value,
-      due: row.querySelector('input[type=date]').value,
-      project: row.querySelector('.proj-select').value,
-    });
-  });
-  sendPrompt('Create these new Todoist tasks via MCP: ' + JSON.stringify(toCreate));
-}
-
-// News tab
-function renderNews(container, list){
-  container.innerHTML = list.length ? list.map(n=>`
-    <div class="news-card">
-      <a href="${n.link}" target="_blank">${n.title}</a>
-      <div class="news-meta">${n.src} &middot; ${n.date}</div>
-      <div>${n.take}</div>
-    </div>`).join('') : '<div class="empty-state">Could not fetch news today — try refreshing.</div>';
-}
-renderNews(document.getElementById('news-ai'), newsAI);
-renderNews(document.getElementById('news-tech'), newsTech);
-renderNews(document.getElementById('news-ps'), newsPS);
-
-// Trash tab
-function renderTrash(){
-  const groups = Object.keys(trashData);
-  document.getElementById('trashGroups').innerHTML = groups.map(g=>`
-    <div class="trash-group"><h3>${g}</h3>
-    ${trashData[g].map(e=>`
-      <div class="trash-item" onclick="trashToggle(this, event)">
-        <input type="checkbox" class="trash-check" data-msg-id="${e.id}" checked onclick="event.stopPropagation();updateTrashCount();">
-        <div class="trash-item-body">
-          <div class="trash-item-subject">${e.subj} <span class="chev" onclick="event.stopPropagation();toggleDetail('${e.id}')">▸ more</span></div>
-          <div class="trash-item-meta"><span>${e.from}</span><span>${e.date}</span><span>Unread</span></div>
-          <div class="email-detail" id="detail-${e.id}" style="display:none">${e.snippet}</div>
-        </div>
-        <span class="trash-reason ${e.reason}">${e.reason.charAt(0).toUpperCase()+e.reason.slice(1)}</span>
-      </div>`).join('')}
-    </div>`).join('');
-  updateTrashCount();
-}
-function trashToggle(el, ev){
+function trashToggle(el){
+  el.classList.toggle('deselected');
   const cb = el.querySelector('.trash-check');
-  if(ev.target !== cb) cb.checked = !cb.checked;
-  el.classList.toggle('deselected', !cb.checked);
+  cb.checked = !el.classList.contains('deselected');
   updateTrashCount();
 }
-function trashSelectAll(){ document.querySelectorAll('.trash-check').forEach(cb=>{cb.checked=true;cb.closest('.trash-item').classList.remove('deselected');}); updateTrashCount(); }
-function trashDeselectAll(){ document.querySelectorAll('.trash-check').forEach(cb=>{cb.checked=false;cb.closest('.trash-item').classList.add('deselected');}); updateTrashCount(); }
+function trashSelectAll(){
+  document.querySelectorAll('.trash-item').forEach(el=>{ el.classList.remove('deselected'); el.querySelector('.trash-check').checked = true; });
+  updateTrashCount();
+}
+function trashDeselectAll(){
+  document.querySelectorAll('.trash-item').forEach(el=>{ el.classList.add('deselected'); el.querySelector('.trash-check').checked = false; });
+  updateTrashCount();
+}
 function updateTrashCount(){
   const all = document.querySelectorAll('.trash-check');
   const checked = document.querySelectorAll('.trash-check:checked');
-  document.getElementById('trashCountLine').textContent = `${checked.length} of ${all.length} selected for trash · ${all.length-checked.length} kept`;
-  document.getElementById('sendTrashBtn').textContent = `🗑️ Send to Trash (${checked.length})`;
-  document.getElementById('sendTrashBtn').disabled = checked.length===0;
+  document.getElementById('trash-count').textContent = checked.length + ' of ' + all.length + ' selected for trash · ' + (all.length-checked.length) + ' kept';
+  const btn = document.getElementById('trash-send-btn');
+  btn.textContent = '🗑️ Send to Trash (' + checked.length + ')';
+  btn.disabled = checked.length === 0;
 }
 function sendToTrash(){
   const ids = [];
   document.querySelectorAll('.trash-check:checked').forEach(cb => ids.push(cb.dataset.msgId));
   sendPrompt('Move these Gmail message IDs to trash via Gmail MCP: ' + JSON.stringify(ids));
 }
-renderTrash();
 
-// File tab
-function renderFile(){
-  let html = '';
-  html += `<div class="file-group" data-group="recipes">
-    <h3>🍽️ Recipes &amp; food newsletters (${fileRecipes.length})</h3>
-    <div class="grouphint">Recipe/food newsletters never go to Trash — file them here instead. Defaults to your "Personal Gmail/Recipes" label.</div>
-    ${fileRecipes.map(e=>`
-      <div class="file-row">
-        <input type="checkbox" class="file-check" data-group="recipes" data-id="${e.id}" checked>
-        <div style="flex:1">
-          <div class="subj">${e.subj} <span class="chev" onclick="toggleDetail('${e.id}')">▸ more</span></div>
-          <div class="meta">${e.from} &middot; ${e.date}</div>
-          <div class="email-detail" id="detail-${e.id}" style="display:none">Food/recipe newsletter — filed under Recipes, not deleted.</div>
-        </div>
-      </div>`).join('')}
-    <div class="file-actions">
-      <select id="dest-recipes"><option value="Personal Gmail/Recipes" selected>Personal Gmail/Recipes</option><option value="ARCHIVE">Archive (no label)</option><option value="TRASH">🗑️ Trash</option></select>
-      <button onclick="fileGroup('recipes')" style="border:1px solid var(--border);background:#fff;border-radius:6px;padding:7px 14px;font-size:12.5px;font-weight:600;cursor:pointer;">Move checked →</button>
-    </div>
-  </div>`;
-
-  html += `<div class="file-group" data-group="stale">
-    <h3>🕓 Stale — no longer relevant (${fileStale.length})</h3>
-    <div class="grouphint">These are 10+ days old and haven't been acted on, or already show a reply resolving them — likely stale because the date has passed and/or it's already handled. Pick Trash or a folder for each.</div>
-    ${fileStale.map(e=>`
-      <div class="file-row">
-        <input type="checkbox" class="file-check" data-group="stale" data-id="${e.id}" checked>
-        <div style="flex:1">
-          <div class="subj">${e.subj}${e.replied?'<span class="replied-pill">already replied</span>':''} <span class="chev" onclick="toggleDetail('${e.id}')">▸ more</span></div>
-          <div class="meta">${e.from} &middot; ${e.date}</div>
-          <div class="email-detail" id="detail-${e.id}" style="display:none">${e.note}</div>
-        </div>
-      </div>`).join('')}
-    <div class="file-actions">
-      <select id="dest-stale"><option value="" selected disabled>Choose…</option><option value="ARCHIVE">Archive (no label)</option><option value="TRASH">🗑️ Trash</option></select>
-      <button onclick="fileGroup('stale')" style="border:1px solid var(--border);background:#fff;border-radius:6px;padding:7px 14px;font-size:12.5px;font-weight:600;cursor:pointer;">Move checked →</button>
-    </div>
-  </div>`;
-
-  document.getElementById('fileGroups').innerHTML = html;
-}
-renderFile();
 function fileGroup(groupId){
+  const checks = document.querySelectorAll('.file-check-'+groupId+':checked');
   const ids = [];
-  document.querySelectorAll(`.file-check[data-group="${groupId}"]:checked`).forEach(cb => ids.push(cb.dataset.id));
-  if(!ids.length){ alert('Nothing checked in this group.'); return; }
+  checks.forEach(cb=>{
+    const row = cb.closest('.file-row');
+    const link = row.querySelector('a');
+    if(link){ const m = link.href.match(/#all\/(.+)$/); if(m) ids.push(m[1]); }
+  });
   const sel = document.getElementById('dest-'+groupId);
   const dest = sel.value;
   if(!dest){ alert('Pick a destination first.'); return; }
@@ -788,6 +643,8 @@ function fileGroup(groupId){
     sendPrompt('Apply the Gmail label "' + dest + '" to these thread IDs and archive them out of the inbox via Gmail MCP: ' + JSON.stringify(ids));
   }
 }
+
+document.addEventListener('DOMContentLoaded', updateTrashCount);
 </script>
 </body>
 </html>
