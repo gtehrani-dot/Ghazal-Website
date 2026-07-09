@@ -89,20 +89,6 @@
 
 <div class="wrap">
 
-  <div class="banner">
-    <h2>⚠ Notes on today's run</h2>
-    <ul>
-      <li><b>Resume customization is complete for all 6 matches below.</b> Fit scores are grounded in your actual history — FranConnect, Decision Lens, ada CX, Booz Allen Hamilton. Customized resumes (where honest keyword alignment existed) and tailored cover letters are ready for every match (local dashboard copy links directly to the files; not published on the public site for privacy).</li>
-      <li><b>Widened the search tonight after the first pass came back thin.</b> Indeed's connector only returns short-link redirects the verification tool can't fetch, so it's excluded entirely right now. General web-search snippets (Greenhouse/Lever/Built In links surfaced via search) had an 83% dead-link rate on direct checks. Ladders' own job pages are JS-rendered and unverifiable the same way. <b>Built In's city job boards, fetched directly, turned out to render server-side and verify reliably</b> — 3 of 4 checked were live — so that's now a primary source going forward, not just Indeed + scattered search. Full detail in <code>history/source_health.json</code>.</li>
-      <li><b>3 of today's 6 matches are in-office in New York</b> (Axon, Triple Whale, Starbridge) — a real gap against the remote/DC-area preference, flagged honestly in each one rather than glossed over.</li>
-      <li><b>NetApp match came from a LinkedIn link Ghazal sent directly.</b> LinkedIn blocks normal fetch-based verification (same as always), but with her active and browser access granted, Claude in Chrome verified it through her own logged-in session.</li>
-      <li><b>LinkedIn connections are now on-request, not automatic.</b> No connections check runs during the scan itself for any match — just ask about a specific company (e.g., "check my connections at NetApp") and I'll run it live, using the <code>linkedin</code> MCP tools if connected or browser access otherwise. The NetApp connection info below was pulled when Ghazal asked about that posting directly, not as part of the automatic scan.</li>
-      <li><b>No fixed top-5 cap anymore.</b> Every match below cleared the fit/desirability bar honestly — today that's 7, not padded to hit a quota and not trimmed to stay at 5. Each one is tagged <b>Primary</b> or <b>Secondary</b> in the summary table and detail cards so it's easy to tell the closest matches from the honest reach.</li>
-      <li><b>Added Booz Allen Hamilton — Strategic Partnerships, VP</b> — a link Ghazal sent directly. Her actual former employer (2001–2008), McLean VA, and the strongest comp range of any match today ($250K–$425K). She'd already hand-tailored a resume for exactly this kind of role in her <code>BAH Partnerships</code> folder before this scan existed — used as-is rather than re-customized. Real gap named honestly: her partnership experience is delivery/enablement-side, not commercial-alliance/channel-GTM-side, which is what this role explicitly wants.</li>
-      <li><b>Ran a same-day refresh late this evening — checked 12 additional candidates, added 0.</b> Forrester, NiCE, and HiBob VP Customer Success postings had all already been removed. Sylvera, Insify, Checkout.com (Lever), Partnerize (Headline), Nue.io, and Talend's GSI-alliances posting all returned blocked/unfetchable pages — dropped rather than reported unverified. Consumer Edge's listing rendered but only through a low-trust aggregator with contradictory metadata, and its real apply link couldn't be independently verified. SolarWinds' Director of GSI Alliances was genuinely live but is a quota-carrying channel/partner sales role with no real overlap to your background, so it didn't clear the fit bar. Full detail in <code>history/source_health.json</code>. Net result: the 6 matches below are still today's complete, current list.</li>
-    </ul>
-  </div>
-
   <div class="tabs">
     <button class="tab-btn active" onclick="showTab('matches')" id="tab-btn-matches">Today's Matches</button>
     <button class="tab-btn" onclick="showTab('tracking')" id="tab-btn-tracking">Job Tracking</button>
@@ -289,6 +275,20 @@
       <h2>Previously surfaced, still open</h2>
       <p class="empty">None — first two matches logged today in <code>history/seen_postings.json</code>.</p>
     </section>
+
+    <div class="banner">
+      <h2>⚠ Notes on today's run</h2>
+      <ul>
+        <li><b>Resume customization is complete for all 6 matches below.</b> Fit scores are grounded in your actual history — FranConnect, Decision Lens, ada CX, Booz Allen Hamilton. Customized resumes (where honest keyword alignment existed) and tailored cover letters are ready for every match (local dashboard copy links directly to the files; not published on the public site for privacy).</li>
+        <li><b>Widened the search tonight after the first pass came back thin.</b> Indeed's connector only returns short-link redirects the verification tool can't fetch, so it's excluded entirely right now. General web-search snippets (Greenhouse/Lever/Built In links surfaced via search) had an 83% dead-link rate on direct checks. Ladders' own job pages are JS-rendered and unverifiable the same way. <b>Built In's city job boards, fetched directly, turned out to render server-side and verify reliably</b> — 3 of 4 checked were live — so that's now a primary source going forward, not just Indeed + scattered search. Full detail in <code>history/source_health.json</code>.</li>
+        <li><b>3 of today's 6 matches are in-office in New York</b> (Axon, Triple Whale, Starbridge) — a real gap against the remote/DC-area preference, flagged honestly in each one rather than glossed over.</li>
+        <li><b>NetApp match came from a LinkedIn link Ghazal sent directly.</b> LinkedIn blocks normal fetch-based verification (same as always), but with her active and browser access granted, Claude in Chrome verified it through her own logged-in session.</li>
+        <li><b>LinkedIn connections are now on-request, not automatic.</b> No connections check runs during the scan itself for any match — just ask about a specific company (e.g., "check my connections at NetApp") and I'll run it live, using the <code>linkedin</code> MCP tools if connected or browser access otherwise. The NetApp connection info below was pulled when Ghazal asked about that posting directly, not as part of the automatic scan.</li>
+        <li><b>No fixed top-5 cap anymore.</b> Every match below cleared the fit/desirability bar honestly — today that's 7, not padded to hit a quota and not trimmed to stay at 5. Each one is tagged <b>Primary</b> or <b>Secondary</b> in the summary table and detail cards so it's easy to tell the closest matches from the honest reach.</li>
+        <li><b>Added Booz Allen Hamilton — Strategic Partnerships, VP</b> — a link Ghazal sent directly. Her actual former employer (2001–2008), McLean VA, and the strongest comp range of any match today ($250K–$425K). She'd already hand-tailored a resume for exactly this kind of role in her <code>BAH Partnerships</code> folder before this scan existed — used as-is rather than re-customized. Real gap named honestly: her partnership experience is delivery/enablement-side, not commercial-alliance/channel-GTM-side, which is what this role explicitly wants.</li>
+        <li><b>Ran a same-day refresh late this evening — checked 12 additional candidates, added 0.</b> Forrester, NiCE, and HiBob VP Customer Success postings had all already been removed. Sylvera, Insify, Checkout.com (Lever), Partnerize (Headline), Nue.io, and Talend's GSI-alliances posting all returned blocked/unfetchable pages — dropped rather than reported unverified. Consumer Edge's listing rendered but only through a low-trust aggregator with contradictory metadata, and its real apply link couldn't be independently verified. SolarWinds' Director of GSI Alliances was genuinely live but is a quota-carrying channel/partner sales role with no real overlap to your background, so it didn't clear the fit bar. Full detail in <code>history/source_health.json</code>. Net result: the 6 matches below are still today's complete, current list.</li>
+      </ul>
+    </div>
 
   </div>
 
