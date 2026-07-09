@@ -944,6 +944,25 @@ function extractCampTitleHint(subject) {
   const m = (subject||'').match(/-\s*([A-Z][\w&'.]+(?:\s+[\w&'.]+){0,4}\s*Camps?)\s*$/i);
   return m ? m[1].trim() : '';
 }
+// Surfaces overnight/campout/sleepover mentions from a vendor email body — grabs
+// a window of text around the keyword so the parent sees the actual requirement
+// (e.g. "not optional, miss Thu+Fri if skipped") without needing to open the email.
+function extractOvernightNote(bodyText) {
+  if (!bodyText) return '';
+  const idx = bodyText.search(/\bovernight\b|\bcampout\b|\bsleepover\b|\bsleeping bag\b/i);
+  if (idx === -1) return '';
+  const start = Math.max(0, idx - 40);
+  return bodyText.slice(start, idx + 260).trim();
+}
+// Pulls a "what to bring / packing / needs list" link out of the raw HTML body
+// (not the stripped text) so the camp table can link straight to it.
+function extractNeedsListUrl(htmlBody) {
+  if (!htmlBody) return '';
+  const m = htmlBody.match(/href="([^"]+)"[^>]*>\s*<strong>\s*CAMP NEEDS LIST/i)
+    || htmlBody.match(/href="([^"]*needs-?list[^"]*)"/i)
+    || htmlBody.match(/href="([^"]*packing[^"]*)"/i);
+  return m ? m[1] : '';
+}
 // Returns ALL stop/time pairs found in the body. When a stopHint regex is
 // given and matches one of the stops, ONLY that stop is returned — a vendor
 // update listing multiple route stops must never be flattened into one
@@ -968,7 +987,9 @@ function extractBusStopUpdate(bodyText, stopHintRe) {
 }
 async function buildCampInfoNotes() {
   return Promise.all(CAMP_INFO_SOURCES.map(async src => {
-    const out = { key: src.key, matchCamp: src.matchCamp, titleHint: '', timeUpdate: '', timeUpdateDateStr: '' };
+    const out = { key: src.key, matchCamp: src.matchCamp, titleHint: '', timeUpdate: '', timeUpdateDateStr: '',
+                   overnightNote: '', overnightDateStr: '', needsListUrl: '',
+                   latestThreadId: '', latestThreadDateStr: '', latestSubject: '' };
     try {
       const data = await callMcp(GMAIL, {query: src.query, pageSize:6, includeTrash:true});
       const items = (data.threads||[]).map(t => ({ t, m: t.messages && t.messages[t.messages.length-1] })).filter(x=>x.m);
@@ -982,12 +1003,25 @@ async function buildCampInfoNotes() {
         const full = await fetchBodyFromThreadFH(t.id, inTrash).catch(()=>({}));
         const msgs = (full && full.messages) || [];
         const bodyMsg = msgs[msgs.length-1];
-        const bodyText = bodyMsg ? stripHtmlFH(bodyMsg.htmlBody||'') : stripHtmlFH(m.snippet||'');
+        const rawHtml = bodyMsg ? (bodyMsg.htmlBody||'') : '';
+        const bodyText = bodyMsg ? stripHtmlFH(rawHtml) : stripHtmlFH(m.snippet||'');
         const stopInfo = extractBusStopUpdate(bodyText, src.stopHint);
         if (stopInfo) {
           out.timeUpdate = stopInfo;
           out.timeUpdateDateStr = new Date(m.date).toLocaleDateString('en-US',{month:'short',day:'numeric'});
         }
+        const overnight = extractOvernightNote(bodyText);
+        if (overnight) {
+          out.overnightNote = overnight;
+          out.overnightDateStr = new Date(m.date).toLocaleDateString('en-US',{month:'short',day:'numeric'});
+          const needs = extractNeedsListUrl(rawHtml);
+          if (needs) out.needsListUrl = needs;
+        }
+        // Track the newest matching thread regardless of what it contains, so
+        // there's always a "view latest camp email" link to check for updates.
+        out.latestThreadId = t.id;
+        out.latestThreadDateStr = new Date(m.date).toLocaleDateString('en-US',{month:'short',day:'numeric'});
+        out.latestSubject = m.subject || '';
       }
     } catch(e) { /* leave this source's fields empty */ }
     return out;
@@ -1005,6 +1039,13 @@ function campCellHtml(e, campInfoList) {
   if (info && info.titleHint) extra += '<div class="event-meta"><b>'+esc(info.titleHint)+'</b></div>';
   if (times) extra += '<div class="event-meta" style="font-size:11px;color:var(--faint)">(per calendar invite'+(info && info.timeUpdate ? ' — now outdated, see below' : '')+')</div>';
   if (info && info.timeUpdate) extra += '<div class="event-meta" style="color:#b45309;font-weight:600">📧 Current per '+esc(info.timeUpdateDateStr)+' email: '+esc(info.timeUpdate)+' — supersedes the calendar invite</div>';
+  if (info && info.overnightNote) {
+    extra += '<div class="event-meta" style="color:#b45309;font-weight:600;margin-top:4px">🏕️ Overnight/campout note (per '+esc(info.overnightDateStr)+' email): '+esc(info.overnightNote)+'</div>';
+    if (info.needsListUrl) extra += '<div class="event-meta"><a href="'+esc(info.needsListUrl)+'" target="_blank">→ Camp Needs List</a></div>';
+  }
+  if (info && info.latestThreadId) {
+    extra += '<div class="event-meta" style="font-size:11px"><a href="https://mail.google.com/mail/u/0/#all/'+esc(info.latestThreadId)+'" target="_blank">📧 Latest camp email ('+esc(info.latestThreadDateStr)+') →</a></div>';
+  }
   return '<div><b>'+name+'</b>' +
     (timeStr ? '<div class="event-meta">'+timeStr+'</div>' : '<div class="event-meta" style="font-style:italic;color:var(--faint)">No drop-off/pickup time on the calendar invite</div>') +
     (loc ? '<div class="event-meta">📍 '+esc(loc)+'</div>' : '') +
