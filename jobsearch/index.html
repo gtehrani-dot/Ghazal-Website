@@ -77,10 +77,11 @@
   <div class="banner">
     <h2>⚠ Notes on today's run</h2>
     <ul>
-      <li><b>Resume customization is complete for all 5 matches below.</b> Fit scores are grounded in your actual history — FranConnect, Decision Lens, ada CX, Booz Allen Hamilton. Customized resumes (where honest keyword alignment existed) and tailored cover letters are ready for every match (local dashboard copy links directly to the files; not published on the public site for privacy).</li>
+      <li><b>Resume customization is complete for all 6 matches below.</b> Fit scores are grounded in your actual history — FranConnect, Decision Lens, ada CX, Booz Allen Hamilton. Customized resumes (where honest keyword alignment existed) and tailored cover letters are ready for every match (local dashboard copy links directly to the files; not published on the public site for privacy).</li>
       <li><b>Widened the search tonight after the first pass came back thin.</b> Indeed's connector only returns short-link redirects the verification tool can't fetch, so it's excluded entirely right now. General web-search snippets (Greenhouse/Lever/Built In links surfaced via search) had an 83% dead-link rate on direct checks. Ladders' own job pages are JS-rendered and unverifiable the same way. <b>Built In's city job boards, fetched directly, turned out to render server-side and verify reliably</b> — 3 of 4 checked were live — so that's now a primary source going forward, not just Indeed + scattered search. Full detail in <code>history/source_health.json</code>.</li>
-      <li><b>3 of today's 5 matches are in-office in New York</b> (Axon, Triple Whale, Starbridge) — a real gap against the remote/DC-area preference, flagged honestly in each one rather than glossed over.</li>
-      <li><b>LinkedIn connections:</b> no connector connected — skipped. Manual check recommended for all 5 companies below.</li>
+      <li><b>3 of today's 6 matches are in-office in New York</b> (Axon, Triple Whale, Starbridge) — a real gap against the remote/DC-area preference, flagged honestly in each one rather than glossed over.</li>
+      <li><b>NetApp match came from a LinkedIn link Ghazal sent directly.</b> LinkedIn blocks normal fetch-based verification (same as always), but with her active and browser access granted, Claude in Chrome verified it through her own logged-in session — which also surfaced network connections at the company. This only works in live sessions, not the unattended overnight scan.</li>
+      <li><b>LinkedIn connections:</b> no connector connected, so this is manual-check-only for the other 5 companies below. Chrome-based checking (like the NetApp one) only works when Ghazal is active and grants access.</li>
     </ul>
   </div>
 
@@ -198,6 +199,25 @@
           <a class="apply" href="https://www.builtinnyc.com/job/vp-customer-success/9195173" target="_blank">View verified posting →</a>
         </div>
       </div>
+
+      <div class="card">
+        <span class="tag saas">RevOps / GTM (off-list title)</span>
+        <h3>AI GTM Transformation Lead</h3>
+        <div class="company">NetApp — enterprise data infrastructure, 12,721 employees, 4% 2-yr growth · sent in by Ghazal directly</div>
+        <div class="row">
+          <div class="item"><b>Location</b>Morrisville, NC (also open in San Jose, CA) — hybrid, some in-office expected</div>
+          <div class="item"><b>Salary</b>$196,350–$292,600 target range</div>
+          <div class="item"><b>Verified</b>Live — posted 1 hour ago, verified directly via Claude in Chrome (her logged-in LinkedIn session)</div>
+        </div>
+        <div class="fit"><b>Why she's a strong fit:</b> Her FranConnect resume already says "Revenue Operations" verbatim — she championed the exact function this role is transforming. "Building where no playbook exists" is close to the throughline of her career: built PS/CS/Training/Account Management from scratch at Decision Lens, is doing the same foundational build again right now at ada CX (an AI-native platform), and was employee #1 building a business at Property Alchemist. Her Booz Allen governance and change-management pedigree lines up directly with this role's governance/adoption mandate.</div>
+        <div class="fit"><b>Honest fit assessment:</b> Good but with two real gaps, not a soft stretch — 68/100. First: this is a senior <i>individual contributor</i> role, not a VP/people-leader role — a genuine shift in scope from her recent trajectory of P&L and team ownership, worth deciding intentionally rather than drifting into. Second: the role wants deep, hands-on fluency designing agentic workflows and working across APIs/automation platforms directly — her AI exposure at ada CX is real but sits at the edge of this requirement, not the center of it. Freshness (posted 1 hour ago) and comp ceiling are both genuinely strong.</div>
+        <div class="gap">Gap to flag: IC not VP-level (real trajectory shift), hands-on agentic/AI-tooling depth is unproven, and Morrisville/San Jose hybrid isn't DC-area or fully remote.</div>
+        <div class="fit"><b>LinkedIn network:</b> <b>Erik Nelson</b> — 1st-degree connection, shows under "connections who work at NetApp," though his own headline still reads "Sr. Client Executive - Verizon" — worth checking his profile directly before reaching out in case that's stale. Weaker secondary path: <b>Micah Makowski</b>, National Partner Manager at NetApp, 2nd-degree (needs a mutual-connection intro).</div>
+        <div class="files">
+          <span class="filenote">Customized resume &amp; cover letter available in Ghazal&#39;s private Job Search folder</span>
+          <a class="apply" href="https://www.linkedin.com/jobs/view/4435678662/" target="_blank">View verified posting →</a>
+        </div>
+      </div>
     </section>
 
     <section>
@@ -281,6 +301,15 @@
       fit: 70,
       salary: "$225K–$275K",
       jdLink: "https://www.builtinnyc.com/job/vp-customer-success/9195173"
+    },
+    {
+      id: "netapp-ai-gtm-2026-07-09",
+      title: "AI GTM Transformation Lead",
+      company: "NetApp",
+      category: "RevOps/GTM (off-list)",
+      fit: 68,
+      salary: "$196K–$293K",
+      jdLink: "https://www.linkedin.com/jobs/view/4435678662/"
     }
   ];
 
