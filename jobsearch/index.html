@@ -105,6 +105,7 @@
           <th>Match</th>
           <th>Category</th>
           <th>Fit</th>
+          <th>Days Active</th>
           <th>Salary</th>
           <th>Posting</th>
           <th>Applied</th>
@@ -276,6 +277,7 @@
       tier: "primary",
       fit: 82,
       salary: "Not listed",
+      postedDate: null,
       jdLink: "https://careers.hcss.com/vice-president-of-professional-services_5075780/"
     },
     {
@@ -286,6 +288,7 @@
       tier: "secondary",
       fit: 52,
       salary: "Not listed",
+      postedDate: null,
       jdLink: "https://canonical.com/careers/4517179"
     },
     {
@@ -296,6 +299,7 @@
       tier: "primary",
       fit: 75,
       salary: "$191K–$255K",
+      postedDate: "2026-07-06",
       jdLink: "https://www.builtinnyc.com/job/vp-customer-success-axon-911/9298186"
     },
     {
@@ -306,6 +310,7 @@
       tier: "primary",
       fit: 78,
       salary: "$185K–$250K",
+      postedDate: "2026-07-01",
       jdLink: "https://www.builtinnyc.com/job/vp-customer-success/9259728"
     },
     {
@@ -316,6 +321,7 @@
       tier: "primary",
       fit: 70,
       salary: "$225K–$275K",
+      postedDate: "2026-06-27",
       jdLink: "https://www.builtinnyc.com/job/vp-customer-success/9195173"
     },
     {
@@ -326,6 +332,7 @@
       tier: "primary",
       fit: 68,
       salary: "$196K–$293K",
+      postedDate: "2026-07-09",
       jdLink: "https://www.linkedin.com/jobs/view/4435678662/"
     }
   ];
@@ -348,6 +355,17 @@
     return state[id] || { applied: false, notes: "" };
   }
 
+  function daysActiveLabel(postedDate) {
+    if (!postedDate) return "Not stated";
+    const posted = new Date(postedDate + "T00:00:00");
+    const today = new Date();
+    today.setHours(0, 0, 0, 0);
+    const days = Math.round((today - posted) / 86400000);
+    if (days <= 0) return "Today";
+    if (days === 1) return "1 day";
+    return days + " days";
+  }
+
   function renderSummaryTable() {
     const state = loadState();
     const tbody = document.getElementById("summary-tbody");
@@ -356,6 +374,7 @@
       const js = getJobState(state, job.id);
       const fitClass = job.fit >= 70 ? "high" : "mid";
       const tierLabel = job.tier === "secondary" ? "Secondary" : "Primary";
+      const daysActive = daysActiveLabel(job.postedDate);
       const tr = document.createElement("tr");
       tr.innerHTML = `
         <td>${job.title}</td>
@@ -363,6 +382,7 @@
         <td><span class="tier-badge ${job.tier}">${tierLabel}</span></td>
         <td>${job.category}</td>
         <td class="fitscore ${fitClass}">${job.fit}/100</td>
+        <td>${daysActive}</td>
         <td>${job.salary}</td>
         <td><a class="jdlink" href="${job.jdLink}" target="_blank">View →</a></td>
         <td>
