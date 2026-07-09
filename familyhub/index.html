@@ -895,6 +895,14 @@ function mondayOnOrAfter(d) {
   dt.setDate(dt.getDate() + add);
   return dt;
 }
+function mondayOfWeek(d) {
+  // Monday of the week containing d (goes backward, unlike mondayOnOrAfter which only goes forward).
+  const dt = new Date(d); dt.setHours(0,0,0,0);
+  const day = dt.getDay();
+  const sub = day === 0 ? 6 : (day - 1);
+  dt.setDate(dt.getDate() - sub);
+  return dt;
+}
 function fmtWeekRange(ws, we) {
   const opt = {month:'short', day:'numeric'};
   return ws.toLocaleDateString('en-US', opt) + ' – ' + we.toLocaleDateString('en-US', opt);
@@ -1007,7 +1015,7 @@ function buildCampSchedule(allEvents) {
   const campEvents = allEvents.filter(e => e.start && e.start.date && CAMP_PREFIX_RE.test((e.summary||'').trim()));
   const vacationEvents = allEvents.filter(e => e.start && e.start.date && VACATION_RE.test(e.summary||''));
   const today = new Date(); today.setHours(0,0,0,0);
-  let weekStart = mondayOnOrAfter(today);
+  let weekStart = mondayOfWeek(today);
   const weeks = [];
   let guard = 0;
   while (weekStart < SCHOOL_START && guard < 30) {
