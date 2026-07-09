@@ -8,13 +8,32 @@
   header { background: #1d2b3a; color: #fff; padding: 28px 40px; }
   header h1 { margin: 0 0 4px 0; font-size: 22px; }
   header p { margin: 0; color: #b9c4d0; font-size: 14px; }
-  .wrap { max-width: 900px; margin: 0 auto; padding: 0 24px; }
+  .wrap { max-width: 980px; margin: 0 auto; padding: 0 24px; }
   .banner { background: #fff4e5; border: 1px solid #f0c36d; border-radius: 8px; padding: 18px 22px; margin: 24px 0; }
   .banner h2 { margin: 0 0 10px 0; font-size: 15px; color: #8a5a00; }
   .banner ul { margin: 0; padding-left: 20px; font-size: 13.5px; line-height: 1.6; }
   .banner li { margin-bottom: 8px; }
   section { margin: 32px 0; }
   section h2 { font-size: 17px; border-bottom: 2px solid #dfe3e8; padding-bottom: 8px; }
+
+  .tabs { display: flex; gap: 4px; margin: 24px 0 0 0; border-bottom: 2px solid #dfe3e8; }
+  .tab-btn { background: none; border: none; font-size: 14.5px; font-weight: 600; padding: 10px 18px; cursor: pointer; color: #667; border-bottom: 3px solid transparent; margin-bottom: -2px; }
+  .tab-btn.active { color: #1d2b3a; border-bottom: 3px solid #1d2b3a; }
+  .tab-panel { display: none; }
+  .tab-panel.active { display: block; }
+
+  table.summary { width: 100%; border-collapse: collapse; background: #fff; border: 1px solid #e2e5ea; border-radius: 10px; overflow: hidden; margin-top: 20px; font-size: 13.5px; }
+  table.summary th { text-align: left; background: #eef2f6; padding: 10px 12px; font-size: 11.5px; text-transform: uppercase; letter-spacing: .03em; color: #55606b; }
+  table.summary td { padding: 10px 12px; border-top: 1px solid #eceff2; vertical-align: middle; }
+  table.summary tr:hover td { background: #fafbfc; }
+  .fitscore { font-weight: 700; }
+  .fitscore.high { color: #1a7f37; }
+  .fitscore.mid { color: #b5820a; }
+  a.jdlink { color: #2952cc; text-decoration: none; font-weight: 600; }
+  a.jdlink:hover { text-decoration: underline; }
+  .applied-check { display: flex; align-items: center; gap: 6px; cursor: pointer; }
+  .applied-check input { width: 16px; height: 16px; cursor: pointer; }
+
   .card { background: #fff; border: 1px solid #e2e5ea; border-radius: 10px; padding: 20px 24px; margin-bottom: 18px; }
   .card h3 { margin: 0 0 2px 0; font-size: 17px; }
   .card .company { color: #55606b; font-size: 14px; margin-bottom: 10px; }
@@ -32,7 +51,16 @@
   a.apply:hover { background: #33465c; }
   a.filelink { display: inline-block; background: #eef2f6; color: #1d2b3a; text-decoration: none; padding: 9px 16px; border-radius: 6px; font-size: 13.5px; font-weight: 600; border: 1px solid #d5dae1; }
   a.filelink:hover { background: #dde3ea; }
+  .filenote { display: inline-block; background: #f7f8fa; color: #767f89; font-style: italic; padding: 9px 16px; border-radius: 6px; font-size: 13px; border: 1px dashed #d5dae1; }
   .empty { color: #667; font-style: italic; font-size: 14px; }
+
+  table.tracking { width: 100%; border-collapse: collapse; background: #fff; border: 1px solid #e2e5ea; border-radius: 10px; overflow: hidden; margin-top: 20px; font-size: 13.5px; }
+  table.tracking th { text-align: left; background: #eef2f6; padding: 10px 12px; font-size: 11.5px; text-transform: uppercase; letter-spacing: .03em; color: #55606b; }
+  table.tracking td { padding: 10px 12px; border-top: 1px solid #eceff2; vertical-align: top; }
+  table.tracking input.notes { width: 100%; box-sizing: border-box; border: 1px solid #d5dae1; border-radius: 6px; padding: 7px 9px; font-size: 13px; font-family: inherit; }
+  .unapply-btn { background: none; border: 1px solid #d5dae1; border-radius: 6px; padding: 5px 10px; font-size: 12px; cursor: pointer; color: #8a5a00; }
+  .unapply-btn:hover { background: #fff4e5; }
+
   footer { text-align: center; color: #99a3ad; font-size: 12px; margin-top: 40px; }
 </style>
 </head>
@@ -49,67 +77,243 @@
   <div class="banner">
     <h2>⚠ Notes on today's run</h2>
     <ul>
-      <li><b>Resume customization is now complete.</b> The morning's run happened before your master resume and real background were in place, so it correctly (if confusingly) held off on customization. Both are now in <code>JobSearch/resumes/</code> and <code>criteria.md</code>, so fit scores below are grounded in your actual history — FranConnect, Decision Lens, ada CX, Booz Allen Hamilton — not the placeholder Indeed-profile summary from before. A customized resume and tailored cover letter are ready for both matches below.</li>
-      <li><b>No resume-track split</b> — per your instruction, there's one master resume, customized fresh per posting. Category tags below (SaaS PS/CS vs. GSI/Consulting) just describe the posting, not a separate base file.</li>
-      <li><b>Link verification was still the bottleneck today, not job availability.</b> Indeed's connector only returns short-link redirects that the verification tool can't fetch, so all Indeed results were excluded unverified. General web-search-sourced postings (Greenhouse/Lever/Built In listings surfaced via search) had an 83% dead-link rate on direct checks — 10 of 12 were already closed. Only the 2 postings below survived live verification. Full detail in <code>history/source_health.json</code>.</li>
-      <li><b>LinkedIn connections:</b> no connector connected — skipped, per criteria.md. Manual check recommended for both companies below.</li>
+      <li><b>Resume customization is now complete.</b> Fit scores below are grounded in your actual history — FranConnect, Decision Lens, ada CX, Booz Allen Hamilton — not the earlier placeholder summary. Customized resume + tailored cover letter ready for both matches (local dashboard copy links directly to the files; not published on the public site for privacy).</li>
+      <li><b>Link verification was the bottleneck today, not job availability.</b> Indeed's connector only returns short-link redirects the verification tool can't fetch. General web-search-sourced postings had an 83% dead-link rate on direct checks. Only the 2 postings below survived live verification — detail in <code>history/source_health.json</code>.</li>
+      <li><b>LinkedIn connections:</b> no connector connected — skipped. Manual check recommended for both companies below.</li>
     </ul>
   </div>
 
-  <section>
-    <h2>Today's matches (2 — see verification note above)</h2>
+  <div class="tabs">
+    <button class="tab-btn active" onclick="showTab('matches')" id="tab-btn-matches">Today's Matches</button>
+    <button class="tab-btn" onclick="showTab('tracking')" id="tab-btn-tracking">Job Tracking</button>
+  </div>
 
-    <div class="card">
-      <span class="tag saas">SaaS PS/CS</span>
-      <h3>Vice President of Professional Services</h3>
-      <div class="company">HCSS (Heavy Construction Systems Specialists) — Thoma Bravo portfolio company · Construction management SaaS</div>
-      <div class="row">
-        <div class="item"><b>Location</b>Not confirmed remote — HQ Sugar Land, TX; team of ~40 "in the US"</div>
-        <div class="item"><b>Salary</b>Not listed in posting</div>
-        <div class="item"><b>Verified</b>Live — fetched directly from careers.hcss.com</div>
-      </div>
-      <div class="fit"><b>Why she's a strong fit:</b> This is close to a repeat of two roles she's already held. At FranConnect she had full P&L ownership of a 50-person global PS team (US/India/Australia), reporting to the COO — this posting reports to the COO too, with a ~40-person team. She took FranConnect PS from loss-leader to break-even with 114% revenue growth, lifted utilization 35%→60%, cut time-to-value 75%, and held a 5.0/5.0 CSAT. At Decision Lens she built PS/CS/Training/Account Management functions from the ground up. The delivery-architecture, talent-development, and metrics-driven-operations language in this posting maps directly onto work she's actually done.</div>
-      <div class="fit"><b>Honest fit assessment:</b> Strong — 82/100. The scope, reporting line, and mandate match closely. Two real questions to have answered before investing much time: (1) her PS leadership has been in B2B SaaS, not heavy-civil construction — a bridgeable but real domain gap worth naming in the interview rather than hoping it doesn't come up; (2) remote eligibility isn't stated and HCSS is Texas-HQ'd, which cuts against her DC-area/remote preference — worth clarifying early, ideally before the resume goes in.</div>
-      <div class="gap">Gap to flag: no salary listed (per your rule, not disqualifying on its own) and remote status unconfirmed.</div>
-      <div class="files">
-        <a class="filelink" href="applications/HCSS-VP-Professional-Services-2026-07-09/Ghazal_Tehrani_Resume_HCSS.docx">Customized resume (changes highlighted)</a>
-        <a class="filelink" href="applications/HCSS-VP-Professional-Services-2026-07-09/Cover_Letter.md">Cover letter</a>
-        <a class="apply" href="https://careers.hcss.com/vice-president-of-professional-services_5075780/" target="_blank">View verified posting →</a>
-      </div>
-    </div>
+  <div class="tab-panel active" id="tab-matches">
 
-    <div class="card">
-      <span class="tag gsi">GSI / Consulting</span>
-      <h3>Global Head of GSI Alliances</h3>
-      <div class="company">Canonical (Ubuntu) — founder-led, profitable, growing; 1,200+ employees, 75+ countries</div>
-      <div class="row">
-        <div class="item"><b>Location</b>Fully home-based — Americas or EMEA</div>
-        <div class="item"><b>Salary</b>Not listed; Canonical states pay varies by geography/experience</div>
-        <div class="item"><b>Verified</b>Live — fetched directly from canonical.com</div>
-      </div>
-      <div class="fit"><b>Why she's a strong fit:</b> Genuinely senior GSI-leadership title at a stable, fully-remote, profitable company — a rare combination that matches her location preference exactly. Her Booz Allen Hamilton foundation (2001–2008, promoted twice, 6 performance awards) gives her real credibility leading complex multi-stakeholder engagements and building a practice from nothing (she built the IP behind a new IT governance practice that won $16.8M in contracts).</div>
-      <div class="fit"><b>Honest fit assessment:</b> Moderate — 52/100, and I want to be direct about why. This posting's core, named requirement is <i>alliance and indirect sales management</i> — quota-carrying channel sales leadership. That specific thread doesn't run through her resume anywhere; her strength is delivery/consulting leadership and client relationship management, not channel-partner revenue ownership. I looked for a legitimate way to bridge this in the resume customization and didn't find one — see the customization log, which is empty for this posting on purpose rather than padded with a forced keyword swap. Her Booz Allen consulting pedigree is also ~18 years old at this point, which a Canonical interviewer would likely probe. This is a real reach, not a soft "stretch" — worth pursuing if she's genuinely open to pivoting toward channel/alliance leadership, less so if she wants a close-fit next role.</div>
-      <div class="gap">Gap to flag: no alliance/indirect-sales-quota experience in her background, and no salary listed.</div>
-      <div class="files">
-        <a class="filelink" href="applications/Canonical-Global-Head-of-GSI-Alliances-2026-07-09/Ghazal_Tehrani_Resume_Canonical.docx">Resume (unchanged — no honest keyword alignment available)</a>
-        <a class="filelink" href="applications/Canonical-Global-Head-of-GSI-Alliances-2026-07-09/Cover_Letter.md">Cover letter (names the gap directly)</a>
-        <a class="apply" href="https://canonical.com/careers/4517179" target="_blank">View verified posting →</a>
-      </div>
-    </div>
-  </section>
+    <table class="summary" id="summary-table">
+      <thead>
+        <tr>
+          <th>Title / Role</th>
+          <th>Company</th>
+          <th>Category</th>
+          <th>Fit</th>
+          <th>Salary</th>
+          <th>Posting</th>
+          <th>Applied</th>
+        </tr>
+      </thead>
+      <tbody id="summary-tbody"><!-- filled by JS --></tbody>
+    </table>
 
-  <section>
-    <h2>Proactive outreach opportunities</h2>
-    <p class="empty">None flagged today. Aura (company-intelligence connector) isn't connected, so this ran on web search alone; nothing found cleared the "real signal, not just a funding mention" bar in the time available. Will keep watching.</p>
-  </section>
+    <section>
+      <h2 style="margin-top:32px;">Match details</h2>
 
-  <section>
-    <h2>Previously surfaced, still open</h2>
-    <p class="empty">None — first two matches logged today in <code>history/seen_postings.json</code>.</p>
-  </section>
+      <div class="card">
+        <span class="tag saas">SaaS PS/CS</span>
+        <h3>Vice President of Professional Services</h3>
+        <div class="company">HCSS (Heavy Construction Systems Specialists) — Thoma Bravo portfolio company · Construction management SaaS</div>
+        <div class="row">
+          <div class="item"><b>Location</b>Not confirmed remote — HQ Sugar Land, TX; team of ~40 "in the US"</div>
+          <div class="item"><b>Salary</b>Not listed in posting</div>
+          <div class="item"><b>Verified</b>Live — fetched directly from careers.hcss.com</div>
+        </div>
+        <div class="fit"><b>Why she's a strong fit:</b> This is close to a repeat of two roles she's already held. At FranConnect she had full P&L ownership of a 50-person global PS team (US/India/Australia), reporting to the COO — this posting reports to the COO too, with a ~40-person team. She took FranConnect PS from loss-leader to break-even with 114% revenue growth, lifted utilization 35%→60%, cut time-to-value 75%, and held a 5.0/5.0 CSAT. At Decision Lens she built PS/CS/Training/Account Management functions from the ground up. The delivery-architecture, talent-development, and metrics-driven-operations language in this posting maps directly onto work she's actually done.</div>
+        <div class="fit"><b>Honest fit assessment:</b> Strong — 82/100. The scope, reporting line, and mandate match closely. Two real questions to have answered before investing much time: (1) her PS leadership has been in B2B SaaS, not heavy-civil construction — a bridgeable but real domain gap worth naming in the interview rather than hoping it doesn't come up; (2) remote eligibility isn't stated and HCSS is Texas-HQ'd, which cuts against her DC-area/remote preference — worth clarifying early, ideally before the resume goes in.</div>
+        <div class="gap">Gap to flag: no salary listed (per your rule, not disqualifying on its own) and remote status unconfirmed.</div>
+        <div class="files">
+          <span class="filenote">Customized resume &amp; cover letter available in Ghazal's private JobSearch folder</span>
+          <a class="apply" href="https://careers.hcss.com/vice-president-of-professional-services_5075780/" target="_blank">View verified posting →</a>
+        </div>
+      </div>
+
+      <div class="card">
+        <span class="tag gsi">GSI / Consulting</span>
+        <h3>Global Head of GSI Alliances</h3>
+        <div class="company">Canonical (Ubuntu) — founder-led, profitable, growing; 1,200+ employees, 75+ countries</div>
+        <div class="row">
+          <div class="item"><b>Location</b>Fully home-based — Americas or EMEA</div>
+          <div class="item"><b>Salary</b>Not listed; Canonical states pay varies by geography/experience</div>
+          <div class="item"><b>Verified</b>Live — fetched directly from canonical.com</div>
+        </div>
+        <div class="fit"><b>Why she's a strong fit:</b> Genuinely senior GSI-leadership title at a stable, fully-remote, profitable company — a rare combination that matches her location preference exactly. Her Booz Allen Hamilton foundation (2001–2008, promoted twice, 6 performance awards) gives her real credibility leading complex multi-stakeholder engagements and building a practice from nothing (she built the IP behind a new IT governance practice that won $16.8M in contracts).</div>
+        <div class="fit"><b>Honest fit assessment:</b> Moderate — 52/100, and I want to be direct about why. This posting's core, named requirement is <i>alliance and indirect sales management</i> — quota-carrying channel sales leadership. That specific thread doesn't run through her resume anywhere; her strength is delivery/consulting leadership and client relationship management, not channel-partner revenue ownership. I looked for a legitimate way to bridge this in the resume customization and didn't find one — the customization log is empty for this posting on purpose rather than padded with a forced keyword swap. Her Booz Allen consulting pedigree is also ~18 years old at this point, which a Canonical interviewer would likely probe. This is a real reach, not a soft "stretch" — worth pursuing if she's genuinely open to pivoting toward channel/alliance leadership, less so if she wants a close-fit next role.</div>
+        <div class="gap">Gap to flag: no alliance/indirect-sales-quota experience in her background, and no salary listed.</div>
+        <div class="files">
+          <span class="filenote">Cover letter names the alliance/channel-sales gap directly — available in Ghazal's private JobSearch folder</span>
+          <a class="apply" href="https://canonical.com/careers/4517179" target="_blank">View verified posting →</a>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <h2>Proactive outreach opportunities</h2>
+      <p class="empty">None flagged today. Aura (company-intelligence connector) isn't connected, so this ran on web search alone; nothing found cleared the "real signal, not just a funding mention" bar in the time available. Will keep watching.</p>
+    </section>
+
+    <section>
+      <h2>Previously surfaced, still open</h2>
+      <p class="empty">None — first two matches logged today in <code>history/seen_postings.json</code>.</p>
+    </section>
+
+  </div>
+
+  <div class="tab-panel" id="tab-tracking">
+    <section>
+      <h2 style="border:none; margin-top:20px;">Applied jobs</h2>
+      <p class="empty" id="tracking-empty">Nothing marked "Applied" yet — check the box in the Today's Matches summary table to add a job here.</p>
+      <table class="tracking" id="tracking-table" style="display:none;">
+        <thead>
+          <tr>
+            <th>Title / Role</th>
+            <th>Company</th>
+            <th>Link to JD</th>
+            <th style="width:34%;">Notes</th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody id="tracking-tbody"></tbody>
+      </table>
+    </section>
+  </div>
 
 </div>
 
-<footer>Generated by the job-search-scan skill · Next run will dedupe against today's postings automatically</footer>
+<footer>Generated by the job-search-scan skill · Next run will dedupe against today's postings automatically · Applied status and notes are saved in this browser only</footer>
+
+<script>
+  const JOBS = [
+    {
+      id: "hcss-vp-ps-2026-07-09",
+      title: "Vice President of Professional Services",
+      company: "HCSS",
+      category: "SaaS PS/CS",
+      fit: 82,
+      salary: "Not listed",
+      jdLink: "https://careers.hcss.com/vice-president-of-professional-services_5075780/"
+    },
+    {
+      id: "canonical-gsi-2026-07-09",
+      title: "Global Head of GSI Alliances",
+      company: "Canonical",
+      category: "GSI / Consulting",
+      fit: 52,
+      salary: "Not listed",
+      jdLink: "https://canonical.com/careers/4517179"
+    }
+  ];
+
+  const STORAGE_KEY = "jobTrackingV1";
+
+  function loadState() {
+    try {
+      return JSON.parse(localStorage.getItem(STORAGE_KEY)) || {};
+    } catch (e) {
+      return {};
+    }
+  }
+
+  function saveState(state) {
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
+  }
+
+  function getJobState(state, id) {
+    return state[id] || { applied: false, notes: "" };
+  }
+
+  function renderSummaryTable() {
+    const state = loadState();
+    const tbody = document.getElementById("summary-tbody");
+    tbody.innerHTML = "";
+    JOBS.forEach(job => {
+      const js = getJobState(state, job.id);
+      const fitClass = job.fit >= 70 ? "high" : "mid";
+      const tr = document.createElement("tr");
+      tr.innerHTML = `
+        <td>${job.title}</td>
+        <td>${job.company}</td>
+        <td>${job.category}</td>
+        <td class="fitscore ${fitClass}">${job.fit}/100</td>
+        <td>${job.salary}</td>
+        <td><a class="jdlink" href="${job.jdLink}" target="_blank">View →</a></td>
+        <td>
+          <label class="applied-check">
+            <input type="checkbox" data-jobid="${job.id}" ${js.applied ? "checked" : ""} onchange="toggleApplied(this)">
+            Applied
+          </label>
+        </td>
+      `;
+      tbody.appendChild(tr);
+    });
+  }
+
+  function toggleApplied(checkbox) {
+    const id = checkbox.getAttribute("data-jobid");
+    const state = loadState();
+    const js = getJobState(state, id);
+    js.applied = checkbox.checked;
+    state[id] = js;
+    saveState(state);
+    renderTrackingTable();
+  }
+
+  function updateNotes(id, value) {
+    const state = loadState();
+    const js = getJobState(state, id);
+    js.notes = value;
+    state[id] = js;
+    saveState(state);
+  }
+
+  function unapply(id) {
+    const state = loadState();
+    const js = getJobState(state, id);
+    js.applied = false;
+    state[id] = js;
+    saveState(state);
+    renderSummaryTable();
+    renderTrackingTable();
+  }
+
+  function renderTrackingTable() {
+    const state = loadState();
+    const applied = JOBS.filter(job => getJobState(state, job.id).applied);
+    const table = document.getElementById("tracking-table");
+    const emptyMsg = document.getElementById("tracking-empty");
+    const tbody = document.getElementById("tracking-tbody");
+    tbody.innerHTML = "";
+
+    if (applied.length === 0) {
+      table.style.display = "none";
+      emptyMsg.style.display = "block";
+      return;
+    }
+    table.style.display = "table";
+    emptyMsg.style.display = "none";
+
+    applied.forEach(job => {
+      const js = getJobState(state, job.id);
+      const tr = document.createElement("tr");
+      tr.innerHTML = `
+        <td>${job.title}</td>
+        <td>${job.company}</td>
+        <td><a class="jdlink" href="${job.jdLink}" target="_blank">View JD →</a></td>
+        <td><input class="notes" type="text" value="${(js.notes || "").replace(/"/g, "&quot;")}" placeholder="e.g. applied 7/9, waiting to hear back" data-jobid="${job.id}" onchange="updateNotes(this.getAttribute('data-jobid'), this.value)"></td>
+        <td><button class="unapply-btn" onclick="unapply('${job.id}')">Remove</button></td>
+      `;
+      tbody.appendChild(tr);
+    });
+  }
+
+  function showTab(name) {
+    document.querySelectorAll(".tab-panel").forEach(p => p.classList.remove("active"));
+    document.querySelectorAll(".tab-btn").forEach(b => b.classList.remove("active"));
+    document.getElementById("tab-" + name).classList.add("active");
+    document.getElementById("tab-btn-" + name).classList.add("active");
+  }
+
+  renderSummaryTable();
+  renderTrackingTable();
+</script>
+
 </body>
 </html>
