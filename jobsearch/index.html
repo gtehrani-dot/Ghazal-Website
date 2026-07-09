@@ -29,6 +29,9 @@
   .fitscore { font-weight: 700; }
   .fitscore.high { color: #1a7f37; }
   .fitscore.mid { color: #b5820a; }
+  .tier-badge { display: inline-block; font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: .03em; padding: 3px 9px; border-radius: 20px; white-space: nowrap; }
+  .tier-badge.primary { background: #e3f6ea; color: #1a7f37; }
+  .tier-badge.secondary { background: #f3eefc; color: #7126c9; }
   a.jdlink { color: #2952cc; text-decoration: none; font-weight: 600; }
   a.jdlink:hover { text-decoration: underline; }
   .applied-check { display: flex; align-items: center; gap: 6px; cursor: pointer; }
@@ -82,6 +85,7 @@
       <li><b>3 of today's 6 matches are in-office in New York</b> (Axon, Triple Whale, Starbridge) — a real gap against the remote/DC-area preference, flagged honestly in each one rather than glossed over.</li>
       <li><b>NetApp match came from a LinkedIn link Ghazal sent directly.</b> LinkedIn blocks normal fetch-based verification (same as always), but with her active and browser access granted, Claude in Chrome verified it through her own logged-in session.</li>
       <li><b>LinkedIn connections are now on-request, not automatic.</b> No connections check runs during the scan itself for any match — just ask about a specific company (e.g., "check my connections at NetApp") and I'll run it live, using the <code>linkedin</code> MCP tools if connected or browser access otherwise. The NetApp connection info below was pulled when Ghazal asked about that posting directly, not as part of the automatic scan.</li>
+      <li><b>No fixed top-5 cap anymore.</b> Every match below cleared the fit/desirability bar honestly — today that's 6, not padded to hit a quota and not trimmed to stay at 5. Each one is tagged <b>Primary</b> or <b>Secondary</b> in the summary table and detail cards so it's easy to tell the closest matches from the honest reach.</li>
     </ul>
   </div>
 
@@ -97,6 +101,7 @@
         <tr>
           <th>Title / Role</th>
           <th>Company</th>
+          <th>Match</th>
           <th>Category</th>
           <th>Fit</th>
           <th>Salary</th>
@@ -111,6 +116,7 @@
       <h2 style="margin-top:32px;">Match details</h2>
 
       <div class="card">
+        <span class="tier-badge primary">Primary</span>
         <span class="tag saas">SaaS PS/CS</span>
         <h3>Vice President of Professional Services</h3>
         <div class="company">HCSS (Heavy Construction Systems Specialists) — Thoma Bravo portfolio company · Construction management SaaS</div>
@@ -123,13 +129,13 @@
         <div class="fit"><b>Honest fit assessment:</b> Strong — 82/100. The scope, reporting line, and mandate match closely. Two real questions to have answered before investing much time: (1) her PS leadership has been in B2B SaaS, not heavy-civil construction — a bridgeable but real domain gap worth naming in the interview rather than hoping it doesn't come up; (2) remote eligibility isn't stated and HCSS is Texas-HQ'd, which cuts against her DC-area/remote preference — worth clarifying early, ideally before the resume goes in.</div>
         <div class="gap">Gap to flag: no salary listed (per your rule, not disqualifying on its own) and remote status unconfirmed.</div>
         <div class="fit"><b>LinkedIn connections:</b> available on request — just ask (e.g. "check my connections at HCSS").</div>
-        <div class="files">
-          <span class="filenote">Customized resume &amp; cover letter available in Ghazal&#39;s private Job Search folder</span>
+        <div class="files">          <span class="filenote">Customized resume &amp; cover letter available in Ghazal's private Job Search folder</span>
           <a class="apply" href="https://careers.hcss.com/vice-president-of-professional-services_5075780/" target="_blank">View verified posting →</a>
         </div>
       </div>
 
       <div class="card">
+        <span class="tier-badge secondary">Secondary</span>
         <span class="tag gsi">GSI / Consulting</span>
         <h3>Global Head of GSI Alliances</h3>
         <div class="company">Canonical (Ubuntu) — founder-led, profitable, growing; 1,200+ employees, 75+ countries</div>
@@ -138,17 +144,17 @@
           <div class="item"><b>Salary</b>Not listed; Canonical states pay varies by geography/experience</div>
           <div class="item"><b>Verified</b>Live — fetched directly from canonical.com</div>
         </div>
-        <div class="fit"><b>Why she's a strong fit:</b> Genuinely senior GSI-leadership title at a stable, fully-remote, profitable company — a rare combination that matches her location preference exactly. Her Booz Allen Hamilton foundation (2001–2008, promoted twice, 6 performance awards) gives her real credibility leading complex multi-stakeholder engagements and building a practice from nothing (she built the IP behind a new IT governance practice that won $16.8M in contracts).</div>
-        <div class="fit"><b>Honest fit assessment:</b> Moderate — 52/100, and I want to be direct about why. This posting's core, named requirement is <i>alliance and indirect sales management</i> — quota-carrying channel sales leadership. That specific thread doesn't run through her resume anywhere; her strength is delivery/consulting leadership and client relationship management, not channel-partner revenue ownership. I looked for a legitimate way to bridge this in the resume customization and didn't find one — the customization log is empty for this posting on purpose rather than padded with a forced keyword swap. Her Booz Allen consulting pedigree is also ~18 years old at this point, which a Canonical interviewer would likely probe. This is a real reach, not a soft "stretch" — worth pursuing if she's genuinely open to pivoting toward channel/alliance leadership, less so if she wants a close-fit next role.</div>
+        <div class="fit"><b>Why she's worth a look:</b> Genuinely senior GSI-leadership title at a stable, fully-remote, profitable company — a rare combination that matches her location preference exactly. Her Booz Allen Hamilton foundation (2001–2008, promoted twice, 6 performance awards) gives her real credibility leading complex multi-stakeholder engagements and building a practice from nothing (she built the IP behind a new IT governance practice that won $16.8M in contracts).</div>
+        <div class="fit"><b>Honest fit assessment:</b> Moderate — 52/100, and I want to be direct about why. This posting's core, named requirement is <i>alliance and indirect sales management</i> — quota-carrying channel sales leadership. That specific thread doesn't run through her resume anywhere; her strength is delivery/consulting leadership and client relationship management, not channel-partner revenue ownership. I looked for a legitimate way to bridge this in the resume customization and didn't find one — the customization log is empty for this posting on purpose rather than padded with a forced keyword swap. Her Booz Allen consulting pedigree is also ~18 years old at this point, which a Canonical interviewer would likely probe. This is a real reach, not a soft "stretch" — worth pursuing if she's genuinely open to pivoting toward channel/alliance leadership, less so if she wants a close-fit next role. Included here because desirability (remote, stable, profitable, senior title) is strong enough to outweigh the fit gap, not because it hit any quota.</div>
         <div class="gap">Gap to flag: no alliance/indirect-sales-quota experience in her background, and no salary listed.</div>
         <div class="fit"><b>LinkedIn connections:</b> available on request — just ask (e.g. "check my connections at Canonical").</div>
-        <div class="files">
-          <span class="filenote">Customized resume &amp; cover letter available in Ghazal&#39;s private Job Search folder</span>
+        <div class="files">          <span class="filenote">Customized resume &amp; cover letter available in Ghazal's private Job Search folder</span>
           <a class="apply" href="https://canonical.com/careers/4517179" target="_blank">View verified posting →</a>
         </div>
       </div>
 
       <div class="card">
+        <span class="tier-badge primary">Primary</span>
         <span class="tag saas">SaaS PS/CS</span>
         <h3>VP of Customer Success, Axon 911</h3>
         <div class="company">Axon — Axon 911 (Prepared + Carbyne) · AI-enabled 911/public-safety platform</div>
@@ -161,13 +167,13 @@
         <div class="fit"><b>Honest fit assessment:</b> Strong — 75/100. NRR and expansion-motion language in her resume already matches this posting's vocabulary almost verbatim, no invented alignment needed. Two real gaps: this is in-office in Manhattan, not remote/DC; and the org structure (Sr. Managers/Directors managing CSM teams beneath her) is one layer deeper than roles she's run directly — worth a candid conversation, not a disqualifier.</div>
         <div class="gap">Gap to flag: in-office NYC (not remote/DC), and base salary's low end ($191K) sits under her $230K floor — only the top of the range clears it.</div>
         <div class="fit"><b>LinkedIn connections:</b> available on request — just ask (e.g. "check my connections at Axon").</div>
-        <div class="files">
-          <span class="filenote">Customized resume &amp; cover letter available in Ghazal&#39;s private Job Search folder</span>
+        <div class="files">          <span class="filenote">Customized resume &amp; cover letter available in Ghazal's private Job Search folder</span>
           <a class="apply" href="https://www.builtinnyc.com/job/vp-customer-success-axon-911/9298186" target="_blank">View verified posting →</a>
         </div>
       </div>
 
       <div class="card">
+        <span class="tier-badge primary">Primary</span>
         <span class="tag saas">SaaS PS/CS</span>
         <h3>VP, Customer Success</h3>
         <div class="company">Triple Whale — ecommerce intelligence/AI platform, 60,000+ brands</div>
@@ -180,13 +186,13 @@
         <div class="fit"><b>Honest fit assessment:</b> Strong — 78/100. This is one of the closest scope matches in today's batch. Same location caveat as the others: in-office Manhattan, not remote/DC. 15+ years experience requested; she clears that comfortably.</div>
         <div class="gap">Gap to flag: in-office NYC (not remote/DC). Comp range's low end is under her $230K floor; top end clears it.</div>
         <div class="fit"><b>LinkedIn connections:</b> available on request — just ask (e.g. "check my connections at Triple Whale").</div>
-        <div class="files">
-          <span class="filenote">Customized resume &amp; cover letter available in Ghazal&#39;s private Job Search folder</span>
+        <div class="files">          <span class="filenote">Customized resume &amp; cover letter available in Ghazal's private Job Search folder</span>
           <a class="apply" href="https://www.builtinnyc.com/job/vp-customer-success/9259728" target="_blank">View verified posting →</a>
         </div>
       </div>
 
       <div class="card">
+        <span class="tier-badge primary">Primary</span>
         <span class="tag saas">SaaS PS/CS</span>
         <h3>VP, Customer Success</h3>
         <div class="company">Starbridge — early-stage/growth-stage, AI-driven product</div>
@@ -195,17 +201,17 @@
           <div class="item"><b>Salary</b>$225,000–$275,000 base</div>
           <div class="item"><b>Verified</b>Live — posted 12 days ago, fetched directly from builtinnyc.com</div>
         </div>
-        <div class="fit"><b>Why she's a strong fit:</b> Best comp match of today's five — nearly clears her $230K floor at the bottom of the range. She's built CS/PS functions from scratch twice (Decision Lens, and currently at ada CX), which matches this posting's "define and build, not just scale" framing. The AI-driven-product angle lines up with her current AI-native platform experience.</div>
+        <div class="fit"><b>Why she's a strong fit:</b> Best comp match of today's batch — nearly clears her $230K floor at the bottom of the range. She's built CS/PS functions from scratch twice (Decision Lens, and currently at ada CX), which matches this posting's "define and build, not just scale" framing. The AI-driven-product angle lines up with her current AI-native platform experience.</div>
         <div class="fit"><b>Honest fit assessment:</b> Good — 70/100. Same in-office-NYC gap as the other two. The bigger honest note: this is an early-stage/growth-stage company, so the team and org she'd inherit will likely start smaller than the 50-person organizations she's run most recently — a real scope step-down worth naming, not necessarily a bad thing if she wants to build again from a smaller base.</div>
         <div class="gap">Gap to flag: in-office NYC (not remote/DC), and likely smaller initial org scope than her recent roles.</div>
         <div class="fit"><b>LinkedIn connections:</b> available on request — just ask (e.g. "check my connections at Starbridge").</div>
-        <div class="files">
-          <span class="filenote">Customized resume &amp; cover letter available in Ghazal&#39;s private Job Search folder</span>
+        <div class="files">          <span class="filenote">Customized resume &amp; cover letter available in Ghazal's private Job Search folder</span>
           <a class="apply" href="https://www.builtinnyc.com/job/vp-customer-success/9195173" target="_blank">View verified posting →</a>
         </div>
       </div>
 
       <div class="card">
+        <span class="tier-badge primary">Primary</span>
         <span class="tag saas">RevOps / GTM (off-list title)</span>
         <h3>AI GTM Transformation Lead</h3>
         <div class="company">NetApp — enterprise data infrastructure, 12,721 employees, 4% 2-yr growth · sent in by Ghazal directly</div>
@@ -218,8 +224,7 @@
         <div class="fit"><b>Honest fit assessment:</b> Good but with two real gaps, not a soft stretch — 68/100. First: this is a senior <i>individual contributor</i> role, not a VP/people-leader role — a genuine shift in scope from her recent trajectory of P&L and team ownership, worth deciding intentionally rather than drifting into. Second: the role wants deep, hands-on fluency designing agentic workflows and working across APIs/automation platforms directly — her AI exposure at ada CX is real but sits at the edge of this requirement, not the center of it. Freshness (posted 1 hour ago) and comp ceiling are both genuinely strong.</div>
         <div class="gap">Gap to flag: IC not VP-level (real trajectory shift), hands-on agentic/AI-tooling depth is unproven, and Morrisville/San Jose hybrid isn't DC-area or fully remote.</div>
         <div class="fit"><b>LinkedIn network:</b> <b>Erik Nelson</b> — 1st-degree connection, shows under "connections who work at NetApp," though his own headline still reads "Sr. Client Executive - Verizon" — worth checking his profile directly before reaching out in case that's stale. Weaker secondary path: <b>Micah Makowski</b>, National Partner Manager at NetApp, 2nd-degree (needs a mutual-connection intro).</div>
-        <div class="files">
-          <span class="filenote">Customized resume &amp; cover letter available in Ghazal&#39;s private Job Search folder</span>
+        <div class="files">          <span class="filenote">Customized resume &amp; cover letter available in Ghazal's private Job Search folder</span>
           <a class="apply" href="https://www.linkedin.com/jobs/view/4435678662/" target="_blank">View verified posting →</a>
         </div>
       </div>
@@ -267,6 +272,7 @@
       title: "Vice President of Professional Services",
       company: "HCSS",
       category: "SaaS PS/CS",
+      tier: "primary",
       fit: 82,
       salary: "Not listed",
       jdLink: "https://careers.hcss.com/vice-president-of-professional-services_5075780/"
@@ -276,6 +282,7 @@
       title: "Global Head of GSI Alliances",
       company: "Canonical",
       category: "GSI / Consulting",
+      tier: "secondary",
       fit: 52,
       salary: "Not listed",
       jdLink: "https://canonical.com/careers/4517179"
@@ -285,6 +292,7 @@
       title: "VP of Customer Success, Axon 911",
       company: "Axon",
       category: "SaaS PS/CS",
+      tier: "primary",
       fit: 75,
       salary: "$191K–$255K",
       jdLink: "https://www.builtinnyc.com/job/vp-customer-success-axon-911/9298186"
@@ -294,6 +302,7 @@
       title: "VP, Customer Success",
       company: "Triple Whale",
       category: "SaaS PS/CS",
+      tier: "primary",
       fit: 78,
       salary: "$185K–$250K",
       jdLink: "https://www.builtinnyc.com/job/vp-customer-success/9259728"
@@ -303,6 +312,7 @@
       title: "VP, Customer Success",
       company: "Starbridge",
       category: "SaaS PS/CS",
+      tier: "primary",
       fit: 70,
       salary: "$225K–$275K",
       jdLink: "https://www.builtinnyc.com/job/vp-customer-success/9195173"
@@ -312,6 +322,7 @@
       title: "AI GTM Transformation Lead",
       company: "NetApp",
       category: "RevOps/GTM (off-list)",
+      tier: "primary",
       fit: 68,
       salary: "$196K–$293K",
       jdLink: "https://www.linkedin.com/jobs/view/4435678662/"
@@ -343,10 +354,12 @@
     JOBS.forEach(job => {
       const js = getJobState(state, job.id);
       const fitClass = job.fit >= 70 ? "high" : "mid";
+      const tierLabel = job.tier === "secondary" ? "Secondary" : "Primary";
       const tr = document.createElement("tr");
       tr.innerHTML = `
         <td>${job.title}</td>
         <td>${job.company}</td>
+        <td><span class="tier-badge ${job.tier}">${tierLabel}</span></td>
         <td>${job.category}</td>
         <td class="fitscore ${fitClass}">${job.fit}/100</td>
         <td>${job.salary}</td>
