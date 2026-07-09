@@ -1,72 +1,115 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>Job Search Scan — 2026-07-08</title>
+<title>Job Search Dashboard — 2026-07-09</title>
 <style>
-body{font-family:-apple-system,Segoe UI,Arial,sans-serif;max-width:820px;margin:40px auto;padding:0 20px;color:#222;line-height:1.5}
-h1{font-size:22px} h2{font-size:17px;border-bottom:1px solid #ddd;padding-bottom:6px;margin-top:36px}
-.banner{background:#fff6e5;border:1px solid #f0c674;border-radius:8px;padding:16px 20px;margin:16px 0}
-.job{border:1px solid #e2e2e2;border-radius:8px;padding:14px 18px;margin:10px 0}
-.job h3{margin:0 0 4px 0;font-size:15px}
-.meta{color:#666;font-size:13px}
-.tag{display:inline-block;background:#eee;border-radius:4px;padding:1px 7px;font-size:12px;margin-right:6px}
-code{background:#f4f4f4;padding:1px 5px;border-radius:3px}
+  body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif; background: #f5f6f8; color: #1d1f24; margin: 0; padding: 0 0 60px 0; }
+  header { background: #1d2b3a; color: #fff; padding: 28px 40px; }
+  header h1 { margin: 0 0 4px 0; font-size: 22px; }
+  header p { margin: 0; color: #b9c4d0; font-size: 14px; }
+  .wrap { max-width: 900px; margin: 0 auto; padding: 0 24px; }
+  .banner { background: #fff4e5; border: 1px solid #f0c36d; border-radius: 8px; padding: 18px 22px; margin: 24px 0; }
+  .banner h2 { margin: 0 0 10px 0; font-size: 15px; color: #8a5a00; }
+  .banner ul { margin: 0; padding-left: 20px; font-size: 13.5px; line-height: 1.6; }
+  .banner li { margin-bottom: 8px; }
+  section { margin: 32px 0; }
+  section h2 { font-size: 17px; border-bottom: 2px solid #dfe3e8; padding-bottom: 8px; }
+  .card { background: #fff; border: 1px solid #e2e5ea; border-radius: 10px; padding: 20px 24px; margin-bottom: 18px; }
+  .card h3 { margin: 0 0 2px 0; font-size: 17px; }
+  .card .company { color: #55606b; font-size: 14px; margin-bottom: 10px; }
+  .tag { display: inline-block; font-size: 11px; font-weight: 600; text-transform: uppercase; letter-spacing: .03em; padding: 3px 9px; border-radius: 20px; margin-right: 6px; }
+  .tag.saas { background: #e5edff; color: #2952cc; }
+  .tag.gsi { background: #f1e6ff; color: #7126c9; }
+  .row { display: flex; gap: 20px; flex-wrap: wrap; margin: 12px 0; font-size: 13.5px; }
+  .row .item { background: #f7f8fa; border-radius: 6px; padding: 8px 12px; }
+  .row .item b { display: block; font-size: 11px; color: #767f89; text-transform: uppercase; letter-spacing: .03em; margin-bottom: 2px; }
+  .fit { margin: 14px 0; font-size: 14px; line-height: 1.55; }
+  .fit b { color: #1d2b3a; }
+  .gap { background: #fff8f0; border-left: 3px solid #e0952f; padding: 8px 12px; font-size: 13.5px; margin: 10px 0; border-radius: 4px; }
+  .files { margin-top: 14px; display: flex; gap: 10px; flex-wrap: wrap; }
+  a.apply { display: inline-block; background: #1d2b3a; color: #fff; text-decoration: none; padding: 9px 16px; border-radius: 6px; font-size: 13.5px; font-weight: 600; }
+  a.apply:hover { background: #33465c; }
+  a.filelink { display: inline-block; background: #eef2f6; color: #1d2b3a; text-decoration: none; padding: 9px 16px; border-radius: 6px; font-size: 13.5px; font-weight: 600; border: 1px solid #d5dae1; }
+  a.filelink:hover { background: #dde3ea; }
+  .empty { color: #667; font-style: italic; font-size: 14px; }
+  footer { text-align: center; color: #99a3ad; font-size: 12px; margin-top: 40px; }
 </style>
 </head>
 <body>
-<h1>Job Search Scan — manual test run, 2026-07-08</h1>
+<header>
+  <div class="wrap">
+    <h1>Ghazal's Job Search Dashboard</h1>
+    <p>Daily scan — Wednesday, July 9, 2026 &nbsp;·&nbsp; Updated after resume upload</p>
+  </div>
+</header>
 
-<div class="banner">
-<strong>Status: sourcing tested tonight, no matches surfaced — and here's exactly why.</strong>
-<p>Criteria are complete and the Indeed connector is live (<code>search_jobs</code>,
-<code>get_job_details</code>, <code>get_company_data</code>). I ran three searches tonight —
-"VP Customer Success" (remote), "VP Professional Services" (Washington DC), and "Chief Customer
-Officer" (remote) — pulling ~30 results total.</p>
-<p><strong>None cleared the fit bar</strong>, and honestly, the result set looked off for a
-senior CS/PS/delivery search: alongside a few plausible adjacents (SVP Enterprise Risk Office at
-PenFed in McLean VA — right location/comp, wrong function; Chief Commercial Officer at LDM
-Global — adjacent but sales-led, not customer-org; SVP Product at Digital.ai — wrong function),
-most results were unrelated to the search terms entirely (a restaurant general manager role at
-Zaytinya DC, a skincare studio manager in Arlington, a nonprofit mission COO). That mix doesn't
-look like what a live "VP Professional Services, Washington DC" search should return.</p>
-<p>I'm flagging this rather than dressing up mismatched results as real leads — worth checking
-whether the connected Indeed tool is pulling live production data or a sandboxed/test feed before
-trusting tomorrow's 4:22 AM run's output. In the meantime, connecting ZipRecruiter and Dice will
-widen coverage and give a cross-check on whether this is an Indeed-specific issue.</p>
-<p><strong>Update after a second round (7 searches total tonight):</strong> "Vice President Customer
-Success SaaS," "Head of Professional Services SaaS," and "Chief Customer Officer startup SaaS"
-(remote) returned zero genuinely relevant results — mostly sales/marketing/BD roles, a compliance
-role, and one search returned nothing at all. A McLean, VA search for "VP Customer Success" returned
-completely unrelated local roles (HVAC technician, medical science liaison, Salesforce public
-affairs). Across 7 searches and ~60 results, <strong>zero postings matched her actual target
-roles.</strong> This is a strong, consistent signal that the connected Indeed tool is not returning
-relevant live results for senior CS/PS/delivery searches in this environment — recommend treating
-tomorrow's automated run with the same skepticism until ZipRecruiter/Dice are connected as a
-cross-check, or the Indeed connection is confirmed to be pulling live data.</p>
-<p>Resume is in — master resume built at
-<code>resumes/Ghazal_Tehrani_Master_Resume.docx</code> from her uploaded background. Real profile:
-Head of Global PS at ada CX (AI-native CX platform), VP PS at FranConnect (P&L, team of 50, 114%
-revenue growth, 110% NRR), VP Customer Operations at Decision Lens (scaled ARR &lt;$1M→$11M),
-Booz Allen Hamilton consulting foundation. Ready to customize the moment real matches surface.</p>
+<div class="wrap">
+
+  <div class="banner">
+    <h2>⚠ Notes on today's run</h2>
+    <ul>
+      <li><b>Resume customization is now complete.</b> The morning's run happened before your master resume and real background were in place, so it correctly (if confusingly) held off on customization. Both are now in <code>JobSearch/resumes/</code> and <code>criteria.md</code>, so fit scores below are grounded in your actual history — FranConnect, Decision Lens, ada CX, Booz Allen Hamilton — not the placeholder Indeed-profile summary from before. A customized resume and tailored cover letter are ready for both matches below.</li>
+      <li><b>No resume-track split</b> — per your instruction, there's one master resume, customized fresh per posting. Category tags below (SaaS PS/CS vs. GSI/Consulting) just describe the posting, not a separate base file.</li>
+      <li><b>Link verification was still the bottleneck today, not job availability.</b> Indeed's connector only returns short-link redirects that the verification tool can't fetch, so all Indeed results were excluded unverified. General web-search-sourced postings (Greenhouse/Lever/Built In listings surfaced via search) had an 83% dead-link rate on direct checks — 10 of 12 were already closed. Only the 2 postings below survived live verification. Full detail in <code>history/source_health.json</code>.</li>
+      <li><b>LinkedIn connections:</b> no connector connected — skipped, per criteria.md. Manual check recommended for both companies below.</li>
+    </ul>
+  </div>
+
+  <section>
+    <h2>Today's matches (2 — see verification note above)</h2>
+
+    <div class="card">
+      <span class="tag saas">SaaS PS/CS</span>
+      <h3>Vice President of Professional Services</h3>
+      <div class="company">HCSS (Heavy Construction Systems Specialists) — Thoma Bravo portfolio company · Construction management SaaS</div>
+      <div class="row">
+        <div class="item"><b>Location</b>Not confirmed remote — HQ Sugar Land, TX; team of ~40 "in the US"</div>
+        <div class="item"><b>Salary</b>Not listed in posting</div>
+        <div class="item"><b>Verified</b>Live — fetched directly from careers.hcss.com</div>
+      </div>
+      <div class="fit"><b>Why she's a strong fit:</b> This is close to a repeat of two roles she's already held. At FranConnect she had full P&L ownership of a 50-person global PS team (US/India/Australia), reporting to the COO — this posting reports to the COO too, with a ~40-person team. She took FranConnect PS from loss-leader to break-even with 114% revenue growth, lifted utilization 35%→60%, cut time-to-value 75%, and held a 5.0/5.0 CSAT. At Decision Lens she built PS/CS/Training/Account Management functions from the ground up. The delivery-architecture, talent-development, and metrics-driven-operations language in this posting maps directly onto work she's actually done.</div>
+      <div class="fit"><b>Honest fit assessment:</b> Strong — 82/100. The scope, reporting line, and mandate match closely. Two real questions to have answered before investing much time: (1) her PS leadership has been in B2B SaaS, not heavy-civil construction — a bridgeable but real domain gap worth naming in the interview rather than hoping it doesn't come up; (2) remote eligibility isn't stated and HCSS is Texas-HQ'd, which cuts against her DC-area/remote preference — worth clarifying early, ideally before the resume goes in.</div>
+      <div class="gap">Gap to flag: no salary listed (per your rule, not disqualifying on its own) and remote status unconfirmed.</div>
+      <div class="files">
+        <a class="filelink" href="applications/HCSS-VP-Professional-Services-2026-07-09/Ghazal_Tehrani_Resume_HCSS.docx">Customized resume (changes highlighted)</a>
+        <a class="filelink" href="applications/HCSS-VP-Professional-Services-2026-07-09/Cover_Letter.md">Cover letter</a>
+        <a class="apply" href="https://careers.hcss.com/vice-president-of-professional-services_5075780/" target="_blank">View verified posting →</a>
+      </div>
+    </div>
+
+    <div class="card">
+      <span class="tag gsi">GSI / Consulting</span>
+      <h3>Global Head of GSI Alliances</h3>
+      <div class="company">Canonical (Ubuntu) — founder-led, profitable, growing; 1,200+ employees, 75+ countries</div>
+      <div class="row">
+        <div class="item"><b>Location</b>Fully home-based — Americas or EMEA</div>
+        <div class="item"><b>Salary</b>Not listed; Canonical states pay varies by geography/experience</div>
+        <div class="item"><b>Verified</b>Live — fetched directly from canonical.com</div>
+      </div>
+      <div class="fit"><b>Why she's a strong fit:</b> Genuinely senior GSI-leadership title at a stable, fully-remote, profitable company — a rare combination that matches her location preference exactly. Her Booz Allen Hamilton foundation (2001–2008, promoted twice, 6 performance awards) gives her real credibility leading complex multi-stakeholder engagements and building a practice from nothing (she built the IP behind a new IT governance practice that won $16.8M in contracts).</div>
+      <div class="fit"><b>Honest fit assessment:</b> Moderate — 52/100, and I want to be direct about why. This posting's core, named requirement is <i>alliance and indirect sales management</i> — quota-carrying channel sales leadership. That specific thread doesn't run through her resume anywhere; her strength is delivery/consulting leadership and client relationship management, not channel-partner revenue ownership. I looked for a legitimate way to bridge this in the resume customization and didn't find one — see the customization log, which is empty for this posting on purpose rather than padded with a forced keyword swap. Her Booz Allen consulting pedigree is also ~18 years old at this point, which a Canonical interviewer would likely probe. This is a real reach, not a soft "stretch" — worth pursuing if she's genuinely open to pivoting toward channel/alliance leadership, less so if she wants a close-fit next role.</div>
+      <div class="gap">Gap to flag: no alliance/indirect-sales-quota experience in her background, and no salary listed.</div>
+      <div class="files">
+        <a class="filelink" href="applications/Canonical-Global-Head-of-GSI-Alliances-2026-07-09/Ghazal_Tehrani_Resume_Canonical.docx">Resume (unchanged — no honest keyword alignment available)</a>
+        <a class="filelink" href="applications/Canonical-Global-Head-of-GSI-Alliances-2026-07-09/Cover_Letter.md">Cover letter (names the gap directly)</a>
+        <a class="apply" href="https://canonical.com/careers/4517179" target="_blank">View verified posting →</a>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <h2>Proactive outreach opportunities</h2>
+    <p class="empty">None flagged today. Aura (company-intelligence connector) isn't connected, so this ran on web search alone; nothing found cleared the "real signal, not just a funding mention" bar in the time available. Will keep watching.</p>
+  </section>
+
+  <section>
+    <h2>Previously surfaced, still open</h2>
+    <p class="empty">None — first two matches logged today in <code>history/seen_postings.json</code>.</p>
+  </section>
+
 </div>
 
-<h2>Closest (non-qualifying) results tonight, for reference</h2>
-
-<div class="job">
-<h3>SVP, Enterprise Risk Office — PenFed Credit Union</h3>
-<div class="meta"><span class="tag">McLean, VA</span><span class="tag">$237,800–$450,772</span><span class="tag">Posted Jun 5, 2026</span></div>
-<p>Location and comp both clear the bar, but the function is risk management, not customer
-success/PS/delivery — a real mismatch on substance, not just title. Not surfaced as a match.</p>
-</div>
-
-<div class="job">
-<h3>Chief Commercial Officer — LDM Global</h3>
-<div class="meta"><span class="tag">Remote</span><span class="tag">From $160,000</span><span class="tag">Posted Jul 6, 2026</span></div>
-<p>Adjacent C-suite title, but "commercial" here reads sales/revenue-led rather than
-customer-org leadership. Below base floor as listed too. Not surfaced as a match.</p>
-</div>
-
-<p style="color:#888;font-size:13px;margin-top:30px">Next scheduled run: 4:22 AM daily. This file is overwritten each run.</p>
+<footer>Generated by the job-search-scan skill · Next run will dedupe against today's postings automatically</footer>
 </body>
 </html>
