@@ -64,6 +64,18 @@
   .unapply-btn { background: none; border: 1px solid #d5dae1; border-radius: 6px; padding: 5px 10px; font-size: 12px; cursor: pointer; color: #8a5a00; }
   .unapply-btn:hover { background: #fff4e5; }
 
+  .add-role-bar { display: flex; align-items: center; gap: 12px; margin: 22px 0 4px 0; flex-wrap: wrap; }
+  .add-role-btn { background: #1d2b3a; color: #fff; border: none; padding: 9px 16px; border-radius: 6px; font-size: 13.5px; font-weight: 600; cursor: pointer; }
+  .add-role-btn:hover { background: #33465c; }
+  .add-role-caption { font-size: 12.5px; color: #767f89; font-style: italic; }
+  table.pending { width: 100%; border-collapse: collapse; background: #fff; border: 1px solid #e2e5ea; border-radius: 10px; overflow: hidden; margin: 10px 0 20px 0; font-size: 13.5px; }
+  table.pending th { text-align: left; background: #eef2f6; padding: 8px 12px; font-size: 11px; text-transform: uppercase; letter-spacing: .03em; color: #55606b; }
+  table.pending td { padding: 8px 12px; border-top: 1px solid #eceff2; vertical-align: middle; }
+  .copy-link-btn, .remove-pending-btn { background: none; border: 1px solid #d5dae1; border-radius: 6px; padding: 4px 9px; font-size: 12px; cursor: pointer; margin-right: 6px; }
+  .copy-link-btn:hover { background: #eef2f6; }
+  .remove-pending-btn { color: #8a5a00; }
+  .remove-pending-btn:hover { background: #fff4e5; }
+
   footer { text-align: center; color: #99a3ad; font-size: 12px; margin-top: 40px; }
 </style>
 </head>
@@ -97,6 +109,22 @@
   </div>
 
   <div class="tab-panel active" id="tab-matches">
+
+    <div class="add-role-bar">
+      <button class="add-role-btn" onclick="addPendingRole()">+ Add a Role</button>
+      <span class="add-role-caption">Personal reminder only — this just saves the link in your browser. Paste it to Claude in a chat to actually get it verified, scored, and turned into a resume + cover letter.</span>
+    </div>
+    <table class="pending" id="pending-table" style="display:none;">
+      <thead>
+        <tr>
+          <th>Link</th>
+          <th>Note</th>
+          <th>Added</th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody id="pending-tbody"></tbody>
+    </table>
 
     <table class="summary" id="summary-table">
       <thead>
@@ -492,8 +520,87 @@
     document.getElementById("tab-btn-" + name).classList.add("active");
   }
 
+  const PENDING_KEY = "pendingRolesV1";
+
+  function loadPending() {
+    try {
+      return JSON.parse(localStorage.getItem(PENDING_KEY)) || [];
+    } catch (e) {
+      return [];
+    }
+  }
+
+  function savePending(list) {
+    localStorage.setItem(PENDING_KEY, JSON.stringify(list));
+  }
+
+  function addPendingRole() {
+    const url = prompt("Paste the job posting URL:");
+    if (!url) return;
+    const note = prompt("Optional note (company, why it caught your eye, etc.) — leave blank to skip:") || "";
+    const list = loadPending();
+    list.unshift({
+      url: url.trim(),
+      note: note.trim(),
+      added: new Date().toISOString().slice(0, 10)
+    });
+    savePending(list);
+    renderPendingTable();
+  }
+
+  function removePendingRole(index) {
+    const list = loadPending();
+    list.splice(index, 1);
+    savePending(list);
+    renderPendingTable();
+  }
+
+  function copyPendingLink(index, btn) {
+    const list = loadPending();
+    const item = list[index];
+    if (!item) return;
+    const text = item.note ? (item.url + " — " + item.note) : item.url;
+    if (navigator.clipboard && navigator.clipboard.writeText) {
+      navigator.clipboard.writeText(text).then(() => {
+        const original = btn.textContent;
+        btn.textContent = "Copied!";
+        setTimeout(() => { btn.textContent = original; }, 1500);
+      });
+    } else {
+      prompt("Copy this link to paste to Claude:", text);
+    }
+  }
+
+  function renderPendingTable() {
+    const list = loadPending();
+    const table = document.getElementById("pending-table");
+    const tbody = document.getElementById("pending-tbody");
+    tbody.innerHTML = "";
+
+    if (list.length === 0) {
+      table.style.display = "none";
+      return;
+    }
+    table.style.display = "table";
+
+    list.forEach((item, index) => {
+      const tr = document.createElement("tr");
+      tr.innerHTML = `
+        <td><a class="jdlink" href="${item.url}" target="_blank">${item.url.length > 60 ? item.url.slice(0, 60) + "…" : item.url}</a></td>
+        <td>${item.note ? item.note : "<span class='empty'>—</span>"}</td>
+        <td>${item.added}</td>
+        <td>
+          <button class="copy-link-btn" onclick="copyPendingLink(${index}, this)">Copy link</button>
+          <button class="remove-pending-btn" onclick="removePendingRole(${index})">Remove</button>
+        </td>
+      `;
+      tbody.appendChild(tr);
+    });
+  }
+
   renderSummaryTable();
   renderTrackingTable();
+  renderPendingTable();
 </script>
 
 </body>
