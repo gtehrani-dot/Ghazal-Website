@@ -1,0 +1,377 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>1502 Linden Hurst Ave — Appraisal Comp Analysis</title>
+<style>
+:root { color-scheme: light; }
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; font-size: 13px; background: #f8f8f6; color: #0b0b0b; padding: 20px; }
+
+h1 { font-size: 17px; font-weight: 500; margin-bottom: 4px; }
+.subtitle { font-size: 12px; color: #52514e; margin-bottom: 20px; }
+
+.tabs { display: flex; gap: 2px; margin-bottom: 16px; border-bottom: 1px solid #e1e0d9; }
+.tab { padding: 8px 16px; font-size: 12px; font-weight: 500; cursor: pointer; border: none; background: none; color: #52514e; border-bottom: 2px solid transparent; margin-bottom: -1px; }
+.tab.active { color: #0b0b0b; border-bottom-color: #0b0b0b; }
+.tab:hover:not(.active) { color: #0b0b0b; background: #f1efe8; border-radius: 6px 6px 0 0; }
+
+.panel { display: none; }
+.panel.active { display: block; }
+
+.subject-bar { display: grid; grid-template-columns: repeat(5, 1fr); gap: 10px; margin-bottom: 18px; padding: 14px 16px; background: #e6f1fb; border: 0.5px solid #b5d4f4; border-radius: 10px; }
+.sb-item .sb-label { font-size: 10px; color: #185fa5; text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 2px; }
+.sb-item .sb-val { font-size: 14px; font-weight: 500; color: #0b0b0b; }
+.sb-item .sb-sub { font-size: 10px; color: #52514e; }
+
+.section-head { font-size: 11px; font-weight: 500; text-transform: uppercase; letter-spacing: 0.06em; padding: 6px 10px; border-radius: 6px; margin: 18px 0 8px; }
+.ryan-head { background: #e6f1fb; color: #185fa5; }
+.keegan-head { background: #eeedfe; color: #3c3489; }
+
+.scroll { overflow-x: auto; border-radius: 8px; border: 0.5px solid #e1e0d9; margin-bottom: 6px; }
+table { border-collapse: collapse; width: 100%; min-width: 820px; font-size: 11px; }
+th { background: #f1efe8; color: #52514e; font-weight: 500; padding: 7px 9px; text-align: left; border-bottom: 0.5px solid #e1e0d9; white-space: nowrap; position: sticky; top: 0; z-index: 1; }
+td { padding: 6px 9px; border-bottom: 0.5px solid #e1e0d9; vertical-align: top; }
+tr:last-child td { border-bottom: none; }
+tr:hover td { background: #f8f8f6; }
+.addr { font-weight: 500; }
+.meta { color: #52514e; font-size: 10px; }
+.pos { color: #0f6e56; }
+.neg { color: #a32d2d; }
+.zero { color: #898781; }
+.bold { font-weight: 500; }
+.site-hi { background: #fef9ec; }
+.highlight { background: #fef3c7; border-radius: 2px; padding: 0 3px; }
+.flag { display: inline-block; background: #faece7; color: #993c1d; font-size: 9px; border-radius: 3px; padding: 1px 4px; margin-left: 3px; }
+
+.badge { font-size: 9px; font-weight: 500; border-radius: 3px; padding: 1px 5px; white-space: nowrap; }
+.badge-both { background: #eeedfe; color: #3c3489; }
+.badge-ryan { background: #e6f1fb; color: #185fa5; }
+.badge-keegan { background: #f3f0fe; color: #534ab7; }
+
+.note { background: #f1efe8; border: 0.5px solid #e1e0d9; border-radius: 8px; padding: 12px 14px; font-size: 11.5px; line-height: 1.65; margin-top: 12px; color: #0b0b0b; }
+.note strong { font-weight: 500; }
+
+/* Assessment tab */
+.assess-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin-bottom: 18px; }
+.metric { background: #fff; border: 0.5px solid #e1e0d9; border-radius: 8px; padding: 12px 14px; }
+.metric .m-label { font-size: 10px; color: #52514e; text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 3px; }
+.metric .m-val { font-size: 18px; font-weight: 500; }
+.metric .m-sub { font-size: 10px; color: #52514e; margin-top: 2px; }
+.m-accent { color: #185fa5; }
+.ratio-hi { color: #0f6e56; font-weight: 500; }
+.ratio-lo { color: #0b0b0b; }
+.ratio-over { color: #a32d2d; font-weight: 500; }
+</style>
+</head>
+<body>
+
+<h1>1502 Linden Hurst Ave, McLean VA 22101</h1>
+<p class="subtitle">Appraisal comparison · Ryan (05/01/2026) vs Keegan (05/06/2026) · Subject: 3,646 sf GLA · 12,500 sf lot · 4 BR / 3.1 BA · Q3/C3 · 1 FP · 2-car garage</p>
+
+<div class="tabs">
+  <button class="tab active" onclick="showTab('adjustments')">Full adjustment grids</button>
+  <button class="tab" onclick="showTab('assessments')">County assessments</button>
+</div>
+
+<!-- TAB 1: ADJUSTMENT GRIDS -->
+<div id="tab-adjustments" class="panel active">
+
+  <div class="subject-bar">
+    <div class="sb-item"><div class="sb-label">Ryan final value</div><div class="sb-val">$1,800,000</div><div class="sb-sub">Mean $1,804,354</div></div>
+    <div class="sb-item"><div class="sb-label">Keegan final value</div><div class="sb-val">$1,830,000</div><div class="sb-sub">Mean $1,834,222</div></div>
+    <div class="sb-item"><div class="sb-label">GLA rate</div><div class="sb-val">$30 vs $200</div><div class="sb-sub">Ryan vs Keegan / sf</div></div>
+    <div class="sb-item"><div class="sb-label">Lot rate</div><div class="sb-val">~$1 vs $4</div><div class="sb-sub">Ryan vs Keegan / sf</div></div>
+    <div class="sb-item"><div class="sb-label">Condition adj</div><div class="sb-val">None vs ±$40–80K</div><div class="sb-sub">Ryan vs Keegan</div></div>
+  </div>
+
+  <div class="section-head ryan-head">Ryan Appraisal — Jim Ryan MS, SRA · 5 comps · GLA $30/sf · Basement $20/sf unfin + $25/sf fin · Lot ~$1/sf</div>
+
+  <div class="scroll">
+  <table>
+    <tr>
+      <th>Address</th><th>Dist</th><th>Sale date</th><th>Sale price</th><th>Lot sf</th>
+      <th class="site-hi">Lot adj ★</th><th>Quality adj</th><th>Rooms adj</th>
+      <th>GLA sf</th><th>GLA adj</th><th>Bsmt adj</th><th>Garage adj</th><th>FP adj</th><th>Other</th>
+      <th>Net adj</th><th>Adj value</th>
+    </tr>
+    <tr>
+      <td><span class="addr">6941 Pine Crest Ave</span><br><span class="meta">Q3 · C3 · 10/4/3.1</span></td>
+      <td>0.47 mi NW</td><td>Dec 2025</td><td>$1,890,000</td><td>11,250</td>
+      <td class="site-hi zero">$0<br><span class="meta">1,250 sf diff, no adj</span></td>
+      <td class="zero">$0<br><span class="meta">Q3 = same</span></td>
+      <td class="zero">$0</td>
+      <td>3,886</td>
+      <td class="neg">−$7,200<br><span class="meta">240 sf × $30</span></td>
+      <td class="neg">−$26,475<br><span class="meta">−$9,400 area / −$17,075 finish</span></td>
+      <td class="neg">−$10,000<br><span class="meta">3-car vs 2-car</span></td>
+      <td class="neg">−$2,500<br><span class="meta">2 FP vs 1</span></td>
+      <td class="pos">+$2,500<br><span class="meta">Deck/fence</span></td>
+      <td class="neg bold">−$43,675</td>
+      <td class="bold">$1,846,325</td>
+    </tr>
+    <tr>
+      <td><span class="addr">6856 Saint Albans Rd</span><br><span class="meta">Q2 · C3 · 9/4/4.1</span></td>
+      <td>0.74 mi N</td><td>Nov 2025</td><td>$1,900,000</td><td>9,583</td>
+      <td class="site-hi pos">+$2,917<br><span class="meta">2,917 sf × ~$1/sf</span></td>
+      <td class="neg">−$25,000<br><span class="meta">Q2 superior</span></td>
+      <td class="neg">−$10,000<br><span class="meta">Extra full bath</span></td>
+      <td>3,439</td>
+      <td class="pos">+$6,210<br><span class="meta">207 sf × $30</span></td>
+      <td class="neg">−$6,355<br><span class="meta">+$2,020 area / −$8,375 finish</span></td>
+      <td class="zero">$0</td>
+      <td class="neg">−$5,000<br><span class="meta">3 FP vs 1</span></td>
+      <td class="zero">$0</td>
+      <td class="neg bold">−$37,228</td>
+      <td class="bold">$1,862,772</td>
+    </tr>
+    <tr>
+      <td><span class="addr">7204 Elizabeth Dr</span><br><span class="meta">Q4 · C3 · 9/4/3.1</span></td>
+      <td>1.16 mi NW</td><td>Aug 2025</td><td>$1,750,000</td><td>17,325</td>
+      <td class="site-hi neg">−$4,825<br><span class="meta">4,825 sf × ~$1/sf</span></td>
+      <td class="pos">+$25,000<br><span class="meta">Q4 inferior</span></td>
+      <td class="zero">$0</td>
+      <td>3,405</td>
+      <td class="pos">+$7,230<br><span class="meta">241 sf × $30</span></td>
+      <td class="neg">−$21,595<br><span class="meta">−$15,920 area / −$5,675 finish</span></td>
+      <td class="zero">$0</td>
+      <td class="neg">−$2,500<br><span class="meta">2 FP vs 1</span></td>
+      <td class="pos">+$5,000<br><span class="meta">Porch deficit</span></td>
+      <td class="pos bold">+$8,310</td>
+      <td class="bold">$1,758,310</td>
+    </tr>
+    <tr>
+      <td><span class="addr">1448 Ingleside Ave</span><br><span class="meta">Q2 · C3 · 8/4/3.1</span></td>
+      <td>0.31 mi NW</td><td>Aug 2025</td><td>$1,751,000</td><td>5,812</td>
+      <td class="site-hi pos"><span class="highlight">+$6,688</span><br><span class="meta">6,688 sf × ~$1/sf</span></td>
+      <td class="neg">−$25,000<br><span class="meta">Q2 superior</span></td>
+      <td class="zero">$0</td>
+      <td>2,672</td>
+      <td class="pos">+$29,220<br><span class="meta">974 sf × $30</span></td>
+      <td class="pos">+$8,440<br><span class="meta">422 sf less area</span></td>
+      <td class="zero">$0</td>
+      <td class="zero">$0</td>
+      <td class="pos">+$5,000<br><span class="meta">Porch deficit</span></td>
+      <td class="pos bold">+$24,348</td>
+      <td class="bold">$1,775,348</td>
+    </tr>
+    <tr>
+      <td><span class="addr">6626 Byrns Pl</span><br><span class="meta">Q3 · C3 · 10/4/3.1</span></td>
+      <td>0.45 mi E</td><td>Aug 2025</td><td>$1,790,000</td><td>24,025</td>
+      <td class="site-hi neg">−$11,525<br><span class="meta">11,525 sf × ~$1/sf</span></td>
+      <td class="zero">$0<br><span class="meta">Q3 = same</span></td>
+      <td class="zero">$0</td>
+      <td>3,713</td>
+      <td class="zero">$0<br><span class="meta">67 sf, immaterial</span></td>
+      <td class="pos">+$3,040<br><span class="meta">152 sf less area</span></td>
+      <td class="zero">$0</td>
+      <td class="zero">$0</td>
+      <td class="neg">−$2,500<br><span class="meta">Extra deck</span></td>
+      <td class="neg bold">−$10,985</td>
+      <td class="bold">$1,779,015</td>
+    </tr>
+  </table>
+  </div>
+
+  <div class="section-head keegan-head">Keegan Appraisal — John R. Keegan CG · 5 comps · GLA $200/sf · Basement $50/sf · Lot $4/sf · Condition ±$40K/−$80K</div>
+
+  <div class="scroll">
+  <table>
+    <tr>
+      <th>Address</th><th>Dist</th><th>Sale date</th><th>Sale price</th><th>Lot sf</th>
+      <th class="site-hi">Lot adj ★</th><th>Condition adj</th><th>Rooms adj</th>
+      <th>GLA sf</th><th>GLA adj</th><th>Bsmt adj</th><th>Garage adj</th><th>FP adj</th><th>Concessions</th>
+      <th>Net adj</th><th>Adj value</th>
+    </tr>
+    <tr>
+      <td><span class="addr">6941 Pine Crest Ave</span><br><span class="meta">avg · inferior cond · 10/4/3.1</span></td>
+      <td>0.53 mi NW</td><td>Dec 2025</td><td>$1,890,000</td><td>11,250</td>
+      <td class="site-hi pos">+$5,000<br><span class="meta">1,250 sf × $4</span></td>
+      <td class="pos">+$40,000<br><span class="meta">inferior</span></td>
+      <td class="zero">$0</td>
+      <td>3,836</td>
+      <td class="neg">−$38,000<br><span class="meta">190 sf × $200</span></td>
+      <td class="neg">−$23,500<br><span class="meta">470 sf × $50</span></td>
+      <td class="neg">−$20,000<br><span class="meta">3-car vs 2-car</span></td>
+      <td class="neg">−$5,000<br><span class="meta">2 FP vs 1</span></td>
+      <td class="zero">$0</td>
+      <td class="neg bold">−$41,500</td>
+      <td class="bold">$1,848,500</td>
+    </tr>
+    <tr>
+      <td><span class="addr">1912 Corliss Ct</span><br><span class="meta">avg · inferior cond · 10/4/3.1</span></td>
+      <td>1.37 mi SE</td><td>Aug 2025</td><td>$1,930,000</td><td>18,080</td>
+      <td class="site-hi neg">−$22,320<br><span class="meta">5,580 sf × $4</span></td>
+      <td class="pos">+$40,000<br><span class="meta">inferior</span></td>
+      <td class="zero">$0</td>
+      <td>4,172</td>
+      <td class="neg">−$105,200<br><span class="meta">526 sf × $200</span></td>
+      <td class="neg">−$24,700<br><span class="meta">494 sf × $50</span></td>
+      <td class="neg">−$20,000<br><span class="meta">3-car vs 2-car</span></td>
+      <td class="neg">−$5,000<br><span class="meta">2 FP vs 1</span></td>
+      <td class="neg">−$25,000<br><span class="meta">financing concession</span></td>
+      <td class="neg bold">−$162,220</td>
+      <td class="bold">$1,767,780</td>
+    </tr>
+    <tr>
+      <td><span class="addr">1519 Pathfinder Ln</span><br><span class="meta">avg · inferior cond · 8/4/2.1 · LLC seller</span></td>
+      <td>0.34 mi W</td><td>Sep 2025</td><td>$1,550,000</td><td>10,493</td>
+      <td class="site-hi pos">+$8,028<br><span class="meta">2,007 sf × $4</span></td>
+      <td class="pos">+$40,000<br><span class="meta">inferior</span></td>
+      <td class="pos">+$30,000<br><span class="meta">1 fewer full bath</span></td>
+      <td>2,613</td>
+      <td class="pos">+$206,600<br><span class="meta">1,033 sf × $200</span></td>
+      <td class="pos">+$20,050<br><span class="meta">401 sf × $50</span></td>
+      <td class="zero">$0</td>
+      <td class="neg">−$5,000<br><span class="meta">2 FP vs 1</span></td>
+      <td class="zero">$0</td>
+      <td class="pos bold">+$299,678</td>
+      <td class="bold">$1,849,678</td>
+    </tr>
+    <tr>
+      <td><span class="addr">6626 Byrns Pl</span><br><span class="meta">avg · inferior cond · 10/4/3.1</span></td>
+      <td>0.45 mi E</td><td>Aug 2025</td><td>$1,790,000</td><td>24,025</td>
+      <td class="site-hi neg">−$46,100<br><span class="meta">11,525 sf × $4</span></td>
+      <td class="pos">+$40,000<br><span class="meta">inferior</span></td>
+      <td class="zero">$0</td>
+      <td>3,713</td>
+      <td class="zero">$0<br><span class="meta">67 sf, immaterial</span></td>
+      <td class="pos">+$7,600<br><span class="meta">152 sf × $50</span></td>
+      <td class="zero">$0</td>
+      <td class="pos">+$1,500<br><span class="meta">FP quality</span></td>
+      <td class="zero">$0</td>
+      <td class="pos bold">+$1,500</td>
+      <td class="bold">$1,791,500</td>
+    </tr>
+    <tr>
+      <td><span class="addr">1448 Ingleside Ave</span><br><span class="meta">avg · superior cond · 8/4/3.1</span></td>
+      <td>0.28 mi NW</td><td>Aug 2025</td><td>$1,751,000</td><td>5,812</td>
+      <td class="site-hi pos"><span class="highlight">+$26,752</span><br><span class="meta">6,688 sf × $4</span></td>
+      <td class="neg">−$80,000<br><span class="meta">superior</span></td>
+      <td class="zero">$0</td>
+      <td>2,672</td>
+      <td class="pos">+$194,800<br><span class="meta">974 sf × $200</span></td>
+      <td class="pos">+$21,100<br><span class="meta">422 sf × $50</span></td>
+      <td class="zero">$0</td>
+      <td class="zero">$0</td>
+      <td class="zero">$0</td>
+      <td class="pos bold">+$162,652</td>
+      <td class="bold">$1,913,652</td>
+    </tr>
+  </table>
+  </div>
+
+  <div class="note">
+    <strong>★ Lot adjustment (highlighted):</strong> Ryan used an undocumented ~$1/sf rate; Keegan used a documented $4/sf derived from 92 paired sales (range $4–$9/sf). For Ingleside (6,688 sf shortfall): Ryan +$6,688 vs Keegan +$26,752 — a $20,064 gap on that line alone. Ryan's low rate systematically understates adjustments in both directions, compressing his final value.<br><br>
+    <strong>Key differences:</strong> Ryan made no condition adjustments (all C3). Keegan applied +$40K for inferior and −$80K for superior condition. Ryan used $30/sf GLA vs Keegan's $200/sf. On Ingleside specifically, the two adjusted values differ by $138,304 ($1,775,348 Ryan vs $1,913,652 Keegan) — the single largest per-comp gap.
+  </div>
+
+</div>
+
+<!-- TAB 2: COUNTY ASSESSMENTS -->
+<div id="tab-assessments" class="panel">
+
+  <div class="assess-grid">
+    <div class="metric">
+      <div class="m-label">Subject 2026 assessed</div>
+      <div class="m-val m-accent">$1,760,520</div>
+      <div class="m-sub">Confirmed iCare · Jan 1 2026 · Map# 0304-03-0033</div>
+    </div>
+    <div class="metric">
+      <div class="m-label">Ryan final vs assessed</div>
+      <div class="m-val">+2.2%</div>
+      <div class="m-sub">$1,800,000 vs $1,760,520</div>
+    </div>
+    <div class="metric">
+      <div class="m-label">Keegan final vs assessed</div>
+      <div class="m-val">+3.9%</div>
+      <div class="m-sub">$1,830,000 vs $1,760,520</div>
+    </div>
+  </div>
+
+  <div class="section-head" style="background:#f1efe8;color:#52514e;">All comps — 2025 county assessed value (in effect at time of sale) vs actual sale price</div>
+
+  <div class="scroll">
+  <table>
+    <tr>
+      <th>Address</th><th>Used by</th><th>Sale date</th><th>Sale price</th><th>Lot sf</th>
+      <th>2025 assessed</th><th>Premium to assessed</th><th>Ryan adj value</th><th>Keegan adj value</th>
+    </tr>
+    <tr>
+      <td><span class="addr">6941 Pine Crest Ave</span></td>
+      <td><span class="badge badge-both">Both</span></td>
+      <td>Dec 2025</td><td>$1,890,000</td><td>11,250</td>
+      <td>$1,820,690</td>
+      <td class="ratio-hi">+3.8%</td>
+      <td>$1,846,325</td><td>$1,848,500</td>
+    </tr>
+    <tr>
+      <td><span class="addr">6856 Saint Albans Rd</span></td>
+      <td><span class="badge badge-ryan">Ryan only</span></td>
+      <td>Nov 2025</td><td>$1,900,000</td><td>9,375</td>
+      <td>$1,700,170</td>
+      <td class="ratio-hi">+11.8%</td>
+      <td>$1,862,772</td><td>—</td>
+    </tr>
+    <tr>
+      <td><span class="addr">7204 Elizabeth Dr</span></td>
+      <td><span class="badge badge-ryan">Ryan only</span></td>
+      <td>Aug 2025</td><td>$1,750,000</td><td>17,325</td>
+      <td>$1,606,910</td>
+      <td class="ratio-hi">+8.9%</td>
+      <td>$1,758,310</td><td>—</td>
+    </tr>
+    <tr>
+      <td><span class="addr">1448 Ingleside Ave</span></td>
+      <td><span class="badge badge-both">Both</span></td>
+      <td>Aug 2025</td><td>$1,751,000</td><td>5,812</td>
+      <td>$1,581,790</td>
+      <td><span class="ratio-hi">+10.7%</span> <span class="flag">largest premium</span></td>
+      <td>$1,775,348</td><td>$1,913,652</td>
+    </tr>
+    <tr>
+      <td><span class="addr">6626 Byrns Pl</span></td>
+      <td><span class="badge badge-both">Both</span></td>
+      <td>Aug 2025</td><td>$1,790,000</td><td>24,025</td>
+      <td>$1,738,860</td>
+      <td class="ratio-hi">+2.9%</td>
+      <td>$1,779,015</td><td>$1,791,500</td>
+    </tr>
+    <tr>
+      <td><span class="addr">1912 Corliss Ct</span></td>
+      <td><span class="badge badge-keegan">Keegan only</span></td>
+      <td>Aug 2025</td><td>$1,930,000</td><td>18,080</td>
+      <td>$1,869,820</td>
+      <td class="ratio-hi">+3.2%</td>
+      <td>—</td><td>$1,767,780</td>
+    </tr>
+    <tr>
+      <td><span class="addr">1519 Pathfinder Ln</span></td>
+      <td><span class="badge badge-keegan">Keegan only</span></td>
+      <td>Sep 2025</td><td>$1,550,000</td><td>10,493</td>
+      <td>$1,622,820</td>
+      <td class="ratio-over">−4.5% <span class="flag">sold below · LLC seller</span></td>
+      <td>—</td><td>$1,849,678</td>
+    </tr>
+  </table>
+  </div>
+
+  <div class="note" style="margin-top:14px;">
+    <strong>Average sale-to-assessment premiums:</strong> Ryan's 5 comps averaged +7.6% above assessed → implies subject value ~$1,894,000. Keegan's 4 comps (ex-Pathfinder) averaged +5.2% above assessed → implies ~$1,852,000. Both cross-checks exceed their respective concluded values.<br><br>
+    <strong>Ingleside</strong> sold $169,210 above county assessment — the largest premium in the set, consistent with superior finishes. <strong>Pathfinder</strong> was the only comp to sell below assessed value (LLC motivated sale, inferior condition). <strong>Tax note:</strong> iCare confirms subject 2026 assessed at $1,760,520, aligning with Ryan's $19,206 tax figure. Keegan's reported $20,713 implies ~$1.91M assessed — inconsistent with the iCare record and likely an error.
+  </div>
+
+</div>
+
+<script>
+function showTab(id) {
+  document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+  document.querySelectorAll('.panel').forEach(p => p.classList.remove('active'));
+  document.getElementById('tab-' + id).classList.add('active');
+  event.target.classList.add('active');
+}
+</script>
+
+</body>
+</html>

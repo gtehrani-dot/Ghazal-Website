@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>1502 Linden Hurst — Comp Map</title>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.css" />
+<script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.js"></script>
+<style>
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; background: #f8f8f6; display: flex; flex-direction: column; height: 100vh; }
+#header { padding: 12px 16px 8px; flex-shrink: 0; }
+h1 { font-size: 15px; font-weight: 500; color: #0b0b0b; }
+.sub { font-size: 11px; color: #52514e; margin-top: 2px; }
+#legend { display: flex; gap: 12px; flex-wrap: wrap; padding: 7px 16px 9px; border-bottom: 1px solid #e1e0d9; border-top: 1px solid #e1e0d9; flex-shrink: 0; background: #fff; }
+.leg { display: flex; align-items: center; gap: 5px; font-size: 11px; color: #0b0b0b; }
+.dot { width: 13px; height: 13px; border-radius: 50%; border: 2px solid rgba(255,255,255,0.8); box-shadow: 0 0 0 1px rgba(0,0,0,0.25); flex-shrink: 0; }
+#status { padding: 5px 16px; font-size: 10.5px; color: #52514e; background: #f1efe8; border-bottom: 1px solid #e1e0d9; flex-shrink: 0; }
+#map { flex: 1; }
+.leaflet-popup-content { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; font-size: 12px; line-height: 1.6; }
+.leaflet-popup-content strong { font-size: 13px; }
+.leaflet-popup-content .tag { display: inline-block; font-size: 10px; border-radius: 3px; padding: 1px 5px; margin-top: 3px; }
+.leaflet-popup-content .price { font-size: 15px; font-weight: 600; color: #0b0b0b; }
+.leaflet-popup-content .asr { color: #52514e; font-size: 11px; }
+.leaflet-popup-content table { border-collapse: collapse; width: 100%; margin-top: 6px; font-size: 11px; }
+.leaflet-popup-content td { padding: 2px 6px 2px 0; }
+.leaflet-popup-content td:last-child { text-align: right; color: #52514e; }
+</style>
+</head>
+<body>
+
+<div id="header">
+  <h1>1502 Linden Hurst Ave — Comp Map</h1>
+  <p class="sub">Ryan comps · Keegan comps · Ghazal's 4 comps · McLean, VA</p>
+</div>
+
+<div id="legend">
+  <div class="leg"><div class="dot" style="background:#f59e0b"></div> Subject</div>
+  <div class="leg"><div class="dot" style="background:#3b82f6"></div> Ryan only</div>
+  <div class="leg"><div class="dot" style="background:#8b5cf6"></div> Keegan only</div>
+  <div class="leg"><div class="dot" style="background:#6366f1"></div> Both appraisers</div>
+  <div class="leg"><div class="dot" style="background:#10b981"></div> Your comps only</div>
+  <div class="leg"><div class="dot" style="background:#059669"></div> Your comps + appraisers</div>
+</div>
+
+<div id="status">Geocoding addresses… (11 properties)</div>
+<div id="map"></div>
+
+<script>
+const properties = [
+  {
+    address: "1502 Linden Hurst Ave, McLean, VA 22101",
+    type: "subject",
+    color: "#f59e0b",
+    popup: `<strong>1502 Linden Hurst Ave</strong><br>
+      <span class="tag" style="background:#fef3c7;color:#92400e">★ SUBJECT PROPERTY</span><br>
+      3,646 sf GLA &nbsp;·&nbsp; 12,500 sf lot &nbsp;·&nbsp; 4BR/3.1BA<br>
+      <table>
+        <tr><td>Ryan value</td><td>$1,800,000</td></tr>
+        <tr><td>Keegan value</td><td>$1,830,000</td></tr>
+        <tr><td>2026 Assessed</td><td>$1,760,520</td></tr>
+      </table>`
+  },
+  {
+    address: "6941 Pine Crest Ave, McLean, VA 22101",
+    type: "both-user",
+    color: "#059669",
+    popup: `<strong>6941 Pine Crest Ave</strong><br>
+      <span class="tag" style="background:#d1fae5;color:#065f46">Ryan + Keegan + Your comps</span><br>
+      <span class="price">$1,890,000</span> &nbsp;<span class="asr">Dec 2025</span><br>
+      <table>
+        <tr><td>2025 Assessed</td><td>$1,820,690</td></tr>
+        <tr><td>ASR</td><td>96.3%</td></tr>
+        <tr><td>Ryan adj</td><td>$1,846,325</td></tr>
+        <tr><td>Keegan adj</td><td>$1,848,500</td></tr>
+      </table>`
+  },
+  {
+    address: "6856 Saint Albans Rd, McLean, VA 22101",
+    type: "ryan",
+    color: "#3b82f6",
+    popup: `<strong>6856 Saint Albans Rd</strong><br>
+      <span class="tag" style="background:#dbeafe;color:#1e40af">Ryan only</span><br>
+      <span class="price">$1,900,000</span> &nbsp;<span class="asr">Nov 2025</span><br>
+      <table>
+        <tr><td>Ryan adj</td><td>$1,862,772</td></tr>
+        <tr><td>Lot sf</td><td>9,583</td></tr>
+        <tr><td>Quality</td><td>Q2 (superior)</td></tr>
+      </table>`
+  },
+  {
+    address: "7204 Elizabeth Dr, McLean, VA 22101",
+    type: "ryan",
+    color: "#3b82f6",
+    popup: `<strong>7204 Elizabeth Dr</strong><br>
+      <span class="tag" style="background:#dbeafe;color:#1e40af">Ryan only</span><br>
+      <span class="price">$1,750,000</span> &nbsp;<span class="asr">Aug 2025</span><br>
+      <table>
+        <tr><td>Ryan adj</td><td>$1,758,310</td></tr>
+        <tr><td>Lot sf</td><td>17,325</td></tr>
+        <tr><td>Quality</td><td>Q4 (inferior)</td></tr>
+      </table>`
+  },
+  {
+    address: "1448 Ingleside Ave, McLean, VA 22101",
+    type: "both",
+    color: "#6366f1",
+    popup: `<strong>1448 Ingleside Ave</strong><br>
+      <span class="tag" style="background:#e0e7ff;color:#3730a3">Ryan + Keegan</span><br>
+      <span class="price">$1,751,000</span> &nbsp;<span class="asr">Aug 2025</span><br>
+      <table>
+        <tr><td>Ryan adj</td><td>$1,775,348</td></tr>
+        <tr><td>Keegan adj</td><td>$1,913,652</td></tr>
+        <tr><td>Gap</td><td>$138,304 ⚠️</td></tr>
+        <tr><td>Lot sf</td><td>5,812 (smallest)</td></tr>
+      </table>`
+  },
+  {
+    address: "6626 Byrns Pl, McLean, VA 22101",
+    type: "both",
+    color: "#6366f1",
+    popup: `<strong>6626 Byrns Pl</strong><br>
+      <span class="tag" style="background:#e0e7ff;color:#3730a3">Ryan + Keegan</span><br>
+      <span class="price">$1,790,000</span> &nbsp;<span class="asr">Aug 2025</span><br>
+      <table>
+        <tr><td>Ryan adj</td><td>$1,779,015</td></tr>
+        <tr><td>Keegan adj</td><td>$1,791,500</td></tr>
+        <tr><td>Lot sf</td><td>24,025 (large)</td></tr>
+      </table>`
+  },
+  {
+    address: "1912 Corliss Ct, McLean, VA 22101",
+    type: "keegan",
+    color: "#8b5cf6",
+    popup: `<strong>1912 Corliss Ct</strong><br>
+      <span class="tag" style="background:#ede9fe;color:#5b21b6">Keegan only</span><br>
+      <span class="price">$1,930,000</span> &nbsp;<span class="asr">Aug 2025</span><br>
+      <table>
+        <tr><td>Keegan adj</td><td>$1,767,780</td></tr>
+        <tr><td>Lot sf</td><td>18,080</td></tr>
+        <tr><td>Note</td><td>LLC seller; concession</td></tr>
+      </table>`
+  },
+  {
+    address: "1519 Pathfinder Ln, McLean, VA 22101",
+    type: "keegan",
+    color: "#8b5cf6",
+    popup: `<strong>1519 Pathfinder Ln</strong><br>
+      <span class="tag" style="background:#ede9fe;color:#5b21b6">Keegan only</span><br>
+      <span class="price">$1,550,000</span> &nbsp;<span class="asr">Sep 2025</span><br>
+      <table>
+        <tr><td>Keegan adj</td><td>$1,849,678</td></tr>
+        <tr><td>GLA</td><td>2,613 sf (smallest)</td></tr>
+        <tr><td>Net adj</td><td>+$299,678 ⚠️</td></tr>
+      </table>`
+  },
+  {
+    address: "6962 Park Ave, McLean, VA 22101",
+    type: "user",
+    color: "#10b981",
+    popup: `<strong>6962 Park Ave</strong><br>
+      <span class="tag" style="background:#d1fae5;color:#065f46">Your comps</span><br>
+      <span class="price">$2,175,000</span> &nbsp;<span class="asr">Jun 2026</span><br>
+      <table>
+        <tr><td>2026 Assessed</td><td>$1,972,990</td></tr>
+        <tr><td>ASR</td><td>90.7%</td></tr>
+      </table>`
+  },
+  {
+    address: "6301 Hunting Ridge Ln, McLean, VA 22101",
+    type: "user",
+    color: "#10b981",
+    popup: `<strong>6301 Hunting Ridge Ln</strong><br>
+      <span class="tag" style="background:#d1fae5;color:#065f46">Your comps</span><br>
+      Comparable construction era, similar home utility, established neighborhood, relevant supporting evidence within the subject's competitive market area.`
+  },
+  {
+    address: "1213 Pine Hill Rd, McLean, VA 22101",
+    type: "user",
+    color: "#10b981",
+    popup: `<strong>1213 Pine Hill Rd</strong><br>
+      <span class="tag" style="background:#d1fae5;color:#065f46">Your comps</span><br>
+      <span class="price">$2,200,000</span> &nbsp;<span class="asr">Oct 2025</span><br>
+      <table>
+        <tr><td>2025 Assessed</td><td>$1,664,230</td></tr>
+        <tr><td>ASR</td><td>75.6%</td></tr>
+      </table>`
+  }
+];
+
+const map = L.map('map').setView([38.935, -77.178], 14);
+
+L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+  attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>',
+  maxZoom: 19
+}).addTo(map);
+
+function createIcon(color, isSubject) {
+  const size = isSubject ? 22 : 15;
+  const ring = isSubject ? `<circle cx="11" cy="11" r="4.5" fill="white"/>` : '';
+  const svg = `<svg xmlns="http://www.w3.org/2000/svg" width="${size}" height="${size}" viewBox="0 0 22 22">
+    <circle cx="11" cy="11" r="10" fill="${color}" stroke="white" stroke-width="2.5"/>
+    ${ring}
+  </svg>`;
+  return L.divIcon({
+    html: svg,
+    className: '',
+    iconSize: [size, size],
+    iconAnchor: [size/2, size/2],
+    popupAnchor: [0, -(size/2 + 4)]
+  });
+}
+
+const statusEl = document.getElementById('status');
+let loaded = 0;
+let failed = 0;
+const bounds = [];
+
+async function geocodeAndAdd(prop, delay) {
+  await new Promise(r => setTimeout(r, delay));
+  const url = `https://nominatim.openstreetmap.org/search?format=json&q=${encodeURIComponent(prop.address)}&limit=1&countrycodes=us`;
+  try {
+    const res = await fetch(url);
+    const data = await res.json();
+    if (data && data[0]) {
+      const lat = parseFloat(data[0].lat);
+      const lon = parseFloat(data[0].lon);
+      bounds.push([lat, lon]);
+      const marker = L.marker([lat, lon], {
+        icon: createIcon(prop.color, prop.type === 'subject'),
+        zIndexOffset: prop.type === 'subject' ? 1000 : 0
+      });
+      marker.bindPopup(prop.popup, { maxWidth: 260, minWidth: 220 });
+      marker.addTo(map);
+      loaded++;
+    } else {
+      loaded++;
+      failed++;
+    }
+    statusEl.textContent = loaded < properties.length
+      ? `Geocoding… ${loaded} of ${properties.length}`
+      : failed > 0
+        ? `${properties.length - failed} of ${properties.length} properties mapped. ${failed} could not be geocoded.`
+        : `All ${properties.length} properties mapped. Click any pin for details.`;
+    if (loaded === properties.length && bounds.length > 1) {
+      map.fitBounds(bounds, { padding: [40, 40] });
+    }
+  } catch(e) {
+    loaded++;
+    failed++;
+  }
+}
+
+properties.forEach((prop, i) => geocodeAndAdd(prop, i * 1200));
+</script>
+</body>
+</html>

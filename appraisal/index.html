@@ -1,0 +1,406 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>1502 Linden Hurst Ave · Home Appraisal</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --ink: #1a1a2e;
+    --ink-soft: #3d3d5c;
+    --gold: #b8922a;
+    --gold-light: #d4aa50;
+    --cream: #faf8f4;
+    --warm-white: #ffffff;
+    --mist: #f0ede8;
+    --rule: #e2ddd6;
+    --serif: 'Cormorant Garamond', Georgia, serif;
+    --sans: 'DM Sans', system-ui, sans-serif;
+  }
+
+  html { scroll-behavior: smooth; }
+  body { font-family: var(--sans); background: var(--cream); color: var(--ink); overflow-x: hidden; }
+
+  /* NAV */
+  nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 100;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 20px 48px;
+    background: rgba(250,248,244,0.92);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--rule);
+  }
+  .nav-logo {
+    font-family: var(--serif);
+    font-size: 1.1rem;
+    font-weight: 600;
+    letter-spacing: 0.04em;
+    color: var(--ink);
+    text-decoration: none;
+  }
+  .nav-links { display: flex; gap: 32px; align-items: center; }
+  .nav-links a {
+    font-size: 0.8rem;
+    font-weight: 500;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--ink-soft);
+    text-decoration: none;
+    transition: color 0.2s;
+  }
+  .nav-links a:hover { color: var(--gold); }
+
+  /* HERO */
+  .hero {
+    padding: 140px 48px 80px;
+    max-width: 1100px;
+    margin: 0 auto;
+    border-bottom: 1px solid var(--rule);
+  }
+  .hero-eyebrow {
+    font-size: 0.75rem;
+    font-weight: 500;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 16px;
+  }
+  .hero h1 {
+    font-family: var(--serif);
+    font-size: clamp(2.4rem, 5vw, 4rem);
+    font-weight: 300;
+    line-height: 1.1;
+    color: var(--ink);
+    margin-bottom: 20px;
+  }
+  .hero h1 em { font-style: italic; color: var(--gold); }
+  .hero-sub {
+    font-size: 0.95rem;
+    color: var(--ink-soft);
+    max-width: 560px;
+    line-height: 1.7;
+  }
+  .hero-meta {
+    display: flex;
+    gap: 40px;
+    margin-top: 36px;
+    padding-top: 32px;
+    border-top: 1px solid var(--rule);
+  }
+  .meta-item .meta-label {
+    font-size: 0.7rem;
+    font-weight: 500;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--ink-soft);
+    margin-bottom: 4px;
+  }
+  .meta-item .meta-val {
+    font-family: var(--serif);
+    font-size: 1.2rem;
+    font-weight: 400;
+    color: var(--ink);
+  }
+
+  /* SECTIONS */
+  .section {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 72px 48px;
+    border-bottom: 1px solid var(--rule);
+  }
+  .section:last-child { border-bottom: none; }
+
+  .section-eyebrow {
+    font-size: 0.7rem;
+    font-weight: 500;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 10px;
+  }
+  .section-title {
+    font-family: var(--serif);
+    font-size: clamp(1.6rem, 3vw, 2.4rem);
+    font-weight: 300;
+    color: var(--ink);
+    margin-bottom: 8px;
+    line-height: 1.15;
+  }
+  .section-desc {
+    font-size: 0.875rem;
+    color: var(--ink-soft);
+    line-height: 1.7;
+    max-width: 600px;
+    margin-bottom: 36px;
+  }
+
+  /* DOCUMENT CARDS */
+  .doc-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 16px;
+  }
+  .doc-card {
+    display: flex;
+    align-items: flex-start;
+    gap: 16px;
+    padding: 22px 24px;
+    background: var(--warm-white);
+    border: 1px solid var(--rule);
+    border-radius: 10px;
+    text-decoration: none;
+    color: var(--ink);
+    transition: border-color 0.2s, box-shadow 0.2s, transform 0.15s;
+  }
+  .doc-card:hover {
+    border-color: var(--gold);
+    box-shadow: 0 4px 24px rgba(184,146,42,0.1);
+    transform: translateY(-1px);
+  }
+  .doc-icon {
+    width: 40px;
+    height: 40px;
+    background: var(--mist);
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    color: var(--gold);
+  }
+  .doc-icon svg { width: 20px; height: 20px; }
+  .doc-info { flex: 1; min-width: 0; }
+  .doc-title {
+    font-size: 0.9rem;
+    font-weight: 500;
+    color: var(--ink);
+    margin-bottom: 4px;
+    line-height: 1.3;
+  }
+  .doc-meta {
+    font-size: 0.75rem;
+    color: var(--ink-soft);
+  }
+  .doc-arrow {
+    color: var(--rule);
+    transition: color 0.2s;
+    flex-shrink: 0;
+    margin-top: 2px;
+  }
+  .doc-card:hover .doc-arrow { color: var(--gold); }
+
+  /* MAP / ARTIFACT EMBED CARD */
+  .embed-card {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    padding: 28px 32px;
+    background: var(--warm-white);
+    border: 1px solid var(--rule);
+    border-radius: 10px;
+    text-decoration: none;
+    color: var(--ink);
+    transition: border-color 0.2s, box-shadow 0.2s, transform 0.15s;
+    max-width: 680px;
+  }
+  .embed-card:hover {
+    border-color: var(--gold);
+    box-shadow: 0 4px 24px rgba(184,146,42,0.1);
+    transform: translateY(-1px);
+  }
+  .embed-icon {
+    width: 52px;
+    height: 52px;
+    background: linear-gradient(135deg, var(--mist), rgba(184,146,42,0.08));
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    color: var(--gold);
+  }
+  .embed-icon svg { width: 26px; height: 26px; }
+  .embed-body { flex: 1; }
+  .embed-title {
+    font-family: var(--serif);
+    font-size: 1.15rem;
+    font-weight: 400;
+    margin-bottom: 5px;
+  }
+  .embed-desc { font-size: 0.8rem; color: var(--ink-soft); line-height: 1.6; }
+  .embed-cta {
+    font-size: 0.72rem;
+    font-weight: 500;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-top: 10px;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+  }
+
+  .cards-row { display: flex; flex-direction: column; gap: 12px; }
+
+  /* FOOTER */
+  footer {
+    text-align: center;
+    padding: 40px 48px;
+    font-size: 0.75rem;
+    color: var(--ink-soft);
+    letter-spacing: 0.05em;
+    border-top: 1px solid var(--rule);
+  }
+  footer a { color: var(--gold); text-decoration: none; }
+
+  @media (max-width: 640px) {
+    nav { padding: 16px 20px; }
+    .nav-links { gap: 16px; }
+    .hero, .section { padding-left: 20px; padding-right: 20px; }
+    .hero { padding-top: 110px; }
+    .hero-meta { flex-wrap: wrap; gap: 24px; }
+    .doc-grid { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <a class="nav-logo" href="https://ghazal-tehrani.me">Ghazal Tehrani</a>
+  <div class="nav-links">
+    <a href="https://ghazal-tehrani.me">Home</a>
+    <a href="#ghazal">My Appraisals</a>
+    <a href="#ben">Ben's Appraisals</a>
+    <a href="#map">Comp Map</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<div class="hero">
+  <p class="hero-eyebrow">Property Valuation · McLean, VA 22101</p>
+  <h1>1502 Linden Hurst Ave<br><em>Home Appraisal</em></h1>
+  <p class="hero-sub">Appraisal documents, comparable sales analysis, and interactive comp map for 1502 Linden Hurst Avenue, McLean, Virginia.</p>
+  <div class="hero-meta">
+    <div class="meta-item">
+      <div class="meta-label">Ryan Value</div>
+      <div class="meta-val">$1,800,000</div>
+    </div>
+    <div class="meta-item">
+      <div class="meta-label">Keegan Value</div>
+      <div class="meta-val">$1,830,000</div>
+    </div>
+    <div class="meta-item">
+      <div class="meta-label">2026 Assessed</div>
+      <div class="meta-val">$1,760,520</div>
+    </div>
+    <div class="meta-item">
+      <div class="meta-label">GLA</div>
+      <div class="meta-val">3,646 sf</div>
+    </div>
+    <div class="meta-item">
+      <div class="meta-label">Lot</div>
+      <div class="meta-val">12,500 sf</div>
+    </div>
+  </div>
+</div>
+
+<!-- GHAZAL'S APPRAISALS -->
+<div class="section" id="ghazal">
+  <p class="section-eyebrow">Section 1</p>
+  <h2 class="section-title">Ghazal's Appraisals</h2>
+  <p class="section-desc">Supporting documentation and adjustment analysis prepared on behalf of Ghazal.</p>
+  <div class="doc-grid">
+    <a class="doc-card" href="ghazal-appraisal-info.pdf" target="_blank">
+      <div class="doc-icon">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg>
+      </div>
+      <div class="doc-info">
+        <div class="doc-title">Ghazal's 1502 Linden Hurst Appraisal Info</div>
+        <div class="doc-meta">PDF · Opens in new tab</div>
+      </div>
+      <svg class="doc-arrow" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17L17 7M17 7H7M17 7v10"/></svg>
+    </a>
+    <a class="doc-card" href="ghazal-appraisal-adjustments.pdf" target="_blank">
+      <div class="doc-icon">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg>
+      </div>
+      <div class="doc-info">
+        <div class="doc-title">Ghazal's 1502 Linden Hurst Appraisal Adjustments</div>
+        <div class="doc-meta">PDF · Opens in new tab</div>
+      </div>
+      <svg class="doc-arrow" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17L17 7M17 7H7M17 7v10"/></svg>
+    </a>
+  </div>
+</div>
+
+<!-- BEN'S APPRAISALS -->
+<div class="section" id="ben">
+  <p class="section-eyebrow">Section 2</p>
+  <h2 class="section-title">Ben's Appraisals</h2>
+  <p class="section-desc">Full appraisal reports from Jim Ryan (Ryan Appraisal Service) and John Keegan (DeHart and Deming, Inc.), plus an interactive comp adjustment grid.</p>
+  <div class="doc-grid" style="margin-bottom: 16px;">
+    <a class="doc-card" href="jim-ryan-appraisal.pdf" target="_blank">
+      <div class="doc-icon">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg>
+      </div>
+      <div class="doc-info">
+        <div class="doc-title">Jim Ryan Appraisal</div>
+        <div class="doc-meta">Ryan Appraisal Service · Effective 05/01/2026 · $1,800,000</div>
+      </div>
+      <svg class="doc-arrow" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17L17 7M17 7H7M17 7v10"/></svg>
+    </a>
+    <a class="doc-card" href="john-keegan-appraisal.pdf" target="_blank">
+      <div class="doc-icon">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg>
+      </div>
+      <div class="doc-info">
+        <div class="doc-title">John Keegan Appraisal</div>
+        <div class="doc-meta">DeHart and Deming, Inc. · Effective 05/06/2026 · $1,830,000</div>
+      </div>
+      <svg class="doc-arrow" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17L17 7M17 7H7M17 7v10"/></svg>
+    </a>
+  </div>
+  <a class="embed-card" href="comps.html" target="_blank">
+    <div class="embed-icon">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="3" width="18" height="18" rx="2"/><line x1="3" y1="9" x2="21" y2="9"/><line x1="9" y1="21" x2="9" y2="9"/></svg>
+    </div>
+    <div class="embed-body">
+      <div class="embed-title">Appraisal Comps Adjustment Grid</div>
+      <div class="embed-desc">Full side-by-side adjustment tables for all 10 comps used by Ryan and Keegan — GLA, lot, basement, condition, quality — plus Fairfax County assessment cross-check.</div>
+      <div class="embed-cta">Open interactive grid <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M7 17L17 7M17 7H7M17 7v10"/></svg></div>
+    </div>
+  </a>
+</div>
+
+<!-- COMP MAP -->
+<div class="section" id="map">
+  <p class="section-eyebrow">Section 3</p>
+  <h2 class="section-title">Comp Map</h2>
+  <p class="section-desc">Interactive map of all comparable sales — Ryan's comps, Keegan's comps, and the final 4-property dataset — color-coded by source.</p>
+  <a class="embed-card" href="map.html" target="_blank">
+    <div class="embed-icon">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><polygon points="3 6 9 3 15 6 21 3 21 18 15 21 9 18 3 21"/><line x1="9" y1="3" x2="9" y2="18"/><line x1="15" y1="6" x2="15" y2="21"/></svg>
+    </div>
+    <div class="embed-body">
+      <div class="embed-title">Comparable Sales Map</div>
+      <div class="embed-desc">11 properties plotted on an interactive map — subject, Ryan comps (blue), Keegan comps (purple), shared comps (indigo), and your 4-comp dataset (green). Click any pin for sale price, assessed value, and ASR.</div>
+      <div class="embed-cta">Open map <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M7 17L17 7M17 7H7M17 7v10"/></svg></div>
+    </div>
+  </a>
+</div>
+
+<footer>
+  <a href="https://ghazal-tehrani.me">ghazal-tehrani.me</a> &nbsp;·&nbsp; 1502 Linden Hurst Ave, McLean VA 22101
+</footer>
+
+</body>
+</html>
