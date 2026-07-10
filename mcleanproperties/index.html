@@ -343,7 +343,8 @@ function renderSavedPanel() {
       const url = s.url || s.link || '';
       const dirUrl = 'https://www.google.com/maps/dir/?api=1&destination=' + encodeURIComponent(addr);
       const linkHtml = url ? '<a href="' + url + '" target="_blank" rel="noopener">View listing →</a>' : '<span style="color:var(--muted);">(no URL on file)</span>';
-      return '<div class="saved-card"><strong>' + addr + '</strong><br>' +
+      const thumb = s.thumb || PLACEHOLDER_THUMB;
+    return '<div class="saved-card"><img src="' + thumb + '" onerror="this.onerror=null;this.src=\'https://placehold.co/240x160/e8e8e8/999999?text=Photo+unavailable\';" style="width:100%;height:90px;object-fit:cover;border-radius:6px;margin-bottom:6px;"><strong>' + addr + '</strong><br>' +
         (s.price || '') + '<br>' +
         '<div class="card-actions" style="margin-top:6px;">' + linkHtml + ' <a href="' + dirUrl + '" target="_blank" rel="noopener">🧭 Directions</a></div>' +
         '</div>';
@@ -353,7 +354,7 @@ function renderSavedPanel() {
   const soldGrid = document.getElementById('sold-grid');
   soldGrid.innerHTML = SOLD_PICKS.map(s => {
     const dirUrl = 'https://www.google.com/maps/dir/?api=1&destination=' + encodeURIComponent(s.addr);
-    return '<div class="sold-card"><strong>' + s.addr + '</strong><br>' +
+    return '<div class="sold-card"><img src="' + PLACEHOLDER_THUMB + '" onerror="this.onerror=null;this.src=\'https://placehold.co/240x160/e8e8e8/999999?text=Photo+unavailable\';" style="width:100%;height:90px;object-fit:cover;border-radius:6px;margin-bottom:6px;filter:grayscale(60%);"><strong>' + s.addr + '</strong><br>' +
       s.notes + '<br>' +
       '<div class="card-actions" style="margin-top:6px;"><a href="' + dirUrl + '" target="_blank" rel="noopener">🧭 Directions</a></div>' +
       '</div>';
