@@ -148,17 +148,19 @@ function directionsUrl(addr) {
   return `https://www.google.com/maps/dir/?api=1&destination=${encodeURIComponent(addr)}`;
 }
 function handleImgError(img) {
-  if (img.dataset.retried) {
+  const attempt = parseInt(img.dataset.retryCount || '0', 10);
+  if (attempt >= 2) {
     img.onerror = null;
     img.src = PLACEHOLDER_THUMB;
     return;
   }
-  img.dataset.retried = '1';
+  img.dataset.retryCount = String(attempt + 1);
   const orig = img.dataset.origSrc || img.src;
+  const delay = attempt === 0 ? 700 : 1800;
   setTimeout(() => {
     const sep = orig.includes('?') ? '&' : '?';
     img.src = orig + sep + '_retry=' + Date.now();
-  }, 900);
+  }, delay);
 }
 function toggleLike(btn, addr, price, url) {
   const saved = getSaved();
