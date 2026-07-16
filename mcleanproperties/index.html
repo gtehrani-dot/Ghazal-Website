@@ -2,345 +2,195 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>McLean Property Dashboard — 2026-07-15</title>
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.css" />
+<title>McLean Property Dashboard — July 16, 2026</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.css">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.js"></script>
 <style>
-  :root {
-    --gold: #c8982a;
-    --green: #2e7d32;
-    --blue: #1565c0;
-    --ink: #1c1c1c;
-    --muted: #767676;
-    --bg: #faf8f5;
-    --card-bg: #ffffff;
-    --border: #e6e1d8;
-  }
+  :root { --accent:#2e5d4f; --gold:#c8982a; --rent:#1565c0; --sale:#2e7d32; }
   * { box-sizing: border-box; }
-  body {
-    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
-    background: var(--bg);
-    color: var(--ink);
-    margin: 0;
-    padding: 0;
-  }
-  header {
-    background: #ffffff;
-    border-bottom: 1px solid var(--border);
-    padding: 16px 24px;
-    position: sticky;
-    top: 0;
-    z-index: 500;
-  }
-  header h1 {
-    margin: 0 0 4px 0;
-    font-size: 22px;
-  }
-  .stats {
-    color: var(--muted);
-    font-size: 13px;
-    margin-bottom: 10px;
-  }
-  .header-controls {
-    display: flex;
-    gap: 8px;
-    flex-wrap: wrap;
-    align-items: center;
-  }
-  button {
-    font-family: inherit;
-    cursor: pointer;
-    border: 1px solid var(--border);
-    background: #fff;
-    border-radius: 6px;
-    padding: 7px 14px;
-    font-size: 13px;
-    color: var(--ink);
-  }
-  button:hover { background: #f2ede4; }
-  button.active {
-    background: var(--gold);
-    color: #fff;
-    border-color: var(--gold);
-  }
-  .sort-toggle { display: inline-flex; border-radius: 6px; overflow: hidden; }
-  .sort-toggle button { border-radius: 0; }
-
-  #map { height: 380px; width: 100%; border-bottom: 1px solid var(--border); }
-
-  .columns {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 20px;
-    padding: 20px 24px;
-  }
-  @media (max-width: 900px) {
-    .columns { grid-template-columns: 1fr; }
-  }
-  .col h2 {
-    font-size: 17px;
-    border-bottom: 2px solid var(--gold);
-    padding-bottom: 6px;
-  }
-  .section-header {
-    font-size: 14px;
-    font-weight: 600;
-    margin: 18px 0 8px 0;
-    color: var(--ink);
-  }
-  .section-header.muted { color: var(--muted); font-weight: 500; }
-  .subsection-header {
-    font-size: 12px;
-    text-transform: uppercase;
-    letter-spacing: .03em;
-    color: var(--muted);
-    margin: 10px 0 6px 0;
-  }
-
-  .card {
-    background: var(--card-bg);
-    border: 1px solid var(--border);
-    border-radius: 8px;
-    padding: 12px;
-    margin-bottom: 12px;
-    display: flex;
-    gap: 12px;
-  }
-  .card.starred-card { border-left: 4px solid var(--gold); }
-  .card img.thumb {
-    width: 120px;
-    height: 90px;
-    object-fit: cover;
-    border-radius: 6px;
-    flex-shrink: 0;
-    background: #eee;
-  }
-  .card-body { flex: 1; min-width: 0; }
-  .card-top {
-    display: flex;
-    justify-content: space-between;
-    align-items: flex-start;
-    gap: 8px;
-  }
-  .addr { font-weight: 600; font-size: 14px; }
-  .pill {
-    display: inline-block;
-    font-size: 11px;
-    padding: 2px 7px;
-    border-radius: 20px;
-    margin-left: 6px;
-    white-space: nowrap;
-  }
-  .pill.in-zone { background: #e3f3e6; color: var(--green); }
-  .pill.out-zone { background: #fdecd2; color: #a2691b; }
-  .pill.unknown-zone { background: #ececec; color: #666; }
-  .price { font-weight: 700; font-size: 15px; margin-top: 4px; }
-  .meta { font-size: 12px; color: var(--muted); margin-top: 2px; }
-  .schools { font-size: 12px; margin-top: 4px; }
-  .highlights { font-size: 12px; color: #555; margin-top: 4px; font-style: italic; }
-  .fsbo-badge {
-    display: inline-block;
-    background: #fce8e6;
-    color: #b3261e;
-    font-size: 10px;
-    padding: 1px 6px;
-    border-radius: 10px;
-    margin-left: 6px;
-  }
-  .card-actions {
-    margin-top: 8px;
-    display: flex;
-    gap: 8px;
-    flex-wrap: wrap;
-    align-items: center;
-  }
-  .card-actions a, .card-actions button {
-    font-size: 12px;
-    text-decoration: none;
-    color: var(--blue);
-    padding: 4px 8px;
-    border: 1px solid var(--border);
-    border-radius: 5px;
-    background: #fff;
-  }
-  .like-btn {
-    font-size: 16px !important;
-    padding: 3px 8px !important;
-    color: #c0392b !important;
-    line-height: 1;
-  }
-
-  #saved-panel {
-    margin: 0 24px 20px 24px;
-    background: #fff;
-    border: 1px solid var(--border);
-    border-radius: 8px;
-    padding: 16px;
-  }
-  .saved-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    flex-wrap: wrap;
-    gap: 8px;
-  }
-  .saved-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
-    gap: 10px;
-    margin-top: 12px;
-  }
-  .saved-card {
-    border: 1px solid var(--border);
-    border-radius: 6px;
-    padding: 10px;
-    font-size: 12px;
-  }
-  .saved-card.sold-card { border-left: 3px solid #999; }
-
-  .bottom-section {
-    padding: 10px 24px 40px 24px;
-  }
-  table.log-table {
-    border-collapse: collapse;
-    width: 100%;
-    font-size: 13px;
-    margin-top: 8px;
-  }
-  table.log-table th, table.log-table td {
-    border: 1px solid var(--border);
-    padding: 6px 10px;
-    text-align: left;
-  }
-  table.log-table th { background: #f2ede4; }
-  .low-inventory-note {
-    background: #fff4e5;
-    border: 1px solid #f0c987;
-    border-radius: 6px;
-    padding: 10px 14px;
-    font-size: 13px;
-    margin-bottom: 14px;
-  }
-  .leaflet-popup-content { font-size: 12px; }
-  .map-popup img { width: 160px; height: 100px; object-fit: cover; border-radius: 4px; display:block; margin-bottom:6px; }
+  body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif; margin:0; background:#f6f5f2; color:#22292b; }
+  header { background:#fff; border-bottom:1px solid #e0ddd6; padding:16px 20px; position:sticky; top:0; z-index:500; }
+  header h1 { margin:0 0 4px 0; font-size:20px; }
+  .stats { color:#666; font-size:13px; margin-bottom:10px; }
+  .header-controls { display:flex; gap:8px; flex-wrap:wrap; align-items:center; }
+  button, .btnlike { border:1px solid #ccc; background:#fff; border-radius:6px; padding:6px 12px; font-size:13px; cursor:pointer; color:#22292b; }
+  button:hover { background:#f0efe9; }
+  .sort-toggle button.active { background:var(--accent); color:#fff; border-color:var(--accent); }
+  main { max-width:1400px; margin:0 auto; padding:16px 20px 60px; }
+  .columns { display:grid; grid-template-columns:1fr 1fr; gap:20px; }
+  @media (max-width:900px){ .columns{ grid-template-columns:1fr; } }
+  .col h2 { font-size:16px; border-bottom:2px solid var(--accent); padding-bottom:6px; }
+  .section-header { font-size:13px; font-weight:600; color:#444; margin:16px 0 8px; }
+  .section-header.muted { color:#999; }
+  .grid { display:grid; grid-template-columns:1fr; gap:10px; }
+  .card { background:#fff; border:1px solid #e4e1da; border-radius:8px; padding:10px; display:flex; gap:10px; position:relative; }
+  .card.starred-card { border-left:4px solid var(--gold); }
+  .card img.thumb { width:120px; height:90px; object-fit:cover; border-radius:6px; flex-shrink:0; }
+  .card-body { flex:1; min-width:0; font-size:13px; }
+  .card-body .addr-line { font-weight:600; font-size:14px; margin-bottom:2px; }
+  .pill { display:inline-block; font-size:11px; padding:1px 6px; border-radius:10px; margin-left:6px; vertical-align:middle; }
+  .pill.in { background:#e3f3ea; color:#1b6b3a; }
+  .pill.out { background:#fbeed7; color:#8a5a1a; }
+  .pill.unk { background:#eee; color:#777; }
+  .price-line { font-weight:600; color:var(--accent); margin:2px 0; }
+  .meta-line, .schools-line, .highlights-line { color:#555; margin:2px 0; }
+  .fsbo-badge { background:#333; color:#fff; font-size:10px; padding:1px 5px; border-radius:4px; margin-left:6px; }
+  .card-actions { margin-top:6px; display:flex; gap:8px; flex-wrap:wrap; font-size:12px; }
+  .card-actions a, .card-actions button { text-decoration:none; }
+  .like-btn { position:absolute; top:8px; right:8px; border:none; background:transparent; font-size:20px; cursor:pointer; color:#c33; line-height:1; padding:2px; }
+  #map { height:420px; border-radius:8px; margin:16px 0; border:1px solid #e4e1da; }
+  .saved-panel { background:#fff; border:1px solid #e4e1da; border-radius:8px; padding:12px; margin:16px 0; }
+  .saved-grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(220px,1fr)); gap:8px; }
+  .saved-card { border:1px solid #e4e1da; border-radius:6px; padding:8px; font-size:12px; }
+  .saved-card.sold-card { border-left:3px solid #999; }
+  table.log-table { border-collapse:collapse; width:100%; font-size:13px; margin-top:8px; }
+  table.log-table th, table.log-table td { border:1px solid #e0ddd6; padding:6px 8px; text-align:left; }
+  footer-note { color:#888; }
+  .low-inventory { background:#fff3cd; border:1px solid #ffe69c; padding:8px 12px; border-radius:6px; font-size:13px; margin-bottom:10px; }
+  .popup-thumb { width:140px; height:100px; object-fit:cover; border-radius:4px; }
 </style>
 </head>
 <body>
-
 <header>
-  <h1>McLean Property Dashboard — 2026-07-15</h1>
-  <div class="stats">17 for-rent · 16 for-sale · <span id="liked-count">0</span> liked · Scan: 2026-07-15 · Sources: Redfin, HotPads, Craigslist</div>
+  <h1>McLean Property Dashboard — July 16, 2026</h1>
+  <div class="stats">17 for-rent · 16 for-sale · <span id='liked-count'>0</span> liked · Scan: July 16, 2026 · Sources: Redfin, HotPads, Craigslist</div>
   <div class="header-controls">
     <button onclick="copyLiked()">📋 Copy Liked</button>
-    <div class="sort-toggle">
+    <span class="sort-toggle">
       <button id="sort-newest" onclick="setSort('newest')">Newest</button>
       <button id="sort-price" onclick="setSort('price')">Price</button>
-    </div>
+    </span>
   </div>
 </header>
-
-<div id="map"></div>
-
-<div class="columns">
-  <div class="col">
-    <h2>For Rent</h2>
-    <div id="rent-col"></div>
-  </div>
-  <div class="col">
-    <h2>For Sale</h2>
-    <div id="sale-col"></div>
-  </div>
-</div>
-
-<div id="saved-panel">
-  <div class="saved-header">
-    <strong>❤ Saved Picks (<span id="saved-count">0</span>)</strong>
-    <div>
-      <button onclick="openRouteInGoogleMaps()">🗺️ Open Route in Google Maps</button>
-      <button onclick="exportLikes()">💾 Export</button>
-      <button onclick="toggleSavedPanel()">Hide/Show</button>
+<main>
+  <div class="columns">
+    <div class="col">
+      <h2>FOR RENT</h2>
+      <div id="rent-col"></div>
+    </div>
+    <div class="col">
+      <h2>FOR SALE</h2>
+      <div id="sale-col"></div>
     </div>
   </div>
-  <div class="saved-grid" id="saved-grid"></div>
-  <details id="sold-section" style="margin-top:10px">
-    <summary style="cursor:pointer;font-size:13px;color:#888;padding:4px 0">
-      ⬇ Previously Liked — No Longer Available (<span id="sold-count">0</span>)
-    </summary>
-    <div class="saved-grid" id="sold-grid" style="margin-top:8px;opacity:0.7"></div>
-  </details>
-</div>
 
-<div class="bottom-section">
-  
-  <h3>Source Coverage Log</h3>
-  <table class="log-table">
-    <tr><th>Source</th><th>Result</th><th>Listings captured (this run)</th></tr>
-    <tr><td>Redfin</td><td>Hit</td><td>32 active listings across 6 zip/type searches (22101, 22043, 22102 — for-sale + rentals)</td></tr>
-    <tr><td>HotPads</td><td>Hit (0 new)</td><td>36 house-for-rent cards scanned across 2 pages; 1 in target zips/budget confirmed as dup of Redfin</td></tr>
-    <tr><td>Craigslist (apa)</td><td>No matches</td><td>0 — expected, very little McLean SFH/townhouse rental inventory on Craigslist</td></tr>
-    <tr><td>Craigslist (rea)</td><td>No matches</td><td>0 — expected, very little McLean SFH/townhouse FSBO inventory on Craigslist</td></tr>
-  </table>
-  <h3 style="margin-top:22px;">Excluded</h3>
-  <table class="log-table">
-    <tr><th>Address</th><th>Reason</th></tr>
-    <tr><td>2038 Brooks Square Pl, Falls Church, VA 22043</td><td>No longer appearing in Redfin search — presumed sold/under contract, marked inactive</td></tr>
-    <tr><td>2409 Chestnut St, Falls Church, VA 22043</td><td>No longer appearing in Redfin search — presumed sold/under contract, marked inactive</td></tr>
-    <tr><td>6519 Engel Dr, McLean, VA 22101</td><td>No longer appearing in Redfin rental search — presumed rented/removed, marked inactive</td></tr>
-    <tr><td>6520 Beverly Ave, McLean, VA 22101</td><td>No longer appearing in Redfin rental search — presumed rented/removed, marked inactive</td></tr>
-    <tr><td>6824 Felix St, McLean, VA 22101</td><td>No longer appearing in Redfin rental search — presumed rented/removed, marked inactive</td></tr>
-    <tr><td>6872 Melrose Dr, McLean, VA 22101</td><td>No longer appearing in Redfin rental search — presumed rented/removed, marked inactive</td></tr>
-  </table>
-</div>
+  <div id="map"></div>
+
+  <div class="saved-panel">
+    <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:8px;">
+      <strong>❤ Saved Picks</strong>
+      <div style="display:flex;gap:8px;flex-wrap:wrap;">
+        <button onclick="openRouteInGoogleMaps()">🗺️ Open Route in Google Maps</button>
+        <button onclick="exportLikes()">💾 Export</button>
+        <button onclick="toggleSavedPanel()">Hide/Show</button>
+      </div>
+    </div>
+    <div class="saved-grid" id="saved-grid" style="margin-top:10px;"></div>
+    <details id="sold-section" style="margin-top:10px">
+      <summary style="cursor:pointer;font-size:13px;color:#888;padding:4px 0">
+        ⬇ Previously Liked — No Longer Available (<span id="sold-count">0</span>)
+      </summary>
+      <div class="saved-grid" id="sold-grid" style="margin-top:8px;opacity:0.7"></div>
+    </details>
+  </div>
+
+  <div class="saved-panel">
+    <strong>Source Coverage Log</strong>
+    <table class="log-table">
+      <tr><th>Source</th><th>Result</th><th>Listings captured (in-zone)</th></tr>
+      <tr><td>Redfin</td><td>Hit — 6 search URLs (3 sale zips + 3 rental zips)</td><td>31</td></tr>
+      <tr><td>HotPads</td><td>Hit — mclean-va/houses-for-rent, 2 pages</td><td>2 new (rest overlapped Redfin)</td></tr>
+      <tr><td>Craigslist</td><td>No matches (normal — thin McLean SFH/townhouse inventory in this band)</td><td>0</td></tr>
+    </table>
+  </div>
+
+  <div class="saved-panel">
+    <strong>Excluded</strong>
+    <table class="log-table" id="excluded-table">
+      <tr><th>Address</th><th>Price</th><th>Reason</th></tr>
+      <tr><td colspan="3" style="color:#888">None this scan — all captured listings matched price/bed/bath/type criteria.</td></tr>
+    </table>
+  </div>
+</main>
 
 <script>
-const PLACEHOLDER_THUMB = "https://placehold.co/240x160/e8e8e8/999999?text=Photo+unavailable";
-const LISTINGS = [{"addr": "1049 Balls Hill Rd, Mc Lean, VA 22101", "price": "$4,900/mo", "priceNum": 4900, "beds": 4, "baths": 2.5, "sqft": 2332, "homeType": "SFH", "source": "Redfin", "url": "https://www.redfin.com/VA/McLean/1049-Balls-Hill-Rd-22101/home/9272801", "thumb": "https://ssl.cdn-redfin.com/photo/rent/42576814-5801-4478-ab6f-515557f3abd8/islphoto/genIsl.0_1.webp", "zoneLabel": "\ud83d\udccd Langley HS (confirmed via FCPS Boundary Locator \u2014 different HS)", "highlights": "", "starred": false, "lat": 38.9481439, "lng": -77.1946216, "kind": "rent", "firstSeen": "2026-07-05", "daysOnMarket": null, "zone": "Langley HS"}, {"addr": "6933 Tyndale St, Mc Lean, VA 22101", "price": "$4,900/mo", "priceNum": 4900, "beds": 5, "baths": 2.5, "sqft": 2576, "homeType": "SFH", "source": "Redfin", "url": "https://www.redfin.com/VA/McLean/6933-Tyndale-St-22101/home/9404921", "thumb": "https://ssl.cdn-redfin.com/photo/rent/ad5fc044-4365-484b-ad7d-3c1ba0000000/islphoto/genIsl.0_1.webp", "zoneLabel": "\u2705 in McLean (confirmed via FCPS Boundary Locator)", "highlights": "Quartz counters", "starred": false, "lat": 38.9192745, "lng": -77.1860317, "kind": "rent", "firstSeen": "2026-07-05", "daysOnMarket": null, "zone": "McLean HS"}, {"addr": "6217 Park Rd, Mc Lean, VA 22101", "price": "$5,500/mo", "priceNum": 5500, "beds": 4, "baths": 2.5, "sqft": 1920, "homeType": "SFH", "source": "Redfin", "url": "https://www.redfin.com/VA/McLean/6217-Park-Rd-22101/home/9483801", "thumb": "https://ssl.cdn-redfin.com/photo/rent/2778f7c3-6756-4ac8-9f62-c99b655ab438/islphoto/genIsl.0_1.webp", "zoneLabel": "\u2705 in McLean (confirmed via FCPS Boundary Locator)", "highlights": "", "starred": false, "lat": 38.9165496, "lng": -77.1508872, "kind": "rent", "firstSeen": "2026-07-05", "daysOnMarket": null, "zone": "McLean HS"}, {"addr": "1619 Seneca Ave, Mc Lean, VA 22102", "price": "$5,700/mo", "priceNum": 5700, "beds": 3, "baths": 3.5, "sqft": 2195, "homeType": "Townhouse", "source": "Redfin", "url": "https://www.redfin.com/VA/McLean/1619-Seneca-Ave-22102/home/9830550", "thumb": "https://ssl.cdn-redfin.com/photo/rent/56ffbc2c-b3c9-460c-8a03-db4c7039c75f/islphoto/genIsl.0_1.webp", "zoneLabel": "\u2705 in McLean (confirmed via FCPS Boundary Locator)", "highlights": "End unit; Newer cabinets", "starred": false, "lat": 38.9254613, "lng": -77.2000223, "kind": "rent", "firstSeen": "2026-07-05", "daysOnMarket": null, "zone": "McLean HS"}, {"addr": "7449 Carriage Hills Dr, Mc Lean, VA 22102", "price": "$5,595/mo", "priceNum": 5595, "beds": 3, "baths": 3.5, "sqft": 2540, "homeType": "Townhouse", "source": "Redfin", "url": "https://www.redfin.com/VA/McLean/7449-Carriage-Hills-Dr-22102/home/9833500", "thumb": "https://ssl.cdn-redfin.com/photo/rent/7f3a77c9-514c-4d35-aace-9c7af4f498db/islphoto/genIsl.0_1.webp", "zoneLabel": "\u2705 in McLean (confirmed via FCPS Boundary Locator)", "highlights": "Near Metro", "starred": false, "lat": 38.9252628, "lng": -77.2007259, "kind": "rent", "firstSeen": "2026-07-05", "daysOnMarket": null, "zone": "McLean HS"}, {"addr": "6522 Truman Ln, Falls Church, VA 22043", "price": "$5,790/mo", "priceNum": 5790, "beds": 5, "baths": 3.5, "sqft": 2456, "homeType": "SFH", "source": "Redfin", "url": "https://www.redfin.com/VA/Falls-Church/6522-Truman-Ln-22043/home/9474738", "thumb": "https://ssl.cdn-redfin.com/photo/rent/d8fdd246-a82b-404a-ab64-29afb69f2edf/islphoto/genIsl.0_1.webp", "zoneLabel": "\u2705 in McLean (confirmed via FCPS Boundary Locator)", "highlights": "Cul-de-sac", "starred": false, "lat": 38.885, "lng": -77.198, "kind": "rent", "firstSeen": "2026-07-05", "daysOnMarket": null, "zone": "McLean HS"}, {"addr": "2506 Patricia Ct, Falls Church, VA 22043", "price": "$5,700/mo", "priceNum": 5700, "beds": 4, "baths": 3.5, "sqft": 3008, "homeType": "SFH", "source": "Redfin", "url": "https://www.redfin.com/VA/Falls-Church/2506-Patricia-Ct-22043/home/9480235", "thumb": "https://ssl.cdn-redfin.com/photo/rent/f969db2e-ed6d-4b7e-9972-4fd42d274a69/islphoto/genIsl.0_5.webp", "zoneLabel": "\ud83d\udccd Marshall HS (confirmed via FCPS Boundary Locator \u2014 different HS)", "highlights": "Coming soon", "starred": false, "lat": 38.887, "lng": -77.201, "kind": "rent", "firstSeen": "2026-07-05", "daysOnMarket": 1, "zone": "Marshall HS"}, {"addr": "2018 Tysons Ridgeline Rd, Falls Church, VA 22043", "price": "$5,200/mo", "priceNum": 5200, "beds": 3, "baths": 3.5, "sqft": 1624, "homeType": "Townhouse", "source": "Redfin", "url": "https://www.redfin.com/VA/Falls-Church/2018-Tysons-Ridgeline-Rd-22043/home/186187740", "thumb": "https://ssl.cdn-redfin.com/photo/rent/024bc3a1-228c-4a9e-820f-f91aa70fbcc9/islphoto/genIsl.0_1.webp", "zoneLabel": "\ud83d\udccd Marshall HS (confirmed via FCPS Boundary Locator \u2014 different HS)", "highlights": "Built 2024 - newer construction", "starred": false, "lat": 38.9080157, "lng": -77.2115785, "kind": "rent", "firstSeen": "2026-07-05", "daysOnMarket": null, "zone": "Marshall HS"}, {"addr": "2064 Tysons Ridgeline Rd, Falls Church, VA 22043", "price": "$5,200/mo", "priceNum": 5200, "beds": 3, "baths": 3.5, "sqft": 1636, "homeType": "Townhouse", "source": "Redfin", "url": "https://www.redfin.com/VA/Falls-Church/2064-Tysons-Ridgeline-Rd-22043/home/186187780", "thumb": "https://ssl.cdn-redfin.com/photo/rent/d67eff66-74c3-4fdf-899c-e4dcdb5bd359/islphoto/genIsl.0_1.webp", "zoneLabel": "\ud83d\udccd Marshall HS (confirmed via FCPS Boundary Locator \u2014 different HS)", "highlights": "Newer construction", "starred": false, "lat": 38.9083157, "lng": -77.2118785, "kind": "rent", "firstSeen": "2026-07-05", "daysOnMarket": 0, "zone": "Marshall HS"}, {"addr": "1036 Carper St, Mc Lean, VA 22101", "price": "$5,900/mo", "priceNum": 5900, "beds": 4, "baths": 3, "sqft": null, "homeType": "SFH", "source": "HotPads", "url": "https://hotpads.com/1036-carper-st-mc-lean-va-22101-sm6k72/pad", "thumb": "https://placehold.co/240x160/e8e8e8/999999?text=Photo+unavailable", "zoneLabel": "\ud83d\udccd Langley HS (confirmed via FCPS Boundary Locator \u2014 different HS)", "highlights": "", "starred": false, "lat": 38.950216, "lng": -77.1850645, "kind": "rent", "firstSeen": "2026-07-05", "daysOnMarket": null, "zone": "Langley HS"}, {"addr": "6740 Towne Lane Rd, Mc Lean, VA 22101", "price": "$1,159,900", "priceNum": 1159900, "beds": 4, "baths": 3, "sqft": 2268, "homeType": "Townhouse", "source": "Redfin", "url": "https://www.redfin.com/VA/McLean/6740-Towne-Lane-Rd-22101/home/9278003", "thumb": "https://ssl.cdn-redfin.com/photo/235/islphoto/940/genIslnoResize.VAFX2318940_1.webp", "zoneLabel": "\ud83d\udccd Langley HS (confirmed via FCPS Boundary Locator \u2014 different HS)", "highlights": "Overlooks Kings Manor Park", "starred": false, "lat": 38.9448435, "lng": -77.1767872, "kind": "sale", "firstSeen": "2026-07-05", "daysOnMarket": null, "zone": "Langley HS"}, {"addr": "1537 Cedar Ave, Mc Lean, VA 22101", "price": "$1,125,000", "priceNum": 1125000, "beds": 4, "baths": 4.5, "sqft": 3512, "homeType": "Townhouse", "source": "Redfin", "url": "https://www.redfin.com/VA/McLean/1537-Cedar-Ave-22101/home/9394800", "thumb": "https://ssl.cdn-redfin.com/photo/235/islphoto/812/genIslnoResize.VAFX2217812_6.webp", "zoneLabel": "\u2705 in McLean (confirmed via FCPS Boundary Locator)", "highlights": "Elevator; 2 fireplaces", "starred": false, "lat": 38.9308116, "lng": -77.1824738, "kind": "sale", "firstSeen": "2026-07-05", "daysOnMarket": null, "zone": "McLean HS"}, {"addr": "7328 Aynsley Ln, Mc Lean, VA 22102", "price": "$1,175,000", "priceNum": 1175000, "beds": 4, "baths": 3.5, "sqft": 2178, "homeType": "Townhouse", "source": "Redfin", "url": "https://www.redfin.com/VA/McLean/7328-Aynsley-Ln-22102/home/9400964", "thumb": "https://ssl.cdn-redfin.com/photo/235/islphoto/604/genIslnoResize.VAFX2321604_1.webp", "zoneLabel": "\u2705 in McLean (confirmed via FCPS Boundary Locator)", "highlights": "Vaulted ceilings; skylights", "starred": false, "lat": 38.9291541, "lng": -77.1982078, "kind": "sale", "firstSeen": "2026-07-05", "daysOnMarket": null, "zone": "McLean HS"}, {"addr": "1644 La Salle Ave, Mc Lean, VA 22102", "price": "$1,000,000", "priceNum": 1000000, "beds": 4, "baths": 3, "sqft": 2640, "homeType": "SFH", "source": "Redfin", "url": "https://www.redfin.com/VA/McLean/1644-La-Salle-Ave-22102/home/9396414", "thumb": "https://ssl.cdn-redfin.com/photo/235/islphoto/200/genIslnoResize.VAFX2323200_2.webp", "zoneLabel": "\u2705 in McLean (confirmed via FCPS Boundary Locator)", "highlights": "Teardown / buildable lot ~1/3 acre", "starred": false, "lat": 38.9240325, "lng": -77.1987276, "kind": "sale", "firstSeen": "2026-07-05", "daysOnMarket": null, "zone": "McLean HS"}, {"addr": "1646 La Salle Ave, Mc Lean, VA 22102", "price": "$1,000,000", "priceNum": 1000000, "beds": 4, "baths": 3, "sqft": 2640, "homeType": "SFH", "source": "Redfin", "url": "https://www.redfin.com/VA/McLean/1646-La-Salle-Ave-22102/home/9396416", "thumb": "https://ssl.cdn-redfin.com/photo/235/islphoto/256/genIslnoResize.VAFX2323256_2.webp", "zoneLabel": "\u2705 in McLean (confirmed via FCPS Boundary Locator)", "highlights": "Teardown / buildable lot ~1/3 acre", "starred": false, "lat": 38.9239082, "lng": -77.1986616, "kind": "sale", "firstSeen": "2026-07-05", "daysOnMarket": null, "zone": "McLean HS"}, {"addr": "1812 Olney Rd, Falls Church, VA 22043", "price": "$970,000", "priceNum": 970000, "beds": 4, "baths": 2.5, "sqft": 1869, "homeType": "SFH", "source": "Redfin", "url": "https://www.redfin.com/VA/Falls-Church/1812-Olney-Rd-22043/home/9398572", "thumb": "https://ssl.cdn-redfin.com/photo/235/islphoto/912/genIslnoResize.VAFX2318912_2.webp", "zoneLabel": "\ud83d\udccd Marshall HS (confirmed via FCPS Boundary Locator \u2014 different HS)", "highlights": "Recently reduced $40k", "starred": false, "lat": 38.886, "lng": -77.19, "kind": "sale", "firstSeen": "2026-07-05", "daysOnMarket": null, "zone": "Marshall HS"}, {"addr": "2814 Hyson Ln, Falls Church, VA 22043", "price": "$675,000", "priceNum": 675000, "beds": 4, "baths": 3.5, "sqft": 2016, "homeType": "Townhouse", "source": "Redfin", "url": "https://www.redfin.com/VA/Falls-Church/2814-Hyson-Ln-22043/home/9543645", "thumb": "https://ssl.cdn-redfin.com/photo/235/islphoto/616/genIslnoResize.VAFX2310616_1.webp", "zoneLabel": "\ud83d\udccd Marshall HS (confirmed via FCPS Boundary Locator \u2014 different HS)", "highlights": "Recently updated; multi-level deck", "starred": false, "lat": 38.8768034, "lng": -77.2144338, "kind": "sale", "firstSeen": "2026-07-05", "daysOnMarket": null, "zone": "Marshall HS"}, {"addr": "2542 Hillsman St, Falls Church, VA 22043", "price": "$949,000", "priceNum": 949000, "beds": 4, "baths": 3, "sqft": 1589, "homeType": "SFH", "source": "Redfin", "url": "https://www.redfin.com/VA/Falls-Church/2542-Hillsman-St-22043/home/9543170", "thumb": "https://ssl.cdn-redfin.com/photo/235/islphoto/966/genIslnoResize.VAFX2318966_2.webp", "zoneLabel": "\ud83d\udccd Marshall HS (confirmed via FCPS Boundary Locator \u2014 different HS)", "highlights": "Fenced backyard; new roof", "starred": false, "lat": 38.8826659, "lng": -77.2107752, "kind": "sale", "firstSeen": "2026-07-05", "daysOnMarket": 18, "zone": "Marshall HS"}, {"addr": "7802 Wincanton Ct, Falls Church, VA 22043", "price": "$960,000", "priceNum": 960000, "beds": 4, "baths": 2.5, "sqft": 2496, "homeType": "SFH", "source": "Redfin", "url": "https://www.redfin.com/VA/Falls-Church/7802-Wincanton-Ct-22043/home/9468105", "thumb": "https://ssl.cdn-redfin.com/photo/235/islphoto/776/genIslnoResize.VAFX2319776_0.webp", "zoneLabel": "\ud83d\udccd Marshall HS (confirmed via FCPS Boundary Locator \u2014 different HS)", "highlights": "Quiet cul-de-sac; vaulted ceilings", "starred": false, "lat": 38.883834, "lng": -77.1725914, "kind": "sale", "firstSeen": "2026-07-05", "daysOnMarket": null, "zone": "Marshall HS"}, {"addr": "7718 Trevino Ln, Falls Church, VA 22043", "price": "$649,900", "priceNum": 649900, "beds": 4, "baths": 3.5, "sqft": 2079, "homeType": "Townhouse", "source": "Redfin", "url": "https://www.redfin.com/VA/Falls-Church/7718-Trevino-Ln-22043/home/9544026", "thumb": "https://ssl.cdn-redfin.com/photo/235/islphoto/344/genIslnoResize.VAFX2317344_2.webp", "zoneLabel": "\ud83d\udccd Marshall HS (confirmed via FCPS Boundary Locator \u2014 different HS)", "highlights": "", "starred": false, "lat": 38.8788431, "lng": -77.2115688, "kind": "sale", "firstSeen": "2026-07-06", "daysOnMarket": null, "zone": "Marshall HS"}, {"addr": "2243 Kings Garden Way, Falls Church, VA 22043", "price": "$910,000", "priceNum": 910000, "beds": 4, "baths": 3.5, "sqft": 2270, "homeType": "SFH", "source": "Redfin", "url": "https://www.redfin.com/VA/Falls-Church/2243-Kings-Garden-Way-22043/home/9461704", "thumb": "https://ssl.cdn-redfin.com/system_files/media/63936_JPG/genDesktopMapHomeCardUrl/item_25.webp", "zoneLabel": "\ud83d\udccd Marshall HS (confirmed via FCPS Boundary Locator \u2014 different HS)", "highlights": "Coming soon", "starred": false, "lat": 38.9038987, "lng": -77.2086555, "kind": "sale", "firstSeen": "2026-07-10", "daysOnMarket": null, "zone": "Marshall HS"}, {"addr": "7314 Idylwood Rd, Falls Church, VA 22043", "price": "$1,100,000", "priceNum": 1100000, "beds": 5, "baths": 4, "sqft": 2573, "homeType": "SFH", "source": "Redfin", "url": "https://www.redfin.com/VA/Falls-Church/7314-Idylwood-Rd-22043/home/9479083", "thumb": "https://ssl.cdn-redfin.com/photo/235/islphoto/632/genIslnoResize.VAFX2323632_0.webp", "zoneLabel": "\ud83d\udccd Marshall HS (confirmed via FCPS Boundary Locator \u2014 different HS)", "highlights": "Half-acre lot, well-treed land", "starred": false, "lat": 38.8981321, "lng": -77.2032232, "kind": "sale", "firstSeen": "2026-07-10", "daysOnMarket": null, "zone": "Marshall HS"}, {"addr": "6226 Hardy Dr, McLean, VA 22101", "price": "$5,900/mo", "priceNum": 5900, "beds": 5, "baths": 2.5, "sqft": 2932, "homeType": "SFH", "source": "Redfin", "url": "https://www.redfin.com/VA/McLean/6226-Hardy-Dr-22101/home/9407507", "thumb": "https://ssl.cdn-redfin.com/photo/rent/03008945-bfb2-4a90-b349-a1f019ad6954/islphoto/genIsl.0_1.webp", "zoneLabel": "\u2705 in McLean (confirmed via FCPS Boundary Locator)", "highlights": "", "starred": false, "lat": 38.9327541, "lng": -77.1541274, "kind": "rent", "firstSeen": "2026-07-10", "daysOnMarket": 4, "zone": "McLean HS"}, {"addr": "1429 Laburnum St, McLean, VA 22101", "price": "$5,000/mo", "priceNum": 5000, "beds": 5, "baths": 3, "sqft": 2055, "homeType": "SFH", "source": "Redfin", "url": "https://www.redfin.com/VA/McLean/1429-Laburnum-St-22101/home/9409494", "thumb": "https://ssl.cdn-redfin.com/photo/rent/5a8959ef-728c-4a79-9999-f6cde3ecdb4e/islphoto/genIsl.0_1.webp", "zoneLabel": "\u2705 in McLean (confirmed via FCPS Boundary Locator)", "highlights": "", "starred": false, "lat": 38.93296, "lng": -77.1383435, "kind": "rent", "firstSeen": "2026-07-10", "daysOnMarket": null, "zone": "McLean HS"}, {"addr": "2725 Oldewood Dr, Falls Church, VA 22043", "price": "$5,500/mo", "priceNum": 5500, "beds": 4, "baths": 3.5, "sqft": 4542, "homeType": "SFH", "source": "Redfin", "url": "https://www.redfin.com/VA/Falls-Church/2725-Oldewood-Dr-22043/home/9542556", "thumb": "https://ssl.cdn-redfin.com/photo/rent/bd50663f-73d1-4fd9-9ec1-491c2230afa4/islphoto/genIsl.0_1.webp", "zoneLabel": "\ud83d\udccd Marshall HS (confirmed via FCPS Boundary Locator \u2014 different HS)", "highlights": "", "starred": false, "lat": 38.8801231, "lng": -77.2192859, "kind": "rent", "firstSeen": "2026-07-10", "daysOnMarket": 1, "zone": "Marshall HS"}, {"addr": "8126 Dunsinane Ct, McLean, VA 22102", "price": "$5,500/mo", "priceNum": 5500, "beds": 6, "baths": 3, "sqft": 3940, "homeType": "SFH", "source": "Redfin", "url": "https://www.redfin.com/VA/McLean/8126-Dunsinane-Ct-22102/home/9375761", "thumb": "https://ssl.cdn-redfin.com/photo/rent/2e1cb18b-9095-4484-9a9b-ed03ae236e8c/islphoto/genIsl.0_1.webp", "zoneLabel": "\ud83d\udccd Langley HS (confirmed via FCPS Boundary Locator \u2014 different HS)", "highlights": "11 foot ceilings, gourmet kitchen", "starred": false, "lat": 38.9374584, "lng": -77.2279309, "kind": "rent", "firstSeen": "2026-07-10", "daysOnMarket": 1, "zone": "Langley HS"}, {"addr": "8020 Agin Ct, McLean, VA 22102", "price": "$5,800/mo", "priceNum": 5800, "beds": 5, "baths": 3, "sqft": 1560, "homeType": "SFH", "source": "Redfin", "url": "https://www.redfin.com/VA/McLean/8020-Agin-Ct-22102/home/9376239", "thumb": "https://ssl.cdn-redfin.com/photo/rent/4c94272b-834d-47e4-9c91-0e86e01f8839/islphoto/genIsl.0_1.webp", "zoneLabel": "\ud83d\udccd Langley HS (confirmed via FCPS Boundary Locator \u2014 different HS)", "highlights": "Quiet cul-de-sac, updated, light-filled open floor plan", "starred": false, "lat": 38.9397043, "lng": -77.2227118, "kind": "rent", "firstSeen": "2026-07-10", "daysOnMarket": 0, "zone": "Langley HS"}, {"addr": "7489 Carriage Hills Dr, McLean, VA 22102", "price": "$5,400/mo", "priceNum": 5400, "beds": 3, "baths": 3.5, "sqft": 2400, "homeType": "Townhouse", "source": "Redfin", "url": "https://www.redfin.com/VA/McLean/7489-Carriage-Hills-Dr-22102/home/9833507", "thumb": "https://ssl.cdn-redfin.com/photo/rent/34fca80a-6f5e-44f7-9228-08407.webp", "zoneLabel": "\u2705 in McLean (confirmed via FCPS Boundary Locator)", "highlights": "2-car garage, 4-story luxury townhouse", "starred": false, "lat": 38.9251079, "lng": -77.2004515, "kind": "rent", "firstSeen": "2026-07-10", "daysOnMarket": null, "zone": "McLean HS"}, {"addr": "2007 Hopewood Dr, Falls Church, VA 22043", "price": "$895,000", "priceNum": 895000, "beds": 3, "baths": 2.5, "sqft": 1804, "homeType": "Townhouse", "source": "Redfin", "url": "https://www.redfin.com/VA/Falls-Church/2007-Hopewood-Dr-22043/home/9475892", "thumb": "https://ssl.cdn-redfin.com/photo/235/islphoto/684/genIslnoResize.VAFX2327684_0.webp", "zoneLabel": "\u2705 in McLean (confirmed via FCPS Boundary Locator)", "highlights": "Private backyard; Granite countertops; Hardwood floors; Coming soon", "starred": false, "lat": 38.8865, "lng": -77.1975, "kind": "sale", "firstSeen": "2026-07-12", "daysOnMarket": null, "zone": "McLean HS"}, {"addr": "1309 McLean Crest Ct, McLean, VA 22101", "price": "$6,000/mo", "priceNum": 6000, "beds": 4, "baths": 4.5, "sqft": 3100, "homeType": "Townhouse", "source": "Redfin", "url": "https://www.redfin.com/VA/McLean/1309-McLean-Crest-Ct-22101/home/9395676", "thumb": "https://ssl.cdn-redfin.com/photo/rent/98810f76-a306-4872-b537-7eb0889fbe9b/islphoto/genIsl.0_1.webp", "zoneLabel": "\u2705 in McLean (confirmed via FCPS Boundary Locator)", "highlights": "Available 8/1; McLean Crest community", "starred": false, "lat": 38.9392204, "lng": -77.179323, "kind": "rent", "firstSeen": "2026-07-12", "daysOnMarket": 1, "zone": "McLean HS"}, {"addr": "6611 Rosecroft Pl, Falls Church, VA 22043", "price": "$910,000", "priceNum": 910000, "beds": 3, "baths": 3.5, "sqft": 2486, "homeType": "Townhouse", "source": "Redfin", "url": "https://www.redfin.com/VA/Falls-Church/6611-Rosecroft-Pl-22043/home/9475746", "thumb": "https://ssl.cdn-redfin.com/photo/235/islphoto/730/genIslnoResize.VAFX2328730_0.webp", "zoneLabel": "\u2705 in McLean (confirmed via FCPS Boundary Locator)", "highlights": "Updated kitchen & bathrooms; fenced backyard w/ deck", "starred": false, "lat": 38.9049, "lng": -77.1968, "kind": "sale", "firstSeen": "2026-07-15", "daysOnMarket": null, "zone": "McLean HS"}, {"addr": "7608 Salem Rd, Falls Church, VA 22043", "price": "$1,099,900", "priceNum": 1099900, "beds": 4, "baths": 2.5, "sqft": 2775, "homeType": "SFH", "source": "Redfin", "url": "https://www.redfin.com/VA/Falls-Church/7608-Salem-Rd-22043/home/9468377", "thumb": "https://ssl.cdn-redfin.com/photo/235/islphoto/356/genIslnoResize.VAFX2323356_0.webp", "zoneLabel": "\ud83d\udccd Marshall HS (confirmed via FCPS Boundary Locator \u2014 different HS)", "highlights": "Renovated kitchen & bathrooms; recessed lighting", "starred": false, "lat": 38.9004, "lng": -77.1933, "kind": "sale", "firstSeen": "2026-07-15", "daysOnMarket": null, "zone": "Marshall HS"}, {"addr": "7348 Lewinsville Square Pl, Mclean, VA 22101", "price": "$1,195,000", "priceNum": 1195000, "beds": 3, "baths": 3.5, "sqft": 2702, "homeType": "Townhouse", "source": "Redfin", "url": "https://www.redfin.com/VA/McLean/7348-Lewinsville-Square-Pl-22101/home/9389595", "thumb": "https://ssl.cdn-redfin.com/photo/235/islphoto/610/genIslnoResize.VAFX2315610_2.webp", "zoneLabel": "\u2705 in McLean (confirmed via FCPS Boundary Locator)", "highlights": "", "starred": false, "lat": 38.9313193, "lng": -77.1980879, "kind": "sale", "firstSeen": "2026-07-15", "daysOnMarket": null, "zone": "McLean HS"}];
+const PLACEHOLDER_THUMB = 'https://placehold.co/240x160/e8e8e8/999999?text=Photo+unavailable';
+const LISTINGS = [{"addr": "1049 Balls Hill Rd, Mc Lean, VA 22101", "price": "$4,900/mo", "priceNum": 4900, "beds": 4, "baths": 2.5, "sqft": 2332, "homeType": "SFH", "source": "Redfin", "url": "https://www.redfin.com/VA/McLean/1049-Balls-Hill-Rd-22101/home/9272801", "thumb": "https://ssl.cdn-redfin.com/photo/rent/42576814-5801-4478-ab6f-515557f3abd8/islphoto/genIsl.0_1.webp", "zoneLabel": "\ud83d\udccd Langley HS (confirmed via FCPS Boundary Locator \u2014 different HS)", "highlights": "", "starred": false, "lat": 38.9481439, "lng": -77.1946216, "kind": "rent", "firstSeen": "2026-07-05", "daysOnMarket": null, "zone": "Langley HS"}, {"addr": "6933 Tyndale St, Mc Lean, VA 22101", "price": "$4,900/mo", "priceNum": 4900, "beds": 5, "baths": 2.5, "sqft": 2576, "homeType": "SFH", "source": "Redfin", "url": "https://www.redfin.com/VA/McLean/6933-Tyndale-St-22101/home/9404921", "thumb": "https://ssl.cdn-redfin.com/photo/rent/ad5fc044-4365-484b-ad7d-3c1ba0000000/islphoto/genIsl.0_1.webp", "zoneLabel": "\u2705 in McLean (confirmed via FCPS Boundary Locator)", "highlights": "Quartz counters", "starred": false, "lat": 38.9192745, "lng": -77.1860317, "kind": "rent", "firstSeen": "2026-07-05", "daysOnMarket": null, "zone": "McLean HS"}, {"addr": "6217 Park Rd, Mc Lean, VA 22101", "price": "$5,000/mo", "priceNum": 5000, "beds": 4, "baths": 2.5, "sqft": 1920, "homeType": "SFH", "source": "Redfin", "url": "https://www.redfin.com/VA/McLean/6217-Park-Rd-22101/home/9483801", "thumb": "https://ssl.cdn-redfin.com/photo/rent/2778f7c3-6756-4ac8-9f62-c99b655ab438/islphoto/genIsl.0_1.webp", "zoneLabel": "\u2705 in McLean (confirmed via FCPS Boundary Locator)", "highlights": "", "starred": false, "lat": 38.9165496, "lng": -77.1508872, "kind": "rent", "firstSeen": "2026-07-05", "daysOnMarket": null, "zone": "McLean HS"}, {"addr": "1619 Seneca Ave, Mc Lean, VA 22102", "price": "$5,700/mo", "priceNum": 5700, "beds": 3, "baths": 3.5, "sqft": 2195, "homeType": "Townhouse", "source": "Redfin", "url": "https://www.redfin.com/VA/McLean/1619-Seneca-Ave-22102/home/9830550", "thumb": "https://ssl.cdn-redfin.com/photo/rent/56ffbc2c-b3c9-460c-8a03-db4c7039c75f/islphoto/genIsl.0_1.webp", "zoneLabel": "\u2705 in McLean (confirmed via FCPS Boundary Locator)", "highlights": "End unit; Newer cabinets", "starred": false, "lat": 38.9254613, "lng": -77.2000223, "kind": "rent", "firstSeen": "2026-07-05", "daysOnMarket": null, "zone": "McLean HS"}, {"addr": "7449 Carriage Hills Dr, Mc Lean, VA 22102", "price": "$5,595/mo", "priceNum": 5595, "beds": 3, "baths": 3.5, "sqft": 2540, "homeType": "Townhouse", "source": "Redfin", "url": "https://www.redfin.com/VA/McLean/7449-Carriage-Hills-Dr-22102/home/9833500", "thumb": "https://ssl.cdn-redfin.com/photo/rent/7f3a77c9-514c-4d35-aace-9c7af4f498db/islphoto/genIsl.0_1.webp", "zoneLabel": "\u2705 in McLean (confirmed via FCPS Boundary Locator)", "highlights": "Near Metro", "starred": false, "lat": 38.9252628, "lng": -77.2007259, "kind": "rent", "firstSeen": "2026-07-05", "daysOnMarket": null, "zone": "McLean HS"}, {"addr": "6522 Truman Ln, Falls Church, VA 22043", "price": "$5,790/mo", "priceNum": 5790, "beds": 5, "baths": 3.5, "sqft": 2456, "homeType": "SFH", "source": "Redfin", "url": "https://www.redfin.com/VA/Falls-Church/6522-Truman-Ln-22043/home/9474738", "thumb": "https://ssl.cdn-redfin.com/photo/rent/d8fdd246-a82b-404a-ab64-29afb69f2edf/islphoto/genIsl.0_1.webp", "zoneLabel": "\u2705 in McLean (confirmed via FCPS Boundary Locator)", "highlights": "Cul-de-sac", "starred": false, "lat": 38.885, "lng": -77.198, "kind": "rent", "firstSeen": "2026-07-05", "daysOnMarket": null, "zone": "McLean HS"}, {"addr": "2506 Patricia Ct, Falls Church, VA 22043", "price": "$5,700/mo", "priceNum": 5700, "beds": 4, "baths": 3.5, "sqft": 3008, "homeType": "SFH", "source": "Redfin", "url": "https://www.redfin.com/VA/Falls-Church/2506-Patricia-Ct-22043/home/9480235", "thumb": "https://ssl.cdn-redfin.com/photo/rent/f969db2e-ed6d-4b7e-9972-4fd42d274a69/islphoto/genIsl.0_5.webp", "zoneLabel": "\ud83d\udccd Marshall HS (confirmed via FCPS Boundary Locator \u2014 different HS)", "highlights": "Coming soon", "starred": false, "lat": 38.887, "lng": -77.201, "kind": "rent", "firstSeen": "2026-07-05", "daysOnMarket": 1, "zone": "Marshall HS"}, {"addr": "2018 Tysons Ridgeline Rd, Falls Church, VA 22043", "price": "$5,200/mo", "priceNum": 5200, "beds": 3, "baths": 3.5, "sqft": 1624, "homeType": "Townhouse", "source": "Redfin", "url": "https://www.redfin.com/VA/Falls-Church/2018-Tysons-Ridgeline-Rd-22043/home/186187740", "thumb": "https://ssl.cdn-redfin.com/photo/rent/024bc3a1-228c-4a9e-820f-f91aa70fbcc9/islphoto/genIsl.0_1.webp", "zoneLabel": "\ud83d\udccd Marshall HS (confirmed via FCPS Boundary Locator \u2014 different HS)", "highlights": "Built 2024 - newer construction", "starred": false, "lat": 38.9080157, "lng": -77.2115785, "kind": "rent", "firstSeen": "2026-07-05", "daysOnMarket": null, "zone": "Marshall HS"}, {"addr": "2064 Tysons Ridgeline Rd, Falls Church, VA 22043", "price": "$5,200/mo", "priceNum": 5200, "beds": 3, "baths": 3.5, "sqft": 1636, "homeType": "Townhouse", "source": "Redfin", "url": "https://www.redfin.com/VA/Falls-Church/2064-Tysons-Ridgeline-Rd-22043/home/186187780", "thumb": "https://ssl.cdn-redfin.com/photo/rent/d67eff66-74c3-4fdf-899c-e4dcdb5bd359/islphoto/genIsl.0_1.webp", "zoneLabel": "\ud83d\udccd Marshall HS (confirmed via FCPS Boundary Locator \u2014 different HS)", "highlights": "Newer construction", "starred": false, "lat": 38.9083157, "lng": -77.2118785, "kind": "rent", "firstSeen": "2026-07-05", "daysOnMarket": 0, "zone": "Marshall HS"}, {"addr": "1036 Carper St, Mc Lean, VA 22101", "price": "$5,900/mo", "priceNum": 5900, "beds": 4, "baths": 3, "sqft": 0, "homeType": "SFH", "source": "HotPads", "url": "https://hotpads.com/1036-carper-st-mc-lean-va-22101-sm6k72/pad", "thumb": "https://placehold.co/240x160/e8e8e8/999999?text=Photo+unavailable", "zoneLabel": "\ud83d\udccd Langley HS (confirmed via FCPS Boundary Locator \u2014 different HS)", "highlights": "", "starred": false, "lat": 38.950216, "lng": -77.1850645, "kind": "rent", "firstSeen": "2026-07-05", "daysOnMarket": null, "zone": "Langley HS"}, {"addr": "6740 Towne Lane Rd, Mc Lean, VA 22101", "price": "$1,159,900", "priceNum": 1159900, "beds": 4, "baths": 3, "sqft": 2268, "homeType": "Townhouse", "source": "Redfin", "url": "https://www.redfin.com/VA/McLean/6740-Towne-Lane-Rd-22101/home/9278003", "thumb": "https://ssl.cdn-redfin.com/photo/235/islphoto/940/genIslnoResize.VAFX2318940_1.webp", "zoneLabel": "\ud83d\udccd Langley HS (confirmed via FCPS Boundary Locator \u2014 different HS)", "highlights": "Overlooks Kings Manor Park", "starred": false, "lat": 38.9448435, "lng": -77.1767872, "kind": "sale", "firstSeen": "2026-07-05", "daysOnMarket": null, "zone": "Langley HS"}, {"addr": "1537 Cedar Ave, Mc Lean, VA 22101", "price": "$1,125,000", "priceNum": 1125000, "beds": 4, "baths": 4.5, "sqft": 3512, "homeType": "Townhouse", "source": "Redfin", "url": "https://www.redfin.com/VA/McLean/1537-Cedar-Ave-22101/home/9394800", "thumb": "https://ssl.cdn-redfin.com/photo/235/islphoto/812/genIslnoResize.VAFX2217812_6.webp", "zoneLabel": "\u2705 in McLean (confirmed via FCPS Boundary Locator)", "highlights": "Elevator; 2 fireplaces", "starred": false, "lat": 38.9308116, "lng": -77.1824738, "kind": "sale", "firstSeen": "2026-07-05", "daysOnMarket": null, "zone": "McLean HS"}, {"addr": "7328 Aynsley Ln, Mc Lean, VA 22102", "price": "$1,175,000", "priceNum": 1175000, "beds": 4, "baths": 3.5, "sqft": 2178, "homeType": "Townhouse", "source": "Redfin", "url": "https://www.redfin.com/VA/McLean/7328-Aynsley-Ln-22102/home/9400964", "thumb": "https://ssl.cdn-redfin.com/photo/235/islphoto/604/genIslnoResize.VAFX2321604_1.webp", "zoneLabel": "\u2705 in McLean (confirmed via FCPS Boundary Locator)", "highlights": "Vaulted ceilings; skylights", "starred": false, "lat": 38.9291541, "lng": -77.1982078, "kind": "sale", "firstSeen": "2026-07-05", "daysOnMarket": null, "zone": "McLean HS"}, {"addr": "1644 La Salle Ave, Mc Lean, VA 22102", "price": "$1,000,000", "priceNum": 1000000, "beds": 4, "baths": 3, "sqft": 2640, "homeType": "SFH", "source": "Redfin", "url": "https://www.redfin.com/VA/McLean/1644-La-Salle-Ave-22102/home/9396414", "thumb": "https://ssl.cdn-redfin.com/photo/235/islphoto/200/genIslnoResize.VAFX2323200_2.webp", "zoneLabel": "\u2705 in McLean (confirmed via FCPS Boundary Locator)", "highlights": "Teardown / buildable lot ~1/3 acre", "starred": false, "lat": 38.9240325, "lng": -77.1987276, "kind": "sale", "firstSeen": "2026-07-05", "daysOnMarket": null, "zone": "McLean HS"}, {"addr": "1646 La Salle Ave, Mc Lean, VA 22102", "price": "$1,000,000", "priceNum": 1000000, "beds": 4, "baths": 3, "sqft": 2640, "homeType": "SFH", "source": "Redfin", "url": "https://www.redfin.com/VA/McLean/1646-La-Salle-Ave-22102/home/9396416", "thumb": "https://ssl.cdn-redfin.com/photo/235/islphoto/256/genIslnoResize.VAFX2323256_2.webp", "zoneLabel": "\u2705 in McLean (confirmed via FCPS Boundary Locator)", "highlights": "Teardown / buildable lot ~1/3 acre", "starred": false, "lat": 38.9239082, "lng": -77.1986616, "kind": "sale", "firstSeen": "2026-07-05", "daysOnMarket": null, "zone": "McLean HS"}, {"addr": "1812 Olney Rd, Falls Church, VA 22043", "price": "$970,000", "priceNum": 970000, "beds": 4, "baths": 2.5, "sqft": 1869, "homeType": "SFH", "source": "Redfin", "url": "https://www.redfin.com/VA/Falls-Church/1812-Olney-Rd-22043/home/9398572", "thumb": "https://ssl.cdn-redfin.com/photo/235/islphoto/912/genIslnoResize.VAFX2318912_2.webp", "zoneLabel": "\ud83d\udccd Marshall HS (confirmed via FCPS Boundary Locator \u2014 different HS)", "highlights": "Recently reduced $40k", "starred": false, "lat": 38.886, "lng": -77.19, "kind": "sale", "firstSeen": "2026-07-05", "daysOnMarket": null, "zone": "Marshall HS"}, {"addr": "2814 Hyson Ln, Falls Church, VA 22043", "price": "$675,000", "priceNum": 675000, "beds": 4, "baths": 3.5, "sqft": 2016, "homeType": "Townhouse", "source": "Redfin", "url": "https://www.redfin.com/VA/Falls-Church/2814-Hyson-Ln-22043/home/9543645", "thumb": "https://ssl.cdn-redfin.com/photo/235/islphoto/616/genIslnoResize.VAFX2310616_1.webp", "zoneLabel": "\ud83d\udccd Marshall HS (confirmed via FCPS Boundary Locator \u2014 different HS)", "highlights": "Recently updated; multi-level deck", "starred": false, "lat": 38.8768034, "lng": -77.2144338, "kind": "sale", "firstSeen": "2026-07-05", "daysOnMarket": null, "zone": "Marshall HS"}, {"addr": "2542 Hillsman St, Falls Church, VA 22043", "price": "$949,000", "priceNum": 949000, "beds": 4, "baths": 3, "sqft": 1589, "homeType": "SFH", "source": "Redfin", "url": "https://www.redfin.com/VA/Falls-Church/2542-Hillsman-St-22043/home/9543170", "thumb": "https://ssl.cdn-redfin.com/photo/235/islphoto/966/genIslnoResize.VAFX2318966_2.webp", "zoneLabel": "\ud83d\udccd Marshall HS (confirmed via FCPS Boundary Locator \u2014 different HS)", "highlights": "Fenced backyard; new roof", "starred": false, "lat": 38.8826659, "lng": -77.2107752, "kind": "sale", "firstSeen": "2026-07-05", "daysOnMarket": 18, "zone": "Marshall HS"}, {"addr": "7802 Wincanton Ct, Falls Church, VA 22043", "price": "$960,000", "priceNum": 960000, "beds": 4, "baths": 2.5, "sqft": 2496, "homeType": "SFH", "source": "Redfin", "url": "https://www.redfin.com/VA/Falls-Church/7802-Wincanton-Ct-22043/home/9468105", "thumb": "https://ssl.cdn-redfin.com/photo/235/islphoto/776/genIslnoResize.VAFX2319776_0.webp", "zoneLabel": "\ud83d\udccd Marshall HS (confirmed via FCPS Boundary Locator \u2014 different HS)", "highlights": "Quiet cul-de-sac; vaulted ceilings", "starred": false, "lat": 38.883834, "lng": -77.1725914, "kind": "sale", "firstSeen": "2026-07-05", "daysOnMarket": null, "zone": "Marshall HS"}, {"addr": "7718 Trevino Ln, Falls Church, VA 22043", "price": "$649,900", "priceNum": 649900, "beds": 4, "baths": 3.5, "sqft": 2079, "homeType": "Townhouse", "source": "Redfin", "url": "https://www.redfin.com/VA/Falls-Church/7718-Trevino-Ln-22043/home/9544026", "thumb": "https://ssl.cdn-redfin.com/photo/235/islphoto/344/genIslnoResize.VAFX2317344_2.webp", "zoneLabel": "\ud83d\udccd Marshall HS (confirmed via FCPS Boundary Locator \u2014 different HS)", "highlights": "", "starred": false, "lat": 38.8788431, "lng": -77.2115688, "kind": "sale", "firstSeen": "2026-07-06", "daysOnMarket": null, "zone": "Marshall HS"}, {"addr": "2243 Kings Garden Way, Falls Church, VA 22043", "price": "$910,000", "priceNum": 910000, "beds": 4, "baths": 3.5, "sqft": 2270, "homeType": "SFH", "source": "Redfin", "url": "https://www.redfin.com/VA/Falls-Church/2243-Kings-Garden-Way-22043/home/9461704", "thumb": "https://ssl.cdn-redfin.com/system_files/media/63936_JPG/genDesktopMapHomeCardUrl/item_25.webp", "zoneLabel": "\ud83d\udccd Marshall HS (confirmed via FCPS Boundary Locator \u2014 different HS)", "highlights": "Coming soon", "starred": false, "lat": 38.9038987, "lng": -77.2086555, "kind": "sale", "firstSeen": "2026-07-10", "daysOnMarket": 7, "zone": "Marshall HS"}, {"addr": "7314 Idylwood Rd, Falls Church, VA 22043", "price": "$1,100,000", "priceNum": 1100000, "beds": 5, "baths": 4, "sqft": 2573, "homeType": "SFH", "source": "Redfin", "url": "https://www.redfin.com/VA/Falls-Church/7314-Idylwood-Rd-22043/home/9479083", "thumb": "https://ssl.cdn-redfin.com/photo/235/islphoto/632/genIslnoResize.VAFX2323632_0.webp", "zoneLabel": "\ud83d\udccd Marshall HS (confirmed via FCPS Boundary Locator \u2014 different HS)", "highlights": "Half-acre lot, well-treed land", "starred": false, "lat": 38.8981321, "lng": -77.2032232, "kind": "sale", "firstSeen": "2026-07-10", "daysOnMarket": null, "zone": "Marshall HS"}, {"addr": "6226 Hardy Dr, McLean, VA 22101", "price": "$5,900/mo", "priceNum": 5900, "beds": 5, "baths": 2.5, "sqft": 2932, "homeType": "SFH", "source": "Redfin", "url": "https://www.redfin.com/VA/McLean/6226-Hardy-Dr-22101/home/9407507", "thumb": "https://ssl.cdn-redfin.com/photo/rent/03008945-bfb2-4a90-b349-a1f019ad6954/islphoto/genIsl.0_1.webp", "zoneLabel": "\u2705 in McLean (confirmed via FCPS Boundary Locator)", "highlights": "", "starred": false, "lat": 38.9327541, "lng": -77.1541274, "kind": "rent", "firstSeen": "2026-07-10", "daysOnMarket": 4, "zone": "McLean HS"}, {"addr": "1429 Laburnum St, McLean, VA 22101", "price": "$5,000/mo", "priceNum": 5000, "beds": 5, "baths": 3, "sqft": 2055, "homeType": "SFH", "source": "Redfin", "url": "https://www.redfin.com/VA/McLean/1429-Laburnum-St-22101/home/9409494", "thumb": "https://ssl.cdn-redfin.com/photo/rent/5a8959ef-728c-4a79-9999-f6cde3ecdb4e/islphoto/genIsl.0_1.webp", "zoneLabel": "\u2705 in McLean (confirmed via FCPS Boundary Locator)", "highlights": "", "starred": false, "lat": 38.93296, "lng": -77.1383435, "kind": "rent", "firstSeen": "2026-07-10", "daysOnMarket": null, "zone": "McLean HS"}, {"addr": "8126 Dunsinane Ct, McLean, VA 22102", "price": "$5,500/mo", "priceNum": 5500, "beds": 6, "baths": 3, "sqft": 3940, "homeType": "SFH", "source": "Redfin", "url": "https://www.redfin.com/VA/McLean/8126-Dunsinane-Ct-22102/home/9375761", "thumb": "https://ssl.cdn-redfin.com/photo/rent/2e1cb18b-9095-4484-9a9b-ed03ae236e8c/islphoto/genIsl.0_1.webp", "zoneLabel": "\ud83d\udccd Langley HS (confirmed via FCPS Boundary Locator \u2014 different HS)", "highlights": "11 foot ceilings, gourmet kitchen", "starred": false, "lat": 38.9374584, "lng": -77.2279309, "kind": "rent", "firstSeen": "2026-07-10", "daysOnMarket": 1, "zone": "Langley HS"}, {"addr": "8020 Agin Ct, McLean, VA 22102", "price": "$5,800/mo", "priceNum": 5800, "beds": 5, "baths": 3, "sqft": 1560, "homeType": "SFH", "source": "Redfin", "url": "https://www.redfin.com/VA/McLean/8020-Agin-Ct-22102/home/9376239", "thumb": "https://ssl.cdn-redfin.com/photo/rent/4c94272b-834d-47e4-9c91-0e86e01f8839/islphoto/genIsl.0_1.webp", "zoneLabel": "\ud83d\udccd Langley HS (confirmed via FCPS Boundary Locator \u2014 different HS)", "highlights": "Quiet cul-de-sac, updated, light-filled open floor plan", "starred": false, "lat": 38.9397043, "lng": -77.2227118, "kind": "rent", "firstSeen": "2026-07-10", "daysOnMarket": 0, "zone": "Langley HS"}, {"addr": "7489 Carriage Hills Dr, McLean, VA 22102", "price": "$5,400/mo", "priceNum": 5400, "beds": 3, "baths": 3.5, "sqft": 2400, "homeType": "Townhouse", "source": "Redfin", "url": "https://www.redfin.com/VA/McLean/7489-Carriage-Hills-Dr-22102/home/9833507", "thumb": "https://ssl.cdn-redfin.com/photo/rent/34fca80a-6f5e-44f7-9228-08407.webp", "zoneLabel": "\u2705 in McLean (confirmed via FCPS Boundary Locator)", "highlights": "2-car garage, 4-story luxury townhouse", "starred": false, "lat": 38.9251079, "lng": -77.2004515, "kind": "rent", "firstSeen": "2026-07-10", "daysOnMarket": null, "zone": "McLean HS"}, {"addr": "2007 Hopewood Dr, Falls Church, VA 22043", "price": "$895,000", "priceNum": 895000, "beds": 3, "baths": 2.5, "sqft": 1804, "homeType": "Townhouse", "source": "Redfin", "url": "https://www.redfin.com/VA/Falls-Church/2007-Hopewood-Dr-22043/home/9475892", "thumb": "https://ssl.cdn-redfin.com/photo/235/islphoto/684/genIslnoResize.VAFX2327684_0.webp", "zoneLabel": "\u2705 in McLean (confirmed via FCPS Boundary Locator)", "highlights": "Private backyard; Granite countertops; Hardwood floors; Coming soon", "starred": false, "lat": 38.8865, "lng": -77.1975, "kind": "sale", "firstSeen": "2026-07-12", "daysOnMarket": null, "zone": "McLean HS"}, {"addr": "1309 McLean Crest Ct, McLean, VA 22101", "price": "$6,000/mo", "priceNum": 6000, "beds": 4, "baths": 4.5, "sqft": 3100, "homeType": "Townhouse", "source": "Redfin", "url": "https://www.redfin.com/VA/McLean/1309-McLean-Crest-Ct-22101/home/9395676", "thumb": "https://ssl.cdn-redfin.com/photo/rent/98810f76-a306-4872-b537-7eb0889fbe9b/islphoto/genIsl.0_1.webp", "zoneLabel": "\u2705 in McLean (confirmed via FCPS Boundary Locator)", "highlights": "Available 8/1; McLean Crest community", "starred": false, "lat": 38.9392204, "lng": -77.179323, "kind": "rent", "firstSeen": "2026-07-12", "daysOnMarket": 1, "zone": "McLean HS"}, {"addr": "6611 Rosecroft Pl, Falls Church, VA 22043", "price": "$910,000", "priceNum": 910000, "beds": 3, "baths": 3.5, "sqft": 2486, "homeType": "Townhouse", "source": "Redfin", "url": "https://www.redfin.com/VA/Falls-Church/6611-Rosecroft-Pl-22043/home/9475746", "thumb": "https://ssl.cdn-redfin.com/photo/235/islphoto/730/genIslnoResize.VAFX2328730_0.webp", "zoneLabel": "\u2705 in McLean (confirmed via FCPS Boundary Locator)", "highlights": "Updated kitchen & bathrooms; fenced backyard w/ deck", "starred": false, "lat": 38.9049, "lng": -77.1968, "kind": "sale", "firstSeen": "2026-07-15", "daysOnMarket": 0, "zone": "McLean HS"}, {"addr": "7608 Salem Rd, Falls Church, VA 22043", "price": "$1,099,900", "priceNum": 1099900, "beds": 4, "baths": 2.5, "sqft": 2775, "homeType": "SFH", "source": "Redfin", "url": "https://www.redfin.com/VA/Falls-Church/7608-Salem-Rd-22043/home/9468377", "thumb": "https://ssl.cdn-redfin.com/photo/235/islphoto/356/genIslnoResize.VAFX2323356_0.webp", "zoneLabel": "\ud83d\udccd Marshall HS (confirmed via FCPS Boundary Locator \u2014 different HS)", "highlights": "Renovated kitchen & bathrooms; recessed lighting", "starred": false, "lat": 38.9004, "lng": -77.1933, "kind": "sale", "firstSeen": "2026-07-15", "daysOnMarket": null, "zone": "Marshall HS"}, {"addr": "7348 Lewinsville Square Pl, Mclean, VA 22101", "price": "$1,195,000", "priceNum": 1195000, "beds": 3, "baths": 3.5, "sqft": 2702, "homeType": "Townhouse", "source": "Redfin", "url": "https://www.redfin.com/VA/McLean/7348-Lewinsville-Square-Pl-22101/home/9389595", "thumb": "https://ssl.cdn-redfin.com/photo/235/islphoto/610/genIslnoResize.VAFX2315610_2.webp", "zoneLabel": "\u2705 in McLean (confirmed via FCPS Boundary Locator)", "highlights": "", "starred": false, "lat": 38.9313193, "lng": -77.1980879, "kind": "sale", "firstSeen": "2026-07-15", "daysOnMarket": null, "zone": "McLean HS"}, {"addr": "1908 Great Falls St, McLean, VA 22101", "price": "$4,900/mo", "priceNum": 4900, "beds": 5, "baths": 3, "sqft": 0, "homeType": "SFH", "source": "HotPads", "url": "https://hotpads.com/1908-great-falls-st-mc-lean-va-22101-t6447j/pad", "thumb": "https://photos.zillowstatic.com/fp/1e5e6eda1a4a8e3480f512e68cd61cde-rentals_medium_500_500.webp", "zoneLabel": "\u2705 in McLean (confirmed via FCPS Boundary Locator)", "highlights": "", "starred": false, "lat": 38.9132495, "lng": -77.185684, "kind": "rent", "firstSeen": "2026-07-16", "daysOnMarket": 1, "zone": "McLean HS"}];
 const MCLEAN_GEOJSON = {"type": "MultiPolygon", "coordinates": [[[[-77.141, 38.942], [-77.13, 38.94], [-77.127, 38.94], [-77.124, 38.939], [-77.123, 38.937], [-77.121, 38.936], [-77.12, 38.934], [-77.127, 38.929], [-77.131, 38.925], [-77.134, 38.923], [-77.14, 38.919], [-77.145, 38.915], [-77.148, 38.912], [-77.155, 38.907], [-77.16, 38.903], [-77.164, 38.9], [-77.168, 38.897], [-77.172, 38.893], [-77.178, 38.894], [-77.182, 38.895], [-77.186, 38.896], [-77.191, 38.898], [-77.195, 38.898], [-77.197, 38.899], [-77.2, 38.903], [-77.198, 38.907], [-77.193, 38.911], [-77.192, 38.917], [-77.205, 38.92], [-77.209, 38.925], [-77.199, 38.932], [-77.192, 38.937], [-77.183, 38.938], [-77.174, 38.941], [-77.161, 38.942], [-77.147, 38.944], [-77.141, 38.942]]], [[[-77.194, 38.887], [-77.194, 38.887], [-77.194, 38.885], [-77.193, 38.884], [-77.192, 38.883], [-77.192, 38.881], [-77.191, 38.88], [-77.19, 38.878], [-77.196, 38.877], [-77.201, 38.876], [-77.208, 38.875], [-77.209, 38.876], [-77.209, 38.878], [-77.211, 38.878], [-77.207, 38.879], [-77.206, 38.879], [-77.206, 38.879], [-77.205, 38.88], [-77.204, 38.882], [-77.203, 38.882], [-77.201, 38.882], [-77.202, 38.884], [-77.204, 38.885], [-77.204, 38.886], [-77.203, 38.886], [-77.202, 38.887], [-77.201, 38.887], [-77.2, 38.888], [-77.199, 38.888], [-77.198, 38.889], [-77.197, 38.891], [-77.193, 38.892], [-77.191, 38.892], [-77.191, 38.892], [-77.192, 38.891], [-77.192, 38.89], [-77.193, 38.889], [-77.193, 38.888], [-77.194, 38.887]]], [[[-77.233, 38.934], [-77.229, 38.934], [-77.223, 38.934], [-77.218, 38.934], [-77.215, 38.933], [-77.213, 38.932], [-77.214, 38.931], [-77.214, 38.93], [-77.214, 38.926], [-77.216, 38.922], [-77.22, 38.92], [-77.222, 38.92], [-77.222, 38.921], [-77.222, 38.922], [-77.221, 38.922], [-77.22, 38.922], [-77.219, 38.923], [-77.218, 38.924], [-77.22, 38.926], [-77.223, 38.928], [-77.225, 38.929], [-77.227, 38.929], [-77.228, 38.929], [-77.23, 38.927], [-77.232, 38.926], [-77.235, 38.925], [-77.236, 38.924], [-77.238, 38.926], [-77.24, 38.927], [-77.241, 38.929], [-77.243, 38.93], [-77.245, 38.933], [-77.245, 38.934], [-77.241, 38.935], [-77.239, 38.934], [-77.237, 38.934], [-77.234, 38.934], [-77.233, 38.934]]]]};
+const SOLD_PICKS = [{"addr": "2023 Freedom Ln, Falls Church 22043", "price": "", "url": "", "note": "Sold \u2014 2026-06-14"}, {"addr": "1601 Colonial Hills Dr, McLean 22102", "price": "$5,500/mo", "url": "https://www.redfin.com/VA/Mc-Lean/1601-Colonial-Hills-Dr-22102/home/9833523", "note": "Rental removed \u2014 Jun 19, 2026 (confirmed via Redfin)"}, {"addr": "1335 Macbeth St, McLean 22102", "price": "", "url": "", "note": "Under contract at $1,619,000 (also over $1.2M budget) \u2014 confirmed via Redfin"}, {"addr": "2212 Reddfield Dr, Falls Church 22043", "price": "", "url": "", "note": "Rental removed \u2014 Jun 13, 2026 (confirmed via Redfin)"}, {"addr": "2406 Claremont Dr, Falls Church 22043", "price": "", "url": "", "note": "Sold Jul 1, 2026 for $999,000 (confirmed via Redfin)"}];
 
-function directionsUrl(addr) {
+function directionsUrl(addr){
   return `https://www.google.com/maps/dir/?api=1&destination=${encodeURIComponent(addr)}`;
 }
 
-function zonePillClass(zoneLabel) {
-  if (!zoneLabel) return 'unknown-zone';
-  if (zoneLabel.includes('✅')) return 'in-zone';
-  if (zoneLabel.includes('📍')) return 'out-zone';
-  return 'unknown-zone';
+// localStorage version guard — NEVER MODIFY
+const STORAGE_KEY = 'mclean_saved_picks';
+const STORAGE_VER_KEY = 'mclean_saved_picks_ver';
+const STORAGE_VER = '2'; // NEVER change — incrementing wipes all saved likes
+try {
+  if (localStorage.getItem(STORAGE_VER_KEY) !== STORAGE_VER) {
+    localStorage.removeItem(STORAGE_KEY);
+    localStorage.setItem(STORAGE_VER_KEY, STORAGE_VER);
+  }
+} catch(e) {}
+
+// PRE-SEEDED LIKED LISTINGS
+try {
+  const SEED_LIKES = {};
+  const _existing = JSON.parse(localStorage.getItem(STORAGE_KEY) || '{}');
+  const _merged = Object.assign({}, SEED_LIKES, _existing);
+  localStorage.setItem(STORAGE_KEY, JSON.stringify(_merged));
+} catch(e) {}
+
+function getSaved(){
+  try { return JSON.parse(localStorage.getItem(STORAGE_KEY) || '{}'); } catch(e){ return {}; }
+}
+function setSaved(obj){
+  try { localStorage.setItem(STORAGE_KEY, JSON.stringify(obj)); } catch(e){}
 }
 
-function cardHtml(item) {
+function toggleLike(btn, addr, price, url){
   const saved = getSaved();
-  const isLiked = !!saved[item.addr];
-  const pillClass = zonePillClass(item.zoneLabel);
-  const starClass = item.starred ? ' starred-card' : '';
+  if (saved[addr]) {
+    delete saved[addr];
+    btn.textContent = '♡';
+  } else {
+    saved[addr] = {addr, price, url, saved: new Date().toISOString().slice(0,10)};
+    btn.textContent = '❤';
+  }
+  setSaved(saved);
+  renderSavedPanel();
+}
+
+function cardHtml(item){
+  const isLiked = !!getSaved()[item.addr];
+  const pillClass = item.zoneLabel.startsWith('✅') ? 'in' : (item.zoneLabel.startsWith('📍') ? 'out' : 'unk');
+  const starClass = item.starred ? 'starred-card' : '';
   const starIcon = item.starred ? ' ⭐' : '';
   const fsbo = item.source === 'Craigslist' ? '<span class="fsbo-badge">FSBO</span>' : '';
-  const highlightsHtml = item.highlights ? `<div class="highlights">${item.highlights}</div>` : '';
-  const priceSuffix = item.kind === 'rent' ? '' : '';
-  const urlBtns = item.url ? `<a href="${item.url}" target="_blank">View listing →</a><a href="${item.url}" target="_blank">📷 Photos</a>` : '';
-  return `
-  <div class="card${starClass}">
-    <img class="thumb" src="${item.thumb}" onerror="this.onerror=null;this.src=PLACEHOLDER_THUMB;">
+  const highlightsLine = item.highlights ? `<div class="highlights-line">✨ ${item.highlights}</div>` : '';
+  const viewBtn = item.url ? `<a href="${item.url}" target="_blank">View listing →</a>` : '';
+  const photosBtn = item.url ? `<a href="${item.url}" target="_blank">📷 Photos</a>` : '';
+  return `<div class="card ${starClass}" data-addr="${item.addr}">
+    <img class="thumb" src="${item.thumb}" onerror="this.onerror=null;this.src='${PLACEHOLDER_THUMB}';" alt="">
     <div class="card-body">
-      <div class="card-top">
-        <div class="addr">${item.addr}${starIcon}<span class="pill ${pillClass}">${item.zoneLabel || '❓ Unknown'}</span>${fsbo}</div>
-      </div>
-      <div class="price">${item.price}</div>
-      <div class="meta">${item.beds ?? '?'} bd / ${item.baths ?? '?'} ba${item.sqft ? ' · ' + item.sqft.toLocaleString() + ' sq ft' : ''} · ${item.homeType || ''} · ${item.source || ''}</div>
-      <div class="schools">${item.zoneLabel || '❓ Unknown'}</div>
-      ${highlightsHtml}
+      <div class="addr-line">${item.addr}${starIcon}<span class="pill ${pillClass}">${item.zoneLabel.split(' (')[0]}</span></div>
+      <div class="price-line">${item.price}${fsbo}</div>
+      <div class="meta-line">${item.beds} bd / ${item.baths} ba${item.sqft ? ' · ' + item.sqft + ' sqft' : ''} · ${item.homeType} · ${item.source}</div>
+      <div class="schools-line">${item.zoneLabel}</div>
+      ${highlightsLine}
       <div class="card-actions">
-        ${urlBtns}
+        ${viewBtn} ${photosBtn}
         <a href="${directionsUrl(item.addr)}" target="_blank">🧭 Directions</a>
-        <button class="like-btn" data-addr="${item.addr}" onclick="toggleLike(this,'${item.addr.replace(/'/g,"\\'")}','${(item.price||'').replace(/'/g,"\\'")}','${(item.url||'').replace(/'/g,"\\'")}')">${isLiked ? '❤' : '♡'}</button>
       </div>
     </div>
+    <button class="like-btn" data-addr="${item.addr}" onclick="toggleLike(this,'${item.addr.replace(/'/g,"\\'")}','${item.price}','${item.url}')">${isLiked ? '❤' : '♡'}</button>
   </div>`;
 }
 
-function sortItems(items) {
-  const copy = items.slice();
+function sortItems(arr) {
+  const copy = arr.slice();
   if (currentSort === 'price') {
     copy.sort((a, b) => (b.starred - a.starred) || (a.priceNum - b.priceNum));
   } else {
@@ -358,132 +208,68 @@ function sortItems(items) {
 }
 
 let currentSort = 'newest';
-function setSort(mode) {
+function setSort(mode){
   currentSort = mode;
-  document.getElementById('sort-newest').classList.toggle('active', mode === 'newest');
-  document.getElementById('sort-price').classList.toggle('active', mode === 'price');
+  document.getElementById('sort-newest').classList.toggle('active', mode==='newest');
+  document.getElementById('sort-price').classList.toggle('active', mode==='price');
   renderAll();
 }
 
-function groupAndRender(kind, containerId) {
-  const container = document.getElementById(containerId);
-  const items = LISTINGS.filter(l => l.kind === kind);
-  const inZone = items.filter(l => l.zoneLabel && l.zoneLabel.includes('✅'));
-  const outZone = items.filter(l => l.zoneLabel && l.zoneLabel.includes('📍'));
-  const unknown = items.filter(l => !l.zoneLabel || (!l.zoneLabel.includes('✅') && !l.zoneLabel.includes('📍')));
-
-  let html = '';
-  if (inZone.length) {
-    html += `<div class="section-header">✅ In McLean HS Zone</div>`;
-    const beds4 = sortItems(inZone.filter(l => (l.beds||0) >= 4));
-    const beds3 = sortItems(inZone.filter(l => (l.beds||0) === 3));
-    if (beds4.length) { html += `<div class="subsection-header">4+ Beds</div>` + beds4.map(cardHtml).join(''); }
-    if (beds3.length) { html += `<div class="subsection-header">3 Beds</div>` + beds3.map(cardHtml).join(''); }
-  }
-  if (outZone.length) {
-    html += `<div class="section-header muted">📍 Outside McLean HS Zone</div>`;
-    html += sortItems(outZone).map(cardHtml).join('');
-  }
-  if (unknown.length) {
-    html += `<div class="section-header muted">❓ Unknown Zone</div>`;
-    html += sortItems(unknown).map(cardHtml).join('');
-  }
-  container.innerHTML = html || '<p style="color:#888;font-size:13px;">No listings found.</p>';
+function sectionHtml(title, arr, muted){
+  if (arr.length === 0) return '';
+  return `<div class="section-header ${muted?'muted':''}">${title} (${arr.length})</div><div class="grid">${sortItems(arr).map(cardHtml).join('')}</div>`;
 }
 
-function renderAll() {
-  groupAndRender('rent', 'rent-col');
-  groupAndRender('sale', 'sale-col');
+function renderAll(){
+  ['rent','sale'].forEach(kind=>{
+    const col = document.getElementById(kind==='rent' ? 'rent-col' : 'sale-col');
+    const all = LISTINGS.filter(i=>i.kind===kind);
+    const inZone = all.filter(i=>i.zoneLabel.startsWith('✅'));
+    const outZone = all.filter(i=>i.zoneLabel.startsWith('📍'));
+    const unknown = all.filter(i=>i.zoneLabel.startsWith('❓'));
+    const inZone4 = inZone.filter(i=>i.beds>=4);
+    const inZone3 = inZone.filter(i=>i.beds<4);
+    let html = '';
+    if (all.length < 5) html += `<div class="low-inventory">Low inventory — only ${all.length} listings found in this scan.</div>`;
+    html += sectionHtml('✅ In McLean HS Zone — 4+ beds', inZone4, false);
+    html += sectionHtml('✅ In McLean HS Zone — 3 beds', inZone3, false);
+    html += sectionHtml('📍 Outside McLean HS Zone', outZone, true);
+    html += sectionHtml('❓ Unknown Zone', unknown, true);
+    col.innerHTML = html;
+  });
   renderSavedPanel();
+  if (window.__map) renderMarkers();
 }
 
-// ---- localStorage version guard (COPY VERBATIM — NEVER MODIFY) ----
-const STORAGE_KEY = 'mclean_saved_picks';
-const STORAGE_VER_KEY = 'mclean_saved_picks_ver';
-const STORAGE_VER = '2'; // NEVER change — incrementing wipes all saved likes
-try {
-  if (localStorage.getItem(STORAGE_VER_KEY) !== STORAGE_VER) {
-    localStorage.removeItem(STORAGE_KEY);
-    localStorage.setItem(STORAGE_VER_KEY, STORAGE_VER);
-  }
-} catch(e) {}
-
-// PRE-SEEDED LIKED LISTINGS — hardcoded backup that survives localStorage wipes
-// Source: liked_listings.md | Updated: 2026-07-15
-// Merge rule: existing localStorage wins; seed fills any gaps (e.g., after a clear)
-try {
-  const SEED_LIKES = {};
-  const _existing = JSON.parse(localStorage.getItem(STORAGE_KEY) || '{}');
-  const _merged = Object.assign({}, SEED_LIKES, _existing);
-  localStorage.setItem(STORAGE_KEY, JSON.stringify(_merged));
-} catch(e) {}
-
-// SOLD_PICKS — shown in "Previously Liked — No Longer Available" section only
-const SOLD_PICKS = [{"addr": "2023 Freedom Ln, Falls Church, VA 22043", "price": "", "url": "", "note": "Sold \u2014 2026-06-14"}, {"addr": "1601 Colonial Hills Dr, McLean, VA 22102", "price": "$5,500/mo", "url": "https://www.redfin.com/VA/McLean/1601-Colonial-Hills-Dr-22102/home/9833523", "note": "Rental removed \u2014 Jun 19, 2026"}, {"addr": "1335 Macbeth St, McLean, VA 22102", "price": "$1,619,000", "url": "https://www.redfin.com/VA/McLean/1335-Macbeth-St-22102/home/9375701", "note": "Under contract \u2014 Jul 2026 (also over budget)"}, {"addr": "2212 Reddfield Dr, Falls Church, VA 22043", "price": "$5,500/mo", "url": "https://www.redfin.com/VA/Falls-Church/2212-Reddfield-Dr-22043/home/9479091", "note": "Rental removed \u2014 Jun 13, 2026"}, {"addr": "2406 Claremont Dr, Falls Church, VA 22043", "price": "$999,000", "url": "https://www.redfin.com/VA/Falls-Church/2406-Claremont-Dr-22043/home/9478326", "note": "Sold Jul 1, 2026 for $999,000"}];
-
-function getSaved() {
-  try { return JSON.parse(localStorage.getItem(STORAGE_KEY) || '{}'); } catch(e) { return {}; }
-}
-function setSaved(obj) {
-  try { localStorage.setItem(STORAGE_KEY, JSON.stringify(obj)); } catch(e) {}
-}
-
-function toggleLike(btn, addr, price, url) {
-  const saved = getSaved();
-  if (saved[addr]) {
-    delete saved[addr];
-  } else {
-    saved[addr] = {addr, price, url, saved: new Date().toISOString().slice(0,10)};
-  }
-  setSaved(saved);
-  renderAll();
-}
-
-function renderSavedPanel() {
+function renderSavedPanel(){
   const saved = getSaved();
   let dirty = false;
   Object.keys(saved).forEach(k => {
     if (!saved[k] || typeof saved[k] !== 'object') { delete saved[k]; dirty = true; }
   });
   if (dirty) setSaved(saved);
-
   const grid = document.getElementById('saved-grid');
   const entries = Object.entries(saved);
-  document.getElementById('saved-count').textContent = entries.length;
   document.getElementById('liked-count').textContent = entries.length;
-  grid.innerHTML = entries.map(([k, s]) => {
-    const addr = s.addr || s.address || k;
-    const url = s.url || s.link || '';
-    const priceLine = s.price ? `<div>${s.price}</div>` : '';
-    const linkOrText = url ? `<a href="${url}" target="_blank">View listing →</a>` : `<span>${addr}</span>`;
-    return `<div class="saved-card">
-      <div><strong>${addr}</strong></div>
-      ${priceLine}
-      <div style="margin-top:6px;display:flex;gap:6px;flex-wrap:wrap;">
-        ${linkOrText}
-        <a href="${directionsUrl(addr)}" target="_blank">🧭 Directions</a>
-      </div>
-    </div>`;
-  }).join('') || '<p style="color:#888;font-size:12px;">No liked properties yet — heart a listing to save it here.</p>';
-
+  if (entries.length === 0) {
+    grid.innerHTML = '<div style="color:#888;font-size:13px;">No liked properties yet — click the ♡ on any card.</div>';
+  } else {
+    grid.innerHTML = entries.map(([k,s])=>{
+      const addr = s.addr || s.address || k;
+      const url = s.url || s.link || '';
+      const linkOrText = url ? `<a href="${url}" target="_blank">${addr}</a>` : addr;
+      return `<div class="saved-card"><strong>${linkOrText}</strong><div>${s.price||''}</div><div><a href="${directionsUrl(addr)}" target="_blank">🧭 Directions</a></div></div>`;
+    }).join('');
+  }
   const soldGrid = document.getElementById('sold-grid');
   document.getElementById('sold-count').textContent = SOLD_PICKS.length;
-  soldGrid.innerHTML = SOLD_PICKS.map(s => {
-    const priceLine = s.price ? `<div>${s.price}</div>` : '';
-    const linkOrText = s.url ? `<a href="${s.url}" target="_blank">View listing →</a>` : `<span>${s.addr}</span>`;
-    return `<div class="saved-card sold-card">
-      <div><strong>${s.addr}</strong></div>
-      ${priceLine}
-      <div style="font-size:11px;color:#888;">${s.note || ''}</div>
-      <div style="margin-top:6px;display:flex;gap:6px;flex-wrap:wrap;">
-        ${linkOrText}
-        <a href="${directionsUrl(s.addr)}" target="_blank">🧭 Directions</a>
-      </div>
-    </div>`;
+  soldGrid.innerHTML = SOLD_PICKS.map(s=>{
+    const linkOrText = s.url ? `<a href="${s.url}" target="_blank">${s.addr}</a>` : s.addr;
+    return `<div class="saved-card sold-card"><strong>${linkOrText}</strong><div>${s.price||''}</div><div style="color:#888">${s.note||''}</div><div><a href="${directionsUrl(s.addr)}" target="_blank">🧭 Directions</a></div></div>`;
   }).join('');
 }
 
-function toggleSavedPanel() {
+function toggleSavedPanel(){
   const grid = document.getElementById('saved-grid');
   grid.style.display = grid.style.display === 'none' ? 'grid' : 'none';
 }
@@ -518,49 +304,57 @@ function exportLikes() {
   a.click();
 }
 
-function copyLiked() {
+function copyLiked(){
   const saved = getSaved();
   const lines = Object.values(saved).map(s => `${s.addr} — ${s.price||''} — ${s.url||''}`);
-  const text = lines.join('\n') || 'No liked properties yet.';
-  navigator.clipboard.writeText(text).then(() => alert('Copied ' + Object.values(saved).length + ' liked propert' + (Object.values(saved).length===1?'y':'ies') + ' to clipboard.'));
+  const text = lines.length ? lines.join('\n') : 'No liked properties yet.';
+  navigator.clipboard.writeText(text).then(()=>alert('Copied liked listings to clipboard.')).catch(()=>alert(text));
 }
 
-// ---- Map ----
-const map = L.map('map').setView([38.9150, -77.1800], 12);
-L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-  attribution: '&copy; OpenStreetMap contributors'
-}).addTo(map);
-
-if (MCLEAN_GEOJSON) {
+// Map
+function initMap(){
+  const map = L.map('map').setView([38.9150, -77.1800], 12);
+  L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+    attribution: '&copy; OpenStreetMap contributors'
+  }).addTo(map);
   L.geoJSON(MCLEAN_GEOJSON, {
-    style: { color: '#c8982a', weight: 2.5, fillColor: '#c8982a', fillOpacity: 0.07, dashArray: '6 4' }
+    style: { color:'#c8982a', weight:2.5, fillColor:'#c8982a', fillOpacity:0.07, dashArray:'6 4' }
   }).addTo(map);
+  window.__map = map;
+  window.__markers = [];
+  renderMarkers();
 }
 
-let markerCount = 0;
-LISTINGS.forEach(item => {
-  if (typeof item.lat !== 'number' || typeof item.lng !== 'number') return;
-  const color = item.starred ? '#c8982a' : (item.kind === 'rent' ? '#1565c0' : '#2e7d32');
-  const radius = item.starred ? 6 : 5;
-  const marker = L.circleMarker([item.lat, item.lng], {
-    radius: radius, color: color, fillColor: color, fillOpacity: 0.85, weight: 1
-  }).addTo(map);
-  const popupHtml = `<div class="map-popup">
-    <img src="${item.thumb}" onerror="this.onerror=null;this.src='${PLACEHOLDER_THUMB}';">
-    <strong>${item.addr}</strong><br>
-    ${item.price}<br>
-    <a href="${item.url}" target="_blank">View listing →</a><br>
-    <a href="${directionsUrl(item.addr)}" target="_blank">🧭 Directions</a>
-  </div>`;
-  marker.bindPopup(popupHtml);
-  marker.on('mouseover', function() { this.openPopup(); });
-  marker.on('mouseout', function() { this.closePopup(); });
-  markerCount++;
-});
+function renderMarkers(){
+  const map = window.__map;
+  (window.__markers||[]).forEach(m=>map.removeLayer(m));
+  window.__markers = [];
+  LISTINGS.forEach(item=>{
+    if (item.lat == null || item.lng == null) return;
+    let color = item.kind === 'rent' ? '#1565c0' : '#2e7d32';
+    if (item.starred) color = '#c8982a';
+    const marker = L.circleMarker([item.lat, item.lng], {
+      radius: item.starred ? 6 : 5,
+      color: color, fillColor: color, fillOpacity: 0.85, weight: 1
+    }).addTo(map);
+    const popupHtml = `<div style="font-size:12px;max-width:180px;">
+      <img class="popup-thumb" src="${item.thumb}" onerror="this.onerror=null;this.src='${PLACEHOLDER_THUMB}';"><br>
+      <strong>${item.addr}</strong><br>${item.price}<br>
+      ${item.url ? `<a href="${item.url}" target="_blank">View listing →</a><br>` : ''}
+      <a href="${directionsUrl(item.addr)}" target="_blank">🧭 Directions</a>
+    </div>`;
+    marker.bindPopup(popupHtml);
+    marker.on('mouseover', function(){ this.openPopup(); });
+    marker.on('mouseout', function(){ this.closePopup(); });
+    window.__markers.push(marker);
+  });
+  const cardCount = document.querySelectorAll('.card').length;
+  console.log('markers:', window.__markers.length, 'cards:', cardCount);
+}
 
-// init
 setSort('newest');
-console.log('Marker count:', markerCount, '/ Listing count with lat/lng:', LISTINGS.filter(l => typeof l.lat === 'number').length, '/ Total listings:', LISTINGS.length);
+renderAll();
+initMap();
 </script>
 </body>
 </html>
