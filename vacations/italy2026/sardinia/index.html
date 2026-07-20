@@ -164,6 +164,9 @@
   .checklist .lbl{ color:var(--gold); font-family:'IBM Plex Mono',monospace; font-size:10.5px; letter-spacing:.06em; text-transform:uppercase; display:block; margin-bottom:3px; }
   .checklist .contact{ display:block; font-family:'IBM Plex Mono',monospace; font-size:11.5px; color:var(--muted); margin-top:4px; }
   .checklist .contact a{ color:var(--gold); }
+  .checklist li.done{ opacity:0.55; }
+  .checklist li.done .lbl{ color:var(--muted); }
+  .checklist li.done::before{ content:'✅'; margin-right:2px; }
 
   footer.footer{ text-align:center; padding:36px 24px 56px; color:rgba(247,243,232,0.35); font-size:12px; font-family:'IBM Plex Mono',monospace; }
   footer.footer span{ color:var(--gold); }
@@ -203,7 +206,7 @@
   <div class="hero-eyebrow">Sardinia Leg · Aug 6–10, 2026</div>
   <h1>Four days,<br>three coasts.<span>One home base in Gallura — north, east, and northwest shorelines, each its own day</span></h1>
   <div class="hero-meta">
-    <div class="meta-chip">✈️ <strong>Arrive OLB</strong> · ~11 AM</div>
+    <div class="meta-chip">✈️ <strong>MXP → OLB</strong> · easyJet, lands 12:05 PM</div>
     <div class="meta-chip">🗓 <strong>4 nights</strong> · Aug 6–10</div>
     <div class="meta-chip">📍 Gallura, NE Sardinia — Olbia · Palau · Cala Gonone · Stintino</div>
     <div class="meta-chip">🏨 <strong>One base</strong> · Casagliana Suite Resort, Olbia</div>
@@ -302,7 +305,8 @@
           <a class="tl-gmaps-btn" href="https://www.google.com/maps/dir/?api=1&origin=Olbia+Costa+Smeralda+Airport&waypoints=40.9950,9.4550&destination=41.0000,9.6170" target="_blank" rel="noopener">🧭 Send route to Google Maps</a>
           <div class="day-weather">🌤️ <b>Weather</b> · Temp: ~30°C/86°F day, ~19–21°C/66–70°F night · Precip: rare, ~6 rainy days/month · Wind: light <span class="wx-note">(typical for August — trip is beyond the live forecast window)</span></div>
           <ul class="tl-items">
-            <li>Land at <strong>Olbia (OLB)</strong> around 11 AM, drive ~15–20 min to <strong>Casagliana Suite Resort</strong>, check in, pool time — no agenda pressure today, the trip's three big days start tomorrow</li>
+            <li>✅ <strong>Flight booked:</strong> easyJet Milan Malpensa (T2) → Olbia (T1), departs 10:45 AM, lands 12:05 PM — checked bags included</li>
+            <li>Land at <strong>Olbia (OLB)</strong> ~12:05 PM, drive ~15–20 min to <strong>Casagliana Suite Resort</strong>, check in, pool time — no agenda pressure today, the trip's three big days start tomorrow</li>
             <li>🏖 <strong>Easy beach option, close to the hotel:</strong> <a href="https://www.portodiolbia.it/en/directory/spiaggia-di-portisco" target="_blank" rel="noopener" class="title-lnk">Spiaggia di Portisco</a> and/or <a href="https://www.portodiolbia.it/en/directory/beach-cala-banana" target="_blank" rel="noopener" class="title-lnk">Cala Banana</a> — both ~15 min from Casagliana, a low-key swim for the afternoon before heading into Golfo Aranci for dinner. Cala Banana's shallow, sandy, arched cove is easy with kids and looks out at Tavolara island; Portisco has a small marina with umbrella/kayak rental if you want gear on the spot</li>
             <li>Evening in <strong>Golfo Aranci</strong>, a working 19th-century fishing village where boats still dock daily and the harbor still runs on the fishermen's schedule</li>
             <li>🍽 <strong>Can't-miss dinner:</strong> <a href="https://restaurantguru.com/Pescheria-and-Friggitoria-Del-Golfo-Golfo-Aranci" target="_blank" rel="noopener" class="title-lnk">Pescheria del Golfo</a> ★4.8 — pick your fish straight from the fishmonger's counter and they fry it fresh, served dockside in a paper tray. Casual, cash-and-carry, genuinely local — no reservations taken</li>
@@ -473,9 +477,13 @@
     <div class="section-title">Book Now Checklist</div>
     <div class="section-sub">Everything that needs advance booking for August, with direct contact info.</div>
 
-    <div class="callout warn"><strong>Two open logistics calls, flagging before you book:</strong> (1) La Pelosa now requires a paid online reservation — it didn't when this itinerary was first drafted; book 5–7 days ahead via the official site only. (2) The Maddalena and Orosei excursions weren't tied to a specific operator in the original notes — Delfino Tours and Palmasera Boat Rental below are well-reviewed options matching the islands/calas already planned, but worth confirming before booking if there's another outfit already in mind.</div>
+    <div class="callout warn"><strong>Three open logistics calls, flagging before you book:</strong> (1) La Pelosa now requires a paid online reservation — it didn't when this itinerary was first drafted; book 5–7 days ahead via the official site only. (2) The Maddalena and Orosei excursions weren't tied to a specific operator in the original notes — Delfino Tours and Palmasera Boat Rental below are well-reviewed options matching the islands/calas already planned, but worth confirming before booking if there's another outfit already in mind. (3) Casagliana Suite Resort is still unbooked — inbox shows a rejected inquiry for Aug 9–13 (different from this page's Aug 6–10 dates), so it's unclear whether those dates are actually available. Confirm availability for Aug 6–10 directly before counting on this hotel.</div>
 
     <ul class="checklist">
+      <li class="done"><span class="checkbox"></span><div>
+        <span class="lbl">Flight — Milan (MXP) → Olbia (OLB)</span>Booked — easyJet, Thu Aug 6, departs 10:45 AM, lands 12:05 PM, checked bags included · matches the plan on this page · booking reference is in the Print/Offline Copy tab
+        <span class="contact"><a href="https://www.easyjet.com/en/manage-bookings" target="_blank" rel="noopener">Manage booking at easyjet.com</a></span>
+      </div></li>
       <li><span class="checkbox"></span><div>
         <span class="lbl">Lodging — Casagliana Suite Resort</span>4 nights, Aug 6–10, Via Sole Ruju 14, Olbia
         <span class="contact">📞 <a href="tel:+390789733029">+39 0789 733029</a> &nbsp;·&nbsp; <a href="https://en.casagliana.com/609/booking-form.html" target="_blank" rel="noopener">Book online</a></span>
@@ -517,6 +525,11 @@
 
     <h3 style="font-family:'Fraunces',serif; font-size:20px; margin:28px 0 14px; color:var(--paper);">Key Contacts</h3>
 
+    <div class="contact-block">
+      <h4>Flight — Milan Malpensa (MXP) → Olbia (OLB)</h4>
+      <div class="contact-line">easyJet · Thu Aug 6, 2026 · Departs 10:45 AM (MXP Terminal 2) · Lands 12:05 PM (OLB Terminal 1) · checked bags included</div>
+      <div class="contact-line">Booking reference: KD1R7CQ &nbsp;·&nbsp; easyjet.com/en/manage-bookings</div>
+    </div>
     <div class="contact-block">
       <h4>Casagliana Suite Resort</h4>
       <div class="contact-line">Via Sole Ruju 14, Località Casagliana, 07026 Olbia (OT)</div>
@@ -563,6 +576,7 @@
     <div class="print-day">
       <h4>Day 1 · Thu Aug 6 · Arrival &amp; Golfo Aranci</h4>
       <ul>
+        <li>Flight — easyJet MXP → OLB<span class="contact-line">Departs 10:45 AM · Lands 12:05 PM · Booking ref KD1R7CQ · easyjet.com/en/manage-bookings</span></li>
         <li>Olbia Costa Smeralda Airport (OLB)<span class="contact-line">Via del Campo 9, Olbia · 📞 +39 0789 563076</span></li>
         <li>Casagliana Suite Resort<span class="contact-line">Via Sole Ruju 14, Olbia · GPS 40.9950, 9.4550 · 📞 +39 0789 733029</span></li>
         <li>Pescheria del Golfo (dinner)<span class="contact-line">Golfo Aranci · GPS 41.0000, 9.6170 · no reservations, cash-and-carry</span></li>

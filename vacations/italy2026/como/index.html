@@ -143,6 +143,9 @@
   .checklist .lbl a{ color:var(--gold); }
   .checklist .contact{ display:block; font-family:'Space Mono',monospace; font-size:11.5px; color:var(--muted); margin-top:5px; }
   .checklist .contact a{ color:var(--aqua); }
+  .checklist li.done{ opacity:0.55; }
+  .checklist li.done .lbl{ color:var(--muted); }
+  .checklist li.done::before{ content:'✅'; margin-right:2px; }
 
   .footer{ text-align:center; padding:40px 0 60px; color:var(--muted); font-size:12px; font-family:'Space Mono',monospace; border-top:1px solid var(--line); }
   .footer span{ color:var(--aqua); }
@@ -262,9 +265,8 @@
         <div class="hotel-meta-row">
           <span>📍 Strada Prov Lariana 583 n 89, 22025 Lezzeno (CO), Italy</span>
           <span>📞 <a href="tel:+390319914035">+39 031 914035</a></span>
-          <span>🔖 Conf# 64745SG029227</span>
         </div>
-        <div class="hotel-note">Two-Bedroom Residence in the annex — lake-view terrace, private beach and infinity pool on site, water-taxi service on request. Booked via Design Hotels (reservations@filario.it). 3 guests, 1 room.</div>
+        <div class="hotel-note">✅ Booked — Two-Bedroom Residence in the annex (75sqm, lake-view terrace, private beach and infinity pool on site, water-taxi service on request). Booked via Design Hotels (reservations@filario.it), 3 guests, 1 room. Confirmation number is in the Print/Offline Copy tab. Cancel or modify 21+ days before arrival to avoid a full-stay penalty.</div>
       </div>
     </div>
   </div>
@@ -465,7 +467,7 @@
       <li><span class="checkbox"></span><div><span class="lbl">Departure flight</span>Confirm airline/flight # — currently just "~3:20pm out of MXP" on file
         <span class="contact">Airline/confirmation not yet on file — add once booked</span>
       </div></li>
-      <li><span class="checkbox"></span><div><span class="lbl">Filario Hotel &amp; Residences</span>Booked — Two Bedroom Residence, Aug 10–14, Conf# 64745SG029227
+      <li class="done"><span class="checkbox"></span><div><span class="lbl">Filario Hotel &amp; Residences</span>Booked — Two Bedroom Residence, Aug 10–14 · matches the plan on this page · cancel 21+ days out to avoid a full-stay penalty · confirmation number is in the Print/Offline Copy tab
         <span class="contact">📞 <a href="tel:+390319914035">+39 031 914035</a> &nbsp;·&nbsp; <a href="mailto:reservations@filario.it">reservations@filario.it</a></span>
       </div></li>
       <li><span class="checkbox"></span><div><span class="lbl"><a href="https://www.viator.com/tours/Lake-Como/COOK-WITH-A-VIEW-VILLA-MELZI-Bellagio/d26113-254673P16" target="_blank" rel="noopener">Cook with a View cooking class</a></span>Il Perlo, Wed Aug 12 — small-group, book ahead. Product code 254673P16
