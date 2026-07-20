@@ -126,6 +126,8 @@
   .tl-items li::before{ content:'—'; position:absolute; left:0; color:var(--gold); }
   .tl-items li strong{ color:var(--paper); }
   .tl-items li.alt{ font-style:italic; opacity:0.85; }
+  .tl-items li.meal{ background:var(--pale); border-radius:6px; padding:8px 12px; margin:6px 0; }
+  .tl-items li.meal::before{ content:''; }
   .tl-items li a{ border-bottom:1px solid rgba(211,169,74,0.35); text-decoration:none; }
   .tl-items li a:hover{ color:var(--gold); }
   .day-weather{ display:flex; align-items:center; gap:10px; flex-wrap:wrap; font-family:'IBM Plex Mono',monospace; font-size:11.5px; color:var(--sea-light); background:rgba(143,207,196,0.07); border-radius:6px; padding:9px 13px; margin:10px 0 14px; }
@@ -259,7 +261,7 @@
     <table class="at-a-glance">
       <thead><tr><th>Day</th><th>Date</th><th>Base / Area</th><th>Focus</th></tr></thead>
       <tbody>
-        <tr><td data-label="Day">1</td><td data-label="Date">Thu, Aug 6</td><td data-label="Base">Olbia — Golfo Aranci</td><td data-label="Focus">Arrival ~11 AM, check in, easy evening in a fishing village</td></tr>
+        <tr><td data-label="Day">1</td><td data-label="Date">Thu, Aug 6</td><td data-label="Base">Olbia — Golfo Aranci</td><td data-label="Focus">Land ~12:05 PM, check in at Casagliana, rental car pickup, dolphin-watching + dinner in Golfo Aranci that evening</td></tr>
         <tr><td data-label="Day">2</td><td data-label="Date">Fri, Aug 7</td><td data-label="Base">Palau — Maddalena</td><td data-label="Focus">All-day (7 hr) boat excursion to the Maddalena Archipelago</td></tr>
         <tr><td data-label="Day">3</td><td data-label="Date">Sat, Aug 8</td><td data-label="Base">Cala Gonone — Orosei</td><td data-label="Focus">Charter to Cala Luna &amp; Cala Mariolu</td></tr>
         <tr><td data-label="Day">4</td><td data-label="Date">Sun, Aug 9</td><td data-label="Base">Stintino</td><td data-label="Focus">Spiaggia La Pelosa — reservation required</td></tr>
@@ -277,7 +279,7 @@
       <div class="hotel-card">
         <div class="hotel-header">
           <div class="hotel-name"><a href="https://en.casagliana.com/609/booking-form.html" target="_blank" rel="noopener">Casagliana Suite Resort</a></div>
-          <div class="hotel-dates">Thu Aug 6 (~11 AM) → Mon Aug 10</div>
+          <div class="hotel-dates">Thu Aug 6 (~12:30 PM check-in) → Mon Aug 10</div>
         </div>
         <div class="hotel-meta-row">
           <span>📍 Via Sole Ruju 14, Località Casagliana, 07026 Olbia (OT)</span>
@@ -302,17 +304,19 @@
         <div class="tl-dot">1</div>
         <div class="tl-card">
           <div class="tl-date">Thu, Aug 6 · Arrival</div>
-          <div class="tl-title">Arrival &amp; Golfo Aranci</div>
+          <div class="tl-title">Arrive &amp; Check In at Casagliana<span style="display:block;font-size:13px;font-weight:400;opacity:0.75;margin-top:2px;">Evening out in Golfo Aranci</span></div>
           <span class="tl-base">🚗 ~15–20 min OLB → Casagliana · leave for dinner by 6:30 PM</span>
           <a class="tl-gmaps-btn" href="https://www.google.com/maps/dir/?api=1&origin=Olbia+Costa+Smeralda+Airport&waypoints=40.9950,9.4550&destination=41.0000,9.6170" target="_blank" rel="noopener">🧭 Send route to Google Maps</a>
           <div class="day-weather">🌤️ <b>Weather</b> · Temp: ~30°C/86°F day, ~19–21°C/66–70°F night · Precip: rare, ~6 rainy days/month · Wind: light <span class="wx-note">(typical for August — trip is beyond the live forecast window)</span></div>
           <ul class="tl-items">
             <li>✅ <strong>Overnight flight booked:</strong> JetBlue, Washington (DCA) → Milan (MXP) via Boston (2h11m layover), departs Wed Aug 5 2:25 PM, arrives Thu Aug 6 8:10 AM local — confirmation <strong>LLBWSJ</strong> (Chase Travel Trip #1020695551), all 3 travelers, Even More fare (checked bags + carry-on + seats included)</li>
             <li>✅ <strong>Flight booked:</strong> easyJet Milan Malpensa (T2) → Olbia (T1), departs 10:45 AM, lands 12:05 PM — checked bags included. Tight-ish connection off the overnight arrival (~2.5 hrs at MXP for immigration/bags/terminal change) but workable.</li>
-            <li>Land at <strong>Olbia (OLB)</strong> ~12:05 PM, drive ~15–20 min to <strong>Casagliana Suite Resort</strong>, check in, pool time — no agenda pressure today, the trip's three big days start tomorrow</li>
+            <li>Land at <strong>Olbia (OLB)</strong> ~12:05 PM. ✅ <strong>Rental car booked</strong> — pick up at the OLB airport rental terminal (Only Sardinia Autonoleggio, ticket #056258). Drive ~15–20 min to <strong>Casagliana Suite Resort</strong>, check in, pool time — no agenda pressure today, the trip's three big days start tomorrow</li>
             <li>🏖 <strong>Easy beach option, close to the hotel:</strong> <a href="https://www.portodiolbia.it/en/directory/spiaggia-di-portisco" target="_blank" rel="noopener" class="title-lnk">Spiaggia di Portisco</a> and/or <a href="https://www.portodiolbia.it/en/directory/beach-cala-banana" target="_blank" rel="noopener" class="title-lnk">Cala Banana</a> — both ~15 min from Casagliana, a low-key swim for the afternoon before heading into Golfo Aranci for dinner. Cala Banana's shallow, sandy, arched cove is easy with kids and looks out at Tavolara island; Portisco has a small marina with umbrella/kayak rental if you want gear on the spot</li>
+            <li class="alt">Prefer to swim right in the village instead? <strong>Cinque Spiagge</strong> — Golfo Aranci's five numbered town beaches (Prima–Quinta Spiaggia), sandy and calm, all within a 10-min walk of the harbor</li>
             <li>Evening in <strong>Golfo Aranci</strong>, a working 19th-century fishing village where boats still dock daily and the harbor still runs on the fishermen's schedule</li>
-            <li>🍽 <strong>Can't-miss dinner:</strong> <a href="https://restaurantguru.com/Pescheria-and-Friggitoria-Del-Golfo-Golfo-Aranci" target="_blank" rel="noopener" class="title-lnk">Pescheria del Golfo</a> ★4.8 — pick your fish straight from the fishmonger's counter and they fry it fresh, served dockside in a paper tray. Casual, cash-and-carry, genuinely local — no reservations taken</li>
+            <li>🐬 <strong>Dolphin watching:</strong> <a href="https://www.dstsardegna.it/en/dolphin-watching/" target="_blank" rel="noopener" class="title-lnk">DST Sardegna</a>'s eco-friendly boat trip out to Figarolo Island — ~1.5 hrs, ~€37/$40pp, ~95% sighting rate thanks to a resident bottlenose pod that's frequented these waters for over a decade. Meets at their office in Golfo Aranci harbor — worth booking ahead given how high dolphins are on the list</li>
+            <li class="meal">🍽 <strong>Can't-miss dinner:</strong> <a href="https://restaurantguru.com/Pescheria-and-Friggitoria-Del-Golfo-Golfo-Aranci" target="_blank" rel="noopener" class="title-lnk">Pescheria del Golfo</a> ★4.8 — pick your fish straight from the fishmonger's counter and they fry it fresh, served dockside in a paper tray. Casual, cash-and-carry, genuinely local — no reservations taken</li>
             <li class="alt">Alternate: <a href="https://lavecchiamarina.com/" target="_blank" rel="noopener" class="title-lnk">La Vecchia Marina</a> — sit-down version, same daily catch</li>
             <li>Or, sunset stroll: the Lungomare promenade past the colorful fishermen's houses, the bronze mermaid statue, and the old port — low-key, no crowds, a good reset after travel</li>
           </ul>
@@ -330,9 +334,9 @@
           <ul class="tl-items">
             <li>All-day (~7 hr) <strong>Maddalena Islands boat excursion</strong> — leaving Casagliana by 8:00 AM gets you into Palau ~8:45, with time for breakfast before most operators' mid-morning boarding</li>
             <li>Recommended operator: <a href="https://gitearcipelago.it/en/" target="_blank" rel="noopener" class="title-lnk">Delfino Tours</a> — daily excursions to Spargi, Budelli, La Maddalena &amp; Santa Maria, with a stop at the Pink Beach (Spiaggia Rosa) view</li>
-            <li>🍽 <strong>Breakfast before boarding:</strong> <a href="https://www.tripadvisor.com/Restaurant_Review-g562810-d2201097-Reviews-Le_Dolcezze_Napoletane-Palau_Province_of_Olbia_Tempio_Sardinia.html" target="_blank" rel="noopener" class="title-lnk">Le Dolcezze Napoletane</a> ★4.5 (632 reviews), #1 of 77 in Palau — Neapolitan pastry shop steps from the ferry dock, Via Nazionale 48</li>
+            <li class="meal">🍽 <strong>Breakfast before boarding:</strong> <a href="https://www.tripadvisor.com/Restaurant_Review-g562810-d2201097-Reviews-Le_Dolcezze_Napoletane-Palau_Province_of_Olbia_Tempio_Sardinia.html" target="_blank" rel="noopener" class="title-lnk">Le Dolcezze Napoletane</a> ★4.5 (632 reviews), #1 of 77 in Palau — Neapolitan pastry shop steps from the ferry dock, Via Nazionale 48</li>
             <li class="alt">Alternate: Cafe del Mar — ★4.5, sit-down with sea views</li>
-            <li>🍽 <strong>Can't-miss dinner, back in Palau:</strong> <a href="https://www.cucumiao.it/en/" target="_blank" rel="noopener" class="title-lnk">CuCumiao</a> ★4.3 (2,500+ reviews) — traditional Gallurese/seafood, handles a full evening crowd well without dropping quality</li>
+            <li class="meal">🍽 <strong>Can't-miss dinner, back in Palau:</strong> <a href="https://www.cucumiao.it/en/" target="_blank" rel="noopener" class="title-lnk">CuCumiao</a> ★4.3 (2,500+ reviews) — traditional Gallurese/seafood, handles a full evening crowd well without dropping quality</li>
             <li class="alt">Alternate: <a href="https://www.obelau.com/" target="_blank" rel="noopener" class="title-lnk">O'Belau Ristorante</a> — ★4.4, book ahead</li>
             <li class="alt">If there's daylight left: <strong>Santa Teresa Gallura</strong>, 20–25 min north of Palau — Piazza Vittorio Emanuele and the old center for a walk, Rena Bianca beach for a look, Capo Testa granite headland toward Corsica at sunset. Otherwise, save it for its own morning</li>
           </ul>
@@ -350,9 +354,9 @@
           <ul class="tl-items">
             <li>The furthest day-trip base on this itinerary, so an early start pays off — leaving Casagliana by 6:45 AM gets you to Cala Gonone ~8:10–8:20, time for breakfast before a typical 9:00 AM charter departure</li>
             <li>Recommended operator: <a href="https://www.palmaseraboatrental.com/en/" target="_blank" rel="noopener" class="title-lnk">Palmasera Boat Rental</a> — Piazza del Porto Box 14, visits Cala Luna, Cala Mariolu, and the other calas in the Gulf of Orosei</li>
-            <li>🍽 <strong>Breakfast at the harbor:</strong> <a href="https://www.google.com/maps/search/Bar+Puddu+Cala+Gonone" target="_blank" rel="noopener" class="title-lnk">Bar Puddu</a> ★4.6 — technically attached to a gas station, don't let that fool you: garden setting, sweeping Gulf of Orosei views, excellent coffee and paninis you can take onto the boat. Viale Colombo 1</li>
+            <li class="meal">🍽 <strong>Breakfast at the harbor:</strong> <a href="https://www.google.com/maps/search/Bar+Puddu+Cala+Gonone" target="_blank" rel="noopener" class="title-lnk">Bar Puddu</a> ★4.6 — technically attached to a gas station, don't let that fool you: garden setting, sweeping Gulf of Orosei views, excellent coffee and paninis you can take onto the boat. Viale Colombo 1</li>
             <li class="alt">Alternate: Garden Bar — ★3.8, central, simpler</li>
-            <li>🍽 <strong>Lunch after the charter:</strong> <a href="https://www.google.com/maps/search/Il+Nuovo+Gabbiano+Cala+Gonone" target="_blank" rel="noopener" class="title-lnk">Il Nuovo Gabbiano</a> ★4.1 (1,555 reviews) — right on the water, order the catch of the day off a working fishing harbor</li>
+            <li class="meal">🍽 <strong>Lunch after the charter:</strong> <a href="https://www.google.com/maps/search/Il+Nuovo+Gabbiano+Cala+Gonone" target="_blank" rel="noopener" class="title-lnk">Il Nuovo Gabbiano</a> ★4.1 (1,555 reviews) — right on the water, order the catch of the day off a working fishing harbor</li>
             <li class="alt">Alternate: La Poltrona — ★4.2, good backup if Gabbiano's full</li>
             <li>Pack reef/water shoes for the calas — rocky entry at Cala Mariolu</li>
           </ul>
@@ -371,8 +375,8 @@
             <li>La Pelosa sits on the far northwest tip of the island — the furthest point on this itinerary</li>
             <li>⚠️ <strong>Leaving later (8:30–9:00 AM) means arriving ~10:45–11:15 AM</strong> — past the ~8–9 AM window locals use specifically to beat the parking crunch; the main lot (~320 car spaces, €2–2.50/hr) reportedly fills by ~10 AM in August. The beach itself isn't at risk (1,500-visitor cap via reservations, entry open until 6 PM), but if the lot's full, overflow is roadside parking further back along the access road toward Stintino — up to ~2 km away, a 20–25 min walk in full midday sun (~30°C). A quick taxi from Stintino village is the easiest way to skip that walk if it comes to it</li>
             <li>⚠️ <strong>Requires an online entry reservation</strong> — timed QR-code entry, 8 AM–6 PM, daily cap 1,500 visitors, €3.50 pp (kids under 12 free, not counted in the reservation). 500 of the 1,500 spots can be booked any time with no advance-window limit (even months out, and for a run of consecutive days); the remaining 1,000 release 48 hrs before each date, opening at 8:00 AM two days prior. Book the no-limit allocation now rather than gambling on the 48-hr release in peak season. Book via <a href="https://spiaggialapelosa.it/en/" target="_blank" rel="noopener" class="title-lnk">spiaggialapelosa.it</a> (the only authorized site)</li>
-            <li>🍽 <strong>Coffee on arrival:</strong> <a href="https://www.google.com/maps/search/Bar+I+Ginepri+Stintino" target="_blank" rel="noopener" class="title-lnk">Bar I Ginepri</a> — terrace bar right over the beach, good for a coffee and pastry before claiming a spot on the sand</li>
-            <li>🍽 <strong>Easy lunch, beachfront:</strong> Bar I Ginepri terrace — panini and light Sardinian plates, steps from the water, no need to leave the beach</li>
+            <li class="meal">🍽 <strong>Coffee on arrival:</strong> <a href="https://www.google.com/maps/search/Bar+I+Ginepri+Stintino" target="_blank" rel="noopener" class="title-lnk">Bar I Ginepri</a> — terrace bar right over the beach, good for a coffee and pastry before claiming a spot on the sand</li>
+            <li class="meal">🍽 <strong>Easy lunch, beachfront:</strong> Bar I Ginepri terrace — panini and light Sardinian plates, steps from the water, no need to leave the beach</li>
             <li class="alt">Alternate: <a href="https://lapelosettarestaurant.it" target="_blank" rel="noopener" class="title-lnk">La Pelosetta</a> — ★3.6, fuller sit-down menu (seafood pasta, wood-oven pizza)</li>
             <li>Sun protection — shade is limited on the beach and worth having in the car for the long drive back</li>
           </ul>
@@ -391,6 +395,7 @@
             <li>⏳ <strong>Flight priced but not purchased:</strong> Aeroitalia XZ2624, OLB → Milan Linate (LIN), departs 2:10 PM, arrives 3:20 PM, ~€179.97 for 3 (2 adults + 1 child) on the Classic fare. Classic includes only carry-on (large cabin trolley + small under-seat bag) — <strong>no checked bag</strong>. Decide before booking: add a checked bag under the "Bags" tab, or upgrade to Biz (32kg checked bag included).</li>
             <li>With a ~2:10 PM departure, the morning has real breathing room — just not enough for a full Golfo Aranci detour on top of checkout</li>
             <li>Breakfast &amp; pool at the resort, checkout by 11:30 AM, depart hotel by 12:00–12:15 PM, straight to OLB (~15–20 min) — arrives with a ~90 min buffer, enough but not extra</li>
+            <li>🚗 <strong>Rental car drop-off:</strong> return to the Only Sardinia Autonoleggio counter at the OLB airport rental terminal, due back by 12:00 PM (rental runs Aug 6 12:00 → Aug 10 12:00) — same stop as the airport drive above</li>
             <li class="alt">Once purchased: lock the checkout time as a hard deadline in Todoist rather than a range</li>
           </ul>
         </div>
@@ -433,6 +438,12 @@
         <div class="card-eyebrow">Day 1 · Golfo Aranci</div>
         <h3>Golfo Aranci Lungomare</h3>
         <p>Not a swim beach, but the harborfront promenade past the colorful fishermen's houses and the bronze mermaid statue — free, low-key, a good arrival-evening reset.</p>
+        <div class="poi-actions"><a class="dir" href="https://www.google.com/maps/dir/?api=1&destination=41.0000,9.6170" target="_blank" rel="noopener">🧭 Directions</a></div>
+      </div>
+      <div class="card">
+        <div class="card-eyebrow">Day 1 · Right in the village, 10-min walk from the harbor</div>
+        <h3>Cinque Spiagge</h3>
+        <p>Golfo Aranci's own five numbered town beaches — Prima, Seconda, Terza, Quarta &amp; Quinta Spiaggia, running along the seafront right in the village. Sandy and calm, no drive needed if you're already in town for the evening.</p>
         <div class="poi-actions"><a class="dir" href="https://www.google.com/maps/dir/?api=1&destination=41.0000,9.6170" target="_blank" rel="noopener">🧭 Directions</a></div>
       </div>
       <div class="card">
@@ -509,6 +520,9 @@
 
     <div class="book-group-label">Excursions</div>
     <ul class="checklist">
+      <li data-book-id="dolphin-watching-dst"><span class="checkbox"></span><div>
+        <span class="lbl"><a href="https://www.dstsardegna.it/en/dolphin-watching/" target="_blank" rel="noopener">Dolphin watching — DST Sardegna</a></span>Thu Aug 6 evening (Day 1) from Golfo Aranci harbor — ~1.5 hrs, ~€37/$40pp, ~95% sighting rate. High priority given dolphins are top of the list — book ahead.
+      </div></li>
       <li data-book-id="maddalena-delfino"><span class="checkbox"></span><div>
         <span class="lbl"><a href="https://gitearcipelago.it/en/" target="_blank" rel="noopener">Maddalena Islands boat excursion — Delfino Tours</a> <a class="tel-ico" href="tel:+393348520671" title="Call">📞</a></span>~7 hr, Fri Aug 7 from Palau — Spargi, Santa Maria, Pink Beach view. Not tied to a specific operator in the original notes — this one's a well-reviewed match, worth confirming if another outfit is already in mind.
       </div></li>
@@ -567,6 +581,11 @@
       <div class="contact-line">book.aeroitalia.com</div>
     </div>
     <div class="contact-block">
+      <h4>DST Sardegna — dolphin watching, Day 1</h4>
+      <div class="contact-line">Golfo Aranci harbor (OT)</div>
+      <div class="contact-line">dstsardegna.it/en/dolphin-watching &nbsp;·&nbsp; ~1.5 hrs, ~€37/$40pp, ~95% sighting rate</div>
+    </div>
+    <div class="contact-block">
       <h4>Delfino Tours — Maddalena Islands boat excursion</h4>
       <div class="contact-line">Piazza del Molo, Palau (OT)</div>
       <div class="contact-line">📞 +39 334 852 0671 &nbsp;·&nbsp; gitearcipelago.it</div>
@@ -600,7 +619,9 @@
         <li>Overnight flight — JetBlue DCA → MXP via BOS<span class="contact-line">Departs Wed 2:25 PM · Arrives Thu 8:10 AM · Confirmation LLBWSJ · Chase Travel Trip #1020695551</span></li>
         <li>Flight — easyJet MXP → OLB<span class="contact-line">Departs 10:45 AM · Lands 12:05 PM · Booking ref KD1R7CQ · easyjet.com/en/manage-bookings</span></li>
         <li>Olbia Costa Smeralda Airport (OLB)<span class="contact-line">Via del Campo 9, Olbia · 📞 +39 0789 563076</span></li>
+        <li>Only Sardinia Autonoleggio (rental car pickup)<span class="contact-line">OLB airport rental terminal · ticket #056258 · 📞 +39 0789 68947</span></li>
         <li>Casagliana Suite Resort<span class="contact-line">Via Sole Ruju 14, Olbia · GPS 40.9950, 9.4550 · 📞 +39 0789 733029</span></li>
+        <li>DST Sardegna (dolphin watching)<span class="contact-line">Golfo Aranci harbor · dstsardegna.it/en/dolphin-watching</span></li>
         <li>Pescheria del Golfo (dinner)<span class="contact-line">Golfo Aranci · GPS 41.0000, 9.6170 · no reservations, cash-and-carry</span></li>
         <li>La Vecchia Marina (dinner alt.)<span class="contact-line">Golfo Aranci · lavecchiamarina.com</span></li>
       </ul>
@@ -637,6 +658,7 @@
       <h4>Day 5 · Mon Aug 10 · Departure</h4>
       <ul>
         <li>Casagliana Suite Resort (checkout)<span class="contact-line">Via Sole Ruju 14, Olbia · 📞 +39 0789 733029</span></li>
+        <li>Only Sardinia Autonoleggio (rental car drop-off)<span class="contact-line">OLB airport rental terminal · due back 12:00 PM · 📞 +39 0789 68947</span></li>
         <li>Olbia Costa Smeralda Airport (OLB)<span class="contact-line">Via del Campo 9, Olbia · 📞 +39 0789 563076</span></li>
         <li>Flight — Aeroitalia XZ2624, OLB → LIN<span class="contact-line">Departs 2:10 PM · Arrives 3:20 PM · ~€179.97 for 3, Classic fare · priced, not yet purchased · book.aeroitalia.com</span></li>
       </ul>
@@ -666,7 +688,7 @@
 
   var points = [
     {lat:40.9950, lng:9.4550, name:"Casagliana Suite Resort", note:"Home base — Via Sole Ruju 14, Olbia", color:"#D3A94A", site:"https://en.casagliana.com/609/booking-form.html"},
-    {lat:41.0000, lng:9.6170, name:"Golfo Aranci", note:"Day 1 — fishing village, evening stroll + Pescheria del Golfo", color:"#3E9C93", img:"https://commons.wikimedia.org/wiki/Special:FilePath/Golfo%20Aranci%20-%20porto.jpg?width=400"},
+    {lat:41.0000, lng:9.6170, name:"Golfo Aranci", note:"Day 1 — fishing village, dolphin watching (DST Sardegna) + dinner at Pescheria del Golfo. Cinque Spiagge (5 town beaches) right here too.", color:"#3E9C93", img:"https://commons.wikimedia.org/wiki/Special:FilePath/Golfo%20Aranci%20-%20porto.jpg?width=400", site:"https://www.dstsardegna.it/en/dolphin-watching/"},
     {lat:41.0350234, lng:9.52276, name:"Spiaggia di Portisco", note:"Day 1 — easy afternoon swim, ~15 min from Casagliana, marina + kayak/umbrella rental", color:"#3E9C93", site:"https://www.portodiolbia.it/en/directory/spiaggia-di-portisco"},
     {lat:40.9609318, lng:9.5834311, name:"Cala Banana", note:"Day 1 — easy afternoon swim, ~15 min from Casagliana, shallow sandy cove, views to Tavolara", color:"#3E9C93", site:"https://www.portodiolbia.it/en/directory/beach-cala-banana"},
     {lat:41.1791, lng:9.3872, name:"Palau", note:"Day 2 — Maddalena Islands boat departure point", color:"#8FCFC4", img:"https://commons.wikimedia.org/wiki/Special:FilePath/Sardinia%20Palau%20Marina%20FdS.jpg?width=400"},
