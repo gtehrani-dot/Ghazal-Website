@@ -135,6 +135,9 @@
   .poi-actions a.tel{ background:rgba(244,192,93,0.14); color:var(--gold); }
 
   /* ── BOOK NOW ── */
+  .book-group-label{ font-family:'Space Mono',monospace; font-size:11px; letter-spacing:.1em; text-transform:uppercase; color:var(--gold); margin:30px 0 6px; display:flex; align-items:center; gap:10px; }
+  .book-group-label:first-child{ margin-top:0; }
+  .book-group-label::after{ content:''; flex:1; height:1px; background:var(--line); }
   .checklist{ list-style:none; }
   .checklist li{ display:flex; gap:14px; align-items:flex-start; padding:16px 0; border-bottom:1px solid var(--line); font-size:14.5px; color:rgba(251,246,234,0.85); }
   .checklist li:last-child{ border-bottom:none; }
@@ -469,6 +472,14 @@
       <strong>Arrival routing decided — LIN + Varenna:</strong> Flying into <strong>Milan Linate (LIN)</strong>, shared shuttle bus to Milano Centrale (~25 min), train to Varenna-Esino (~1 hr, scenic lake-shore approach), ferry to Bellagio (~15 min), then the C130 bus to the <strong>Pescaù–Bivio Bagnana</strong> stop nearest Filario. Chosen over Malpensa + car via Como town for the more scenic approach. Flight itself still needs booking.
     </div>
 
+    <div class="book-group-label">Accommodations</div>
+    <ul class="checklist">
+      <li class="done"><span class="checkbox"></span><div><span class="lbl">Filario Hotel &amp; Residences</span>Booked — Two Bedroom Residence, Aug 10–14 · matches the plan on this page · cancel 21+ days out to avoid a full-stay penalty · confirmation number is in the Print/Offline Copy tab
+        <span class="contact">📞 <a href="tel:+390319914035">+39 031 914035</a> &nbsp;·&nbsp; <a href="mailto:reservations@filario.it">reservations@filario.it</a></span>
+      </div></li>
+    </ul>
+
+    <div class="book-group-label">Transportation</div>
     <ul class="checklist">
       <li><span class="checkbox"></span><div><span class="lbl">Arrival flight — Milan Linate (LIN)</span>Routing decided (see callout above): shuttle bus + train + ferry + C130 bus into Lezzeno. Just need to book the flight itself.
         <span class="contact">No contact yet — this is a flight booking, not a routing decision</span>
@@ -476,22 +487,7 @@
       <li class="done"><span class="checkbox"></span><div><span class="lbl">Departure flight</span>Booked — United, MXP → ORD → DCA, Fri Aug 14, departs 3:20 PM MXP, arrives 10:52 PM DCA, confirmation CTVQ69, all 3 travelers
         <span class="contact"><a href="https://www.united.com/en/us/manageres/mytrips" target="_blank" rel="noopener">Manage booking at united.com</a></span>
       </div></li>
-      <li class="done"><span class="checkbox"></span><div><span class="lbl">Filario Hotel &amp; Residences</span>Booked — Two Bedroom Residence, Aug 10–14 · matches the plan on this page · cancel 21+ days out to avoid a full-stay penalty · confirmation number is in the Print/Offline Copy tab
-        <span class="contact">📞 <a href="tel:+390319914035">+39 031 914035</a> &nbsp;·&nbsp; <a href="mailto:reservations@filario.it">reservations@filario.it</a></span>
-      </div></li>
-      <li><span class="checkbox"></span><div><span class="lbl"><a href="https://www.viator.com/tours/Lake-Como/COOK-WITH-A-VIEW-VILLA-MELZI-Bellagio/d26113-254673P16" target="_blank" rel="noopener">Cook with a View cooking class</a></span>Il Perlo, Wed Aug 12 — small-group, book ahead. Product code 254673P16
-        <span class="contact">📞 <a href="tel:+18552755071">+1 855 275 5071</a> (Viator) &nbsp;·&nbsp; <a href="https://www.viator.com/tours/Lake-Como/COOK-WITH-A-VIEW-VILLA-MELZI-Bellagio/d26113-254673P16" target="_blank" rel="noopener">Book online</a></span>
-      </div></li>
-      <li><span class="checkbox"></span><div><span class="lbl"><a href="https://www.cavatappivarenna.it/" target="_blank" rel="noopener">Il Cavatappi</a> — Varenna lunch</span>Thu Aug 13. Dinner reservations accepted by phone; lunch tends to be walk-in, so arrive early
-        <span class="contact">📞 <a href="tel:+390341815349">+39 0341 815349</a></span>
-      </div></li>
-      <li><span class="checkbox"></span><div><span class="lbl"><a href="https://osteriailgoverno.com/en/" target="_blank" rel="noopener">Osteria Il Governo 1801</a> — last-night dinner</span>Thu Aug 13, Lezzeno
-        <span class="contact">📞 <a href="tel:+390315478129">+39 031 5478129</a> &nbsp;·&nbsp; <a href="https://osteriailgoverno.com/en/" target="_blank" rel="noopener">Website</a></span>
-      </div></li>
-      <li><span class="checkbox"></span><div><span class="lbl">Trattoria San Giacomo</span>Tue Aug 11 — no reservations taken, call only with questions
-        <span class="contact">📞 <a href="tel:+39031950329">+39 031 950329</a></span>
-      </div></li>
-      <li><span class="checkbox"></span><div><span class="lbl"><a href="https://www.taxilezzeno.com/transfer-to-hotel-filario/" target="_blank" rel="noopener">Taxi Lezzeno</a> — private car to MXP</span>Fri Aug 14 departure, book once the flight is confirmed
+      <li><span class="checkbox"></span><div><span class="lbl"><a href="https://www.taxilezzeno.com/transfer-to-hotel-filario/" target="_blank" rel="noopener">Taxi Lezzeno</a> — private car to MXP</span>Fri Aug 14 departure — flight is now confirmed (3:20 PM), so this can be booked
         <span class="contact">📞 <a href="tel:+39329703270">+39 329 703 270</a> &nbsp;·&nbsp; <a href="mailto:info@taxilezzeno.com">info@taxilezzeno.com</a></span>
       </div></li>
       <li><span class="checkbox"></span><div><span class="lbl"><a href="https://www.navigazionelaghi.it/en/tickets-and-timetables-lake-como/" target="_blank" rel="noopener">Bellagio–Varenna ferry</a></span>Thu Aug 13 — single crossings don't need advance booking, but check the current timetable (valid Jul 1–Oct 4, 2026)
@@ -500,8 +496,28 @@
       <li><span class="checkbox"></span><div><span class="lbl"><a href="https://www.asfautolinee.it/wp-content/uploads/pdf/estivo/C130.pdf" target="_blank" rel="noopener">C130 bus</a> (signed locally as "C30") — Pescaù–Bivio Bagnana ↔ Bellagio</span>No booking needed, pay on board — nearest stop to Filario is <strong>Pescaù–Bivio Bagnana</strong>, confirmed directly by the hotel (not Lezzeno–Piazza Roma). Current schedule linked is the Aug 3–30, 2026 reduced-summer timetable that covers this whole trip; worth a quick double-check with the front desk at check-in in case of last-minute changes
         <span class="contact">📞 <a href="tel:+390312471111">+39 031 247 111</a> &nbsp;·&nbsp; <a href="https://www.asfautolinee.it/wp-content/uploads/pdf/estivo/C130.pdf" target="_blank" rel="noopener">Current schedule (PDF)</a></span>
       </div></li>
+    </ul>
+
+    <div class="book-group-label">Excursions</div>
+    <ul class="checklist">
+      <li><span class="checkbox"></span><div><span class="lbl"><a href="https://www.viator.com/tours/Lake-Como/COOK-WITH-A-VIEW-VILLA-MELZI-Bellagio/d26113-254673P16" target="_blank" rel="noopener">Cook with a View cooking class</a></span>Il Perlo, Wed Aug 12 — small-group, book ahead. Product code 254673P16
+        <span class="contact">📞 <a href="tel:+18552755071">+1 855 275 5071</a> (Viator) &nbsp;·&nbsp; <a href="https://www.viator.com/tours/Lake-Como/COOK-WITH-A-VIEW-VILLA-MELZI-Bellagio/d26113-254673P16" target="_blank" rel="noopener">Book online</a></span>
+      </div></li>
       <li><span class="checkbox"></span><div><span class="lbl"><a href="https://www.giardinidivillamelzi.it/en/home2/" target="_blank" rel="noopener">Villa Melzi Gardens</a></span>Wed Aug 12 — no reservation needed for general entry (already bundled with the cooking-class ticket); guided tours need an email in advance
         <span class="contact">📞 <a href="tel:+393334877427">+39 333 487 7427</a> &nbsp;·&nbsp; <a href="mailto:visite@giardinidivillamelzi.it">visite@giardinidivillamelzi.it</a></span>
+      </div></li>
+    </ul>
+
+    <div class="book-group-label">Restaurants</div>
+    <ul class="checklist">
+      <li><span class="checkbox"></span><div><span class="lbl"><a href="https://www.cavatappivarenna.it/" target="_blank" rel="noopener">Il Cavatappi</a> — Varenna lunch</span>Thu Aug 13. Dinner reservations accepted by phone; lunch tends to be walk-in, so arrive early
+        <span class="contact">📞 <a href="tel:+390341815349">+39 0341 815349</a></span>
+      </div></li>
+      <li><span class="checkbox"></span><div><span class="lbl"><a href="https://osteriailgoverno.com/en/" target="_blank" rel="noopener">Osteria Il Governo 1801</a> — last-night dinner</span>Thu Aug 13, Lezzeno
+        <span class="contact">📞 <a href="tel:+390315478129">+39 031 5478129</a> &nbsp;·&nbsp; <a href="https://osteriailgoverno.com/en/" target="_blank" rel="noopener">Website</a></span>
+      </div></li>
+      <li><span class="checkbox"></span><div><span class="lbl">Trattoria San Giacomo</span>Tue Aug 11 — no reservations taken, call only with questions
+        <span class="contact">📞 <a href="tel:+39031950329">+39 031 950329</a></span>
       </div></li>
     </ul>
   </div>
