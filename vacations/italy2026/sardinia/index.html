@@ -3,7 +3,9 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Sardinia — Aug 6–10</title>
+<meta name="color-scheme" content="dark only">
+<meta name="theme-color" content="#0E2A2E">
+<title>Sardinia · Aug 6–10, 2026</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=Inter:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
@@ -17,572 +19,631 @@
     --granite-deep:#B65E48;
     --sand:#EFE6CE;
     --gold:#D3A94A;
+    --gold-deep:#B8862F;
     --paper:#F7F3E8;
+    --muted: rgba(247,243,232,0.62);
+    --card: rgba(247,243,232,0.035);
+    --card-hover: rgba(247,243,232,0.06);
     --line: rgba(239,230,206,0.18);
+    --pale: rgba(211,169,74,0.10);
   }
-  *{box-sizing:border-box;}
-  html,body{margin:0;padding:0;}
-  body{
-    background: var(--ink);
-    color: var(--sand);
-    font-family:'Inter',sans-serif;
-    -webkit-font-smoothing:antialiased;
-  }
+  *{box-sizing:border-box; margin:0; padding:0;}
+  html{ background:var(--ink); color-scheme:dark only; }
+  body{ background:var(--ink); color:var(--paper); font-family:'Inter',sans-serif; line-height:1.55; -webkit-font-smoothing:antialiased; min-height:100vh; }
   ::selection{ background: var(--gold); color:var(--ink); }
-  .wrap{ max-width:1180px; margin:0 auto; padding: 0 24px; }
+  h1,h2,h3,.display{ font-family:'Fraunces', serif; }
+  .mono{ font-family:'IBM Plex Mono', monospace; }
+  a{ color:var(--gold); }
+  img{ max-width:100%; display:block; }
+  .wrap{ max-width:1180px; margin:0 auto; padding:0 24px; }
 
-  /* ---------- HERO ---------- */
-  .hero{
-    position:relative;
-    min-height: 380px;
-    display:flex; align-items:flex-end;
-    background-image:
-      linear-gradient(180deg, rgba(14,42,46,0.22) 0%, rgba(14,42,46,0.42) 55%, rgba(14,42,46,0.78) 100%),
-      url('https://commons.wikimedia.org/wiki/Special:FilePath/La%20Pelosa%20beach%2C%20north%20Sardinia%20(Italy)%20(24167750496).jpg');
-    background-size: cover;
-    background-position: center 60%;
-    border-bottom: 1px solid var(--line);
-  }
-  .hero-inner{ max-width:1180px; margin:0 auto; position:relative; padding: 64px 24px 36px; width:100%; }
-  .eyebrow{
-    font-family:'IBM Plex Mono', monospace;
-    font-size:12px; letter-spacing:.14em; text-transform:uppercase;
-    color: var(--sea-light); margin:0 0 18px;
-    display:flex; align-items:center; gap:10px;
-  }
-  .eyebrow::before{ content:""; width:26px; height:1px; background: var(--sea-light); display:inline-block; }
-  h1.title{
-    font-family:'Fraunces', serif;
-    font-weight:600;
-    font-size: clamp(38px, 6vw, 68px);
-    line-height: 0.98;
-    margin: 0 0 14px;
-    color: var(--paper);
-    letter-spacing:-0.01em;
-    text-shadow: 0 2px 18px rgba(0,0,0,0.35);
-  }
-  h1.title em{ font-style:italic; color: var(--granite); font-weight:500; }
-  .subhead{
-    font-size:17px; line-height:1.6; max-width: 620px; color: rgba(247,243,232,0.85);
-    margin: 0 0 26px;
-  }
-  .base-card{
-    display:flex; flex-wrap:wrap; gap:28px;
-    background: rgba(14,42,46,0.55);
-    border: 1px solid var(--line);
-    border-radius: 4px;
-    padding: 18px 24px;
-    backdrop-filter: blur(4px);
-  }
-  .base-item .k{ font-family:'IBM Plex Mono',monospace; font-size:10.5px; letter-spacing:.1em; text-transform:uppercase; color: var(--sea-light); display:block; margin-bottom:5px;}
-  .base-item .v{ font-size:15px; color: var(--paper); font-weight:500; }
-  .base-item a{ color: var(--gold); text-decoration:none; border-bottom:1px solid rgba(211,169,74,0.4); }
-  .base-item a:hover{ border-color: var(--gold); }
-  .photo-credit{ font-family:'IBM Plex Mono',monospace; font-size:10px; color: rgba(247,243,232,0.4); text-align:right; padding: 4px 24px 0; max-width:1180px; margin:0 auto; }
+  /* ── TOP BAR / HERO ── */
+  .topbar{ max-width:1180px; margin:0 auto; padding:48px 24px 24px; }
+  .hero-eyebrow{ font-family:'IBM Plex Mono',monospace; font-size:11.5px; letter-spacing:.24em; text-transform:uppercase; color:var(--sea-light); margin-bottom:14px; display:flex; align-items:center; gap:10px; }
+  .hero-eyebrow::before{ content:""; width:26px; height:1px; background:var(--sea-light); display:inline-block; }
+  .topbar h1{ font-size:clamp(36px,6vw,64px); font-weight:600; line-height:1.0; color:var(--paper); letter-spacing:-0.01em; }
+  .topbar h1 span{ display:block; font-style:italic; font-weight:400; color:var(--gold); font-size:0.42em; margin-top:12px; }
 
-  /* ---------- TOP MAP (always visible) ---------- */
-  .topmap-section{ background: var(--deep); border-bottom: 1px solid var(--line); padding: 26px 24px 30px; }
-  .topmap-inner{ max-width:1180px; margin:0 auto; }
-  .topmap-title{ font-family:'IBM Plex Mono',monospace; font-size:10.5px; letter-spacing:.14em; text-transform:uppercase; color: var(--sea-light); margin-bottom:12px; }
-  #topmap{ width:100%; height: 380px; border-radius:4px; border:1px solid var(--line); }
-  .legend{ display:flex; flex-wrap:wrap; gap:14px; margin-top:14px; }
-  .legend-item{ display:flex; align-items:center; gap:8px; font-size:12px; color: rgba(247,243,232,0.75); font-family:'IBM Plex Mono',monospace; }
-  .dot{ width:11px; height:11px; border-radius:50%; display:inline-block; border:1.5px solid var(--ink); }
+  /* ── STAT CHIPS (always present) ── */
+  .hero-meta{ display:flex; flex-wrap:wrap; gap:10px; margin-top:26px; }
+  .meta-chip{ font-family:'IBM Plex Mono',monospace; font-size:12px; padding:9px 16px; border:1px solid var(--line); border-radius:100px; background:rgba(247,243,232,0.04); color:var(--paper); }
+  .meta-chip strong{ color:var(--gold); }
 
-  /* ---------- LOG / SUMMARY TABLE ---------- */
-  .log{ background: var(--ink); border-bottom: 1px solid var(--line); padding: 26px 24px; }
-  .log-inner{ max-width:1180px; margin:0 auto; }
-  .log-title{ font-family:'IBM Plex Mono',monospace; font-size:10.5px; letter-spacing:.14em; text-transform:uppercase; color: var(--sea-light); margin-bottom:14px; }
-  table.log-table{ width:100%; border-collapse:collapse; border:1px solid var(--line); }
-  table.log-table th, table.log-table td{ border:1px solid var(--line); padding: 12px 14px; text-align:left; font-size:13px; }
-  table.log-table th{ font-family:'IBM Plex Mono',monospace; font-size:10.5px; text-transform:uppercase; letter-spacing:.08em; color: var(--sea-light); background: rgba(247,243,232,0.03); font-weight:500; }
-  table.log-table td.dayname{ font-family:'Fraunces',serif; font-size:15px; color:var(--paper); }
-  table.log-table td.mono{ font-family:'IBM Plex Mono',monospace; color: var(--sand); }
-  table.log-table td.mono b{ color: var(--gold); }
-  table.log-table td.leaveby{ font-family:'IBM Plex Mono',monospace; color: var(--granite); font-weight:600; }
-  @media (max-width: 760px){
-    table.log-table, table.log-table thead, table.log-table tbody, table.log-table th, table.log-table td, table.log-table tr{ display:block; }
-    table.log-table thead{ display:none; }
-    table.log-table tr{ border:1px solid var(--line); margin-bottom:10px; padding:10px 12px; }
-    table.log-table td{ border:none; padding:4px 0; }
-    table.log-table td::before{ content: attr(data-label) ": "; font-family:'IBM Plex Mono',monospace; font-size:10px; text-transform:uppercase; color: var(--sea-light); }
+  /* ── BANNER: PHOTO + MAP ── */
+  .banner{ max-width:1180px; margin:0 auto; padding:20px 24px 36px; display:grid; grid-template-columns:1fr 1fr; gap:20px; }
+  .banner-panel{ position:relative; height:420px; border-radius:6px; overflow:hidden; border:1px solid var(--line); background:var(--deep); }
+  .banner-photo{ width:100%; height:100%; background-size:cover; background-position:center 60%; }
+  .banner-photo-cap{ position:absolute; left:14px; bottom:12px; font-family:'IBM Plex Mono',monospace; font-size:10.5px; color:#fff; text-shadow:0 1px 5px rgba(0,0,0,0.6); }
+  #map{ background:var(--deep); }
+  .leaflet-popup-content-wrapper{ background:#fff; }
+  .leaflet-popup-content{ font-family:'Inter',sans-serif; }
+  .leaflet-popup-content b{ font-family:'Fraunces',serif; }
+  .legend{ display:flex; flex-wrap:wrap; gap:8px 16px; padding:12px 2px 0; font-family:'IBM Plex Mono',monospace; font-size:11px; color:var(--muted); align-items:center; }
+  .legend .dot{ width:10px; height:10px; border-radius:50%; display:inline-block; margin-right:5px; vertical-align:middle; }
+  .photo-credit{ font-family:'IBM Plex Mono',monospace; font-size:10px; color:rgba(247,243,232,0.35); text-align:right; max-width:1180px; margin:0 auto; padding:4px 24px 0; }
+
+  /* ── TAB NAV ── */
+  .tab-nav{ position:sticky; top:0; z-index:50; background:rgba(14,42,46,0.96); backdrop-filter:blur(8px); border-bottom:1px solid var(--line); }
+  .tab-nav-inner{ display:flex; max-width:1180px; margin:0 auto; padding:0 24px; overflow-x:auto; gap:2px; }
+  .tab-btn{ appearance:none; border:none; background:transparent; cursor:pointer; font-family:'IBM Plex Mono',monospace; font-size:12.5px; letter-spacing:.05em; text-transform:uppercase; white-space:nowrap; color:rgba(247,243,232,0.55); padding:17px 16px; border-bottom:2px solid transparent; transition:all .2s; }
+  .tab-btn:hover{ color:var(--paper); }
+  .tab-btn.active{ color:var(--gold); border-bottom-color:var(--gold); }
+
+  .content-wrap{ max-width:980px; margin:0 auto; padding:52px 24px 64px; }
+  .section{ display:none; }
+  .section.active{ display:block; animation:fadeIn .4s ease; }
+  @keyframes fadeIn{ from{opacity:0; transform:translateY(8px);} to{opacity:1; transform:translateY(0);} }
+  .section-title{ font-size:clamp(26px,4vw,38px); font-weight:600; margin-bottom:8px; color:var(--paper); }
+  .section-sub{ color:var(--muted); font-size:15px; margin-bottom:36px; max-width:660px; }
+
+  .callout{ border:1px solid var(--line); border-left:3px solid var(--gold); background:var(--pale); border-radius:0 6px 6px 0; padding:16px 20px; font-size:14.5px; color:var(--paper); margin-bottom:28px; }
+  .callout.warn{ border-left-color:var(--granite-deep); background:rgba(182,94,72,0.12); }
+  .callout.muted{ border-left-color:var(--sea-light); background:rgba(143,207,196,0.06); }
+  .callout strong{ color:var(--gold); }
+  .callout.warn strong{ color:var(--granite); }
+  .callout.muted strong{ color:var(--sea-light); }
+
+  /* ── OVERVIEW: AT-A-GLANCE TABLE ── */
+  .at-a-glance{ width:100%; border-collapse:collapse; margin-top:8px; }
+  .at-a-glance th{ text-align:left; font-family:'IBM Plex Mono',monospace; font-size:10.5px; text-transform:uppercase; letter-spacing:.08em; color:var(--sea-light); padding:10px 14px; border-bottom:1px solid var(--line); }
+  .at-a-glance td{ padding:12px 14px; border-bottom:1px solid var(--line); font-size:14px; color:var(--paper); }
+  .at-a-glance tr:last-child td{ border-bottom:none; }
+  @media (max-width:700px){
+    .at-a-glance, .at-a-glance thead, .at-a-glance tbody, .at-a-glance th, .at-a-glance td, .at-a-glance tr{ display:block; }
+    .at-a-glance thead{ display:none; }
+    .at-a-glance tr{ border:1px solid var(--line); margin-bottom:8px; padding:8px 10px; }
+    .at-a-glance td{ border:none; padding:3px 0; }
+    .at-a-glance td::before{ content:attr(data-label) ": "; font-family:'IBM Plex Mono',monospace; font-size:10px; text-transform:uppercase; color:var(--sea-light); }
   }
 
-  /* ---------- TABS ---------- */
-  .tabbar{ position: sticky; top:0; z-index: 50; background: rgba(14,42,46,0.96); backdrop-filter: blur(8px); border-bottom: 1px solid var(--line); }
-  .tabbar-inner{ max-width:1180px; margin:0 auto; display:flex; gap:4px; padding: 0 24px; overflow-x:auto; }
-  .tab-btn{ appearance:none; border:none; background:transparent; cursor:pointer; font-family:'IBM Plex Mono',monospace; font-size:12.5px; letter-spacing:.06em; text-transform:uppercase; color: rgba(247,243,232,0.55); padding: 16px 18px 14px; border-bottom: 2px solid transparent; white-space:nowrap; }
-  .tab-btn:hover{ color: var(--paper); }
-  .tab-btn.active{ color: var(--gold); border-bottom-color: var(--gold); }
+  /* ── HOTELS TAB ── */
+  .hotels-grid{ display:grid; gap:16px; }
+  .hotel-card{ background:var(--card); border:1px solid var(--line); border-radius:6px; padding:24px 28px; }
+  .hotel-card.tbd{ border-style:dashed; border-color:var(--granite-deep); background:rgba(182,94,72,0.08); }
+  .hotel-header{ display:flex; justify-content:space-between; align-items:flex-start; gap:16px; flex-wrap:wrap; margin-bottom:8px; }
+  .hotel-name{ font-family:'Fraunces',serif; font-size:22px; font-weight:600; }
+  .hotel-name a{ color:var(--paper); text-decoration:none; border-bottom:1px solid rgba(211,169,74,0.4); }
+  .hotel-name a:hover{ color:var(--gold); }
+  .hotel-dates{ font-family:'IBM Plex Mono',monospace; font-size:11.5px; color:var(--gold); text-align:right; }
+  .hotel-meta-row{ display:flex; flex-wrap:wrap; gap:16px; margin:10px 0; font-size:13.5px; color:var(--muted); }
+  .hotel-meta-row strong{ color:var(--paper); }
+  .hotel-meta-row a{ color:var(--gold); }
+  .hotel-note{ font-size:13.5px; color:rgba(247,243,232,0.7); border-top:1px solid var(--line); padding-top:12px; margin-top:12px; }
 
-  .section{ display:none; padding: 40px 0 80px; }
-  .section.active{ display:block; }
+  /* ── ITINERARY TIMELINE ── */
+  .timeline{ position:relative; padding-left:52px; }
+  .timeline::before{ content:''; position:absolute; left:19px; top:6px; bottom:6px; width:2px; background:linear-gradient(180deg, var(--gold), var(--sea), var(--granite)); }
+  .tl-day{ position:relative; margin-bottom:34px; }
+  .tl-dot{ position:absolute; left:-52px; top:2px; width:38px; height:38px; border-radius:50%; background:var(--ink); border:2px solid var(--gold); display:flex; align-items:center; justify-content:center; font-family:'IBM Plex Mono',monospace; font-size:13px; font-weight:600; color:var(--gold); box-shadow:0 2px 8px rgba(0,0,0,0.3); }
+  .tl-card{ background:var(--card); border:1px solid var(--line); border-radius:6px; padding:22px 24px; }
+  .tl-date{ font-family:'IBM Plex Mono',monospace; font-size:11.5px; letter-spacing:.1em; text-transform:uppercase; color:var(--sea-light); margin-bottom:6px; }
+  .tl-title{ font-family:'Fraunces',serif; font-size:22px; font-weight:600; margin-bottom:14px; color:var(--paper); }
+  .tl-base{ display:inline-block; font-size:11.5px; font-family:'IBM Plex Mono',monospace; color:var(--ink); background:var(--gold); padding:4px 12px; border-radius:100px; margin-bottom:14px; margin-right:8px; font-weight:600; }
+  .tl-gmaps-btn{ display:inline-flex; align-items:center; gap:5px; font-family:'IBM Plex Mono',monospace; font-size:11px; font-weight:600; text-decoration:none; padding:4px 12px; border-radius:100px; background:var(--sea); color:var(--ink); margin-bottom:14px; }
+  .tl-gmaps-btn:hover{ background:var(--sea-light); }
+  .tl-items{ list-style:none; }
+  .tl-items li{ position:relative; padding-left:20px; margin-bottom:9px; font-size:14.5px; color:var(--muted); }
+  .tl-items li::before{ content:'—'; position:absolute; left:0; color:var(--gold); }
+  .tl-items li strong{ color:var(--paper); }
+  .tl-items li.alt{ font-style:italic; opacity:0.85; }
+  .tl-items li a{ border-bottom:1px solid rgba(211,169,74,0.35); text-decoration:none; }
+  .tl-items li a:hover{ color:var(--gold); }
+  .day-weather{ display:flex; align-items:center; gap:10px; flex-wrap:wrap; font-family:'IBM Plex Mono',monospace; font-size:11.5px; color:var(--sea-light); background:rgba(143,207,196,0.07); border-radius:6px; padding:9px 13px; margin:10px 0 14px; }
+  .day-weather b{ color:var(--gold); font-weight:600; }
+  .day-weather .wx-note{ color:rgba(247,243,232,0.5); font-style:italic; }
+  .title-lnk{ color:var(--paper); text-decoration:underline; text-decoration-color:var(--gold); text-underline-offset:3px; }
+  .title-lnk:hover{ color:var(--gold); }
 
-  /* ---------- DAY CARDS ---------- */
-  .day{ border: 1px solid var(--line); border-radius: 4px; margin-bottom: 22px; overflow:hidden; background: rgba(247,243,232,0.025); }
-  .day-head{ display:flex; justify-content:space-between; align-items:flex-end; gap:16px; padding: 22px 26px 18px; border-bottom: 1px solid var(--line); flex-wrap:wrap; }
-  .day-head .dnum{ font-family:'IBM Plex Mono',monospace; font-size:11px; color: var(--sea-light); letter-spacing:.1em; text-transform:uppercase; margin-bottom:6px; }
-  .day-head h2{ font-family:'Fraunces',serif; font-weight:600; font-size:26px; margin:0; color: var(--paper); }
-  .chip-row{ display:flex; gap:8px; flex-wrap:wrap; }
-  .chip{ font-family:'IBM Plex Mono',monospace; font-size:11.5px; color: var(--ink); padding: 7px 12px; border-radius: 3px; white-space:nowrap; font-weight:600; }
-  .chip.gold{ background: var(--gold); }
-  .chip.granite{ background: var(--granite); }
-  .chip.outline{ background:transparent; border:1px solid var(--sea-light); color: var(--sea-light); font-weight:500; }
-  .day-body{ padding: 20px 26px 26px; }
-  .day-weather{ display:flex; align-items:center; gap:10px; flex-wrap:wrap; font-family:'IBM Plex Mono',monospace; font-size:11.5px; color: var(--sea-light); background: rgba(143,207,196,0.08); border-bottom:1px solid var(--line); padding: 12px 26px; }
-  .day-weather b{ color: var(--gold); }
-  .day-weather .wx-note{ color: rgba(239,230,206,0.55); font-style:italic; }
-  .day-note{ font-size:14.5px; line-height:1.65; color: rgba(247,243,232,0.75); margin: 0 0 18px; }
-  .flag{ display:inline-block; font-family:'IBM Plex Mono',monospace; font-size:11px; color: var(--granite); border:1px solid rgba(217,136,115,0.4); padding:3px 8px; border-radius:3px; margin-bottom:14px; }
+  /* ── CARD GRID (Hotels / trip-specific / Also Worth Seeing) ── */
+  .card-grid{ display:grid; grid-template-columns:repeat(auto-fit,minmax(260px,1fr)); gap:18px; margin-bottom:16px; }
+  .card{ background:var(--card); border:1px solid var(--line); border-left:3px solid var(--gold); border-radius:0 6px 6px 0; padding:20px 22px; }
+  .card.accent1{ border-left-color:var(--sea); }
+  .card.accent2{ border-left-color:var(--granite); }
+  .card.accent3{ border-left-color:var(--granite-deep); }
+  .card.muted{ border-left-color:var(--muted); opacity:0.75; }
+  .card-eyebrow{ font-family:'IBM Plex Mono',monospace; font-size:10.5px; letter-spacing:.1em; text-transform:uppercase; color:var(--sea-light); margin-bottom:6px; }
+  .card h3{ font-size:19px; font-weight:600; margin-bottom:10px; color:var(--paper); }
+  .card p{ font-size:14px; color:var(--muted); margin-bottom:8px; }
+  .card .tag{ display:inline-block; font-family:'IBM Plex Mono',monospace; font-size:10.5px; padding:3px 9px; border-radius:100px; background:var(--pale); color:var(--gold); margin-right:6px; margin-top:6px; }
+  .poi-actions{ display:flex; gap:8px; flex-wrap:wrap; margin-top:10px; }
+  .poi-actions a{ display:inline-flex; align-items:center; gap:5px; font-family:'IBM Plex Mono',monospace; font-size:11px; font-weight:600; text-decoration:none; padding:5px 12px; border-radius:100px; white-space:nowrap; }
+  .poi-actions a.site{ background:var(--pale); color:var(--gold); }
+  .poi-actions a.dir{ background:var(--sea); color:var(--ink); }
+  .poi-actions a.dir:hover{ background:var(--sea-light); }
 
-  .meal-grid{ display:grid; grid-template-columns: 1fr 1fr; gap: 18px; margin-top: 10px; }
-  @media (max-width:720px){ .meal-grid{ grid-template-columns: 1fr; } }
-  .meal{ border-left: 2px solid var(--sea); padding: 4px 0 4px 16px; }
-  .meal .mtype{ font-family:'IBM Plex Mono',monospace; font-size:10.5px; text-transform:uppercase; letter-spacing:.1em; color: var(--sea-light); margin-bottom:6px; }
-  .meal .mname{ font-size:15.5px; font-weight:600; color: var(--paper); }
-  .meal .mname a{ color:var(--paper); text-decoration:none; border-bottom:1px solid rgba(247,243,232,0.3); }
-  .meal .mname a:hover{ border-color: var(--gold); color:var(--gold); }
-  .meal .mrating{ font-family:'IBM Plex Mono',monospace; font-size:12px; color:var(--gold); margin: 2px 0 6px; }
-  .meal .mdesc{ font-size:13.5px; line-height:1.55; color: rgba(247,243,232,0.68); }
-  .meal .malt{ font-size:12.5px; margin-top:6px; color: rgba(247,243,232,0.5); font-style:italic; }
-  .meal .malt a{ color: rgba(247,243,232,0.65); }
+  .shore-heading{ display:flex; align-items:center; gap:12px; margin:40px 0 18px; }
+  .shore-heading:first-child{ margin-top:0; }
+  .shore-heading h3{ font-size:14px; font-family:'IBM Plex Mono',monospace; letter-spacing:.08em; text-transform:uppercase; color:var(--gold); white-space:nowrap; }
+  .shore-heading::after{ content:''; flex:1; height:1px; background:var(--line); }
 
-  .stops{ margin-top:20px; padding-top:18px; border-top: 1px dashed var(--line); }
-  .stops .slabel{ font-family:'IBM Plex Mono',monospace; font-size:10.5px; text-transform:uppercase; letter-spacing:.1em; color: var(--sea-light); margin-bottom:10px; }
-  .stop-item{ font-size:14px; line-height:1.6; color: rgba(247,243,232,0.78); margin-bottom:8px; }
-  .stop-item b{ color: var(--paper); }
-  .stop-item a{ color: var(--gold); text-decoration:none; border-bottom:1px solid rgba(211,169,74,0.35); font-size:12.5px; }
+  /* ── BOOK NOW / CHECKLIST ── */
+  .checklist{ list-style:none; }
+  .checklist li{ display:flex; gap:14px; align-items:flex-start; padding:16px 0; border-bottom:1px solid var(--line); font-size:14.5px; color:var(--muted); }
+  .checklist li:last-child{ border-bottom:none; }
+  .checkbox{ width:19px; height:19px; border:2px solid var(--gold); border-radius:5px; flex-shrink:0; margin-top:1px; }
+  .checklist .lbl{ color:var(--gold); font-family:'IBM Plex Mono',monospace; font-size:10.5px; letter-spacing:.06em; text-transform:uppercase; display:block; margin-bottom:3px; }
+  .checklist .contact{ display:block; font-family:'IBM Plex Mono',monospace; font-size:11.5px; color:var(--muted); margin-top:4px; }
+  .checklist .contact a{ color:var(--gold); }
 
-  /* ---------- OVERVIEW TAB ---------- */
-  .ov-grid{ display:grid; grid-template-columns: 1.1fr 0.9fr; gap: 28px; }
-  @media (max-width: 860px){ .ov-grid{ grid-template-columns: 1fr; } }
-  .ov-card{ border:1px solid var(--line); border-radius:4px; padding:24px 26px; background: rgba(247,243,232,0.025); }
-  .ov-card h3{ font-family:'Fraunces',serif; font-size:19px; color:var(--paper); margin:0 0 12px; font-weight:600; }
-  .ov-list{ list-style:none; margin:0; padding:0; }
-  .ov-list li{ display:flex; gap:12px; padding: 10px 0; border-bottom: 1px solid var(--line); font-size:14px; color: rgba(247,243,232,0.8); }
-  .ov-list li:last-child{ border-bottom:none; }
-  .ov-list .oday{ font-family:'IBM Plex Mono',monospace; color: var(--sea-light); min-width:74px; font-size:12px; padding-top:2px;}
+  footer.footer{ text-align:center; padding:36px 24px 56px; color:rgba(247,243,232,0.35); font-size:12px; font-family:'IBM Plex Mono',monospace; }
+  footer.footer span{ color:var(--gold); }
 
-  footer{ text-align:center; padding: 30px 24px 50px; color: rgba(247,243,232,0.35); font-size:12px; font-family:'IBM Plex Mono',monospace; }
+  /* ── PRINT / OFFLINE COPY TAB ── */
+  .print-btn{ display:inline-flex; align-items:center; gap:6px; font-family:'IBM Plex Mono',monospace; font-size:12px; font-weight:600; text-decoration:none; padding:9px 18px; border-radius:100px; background:var(--gold); color:var(--ink); border:none; cursor:pointer; margin-bottom:28px; margin-right:10px; }
+  .print-btn:hover{ background:var(--gold-deep); }
+  .print-btn.outline{ background:transparent; color:var(--gold); border:1px solid var(--line); }
+  .contact-block{ background:var(--card); border:1px solid var(--line); border-radius:6px; padding:20px 24px; margin-bottom:16px; }
+  .contact-block h4{ font-family:'Fraunces',serif; font-size:17px; margin-bottom:4px; color:var(--paper); }
+  .contact-block .contact-line{ font-size:13px; color:var(--muted); margin-top:2px; }
+  .print-day{ margin-bottom:22px; }
+  .print-day h4{ font-family:'IBM Plex Mono',monospace; font-size:12px; text-transform:uppercase; letter-spacing:.06em; color:var(--gold); border-bottom:1px solid var(--line); padding-bottom:6px; margin-bottom:10px; }
+  .print-day ul{ list-style:none; }
+  .print-day li{ font-size:13.5px; color:var(--paper); margin-bottom:8px; padding-left:14px; position:relative; }
+  .print-day li::before{ content:'•'; position:absolute; left:0; color:var(--gold); }
+  .print-day li .contact-line{ display:block; color:var(--muted); font-size:12px; margin-top:1px; }
 
-  /* ---------- ACTIONS ---------- */
-  ul.action-list{ list-style:none; margin:0; padding:0; }
-  ul.action-list li{ border-bottom: 1px solid var(--line); }
-  ul.action-list li:last-child{ border-bottom:none; }
-  ul.action-list label{ display:flex; align-items:flex-start; gap:10px; padding: 11px 2px; cursor:pointer; font-size:14px; line-height:1.5; color: rgba(247,243,232,0.85); }
-  ul.action-list input[type="checkbox"]{ appearance:none; width:17px; height:17px; min-width:17px; margin-top:2px; border:1.5px solid var(--sea-light); border-radius:3px; cursor:pointer; position:relative; background:transparent; }
-  ul.action-list input[type="checkbox"]:checked{ background: var(--gold); border-color: var(--gold); }
-  ul.action-list input[type="checkbox"]:checked::after{ content:"✓"; position:absolute; top:-3px; left:2px; font-size:12px; color: var(--ink); font-weight:700; }
-  ul.action-list label:has(input:checked){ color: rgba(247,243,232,0.4); text-decoration: line-through; }
-  ul.action-list a{ color: var(--gold); text-decoration:none; border-bottom:1px solid rgba(211,169,74,0.35); font-size:12.5px; margin-left:4px; }
+  @media (max-width:820px){ .banner{ grid-template-columns:1fr; } .banner-panel{ height:340px; } }
+  @media (max-width:640px){ .timeline{ padding-left:40px; } .tl-dot{ left:-40px; width:32px; height:32px; font-size:11px; } }
+
+  /* ── PRINT MEDIA ── */
+  @media print{
+    .tab-nav, .banner, .topbar, .photo-credit, .print-btn{ display:none !important; }
+    .section{ display:none !important; }
+    #tab-print{ display:block !important; }
+    body{ background:#fff; color:#111; }
+    .content-wrap{ padding:0; max-width:100%; }
+    a{ color:#000; text-decoration:none; }
+    .contact-block, .print-day{ break-inside:avoid; }
+  }
 </style>
 </head>
 <body>
 
-<div class="hero">
-  <div class="hero-inner">
-    <div class="eyebrow">Sardinia · 6–10 August</div>
-    <h1 class="title">Four days,<br><em>three coasts.</em></h1>
-    <p class="subhead">Land at 11 AM, one home port in Gallura, and three full-day runs to the north, east, and northwest coasts — Maddalena by boat, Orosei's calas by charter, and La Pelosa on the far shore.</p>
-    <div class="base-card">
-      <div class="base-item"><span class="k">Home base</span><span class="v">Casagliana Suite Resort</span></div>
-      <div class="base-item"><span class="k">Address</span><span class="v">Via Sole Ruju 14, Olbia</span></div>
-      <div class="base-item"><span class="k">Dates</span><span class="v">Aug 6 (~11 AM arrival) – Aug 10</span></div>
-      <div class="base-item"><span class="k">Book</span><span class="v"><a href="https://en.casagliana.com/609/booking-form.html" target="_blank" rel="noopener">en.casagliana.com →</a></span></div>
+<div class="topbar">
+  <div class="hero-eyebrow">Sardinia Leg · Aug 6–10, 2026</div>
+  <h1>Four days,<br>three coasts.<span>One home base in Gallura — north, east, and northwest shorelines, each its own day</span></h1>
+  <div class="hero-meta">
+    <div class="meta-chip">✈️ <strong>Arrive OLB</strong> · ~11 AM</div>
+    <div class="meta-chip">🗓 <strong>4 nights</strong> · Aug 6–10</div>
+    <div class="meta-chip">📍 Gallura, NE Sardinia — Olbia · Palau · Cala Gonone · Stintino</div>
+    <div class="meta-chip">🏨 <strong>One base</strong> · Casagliana Suite Resort, Olbia</div>
+  </div>
+</div>
+
+<div class="banner">
+  <div class="banner-panel">
+    <div class="banner-photo" style="background-image:url('https://commons.wikimedia.org/wiki/Special:FilePath/La%20Pelosa%20beach%2C%20north%20Sardinia%20(Italy)%20(24167750496).jpg');"></div>
+    <div class="banner-photo-cap">La Pelosa beach, Stintino</div>
+  </div>
+  <div>
+    <div class="banner-panel"><div id="map" style="width:100%; height:100%;"></div></div>
+    <div class="legend">
+      <span><span class="dot" style="background:#D3A94A"></span>Home base</span>
+      <span><span class="dot" style="background:#3E9C93"></span>Day 1 — Golfo Aranci</span>
+      <span><span class="dot" style="background:#8FCFC4"></span>Day 2 — Palau / Maddalena / Santa Teresa</span>
+      <span><span class="dot" style="background:#D98873"></span>Day 3 — Cala Gonone / Orosei</span>
+      <span><span class="dot" style="background:#B65E48"></span>Day 4 — Stintino / La Pelosa</span>
     </div>
   </div>
 </div>
 <div class="photo-credit">La Pelosa beach, Stintino — photo: <a href="https://commons.wikimedia.org/wiki/File:La_Pelosa_beach,_north_Sardinia_(Italy)_(24167750496).jpg" target="_blank" rel="noopener" style="color:rgba(247,243,232,0.4)">Wikimedia Commons, CC BY 2.0</a></div>
 
-<div class="topmap-section">
-  <div class="topmap-inner">
-    <div class="topmap-title">Route map — home base + all four excursion days</div>
-    <div id="topmap"></div>
-    <div class="legend">
-      <div class="legend-item"><span class="dot" style="background:#D3A94A"></span> Home base</div>
-      <div class="legend-item"><span class="dot" style="background:#3E9C93"></span> Day 1 — Golfo Aranci</div>
-      <div class="legend-item"><span class="dot" style="background:#8FCFC4"></span> Day 2 — Palau / Maddalena / Santa Teresa</div>
-      <div class="legend-item"><span class="dot" style="background:#D98873"></span> Day 3 — Cala Gonone / Orosei</div>
-      <div class="legend-item"><span class="dot" style="background:#B65E48"></span> Day 4 — Stintino / La Pelosa</div>
-    </div>
+<nav class="tab-nav">
+  <div class="tab-nav-inner">
+    <button class="tab-btn active" onclick="showTab('overview')">📋 Overview</button>
+    <button class="tab-btn" onclick="showTab('hotels')">🏨 Hotels</button>
+    <button class="tab-btn" onclick="showTab('itinerary')">📅 Itinerary</button>
+    <button class="tab-btn" onclick="showTab('beaches')">🏖 Beaches &amp; Coves</button>
+    <button class="tab-btn" onclick="showTab('more')">⭐ Also Worth Seeing</button>
+    <button class="tab-btn" onclick="showTab('book')">✅ Book Now</button>
+    <button class="tab-btn" onclick="showTab('print')">🖨 Print / Offline Copy</button>
   </div>
-</div>
+</nav>
 
-<div class="log">
-  <div class="log-inner">
-    <div class="log-title">Five-day summary — drive time &amp; recommended leave-by</div>
-    <table class="log-table">
-      <thead>
-        <tr><th>Day</th><th>Destination</th><th>Drive time (one way)</th><th>Leave home base by</th></tr>
-      </thead>
+<div class="content-wrap">
+
+  <!-- ═══════════ OVERVIEW ═══════════ -->
+  <div id="tab-overview" class="section active">
+    <div class="section-title">Trip Overview</div>
+    <div class="section-sub">Everything at a glance — no need to read the full itinerary to answer "when do we land" or "how far is today's drive."</div>
+
+    <div class="callout muted"><strong>Why this route:</strong> One home base — Casagliana Suite Resort in Olbia — for all 4 nights, so there's no mid-trip packing. The three excursion days are sequenced by driving distance, closest first: Golfo Aranci (15 min) the arrival evening, then the Maddalena boat day from Palau (40–45 min), then the longer Orosei charter from Cala Gonone (1h 25–35m), building to the longest drive of the trip — La Pelosa on the far northwest tip (2h 15m) — right before the short hop back to the airport. Each excursion day is built around exactly one activity; nothing is double-booked.</div>
+
+    <div class="callout warn"><strong>Heads up — La Pelosa now requires a paid online reservation</strong> (it didn't when this itinerary was first drafted). Book via the official site 5–7 days ahead for peak season — see Book Now.</div>
+
+    <table class="at-a-glance">
+      <thead><tr><th>Day</th><th>Date</th><th>Base / Area</th><th>Focus</th></tr></thead>
       <tbody>
-        <tr>
-          <td class="dayname" data-label="Day">Thu 8/6 — Arrival</td>
-          <td data-label="Destination">Golfo Aranci</td>
-          <td class="mono" data-label="Drive"><b>~15 min</b></td>
-          <td class="leaveby" data-label="Leave by">6:30 PM (dinner)</td>
-        </tr>
-        <tr>
-          <td class="dayname" data-label="Day">Fri 8/7 — Maddalena</td>
-          <td data-label="Destination">Palau</td>
-          <td class="mono" data-label="Drive"><b>~40–45 min</b></td>
-          <td class="leaveby" data-label="Leave by">8:00 AM</td>
-        </tr>
-        <tr>
-          <td class="dayname" data-label="Day">Sat 8/8 — Orosei charter</td>
-          <td data-label="Destination">Cala Gonone</td>
-          <td class="mono" data-label="Drive"><b>~1h 25–35m</b></td>
-          <td class="leaveby" data-label="Leave by">6:45 AM</td>
-        </tr>
-        <tr>
-          <td class="dayname" data-label="Day">Sun 8/9 — La Pelosa</td>
-          <td data-label="Destination">Stintino</td>
-          <td class="mono" data-label="Drive"><b>~2h 15m</b></td>
-          <td class="leaveby" data-label="Leave by">6:30 AM</td>
-        </tr>
-        <tr>
-          <td class="dayname" data-label="Day">Mon 8/10 — Departure</td>
-          <td data-label="Destination">Olbia Airport (OLB)</td>
-          <td class="mono" data-label="Drive"><b>~15–20 min</b></td>
-          <td class="leaveby" data-label="Leave by">12:00 or 1:00 PM*</td>
-        </tr>
+        <tr><td data-label="Day">1</td><td data-label="Date">Thu, Aug 6</td><td data-label="Base">Olbia — Golfo Aranci</td><td data-label="Focus">Arrival ~11 AM, check in, easy evening in a fishing village</td></tr>
+        <tr><td data-label="Day">2</td><td data-label="Date">Fri, Aug 7</td><td data-label="Base">Palau — Maddalena</td><td data-label="Focus">All-day (7 hr) boat excursion to the Maddalena Archipelago</td></tr>
+        <tr><td data-label="Day">3</td><td data-label="Date">Sat, Aug 8</td><td data-label="Base">Cala Gonone — Orosei</td><td data-label="Focus">Charter to Cala Luna &amp; Cala Mariolu</td></tr>
+        <tr><td data-label="Day">4</td><td data-label="Date">Sun, Aug 9</td><td data-label="Base">Stintino</td><td data-label="Focus">Spiaggia La Pelosa — reservation required</td></tr>
+        <tr><td data-label="Day">5</td><td data-label="Date">Mon, Aug 10</td><td data-label="Base">Departure</td><td data-label="Focus">Fly out of OLB, 2–3 PM window (confirm exact time)</td></tr>
       </tbody>
     </table>
   </div>
-</div>
 
-<div class="tabbar">
-  <div class="tabbar-inner">
-    <button class="tab-btn active" onclick="showTab('overview', this)">Overview</button>
-    <button class="tab-btn" onclick="showTab('day1', this)">Day 1 · Aug 6</button>
-    <button class="tab-btn" onclick="showTab('day2', this)">Day 2 · Aug 7</button>
-    <button class="tab-btn" onclick="showTab('day3', this)">Day 3 · Aug 8</button>
-    <button class="tab-btn" onclick="showTab('day4', this)">Day 4 · Aug 9</button>
-    <button class="tab-btn" onclick="showTab('day5', this)">Day 5 · Aug 10</button>
-    <button class="tab-btn" onclick="showTab('actions', this)">Actions <span id="actions-count" style="opacity:0.6"></span></button>
-  </div>
-</div>
+  <!-- ═══════════ HOTELS ═══════════ -->
+  <div id="tab-hotels" class="section">
+    <div class="section-title">Where You're Staying</div>
+    <div class="section-sub">One base for all 4 nights — Olbia, Gallura.</div>
 
-<div class="wrap">
-
-  <!-- OVERVIEW -->
-  <div class="section active" id="tab-overview">
-    <div class="ov-grid">
-      <div class="ov-card">
-        <h3>The five days</h3>
-        <ul class="ov-list">
-          <li><span class="oday">Thu 8/6</span> Land ~11 AM, check in, easy afternoon, evening stroll + fry-fresh dinner in Golfo Aranci (~15 min).</li>
-          <li><span class="oday">Fri 8/7</span> All-day (7 hr) Maddalena Islands boat excursion from Palau (~40–45 min). Leave by 8:00 AM.</li>
-          <li><span class="oday">Sat 8/8</span> Orosei charter to Cala Luna &amp; Cala Mariolu from Cala Gonone (~1h 25–35m). Leave by 6:45 AM.</li>
-          <li><span class="oday">Sun 8/9</span> Spiaggia La Pelosa, Stintino (~2h 15m) — the far northwest tip. Leave by 6:30 AM.</li>
-          <li><span class="oday">Mon 8/10</span> Departure. OLB is ~15–20 min from the hotel — leave by 12 or 1 PM depending on flight time.</li>
-        </ul>
-      </div>
-      <div class="ov-card">
-        <h3>Notes worth flagging</h3>
-        <ul class="ov-list">
-          <li><span class="oday">Pacing</span> Days 2–4 are each built around one excursion — no double-booking a beach + a boat in the same day.</li>
-          <li><span class="oday">La Pelosa</span> ~4.5 hrs of driving round trip, plus the beach caps daily visitor numbers in peak season — worth checking if online booking is required before you go.</li>
-          <li><span class="oday">Santa Teresa</span> Sits 20–25 min past Palau — pairs naturally as a golden-hour stop on the way back from Maddalena if the group has the stamina.</li>
-          <li><span class="oday">Fresh catch</span> Golfo Aranci's pescheria-friggitoria format (pick it, they fry it, you eat it dockside) is unique to that town on this route.</li>
-        </ul>
+    <div class="hotels-grid">
+      <div class="hotel-card">
+        <div class="hotel-header">
+          <div class="hotel-name"><a href="https://en.casagliana.com/609/booking-form.html" target="_blank" rel="noopener">Casagliana Suite Resort</a></div>
+          <div class="hotel-dates">Thu Aug 6 (~11 AM) → Mon Aug 10</div>
+        </div>
+        <div class="hotel-meta-row">
+          <span>📍 Via Sole Ruju 14, Località Casagliana, 07026 Olbia (OT)</span>
+          <span>📞 <a href="tel:+390789733029">+39 0789 733029</a> / <a href="tel:+393289284020">+39 328 928 4020</a></span>
+          <span>🔖 Conf# — not yet booked</span>
+        </div>
+        <div class="hotel-note">~15–20 min from OLB airport — the anchor point for all four excursion days. Booking not yet confirmed; see Book Now tab. Once booked, add the confirmation number here and to the Print tab.</div>
       </div>
     </div>
+  </div>
 
-    <div class="ov-card" style="margin-top:22px;">
-      <h3>Optional — only if you extend the trip</h3>
-      <ul class="ov-list">
-        <li><span class="oday">Santa Barbara Trail</span> 500km mining-history hiking route in Sulcis-Iglesiente, SW Sardinia — ~3+ hrs from Casagliana. Beautiful, but a different trip.</li>
-        <li><span class="oday">Sinis Peninsula</span> Cycling near Oristano, west coast — ~2–2.5 hrs from Casagliana.</li>
-        <li><span class="oday">Tuerredda Beach</span> Often ranked among Sardinia's best beaches, deep south near Teulada — ~3+ hrs from Casagliana.</li>
-        <li><span class="oday">Reachable now</span> Capo Testa (Day 2 add-on) and a Golfo Aranci coastal walk (Day 1) cover the "explore on foot" idea without the extra driving.</li>
+  <!-- ═══════════ ITINERARY ═══════════ -->
+  <div id="tab-itinerary" class="section">
+    <div class="section-title">Day-by-Day Itinerary</div>
+    <div class="section-sub">One base for the whole trip — Casagliana Suite Resort, Olbia — with a different excursion day radiating out to each coast. Drive time and leave-by time are noted for every day.</div>
+
+    <div class="callout muted"><strong>Drive times from Casagliana (your only base):</strong> Golfo Aranci ~15 min · Palau ~40–45 min · Cala Gonone ~1h 25–35m · Stintino / La Pelosa ~2h 15m · OLB Airport ~15–20 min. Days 2–4 are each built around one excursion — no double-booking a beach + a boat in the same day.</div>
+
+    <div class="timeline">
+
+      <div class="tl-day">
+        <div class="tl-dot">1</div>
+        <div class="tl-card">
+          <div class="tl-date">Thu, Aug 6 · Arrival</div>
+          <div class="tl-title">Arrival &amp; Golfo Aranci</div>
+          <span class="tl-base">🚗 ~15–20 min OLB → Casagliana · leave for dinner by 6:30 PM</span>
+          <a class="tl-gmaps-btn" href="https://www.google.com/maps/dir/?api=1&origin=Olbia+Costa+Smeralda+Airport&waypoints=40.9950,9.4550&destination=41.0000,9.6170" target="_blank" rel="noopener">🧭 Send route to Google Maps</a>
+          <div class="day-weather">🌤️ <b>Weather</b> · Temp: ~30°C/86°F day, ~19–21°C/66–70°F night · Precip: rare, ~6 rainy days/month · Wind: light <span class="wx-note">(typical for August — trip is beyond the live forecast window)</span></div>
+          <ul class="tl-items">
+            <li>Land at <strong>Olbia (OLB)</strong> around 11 AM, drive ~15–20 min to <strong>Casagliana Suite Resort</strong>, check in, pool time — no agenda pressure today, the trip's three big days start tomorrow</li>
+            <li>Evening in <strong>Golfo Aranci</strong>, a working 19th-century fishing village where boats still dock daily and the harbor still runs on the fishermen's schedule</li>
+            <li>🍽 <strong>Can't-miss dinner:</strong> <a href="https://restaurantguru.com/Pescheria-and-Friggitoria-Del-Golfo-Golfo-Aranci" target="_blank" rel="noopener" class="title-lnk">Pescheria del Golfo</a> ★4.8 — pick your fish straight from the fishmonger's counter and they fry it fresh, served dockside in a paper tray. Casual, cash-and-carry, genuinely local — no reservations taken</li>
+            <li class="alt">Alternate: <a href="https://lavecchiamarina.com/" target="_blank" rel="noopener" class="title-lnk">La Vecchia Marina</a> — sit-down version, same daily catch</li>
+            <li>Or, sunset stroll: the Lungomare promenade past the colorful fishermen's houses, the bronze mermaid statue, and the old port — low-key, no crowds, a good reset after travel</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="tl-day">
+        <div class="tl-dot">2</div>
+        <div class="tl-card">
+          <div class="tl-date">Fri, Aug 7 · Maddalena Islands</div>
+          <div class="tl-title">Maddalena Archipelago boat day</div>
+          <span class="tl-base">🚗 ~40–45 min Casagliana → Palau · leave by 8:00 AM</span>
+          <a class="tl-gmaps-btn" href="https://www.google.com/maps/dir/?api=1&origin=40.9950,9.4550&destination=41.1791,9.3872" target="_blank" rel="noopener">🧭 Send route to Google Maps</a>
+          <div class="day-weather">🌤️ <b>Weather</b> · Temp: ~30°C/86°F day, ~19–21°C/66–70°F night · Precip: rare, ~6 rainy days/month · Wind: light <span class="wx-note">(typical for August — trip is beyond the live forecast window)</span></div>
+          <ul class="tl-items">
+            <li>All-day (~7 hr) <strong>Maddalena Islands boat excursion</strong> — leaving Casagliana by 8:00 AM gets you into Palau ~8:45, with time for breakfast before most operators' mid-morning boarding</li>
+            <li>Recommended operator: <a href="https://gitearcipelago.it/en/" target="_blank" rel="noopener" class="title-lnk">Delfino Tours</a> — daily excursions to Spargi, Budelli, La Maddalena &amp; Santa Maria, with a stop at the Pink Beach (Spiaggia Rosa) view</li>
+            <li>🍽 <strong>Breakfast before boarding:</strong> <a href="https://www.tripadvisor.com/Restaurant_Review-g562810-d2201097-Reviews-Le_Dolcezze_Napoletane-Palau_Province_of_Olbia_Tempio_Sardinia.html" target="_blank" rel="noopener" class="title-lnk">Le Dolcezze Napoletane</a> ★4.5 (632 reviews), #1 of 77 in Palau — Neapolitan pastry shop steps from the ferry dock, Via Nazionale 48</li>
+            <li class="alt">Alternate: Cafe del Mar — ★4.5, sit-down with sea views</li>
+            <li>🍽 <strong>Can't-miss dinner, back in Palau:</strong> <a href="https://www.cucumiao.it/en/" target="_blank" rel="noopener" class="title-lnk">CuCumiao</a> ★4.3 (2,500+ reviews) — traditional Gallurese/seafood, handles a full evening crowd well without dropping quality</li>
+            <li class="alt">Alternate: <a href="https://www.obelau.com/" target="_blank" rel="noopener" class="title-lnk">O'Belau Ristorante</a> — ★4.4, book ahead</li>
+            <li class="alt">If there's daylight left: <strong>Santa Teresa Gallura</strong>, 20–25 min north of Palau — Piazza Vittorio Emanuele and the old center for a walk, Rena Bianca beach for a look, Capo Testa granite headland toward Corsica at sunset. Otherwise, save it for its own morning</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="tl-day">
+        <div class="tl-dot">3</div>
+        <div class="tl-card">
+          <div class="tl-date">Sat, Aug 8 · Orosei Charter</div>
+          <div class="tl-title">Cala Luna &amp; Cala Mariolu by boat</div>
+          <span class="tl-base">🚗 ~1h 25–35m Casagliana → Cala Gonone · leave by 6:45 AM — longest one-way drive on the trip</span>
+          <a class="tl-gmaps-btn" href="https://www.google.com/maps/dir/?api=1&origin=40.9950,9.4550&destination=40.2790,9.6345" target="_blank" rel="noopener">🧭 Send route to Google Maps</a>
+          <div class="day-weather">🌤️ <b>Weather</b> · Temp: ~30°C/86°F day, ~19–21°C/66–70°F night · Precip: rare, ~6 rainy days/month · Wind: light <span class="wx-note">(typical for August — trip is beyond the live forecast window)</span></div>
+          <ul class="tl-items">
+            <li>The furthest day-trip base on this itinerary, so an early start pays off — leaving Casagliana by 6:45 AM gets you to Cala Gonone ~8:10–8:20, time for breakfast before a typical 9:00 AM charter departure</li>
+            <li>Recommended operator: <a href="https://www.palmaseraboatrental.com/en/" target="_blank" rel="noopener" class="title-lnk">Palmasera Boat Rental</a> — Piazza del Porto Box 14, visits Cala Luna, Cala Mariolu, and the other calas in the Gulf of Orosei</li>
+            <li>🍽 <strong>Breakfast at the harbor:</strong> <a href="https://www.google.com/maps/search/Bar+Puddu+Cala+Gonone" target="_blank" rel="noopener" class="title-lnk">Bar Puddu</a> ★4.6 — technically attached to a gas station, don't let that fool you: garden setting, sweeping Gulf of Orosei views, excellent coffee and paninis you can take onto the boat. Viale Colombo 1</li>
+            <li class="alt">Alternate: Garden Bar — ★3.8, central, simpler</li>
+            <li>🍽 <strong>Lunch after the charter:</strong> <a href="https://www.google.com/maps/search/Il+Nuovo+Gabbiano+Cala+Gonone" target="_blank" rel="noopener" class="title-lnk">Il Nuovo Gabbiano</a> ★4.1 (1,555 reviews) — right on the water, order the catch of the day off a working fishing harbor</li>
+            <li class="alt">Alternate: La Poltrona — ★4.2, good backup if Gabbiano's full</li>
+            <li>Pack reef/water shoes for the calas — rocky entry at Cala Mariolu</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="tl-day">
+        <div class="tl-dot">4</div>
+        <div class="tl-card">
+          <div class="tl-date">Sun, Aug 9 · Stintino</div>
+          <div class="tl-title">Spiaggia La Pelosa</div>
+          <span class="tl-base">🚗 ~2h 15m Casagliana → Stintino · leave by 6:30 AM — biggest driving day, ~4.5 hrs round trip</span>
+          <a class="tl-gmaps-btn" href="https://www.google.com/maps/dir/?api=1&origin=40.9950,9.4550&destination=40.9491,8.2231" target="_blank" rel="noopener">🧭 Send route to Google Maps</a>
+          <div class="day-weather">🌤️ <b>Weather</b> · Temp: ~30°C/86°F day, ~19–21°C/66–70°F night · Precip: rare, ~6 rainy days/month · Wind: light <span class="wx-note">(typical for August — trip is beyond the live forecast window)</span></div>
+          <ul class="tl-items">
+            <li>La Pelosa sits on the far northwest tip of the island — the furthest point on this itinerary. Leaving by 6:30 AM puts you on the beach ~8:45, ahead of both the midday heat and the crowds</li>
+            <li>⚠️ <strong>Requires an online entry reservation</strong> — timed QR-code entry, 8 AM–6 PM, €3.50 pp, daily cap ~1,500 visitors. Book via <a href="https://spiaggialapelosa.it/en/" target="_blank" rel="noopener" class="title-lnk">spiaggialapelosa.it</a> (the only authorized site) 5–7 days ahead in peak season</li>
+            <li>🍽 <strong>Coffee on arrival:</strong> <a href="https://www.google.com/maps/search/Bar+I+Ginepri+Stintino" target="_blank" rel="noopener" class="title-lnk">Bar I Ginepri</a> — terrace bar right over the beach, good for a coffee and pastry before claiming a spot on the sand</li>
+            <li>🍽 <strong>Easy lunch, beachfront:</strong> Bar I Ginepri terrace — panini and light Sardinian plates, steps from the water, no need to leave the beach</li>
+            <li class="alt">Alternate: <a href="https://lapelosettarestaurant.it" target="_blank" rel="noopener" class="title-lnk">La Pelosetta</a> — ★3.6, fuller sit-down menu (seafood pasta, wood-oven pizza)</li>
+            <li>Sun protection — shade is limited on the beach and worth having in the car for the long drive back</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="tl-day">
+        <div class="tl-dot">5</div>
+        <div class="tl-card">
+          <div class="tl-date">Mon, Aug 10 · Departure</div>
+          <div class="tl-title">Casagliana → OLB Airport</div>
+          <span class="tl-base">🚗 ~15–20 min Casagliana → OLB · flight window 2–3 PM, confirm exact time</span>
+          <a class="tl-gmaps-btn" href="https://www.google.com/maps/dir/?api=1&origin=40.9950,9.4550&destination=Olbia+Costa+Smeralda+Airport" target="_blank" rel="noopener">🧭 Send route to Google Maps</a>
+          <div class="day-weather">🌤️ <b>Weather</b> · Temp: ~30°C/86°F day, ~19–21°C/66–70°F night · Precip: rare, ~6 rainy days/month · Wind: light <span class="wx-note">(typical for August — trip is beyond the live forecast window)</span></div>
+          <ul class="tl-items">
+            <li>With a 2–3 PM departure, the morning has real breathing room — just not enough for a full Golfo Aranci detour on top of checkout</li>
+            <li><strong>If 2:00 PM flight:</strong> breakfast &amp; pool at the resort, checkout by 11:30 AM, depart hotel by 12:00–12:15 PM, straight to OLB (~15–20 min) — arrives with a ~90 min buffer, enough but not extra</li>
+            <li><strong>If 3:00 PM flight:</strong> same slow morning, depart hotel by 1:00–1:15 PM — enough slack for a quick last coffee or pastry stop in Golfo Aranci (~15 min detour) on the way to the airport, still landing the ~90 min buffer</li>
+            <li class="alt">Once the exact time is booked: lock the checkout time as a hard deadline in Todoist rather than a range</li>
+          </ul>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ═══════════ BEACHES & COVES ═══════════ -->
+  <div id="tab-beaches" class="section">
+    <div class="section-title">Beaches &amp; Coves</div>
+    <div class="section-sub">The full list from the itinerary, gathered in one place — worth having on hand if plans shift day to day.</div>
+
+    <div class="card-grid">
+      <div class="card accent3">
+        <div class="card-eyebrow">Day 4 · Stintino</div>
+        <h3>Spiaggia La Pelosa</h3>
+        <p>The far northwest tip of the island — white sand, shallow turquoise water, views to the Asinara and Piana islets and the old Aragonese tower. Requires a paid online reservation, timed 8 AM–6 PM entry, book 5–7 days ahead in peak season.</p>
+        <div class="poi-actions"><a class="site" href="https://spiaggialapelosa.it/en/" target="_blank" rel="noopener">🌐 Reserve</a><a class="dir" href="https://www.google.com/maps/dir/?api=1&destination=40.9491,8.2231" target="_blank" rel="noopener">🧭 Directions</a></div>
+      </div>
+      <div class="card accent2">
+        <div class="card-eyebrow">Day 3 · Gulf of Orosei</div>
+        <h3>Cala Luna</h3>
+        <p>Reachable only by boat or a long hike — arched sea caves, pine trees down to the sand, one of the signature stops on the Orosei charter.</p>
+        <div class="poi-actions"><a class="dir" href="https://www.google.com/maps/dir/?api=1&destination=40.2350,9.6280" target="_blank" rel="noopener">🧭 Directions</a></div>
+      </div>
+      <div class="card accent2">
+        <div class="card-eyebrow">Day 3 · Gulf of Orosei</div>
+        <h3>Cala Mariolu</h3>
+        <p>Round white-pebble beach beneath limestone cliffs, striking turquoise-to-deep-blue water — the other headline stop on the charter. Rocky entry, bring water shoes.</p>
+        <div class="poi-actions"><a class="dir" href="https://www.google.com/maps/dir/?api=1&destination=40.1650,9.6850" target="_blank" rel="noopener">🧭 Directions</a></div>
+      </div>
+      <div class="card accent1">
+        <div class="card-eyebrow">Day 2 add-on · Santa Teresa Gallura</div>
+        <h3>Rena Bianca</h3>
+        <p>Fine white sand right in Santa Teresa's old town, 20–25 min north of Palau — an easy pairing with the Maddalena boat day if there's still daylight, otherwise its own morning.</p>
+        <div class="poi-actions"><a class="dir" href="https://www.google.com/maps/dir/?api=1&destination=41.2380,9.1900" target="_blank" rel="noopener">🧭 Directions</a></div>
+      </div>
+      <div class="card">
+        <div class="card-eyebrow">Day 1 · Golfo Aranci</div>
+        <h3>Golfo Aranci Lungomare</h3>
+        <p>Not a swim beach, but the harborfront promenade past the colorful fishermen's houses and the bronze mermaid statue — free, low-key, a good arrival-evening reset.</p>
+        <div class="poi-actions"><a class="dir" href="https://www.google.com/maps/dir/?api=1&destination=41.0000,9.6170" target="_blank" rel="noopener">🧭 Directions</a></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══════════ ALSO WORTH SEEING ═══════════ -->
+  <div id="tab-more" class="section">
+    <div class="section-title">Also Worth Seeing</div>
+    <div class="section-sub">Researched, real options that didn't make this trip's four days — too far from Casagliana for a day trip, but worth knowing about for a future visit.</div>
+    <div class="card-grid">
+      <div class="card accent3">
+        <div class="card-eyebrow">Sulcis-Iglesiente, SW Sardinia</div>
+        <h3>Santa Barbara Trail</h3>
+        <p>A 500km mining-history hiking route through the old mining districts of southwest Sardinia — genuinely beautiful, but ~3+ hrs from Casagliana, a different trip entirely.</p>
+        <div class="poi-actions"><a class="dir" href="https://www.google.com/maps/dir/?api=1&destination=Sentiero+Italia+Santa+Barbara+Trail+Sardinia" target="_blank" rel="noopener">🧭 Directions</a></div>
+      </div>
+      <div class="card accent3">
+        <div class="card-eyebrow">Near Oristano, west coast</div>
+        <h3>Sinis Peninsula</h3>
+        <p>Flat, scenic cycling terrain and the quartz-sand beach at Is Arutas — ~2–2.5 hrs from Casagliana.</p>
+        <div class="poi-actions"><a class="dir" href="https://www.google.com/maps/dir/?api=1&destination=Penisola+del+Sinis,+Sardinia" target="_blank" rel="noopener">🧭 Directions</a></div>
+      </div>
+      <div class="card accent3">
+        <div class="card-eyebrow">Deep south, near Teulada</div>
+        <h3>Tuerredda Beach</h3>
+        <p>Often ranked among Sardinia's best beaches — a small island just offshore you can wade to, but ~3+ hrs from Casagliana.</p>
+        <div class="poi-actions"><a class="dir" href="https://www.google.com/maps/dir/?api=1&destination=Spiaggia+di+Tuerredda,+Sardinia" target="_blank" rel="noopener">🧭 Directions</a></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══════════ BOOK NOW ═══════════ -->
+  <div id="tab-book" class="section">
+    <div class="section-title">Book Now Checklist</div>
+    <div class="section-sub">Everything that needs advance booking for August, with direct contact info.</div>
+
+    <div class="callout warn"><strong>Two open logistics calls, flagging before you book:</strong> (1) La Pelosa now requires a paid online reservation — it didn't when this itinerary was first drafted; book 5–7 days ahead via the official site only. (2) The Maddalena and Orosei excursions weren't tied to a specific operator in the original notes — Delfino Tours and Palmasera Boat Rental below are well-reviewed options matching the islands/calas already planned, but worth confirming before booking if there's another outfit already in mind.</div>
+
+    <ul class="checklist">
+      <li><span class="checkbox"></span><div>
+        <span class="lbl">Lodging — Casagliana Suite Resort</span>4 nights, Aug 6–10, Via Sole Ruju 14, Olbia
+        <span class="contact">📞 <a href="tel:+390789733029">+39 0789 733029</a> &nbsp;·&nbsp; <a href="https://en.casagliana.com/609/booking-form.html" target="_blank" rel="noopener">Book online</a></span>
+      </div></li>
+      <li><span class="checkbox"></span><div>
+        <span class="lbl">Rental car — Only Sardinia Autonoleggio</span>In-terminal pickup at OLB; alt: Sicily by Car
+        <span class="contact">📞 <a href="tel:+390789689470">+39 0789 68947</a> &nbsp;·&nbsp; <a href="https://www.only-sardinia.com/en/sardinia-car-rental/" target="_blank" rel="noopener">Book online</a></span>
+      </div></li>
+      <li><span class="checkbox"></span><div>
+        <span class="lbl">Maddalena Islands boat excursion — Delfino Tours</span>~7 hr, Fri Aug 7 from Palau — Spargi, Santa Maria, Pink Beach view
+        <span class="contact">📞 <a href="tel:+393348520671">+39 334 852 0671</a> &nbsp;·&nbsp; <a href="https://gitearcipelago.it/en/" target="_blank" rel="noopener">Book online</a></span>
+      </div></li>
+      <li><span class="checkbox"></span><div>
+        <span class="lbl">Orosei charter — Palmasera Boat Rental</span>Cala Luna &amp; Cala Mariolu, Sat Aug 8 from Cala Gonone, ~9 AM departure typical
+        <span class="contact">📞 <a href="tel:+393476027626">+39 347 602 7626</a> &nbsp;·&nbsp; <a href="https://www.palmaseraboatrental.com/en/" target="_blank" rel="noopener">Book online</a></span>
+      </div></li>
+      <li><span class="checkbox"></span><div>
+        <span class="lbl">La Pelosa entry reservation</span>Sun Aug 9 — required timed online reservation, €3.50 pp, book 5–7 days ahead
+        <span class="contact"><a href="https://spiaggialapelosa.it/en/" target="_blank" rel="noopener">Reserve at spiaggialapelosa.it</a> (official site only)</span>
+      </div></li>
+      <li><span class="checkbox"></span><div>
+        <span class="lbl">Dinner reservation — CuCumiao</span>Fri Aug 7, Palau — reserve ahead, June–August is busy
+        <span class="contact">📞 <a href="tel:+390789707064">+39 0789 707064</a> &nbsp;·&nbsp; <a href="https://www.cucumiao.it/en/" target="_blank" rel="noopener">cucumiao.it</a> &nbsp;·&nbsp; alt: O'Belau 📞 <a href="tel:+393478961670">+39 347 896 1670</a></span>
+      </div></li>
+      <li><span class="checkbox"></span><div>
+        <span class="lbl">Confirm Aug 10 departure time</span>2:00 vs 3:00 PM flight — locks the Day 5 checkout/leave-by time
+        <span class="contact">No vendor — update this page once the flight is booked</span>
+      </div></li>
+    </ul>
+  </div>
+
+  <!-- ═══════════ PRINT / OFFLINE COPY ═══════════ -->
+  <div id="tab-print" class="section">
+    <div class="section-title">Print / Offline Copy</div>
+    <div class="section-sub">A no-internet-needed version — every phone number, address, and website spelled out as plain text. Print this tab or grab the PDF before you lose signal.</div>
+
+    <button class="print-btn" onclick="window.print()">🖨 Print this page</button>
+    <a class="print-btn outline" href="Sardinia-Itinerary-Printable.pdf" target="_blank" rel="noopener">⬇ Download PDF</a>
+
+    <h3 style="font-family:'Fraunces',serif; font-size:20px; margin:28px 0 14px; color:var(--paper);">Key Contacts</h3>
+
+    <div class="contact-block">
+      <h4>Casagliana Suite Resort</h4>
+      <div class="contact-line">Via Sole Ruju 14, Località Casagliana, 07026 Olbia (OT)</div>
+      <div class="contact-line">📞 +39 0789 733029 / +39 328 928 4020 &nbsp;·&nbsp; en.casagliana.com &nbsp;·&nbsp; Conf# not yet booked</div>
+    </div>
+    <div class="contact-block">
+      <h4>Olbia Costa Smeralda Airport (OLB)</h4>
+      <div class="contact-line">Via del Campo 9, 07026 Olbia (OT)</div>
+      <div class="contact-line">📞 +39 0789 563076 &nbsp;·&nbsp; olbiaairport.it</div>
+    </div>
+    <div class="contact-block">
+      <h4>Only Sardinia Autonoleggio — rental car</h4>
+      <div class="contact-line">In-terminal, Olbia Costa Smeralda Airport</div>
+      <div class="contact-line">📞 +39 0789 68947 &nbsp;·&nbsp; only-sardinia.com</div>
+    </div>
+    <div class="contact-block">
+      <h4>Delfino Tours — Maddalena Islands boat excursion</h4>
+      <div class="contact-line">Piazza del Molo, Palau (OT)</div>
+      <div class="contact-line">📞 +39 334 852 0671 &nbsp;·&nbsp; gitearcipelago.it</div>
+    </div>
+    <div class="contact-block">
+      <h4>Palmasera Boat Rental — Orosei charter</h4>
+      <div class="contact-line">Piazza del Porto Box 14, Cala Gonone (NU)</div>
+      <div class="contact-line">📞 +39 347 602 7626 &nbsp;·&nbsp; palmaseraboatrental.com</div>
+    </div>
+    <div class="contact-block">
+      <h4>La Pelosa reservation</h4>
+      <div class="contact-line">Online only — spiaggialapelosa.it, the only authorized booking site</div>
+      <div class="contact-line">Timed entry 8 AM–6 PM &nbsp;·&nbsp; €3.50 pp &nbsp;·&nbsp; book 5–7 days ahead in peak season</div>
+    </div>
+    <div class="contact-block">
+      <h4>CuCumiao — dinner, Day 2</h4>
+      <div class="contact-line">S.S. 125, Km 353, 07020 Palau (OT)</div>
+      <div class="contact-line">📞 +39 0789 707064 &nbsp;·&nbsp; cucumiao.it</div>
+    </div>
+    <div class="contact-block">
+      <h4>O'Belau Ristorante — dinner alternate, Day 2</h4>
+      <div class="contact-line">Palau (OT)</div>
+      <div class="contact-line">📞 +39 347 896 1670 &nbsp;·&nbsp; obelau.com</div>
+    </div>
+
+    <h3 style="font-family:'Fraunces',serif; font-size:20px; margin:32px 0 14px; color:var(--paper);">Day-by-Day Contacts</h3>
+
+    <div class="print-day">
+      <h4>Day 1 · Thu Aug 6 · Arrival &amp; Golfo Aranci</h4>
+      <ul>
+        <li>Olbia Costa Smeralda Airport (OLB)<span class="contact-line">Via del Campo 9, Olbia · 📞 +39 0789 563076</span></li>
+        <li>Casagliana Suite Resort<span class="contact-line">Via Sole Ruju 14, Olbia · GPS 40.9950, 9.4550 · 📞 +39 0789 733029</span></li>
+        <li>Pescheria del Golfo (dinner)<span class="contact-line">Golfo Aranci · GPS 41.0000, 9.6170 · no reservations, cash-and-carry</span></li>
+        <li>La Vecchia Marina (dinner alt.)<span class="contact-line">Golfo Aranci · lavecchiamarina.com</span></li>
+      </ul>
+    </div>
+    <div class="print-day">
+      <h4>Day 2 · Fri Aug 7 · Maddalena Islands</h4>
+      <ul>
+        <li>Delfino Tours (boat excursion)<span class="contact-line">Piazza del Molo, Palau · GPS 41.1791, 9.3872 · 📞 +39 334 852 0671 · gitearcipelago.it</span></li>
+        <li>Le Dolcezze Napoletane (breakfast)<span class="contact-line">Via Nazionale 48, Palau · GPS 41.1780, 9.3865</span></li>
+        <li>CuCumiao (dinner)<span class="contact-line">S.S. 125, Km 353, Palau · 📞 +39 0789 707064 · cucumiao.it</span></li>
+        <li>O'Belau (dinner alt.)<span class="contact-line">Palau · 📞 +39 347 896 1670 · obelau.com</span></li>
+        <li>Santa Teresa Gallura (optional add-on)<span class="contact-line">GPS 41.2380, 9.1900 — Rena Bianca beach, Capo Testa</span></li>
+      </ul>
+    </div>
+    <div class="print-day">
+      <h4>Day 3 · Sat Aug 8 · Orosei Charter</h4>
+      <ul>
+        <li>Palmasera Boat Rental (charter)<span class="contact-line">Piazza del Porto Box 14, Cala Gonone · GPS 40.2790, 9.6345 · 📞 +39 347 602 7626 · palmaseraboatrental.com</span></li>
+        <li>Bar Puddu (breakfast)<span class="contact-line">Viale Colombo 1, Cala Gonone</span></li>
+        <li>Il Nuovo Gabbiano (lunch)<span class="contact-line">Cala Gonone harbor</span></li>
+        <li>Cala Luna<span class="contact-line">GPS 40.2350, 9.6280</span></li>
+        <li>Cala Mariolu<span class="contact-line">GPS 40.1650, 9.6850</span></li>
+      </ul>
+    </div>
+    <div class="print-day">
+      <h4>Day 4 · Sun Aug 9 · La Pelosa</h4>
+      <ul>
+        <li>Spiaggia La Pelosa<span class="contact-line">Stintino · GPS 40.9491, 8.2231 · reservation required: spiaggialapelosa.it</span></li>
+        <li>Bar I Ginepri (coffee &amp; lunch)<span class="contact-line">GPS 40.9475, 8.2245</span></li>
+        <li>La Pelosetta (lunch alt.)<span class="contact-line">Stintino · lapelosettarestaurant.it</span></li>
+      </ul>
+    </div>
+    <div class="print-day">
+      <h4>Day 5 · Mon Aug 10 · Departure</h4>
+      <ul>
+        <li>Casagliana Suite Resort (checkout)<span class="contact-line">Via Sole Ruju 14, Olbia · 📞 +39 0789 733029</span></li>
+        <li>Olbia Costa Smeralda Airport (OLB)<span class="contact-line">Via del Campo 9, Olbia · 📞 +39 0789 563076</span></li>
       </ul>
     </div>
   </div>
 
-  <!-- DAY 1 -->
-  <div class="section" id="tab-day1">
-    <div class="day">
-      <div class="day-head">
-        <div><div class="dnum">Thursday, August 6</div><h2>Arrival &amp; Golfo Aranci</h2></div>
-        <div class="chip-row">
-          <div class="chip gold">~15 min drive</div>
-          <div class="chip outline">Leave for dinner: 6:30 PM</div>
-        </div>
-      </div>
-      <div class="day-weather">🌤️ <b>Weather</b> · Temp: — · Precip: — · Wind: — <span class="wx-note">(Forecasts open up ~10 days out)</span></div>
-      <div class="day-body">
-        <p class="day-note">Land at Olbia around 11 AM, drive straight to Casagliana (roughly 15–20 min from the airport), check in, unpack, pool time. No agenda pressure today — the trip's three big days start tomorrow. In the evening, head to <b>Golfo Aranci</b>, a working 19th-century fishing village where boats still dock daily and the harbor still runs on the fishermen's schedule.</p>
-        <div class="meal-grid">
-          <div class="meal">
-            <div class="mtype">Dinner</div>
-            <div class="mname"><a href="https://restaurantguru.com/Pescheria-and-Friggitoria-Del-Golfo-Golfo-Aranci" target="_blank" rel="noopener">Pescheria del Golfo</a></div>
-            <div class="mrating">★ 4.8 (Restaurant Guru)</div>
-            <div class="mdesc">Pick your fish straight from the fishmonger's counter — calamari, mussels, shrimp, tuna, whatever came in that morning — and they fry it fresh and serve it dockside in a paper tray. Casual, cash-and-carry, genuinely local.</div>
-            <div class="malt">Alt: La Vecchia Marina — sit-down version, same daily catch. <a href="https://lavecchiamarina.com/" target="_blank" rel="noopener">lavecchiamarina.com</a></div>
-          </div>
-          <div class="meal">
-            <div class="mtype">Or, sunset stroll</div>
-            <div class="mname">Golfo Aranci harborfront</div>
-            <div class="mrating">Free</div>
-            <div class="mdesc">The Lungomare promenade past the colorful fishermen's houses, the bronze mermaid statue, and the old port — low-key, no crowds, a good reset after travel.</div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <!-- DAY 2 -->
-  <div class="section" id="tab-day2">
-    <div class="day">
-      <div class="day-head">
-        <div><div class="dnum">Friday, August 7</div><h2>Maddalena Islands</h2></div>
-        <div class="chip-row">
-          <div class="chip gold">~40–45 min drive</div>
-          <div class="chip outline">Leave by 8:00 AM</div>
-        </div>
-      </div>
-      <div class="day-weather">🌤️ <b>Weather</b> · Temp: — · Precip: — · Wind: — <span class="wx-note">(Forecasts open up ~10 days out)</span></div>
-      <div class="day-body">
-        <span class="flag">All-day · 7 hr excursion</span>
-        <p class="day-note">The boat excursion runs about 7 hours, so this is the one true "all-in" day. Leaving by 8:00 AM gets you into Palau around 8:45, with time for breakfast before most operators' mid-morning boarding. Expect stops at Spargi, Santa Maria, and views of the Pink Beach (Spiaggia Rosa) across the archipelago.</p>
-        <div class="meal-grid">
-          <div class="meal">
-            <div class="mtype">Breakfast — before boarding</div>
-            <div class="mname">Le Dolcezze Napoletane</div>
-            <div class="mrating">★ 4.5 (632 reviews) · #1 of 77 in Palau</div>
-            <div class="mdesc">Neapolitan pastry shop steps from the ferry dock — cornetti, cannoli, strong espresso, quick enough to grab and go before the boat. Via Nazionale 48, Palau.</div>
-            <div class="malt">Alt: Cafe del Mar — ★4.5, sit-down with sea views.</div>
-          </div>
-          <div class="meal">
-            <div class="mtype">Dinner — back on land</div>
-            <div class="mname">CuCumiao</div>
-            <div class="mrating">★ 4.3 (2,500+ reviews)</div>
-            <div class="mdesc">Solid Italian/seafood back in Palau for whenever the boat gets in — handles a full evening crowd well without dropping quality.</div>
-            <div class="malt">Alt: O'Belau Ristorante — ★4.4, book ahead.</div>
-          </div>
-        </div>
-        <div class="stops">
-          <div class="slabel">If there's daylight left</div>
-          <div class="stop-item"><b>Santa Teresa Gallura</b> — 20–25 min north of Palau. Worth the detour if the group still has legs after 7 hours on the water: <b>Piazza Vittorio Emanuele</b> and the old center for a walk, <b>Rena Bianca</b> beach for a look, and <b>Capo Testa</b> for granite headland views toward Corsica at sunset. Otherwise, save it for its own morning.</div>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <!-- DAY 3 -->
-  <div class="section" id="tab-day3">
-    <div class="day">
-      <div class="day-head">
-        <div><div class="dnum">Saturday, August 8</div><h2>Orosei charter — Cala Luna &amp; Cala Mariolu</h2></div>
-        <div class="chip-row">
-          <div class="chip granite">~1h 25–35m drive</div>
-          <div class="chip outline">Leave by 6:45 AM</div>
-        </div>
-      </div>
-      <div class="day-weather">🌤️ <b>Weather</b> · Temp: — · Precip: — · Wind: — <span class="wx-note">(Forecasts open up ~10 days out)</span></div>
-      <div class="day-body">
-        <span class="flag">Longest one-way drive on the trip</span>
-        <p class="day-note">This is the furthest day-trip base, so an early start pays off. Leaving Casagliana by 6:45 AM gets you to Cala Gonone around 8:10–8:20 — time for breakfast at the harbor before a typical 9:00 AM charter departure.</p>
-        <div class="meal-grid">
-          <div class="meal">
-            <div class="mtype">Breakfast — at the harbor</div>
-            <div class="mname">Bar Puddu</div>
-            <div class="mrating">★ 4.6 (Google)</div>
-            <div class="mdesc">Technically attached to a gas station — don't let that fool you. Garden setting, sweeping views over the Gulf of Orosei, excellent coffee and paninis you can take straight onto the boat. Viale Colombo 1, Cala Gonone.</div>
-            <div class="malt">Alt: Garden Bar — ★3.8, central, simpler.</div>
-          </div>
-          <div class="meal">
-            <div class="mtype">Lunch — after the charter</div>
-            <div class="mname">Il Nuovo Gabbiano</div>
-            <div class="mrating">★ 4.1 (1,555 reviews)</div>
-            <div class="mdesc">Right on the water in Cala Gonone — order the catch of the day off a working fishing harbor, not a tourist stand-in.</div>
-            <div class="malt">Alt: La Poltrona — ★4.2, good backup if Gabbiano's full.</div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <!-- DAY 4 -->
-  <div class="section" id="tab-day4">
-    <div class="day">
-      <div class="day-head">
-        <div><div class="dnum">Sunday, August 9</div><h2>Spiaggia La Pelosa, Stintino</h2></div>
-        <div class="chip-row">
-          <div class="chip granite">~2h 15m drive</div>
-          <div class="chip outline">Leave by 6:30 AM</div>
-        </div>
-      </div>
-      <div class="day-weather">🌤️ <b>Weather</b> · Temp: — · Precip: — · Wind: — <span class="wx-note">(Forecasts open up ~10 days out)</span></div>
-      <div class="day-body">
-        <span class="flag">Biggest driving day — ~4.5 hrs round trip</span>
-        <p class="day-note">La Pelosa sits on the far northwest tip of the island — the furthest point on this itinerary from Casagliana. Leaving by 6:30 AM puts you on the beach around 8:45, ahead of both the midday heat and the crowds — La Pelosa caps daily visitors in peak season, so an early arrival matters more here than anywhere else on the trip.</p>
-        <div class="meal-grid">
-          <div class="meal">
-            <div class="mtype">Coffee, on arrival</div>
-            <div class="mname">Bar I Ginepri</div>
-            <div class="mrating">Mixed but consistent praise for the view</div>
-            <div class="mdesc">Terrace bar right over the beach — good for a coffee and pastry before you claim a spot on the sand.</div>
-          </div>
-          <div class="meal">
-            <div class="mtype">Lunch — beachfront</div>
-            <div class="mname">Bar I Ginepri (terrace lunch)</div>
-            <div class="mrating">Beautifully presented, view of La Pelosa</div>
-            <div class="mdesc">Panini and light Sardinian plates, steps from the water — easy, no need to leave the beach.</div>
-            <div class="malt">Alt: La Pelosetta — ★3.6, fuller sit-down menu (seafood pasta, wood-oven pizza). <a href="https://lapelosettarestaurant.it" target="_blank" rel="noopener">lapelosettarestaurant.it</a></div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <!-- DAY 5 -->
-  <div class="section" id="tab-day5">
-    <div class="day">
-      <div class="day-head">
-        <div><div class="dnum">Monday, August 10</div><h2>Departure</h2></div>
-        <div class="chip-row">
-          <div class="chip gold">~15–20 min to OLB</div>
-          <div class="chip outline">Flight window: 2–3 PM</div>
-        </div>
-      </div>
-      <div class="day-weather">🌤️ <b>Weather</b> · Temp: — · Precip: — · Wind: — <span class="wx-note">(Forecasts open up ~10 days out)</span></div>
-      <div class="day-body">
-        <p class="day-note">With a 2–3 PM departure, the morning has real breathing room — just not enough for a full Golfo Aranci detour on top of checkout. Two versions depending on which slot you book:</p>
-        <div class="meal-grid">
-          <div class="meal">
-            <div class="mtype">If 2:00 PM flight</div>
-            <div class="mname">Tight but relaxed</div>
-            <div class="mrating">Depart hotel by 12:00–12:15 PM</div>
-            <div class="mdesc">Breakfast &amp; pool at the resort, checkout by 11:30 AM, straight to OLB (~15–20 min). Arrives with ~90 min buffer before a domestic/EU departure — enough, not extra.</div>
-          </div>
-          <div class="meal">
-            <div class="mtype">If 3:00 PM flight</div>
-            <div class="mname">Room for one last stop</div>
-            <div class="mrating">Depart hotel by 1:00–1:15 PM</div>
-            <div class="mdesc">Same slow morning, but enough slack for a quick last coffee or pastry stop in Golfo Aranci (~15 min detour) on the way to the airport before the ~90 min buffer.</div>
-          </div>
-        </div>
-        <div class="stops">
-          <div class="slabel">Once it's booked</div>
-          <div class="stop-item">Confirm exact time and I'll lock the checkout time and add it to Todoist as a hard deadline rather than a range.</div>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <!-- ACTIONS / BOOKINGS -->
-  <div class="section" id="tab-actions">
-    <div class="ov-card" style="margin-bottom:22px;">
-      <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:12px;">
-        <h3 style="margin:0;">Bookings &amp; to-dos</h3>
-        <div id="progress-label" style="font-family:'IBM Plex Mono',monospace; font-size:12px; color: var(--sea-light);"></div>
-      </div>
-      <div style="height:6px; background:rgba(239,230,206,0.12); border-radius:3px; margin-top:14px; overflow:hidden;">
-        <div id="progress-bar" style="height:100%; width:0%; background: var(--gold); transition: width .25s ease;"></div>
-      </div>
-    </div>
-
-    <div class="ov-grid">
-      <div class="ov-card">
-        <h3>Lodging &amp; travel</h3>
-        <ul class="action-list">
-          <li><label><input type="checkbox" data-item> Book Casagliana Suite Resort, Aug 6–10 <a href="https://en.casagliana.com/609/booking-form.html" target="_blank" rel="noopener">→ site</a></label></li>
-          <li><label><input type="checkbox" data-item> Confirm exact Aug 10 flight time (2:00 vs 3:00 PM)</label></li>
-          <li><label><input type="checkbox" data-item> Arrange airport transfer / rental car pickup at OLB — <b>Only Sardinia Autonoleggio</b> (in-terminal, 5★/190+ reviews); alt: Sicily by Car</label></li>
-        </ul>
-      </div>
-      <div class="ov-card">
-        <h3>Excursions to book</h3>
-        <ul class="action-list">
-          <li><label><input type="checkbox" data-item> Book Maddalena Islands 7-hr boat excursion from Palau (Aug 7)</label></li>
-          <li><label><input type="checkbox" data-item> Book Orosei charter to Cala Luna &amp; Cala Mariolu from Cala Gonone (Aug 8)</label></li>
-          <li><label><input type="checkbox" data-item> Check if La Pelosa requires an online entry reservation for Aug 9</label></li>
-        </ul>
-      </div>
-      <div class="ov-card">
-        <h3>Dining — worth reserving ahead</h3>
-        <ul class="action-list">
-          <li><label><input type="checkbox" data-item> Golfo Aranci — Pescheria del Golfo, check hours for Aug 6 dinner</label></li>
-          <li><label><input type="checkbox" data-item> Palau — reserve CuCumiao or O'Belau for Aug 7 dinner</label></li>
-          <li><label><input type="checkbox" data-item> Cala Gonone — no reservation needed, but arrive early to Il Nuovo Gabbiano post-charter</label></li>
-        </ul>
-      </div>
-      <div class="ov-card">
-        <h3>Nice-to-haves</h3>
-        <ul class="action-list">
-          <li><label><input type="checkbox" data-item> Decide: Santa Teresa Gallura as Day 2 add-on or its own separate morning</label></li>
-          <li><label><input type="checkbox" data-item> Pack reef shoes / water shoes for the calas (rocky entry at Cala Mariolu)</label></li>
-          <li><label><input type="checkbox" data-item> Sun protection for the boat days — shade is limited on charters</label></li>
-        </ul>
-      </div>
-    </div>
-    <p style="font-family:'IBM Plex Mono',monospace; font-size:11.5px; color: rgba(247,243,232,0.4); margin-top:18px;">Checks reset if you close and reopen this file — it's a static page, not a synced list. Happy to also add any of these straight to your Todoist.</p>
-  </div>
-
 </div>
 
-<footer>* Day 5 leave-by depends on final flight time — see Day 5 tab for both scenarios · Sardinia · Aug 6–10</footer>
+<footer class="footer">Built for the Moore family · <span>Sardinia, Aug 6–10, 2026</span></footer>
 
 <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
 <script>
-  function showTab(id, btn){
+  function showTab(id){
     document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
     document.getElementById('tab-' + id).classList.add('active');
     document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
-    btn.classList.add('active');
+    event.target.closest('.tab-btn').classList.add('active');
   }
 
   function pin(color){
     return L.divIcon({
       className:'',
-      html: '<div style="width:16px;height:16px;border-radius:50% 50% 50% 0;background:'+color+';border:2px solid #0E2A2E;transform:rotate(-45deg);box-shadow:0 1px 3px rgba(0,0,0,0.4);"></div>',
+      html:'<div style="width:16px;height:16px;border-radius:50% 50% 50% 0;background:'+color+';border:2px solid #0E2A2E;transform:rotate(-45deg);box-shadow:0 1px 3px rgba(0,0,0,0.4);"></div>',
       iconSize:[16,16], iconAnchor:[8,16]
     });
   }
 
   var points = [
-    {lat:40.9950, lng:9.4550, name:"Casagliana Suite Resort", note:"Home base — Via Sole Ruju 14, Olbia", color:"#D3A94A"},
-    {lat:41.0000, lng:9.6170, name:"Golfo Aranci", note:"Day 1 — fishing village, evening stroll + Pescheria del Golfo", color:"#3E9C93"},
-    {lat:41.1791, lng:9.3872, name:"Palau", note:"Day 2 — Maddalena Islands boat departure point", color:"#8FCFC4"},
-    {lat:41.1780, lng:9.3865, name:"Le Dolcezze Napoletane", note:"Day 2 breakfast, \u2605 4.5", color:"#8FCFC4"},
-    {lat:41.2167, lng:9.4300, name:"La Maddalena Archipelago", note:"Day 2 — Spargi, Santa Maria, Pink Beach", color:"#8FCFC4"},
+    {lat:40.9950, lng:9.4550, name:"Casagliana Suite Resort", note:"Home base — Via Sole Ruju 14, Olbia", color:"#D3A94A", site:"https://en.casagliana.com/609/booking-form.html"},
+    {lat:41.0000, lng:9.6170, name:"Golfo Aranci", note:"Day 1 — fishing village, evening stroll + Pescheria del Golfo", color:"#3E9C93", img:"https://commons.wikimedia.org/wiki/Special:FilePath/Golfo%20Aranci%20-%20porto.jpg?width=400"},
+    {lat:41.1791, lng:9.3872, name:"Palau", note:"Day 2 — Maddalena Islands boat departure point", color:"#8FCFC4", img:"https://commons.wikimedia.org/wiki/Special:FilePath/Sardinia%20Palau%20Marina%20FdS.jpg?width=400"},
+    {lat:41.1780, lng:9.3865, name:"Le Dolcezze Napoletane", note:"Day 2 breakfast, ★ 4.5", color:"#8FCFC4"},
+    {lat:41.2167, lng:9.4300, name:"La Maddalena Archipelago", note:"Day 2 — Spargi, Santa Maria, Pink Beach", color:"#8FCFC4", img:"https://commons.wikimedia.org/wiki/Special:FilePath/Testa%20della%20Strega%2C%20Isola%20di%20Spargi.%20Arcipelago%20della%20Maddalena.JPG?width=400", site:"https://gitearcipelago.it/en/"},
     {lat:41.2380, lng:9.1900, name:"Santa Teresa Gallura", note:"Day 2 optional add-on — old town, Rena Bianca, Capo Testa", color:"#8FCFC4"},
-    {lat:40.2790, lng:9.6345, name:"Cala Gonone", note:"Day 3 — Orosei charter departure, \u2605 4.6 Bar Puddu", color:"#D98873"},
-    {lat:40.2350, lng:9.6280, name:"Cala Luna", note:"Day 3 — charter stop", color:"#D98873"},
-    {lat:40.1650, lng:9.6850, name:"Cala Mariolu", note:"Day 3 — charter stop", color:"#D98873"},
-    {lat:40.9491, lng:8.2231, name:"Spiaggia La Pelosa", note:"Day 4 — Stintino, far northwest tip", color:"#B65E48"},
+    {lat:40.2790, lng:9.6345, name:"Cala Gonone", note:"Day 3 — Orosei charter departure, ★ 4.6 Bar Puddu", color:"#D98873", site:"https://www.palmaseraboatrental.com/en/"},
+    {lat:40.2350, lng:9.6280, name:"Cala Luna", note:"Day 3 — charter stop", color:"#D98873", img:"https://commons.wikimedia.org/wiki/Special:FilePath/Cala%20Luna%2C%20Sardinien.JPG?width=400"},
+    {lat:40.1650, lng:9.6850, name:"Cala Mariolu", note:"Day 3 — charter stop", color:"#D98873", img:"https://commons.wikimedia.org/wiki/Special:FilePath/Cala%20Mariolu%202012.jpg?width=400"},
+    {lat:40.9491, lng:8.2231, name:"Spiaggia La Pelosa", note:"Day 4 — Stintino, far northwest tip. Reservation required", color:"#B65E48", img:"https://commons.wikimedia.org/wiki/Special:FilePath/La%20Pelosa%20beach%2C%20north%20Sardinia%20(Italy)%20(24167750496).jpg?width=400", site:"https://spiaggialapelosa.it/en/"},
     {lat:40.9475, lng:8.2245, name:"Bar I Ginepri", note:"Day 4 breakfast & lunch, beachfront terrace", color:"#B65E48"}
   ];
 
-  var topmap = L.map('topmap', { scrollWheelZoom:false }).setView([40.85, 9.25], 8);
+  var map = L.map('map', { scrollWheelZoom:false }).setView([40.85, 9.25], 8);
   L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
     attribution: '&copy; OpenStreetMap contributors',
     maxZoom: 18
-  }).addTo(topmap);
+  }).addTo(map);
 
   points.forEach(function(p){
-    L.marker([p.lat, p.lng], {icon: pin(p.color)}).addTo(topmap)
-      .bindPopup('<b>'+p.name+'</b><br><span style="font-size:12px;color:#555">'+p.note+'</span>', {maxWidth:220});
+    var thumbHtml = p.img ? '<img src="'+p.img+'" style="width:100%;height:90px;object-fit:cover;border-radius:6px;margin-bottom:6px;">' : '';
+    var noteHtml = p.note ? '<br><span style="color:#888;font-size:12px;">'+p.note+'</span>' : '';
+    var gmapsUrl = 'https://www.google.com/maps/dir/?api=1&destination=' + p.lat + ',' + p.lng;
+    var linkHtml = '<br><a href="'+gmapsUrl+'" target="_blank" rel="noopener" style="font-size:11px;">Open in Google Maps →</a>';
+    L.marker([p.lat, p.lng], {icon: pin(p.color)}).addTo(map)
+      .bindPopup(thumbHtml + '<b>'+p.name+'</b>' + noteHtml + linkHtml, {maxWidth:220});
   });
 
-  setTimeout(function(){ topmap.invalidateSize(); }, 150);
-
-  var checkboxes = document.querySelectorAll('input[data-item]');
-  var progressBar = document.getElementById('progress-bar');
-  var progressLabel = document.getElementById('progress-label');
-  var actionsCount = document.getElementById('actions-count');
-  function updateProgress(){
-    var total = checkboxes.length;
-    var done = document.querySelectorAll('input[data-item]:checked').length;
-    var pct = total ? Math.round((done/total)*100) : 0;
-    progressBar.style.width = pct + '%';
-    progressLabel.textContent = done + ' / ' + total + ' done';
-    actionsCount.textContent = '(' + done + '/' + total + ')';
-  }
-  checkboxes.forEach(function(cb){ cb.addEventListener('change', updateProgress); });
-  updateProgress();
+  setTimeout(function(){ map.invalidateSize(); }, 150);
 </script>
 
 </body>
