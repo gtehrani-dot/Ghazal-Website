@@ -101,6 +101,12 @@
   .map-head h2{ font-size:clamp(26px,3vw,34px); }
   .map-head p{ color:rgba(251,246,234,0.65); font-size:14px; max-width:44ch; }
 
+  .callout{
+    border:1px solid var(--line); border-left:3px solid var(--gold); background:rgba(244,192,93,0.08);
+    border-radius:0 8px 8px 0; padding:16px 20px; font-size:14.5px; color:var(--cream); margin:0 0 24px;
+  }
+  .callout strong{ color:var(--gold); }
+
   #map{
     height:460px; width:100%; border-radius:22px; overflow:hidden;
     border:1px solid var(--line);
@@ -158,6 +164,10 @@
         <p>Both trips sit inside Italy but couldn't feel more different — one on the water, one above it.</p>
       </div>
     </div>
+    <div class="callout">
+      <strong>Getting between the two:</strong><br>
+      No direct drive — Sardinia is an island. Most travelers fly Olbia (OLB) → Milan (MXP/LIN), ~1h15m nonstop, then it's about 1h to Como by car or train. Figure a half-day door to door either way.
+    </div>
     <div id="map"></div>
   </div>
 
@@ -167,9 +177,9 @@
 <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
 <script>
   const map = L.map('map', { scrollWheelZoom:false }).setView([43.6, 10.0], 6);
-  L.tileLayer('https://{s}.basemaps.cartocdn.com/dark_nolabels/{z}/{x}/{y}{r}.png', {
-    attribution:'&copy; OpenStreetMap &copy; CARTO',
-    subdomains:'abcd', maxZoom:19
+  L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+    attribution:'&copy; OpenStreetMap contributors',
+    maxZoom:19
   }).addTo(map);
 
   function pinIcon(color){
