@@ -176,6 +176,32 @@
   .day-weather .wx-note{ color:var(--granite); font-style:italic; }
   .title-lnk{ color:inherit; text-decoration:underline; text-decoration-color:var(--sky); text-underline-offset:3px; text-decoration-thickness:1.5px; }
   .title-lnk:hover{ color:var(--sky-deep); }
+  .tl-gmaps-btn{ display:inline-flex; align-items:center; gap:5px; font-family:'JetBrains Mono',monospace; font-size:11px; font-weight:600; text-decoration:none; padding:4px 12px; border-radius:100px; background:var(--sky); color:#fff; margin-bottom:14px; margin-left:2px; }
+  .tl-gmaps-btn:hover{ background:var(--sky-deep); }
+  .tl-items li.alt{ font-style:italic; opacity:0.85; }
+
+  /* ── OVERVIEW TAB ── */
+  .overview-grid{ display:grid; grid-template-columns:repeat(auto-fit,minmax(220px,1fr)); gap:16px; margin-bottom:32px; }
+  .overview-stat{ background:var(--white); border:1px solid var(--line); border-radius:10px; padding:18px 20px; }
+  .overview-stat .lbl{ font-family:'JetBrains Mono',monospace; font-size:10.5px; text-transform:uppercase; letter-spacing:0.08em; color:var(--granite); margin-bottom:6px; }
+  .overview-stat .val{ font-size:16px; font-weight:600; color:var(--ink); }
+  .at-a-glance{ width:100%; border-collapse:collapse; margin-top:8px; }
+  .at-a-glance th{ text-align:left; font-family:'JetBrains Mono',monospace; font-size:10.5px; text-transform:uppercase; letter-spacing:0.06em; color:var(--granite); padding:10px 14px; border-bottom:1px solid var(--line); }
+  .at-a-glance td{ padding:12px 14px; border-bottom:1px solid var(--line); font-size:14px; color:var(--ink); }
+  .at-a-glance tr:last-child td{ border-bottom:none; }
+
+  /* ── HOTELS TAB ── */
+  .hotels-grid{ display:grid; gap:16px; }
+  .hotel-card{ background:var(--white); border:1px solid var(--line); border-radius:12px; padding:24px 28px; }
+  .hotel-card.tbd{ border-style:dashed; border-color:var(--coral); background:#fdefe9; }
+  .hotel-header{ display:flex; justify-content:space-between; align-items:flex-start; gap:16px; flex-wrap:wrap; margin-bottom:8px; }
+  .hotel-name{ font-family:'Fraunces', serif; font-size:22px; font-weight:600; }
+  .hotel-name a{ color:var(--ink); text-decoration:none; }
+  .hotel-name a:hover{ color:var(--sky-deep); }
+  .hotel-dates{ font-family:'JetBrains Mono',monospace; font-size:11.5px; color:var(--sky-deep); text-align:right; }
+  .hotel-meta-row{ display:flex; flex-wrap:wrap; gap:16px; margin:10px 0; font-size:13.5px; color:var(--granite); }
+  .hotel-meta-row strong{ color:var(--ink); }
+  .hotel-note{ font-size:13.5px; color:#444; border-top:1px solid var(--line); padding-top:12px; margin-top:12px; }
 
   .shore-heading{ display:flex; align-items:center; gap:12px; margin:44px 0 18px; }
   .shore-heading:first-child{ margin-top:0; }
@@ -188,6 +214,8 @@
   .checklist li:last-child{ border-bottom:none; }
   .checkbox{ width:20px; height:20px; border:2px solid var(--sky); border-radius:5px; flex-shrink:0; margin-top:1px; }
   .checklist .lbl{ color:var(--sky-deep); font-family:'JetBrains Mono',monospace; font-size:10.5px; letter-spacing:0.06em; text-transform:uppercase; display:block; margin-bottom:3px; }
+  .checklist .contact{ display:block; font-family:'JetBrains Mono',monospace; font-size:11.5px; color:var(--granite); margin-top:4px; }
+  .checklist .contact a{ color:var(--sky-deep); }
 
   .footer{ text-align:center; padding:40px 6vw 60px; color:var(--granite); font-size:12px; font-family:'JetBrains Mono',monospace; }
   .footer span{ color:var(--sky-deep); }
@@ -238,7 +266,9 @@
 <!-- TAB NAV -->
 <nav class="tab-nav">
   <div class="tab-nav-inner">
-  <button class="tab-btn active" onclick="showTab('itinerary')">📅 Itinerary</button>
+  <button class="tab-btn active" onclick="showTab('overview')">📋 Overview</button>
+  <button class="tab-btn" onclick="showTab('hotels')">🏨 Hotels</button>
+  <button class="tab-btn" onclick="showTab('itinerary')">📅 Itinerary</button>
   <button class="tab-btn" onclick="showTab('beaches')">🏖 Beaches</button>
   <button class="tab-btn" onclick="showTab('adventures')">🥾 Hikes &amp; Adventures</button>
   <button class="tab-btn" onclick="showTab('more')">⭐ Also Worth Seeing</button>
@@ -248,8 +278,55 @@
 
 <div class="wrap">
 
+  <!-- ═══════════ OVERVIEW ═══════════ -->
+  <div id="tab-overview" class="section active">
+    <div class="section-title">Trip Overview</div>
+    <div class="section-sub">Everything at a glance — dates, flights, base, and how the eight days break down.</div>
+
+    <div class="overview-grid">
+      <div class="overview-stat"><div class="lbl">Dates</div><div class="val">Wed Aug 5 – Wed Aug 12, 2026 (7 nights)</div></div>
+      <div class="overview-stat"><div class="lbl">Flights</div><div class="val">DCA/IAD → RNO, both legs</div></div>
+      <div class="overview-stat"><div class="lbl">Base</div><div class="val">One base · Incline Village, North Shore</div></div>
+      <div class="overview-stat"><div class="lbl">Rental car</div><div class="val">One car, full week (agency TBD)</div></div>
+    </div>
+
+    <div class="callout muted">
+      <strong>Why this route:</strong> Everything radiates out from Incline Village so there's no mid-trip packing. North &amp; East Shore days (2–3) stay under 30 minutes; the two West Shore days (4 &amp; 6) are the long drives, so they're spaced apart with a rest day (5) in between rather than stacked back to back.
+    </div>
+
+    <table class="at-a-glance">
+      <thead><tr><th>Day</th><th>Date</th><th>Area</th><th>Focus</th></tr></thead>
+      <tbody>
+        <tr><td>1</td><td>Wed Aug 5</td><td>Travel</td><td>DC → Reno-Tahoe → Incline Village</td></tr>
+        <tr><td>2</td><td>Thu Aug 6</td><td>North Shore</td><td>Sand Harbor — SUP day</td></tr>
+        <tr><td>3</td><td>Fri Aug 7</td><td>East Shore</td><td>Secret Cove, Zephyr Cove &amp; Nevada Beach</td></tr>
+        <tr><td>4</td><td>Sat Aug 8</td><td>Tahoe City</td><td>Truckee River rafting</td></tr>
+        <tr><td>5</td><td>Sun Aug 9</td><td>West Shore</td><td>Meeks Bay, then live music at Commons Beach</td></tr>
+        <tr><td>6</td><td>Mon Aug 10</td><td>West Shore</td><td>Eagle Falls + Emerald Bay, then Bliss Beach</td></tr>
+        <tr><td>7</td><td>Tue Aug 11</td><td>Flex</td><td>Optional Tree Tops, or stay close to home</td></tr>
+        <tr><td>8</td><td>Wed Aug 12</td><td>Travel</td><td>Incline Village → Reno-Tahoe → Home</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- ═══════════ HOTELS ═══════════ -->
+  <div id="tab-hotels" class="section">
+    <div class="section-title">Where You're Staying</div>
+    <div class="section-sub">One base for all 7 nights — Incline Village, North Shore.</div>
+
+    <div class="hotels-grid">
+      <div class="hotel-card tbd">
+        <div class="hotel-header">
+          <div class="hotel-name">Incline Village lodging — name/address needed</div>
+          <div class="hotel-dates">Wed Aug 5 → Wed Aug 12</div>
+        </div>
+        <div class="hotel-note">The itinerary and Book Now tab both assume one Incline Village property for all 7 nights, but the actual hotel/rental name, address, confirmation number, and phone haven't been specified yet — this card is a placeholder so the tab exists and is easy to fill in. Tell me the property (e.g. Hyatt Regency Lake Tahoe, a VRBO, etc.) and I'll fill in the rest, including its own map pin.</div>
+      </div>
+    </div>
+  </div>
+
   <!-- ═══════════ ITINERARY ═══════════ -->
-  <div id="tab-itinerary" class="section active">
+  <div id="tab-itinerary" class="section">
     <div class="section-title">Day-by-Day Itinerary</div>
     <div class="section-sub">One base for the whole trip — Incline Village — so no packing up mid-week. Drive time from Incline is noted on each day; the active days (rafting, the hike) are spread out rather than stacked so nothing runs back-to-back.</div>
 
@@ -266,6 +343,7 @@
           <div class="tl-date">Wed, Aug 5 · Travel Day</div>
           <div class="tl-title">DC → Reno-Tahoe → Incline Village</div>
           <span class="tl-base">🚗 45–60 min, RNO → Incline Village</span>
+          <a class="tl-gmaps-btn" href="https://www.google.com/maps/dir/?api=1&origin=Reno-Tahoe+International+Airport&destination=Incline+Village,+NV" target="_blank" rel="noopener">🧭 Send route to Google Maps</a>
           <div class="day-weather">🌤️ <b>Weather</b> · Temp: — · Precip: — · Wind: — <span class="wx-note">(Forecasts open up ~10 days out)</span></div>
           <ul class="tl-items">
             <li>Fly DCA or IAD → <strong>RNO (Reno-Tahoe Intl)</strong></li>
@@ -281,7 +359,8 @@
         <div class="tl-card">
           <div class="tl-date">Thu, Aug 6 · North Shore</div>
           <div class="tl-title">Sand Harbor — your SUP day</div>
-          <span class="tl-base">🚗 10 min from Incline Village</span>
+          <span class="tl-base">🚗 10 min from Incline Village · leave by 7:45am</span>
+          <a class="tl-gmaps-btn" href="https://www.google.com/maps/dir/?api=1&origin=Incline+Village,+NV&destination=39.1972,-119.9317" target="_blank" rel="noopener">🧭 Send route to Google Maps</a>
           <div class="day-weather">🌤️ <b>Weather</b> · Temp: — · Precip: — · Wind: — <span class="wx-note">(Forecasts open up ~10 days out)</span></div>
           <ul class="tl-items">
             <li><strong>Arrive Sand Harbor by 8–8:30am</strong> — the lot fills and closes by mid-morning in August</li>
@@ -298,7 +377,8 @@
         <div class="tl-card">
           <div class="tl-date">Fri, Aug 7 · East Shore</div>
           <div class="tl-title">Secret Cove, Zephyr Cove &amp; Nevada Beach</div>
-          <span class="tl-base">🚗 20–35 min from Incline Village (Secret Cove 20, Zephyr Cove 30, Nevada Beach 35)</span>
+          <span class="tl-base">🚗 20–35 min from Incline Village (Secret Cove 20, Zephyr Cove 30, Nevada Beach 35) · no fixed start, aim to leave by 1pm to land golden hour at the last stop</span>
+          <a class="tl-gmaps-btn" href="https://www.google.com/maps/dir/?api=1&origin=Incline+Village,+NV&waypoints=39.1553,-119.9426|39.0034,-119.9539&destination=38.9767,-119.9445" target="_blank" rel="noopener">🧭 Send route to Google Maps</a>
           <div class="day-weather">🌤️ <b>Weather</b> · Temp: — · Precip: — · Wind: — <span class="wx-note">(Forecasts open up ~10 days out)</span></div>
           <ul class="tl-items">
             <li>Pack lunch before you go — no food right at Secret Cove or Nevada Beach. <strong><a href="http://www.mountainhighsandwichco.com/" target="_blank" rel="noopener" class="title-lnk">Mountain High Sandwich Co</a></strong> in Incline Village is the move (gourmet deli, order ahead)</li>
@@ -316,7 +396,8 @@
         <div class="tl-card">
           <div class="tl-date">Sat, Aug 8 · Tahoe City</div>
           <div class="tl-title">River rafting — an easy, active day trip west</div>
-          <span class="tl-base">🚗 25–30 min from Incline Village, each way</span>
+          <span class="tl-base">🚗 25–30 min from Incline Village, each way · leave by ~8:30am for the earliest launch slot</span>
+          <a class="tl-gmaps-btn" href="https://www.google.com/maps/dir/?api=1&origin=Incline+Village,+NV&destination=39.1679,-120.1428" target="_blank" rel="noopener">🧭 Send route to Google Maps</a>
           <div class="day-weather">🌤️ <b>Weather</b> · Temp: — · Precip: — · Wind: — <span class="wx-note">(Forecasts open up ~10 days out)</span></div>
           <ul class="tl-items">
             <li><strong>Truckee River rafting</strong> — <a class="lnk" href="https://truckeeriverraft.com/" target="_blank">truckeeriverraft.com</a>, self-guided, ~5 miles, 2–3 hrs, ends at River Ranch Lodge. $77 adult / $40 kids — book the earliest slot you can</li>
@@ -331,7 +412,8 @@
         <div class="tl-card">
           <div class="tl-date">Sun, Aug 9 · West Shore</div>
           <div class="tl-title">Peaceful day — Meeks Bay, then live music</div>
-          <span class="tl-base">🚗 40–45 min from Incline Village to Meeks Bay</span>
+          <span class="tl-base">🚗 40–45 min from Incline Village to Meeks Bay · no fixed start, aim to be at Meeks Bay by late morning</span>
+          <a class="tl-gmaps-btn" href="https://www.google.com/maps/dir/?api=1&origin=Incline+Village,+NV&waypoints=Tahoe+City,+CA|39.0325,-120.1183&destination=39.1699,-120.1439" target="_blank" rel="noopener">🧭 Send route to Google Maps</a>
           <div class="day-weather">🌤️ <b>Weather</b> · Temp: — · Precip: — · Wind: — <span class="wx-note">(Forecasts open up ~10 days out)</span></div>
           <ul class="tl-items">
             <li>🍽 <strong>Quick grab:</strong> pick up a picnic from <strong><a href="https://www.westshoremarket.com/" target="_blank" rel="noopener" class="title-lnk">West Shore Market</a></strong> in Tahoe City on the way — chic little deli, great sandwiches, perfect for the beach</li>
@@ -347,7 +429,8 @@
         <div class="tl-card">
           <div class="tl-date">Mon, Aug 10 · West Shore</div>
           <div class="tl-title">Eagle Falls + Emerald Bay, then Bliss Beach</div>
-          <span class="tl-base">🚗 50–60 min from Incline Village to the trailhead — the longest drive of the trip</span>
+          <span class="tl-base">🚗 50–60 min from Incline Village to the trailhead — the longest drive of the trip · leave by 6–6:15am</span>
+          <a class="tl-gmaps-btn" href="https://www.google.com/maps/dir/?api=1&origin=Incline+Village,+NV&waypoints=38.9548,-120.1006&destination=38.9975,-120.0989" target="_blank" rel="noopener">🧭 Send route to Google Maps</a>
           <div class="day-weather">🌤️ <b>Weather</b> · Temp: — · Precip: — · Wind: — <span class="wx-note">(Forecasts open up ~10 days out)</span></div>
           <ul class="tl-items">
             <li>🍽 Grab coffee/pastries the night before or from <strong><a href="https://www.tahoe-house.com/" target="_blank" rel="noopener" class="title-lnk">Tahoe House Bakery</a></strong> in Tahoe City if it's open on your way through — Fire Sign Cafe (the local favorite) won't be open yet at this hour</li>
@@ -367,6 +450,7 @@
           <div class="tl-date">Tue, Aug 11 · Flex Day</div>
           <div class="tl-title">Optional Tree Tops, or stay close to home</div>
           <span class="tl-base">🚗 10–30 min from Incline Village — your pick, this is the easy day</span>
+          <a class="tl-gmaps-btn" href="https://www.google.com/maps/dir/?api=1&origin=Incline+Village,+NV&destination=39.1522,-120.1544" target="_blank" rel="noopener">🧭 Send Tree Tops route to Google Maps</a>
           <div class="day-weather">🌤️ <b>Weather</b> · Temp: — · Precip: — · Wind: — <span class="wx-note">(Forecasts open up ~10 days out)</span></div>
           <ul class="tl-items">
             <li>Built-in buffer day after yesterday's long drive — a good spot for <strong>Tree Tops Adventure Park</strong> (Tahoe City/Granlibakken, ~25–30 min) if everyone still has the energy for it, entirely optional</li>
@@ -382,6 +466,7 @@
           <div class="tl-date">Wed, Aug 12 · Travel Day</div>
           <div class="tl-title">Incline Village → Reno-Tahoe → Home</div>
           <span class="tl-base">🚗 45–60 min, Incline Village → RNO</span>
+          <a class="tl-gmaps-btn" href="https://www.google.com/maps/dir/?api=1&origin=Incline+Village,+NV&destination=Reno-Tahoe+International+Airport" target="_blank" rel="noopener">🧭 Send route to Google Maps</a>
           <div class="day-weather">🌤️ <b>Weather</b> · Temp: — · Precip: — · Wind: — <span class="wx-note">(Forecasts open up ~10 days out)</span></div>
           <ul class="tl-items">
             <li>Same drive as Day 1, in reverse — build it into your flight timing</li>
@@ -558,15 +643,38 @@
   <div id="tab-book" class="section">
     <div class="section-title">Book Now Checklist</div>
     <div class="section-sub">The pieces that sell out or need advance reservations in August — in order to lock down.</div>
+
+    <div class="callout warn">
+      <strong>Heads up — two nearly identical rafting companies:</strong> "Truckee River Rafting" (175 River Rd, (530) 583-1111) and "Truckee River Raft Company" (185 River Rd, (530) 583-0123) sit right next to each other in Tahoe City. This page links to <a href="https://truckeeriverraft.com/" target="_blank" rel="noopener" class="title-lnk">truckeeriverraft.com</a> (Truckee River Raft Company) — worth double-checking that's the one you actually book, since it's an easy mix-up.
+    </div>
+
     <ul class="checklist">
-      <li><span class="checkbox"></span><div><span class="lbl">Flights</span>DCA/IAD → RNO, arrive Wed Aug 5 / depart Wed Aug 12</div></li>
-      <li><span class="checkbox"></span><div><span class="lbl">Rental car</span>One car for the full week</div></li>
-      <li><span class="checkbox"></span><div><span class="lbl">Lodging × 1</span>Incline Village / North Shore, all 7 nights — no mid-trip move</div></li>
-      <li><span class="checkbox"></span><div><span class="lbl"><a href="https://truckeeriverraft.com/" target="_blank" rel="noopener" class="title-lnk">Truckee River rafting</a></span>Book the earliest Saturday Aug 8 slot</div></li>
-      <li><span class="checkbox"></span><div><span class="lbl"><a href="https://tahoetreetop.com/tahoe-city-treetop/" target="_blank" rel="noopener" class="title-lnk">Tree Tops Adventure Park (optional)</a></span>Tahoe City/Granlibakken — only if you decide to do it on the Day 7 flex day, reserve ahead if so</div></li>
-      <li><span class="checkbox"></span><div><span class="lbl"><a href="https://clearlytahoerentals.com/" target="_blank" rel="noopener" class="title-lnk">SUP rental</a></span>Clearly Tahoe at Sand Harbor, Thursday Aug 6 — first-come at their beach kiosk, no advance booking needed/available</div></li>
-      <li><span class="checkbox"></span><div><span class="lbl">Sand Harbor parking</span>No reservation — arrive by 8am, Thursday Aug 6</div></li>
-      <li><span class="checkbox"></span><div><span class="lbl">Vikingsholm tour tickets</span>Check current summer tour schedule closer to the date</div></li>
+      <li><span class="checkbox"></span><div><span class="lbl">Flights</span>DCA/IAD → RNO, arrive Wed Aug 5 / depart Wed Aug 12
+        <span class="contact">Airline/confirmation not yet on file — add once booked</span>
+      </div></li>
+      <li><span class="checkbox"></span><div><span class="lbl">Rental car</span>One car for the full week
+        <span class="contact">Agency not yet on file — add once booked</span>
+      </div></li>
+      <li><span class="checkbox"></span><div><span class="lbl">Lodging × 1</span>Incline Village / North Shore, all 7 nights — no mid-trip move. See Hotels tab — property name/confirmation still needed.
+      </div></li>
+      <li><span class="checkbox"></span><div><span class="lbl"><a href="https://truckeeriverraft.com/" target="_blank" rel="noopener" class="title-lnk">Truckee River rafting</a></span>Book the earliest Saturday Aug 8 slot
+        <span class="contact">📞 <a href="tel:5305830123">(530) 583-0123</a> &nbsp;·&nbsp; <a href="https://truckeeriverraft.com/" target="_blank" rel="noopener">Book online</a></span>
+      </div></li>
+      <li><span class="checkbox"></span><div><span class="lbl"><a href="https://tahoetreetop.com/tahoe-city-treetop/" target="_blank" rel="noopener" class="title-lnk">Tree Tops Adventure Park (optional)</a></span>Tahoe City/Granlibakken — only if you decide to do it on the Day 7 flex day, reserve ahead if so
+        <span class="contact">📞 <a href="tel:5308071004">(530) 807-1004</a> &nbsp;·&nbsp; <a href="mailto:Reservations@TahoeTreetop.com">Reservations@TahoeTreetop.com</a></span>
+      </div></li>
+      <li><span class="checkbox"></span><div><span class="lbl"><a href="https://clearlytahoerentals.com/" target="_blank" rel="noopener" class="title-lnk">SUP rental</a></span>Clearly Tahoe at Sand Harbor, Thursday Aug 6 — first-come at their beach kiosk, no advance booking needed/available
+        <span class="contact">📞 <a href="tel:5305544664">(530) 554-4664</a></span>
+      </div></li>
+      <li><span class="checkbox"></span><div><span class="lbl">Sand Harbor parking</span>No reservation — arrive by 8am, Thursday Aug 6
+        <span class="contact">📞 Nevada State Parks, Lake Tahoe: <a href="tel:7758310494">(775) 831-0494</a></span>
+      </div></li>
+      <li><span class="checkbox"></span><div><span class="lbl">Vikingsholm tour tickets</span>Check current summer tour schedule closer to the date — Monday Aug 10
+        <span class="contact">📞 Visitor Center: <a href="tel:5305257232">(530) 525-7232</a> &nbsp;·&nbsp; <a href="https://www.sierrastateparks.org/vikingsholm" target="_blank" rel="noopener">sierrastateparks.org</a></span>
+      </div></li>
+      <li><span class="checkbox"></span><div><span class="lbl"><a href="https://www.zephyrcove.com/lake-tahoe-cruises/our-fleet" target="_blank" rel="noopener" class="title-lnk">M.S. Dixie II (optional, Day 7)</a></span>Only if the flex day goes this direction instead of Tree Tops
+        <span class="contact">📞 Zephyr Cove Resort: <a href="tel:7755894901">(775) 589-4901</a></span>
+      </div></li>
     </ul>
   </div>
 
