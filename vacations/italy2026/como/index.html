@@ -61,6 +61,9 @@
   .day:first-of-type{ border-top:1px solid var(--line); }
   .day .num{ font-family:'Space Mono',monospace; color:var(--gold); font-size:13px; padding-top:4px; }
   .day .num span{ display:block; color:rgba(251,246,234,0.5); font-size:11px; margin-top:4px; }
+  .day-weather{ display:flex; align-items:center; gap:10px; flex-wrap:wrap; font-family:'Space Mono',monospace; font-size:11.5px; color:var(--aqua); background:rgba(127,227,212,0.08); border:1px solid var(--line); border-radius:8px; padding:8px 12px; margin:8px 0 14px; }
+  .day-weather b{ color:var(--gold); }
+  .day-weather .wx-note{ color:rgba(251,246,234,0.55); font-style:italic; }
   .day h3{ font-size:20px; margin-bottom:10px; }
   .day ul{ list-style:none; }
   .day li{ position:relative; padding-left:20px; margin-bottom:9px; font-size:14.5px; color:rgba(251,246,234,0.85); }
@@ -139,6 +142,7 @@
       <div class="num">ARR<span>Evening</span></div>
       <div>
         <h3>Settle in</h3>
+          <div class="day-weather">🌤️ <b>Weather</b> · Temp: — · Precip: — · Wind: — <span class="wx-note">(Forecasts open up ~10 days out)</span></div>
         <ul>
           <li>Check in at <b>Filario Hotel &amp; Residences</b>, Lezzeno.</li>
           <li>Dinner at <b>Filo</b> <span class="pill gold">$$$$</span> — the hotel's fine-dining terrace, first-night splurge.</li>
@@ -150,6 +154,7 @@
       <div class="num">DAY 2<span>Bellagio</span></div>
       <div>
         <h3>Bellagio + rest</h3>
+          <div class="day-weather">🌤️ <b>Weather</b> · Temp: — · Precip: — · Wind: — <span class="wx-note">(Forecasts open up ~10 days out)</span></div>
         <ul>
           <li><b>Morning:</b> beach and pool time at Filario — recover from travel.</li>
           <li><b>Afternoon:</b> C30 bus to Bellagio (~10-15 min) — walk Salita Serbelloni, the promenade, Punta Spartivento.</li>
@@ -163,6 +168,7 @@
       <div class="num">DAY 3<span>Cooking class</span></div>
       <div>
         <h3>Cook with a View + Villa Melzi</h3>
+          <div class="day-weather">🌤️ <b>Weather</b> · Temp: — · Precip: — · Wind: — <span class="wx-note">(Forecasts open up ~10 days out)</span></div>
         <ul>
           <li><b>Late morning:</b> <a href="https://www.viator.com/tours/Lake-Como/COOK-WITH-A-VIEW-VILLA-MELZI-Bellagio/d26113-254673P16">Cook with a View</a> cooking class at Il Perlo, above Bellagio — includes lunch and Villa Melzi garden tickets.</li>
           <li><b>Afternoon:</b> Villa Melzi gardens, then back to the hotel for pool/beach.</li>
@@ -175,6 +181,7 @@
       <div class="num">DAY 4<span>Varenna</span></div>
       <div>
         <h3>Lovers' Walk + last dinner</h3>
+          <div class="day-weather">🌤️ <b>Weather</b> · Temp: — · Precip: — · Wind: — <span class="wx-note">(Forecasts open up ~10 days out)</span></div>
         <ul>
           <li>C30 bus to Bellagio, ferry to Varenna.</li>
           <li><b>La Passeggiata degli Innamorati</b> (Lovers' Walk) — starts right at the Varenna ferry dock.</li>
@@ -190,6 +197,7 @@
       <div class="num">DEP<span>14th</span></div>
       <div>
         <h3>Departure</h3>
+          <div class="day-weather">🌤️ <b>Weather</b> · Temp: — · Precip: — · Wind: — <span class="wx-note">(Forecasts open up ~10 days out)</span></div>
         <ul>
           <li>Flight is <b>3:20 PM out of MXP</b>. Depart the hotel by <b>11:00-11:30 AM</b> — drive is 65-90 min plus airport buffer.</li>
         </ul>

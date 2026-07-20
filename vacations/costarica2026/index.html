@@ -99,6 +99,9 @@
   .day-header { display: flex; align-items: baseline; gap: 12px; margin-bottom: 12px; flex-wrap: wrap; }
   .day-date { font-size: 11px; letter-spacing: 2px; text-transform: uppercase; color: var(--warm-grey); font-weight: 500; }
   .day-title { font-family: 'Cormorant Garamond', serif; font-size: 20px; font-weight: 400; color: var(--jungle); }
+  .day-weather { display:flex; align-items:center; gap:10px; flex-wrap:wrap; font-family:'DM Sans',sans-serif; font-size:12.5px; color: var(--warm-grey); background: var(--mist); border-radius:8px; padding:8px 12px; margin:10px 0 14px; }
+  .day-weather b{ color: var(--jungle); font-weight:600; }
+  .day-weather .wx-note{ font-style:italic; }
   .activity-list { list-style: none; display: grid; gap: 8px; }
   .activity-list li { font-size: 13.5px; color: #3a3a38; display: flex; gap: 10px; align-items: flex-start; line-height: 1.5; }
   .activity-list li .bullet { color: var(--palm); font-size: 16px; flex-shrink: 0; margin-top: 1px; }
@@ -421,6 +424,7 @@
             <div class="day-date">Day 1 · Travel Day</div>
             <div class="day-title">Travel Day</div>
           </div>
+          <div class="day-weather">🌤️ <b>Weather</b> · Temp: — · Precip: — · Wind: — <span class="wx-note">(Forecasts open up ~10 days out)</span></div>
           <ul class="activity-list">
             <li><span class="bullet">✈</span><span>Depart IAD 5:35pm → arrive SJO 11:40pm (Avianca, 1 stop SAL)</span></li>
             <li><span class="bullet">🏨</span><span>Shuttle to <a href="https://www.hilton.com/en/hotels/sjoaphx-hampton-san-jose-airport/" target="_blank">Hampton by Hilton SJO Airport</a> — free 24hr shuttle from arrivals</span></li>
@@ -436,6 +440,7 @@
             <div class="day-date">Day 2 · SJO → Arenal</div>
             <div class="day-title">SJO → Arenal</div>
           </div>
+          <div class="day-weather">🌤️ <b>Weather</b> · Temp: — · Precip: — · Wind: — <span class="wx-note">(Forecasts open up ~10 days out)</span></div>
           <ul class="activity-list">
             <li><span class="bullet">🚙</span><span>Pick up 4WD SUV from <a href="https://www.adobecar.com" target="_blank">Adobe Rent A Car</a> at SJO</span></li>
             <li><span class="bullet">🛣️</span><span>Drive to La Fortuna (~3 hrs) · Check into <a href="https://www.thespringscostarica.com" target="_blank">The Springs Resort &amp; Spa</a></span></li>
@@ -452,6 +457,7 @@
             <div class="day-date">Day 3 · Arenal</div>
             <div class="day-title">Arenal — Full Adventure Day</div>
           </div>
+          <div class="day-weather">🌤️ <b>Weather</b> · Temp: — · Precip: — · Wind: — <span class="wx-note">(Forecasts open up ~10 days out)</span></div>
           <ul class="activity-list">
             <li><span class="bullet">💧</span>
               <span><a href="https://www.cataratalafortuna.com/la-fortuna-waterfall-hike" target="_blank">La Fortuna Waterfall</a> — self-guided hike, open 7am
@@ -475,6 +481,7 @@
             <div class="day-date">Day 4 · Arenal</div>
             <div class="day-title">Arenal — Adventure + Resort Day</div>
           </div>
+          <div class="day-weather">🌤️ <b>Weather</b> · Temp: — · Precip: — · Wind: — <span class="wx-note">(Forecasts open up ~10 days out)</span></div>
           <ul class="activity-list">
             <li><span class="bullet">🛟</span>
               <span><a href="https://www.tripadvisor.com/Attraction_Review-g309226-d5616226-Reviews-Arenal_River_Tubing_Hiking-La_Fortuna_de_San_Carlos_Arenal_Volcano_National_Park_.html" target="_blank">Arenal River Tubing</a> — jungle float, back by noon
@@ -498,6 +505,7 @@
             <div class="day-date">Day 5 · Arenal → Monteverde</div>
             <div class="day-title">Arenal → Monteverde</div>
           </div>
+          <div class="day-weather">🌤️ <b>Weather</b> · Temp: — · Precip: — · Wind: — <span class="wx-note">(Forecasts open up ~10 days out)</span></div>
           <ul class="activity-list">
             <li><span class="bullet">🍳</span><span>Leisurely breakfast at The Springs · Checkout</span></li>
             <li><span class="bullet">🛣️</span><span>Drive around Lake Arenal to Monteverde (~3.5 hrs) — scenic paved road, bumpy unpaved final stretch · 4WD essential</span></li>
@@ -514,6 +522,7 @@
             <div class="day-date">Day 6 · Monteverde</div>
             <div class="day-title">Monteverde — Full Day</div>
           </div>
+          <div class="day-weather">🌤️ <b>Weather</b> · Temp: — · Precip: — · Wind: — <span class="wx-note">(Forecasts open up ~10 days out)</span></div>
           <ul class="activity-list">
             <li><span class="bullet">🌉</span>
               <span>Sky bridges &amp; cloud forest hike at Santa Elena Reserve
@@ -536,6 +545,7 @@
             <div class="day-date">Day 7 · Monteverde → Manuel Antonio</div>
             <div class="day-title">Monteverde → Manuel Antonio</div>
           </div>
+          <div class="day-weather">🌤️ <b>Weather</b> · Temp: — · Precip: — · Wind: — <span class="wx-note">(Forecasts open up ~10 days out)</span></div>
           <ul class="activity-list">
             <li><span class="bullet">🍳</span><span>Leisurely Hotel Belmar breakfast · Checkout by noon · Enjoy the cloud forest views one last time</span></li>
             <li><span class="bullet">🛣️</span><span>Drive to Manuel Antonio (~5 hrs on good paved roads)</span></li>
@@ -552,6 +562,7 @@
             <div class="day-date">Day 8 · Manuel Antonio</div>
             <div class="day-title">Manuel Antonio — Park Day</div>
           </div>
+          <div class="day-weather">🌤️ <b>Weather</b> · Temp: — · Precip: — · Wind: — <span class="wx-note">(Forecasts open up ~10 days out)</span></div>
           <ul class="activity-list">
             <li><span class="bullet">🐒</span>
               <span><a href="https://serviciosenlinea.sinac.go.cr" target="_blank">Manuel Antonio National Park</a> — arrive at 7am opening · Hire a certified guide at the entrance
@@ -571,6 +582,7 @@
             <div class="day-date">Day 9 · Manuel Antonio</div>
             <div class="day-title">Nauyaca Waterfall + Beach Day</div>
           </div>
+          <div class="day-weather">🌤️ <b>Weather</b> · Temp: — · Precip: — · Wind: — <span class="wx-note">(Forecasts open up ~10 days out)</span></div>
           <ul class="activity-list">
             <li><span class="bullet">💦</span>
               <span><a href="https://www.walkmyworld.com/posts/nauyaca-waterfall" target="_blank">Nauyaca Waterfall</a> — one of Costa Rica's most stunning. Two tiers dropping into an enormous emerald swimming hole. Start early to arrive before crowds.
@@ -595,6 +607,7 @@
             <div class="day-date">Day 10 · Fly Home</div>
             <div class="day-title">Drive to SJO → Fly Home</div>
           </div>
+          <div class="day-weather">🌤️ <b>Weather</b> · Temp: — · Precip: — · Wind: — <span class="wx-note">(Forecasts open up ~10 days out)</span></div>
           <ul class="activity-list">
             <li><span class="bullet">🍳</span><span>Breakfast at Tulemar · Checkout · Leave by 9am</span></li>
             <li><span class="bullet">🛣️</span><span>Drive to San José (~3 hrs)</span></li>
