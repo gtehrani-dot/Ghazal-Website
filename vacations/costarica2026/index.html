@@ -3,8 +3,12 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="color-scheme" content="light only">
+<meta name="theme-color" content="#1a3a2a">
 <title>Costa Rica Family Trip — June 2027</title>
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Sans:wght@300;400;500&family=JetBrains+Mono:wght@500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
 <style>
   :root {
     --jungle: #1a3a2a;
@@ -18,14 +22,18 @@
     --cream: #faf7f2;
     --ink: #1a1a18;
     --warm-grey: #8a8678;
+    --white: #ffffff;
+    --line: rgba(26,58,42,0.12);
   }
   * { margin: 0; padding: 0; box-sizing: border-box; }
   body { font-family: 'DM Sans', sans-serif; background: var(--cream); color: var(--ink); font-size: 15px; line-height: 1.7; }
+  .mono { font-family: 'JetBrains Mono', monospace; }
+  a { color: var(--jungle); }
 
   .hero { background: var(--jungle); color: white; padding: 64px 48px 56px; position: relative; overflow: hidden; }
   .hero::before { content: ''; position: absolute; inset: 0; background: radial-gradient(ellipse at 80% 20%, rgba(74,140,92,0.3) 0%, transparent 60%), radial-gradient(ellipse at 10% 80%, rgba(74,124,138,0.2) 0%, transparent 50%); }
   .hero-inner { position: relative; z-index: 1; max-width: 860px; margin: 0 auto; }
-  .hero-eyebrow { font-size: 11px; font-weight: 500; letter-spacing: 3px; text-transform: uppercase; color: var(--lime); margin-bottom: 16px; }
+  .hero-eyebrow { font-size: 11px; font-weight: 500; letter-spacing: 3px; text-transform: uppercase; color: var(--lime); margin-bottom: 16px; font-family:'JetBrains Mono',monospace; }
   .hero h1 { font-family: 'Cormorant Garamond', serif; font-size: clamp(42px, 6vw, 72px); font-weight: 300; line-height: 1.05; margin-bottom: 24px; }
   .hero h1 em { font-style: italic; color: var(--lime); }
   .flight-strip { display: flex; gap: 32px; flex-wrap: wrap; margin-top: 32px; padding-top: 32px; border-top: 1px solid rgba(255,255,255,0.15); }
@@ -33,7 +41,12 @@
   .flight-detail { font-size: 14px; color: rgba(255,255,255,0.9); font-weight: 300; }
   .flight-detail strong { color: white; font-weight: 500; }
 
-  /* TIMELINE BAR */
+  /* ── STAT CHIPS (always present) ── */
+  .hero-meta { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 24px; }
+  .meta-chip { font-family:'JetBrains Mono', monospace; font-size: 12px; padding: 9px 16px; border: 1px solid rgba(255,255,255,0.22); border-radius: 100px; background: rgba(255,255,255,0.07); color: rgba(255,255,255,0.9); }
+  .meta-chip strong { color: var(--lime); }
+
+  /* TIMELINE BAR (multi-town) */
   .timeline { background: #0f2419; padding: 28px 48px; }
   .timeline-inner { max-width: 860px; margin: 0 auto; }
   .timeline-track { position: relative; display: flex; align-items: flex-start; justify-content: space-between; }
@@ -60,9 +73,41 @@
   .timeline-segment.monteverde .timeline-nights { background: rgba(74,140,92,0.2); color: var(--lime); }
   .timeline-segment.manuel .timeline-nights { background: rgba(74,124,138,0.2); color: #7ab8c4; }
 
+  /* MAP BANNER */
+  .map-banner-section { background: #0f2419; padding: 0 0 32px; }
+  .map-banner-inner { max-width: 1040px; margin: 0 auto; padding: 28px 48px 0; }
+  .map-banner-title { font-family:'JetBrains Mono',monospace; font-size: 11px; letter-spacing: 2px; text-transform: uppercase; color: rgba(255,255,255,0.55); margin-bottom: 14px; }
+  .map-panel { height: 440px; border-radius: 14px; overflow: hidden; border: 1px solid rgba(255,255,255,0.12); background: var(--mist); }
+  #map { width: 100%; height: 100%; }
+  .leaflet-popup-content { font-family: 'DM Sans', sans-serif; }
+  .leaflet-popup-content b { font-family: 'Cormorant Garamond', serif; font-size: 16px; }
+  .map-legend { display: flex; flex-wrap: wrap; gap: 8px 18px; padding: 14px 2px 0; font-family:'JetBrains Mono',monospace; font-size: 11px; color: rgba(255,255,255,0.6); }
+
   .container { max-width: 860px; margin: 0 auto; padding: 0 48px 80px; }
-  .section { margin-top: 56px; }
-  .section-title { font-size: 11px; font-weight: 600; letter-spacing: 4px; text-transform: uppercase; color: var(--palm); margin-bottom: 24px; padding-bottom: 12px; border-bottom: 1px solid var(--mist); }
+  .section { display: none; margin-top: 56px; }
+  .section.active { display: block; animation: fadeIn .4s ease; }
+  @keyframes fadeIn { from{opacity:0; transform:translateY(8px);} to{opacity:1; transform:translateY(0);} }
+  .section-title { font-size: 11px; font-weight: 600; letter-spacing: 4px; text-transform: uppercase; color: var(--palm); margin-bottom: 10px; padding-bottom: 12px; border-bottom: 1px solid var(--mist); }
+  .section-sub { color: var(--warm-grey); font-size: 13.5px; margin: -2px 0 28px; max-width: 620px; }
+
+  /* TAB NAV */
+  .tab-nav { position: sticky; top: 0; z-index: 50; display: flex; overflow-x: auto; gap: 2px; background: var(--cream); border-bottom: 1px solid var(--mist); }
+  .tab-nav-inner { display: flex; max-width: 860px; margin: 0 auto; padding: 0 48px; overflow-x: auto; }
+  .tab-btn { font-family:'JetBrains Mono', monospace; font-size: 12px; white-space: nowrap; background: none; border: none; color: var(--warm-grey); padding: 16px 14px; cursor: pointer; border-bottom: 2px solid transparent; transition: all .2s; }
+  .tab-btn:hover { color: var(--jungle); }
+  .tab-btn.active { color: var(--jungle); border-bottom-color: var(--palm); }
+
+  /* CALLOUTS */
+  .callout { border: 1px solid var(--line); border-left: 3px solid var(--sunset); background: rgba(196,112,58,0.08); border-radius: 0 8px 8px 0; padding: 16px 20px; font-size: 13.5px; color: var(--ink); margin-bottom: 32px; }
+  .callout.muted { border-left-color: var(--warm-grey); background: var(--mist); }
+  .callout.warn { border-left-color: var(--sunset); background: rgba(196,112,58,0.1); }
+  .callout strong { color: var(--jungle); }
+
+  /* AT-A-GLANCE (Overview) */
+  .at-a-glance { width: 100%; border-collapse: collapse; margin-top: 8px; }
+  .at-a-glance th { text-align: left; font-family:'JetBrains Mono',monospace; font-size: 10px; text-transform: uppercase; letter-spacing: 0.06em; color: var(--warm-grey); padding: 10px 12px; border-bottom: 1px solid var(--mist); }
+  .at-a-glance td { padding: 11px 12px; border-bottom: 1px solid var(--mist); font-size: 13.5px; color: var(--ink); }
+  .at-a-glance tr:last-child td { border-bottom: none; }
 
   .rental-card { background: var(--jungle); color: white; border-radius: 12px; padding: 28px 32px; display: flex; align-items: flex-start; gap: 24px; }
   .rental-icon { font-size: 32px; flex-shrink: 0; margin-top: 2px; }
@@ -81,6 +126,9 @@
   .hotel-meta { text-align: right; flex-shrink: 0; }
   .hotel-location { font-size: 11px; letter-spacing: 2px; text-transform: uppercase; color: var(--palm); font-weight: 500; }
   .hotel-price { font-size: 13px; color: var(--warm-grey); margin-top: 2px; }
+  .hotel-contact-row { display: flex; flex-wrap: wrap; gap: 6px 18px; margin: 10px 0 4px; font-size: 12.5px; color: var(--warm-grey); font-family:'JetBrains Mono',monospace; }
+  .hotel-contact-row a { color: var(--jungle); }
+  .conf-flag { display: inline-block; font-family:'JetBrains Mono',monospace; font-size: 10.5px; color: #a5502c; background: #fdefe9; border: 1px dashed var(--sunset); padding: 2px 9px; border-radius: 100px; }
   .hotel-desc { font-size: 13.5px; color: #444; line-height: 1.65; border-top: 1px solid var(--mist); padding-top: 12px; margin-top: 12px; }
   .hotel-badge { display: inline-block; background: var(--mist); color: var(--palm); font-size: 11px; font-weight: 500; padding: 3px 10px; border-radius: 20px; margin-top: 10px; letter-spacing: 0.5px; }
 
@@ -96,10 +144,13 @@
   .day-card:last-child { border-bottom: none; }
   .day-number { font-family: 'Cormorant Garamond', serif; font-size: 48px; font-weight: 300; color: var(--mist); line-height: 1; padding-top: 2px; }
   .day-content { padding-left: 16px; }
-  .day-header { display: flex; align-items: baseline; gap: 12px; margin-bottom: 12px; flex-wrap: wrap; }
+  .day-header { display: flex; align-items: baseline; gap: 12px; margin-bottom: 8px; flex-wrap: wrap; }
   .day-date { font-size: 11px; letter-spacing: 2px; text-transform: uppercase; color: var(--warm-grey); font-weight: 500; }
   .day-title { font-family: 'Cormorant Garamond', serif; font-size: 20px; font-weight: 400; color: var(--jungle); }
-  .day-weather { display:flex; align-items:center; gap:10px; flex-wrap:wrap; font-family:'DM Sans',sans-serif; font-size:12.5px; color: var(--warm-grey); background: var(--mist); border-radius:8px; padding:8px 12px; margin:10px 0 14px; }
+  .day-drive { display: inline-block; font-size: 11.5px; font-family:'JetBrains Mono',monospace; color: #a5502c; background: #fdefe9; padding: 3px 10px; border-radius: 100px; margin: 4px 8px 4px 0; }
+  .day-gmaps-btn { display: inline-flex; align-items: center; gap: 5px; font-family:'JetBrains Mono',monospace; font-size: 11px; font-weight: 600; text-decoration: none; padding: 4px 12px; border-radius: 100px; background: var(--palm); color: #fff; margin: 4px 0 10px; }
+  .day-gmaps-btn:hover { background: var(--jungle); }
+  .day-weather { display:flex; align-items:center; gap:10px; flex-wrap:wrap; font-family:'DM Sans',sans-serif; font-size:12.5px; color: var(--warm-grey); background: var(--mist); border-radius:8px; padding:8px 12px; margin:6px 0 14px; }
   .day-weather b{ color: var(--jungle); font-weight:600; }
   .day-weather .wx-note{ font-style:italic; }
   .activity-list { list-style: none; display: grid; gap: 8px; }
@@ -107,10 +158,12 @@
   .activity-list li .bullet { color: var(--palm); font-size: 16px; flex-shrink: 0; margin-top: 1px; }
   .activity-list li.resort .bullet { color: var(--water); }
   .activity-list li.beach .bullet { color: var(--sunset); }
+  .activity-list li.alt { font-style: italic; opacity: 0.82; }
   .activity-list a { color: var(--jungle); text-decoration: underline; text-decoration-color: var(--lime); text-underline-offset: 2px; font-weight: 500; }
   .activity-list a:hover { color: var(--palm); }
   .activity-meta { font-size: 12px; color: var(--warm-grey); margin-top: 2px; display: block; }
   .resort-tag { display: inline-block; background: rgba(74,124,138,0.1); color: var(--water); font-size: 10px; font-weight: 500; padding: 2px 8px; border-radius: 20px; letter-spacing: 1px; text-transform: uppercase; margin-right: 6px; }
+  .alt-tag { display: inline-block; background: rgba(196,112,58,0.12); color: var(--sunset); font-size: 10px; font-weight: 500; padding: 2px 8px; border-radius: 20px; letter-spacing: 1px; text-transform: uppercase; margin-right: 6px; }
   .day-note { margin-top: 10px; background: rgba(196,112,58,0.08); border-left: 3px solid var(--sunset); padding: 8px 12px; border-radius: 0 6px 6px 0; font-size: 12.5px; color: #666; font-style: italic; }
 
   .cost-table { width: 100%; border-collapse: collapse; }
@@ -130,12 +183,42 @@
   .booking-info h4 { font-size: 14px; font-weight: 500; color: var(--jungle); margin-bottom: 2px; }
   .booking-info .when { font-size: 12px; color: var(--warm-grey); }
   .booking-info .when.urgent { color: var(--sunset); font-weight: 500; }
+  .booking-info .contact-phone { font-size: 11.5px; font-family:'JetBrains Mono',monospace; color: var(--water); margin-top: 3px; }
+  .booking-info .contact-phone a { color: var(--water); }
+  .booking-info .contact-phone.missing { color: #a5502c; font-style: italic; }
   .booking-link a { background: var(--jungle); color: white; text-decoration: none; font-size: 12px; font-weight: 500; padding: 7px 16px; border-radius: 20px; white-space: nowrap; transition: background 0.2s; display: inline-block; }
   .booking-link a:hover { background: var(--palm); }
 
+  /* ALSO WORTH SEEING card grid */
+  .card-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px,1fr)); gap: 18px; }
+  .card { background: var(--white); border: 1px solid var(--mist); border-left: 3px solid var(--sunset); border-radius: 0 10px 10px 0; padding: 20px 22px; box-shadow: 0 2px 12px rgba(26,58,42,0.05); }
+  .card-eyebrow { font-family:'JetBrains Mono', monospace; font-size: 10.5px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--warm-grey); margin-bottom: 6px; }
+  .card h3 { font-family:'Cormorant Garamond',serif; font-size: 21px; font-weight: 500; margin-bottom: 10px; color: var(--ink); }
+  .card p { font-size: 13.5px; color: #555; margin-bottom: 10px; line-height: 1.6; }
+  .card .warn-line { background: rgba(196,112,58,0.12); border-radius: 6px; padding: 8px 12px; font-size: 12.5px; color: #a5502c; margin-bottom: 10px; }
+  .poi-actions { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 8px; }
+  .poi-actions a { display: inline-flex; align-items: center; gap: 5px; font-family:'JetBrains Mono',monospace; font-size: 11px; font-weight: 600; text-decoration: none; padding: 5px 12px; border-radius: 100px; white-space: nowrap; }
+  .poi-actions a.site { background: var(--mist); color: var(--jungle); }
+  .poi-actions a.dir { background: var(--palm); color: #fff; }
+  .poi-actions a.dir:hover { background: var(--jungle); }
+
   .footer { text-align: center; padding: 40px 48px; border-top: 1px solid var(--mist); font-size: 12px; color: var(--warm-grey); letter-spacing: 1px; }
 
-              /* CAROUSEL */
+  /* PRINT / OFFLINE COPY TAB */
+  .print-btn { display: inline-flex; align-items: center; gap: 6px; font-family:'JetBrains Mono',monospace; font-size: 12px; font-weight: 600; text-decoration: none; padding: 9px 18px; border-radius: 100px; background: var(--jungle); color: #fff; border: none; cursor: pointer; margin-bottom: 28px; margin-right: 10px; }
+  .print-btn:hover { background: var(--palm); }
+  .print-btn.outline { background: var(--white); color: var(--jungle); border: 1px solid var(--mist); }
+  .contact-block { background: var(--white); border: 1px solid var(--mist); border-radius: 10px; padding: 18px 22px; margin-bottom: 14px; }
+  .contact-block h4 { font-family:'Cormorant Garamond',serif; font-size: 17px; margin-bottom: 4px; color: var(--jungle); font-weight: 500; }
+  .contact-block .contact-line { font-size: 12.5px; color: var(--warm-grey); margin-top: 2px; }
+  .print-day { margin-bottom: 20px; }
+  .print-day h4 { font-family:'JetBrains Mono',monospace; font-size: 11.5px; text-transform: uppercase; letter-spacing: 0.06em; color: var(--palm); border-bottom: 1px solid var(--mist); padding-bottom: 6px; margin-bottom: 10px; }
+  .print-day ul { list-style: none; }
+  .print-day li { font-size: 13px; color: var(--ink); margin-bottom: 8px; padding-left: 14px; position: relative; }
+  .print-day li::before { content:'•'; position:absolute; left:0; color: var(--palm); }
+  .print-day li .contact-line { display:block; color: var(--warm-grey); font-size: 11.5px; margin-top: 1px; }
+
+  /* CAROUSEL */
   .carousel-section { background: #0f2419; padding: 0 0 32px; }
   .carousel { max-width: 100%; position: relative; overflow: hidden; }
   .carousel-track { display: flex; transition: transform 0.5s cubic-bezier(0.4,0,0.2,1); will-change: transform; }
@@ -151,14 +234,30 @@
   .carousel-dots { display: flex; justify-content: center; gap: 8px; padding: 16px 0 8px; }
   .carousel-dot { width: 8px; height: 8px; border-radius: 50%; background: rgba(255,255,255,0.25); cursor: pointer; transition: background 0.2s; border: none; }
   .carousel-dot.active { background: #7bc67e; }
+
+  /* PRINT MEDIA: only the Print/Offline Copy tab renders when printing */
+  @media print {
+    .tab-nav, .carousel-section, .map-banner-section, .timeline, .print-btn { display: none !important; }
+    .section { display: none !important; }
+    #tab-print { display: block !important; }
+    body { background: #fff; }
+    .container { padding: 0; max-width: 100%; }
+    a { color: #000; text-decoration: none; }
+  }
 </style>
 </head>
 <body>
 
 <div class="hero">
   <div class="hero-inner">
-    <div class="hero-eyebrow">🌿 Family Adventure</div>
+    <div class="hero-eyebrow">🌿 Family Adventure · June 2027</div>
     <h1>Costa Rica<br><em>June 2027</em></h1>
+    <div class="hero-meta">
+      <div class="meta-chip">✈️ <strong>IAD ⇄ SJO</strong></div>
+      <div class="meta-chip">🗓 <strong>9 nights</strong> · June 2027</div>
+      <div class="meta-chip">📍 Arenal · Monteverde · Manuel Antonio</div>
+      <div class="meta-chip">🏨 <strong>3 bases</strong> · hotel-hopping loop</div>
+    </div>
     <div class="flight-strip">
       <div class="flight-item">
         <div class="flight-label">Outbound</div>
@@ -229,13 +328,6 @@
     </div>
   </div>
 </div>
-
-
-
-
-
-
-
 
 <!-- CAROUSEL -->
 <div class="carousel-section">
@@ -313,49 +405,100 @@
   </div>
 </div>
 
-<script>
-  let current = 0;
-  const total = 8;
-  function moveCarousel(dir) {
-    current = (current + dir + total) % total;
-    updateCarousel();
-  }
-  function goToSlide(n) {
-    current = n;
-    updateCarousel();
-  }
-  function updateCarousel() {
-    document.getElementById('carouselTrack').style.transform = 'translateX(-' + (current * 100) + '%)';
-    document.querySelectorAll('.carousel-dot').forEach((d, i) => d.classList.toggle('active', i === current));
-  }
-  setInterval(() => moveCarousel(1), 5000);
-</script>
+<!-- INTERACTIVE MAP -->
+<div class="map-banner-section">
+  <div class="map-banner-inner">
+    <div class="map-banner-title">Trip Map — every stop, in order</div>
+    <div class="map-panel"><div id="map"></div></div>
+    <div class="map-legend">
+      <span><strong style="color:#c4703a">●</strong> Hotel</span>
+      <span><strong style="color:#4a8c5c">●</strong> Adventure</span>
+      <span><strong style="color:#7bc67e">●</strong> Nature</span>
+      <span><strong style="color:#4a7c8a">●</strong> Beach</span>
+    </div>
+  </div>
+</div>
+
+<!-- TAB NAV -->
+<nav class="tab-nav">
+  <div class="tab-nav-inner">
+  <button class="tab-btn active" onclick="showTab('overview')">📋 Overview</button>
+  <button class="tab-btn" onclick="showTab('hotels')">🏨 Hotels</button>
+  <button class="tab-btn" onclick="showTab('itinerary')">📅 Itinerary</button>
+  <button class="tab-btn" onclick="showTab('beaches')">🏖 Beaches</button>
+  <button class="tab-btn" onclick="showTab('budget')">💰 Budget</button>
+  <button class="tab-btn" onclick="showTab('more')">⭐ Also Worth Seeing</button>
+  <button class="tab-btn" onclick="showTab('book')">✅ Book Now</button>
+  <button class="tab-btn" onclick="showTab('print')">🖨 Print / Offline Copy</button>
+  </div>
+</nav>
+
 <div class="container">
 
+  <!-- ═══════════ OVERVIEW ═══════════ -->
+  <div id="tab-overview" class="section active">
+    <div class="section-title">Trip Overview</div>
+    <div class="section-sub">Everything at a glance — no need to read the full itinerary to answer "where are we sleeping" or "what's the plan that day."</div>
 
-  <!-- HOTELS -->
-  <div class="section">
+    <div class="callout muted">
+      <strong>Why this route:</strong> The loop moves from lowland volcano country (Arenal) up into the cloud forest (Monteverde) and back down to the Pacific coast (Manuel Antonio) — one direction, no backtracking. Each region gets 2–3 nights so you're never packing the morning after you arrive, and the most physically demanding day (Manuel Antonio National Park, 7am start) lands after the family has already acclimated, not on day one.
+    </div>
+
+    <table class="at-a-glance">
+      <thead><tr><th>Day</th><th>Base / Area</th><th>Focus</th></tr></thead>
+      <tbody>
+        <tr><td>1</td><td>San José (transit)</td><td>Land SJO late, sleep at airport hotel</td></tr>
+        <tr><td>2</td><td>Arenal</td><td>Pick up car, drive to La Fortuna, settle into The Springs</td></tr>
+        <tr><td>3</td><td>Arenal</td><td>La Fortuna Waterfall + Mistico Hanging Bridges</td></tr>
+        <tr><td>4</td><td>Arenal</td><td>River tubing + evening at Tabacón</td></tr>
+        <tr><td>5</td><td>Arenal → Monteverde</td><td>Drive around Lake Arenal to Hotel Belmar</td></tr>
+        <tr><td>6</td><td>Monteverde</td><td>Santa Elena Reserve + 100% Aventura zip-lining</td></tr>
+        <tr><td>7</td><td>Monteverde → Manuel Antonio</td><td>Long coastal drive to Tulemar Resort</td></tr>
+        <tr><td>8</td><td>Manuel Antonio</td><td>National Park at opening, resort afternoon</td></tr>
+        <tr><td>9</td><td>Manuel Antonio</td><td>Nauyaca Waterfall (or surf lesson alt) + beach</td></tr>
+        <tr><td>10</td><td>San José (transit)</td><td>Drive back, drop car, fly home</td></tr>
+      </tbody>
+    </table>
+
+    <div class="callout warn" style="margin-top:28px;">
+      <strong>Open item:</strong> Exact calendar dates aren't locked yet — the plan currently only specifies "June 2027" plus day numbers. Pin down real dates once flights are booked so hotel check-in/out and the Book Now deadlines below can reference actual days.
+    </div>
+  </div>
+
+  <!-- ═══════════ HOTELS ═══════════ -->
+  <div id="tab-hotels" class="section">
     <div class="section-title">Hotels</div>
+    <div class="section-sub">Every lodging leg on this trip, in order. Confirmation numbers are flagged where not yet on file — don't lose the reservation, just haven't been given the number.</div>
     <div class="hotels-grid">
 
       <div class="hotel-card">
         <div class="hotel-header">
-          <div class="hotel-name"><a href="https://www.hilton.com/en/hotels/sjoaphx-hampton-san-jose-airport/" target="_blank">Hampton by Hilton San José Airport</a></div>
+          <div class="hotel-name"><a href="https://www.hilton.com/en/hotels/sjcaphx-hampton-san-jose-airport/" target="_blank" rel="noopener">Hampton by Hilton San José Airport</a></div>
           <div class="hotel-meta">
-            <div class="hotel-location">San José · Night 1</div>
+            <div class="hotel-location">San José · Night 1 (Day 1 → Day 2)</div>
             <div class="hotel-price">~$150/night</div>
           </div>
+        </div>
+        <div class="hotel-contact-row">
+          <span>📍 Hwy 1 Airport Blvd, Alajuela, Costa Rica</span>
+          <span>📞 <a href="tel:+50624360000">+506 2436 0000</a></span>
+          <span class="conf-flag">🔖 Conf# not yet on file</span>
         </div>
         <div class="hotel-desc">Free 24-hour airport shuttle, outdoor pool, free WiFi. Pure transit hotel — arrive, sleep, leave fresh in the morning. Do NOT pick up the rental car tonight.</div>
       </div>
 
       <div class="hotel-card">
         <div class="hotel-header">
-          <div class="hotel-name"><a href="https://www.thespringscostarica.com" target="_blank">The Springs Resort &amp; Spa</a></div>
+          <div class="hotel-name"><a href="https://www.thespringscostarica.com" target="_blank" rel="noopener">The Springs Resort &amp; Spa</a></div>
           <div class="hotel-meta">
-            <div class="hotel-location">Arenal · 3 Nights</div>
+            <div class="hotel-location">Arenal · 3 Nights (Day 2 → Day 5)</div>
             <div class="hotel-price">~$996/night</div>
           </div>
+        </div>
+        <div class="hotel-contact-row">
+          <span>📍 La Fortuna de San Carlos, Alajuela Province, Costa Rica</span>
+          <span>📞 <a href="tel:+50624013313">+506 2401 3313</a></span>
+          <span class="conf-flag">🔖 Conf# not yet on file</span>
         </div>
         <div class="hotel-desc">165-acre five-star resort with spectacular Arenal Volcano views and 28 mineral-filled natural hot spring pools. CNN Travel named it one of the seven resorts with the most spectacular views in the world. Outstanding for families: waterslide, putt-putt course, kids' game room, and the on-site Club Rio Adventure Center with river tubing, kayaking, horseback riding, rock climbing, and an Animal Sanctuary. Five unique dining experiences including Las Ventanas, a dinner-only restaurant 1,000 feet above the ground with volcano views. Rated 9.8 for families.</div>
         <span class="hotel-badge">🌋 Volcano Views · 28 Hot Springs · Family Paradise</span>
@@ -363,11 +506,16 @@
 
       <div class="hotel-card">
         <div class="hotel-header">
-          <div class="hotel-name"><a href="https://www.hotelbelmar.net" target="_blank">Hotel Belmar</a></div>
+          <div class="hotel-name"><a href="https://www.hotelbelmar.net" target="_blank" rel="noopener">Hotel Belmar</a></div>
           <div class="hotel-meta">
-            <div class="hotel-location">Monteverde · 2 Nights</div>
+            <div class="hotel-location">Monteverde · 2 Nights (Day 5 → Day 7)</div>
             <div class="hotel-price">~$620/night</div>
           </div>
+        </div>
+        <div class="hotel-contact-row">
+          <span>📍 Calle Samudio, Barrio Copey, Monteverde, Puntarenas Province, Costa Rica</span>
+          <span>📞 <a href="tel:+50626455201">+506 2645 5201</a></span>
+          <span class="conf-flag">🔖 Conf# not yet on file</span>
         </div>
         <div class="hotel-desc">Mountain chalet-style ecolodge high in the cloud forest with a spring-fed pond, onsite microbrewery, and organic farm. The Peninsula Room has two queen beds and a private terrace with hammock — ideal for families. No pool, no A/C needed — Monteverde stays cool year-round and you're outside all day.</div>
         <span class="hotel-badge">🌿 Farm-to-Table · Microbrewery · Cloud Forest</span>
@@ -375,11 +523,16 @@
 
       <div class="hotel-card">
         <div class="hotel-header">
-          <div class="hotel-name"><a href="https://www.tulemarresort.com" target="_blank">Tulemar Resort</a></div>
+          <div class="hotel-name"><a href="https://www.tulemarresort.com" target="_blank" rel="noopener">Tulemar Resort</a></div>
           <div class="hotel-meta">
-            <div class="hotel-location">Manuel Antonio · 3 Nights</div>
+            <div class="hotel-location">Manuel Antonio · 3 Nights (Day 7 → Day 10)</div>
             <div class="hotel-price">~$413/night</div>
           </div>
+        </div>
+        <div class="hotel-contact-row">
+          <span>📍 Carretera a Manuel Antonio, Km 4, Quepos 60601, Puntarenas, Costa Rica</span>
+          <span>📞 <a href="tel:+50640015878">+506 4001 5878</a></span>
+          <span class="conf-flag">🔖 Conf# not yet on file</span>
         </div>
         <div class="hotel-desc">A 33-acre gated jungle resort with private beach, multiple pools, and spectacular Manuel Antonio coastline views. Monkeys, birds, and sloths spotted from balconies daily. On-property sloth sanctuary. Children 10 and under accompanied by an adult stay free. Rated TripAdvisor's #1 Hotel in the World (2022).</div>
         <span class="hotel-badge">🏆 TripAdvisor #1 Hotel in the World · Private Beach</span>
@@ -388,9 +541,239 @@
     </div>
   </div>
 
-  <!-- BEACHES -->
-  <div class="section">
+  <!-- ═══════════ ITINERARY ═══════════ -->
+  <div id="tab-itinerary" class="section">
+    <div class="section-title">Daily Itinerary</div>
+    <div class="section-sub">Weather figures below are seasonal climate normals, not a forecast — June 2027 is far beyond any live forecast window. Tap the route button on any day to send that day's stops straight to Google Maps.</div>
+    <div class="day-cards">
+
+      <div class="day-card">
+        <div class="day-number">01</div>
+        <div class="day-content">
+          <div class="day-header">
+            <div class="day-date">Day 1 · Travel Day</div>
+            <div class="day-title">Travel Day</div>
+          </div>
+          <a class="day-gmaps-btn" href="https://www.google.com/maps/dir/?api=1&origin=Juan+Santamaria+International+Airport+SJO&destination=Hampton+by+Hilton+San+Jose+Airport,+Alajuela,+Costa+Rica" target="_blank" rel="noopener">🧭 Send route to Google Maps</a>
+          <div class="day-weather">🌤️ <b>Weather</b> · Temp: 66–81°F (19–27°C) · Precip: afternoon showers typical of rainy season · Wind: light <span class="wx-note">(typical for June — trip is beyond the forecast window)</span></div>
+          <ul class="activity-list">
+            <li><span class="bullet">✈</span><span>Depart IAD 5:35pm → arrive SJO 11:40pm (Avianca, 1 stop SAL)</span></li>
+            <li><span class="bullet">🏨</span><span>Shuttle to <a href="https://www.hilton.com/en/hotels/sjcaphx-hampton-san-jose-airport/" target="_blank" rel="noopener">Hampton by Hilton SJO Airport</a> — free 24hr shuttle from arrivals</span></li>
+            <li><span class="bullet">😴</span><span>Check in and sleep — do NOT pick up the rental car tonight</span></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="day-card">
+        <div class="day-number">02</div>
+        <div class="day-content">
+          <div class="day-header">
+            <div class="day-date">Day 2 · SJO → Arenal</div>
+            <div class="day-title">SJO → Arenal</div>
+          </div>
+          <span class="day-drive">🚗 ~3 hrs SJO → La Fortuna · leave by 9:00am</span>
+          <a class="day-gmaps-btn" href="https://www.google.com/maps/dir/?api=1&origin=Hampton+by+Hilton+San+Jose+Airport,+Alajuela,+Costa+Rica&destination=The+Springs+Resort+%26+Spa,+La+Fortuna,+Costa+Rica&waypoints=Adobe+Rent+A+Car+San+Jose+Airport" target="_blank" rel="noopener">🧭 Send route to Google Maps</a>
+          <div class="day-weather">🌤️ <b>Weather</b> · Temp: 77–90°F (25–32°C) · Precip: ~24 rainy days/mo, afternoon storms typical · Wind: light breeze <span class="wx-note">(typical for June — trip is beyond the forecast window)</span></div>
+          <ul class="activity-list">
+            <li><span class="bullet">🚙</span><span>Pick up 4WD SUV from <a href="https://www.adobecar.com" target="_blank" rel="noopener">Adobe Rent A Car</a> at SJO</span></li>
+            <li><span class="bullet">🛣️</span><span>Drive to La Fortuna (~3 hrs) · Check into <a href="https://www.thespringscostarica.com" target="_blank" rel="noopener">The Springs Resort &amp; Spa</a></span></li>
+            <li class="resort"><span class="bullet">🌋</span><span><span class="resort-tag">Resort</span>Explore the 165-acre property — volcano views, animal sanctuary, spot wildlife</span></li>
+            <li class="resort"><span class="bullet">♨️</span><span><span class="resort-tag">Resort</span>28 natural hot spring pools, swim-up bar, dinner at one of five on-site restaurants</span></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="day-card">
+        <div class="day-number">03</div>
+        <div class="day-content">
+          <div class="day-header">
+            <div class="day-date">Day 3 · Arenal</div>
+            <div class="day-title">Arenal — Full Adventure Day</div>
+          </div>
+          <span class="day-drive">🚗 10–20 min from The Springs · leave by 6:45am</span>
+          <a class="day-gmaps-btn" href="https://www.google.com/maps/dir/?api=1&origin=The+Springs+Resort+%26+Spa,+La+Fortuna,+Costa+Rica&destination=Mistico+Arenal+Hanging+Bridges+Park,+La+Fortuna,+Costa+Rica&waypoints=La+Fortuna+Waterfall,+Costa+Rica" target="_blank" rel="noopener">🧭 Send route to Google Maps</a>
+          <div class="day-weather">🌤️ <b>Weather</b> · Temp: 77–90°F (25–32°C) · Precip: ~24 rainy days/mo, afternoon storms typical · Wind: light breeze <span class="wx-note">(typical for June — trip is beyond the forecast window)</span></div>
+          <ul class="activity-list">
+            <li><span class="bullet">💧</span>
+              <span><a href="https://www.cataratalafortuna.com/la-fortuna-waterfall-hike" target="_blank" rel="noopener">La Fortuna Waterfall</a> — self-guided hike, open 7am, arrive early to beat the heat and crowds
+                <span class="activity-meta">~$18/adult · $5/child</span>
+              </span>
+            </li>
+            <li><span class="bullet">🌉</span>
+              <span><a href="https://www.getyourguide.com/mistico-arenal-hanging-bridges-park-l87313/hanging-bridges-walk-in-arenal-volcano-t411384/" target="_blank" rel="noopener">Mistico Hanging Bridges</a> — Guided Natural History Tour, 2.5 hrs
+                <span class="activity-meta">~$17–$44/person</span>
+              </span>
+            </li>
+            <li class="resort"><span class="bullet">♨️</span><span><span class="resort-tag">Resort</span>Hot springs, waterslide, and pools back at The Springs</span></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="day-card">
+        <div class="day-number">04</div>
+        <div class="day-content">
+          <div class="day-header">
+            <div class="day-date">Day 4 · Arenal</div>
+            <div class="day-title">Arenal — Adventure + Resort Day</div>
+          </div>
+          <span class="day-drive">🚗 Short local transfer · leave by 8:15am</span>
+          <a class="day-gmaps-btn" href="https://www.google.com/maps/dir/?api=1&origin=The+Springs+Resort+%26+Spa,+La+Fortuna,+Costa+Rica&destination=Tabacon+Thermal+Resort,+La+Fortuna,+Costa+Rica&waypoints=Arenal+River+Tubing+La+Fortuna" target="_blank" rel="noopener">🧭 Send route to Google Maps</a>
+          <div class="day-weather">🌤️ <b>Weather</b> · Temp: 77–90°F (25–32°C) · Precip: ~24 rainy days/mo, afternoon storms typical · Wind: light breeze <span class="wx-note">(typical for June — trip is beyond the forecast window)</span></div>
+          <ul class="activity-list">
+            <li><span class="bullet">🛟</span>
+              <span><a href="https://www.tripadvisor.com/Attraction_Review-g309226-d5616226-Reviews-Arenal_River_Tubing_Hiking-La_Fortuna_de_San_Carlos_Arenal_Volcano_National_Park_.html" target="_blank" rel="noopener">Arenal River Tubing</a> — jungle float, back by noon
+                <span class="activity-meta">~$45–$55/person</span>
+              </span>
+            </li>
+            <li class="resort"><span class="bullet">🏊</span><span><span class="resort-tag">Resort</span>Big resort afternoon — waterslide, putt-putt, kids' game room, animal sanctuary, hot springs</span></li>
+            <li><span class="bullet">♨️</span>
+              <span><a href="https://www.tabacon.com/product-category/one-day-pass/" target="_blank" rel="noopener">Tabacón Hot Springs Day Pass</a> — evening session is magical
+                <span class="activity-meta">~$81/adult · ~$39/child · Book at least 1 week in advance</span>
+              </span>
+            </li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="day-card">
+        <div class="day-number">05</div>
+        <div class="day-content">
+          <div class="day-header">
+            <div class="day-date">Day 5 · Arenal → Monteverde</div>
+            <div class="day-title">Arenal → Monteverde</div>
+          </div>
+          <span class="day-drive">🚗 ~3.5 hrs around Lake Arenal · leave by 9:00am</span>
+          <a class="day-gmaps-btn" href="https://www.google.com/maps/dir/?api=1&origin=The+Springs+Resort+%26+Spa,+La+Fortuna,+Costa+Rica&destination=Hotel+Belmar,+Monteverde,+Costa+Rica" target="_blank" rel="noopener">🧭 Send route to Google Maps</a>
+          <div class="day-weather">🌤️ <b>Weather</b> · Temp: 66–84°F (19–29°C) · Precip: ~23 rainy days/mo, often misty · Wind: breezy at elevation <span class="wx-note">(typical for June — trip is beyond the forecast window)</span></div>
+          <ul class="activity-list">
+            <li><span class="bullet">🍳</span><span>Leisurely breakfast at The Springs · Checkout</span></li>
+            <li><span class="bullet">🛣️</span><span>Drive around Lake Arenal to Monteverde (~3.5 hrs) — scenic paved road, bumpy unpaved final stretch · 4WD essential</span></li>
+            <li><span class="bullet">🏨</span><span>Check into <a href="https://www.hotelbelmar.net" target="_blank" rel="noopener">Hotel Belmar</a></span></li>
+            <li class="resort"><span class="bullet">🌿</span><span><span class="resort-tag">Resort</span>Explore Belmar's grounds — hummingbird garden, spring-fed pond, cloud forest sunset views · Dinner at farm-to-table restaurant · Try a beer from the onsite microbrewery</span></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="day-card">
+        <div class="day-number">06</div>
+        <div class="day-content">
+          <div class="day-header">
+            <div class="day-date">Day 6 · Monteverde</div>
+            <div class="day-title">Monteverde — Full Day</div>
+          </div>
+          <span class="day-drive">🚗 10–15 min from Belmar · leave by 7:30am</span>
+          <a class="day-gmaps-btn" href="https://www.google.com/maps/dir/?api=1&origin=Hotel+Belmar,+Monteverde,+Costa+Rica&destination=100%25+Aventura+Canopy+Tour,+Monteverde,+Costa+Rica&waypoints=Santa+Elena+Cloud+Forest+Reserve,+Costa+Rica" target="_blank" rel="noopener">🧭 Send route to Google Maps</a>
+          <div class="day-weather">🌤️ <b>Weather</b> · Temp: 66–84°F (19–29°C) · Precip: ~23 rainy days/mo, often misty · Wind: breezy at elevation <span class="wx-note">(typical for June — trip is beyond the forecast window)</span></div>
+          <ul class="activity-list">
+            <li><span class="bullet">🌉</span>
+              <span>Sky bridges &amp; cloud forest hike at Santa Elena Reserve
+                <span class="activity-meta">~$18/person</span>
+              </span>
+            </li>
+            <li><span class="bullet">🪂</span>
+              <span><a href="https://montetours.com/100-aventura-zip-lines/" target="_blank" rel="noopener">100% Aventura Zip-lining</a> — 3 hrs through cloud forest canopy, Latin America's longest lines
+                <span class="activity-meta">From ~$48/person · Must book in advance · No walk-ins</span>
+              </span>
+            </li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="day-card">
+        <div class="day-number">07</div>
+        <div class="day-content">
+          <div class="day-header">
+            <div class="day-date">Day 7 · Monteverde → Manuel Antonio</div>
+            <div class="day-title">Monteverde → Manuel Antonio</div>
+          </div>
+          <span class="day-drive">🚗 ~5 hrs on paved roads · leave by 12:00pm (after leisurely breakfast/checkout)</span>
+          <a class="day-gmaps-btn" href="https://www.google.com/maps/dir/?api=1&origin=Hotel+Belmar,+Monteverde,+Costa+Rica&destination=Tulemar+Resort,+Manuel+Antonio,+Costa+Rica" target="_blank" rel="noopener">🧭 Send route to Google Maps</a>
+          <div class="day-weather">🌤️ <b>Weather</b> · Temp: 75–82°F (24–28°C) · Precip: heavy rain typical, ~22 rainy days/mo, intense afternoon downpours · Wind: light coastal breeze <span class="wx-note">(typical for June — trip is beyond the forecast window)</span></div>
+          <ul class="activity-list">
+            <li><span class="bullet">🍳</span><span>Leisurely Hotel Belmar breakfast · Checkout by noon · Enjoy the cloud forest views one last time</span></li>
+            <li><span class="bullet">🛣️</span><span>Drive to Manuel Antonio (~5 hrs on good paved roads)</span></li>
+            <li><span class="bullet">🏨</span><span>Check into <a href="https://www.tulemarresort.com" target="_blank" rel="noopener">Tulemar Resort</a></span></li>
+            <li class="resort"><span class="bullet">🏖️</span><span><span class="resort-tag">Resort</span>First taste of Tulemar — pools, private beach walk, spot sloths at the on-property sanctuary · Dinner at the resort restaurant</span></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="day-card">
+        <div class="day-number">08</div>
+        <div class="day-content">
+          <div class="day-header">
+            <div class="day-date">Day 8 · Manuel Antonio</div>
+            <div class="day-title">Manuel Antonio — Park Day</div>
+          </div>
+          <span class="day-drive">🚗 ~15–20 min from Tulemar · leave by 6:15am</span>
+          <a class="day-gmaps-btn" href="https://www.google.com/maps/dir/?api=1&origin=Tulemar+Resort,+Manuel+Antonio,+Costa+Rica&waypoints=Manuel+Antonio+National+Park,+Costa+Rica&destination=Quepos+Marina,+Costa+Rica" target="_blank" rel="noopener">🧭 Send route to Google Maps</a>
+          <div class="day-weather">🌤️ <b>Weather</b> · Temp: 75–82°F (24–28°C) · Precip: heavy rain typical, ~22 rainy days/mo, intense afternoon downpours · Wind: light coastal breeze <span class="wx-note">(typical for June — trip is beyond the forecast window)</span></div>
+          <ul class="activity-list">
+            <li><span class="bullet">🐒</span>
+              <span><a href="https://serviciosenlinea.sinac.go.cr" target="_blank" rel="noopener">Manuel Antonio National Park</a> — arrive at 7am opening · Hire a certified guide at the entrance
+                <span class="activity-meta">~$18/adult · ~$3/child 6–12 · Guide ~$30–40 · Book online 90 days ahead of your visit date, as soon as the window opens</span>
+              </span>
+            </li>
+            <li class="resort"><span class="bullet">🏊</span><span><span class="resort-tag">Resort</span>Full resort afternoon at Tulemar — multiple pools, private beach with chairs and towels, sloth sanctuary walk</span></li>
+            <li><span class="bullet">🌅</span><span>Sunset dinner in Quepos marina</span></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="day-card">
+        <div class="day-number">09</div>
+        <div class="day-content">
+          <div class="day-header">
+            <div class="day-date">Day 9 · Manuel Antonio</div>
+            <div class="day-title">Nauyaca Waterfall + Beach Day</div>
+          </div>
+          <span class="day-drive">🚗 ~1–1.5 hrs to Platanillo · leave by 6:00am for the 7am shuttle</span>
+          <a class="day-gmaps-btn" href="https://www.google.com/maps/dir/?api=1&origin=Tulemar+Resort,+Manuel+Antonio,+Costa+Rica&destination=Catarata+Nauyaca+Don+Lulo,+Platanillo,+Costa+Rica" target="_blank" rel="noopener">🧭 Send route to Google Maps</a>
+          <div class="day-note">Route note carried over from research: use Waze (not Google Maps) for turn-by-turn via Route 243 — this Google Maps button gets you the same start/end points but the original guide flags Waze as more reliable for the final unpaved stretch.</div>
+          <div class="day-weather">🌤️ <b>Weather</b> · Temp: 75–82°F (24–28°C) · Precip: heavy rain typical, ~22 rainy days/mo, intense afternoon downpours · Wind: light coastal breeze <span class="wx-note">(typical for June — trip is beyond the forecast window)</span></div>
+          <ul class="activity-list">
+            <li><span class="bullet">💦</span>
+              <span><a href="https://www.walkmyworld.com/posts/nauyaca-waterfall" target="_blank" rel="noopener">Nauyaca Waterfall</a> — one of Costa Rica's most stunning. Two tiers dropping into an enormous emerald swimming hole. Start early to arrive before crowds.
+                <span class="activity-meta">~$10–$38/person · Book shuttle in advance · Use Waze (not Google Maps) for directions via route 243</span>
+              </span>
+            </li>
+            <li class="alt"><span class="bullet">🏄</span>
+              <span><span class="alt-tag">Alternate</span><a href="https://www.getyourguide.com/manuel-antonio-l142888/manuel-antonio-surf-lessons-t669034/" target="_blank" rel="noopener">Surf Lessons at Playa Espadilla</a> with Glen Castro — 2 hrs (swap with Nauyaca if preferred)
+                <span class="activity-meta">~$65–$80/person</span>
+              </span>
+            </li>
+            <li class="resort"><span class="bullet">🏖️</span><span><span class="resort-tag">Resort</span>Afternoon at Tulemar — pools, private beach, sloth sanctuary</span></li>
+            <li><span class="bullet">🍽️</span><span>Last dinner in Quepos · Pack up</span></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="day-card">
+        <div class="day-number">10</div>
+        <div class="day-content">
+          <div class="day-header">
+            <div class="day-date">Day 10 · Fly Home</div>
+            <div class="day-title">Drive to SJO → Fly Home</div>
+          </div>
+          <span class="day-drive">🚗 ~3 hrs to San José · leave by 9:00am</span>
+          <a class="day-gmaps-btn" href="https://www.google.com/maps/dir/?api=1&origin=Tulemar+Resort,+Manuel+Antonio,+Costa+Rica&destination=Juan+Santamaria+International+Airport+SJO&waypoints=Adobe+Rent+A+Car+San+Jose+Airport" target="_blank" rel="noopener">🧭 Send route to Google Maps</a>
+          <div class="day-weather">🌤️ <b>Weather</b> · Temp: 66–81°F (19–27°C) · Precip: afternoon showers typical of rainy season · Wind: light <span class="wx-note">(typical for June — trip is beyond the forecast window)</span></div>
+          <ul class="activity-list">
+            <li><span class="bullet">🍳</span><span>Breakfast at Tulemar · Checkout · Leave by 9am</span></li>
+            <li><span class="bullet">🛣️</span><span>Drive to San José (~3 hrs)</span></li>
+            <li><span class="bullet">🚙</span><span>Drop rental car at <a href="https://www.adobecar.com" target="_blank" rel="noopener">Adobe SJO office</a> · Lunch near airport</span></li>
+            <li><span class="bullet">✈</span><span>Arrive terminal by 2:30pm · Depart SJO 4:35pm nonstop (Avianca) → arrive IAD 2:15am</span></li>
+          </ul>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ═══════════ BEACHES (trip-specific) ═══════════ -->
+  <div id="tab-beaches" class="section">
     <div class="section-title">Beaches &amp; Swimming — Manuel Antonio</div>
+    <div class="section-sub">Arenal and Monteverde are both inland, so all beach/swim options are here on the coast.</div>
     <div class="beaches-grid">
       <div class="beach-card">
         <h4>🏖️ Playa Biesanz</h4>
@@ -412,217 +795,10 @@
     </div>
   </div>
 
-  <!-- ITINERARY -->
-  <div class="section">
-    <div class="section-title">Daily Itinerary</div>
-    <div class="day-cards">
-
-      <div class="day-card">
-        <div class="day-number">01</div>
-        <div class="day-content">
-          <div class="day-header">
-            <div class="day-date">Day 1 · Travel Day</div>
-            <div class="day-title">Travel Day</div>
-          </div>
-          <div class="day-weather">🌤️ <b>Weather</b> · Temp: — · Precip: — · Wind: — <span class="wx-note">(Forecasts open up ~10 days out)</span></div>
-          <ul class="activity-list">
-            <li><span class="bullet">✈</span><span>Depart IAD 5:35pm → arrive SJO 11:40pm (Avianca, 1 stop SAL)</span></li>
-            <li><span class="bullet">🏨</span><span>Shuttle to <a href="https://www.hilton.com/en/hotels/sjoaphx-hampton-san-jose-airport/" target="_blank">Hampton by Hilton SJO Airport</a> — free 24hr shuttle from arrivals</span></li>
-            <li><span class="bullet">😴</span><span>Check in and sleep — do NOT pick up the rental car tonight</span></li>
-          </ul>
-        </div>
-      </div>
-
-      <div class="day-card">
-        <div class="day-number">02</div>
-        <div class="day-content">
-          <div class="day-header">
-            <div class="day-date">Day 2 · SJO → Arenal</div>
-            <div class="day-title">SJO → Arenal</div>
-          </div>
-          <div class="day-weather">🌤️ <b>Weather</b> · Temp: — · Precip: — · Wind: — <span class="wx-note">(Forecasts open up ~10 days out)</span></div>
-          <ul class="activity-list">
-            <li><span class="bullet">🚙</span><span>Pick up 4WD SUV from <a href="https://www.adobecar.com" target="_blank">Adobe Rent A Car</a> at SJO</span></li>
-            <li><span class="bullet">🛣️</span><span>Drive to La Fortuna (~3 hrs) · Check into <a href="https://www.thespringscostarica.com" target="_blank">The Springs Resort &amp; Spa</a></span></li>
-            <li class="resort"><span class="bullet">🌋</span><span><span class="resort-tag">Resort</span>Explore the 165-acre property — volcano views, animal sanctuary, spot wildlife</span></li>
-            <li class="resort"><span class="bullet">♨️</span><span><span class="resort-tag">Resort</span>28 natural hot spring pools, swim-up bar, dinner at one of five on-site restaurants</span></li>
-          </ul>
-        </div>
-      </div>
-
-      <div class="day-card">
-        <div class="day-number">03</div>
-        <div class="day-content">
-          <div class="day-header">
-            <div class="day-date">Day 3 · Arenal</div>
-            <div class="day-title">Arenal — Full Adventure Day</div>
-          </div>
-          <div class="day-weather">🌤️ <b>Weather</b> · Temp: — · Precip: — · Wind: — <span class="wx-note">(Forecasts open up ~10 days out)</span></div>
-          <ul class="activity-list">
-            <li><span class="bullet">💧</span>
-              <span><a href="https://www.cataratalafortuna.com/la-fortuna-waterfall-hike" target="_blank">La Fortuna Waterfall</a> — self-guided hike, open 7am
-                <span class="activity-meta">~$18/adult · $5/child</span>
-              </span>
-            </li>
-            <li><span class="bullet">🌉</span>
-              <span><a href="https://www.getyourguide.com/mistico-arenal-hanging-bridges-park-l87313/hanging-bridges-walk-in-arenal-volcano-t411384/" target="_blank">Mistico Hanging Bridges</a> — Guided Natural History Tour, 2.5 hrs
-                <span class="activity-meta">~$17–$44/person</span>
-              </span>
-            </li>
-            <li class="resort"><span class="bullet">♨️</span><span><span class="resort-tag">Resort</span>Hot springs, waterslide, and pools back at The Springs</span></li>
-          </ul>
-        </div>
-      </div>
-
-      <div class="day-card">
-        <div class="day-number">04</div>
-        <div class="day-content">
-          <div class="day-header">
-            <div class="day-date">Day 4 · Arenal</div>
-            <div class="day-title">Arenal — Adventure + Resort Day</div>
-          </div>
-          <div class="day-weather">🌤️ <b>Weather</b> · Temp: — · Precip: — · Wind: — <span class="wx-note">(Forecasts open up ~10 days out)</span></div>
-          <ul class="activity-list">
-            <li><span class="bullet">🛟</span>
-              <span><a href="https://www.tripadvisor.com/Attraction_Review-g309226-d5616226-Reviews-Arenal_River_Tubing_Hiking-La_Fortuna_de_San_Carlos_Arenal_Volcano_National_Park_.html" target="_blank">Arenal River Tubing</a> — jungle float, back by noon
-                <span class="activity-meta">~$45–$55/person</span>
-              </span>
-            </li>
-            <li class="resort"><span class="bullet">🏊</span><span><span class="resort-tag">Resort</span>Big resort afternoon — waterslide, putt-putt, kids' game room, animal sanctuary, hot springs</span></li>
-            <li><span class="bullet">♨️</span>
-              <span><a href="https://www.tabacon.com/product-category/one-day-pass/" target="_blank">Tabacón Hot Springs Day Pass</a> — evening session is magical
-                <span class="activity-meta">~$81/adult · ~$39/child · Book at least 1 week in advance</span>
-              </span>
-            </li>
-          </ul>
-        </div>
-      </div>
-
-      <div class="day-card">
-        <div class="day-number">05</div>
-        <div class="day-content">
-          <div class="day-header">
-            <div class="day-date">Day 5 · Arenal → Monteverde</div>
-            <div class="day-title">Arenal → Monteverde</div>
-          </div>
-          <div class="day-weather">🌤️ <b>Weather</b> · Temp: — · Precip: — · Wind: — <span class="wx-note">(Forecasts open up ~10 days out)</span></div>
-          <ul class="activity-list">
-            <li><span class="bullet">🍳</span><span>Leisurely breakfast at The Springs · Checkout</span></li>
-            <li><span class="bullet">🛣️</span><span>Drive around Lake Arenal to Monteverde (~3.5 hrs) — scenic paved road, bumpy unpaved final stretch · 4WD essential</span></li>
-            <li><span class="bullet">🏨</span><span>Check into <a href="https://www.hotelbelmar.net" target="_blank">Hotel Belmar</a></span></li>
-            <li class="resort"><span class="bullet">🌿</span><span><span class="resort-tag">Resort</span>Explore Belmar's grounds — hummingbird garden, spring-fed pond, cloud forest sunset views · Dinner at farm-to-table restaurant · Try a beer from the onsite microbrewery</span></li>
-          </ul>
-        </div>
-      </div>
-
-      <div class="day-card">
-        <div class="day-number">06</div>
-        <div class="day-content">
-          <div class="day-header">
-            <div class="day-date">Day 6 · Monteverde</div>
-            <div class="day-title">Monteverde — Full Day</div>
-          </div>
-          <div class="day-weather">🌤️ <b>Weather</b> · Temp: — · Precip: — · Wind: — <span class="wx-note">(Forecasts open up ~10 days out)</span></div>
-          <ul class="activity-list">
-            <li><span class="bullet">🌉</span>
-              <span>Sky bridges &amp; cloud forest hike at Santa Elena Reserve
-                <span class="activity-meta">~$18/person</span>
-              </span>
-            </li>
-            <li><span class="bullet">🪂</span>
-              <span><a href="https://montetours.com/100-aventura-zip-lines/" target="_blank">100% Aventura Zip-lining</a> — 3 hrs through cloud forest canopy, Latin America's longest lines
-                <span class="activity-meta">From ~$48/person · Must book in advance · No walk-ins</span>
-              </span>
-            </li>
-          </ul>
-        </div>
-      </div>
-
-      <div class="day-card">
-        <div class="day-number">07</div>
-        <div class="day-content">
-          <div class="day-header">
-            <div class="day-date">Day 7 · Monteverde → Manuel Antonio</div>
-            <div class="day-title">Monteverde → Manuel Antonio</div>
-          </div>
-          <div class="day-weather">🌤️ <b>Weather</b> · Temp: — · Precip: — · Wind: — <span class="wx-note">(Forecasts open up ~10 days out)</span></div>
-          <ul class="activity-list">
-            <li><span class="bullet">🍳</span><span>Leisurely Hotel Belmar breakfast · Checkout by noon · Enjoy the cloud forest views one last time</span></li>
-            <li><span class="bullet">🛣️</span><span>Drive to Manuel Antonio (~5 hrs on good paved roads)</span></li>
-            <li><span class="bullet">🏨</span><span>Check into <a href="https://www.tulemarresort.com" target="_blank">Tulemar Resort</a></span></li>
-            <li class="resort"><span class="bullet">🏖️</span><span><span class="resort-tag">Resort</span>First taste of Tulemar — pools, private beach walk, spot sloths at the on-property sanctuary · Dinner at the resort restaurant</span></li>
-          </ul>
-        </div>
-      </div>
-
-      <div class="day-card">
-        <div class="day-number">08</div>
-        <div class="day-content">
-          <div class="day-header">
-            <div class="day-date">Day 8 · Manuel Antonio</div>
-            <div class="day-title">Manuel Antonio — Park Day</div>
-          </div>
-          <div class="day-weather">🌤️ <b>Weather</b> · Temp: — · Precip: — · Wind: — <span class="wx-note">(Forecasts open up ~10 days out)</span></div>
-          <ul class="activity-list">
-            <li><span class="bullet">🐒</span>
-              <span><a href="https://serviciosenlinea.sinac.go.cr" target="_blank">Manuel Antonio National Park</a> — arrive at 7am opening · Hire a certified guide at the entrance
-                <span class="activity-meta">~$18/adult · ~$3/child 6–12 · Guide ~$30–40 · Book tickets weeks in advance</span>
-              </span>
-            </li>
-            <li class="resort"><span class="bullet">🏊</span><span><span class="resort-tag">Resort</span>Full resort afternoon at Tulemar — multiple pools, private beach with chairs and towels, sloth sanctuary walk</span></li>
-            <li><span class="bullet">🌅</span><span>Sunset dinner in Quepos marina</span></li>
-          </ul>
-        </div>
-      </div>
-
-      <div class="day-card">
-        <div class="day-number">09</div>
-        <div class="day-content">
-          <div class="day-header">
-            <div class="day-date">Day 9 · Manuel Antonio</div>
-            <div class="day-title">Nauyaca Waterfall + Beach Day</div>
-          </div>
-          <div class="day-weather">🌤️ <b>Weather</b> · Temp: — · Precip: — · Wind: — <span class="wx-note">(Forecasts open up ~10 days out)</span></div>
-          <ul class="activity-list">
-            <li><span class="bullet">💦</span>
-              <span><a href="https://www.walkmyworld.com/posts/nauyaca-waterfall" target="_blank">Nauyaca Waterfall</a> — one of Costa Rica's most stunning. Two tiers dropping into an enormous emerald swimming hole. Start early to arrive before crowds.
-                <span class="activity-meta">~$10–$38/person · Book shuttle in advance · Use Waze (not Google Maps) for directions via route 243</span>
-              </span>
-            </li>
-            <li class="beach"><span class="bullet">🏄</span>
-              <span><a href="https://www.getyourguide.com/manuel-antonio-l142888/manuel-antonio-surf-lessons-t669034/" target="_blank">Surf Lessons at Playa Espadilla</a> with Glen Castro — 2 hrs (swap with Nauyaca if preferred)
-                <span class="activity-meta">~$65–$80/person</span>
-              </span>
-            </li>
-            <li class="resort"><span class="bullet">🏖️</span><span><span class="resort-tag">Resort</span>Afternoon at Tulemar — pools, private beach, sloth sanctuary</span></li>
-            <li><span class="bullet">🍽️</span><span>Last dinner in Quepos · Pack up</span></li>
-          </ul>
-        </div>
-      </div>
-
-      <div class="day-card">
-        <div class="day-number">10</div>
-        <div class="day-content">
-          <div class="day-header">
-            <div class="day-date">Day 10 · Fly Home</div>
-            <div class="day-title">Drive to SJO → Fly Home</div>
-          </div>
-          <div class="day-weather">🌤️ <b>Weather</b> · Temp: — · Precip: — · Wind: — <span class="wx-note">(Forecasts open up ~10 days out)</span></div>
-          <ul class="activity-list">
-            <li><span class="bullet">🍳</span><span>Breakfast at Tulemar · Checkout · Leave by 9am</span></li>
-            <li><span class="bullet">🛣️</span><span>Drive to San José (~3 hrs)</span></li>
-            <li><span class="bullet">🚙</span><span>Drop rental car at <a href="https://www.adobecar.com" target="_blank">Adobe SJO office</a> · Lunch near airport</span></li>
-            <li><span class="bullet">✈</span><span>Arrive terminal by 2:30pm · Depart SJO 4:35pm nonstop (Avianca) → arrive IAD 2:15am</span></li>
-          </ul>
-        </div>
-      </div>
-
-    </div>
-  </div>
-
-  <!-- COSTS -->
-  <div class="section">
+  <!-- ═══════════ BUDGET (trip-specific) ═══════════ -->
+  <div id="tab-budget" class="section">
     <div class="section-title">Cost Breakdown — Family of 3 (June 2027)</div>
+    <div class="section-sub">Working estimate — will firm up once flights, hotels, and tours are actually booked.</div>
     <table class="cost-table">
       <tr><td colspan="2" class="category">Flights &amp; Transport</td></tr>
       <tr><td>Flights — 3 × $452 (Avianca)</td><td>~$1,356</td></tr>
@@ -652,51 +828,61 @@
     </div>
   </div>
 
-  <!-- RENTAL CAR -->
-  <div class="section">
-    <div class="section-title">Rental Car</div>
-    <div class="rental-card">
-      <div class="rental-icon">🚙</div>
-      <div>
-        <h3>Adobe Rent A Car</h3>
-        <a href="https://www.adobecar.com" target="_blank">adobecar.com →</a>
-        <p>Pick up Day 2 at SJO · Drop off Day 10 before departure flight · ~$700 for 9 days<br>
-        Book a full-size 4WD SUV — essential for the Monteverde road. Costa Rica's best rental option. No hidden fees, newest fleet in the country.</p>
-        <div class="warning">⚠️ Book directly with Adobe — NOT through a third-party site. Representatives meet you at the SJO airport exit with a sign.</div>
+  <!-- ═══════════ ALSO WORTH SEEING ═══════════ -->
+  <div id="tab-more" class="section">
+    <div class="section-title">Also Worth Seeing</div>
+    <div class="section-sub">Researched, real options that didn't make the day-by-day cut — good candidates for a future trip.</div>
+    <div class="card-grid">
+      <div class="card">
+        <div class="card-eyebrow">Near Manuel Antonio / South Pacific</div>
+        <h3>⚡ Jurassic Canyon <span style="font-size:12px;font-weight:400;color:var(--warm-grey);">(a.k.a. Toro Bed)</span></h3>
+        <p>A dramatic canyon hike that looks extraordinary — hence the nickname "Jurassic." Long and out of the way, making it impractical for this itinerary without a significant detour or extension.</p>
+        <div class="warn-line">⚠️ Not currently recommended due to flash flooding risk.</div>
+        <p style="margin-bottom:0;">Worth keeping for a future Costa Rica trip when conditions are right and you have more time to position for it.</p>
+        <div class="poi-actions"><a class="site" href="https://www.overtheplanet.com/en-US/unique-experiences-with-costa-rica-waterfalls-guided-adventure-hiking.a951117" target="_blank" rel="noopener">🌐 Guide</a></div>
       </div>
     </div>
   </div>
 
-  <!-- BOOKING CHECKLIST -->
-  <div class="section">
+  <!-- ═══════════ BOOK NOW ═══════════ -->
+  <div id="tab-book" class="section">
     <div class="section-title">Book Before You Leave Home</div>
+    <div class="section-sub">Every item below has a phone number or booking link. Where a phone number couldn't be found, that's flagged rather than guessed.</div>
+
+    <div class="callout warn">
+      <strong>Rental car:</strong> Book directly with Adobe — NOT through a third-party site. Representatives meet you at the SJO airport exit with a sign. Full-size 4WD SUV is essential for the Monteverde road.
+    </div>
+
     <div class="booking-list">
 
       <div class="booking-item">
         <div class="booking-num">1</div>
         <div class="booking-info">
           <h4>Manuel Antonio National Park</h4>
-          <div class="when urgent">⚡ Opens ~June 8 for August — book the moment the window opens</div>
+          <div class="when urgent">⚡ Online booking window opens 90 days before your visit date — reserve your entry time slot the moment it opens</div>
+          <div class="contact-phone">📞 SINAC: <a href="tel:+50627775185">+506 2777 5185</a></div>
         </div>
-        <div class="booking-link"><a href="https://serviciosenlinea.sinac.go.cr" target="_blank">Book Now</a></div>
+        <div class="booking-link"><a href="https://serviciosenlinea.sinac.go.cr" target="_blank" rel="noopener">Book Now</a></div>
       </div>
 
       <div class="booking-item">
         <div class="booking-num">2</div>
         <div class="booking-info">
           <h4>100% Aventura Zip-lining</h4>
-          <div class="when urgent">⚡ Now — sells out fast in August</div>
+          <div class="when urgent">⚡ Sells out fast in peak season — book as early as possible</div>
+          <div class="contact-phone missing">📞 No published phone number found — book online</div>
         </div>
-        <div class="booking-link"><a href="https://montetours.com/100-aventura-zip-lines/" target="_blank">Book Now</a></div>
+        <div class="booking-link"><a href="https://montetours.com/100-aventura-zip-lines/" target="_blank" rel="noopener">Book Now</a></div>
       </div>
 
       <div class="booking-item">
         <div class="booking-num">3</div>
         <div class="booking-info">
           <h4>Tabacón Hot Springs Day Pass</h4>
-          <div class="when urgent">⚡ At least 1 week before August 10</div>
+          <div class="when urgent">⚡ At least 1 week before your visit</div>
+          <div class="contact-phone">📞 <a href="tel:+50625191999">+506 2519 1999</a></div>
         </div>
-        <div class="booking-link"><a href="https://www.tabacon.com/product-category/one-day-pass/" target="_blank">Book Now</a></div>
+        <div class="booking-link"><a href="https://www.tabacon.com/product-category/one-day-pass/" target="_blank" rel="noopener">Book Now</a></div>
       </div>
 
       <div class="booking-item">
@@ -704,90 +890,293 @@
         <div class="booking-info">
           <h4>Mistico Hanging Bridges</h4>
           <div class="when">Advance booking strongly recommended</div>
+          <div class="contact-phone">📞 <a href="tel:+50624798282">+506 2479 8282</a></div>
         </div>
-        <div class="booking-link"><a href="https://www.getyourguide.com/mistico-arenal-hanging-bridges-park-l87313/hanging-bridges-walk-in-arenal-volcano-t411384/" target="_blank">Book Now</a></div>
+        <div class="booking-link"><a href="https://www.getyourguide.com/mistico-arenal-hanging-bridges-park-l87313/hanging-bridges-walk-in-arenal-volcano-t411384/" target="_blank" rel="noopener">Book Now</a></div>
       </div>
 
       <div class="booking-item">
         <div class="booking-num">5</div>
         <div class="booking-info">
-          <h4>Nauyaca Waterfall Shuttle</h4>
+          <h4>Nauyaca Waterfall Shuttle (Don Lulo)</h4>
           <div class="when urgent">⚡ Book in advance — start as early as possible to beat crowds</div>
+          <div class="contact-phone">📞 <a href="tel:+50627870541">+506 2787 0541</a> · <a href="tel:+50662801790">+506 6280 1790</a></div>
         </div>
-        <div class="booking-link"><a href="https://www.walkmyworld.com/posts/nauyaca-waterfall" target="_blank">Full Guide</a></div>
+        <div class="booking-link"><a href="https://www.walkmyworld.com/posts/nauyaca-waterfall" target="_blank" rel="noopener">Full Guide</a></div>
       </div>
 
       <div class="booking-item">
         <div class="booking-num">6</div>
         <div class="booking-info">
-          <h4>Adobe Rental Car — 4WD SUV</h4>
-          <div class="when urgent">⚡ Now — book directly, NOT third-party</div>
+          <h4>Surf Lessons — Glen Castro</h4>
+          <div class="when">Alternate to Nauyaca on Day 9 — arrange ahead if you want it locked in</div>
+          <div class="contact-phone missing">📞 No published phone number found — book via GetYourGuide/Viator, or find his tent on Playa Espadilla Norte</div>
         </div>
-        <div class="booking-link"><a href="https://www.adobecar.com" target="_blank">Book Now</a></div>
+        <div class="booking-link"><a href="https://www.getyourguide.com/manuel-antonio-l142888/manuel-antonio-surf-lessons-t669034/" target="_blank" rel="noopener">Book Now</a></div>
       </div>
 
       <div class="booking-item">
         <div class="booking-num">7</div>
         <div class="booking-info">
-          <h4>Hampton by Hilton SJO Airport — August 7</h4>
-          <div class="when">Book now</div>
+          <h4>Adobe Rental Car — 4WD SUV</h4>
+          <div class="when urgent">⚡ Book now — directly, NOT third-party</div>
+          <div class="contact-phone">📞 CR: <a href="tel:+50624422422">+506 2442 2422</a> · US toll-free: <a href="tel:18558611250">1-855-861-1250</a></div>
         </div>
-        <div class="booking-link"><a href="https://www.hilton.com/en/hotels/sjoaphx-hampton-san-jose-airport/" target="_blank">Book Now</a></div>
+        <div class="booking-link"><a href="https://www.adobecar.com" target="_blank" rel="noopener">Book Now</a></div>
       </div>
 
       <div class="booking-item">
         <div class="booking-num">8</div>
         <div class="booking-info">
-          <h4>The Springs Resort &amp; Spa — Arenal</h4>
-          <div class="when urgent">⚡ Book now — limited rooms at peak August pricing</div>
+          <h4>Flights — Avianca</h4>
+          <div class="when">IAD ⇄ SJO, book once dates are confirmed</div>
+          <div class="contact-phone">📞 <a href="tel:18669190081">1-866-919-0081</a></div>
         </div>
-        <div class="booking-link"><a href="https://www.thespringscostarica.com" target="_blank">Book Now</a></div>
+        <div class="booking-link"><a href="https://www.avianca.com" target="_blank" rel="noopener">Book Now</a></div>
       </div>
 
       <div class="booking-item">
         <div class="booking-num">9</div>
         <div class="booking-info">
-          <h4>Hotel Belmar — Monteverde</h4>
-          <div class="when">Book now for August availability</div>
+          <h4>Hampton by Hilton SJO Airport</h4>
+          <div class="when">Book now</div>
+          <div class="contact-phone">📞 <a href="tel:+50624360000">+506 2436 0000</a></div>
         </div>
-        <div class="booking-link"><a href="https://www.hotelbelmar.net" target="_blank">Book Now</a></div>
+        <div class="booking-link"><a href="https://www.hilton.com/en/hotels/sjcaphx-hampton-san-jose-airport/" target="_blank" rel="noopener">Book Now</a></div>
       </div>
 
       <div class="booking-item">
         <div class="booking-num">10</div>
         <div class="booking-info">
-          <h4>Tulemar Resort — Manuel Antonio</h4>
-          <div class="when">Book now for August availability</div>
+          <h4>The Springs Resort &amp; Spa — Arenal</h4>
+          <div class="when urgent">⚡ Book now — limited rooms at peak pricing</div>
+          <div class="contact-phone">📞 <a href="tel:+50624013313">+506 2401 3313</a></div>
         </div>
-        <div class="booking-link"><a href="https://www.tulemar.com" target="_blank">Book Now</a></div>
+        <div class="booking-link"><a href="https://www.thespringscostarica.com" target="_blank" rel="noopener">Book Now</a></div>
+      </div>
+
+      <div class="booking-item">
+        <div class="booking-num">11</div>
+        <div class="booking-info">
+          <h4>Hotel Belmar — Monteverde</h4>
+          <div class="when">Book now for availability</div>
+          <div class="contact-phone">📞 <a href="tel:+50626455201">+506 2645 5201</a></div>
+        </div>
+        <div class="booking-link"><a href="https://www.hotelbelmar.net" target="_blank" rel="noopener">Book Now</a></div>
+      </div>
+
+      <div class="booking-item">
+        <div class="booking-num">12</div>
+        <div class="booking-info">
+          <h4>Tulemar Resort — Manuel Antonio</h4>
+          <div class="when">Book now for availability</div>
+          <div class="contact-phone">📞 <a href="tel:+50640015878">+506 4001 5878</a></div>
+        </div>
+        <div class="booking-link"><a href="https://www.tulemarresort.com" target="_blank" rel="noopener">Book Now</a></div>
       </div>
 
       <div class="booking-item" style="grid-column:1/-1;background:#fdf6e8;border-color:#e8d5a0;">
         <div class="booking-num" style="background:#c8a84b;">💡</div>
         <div class="booking-info">
           <h4 style="color:#6a4e1a;">Tulemar Booking Tip</h4>
-          <div class="when">Check both <a href="https://www.tulemar.com" target="_blank" style="color:var(--jungle);">tulemar.com</a> and <a href="https://www.tulemarresort.com" target="_blank" style="color:var(--jungle);">tulemarresort.com</a> — both list desirable villas and bungalows. Also check <strong>VRBO</strong> and <strong>Airbnb</strong> for individual unit listings which may offer better rates or availability.</div>
+          <div class="when">Check both <a href="https://www.tulemar.com" target="_blank" rel="noopener" style="color:var(--jungle);">tulemar.com</a> and <a href="https://www.tulemarresort.com" target="_blank" rel="noopener" style="color:var(--jungle);">tulemarresort.com</a> — both list desirable villas and bungalows. Also check <strong>VRBO</strong> and <strong>Airbnb</strong> for individual unit listings which may offer better rates or availability.</div>
         </div>
       </div>
 
     </div>
   </div>
 
-</div>
+  <!-- ═══════════ PRINT / OFFLINE COPY (always last) ═══════════ -->
+  <div id="tab-print" class="section">
+    <div class="section-title">Print / Offline Copy</div>
+    <div class="section-sub">A no-internet-needed version — every phone number, address, and website spelled out as plain text. Print this tab or grab the PDF before you lose signal in the rainforest.</div>
 
-  <!-- WISHLIST / FUTURE TRIPS -->
-  <div class="section">
-    <div class="section-title">Wishlist — Future Trips &amp; Extensions</div>
-    <div style="background:#f5f0ff;border:1px dashed #b0a0cc;border-radius:12px;padding:24px 28px;margin-bottom:16px;">
-      <div style="font-family:'Cormorant Garamond',serif;font-size:20px;font-weight:400;color:#3a2a6a;margin-bottom:8px;">⚡ Jurassic Canyon <span style="font-size:13px;font-weight:400;color:#7a6aaa;">(a.k.a. Toro Bed)</span></div>
-      <p style="font-size:13.5px;color:#5a4a8a;line-height:1.65;margin-bottom:10px;">A dramatic canyon hike that looks extraordinary — hence the nickname "Jurassic." Long and out of the way, making it impractical for this itinerary without a significant detour or extension. <strong style="color:#c04040;">⚠️ Not currently recommended due to flash flooding risk.</strong> Worth keeping for a future Costa Rica trip when conditions are right and you have more time to position for it.</p>
-      <a href="https://www.overtheplanet.com/en-US/unique-experiences-with-costa-rica-waterfalls-guided-adventure-hiking.a951117" target="_blank" style="font-size:13px;color:#5a2aa0;font-weight:500;text-decoration:underline;">overtheplanet.com — guided adventure details →</a>
+    <button class="print-btn" onclick="window.print()">🖨 Print this page</button>
+    <a class="print-btn outline" href="Costa-Rica-Itinerary-Printable.pdf" target="_blank" rel="noopener">⬇ Download PDF</a>
+
+    <h3 style="font-family:'Cormorant Garamond',serif; font-size:20px; margin:28px 0 14px; color:var(--jungle); font-weight:500;">Key Contacts</h3>
+
+    <div class="contact-block">
+      <h4>Hampton by Hilton San José Airport</h4>
+      <div class="contact-line">Hwy 1 Airport Blvd, Alajuela, Costa Rica</div>
+      <div class="contact-line">📞 +506 2436 0000 &nbsp;·&nbsp; hilton.com/en/hotels/sjcaphx-hampton-san-jose-airport</div>
+      <div class="contact-line">Conf#: not yet on file</div>
+    </div>
+    <div class="contact-block">
+      <h4>The Springs Resort &amp; Spa — Arenal</h4>
+      <div class="contact-line">La Fortuna de San Carlos, Alajuela Province, Costa Rica</div>
+      <div class="contact-line">📞 +506 2401 3313 &nbsp;·&nbsp; thespringscostarica.com</div>
+      <div class="contact-line">Conf#: not yet on file</div>
+    </div>
+    <div class="contact-block">
+      <h4>Hotel Belmar — Monteverde</h4>
+      <div class="contact-line">Calle Samudio, Barrio Copey, Monteverde, Puntarenas Province, Costa Rica</div>
+      <div class="contact-line">📞 +506 2645 5201 &nbsp;·&nbsp; hotelbelmar.net</div>
+      <div class="contact-line">Conf#: not yet on file</div>
+    </div>
+    <div class="contact-block">
+      <h4>Tulemar Resort — Manuel Antonio</h4>
+      <div class="contact-line">Carretera a Manuel Antonio, Km 4, Quepos 60601, Puntarenas, Costa Rica</div>
+      <div class="contact-line">📞 +506 4001 5878 &nbsp;·&nbsp; tulemarresort.com / tulemar.com</div>
+      <div class="contact-line">Conf#: not yet on file</div>
+    </div>
+    <div class="contact-block">
+      <h4>Adobe Rent A Car — SJO Airport</h4>
+      <div class="contact-line">Juan Santamaría International Airport, Alajuela, Costa Rica</div>
+      <div class="contact-line">📞 +506 2442 2422 (CR) · 1-855-861-1250 (US toll-free) &nbsp;·&nbsp; adobecar.com</div>
+    </div>
+    <div class="contact-block">
+      <h4>Manuel Antonio National Park (SINAC)</h4>
+      <div class="contact-line">Quepos, 60601, Puntarenas, Costa Rica</div>
+      <div class="contact-line">📞 +506 2777 5185 &nbsp;·&nbsp; serviciosenlinea.sinac.go.cr</div>
+    </div>
+    <div class="contact-block">
+      <h4>Avianca</h4>
+      <div class="contact-line">📞 1-866-919-0081 &nbsp;·&nbsp; avianca.com</div>
+    </div>
+
+    <h3 style="font-family:'Cormorant Garamond',serif; font-size:20px; margin:28px 0 14px; color:var(--jungle); font-weight:500;">Day-by-Day Contacts</h3>
+
+    <div class="print-day">
+      <h4>Day 1 · Travel Day</h4>
+      <ul>
+        <li>Hampton by Hilton SJO Airport<span class="contact-line">Hwy 1 Airport Blvd, Alajuela &nbsp;·&nbsp; 📞 +506 2436 0000 &nbsp;·&nbsp; hilton.com/en/hotels/sjcaphx-hampton-san-jose-airport</span></li>
+      </ul>
+    </div>
+    <div class="print-day">
+      <h4>Day 2 · SJO → Arenal</h4>
+      <ul>
+        <li>Adobe Rent A Car (SJO)<span class="contact-line">📞 +506 2442 2422 &nbsp;·&nbsp; adobecar.com</span></li>
+        <li>The Springs Resort &amp; Spa<span class="contact-line">La Fortuna, Costa Rica &nbsp;·&nbsp; 📞 +506 2401 3313 &nbsp;·&nbsp; thespringscostarica.com</span></li>
+      </ul>
+    </div>
+    <div class="print-day">
+      <h4>Day 3 · Arenal — Waterfall + Hanging Bridges</h4>
+      <ul>
+        <li>La Fortuna Waterfall<span class="contact-line">La Fortuna, Costa Rica &nbsp;·&nbsp; cataratalafortuna.com/la-fortuna-waterfall-hike</span></li>
+        <li>Mistico Hanging Bridges<span class="contact-line">📞 +506 2479 8282 &nbsp;·&nbsp; misticopark.com</span></li>
+      </ul>
+    </div>
+    <div class="print-day">
+      <h4>Day 4 · Arenal — Tubing + Tabacón</h4>
+      <ul>
+        <li>Arenal River Tubing<span class="contact-line">Near La Fortuna &nbsp;·&nbsp; tripadvisor.com listing</span></li>
+        <li>Tabacón Hot Springs<span class="contact-line">📞 +506 2519 1999 &nbsp;·&nbsp; tabacon.com</span></li>
+      </ul>
+    </div>
+    <div class="print-day">
+      <h4>Day 5 · Arenal → Monteverde</h4>
+      <ul>
+        <li>Hotel Belmar<span class="contact-line">Monteverde, Costa Rica &nbsp;·&nbsp; 📞 +506 2645 5201 &nbsp;·&nbsp; hotelbelmar.net</span></li>
+      </ul>
+    </div>
+    <div class="print-day">
+      <h4>Day 6 · Monteverde — Reserve + Zip-lining</h4>
+      <ul>
+        <li>Santa Elena Cloud Forest Reserve<span class="contact-line">Monteverde, Costa Rica</span></li>
+        <li>100% Aventura Zip-lining<span class="contact-line">San Bosco, Monteverde &nbsp;·&nbsp; No published phone found &nbsp;·&nbsp; montetours.com/100-aventura-zip-lines</span></li>
+      </ul>
+    </div>
+    <div class="print-day">
+      <h4>Day 7 · Monteverde → Manuel Antonio</h4>
+      <ul>
+        <li>Tulemar Resort<span class="contact-line">Km 4, Quepos, Costa Rica &nbsp;·&nbsp; 📞 +506 4001 5878 &nbsp;·&nbsp; tulemarresort.com</span></li>
+      </ul>
+    </div>
+    <div class="print-day">
+      <h4>Day 8 · Manuel Antonio — Park Day</h4>
+      <ul>
+        <li>Manuel Antonio National Park<span class="contact-line">Quepos, Costa Rica &nbsp;·&nbsp; 📞 +506 2777 5185 &nbsp;·&nbsp; serviciosenlinea.sinac.go.cr</span></li>
+        <li>Quepos Marina (dinner)<span class="contact-line">Quepos, Costa Rica</span></li>
+      </ul>
+    </div>
+    <div class="print-day">
+      <h4>Day 9 · Nauyaca Waterfall + Beach</h4>
+      <ul>
+        <li>Nauyaca Waterfall (Don Lulo)<span class="contact-line">Platanillo, Costa Rica &nbsp;·&nbsp; 📞 +506 2787 0541 / +506 6280 1790 &nbsp;·&nbsp; cataratasnauyaca.com &nbsp;·&nbsp; use Waze, not Google Maps, for the last stretch</span></li>
+        <li>Surf Lessons — Glen Castro (alternate)<span class="contact-line">Playa Espadilla Norte &nbsp;·&nbsp; No published phone found &nbsp;·&nbsp; book via GetYourGuide/Viator</span></li>
+      </ul>
+    </div>
+    <div class="print-day">
+      <h4>Day 10 · Fly Home</h4>
+      <ul>
+        <li>Adobe Rent A Car (SJO drop-off)<span class="contact-line">📞 +506 2442 2422 &nbsp;·&nbsp; adobecar.com</span></li>
+        <li>Avianca — depart SJO 4:35pm nonstop → IAD 2:15am<span class="contact-line">📞 1-866-919-0081 &nbsp;·&nbsp; avianca.com</span></li>
+      </ul>
     </div>
   </div>
+
+</div>
 
 <div class="footer">
   Costa Rica Family Trip · June 2027 · Pura Vida 🌿
 </div>
+
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+<script>
+  let current = 0;
+  const total = 8;
+  function moveCarousel(dir) {
+    current = (current + dir + total) % total;
+    updateCarousel();
+  }
+  function goToSlide(n) {
+    current = n;
+    updateCarousel();
+  }
+  function updateCarousel() {
+    document.getElementById('carouselTrack').style.transform = 'translateX(-' + (current * 100) + '%)';
+    document.querySelectorAll('.carousel-dot').forEach((d, i) => d.classList.toggle('active', i === current));
+  }
+  setInterval(() => moveCarousel(1), 5000);
+
+  function showTab(id){
+    document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+    document.getElementById('tab-' + id).classList.add('active');
+    document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+    event.target.closest('.tab-btn').classList.add('active');
+  }
+
+  var pins = [
+    {n:1, name:'Hampton by Hilton San José Airport', cat:'hotel', note:'Night 1 — transit only', lat:9.9963, lng:-84.2065, site:'https://www.hilton.com/en/hotels/sjcaphx-hampton-san-jose-airport/'},
+    {n:2, name:'The Springs Resort & Spa', cat:'hotel', note:'Arenal · 3 nights', lat:10.4886, lng:-84.6178, img:'arenal.jpg', site:'https://www.thespringscostarica.com'},
+    {n:3, name:'La Fortuna Waterfall', cat:'nature', note:'Self-guided hike, opens 7am', lat:10.4636, lng:-84.6892, img:'waterfall.jpg', site:'https://www.cataratalafortuna.com/la-fortuna-waterfall-hike'},
+    {n:4, name:'Mistico Arenal Hanging Bridges', cat:'adventure', note:'2.5 hr guided tour', lat:10.4926, lng:-84.7469, site:'https://misticopark.com/'},
+    {n:5, name:'Arenal River Tubing', cat:'adventure', note:'Jungle float, back by noon', lat:10.4620, lng:-84.6470, img:'tubing.jpg'},
+    {n:6, name:'Tabacón Thermal Resort', cat:'adventure', note:'Evening hot springs pass', lat:10.4928, lng:-84.6795, img:'tabacon.jpg', site:'https://www.tabacon.com/'},
+    {n:7, name:'Hotel Belmar', cat:'hotel', note:'Monteverde · 2 nights', lat:10.3184, lng:-84.8114, site:'https://www.hotelbelmar.net'},
+    {n:8, name:'Santa Elena Cloud Forest Reserve', cat:'nature', note:'Sky bridges & hiking', lat:10.3350, lng:-84.8020, img:'cloudforest.jpg'},
+    {n:9, name:'100% Aventura Zip-lining', cat:'adventure', note:'Book ahead, no walk-ins', lat:10.3395, lng:-84.7930, img:'zipline.webp', site:'https://montetours.com/100-aventura-zip-lines/'},
+    {n:10, name:'Tulemar Resort', cat:'hotel', note:'Manuel Antonio · 3 nights, sloth sanctuary', lat:9.4103, lng:-84.1500, img:'sloths.webp', site:'https://www.tulemarresort.com'},
+    {n:11, name:'Manuel Antonio National Park', cat:'nature', note:'Arrive at 7am opening', lat:9.3925, lng:-84.1398, img:'beach.jpg', site:'https://serviciosenlinea.sinac.go.cr'},
+    {n:12, name:'Playa Biesanz', cat:'beach', note:'Calmest cove, best snorkeling', lat:9.3987, lng:-84.1543},
+    {n:13, name:'Playa Espadilla', cat:'beach', note:'Surf lessons here', lat:9.3945, lng:-84.1425},
+    {n:14, name:'Nauyaca Waterfall (Don Lulo)', cat:'nature', note:'4x4 shuttle from Platanillo', lat:9.2280, lng:-83.7480},
+    {n:15, name:'Quepos Marina', cat:'beach', note:'Sunset / last-night dinner', lat:9.4319, lng:-84.1651}
+  ];
+  var colors = { hotel:'#c4703a', adventure:'#4a8c5c', nature:'#7bc67e', beach:'#4a7c8a' };
+
+  var map = L.map('map', { scrollWheelZoom:false }).setView([9.9, -84.4], 8);
+  L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+    attribution:'&copy; OpenStreetMap contributors', maxZoom:17
+  }).addTo(map);
+
+  pins.forEach(function(p){
+    var icon = L.divIcon({
+      className:'',
+      html:'<div style="background:'+colors[p.cat]+';width:24px;height:24px;border-radius:50%;border:2.5px solid #fff;box-shadow:0 2px 6px rgba(0,0,0,0.3);display:flex;align-items:center;justify-content:center;color:#fff;font-family:JetBrains Mono,monospace;font-weight:600;font-size:11px;">'+p.n+'</div>',
+      iconSize:[24,24], iconAnchor:[12,12]
+    });
+    var thumbHtml = p.img ? '<img src="'+p.img+'" style="width:100%;height:90px;object-fit:cover;border-radius:6px;margin-bottom:6px;">' : '';
+    var noteHtml = p.note ? '<br><span style="color:#888;font-size:12px;">'+p.note+'</span>' : '';
+    var gmapsUrl = 'https://www.google.com/maps/dir/?api=1&destination=' + p.lat + ',' + p.lng;
+    var linkHtml = '<br><a href="'+gmapsUrl+'" target="_blank" rel="noopener" style="font-size:11px;">Open in Google Maps →</a>';
+    L.marker([p.lat, p.lng], {icon:icon}).addTo(map)
+      .bindPopup(thumbHtml + '<b>'+p.name+'</b>' + noteHtml + linkHtml, {maxWidth:220});
+  });
+
+  setTimeout(function(){ map.invalidateSize(); }, 150);
+</script>
 
 </body>
 </html>
