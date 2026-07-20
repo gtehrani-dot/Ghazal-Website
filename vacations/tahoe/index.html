@@ -205,6 +205,9 @@
   .shore-heading::after{ content:''; flex:1; height:1px; background:var(--line); }
 
   /* ── CHECKLIST ── */
+  .book-group-label{ font-family:'JetBrains Mono',monospace; font-size:11px; letter-spacing:.1em; text-transform:uppercase; color:var(--sky-deep); margin:30px 0 6px; display:flex; align-items:center; gap:10px; }
+  .book-group-label:first-child{ margin-top:0; }
+  .book-group-label::after{ content:''; flex:1; height:1px; background:var(--line); }
   .checklist{ list-style:none; }
   .checklist li{ display:flex; gap:14px; align-items:flex-start; padding:16px 0; border-bottom:1px solid var(--line); font-size:14.5px; color:var(--granite); }
   .checklist li:last-child{ border-bottom:none; }
@@ -662,6 +665,13 @@
       <strong>Heads up — two nearly identical rafting companies:</strong> "Truckee River Rafting" (175 River Rd, (530) 583-1111) and "Truckee River Raft Company" (185 River Rd, (530) 583-0123) sit right next to each other in Tahoe City. This page links to <a href="https://truckeeriverraft.com/" target="_blank" rel="noopener" class="title-lnk">truckeeriverraft.com</a> (Truckee River Raft Company) — worth double-checking that's the one you actually book, since it's an easy mix-up.
     </div>
 
+    <div class="book-group-label">Accommodations</div>
+    <ul class="checklist">
+      <li><span class="checkbox"></span><div><span class="lbl">Lodging × 1</span>Incline Village / North Shore, all 7 nights — no mid-trip move. See Hotels tab — property name/confirmation still needed.
+      </div></li>
+    </ul>
+
+    <div class="book-group-label">Transportation</div>
     <ul class="checklist">
       <li><span class="checkbox"></span><div><span class="lbl">Flights</span>DCA/IAD → RNO, arrive Wed Aug 5 / depart Wed Aug 12
         <span class="contact">Airline/confirmation not yet on file — add once booked</span>
@@ -669,8 +679,10 @@
       <li><span class="checkbox"></span><div><span class="lbl">Rental car</span>One car for the full week
         <span class="contact">Agency not yet on file — add once booked</span>
       </div></li>
-      <li><span class="checkbox"></span><div><span class="lbl">Lodging × 1</span>Incline Village / North Shore, all 7 nights — no mid-trip move. See Hotels tab — property name/confirmation still needed.
-      </div></li>
+    </ul>
+
+    <div class="book-group-label">Excursions</div>
+    <ul class="checklist">
       <li><span class="checkbox"></span><div><span class="lbl"><a href="https://truckeeriverraft.com/" target="_blank" rel="noopener" class="title-lnk">Truckee River rafting</a></span>Book the earliest Saturday Aug 8 slot
         <span class="contact">📞 <a href="tel:5305830123">(530) 583-0123</a> &nbsp;·&nbsp; <a href="https://truckeeriverraft.com/" target="_blank" rel="noopener">Book online</a></span>
       </div></li>
