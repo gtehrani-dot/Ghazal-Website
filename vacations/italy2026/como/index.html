@@ -1,0 +1,331 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Lake Como · Itinerary</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=Manrope:wght@400;500;600;700;800&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+<style>
+  :root{
+    --deep:#052e2f; --deep2:#0a4547; --teal:#0e6b64;
+    --turquoise:#1fb8a6; --aqua:#7fe3d4; --coral:#ff7a5c; --gold:#f4c05d;
+    --cream:#fbf6ea; --ink:#062527; --line:rgba(251,246,234,0.14);
+    --card:#0a4144;
+  }
+  *{box-sizing:border-box; margin:0; padding:0;}
+  body{ background:var(--deep); color:var(--cream); font-family:'Manrope',sans-serif; line-height:1.6; -webkit-font-smoothing:antialiased; }
+  h1,h2,h3,.display{ font-family:'Fraunces', serif; font-weight:600; letter-spacing:-0.01em; }
+  .mono{ font-family:'Space Mono', monospace; letter-spacing:0.06em; text-transform:uppercase; }
+  a{ color:inherit; }
+  .wrap{ max-width:1180px; margin:0 auto; padding:0 32px; }
+
+  .backlink{ display:inline-flex; align-items:center; gap:8px; font-size:13px; color:var(--aqua); text-decoration:none; padding:22px 0; }
+
+  /* banner: photo + map split, like Tahoe */
+  .banner{ display:grid; grid-template-columns:1.1fr 1fr; gap:20px; margin-bottom:10px; }
+  @media (max-width:900px){ .banner{ grid-template-columns:1fr; } }
+  .hero-photo{ position:relative; border-radius:22px; overflow:hidden; min-height:420px; border:1px solid var(--line); }
+  .hero-photo img{ position:absolute; inset:0; width:100%; height:100%; object-fit:cover; }
+  .hero-photo::after{ content:""; position:absolute; inset:0; background:linear-gradient(0deg, rgba(5,46,47,0.85), rgba(5,46,47,0) 45%); }
+  .hero-copy{ position:absolute; left:28px; right:28px; bottom:24px; z-index:2; }
+  .hero-copy .eyebrow{ color:var(--aqua); font-size:11px; margin-bottom:10px; }
+  .hero-copy h1{ font-size:clamp(32px,4vw,46px); color:var(--cream); }
+  .hero-copy p{ margin-top:8px; color:rgba(251,246,234,0.8); font-size:14.5px; max-width:40ch; }
+
+  #map{ height:420px; border-radius:22px; overflow:hidden; border:1px solid var(--line); }
+  .leaflet-popup-content-wrapper{ background:var(--cream); color:var(--ink); border-radius:12px; }
+  .leaflet-popup-content{ font-family:'Manrope',sans-serif; margin:10px 12px; font-size:13px; }
+  .leaflet-popup-content b{ font-family:'Fraunces',serif; font-size:14.5px; }
+  .leaflet-popup-tip{ background:var(--cream); }
+
+  /* tabs */
+  nav.tabs{ display:flex; gap:6px; margin:34px 0 30px; border-bottom:1px solid var(--line); overflow-x:auto; }
+  nav.tabs button{
+    background:none; border:none; color:rgba(251,246,234,0.55); font-family:'Manrope',sans-serif;
+    font-size:14px; font-weight:700; padding:12px 18px; cursor:pointer; white-space:nowrap;
+    border-bottom:2px solid transparent; transition:.2s;
+  }
+  nav.tabs button.active{ color:var(--cream); border-color:var(--coral); }
+  nav.tabs button:hover{ color:var(--cream); }
+
+  section.tabpanel{ display:none; padding-bottom:70px; }
+  section.tabpanel.active{ display:block; }
+
+  h2.section-title{ font-size:clamp(24px,2.6vw,30px); margin-bottom:6px; }
+  .section-sub{ color:rgba(251,246,234,0.6); font-size:14px; margin-bottom:26px; max-width:60ch; }
+
+  /* day cards */
+  .day{ display:grid; grid-template-columns:120px 1fr; gap:22px; padding:26px 0; border-top:1px solid var(--line); }
+  .day:first-of-type{ border-top:1px solid var(--line); }
+  .day .num{ font-family:'Space Mono',monospace; color:var(--gold); font-size:13px; padding-top:4px; }
+  .day .num span{ display:block; color:rgba(251,246,234,0.5); font-size:11px; margin-top:4px; }
+  .day h3{ font-size:20px; margin-bottom:10px; }
+  .day ul{ list-style:none; }
+  .day li{ position:relative; padding-left:20px; margin-bottom:9px; font-size:14.5px; color:rgba(251,246,234,0.85); }
+  .day li::before{ content:"—"; position:absolute; left:0; color:var(--turquoise); }
+  .day li b{ color:var(--cream); }
+  .day li a{ color:var(--aqua); text-decoration:underline; text-underline-offset:3px; }
+  .pill{
+    display:inline-block; font-family:'Space Mono',monospace; font-size:10.5px; padding:2px 8px;
+    border-radius:100px; margin-left:8px; vertical-align:middle;
+  }
+  .pill.gold{ background:rgba(244,192,93,0.18); color:var(--gold); }
+  .pill.coral{ background:rgba(255,122,92,0.18); color:var(--coral); }
+
+  /* restaurant cards */
+  .rest-grid{ display:grid; grid-template-columns:repeat(2,1fr); gap:18px; }
+  @media (max-width:760px){ .rest-grid{ grid-template-columns:1fr; } }
+  .rest-card{ background:var(--card); border:1px solid var(--line); border-radius:16px; padding:22px; }
+  .rest-card .top{ display:flex; justify-content:space-between; align-items:flex-start; gap:10px; margin-bottom:8px; }
+  .rest-card h3{ font-size:18px; }
+  .rest-card .dollar{ font-family:'Space Mono',monospace; color:var(--gold); font-size:13px; white-space:nowrap; }
+  .rest-card .meta{ font-size:12.5px; color:rgba(251,246,234,0.55); margin-bottom:12px; }
+  .rest-card .meta b{ color:var(--aqua); }
+  .rest-card p{ font-size:14px; color:rgba(251,246,234,0.8); margin-bottom:12px; }
+  .rest-card .alt{ font-size:12.5px; color:rgba(251,246,234,0.55); border-top:1px dashed var(--line); padding-top:10px; margin-top:4px; }
+  .rest-card a.link{ display:inline-block; margin-top:6px; font-size:12.5px; color:var(--aqua); text-decoration:underline; }
+  .tag-role{ font-family:'Space Mono',monospace; font-size:10px; text-transform:uppercase; color:var(--coral); letter-spacing:.06em; margin-bottom:6px; display:block; }
+
+  /* logistics + actions */
+  .logi-grid{ display:grid; grid-template-columns:repeat(2,1fr); gap:18px; margin-bottom:40px; }
+  @media (max-width:760px){ .logi-grid{ grid-template-columns:1fr; } }
+  .logi-card{ background:var(--card); border:1px solid var(--line); border-radius:16px; padding:22px; }
+  .logi-card h3{ font-size:16px; margin-bottom:10px; color:var(--aqua); }
+  .logi-card p, .logi-card li{ font-size:13.5px; color:rgba(251,246,234,0.8); }
+  .logi-card a{ color:var(--gold); text-decoration:underline; }
+
+  .actions{ list-style:none; }
+  .actions li{
+    display:flex; gap:14px; align-items:flex-start; padding:14px 0; border-top:1px solid var(--line); font-size:14.5px;
+  }
+  .actions li:first-child{ border-top:none; }
+  .checkbox{ width:18px; height:18px; border-radius:5px; border:1.5px solid var(--aqua); flex:0 0 auto; margin-top:2px; }
+  .actions .p1{ color:var(--coral); font-family:'Space Mono',monospace; font-size:10.5px; margin-left:auto; padding-left:10px; white-space:nowrap; }
+
+  footer{ padding:36px 0 60px; border-top:1px solid var(--line); color:rgba(251,246,234,0.45); font-size:12.5px; }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <a class="backlink" href="../index.html">&larr; Back to trips</a>
+
+  <div class="banner">
+    <div class="hero-photo">
+      <img src="https://images.unsplash.com/photo-1683623210055-b76c134c21bd?fm=jpg&q=80&w=1600&auto=format&fit=crop" alt="Bellagio on Lake Como">
+      <div class="hero-copy">
+        <div class="eyebrow mono">Lezzeno &amp; Bellagio · 4 days</div>
+        <h1>Lake Como</h1>
+        <p>Filario Hotel private beach, the Lovers' Walk in Varenna, a cooking class above Bellagio, and the best pasta in three towns.</p>
+      </div>
+    </div>
+    <div id="map"></div>
+  </div>
+
+  <nav class="tabs">
+    <button class="active" data-tab="itinerary">Itinerary</button>
+    <button data-tab="restaurants">Restaurants</button>
+    <button data-tab="logistics">Logistics</button>
+    <button data-tab="actions">Actions</button>
+  </nav>
+
+  <!-- ITINERARY -->
+  <section class="tabpanel active" id="itinerary">
+    <h2 class="section-title">Day by day</h2>
+    <p class="section-sub">Arrive evening of the 10th, depart morning of the 14th — 3 full days between, alternating sightseeing with real rest at the hotel's private beach.</p>
+
+    <div class="day">
+      <div class="num">ARR<span>Evening</span></div>
+      <div>
+        <h3>Settle in</h3>
+        <ul>
+          <li>Check in at <b>Filario Hotel &amp; Residences</b>, Lezzeno.</li>
+          <li>Dinner at <b>Filo</b> <span class="pill gold">$$$$</span> — the hotel's fine-dining terrace, first-night splurge.</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="day">
+      <div class="num">DAY 2<span>Bellagio</span></div>
+      <div>
+        <h3>Bellagio + rest</h3>
+        <ul>
+          <li><b>Morning:</b> beach and pool time at Filario — recover from travel.</li>
+          <li><b>Afternoon:</b> C30 bus to Bellagio (~10-15 min) — walk Salita Serbelloni, the promenade, Punta Spartivento.</li>
+          <li>Gelato at <b>Gelateria del Borgo</b>, Via Giuseppe Garibaldi 46.</li>
+          <li><b>Dinner:</b> <a href="https://trattoriabellagio.it/en/">Trattoria San Giacomo</a> <span class="pill gold">$$</span> — arrive ~7 PM, no reservations taken.</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="day">
+      <div class="num">DAY 3<span>Cooking class</span></div>
+      <div>
+        <h3>Cook with a View + Villa Melzi</h3>
+        <ul>
+          <li><b>Late morning:</b> <a href="https://www.viator.com/tours/Lake-Como/COOK-WITH-A-VIEW-VILLA-MELZI-Bellagio/d26113-254673P16">Cook with a View</a> cooking class at Il Perlo, above Bellagio — includes lunch and Villa Melzi garden tickets.</li>
+          <li><b>Afternoon:</b> Villa Melzi gardens, then back to the hotel for pool/beach.</li>
+          <li><b>Dinner:</b> <a href="https://www.filario.it/en/beach-section/yeast-beach-bar/">Yeast Side</a> <span class="pill gold">$$</span> at the hotel, 7 PM — open until 8, casual pizzas and apps on the beach.</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="day">
+      <div class="num">DAY 4<span>Varenna</span></div>
+      <div>
+        <h3>Lovers' Walk + last dinner</h3>
+        <ul>
+          <li>C30 bus to Bellagio, ferry to Varenna.</li>
+          <li><b>La Passeggiata degli Innamorati</b> (Lovers' Walk) — starts right at the Varenna ferry dock.</li>
+          <li><b>Lunch:</b> Il Cavatappi <span class="pill gold">$$$</span> — small, reserve ahead.</li>
+          <li>Gelato at Gelateria Riva, on the harbor.</li>
+          <li>Ferry + bus back to the hotel.</li>
+          <li><b>Last-night dinner:</b> <a href="https://osteriailgoverno.com/en/">Osteria Il Governo 1801</a> <span class="pill gold">$$-$$$</span> in Lezzeno — no travel needed, best-rated meal of the trip.</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="day">
+      <div class="num">DEP<span>14th</span></div>
+      <div>
+        <h3>Departure</h3>
+        <ul>
+          <li>Flight is <b>3:20 PM out of MXP</b>. Depart the hotel by <b>11:00-11:30 AM</b> — drive is 65-90 min plus airport buffer.</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- RESTAURANTS -->
+  <section class="tabpanel" id="restaurants">
+    <h2 class="section-title">Restaurants</h2>
+    <p class="section-sub">Google ratings where confirmed; alternates included for every reserved spot in case a table falls through.</p>
+
+    <div class="rest-grid">
+      <div class="rest-card">
+        <span class="tag-role">Arrival night · Fine dining</span>
+        <div class="top"><h3>Filo</h3><span class="dollar">$$$$</span></div>
+        <div class="meta"><b>4.7★ Google</b> (312 reviews) · Filario Hotel, Lezzeno</div>
+        <p>Lake-view terrace, tasting menus historically ~€80-120/person + wine pairing, à la carte less.</p>
+        <a class="link" href="https://www.filario.it/en/food-section/filo-restaurant/">Restaurant page →</a>
+      </div>
+
+      <div class="rest-card">
+        <span class="tag-role">Day 2 dinner · Bellagio</span>
+        <div class="top"><h3>Trattoria San Giacomo</h3><span class="dollar">$$</span></div>
+        <div class="meta"><b>4.4★ Google</b> (667 reviews) · Salita Serbelloni 45</div>
+        <p>No reservations — arrive at opening or expect a wait. Ravioli and fettuccine ragù are the standouts.</p>
+        <div class="alt"><b>Alt:</b> La Punta / Bar Il Molo — peninsula-tip lake view.</div>
+      </div>
+
+      <div class="rest-card">
+        <span class="tag-role">Day 3 dinner · Hotel</span>
+        <div class="top"><h3>Yeast Side</h3><span class="dollar">$$</span></div>
+        <div class="meta">Filario beach bar · open 12-8 PM daily, May–Sept</div>
+        <p>Casual pizzas and apps on the beach. 7 PM works fine since it closes at 8.</p>
+        <a class="link" href="https://www.filario.it/app/uploads/2026/05/YEAST2026-ALL-REV-1805-Ultima.pdf">Menu (PDF) →</a>
+      </div>
+
+      <div class="rest-card">
+        <span class="tag-role">Day 4 lunch · Varenna</span>
+        <div class="top"><h3>Il Cavatappi</h3><span class="dollar">$$$</span></div>
+        <div class="meta"><b>4.6★ Tripadvisor</b> (1,000+ reviews) · alley near the main square</div>
+        <p>Tiny, romantic, excellent homemade pasta. Reserve ahead by phone or WhatsApp.</p>
+        <div class="alt"><b>Alt:</b> Al Prato — waterfront terrace, pumpkin ravioli.</div>
+      </div>
+
+      <div class="rest-card">
+        <span class="tag-role">Last-night dinner · Lezzeno</span>
+        <div class="top"><h3>Osteria Il Governo 1801</h3><span class="dollar">$$-$$$</span></div>
+        <div class="meta"><b>4.8★ Google</b> · highest-rated of the trip</div>
+        <p>Lakeside garden, 7th-generation family osteria. Pistachio pasta is the dish everyone mentions.</p>
+        <a class="link" href="https://osteriailgoverno.com/en/">Restaurant page →</a>
+        <div class="alt"><b>Alt:</b> Ristorante Aurora — 4.6★ Google, also in Lezzeno, zero travel.</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- LOGISTICS -->
+  <section class="tabpanel" id="logistics">
+    <h2 class="section-title">Getting around</h2>
+    <p class="section-sub">Lezzeno's own ferry stop only gets a handful of boats a day — the C30 bus is the real workhorse.</p>
+
+    <div class="logi-grid">
+      <div class="logi-card">
+        <h3>C30 Bus — Lezzeno ↔ Bellagio</h3>
+        <p>~10-15 minutes, far more frequent than the Lezzeno ferry stop. Confirm current schedule with the front desk at check-in.</p>
+      </div>
+      <div class="logi-card">
+        <h3>Ferry timetables (current)</h3>
+        <p>Valid July 1 – Oct 4, 2026.<br>
+        <a href="https://www.navigazionelaghi.it/en/tickets-and-timetables-lake-como/">Main timetable page →</a><br>
+        <a href="https://www.navigazionelaghi.it/wp-content/uploads/2026/06/Orari_WebVerticali-E26_TR_fer.pdf">Bellagio–Varenna–Menaggio, weekdays (PDF) →</a><br>
+        <a href="https://www.navigazionelaghi.it/wp-content/uploads/2026/06/Orari_WebVerticali-E26_TR_fest.pdf">Sun / holidays (PDF) →</a></p>
+      </div>
+      <div class="logi-card">
+        <h3>Departure transfer — Lezzeno → MXP</h3>
+        <p>Drive is 65-90 min. Water taxi won't save time (MXP is on the far side of Milan from the lake) — book a private car instead. <a href="https://www.taxilezzeno.com/transfer-to-hotel-filario/">Taxi Lezzeno</a> explicitly serves Filario, fixed price, ballpark ~€180-230.</p>
+      </div>
+      <div class="logi-card">
+        <h3>Hotel</h3>
+        <p><a href="https://www.filario.it/en/">Filario Hotel &amp; Residences</a> — private beach, infinity pool, water-taxi service on request.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ACTIONS -->
+  <section class="tabpanel" id="actions">
+    <h2 class="section-title">Concierge action list</h2>
+    <p class="section-sub">Everything to raise at check-in — also tracked as the "Lake Como Trip - Actions" project in Todoist.</p>
+    <ul class="actions">
+      <li><div class="checkbox"></div>Book "Cook with a View" cooking class at Il Perlo<span class="p1">P1</span></li>
+      <li><div class="checkbox"></div>Reserve Filo for arrival-night dinner<span class="p1">P1</span></li>
+      <li><div class="checkbox"></div>Current C30 bus schedule (Lezzeno ↔ Bellagio)<span class="p1">P2</span></li>
+      <li><div class="checkbox"></div>Private car to MXP for departure day (3:20 PM flight)<span class="p1">P2</span></li>
+      <li><div class="checkbox"></div>Reserve Osteria Il Governo 1801 for last-night dinner<span class="p1">P2</span></li>
+      <li><div class="checkbox"></div>Reserve Il Cavatappi in Varenna for lunch<span class="p1">P2</span></li>
+      <li><div class="checkbox"></div>Water taxi details — cost, timing, worth it for any day?<span class="p1">P3</span></li>
+      <li><div class="checkbox"></div>Trattoria San Giacomo reservation policy<span class="p1">P3</span></li>
+      <li><div class="checkbox"></div>Current Bellagio–Varenna ferry times<span class="p1">P3</span></li>
+    </ul>
+  </section>
+
+  <footer>Lake Como · 2026</footer>
+</div>
+
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+<script>
+  const map = L.map('map', { scrollWheelZoom:false }).setView([45.975, 9.28], 12);
+  L.tileLayer('https://{s}.basemaps.cartocdn.com/dark_nolabels/{z}/{x}/{y}{r}.png', {
+    attribution:'&copy; OpenStreetMap &copy; CARTO', subdomains:'abcd', maxZoom:19
+  }).addTo(map);
+
+  function pin(color){
+    return L.divIcon({ className:'', html:`<div style="width:20px;height:20px;border-radius:50% 50% 50% 0;background:${color};transform:rotate(-45deg);box-shadow:0 4px 10px rgba(0,0,0,.4);border:2px solid rgba(251,246,234,0.9);"></div>`, iconSize:[20,20], iconAnchor:[10,20] });
+  }
+
+  const pts = [
+    { ll:[45.951, 9.282], c:'#7fe3d4', label:'<b>Filario Hotel</b><br>Lezzeno — home base' },
+    { ll:[45.9860, 9.2571], c:'#f4c05d', label:'<b>Bellagio</b><br>Salita Serbelloni, Punta Spartivento' },
+    { ll:[45.978, 9.263], c:'#ff7a5c', label:'<b>Il Perlo</b><br>Cooking class + Villa Melzi' },
+    { ll:[46.0142, 9.2830], c:'#f4c05d', label:'<b>Varenna</b><br>Lovers\' Walk, Il Cavatappi' },
+    { ll:[45.945, 9.278], c:'#7fe3d4', label:'<b>Osteria Il Governo 1801</b><br>Last-night dinner' }
+  ];
+  const markers = pts.map(p => L.marker(p.ll, { icon: pin(p.c) }).addTo(map).bindPopup(p.label));
+  const group = new L.featureGroup(markers);
+  map.fitBounds(group.getBounds().pad(0.35));
+</script>
+
+<script>
+  document.querySelectorAll('nav.tabs button').forEach(btn=>{
+    btn.addEventListener('click', ()=>{
+      document.querySelectorAll('nav.tabs button').forEach(b=>b.classList.remove('active'));
+      document.querySelectorAll('.tabpanel').forEach(p=>p.classList.remove('active'));
+      btn.classList.add('active');
+      document.getElementById(btn.dataset.tab).classList.add('active');
+    });
+  });
+</script>
+</body>
+</html>

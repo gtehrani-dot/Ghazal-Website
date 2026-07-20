@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sardinia · Itinerary</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=Manrope:wght@400;500;600;700;800&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+<style>
+  :root{
+    --deep:#052e2f; --deep2:#0a4547; --teal:#0e6b64;
+    --turquoise:#1fb8a6; --aqua:#7fe3d4; --coral:#ff7a5c; --gold:#f4c05d;
+    --cream:#fbf6ea; --ink:#062527; --line:rgba(251,246,234,0.14);
+    --card:#0a4144;
+  }
+  *{box-sizing:border-box; margin:0; padding:0;}
+  body{ background:var(--deep); color:var(--cream); font-family:'Manrope',sans-serif; line-height:1.6; -webkit-font-smoothing:antialiased; }
+  h1,h2,h3,.display{ font-family:'Fraunces', serif; font-weight:600; letter-spacing:-0.01em; }
+  .mono{ font-family:'Space Mono', monospace; letter-spacing:0.06em; text-transform:uppercase; }
+  a{ color:inherit; }
+  .wrap{ max-width:1180px; margin:0 auto; padding:0 32px; }
+  .backlink{ display:inline-flex; align-items:center; gap:8px; font-size:13px; color:var(--aqua); text-decoration:none; padding:22px 0; }
+
+  .banner{ display:grid; grid-template-columns:1.1fr 1fr; gap:20px; margin-bottom:10px; }
+  @media (max-width:900px){ .banner{ grid-template-columns:1fr; } }
+  .hero-photo{ position:relative; border-radius:22px; overflow:hidden; min-height:420px; border:1px solid var(--line); }
+  .hero-photo img{ position:absolute; inset:0; width:100%; height:100%; object-fit:cover; }
+  .hero-photo::after{ content:""; position:absolute; inset:0; background:linear-gradient(0deg, rgba(5,46,47,0.85), rgba(5,46,47,0) 45%); }
+  .hero-copy{ position:absolute; left:28px; right:28px; bottom:24px; z-index:2; }
+  .hero-copy .eyebrow{ color:var(--gold); font-size:11px; margin-bottom:10px; }
+  .hero-copy h1{ font-size:clamp(32px,4vw,46px); color:var(--cream); }
+  .hero-copy p{ margin-top:8px; color:rgba(251,246,234,0.8); font-size:14.5px; max-width:42ch; }
+
+  #map{ height:420px; border-radius:22px; overflow:hidden; border:1px solid var(--line); }
+  .leaflet-popup-content-wrapper{ background:var(--cream); color:var(--ink); border-radius:12px; }
+  .leaflet-popup-content{ font-family:'Manrope',sans-serif; margin:10px 12px; font-size:13px; }
+  .leaflet-popup-content b{ font-family:'Fraunces',serif; font-size:14.5px; }
+
+  .notice{
+    margin:34px 0; padding:20px 24px; border-radius:16px;
+    background:rgba(244,192,93,0.10); border:1px solid rgba(244,192,93,0.3);
+    font-size:14px; color:rgba(251,246,234,0.9);
+  }
+  .notice b{ color:var(--gold); }
+
+  h2.section-title{ font-size:clamp(24px,2.6vw,30px); margin:36px 0 6px; }
+  .section-sub{ color:rgba(251,246,234,0.6); font-size:14px; margin-bottom:26px; max-width:60ch; }
+
+  .info-grid{ display:grid; grid-template-columns:repeat(2,1fr); gap:18px; margin-bottom:40px; }
+  @media (max-width:760px){ .info-grid{ grid-template-columns:1fr; } }
+  .info-card{ background:var(--card); border:1px solid var(--line); border-radius:16px; padding:22px; }
+  .info-card h3{ font-size:16px; margin-bottom:10px; color:var(--aqua); }
+  .info-card p{ font-size:13.5px; color:rgba(251,246,234,0.8); }
+
+  .hotel-grid{ display:grid; grid-template-columns:repeat(2,1fr); gap:18px; margin-bottom:40px; }
+  @media (max-width:760px){ .hotel-grid{ grid-template-columns:1fr; } }
+  .hotel-card{ background:var(--card); border:1px solid var(--line); border-radius:16px; padding:22px; }
+  .hotel-card h3{ font-size:18px; margin-bottom:6px; }
+  .hotel-card .loc{ font-family:'Space Mono',monospace; font-size:11px; color:var(--gold); margin-bottom:10px; display:block; }
+  .hotel-card p{ font-size:14px; color:rgba(251,246,234,0.8); }
+
+  footer{ padding:36px 0 60px; border-top:1px solid var(--line); color:rgba(251,246,234,0.45); font-size:12.5px; }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <a class="backlink" href="../index.html">&larr; Back to trips</a>
+
+  <div class="banner">
+    <div class="hero-photo">
+      <img src="https://images.unsplash.com/photo-1780914436298-a39fd1b6da60?fm=jpg&q=80&w=1600&auto=format&fit=crop" alt="Turquoise water on the Sardinian coast">
+      <div class="hero-copy">
+        <div class="eyebrow mono">Costa Smeralda · Late summer 2026</div>
+        <h1>Sardinia</h1>
+        <p>Granite coves, La Maddalena's turquoise water, and a nonstop home from Rome.</p>
+      </div>
+    </div>
+    <div id="map"></div>
+  </div>
+
+  <div class="notice">
+    <b>Work in progress —</b> the full day-by-day isn't built yet. This page has what's been settled so far: routing, flight logistics, and the two hotel front-runners. Say the word and I'll flesh out a complete itinerary here the same way the Como page is built.
+  </div>
+
+  <h2 class="section-title">What's settled</h2>
+  <p class="section-sub">Routing and flight logistics from prior research.</p>
+  <div class="info-grid">
+    <div class="info-card">
+      <h3>Routing</h3>
+      <p>Multi-city (open-jaw): IAD → Milan → Sardinia → home via Rome. This avoids backtracking to Milan and saves a flight segment compared to a round-trip-from-Milan structure.</p>
+    </div>
+    <div class="info-card">
+      <h3>Getting there</h3>
+      <p>Milan → Olbia is a short domestic hop (~1h20-1h45, easyJet/Neos/Wizz Air) — no passport control since Sardinia is part of Italy.</p>
+    </div>
+    <div class="info-card">
+      <h3>Getting home</h3>
+      <p>Olbia/Cagliari → Rome Fiumicino → home. ITA Airways flies FCO–IAD as a genuine nonstop (~9 hrs), so it's one clean connection instead of two.</p>
+    </div>
+    <div class="info-card">
+      <h3>Return flight noted</h3>
+      <p>Return leg discussed: OLB → LHR → BWI on British Airways, mid-August. Worth confirming this is still the booked routing given the ITA/Rome option above may be simpler.</p>
+    </div>
+  </div>
+
+  <h2 class="section-title">Hotel front-runners</h2>
+  <p class="section-sub">Two boutique options researched so far, both with direct water access.</p>
+  <div class="hotel-grid">
+    <div class="hotel-card">
+      <h3>Capo d'Orso Hotel Thalasso &amp; SPA</h3>
+      <span class="loc">Palau, Sardinia</span>
+      <p>Private cove with direct kayak access from the villas — dramatic granite coastline setting near the La Maddalena archipelago.</p>
+    </div>
+    <div class="hotel-card">
+      <h3>Is Morus Relais</h3>
+      <span class="loc">Santa Margherita di Pula, Sardinia</span>
+      <p>Boutique beachfront property with kayak rentals right from shore — quieter, less glossy than Costa Smeralda proper.</p>
+    </div>
+  </div>
+
+  <footer>Sardinia · 2026 · itinerary in progress</footer>
+</div>
+
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+<script>
+  const map = L.map('map', { scrollWheelZoom:false }).setView([41.15, 9.45], 9);
+  L.tileLayer('https://{s}.basemaps.cartocdn.com/dark_nolabels/{z}/{x}/{y}{r}.png', {
+    attribution:'&copy; OpenStreetMap &copy; CARTO', subdomains:'abcd', maxZoom:19
+  }).addTo(map);
+
+  function pin(color){
+    return L.divIcon({ className:'', html:`<div style="width:20px;height:20px;border-radius:50% 50% 50% 0;background:${color};transform:rotate(-45deg);box-shadow:0 4px 10px rgba(0,0,0,.4);border:2px solid rgba(251,246,234,0.9);"></div>`, iconSize:[20,20], iconAnchor:[10,20] });
+  }
+
+  const pts = [
+    { ll:[41.013, 9.500], c:'#f4c05d', label:'<b>Olbia</b><br>Airport / gateway' },
+    { ll:[41.174, 9.507], c:'#7fe3d4', label:'<b>Palau</b><br>Capo d\'Orso Hotel Thalasso &amp; SPA' },
+    { ll:[41.213, 9.406], c:'#ff7a5c', label:'<b>La Maddalena archipelago</b><br>Turquoise coves' },
+    { ll:[38.988, 8.984], c:'#7fe3d4', label:'<b>Santa Margherita di Pula</b><br>Is Morus Relais' }
+  ];
+  const markers = pts.map(p => L.marker(p.ll, { icon: pin(p.c) }).addTo(map).bindPopup(p.label));
+  const group = new L.featureGroup(markers);
+  map.fitBounds(group.getBounds().pad(0.4));
+</script>
+</body>
+</html>
