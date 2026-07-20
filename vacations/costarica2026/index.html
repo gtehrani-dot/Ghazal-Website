@@ -177,6 +177,9 @@
   .cost-total-amount { font-family: 'Cormorant Garamond', serif; font-size: 36px; font-weight: 300; color: var(--lime); }
 
   .booking-list { display: grid; gap: 12px; }
+  .book-group-label { font-family:'JetBrains Mono',monospace; font-size: 11px; letter-spacing: .1em; text-transform: uppercase; color: var(--jungle); margin: 30px 0 6px; display: flex; align-items: center; gap: 10px; }
+  .book-group-label:first-child { margin-top: 0; }
+  .book-group-label::after { content: ''; flex: 1; height: 1px; background: var(--mist); }
   .booking-item { background: white; border: 1px solid var(--mist); border-radius: 10px; padding: 18px 22px; display: grid; grid-template-columns: 28px 1fr auto; align-items: center; gap: 14px; transition: box-shadow 0.2s; }
   .booking-item:hover { box-shadow: 0 4px 16px rgba(26,58,42,0.08); }
   .booking-num { width: 28px; height: 28px; background: var(--jungle); color: white; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 12px; font-weight: 500; flex-shrink: 0; }
@@ -853,90 +856,11 @@
       <strong>Rental car:</strong> Book directly with Adobe — NOT through a third-party site. Representatives meet you at the SJO airport exit with a sign. Full-size 4WD SUV is essential for the Monteverde road.
     </div>
 
+    <div class="book-group-label">Accommodations</div>
     <div class="booking-list">
 
       <div class="booking-item">
         <div class="booking-num">1</div>
-        <div class="booking-info">
-          <h4>Manuel Antonio National Park</h4>
-          <div class="when urgent">⚡ Online booking window opens 90 days before your visit date — reserve your entry time slot the moment it opens</div>
-          <div class="contact-phone">📞 SINAC: <a href="tel:+50627775185">+506 2777 5185</a></div>
-        </div>
-        <div class="booking-link"><a href="https://serviciosenlinea.sinac.go.cr" target="_blank" rel="noopener">Book Now</a></div>
-      </div>
-
-      <div class="booking-item">
-        <div class="booking-num">2</div>
-        <div class="booking-info">
-          <h4>100% Aventura Zip-lining</h4>
-          <div class="when urgent">⚡ Sells out fast in peak season — book as early as possible</div>
-          <div class="contact-phone missing">📞 No published phone number found — book online</div>
-        </div>
-        <div class="booking-link"><a href="https://montetours.com/100-aventura-zip-lines/" target="_blank" rel="noopener">Book Now</a></div>
-      </div>
-
-      <div class="booking-item">
-        <div class="booking-num">3</div>
-        <div class="booking-info">
-          <h4>Tabacón Hot Springs Day Pass</h4>
-          <div class="when urgent">⚡ At least 1 week before your visit</div>
-          <div class="contact-phone">📞 <a href="tel:+50625191999">+506 2519 1999</a></div>
-        </div>
-        <div class="booking-link"><a href="https://www.tabacon.com/product-category/one-day-pass/" target="_blank" rel="noopener">Book Now</a></div>
-      </div>
-
-      <div class="booking-item">
-        <div class="booking-num">4</div>
-        <div class="booking-info">
-          <h4>Mistico Hanging Bridges</h4>
-          <div class="when">Advance booking strongly recommended</div>
-          <div class="contact-phone">📞 <a href="tel:+50624798282">+506 2479 8282</a></div>
-        </div>
-        <div class="booking-link"><a href="https://www.getyourguide.com/mistico-arenal-hanging-bridges-park-l87313/hanging-bridges-walk-in-arenal-volcano-t411384/" target="_blank" rel="noopener">Book Now</a></div>
-      </div>
-
-      <div class="booking-item">
-        <div class="booking-num">5</div>
-        <div class="booking-info">
-          <h4>Nauyaca Waterfall Shuttle (Don Lulo)</h4>
-          <div class="when urgent">⚡ Book in advance — start as early as possible to beat crowds</div>
-          <div class="contact-phone">📞 <a href="tel:+50627870541">+506 2787 0541</a> · <a href="tel:+50662801790">+506 6280 1790</a></div>
-        </div>
-        <div class="booking-link"><a href="https://www.walkmyworld.com/posts/nauyaca-waterfall" target="_blank" rel="noopener">Full Guide</a></div>
-      </div>
-
-      <div class="booking-item">
-        <div class="booking-num">6</div>
-        <div class="booking-info">
-          <h4>Surf Lessons — Glen Castro</h4>
-          <div class="when">Alternate to Nauyaca on Day 9 — arrange ahead if you want it locked in</div>
-          <div class="contact-phone missing">📞 No published phone number found — book via GetYourGuide/Viator, or find his tent on Playa Espadilla Norte</div>
-        </div>
-        <div class="booking-link"><a href="https://www.getyourguide.com/manuel-antonio-l142888/manuel-antonio-surf-lessons-t669034/" target="_blank" rel="noopener">Book Now</a></div>
-      </div>
-
-      <div class="booking-item">
-        <div class="booking-num">7</div>
-        <div class="booking-info">
-          <h4>Adobe Rental Car — 4WD SUV</h4>
-          <div class="when urgent">⚡ Book now — directly, NOT third-party</div>
-          <div class="contact-phone">📞 CR: <a href="tel:+50624422422">+506 2442 2422</a> · US toll-free: <a href="tel:18558611250">1-855-861-1250</a></div>
-        </div>
-        <div class="booking-link"><a href="https://www.adobecar.com" target="_blank" rel="noopener">Book Now</a></div>
-      </div>
-
-      <div class="booking-item">
-        <div class="booking-num">8</div>
-        <div class="booking-info">
-          <h4>Flights — Avianca</h4>
-          <div class="when">IAD ⇄ SJO, book once dates are confirmed</div>
-          <div class="contact-phone">📞 <a href="tel:18669190081">1-866-919-0081</a></div>
-        </div>
-        <div class="booking-link"><a href="https://www.avianca.com" target="_blank" rel="noopener">Book Now</a></div>
-      </div>
-
-      <div class="booking-item">
-        <div class="booking-num">9</div>
         <div class="booking-info">
           <h4>Hampton by Hilton SJO Airport</h4>
           <div class="when">Book now</div>
@@ -946,7 +870,7 @@
       </div>
 
       <div class="booking-item">
-        <div class="booking-num">10</div>
+        <div class="booking-num">2</div>
         <div class="booking-info">
           <h4>The Springs Resort &amp; Spa — Arenal</h4>
           <div class="when urgent">⚡ Book now — limited rooms at peak pricing</div>
@@ -956,7 +880,7 @@
       </div>
 
       <div class="booking-item">
-        <div class="booking-num">11</div>
+        <div class="booking-num">3</div>
         <div class="booking-info">
           <h4>Hotel Belmar — Monteverde</h4>
           <div class="when">Book now for availability</div>
@@ -966,7 +890,7 @@
       </div>
 
       <div class="booking-item">
-        <div class="booking-num">12</div>
+        <div class="booking-num">4</div>
         <div class="booking-info">
           <h4>Tulemar Resort — Manuel Antonio</h4>
           <div class="when">Book now for availability</div>
@@ -981,6 +905,96 @@
           <h4 style="color:#6a4e1a;">Tulemar Booking Tip</h4>
           <div class="when">Check both <a href="https://www.tulemar.com" target="_blank" rel="noopener" style="color:var(--jungle);">tulemar.com</a> and <a href="https://www.tulemarresort.com" target="_blank" rel="noopener" style="color:var(--jungle);">tulemarresort.com</a> — both list desirable villas and bungalows. Also check <strong>VRBO</strong> and <strong>Airbnb</strong> for individual unit listings which may offer better rates or availability.</div>
         </div>
+      </div>
+
+    </div>
+
+    <div class="book-group-label">Transportation</div>
+    <div class="booking-list">
+
+      <div class="booking-item">
+        <div class="booking-num">5</div>
+        <div class="booking-info">
+          <h4>Flights — Avianca</h4>
+          <div class="when">IAD ⇄ SJO, book once dates are confirmed</div>
+          <div class="contact-phone">📞 <a href="tel:18669190081">1-866-919-0081</a></div>
+        </div>
+        <div class="booking-link"><a href="https://www.avianca.com" target="_blank" rel="noopener">Book Now</a></div>
+      </div>
+
+      <div class="booking-item">
+        <div class="booking-num">6</div>
+        <div class="booking-info">
+          <h4>Adobe Rental Car — 4WD SUV</h4>
+          <div class="when urgent">⚡ Book now — directly, NOT third-party</div>
+          <div class="contact-phone">📞 CR: <a href="tel:+50624422422">+506 2442 2422</a> · US toll-free: <a href="tel:18558611250">1-855-861-1250</a></div>
+        </div>
+        <div class="booking-link"><a href="https://www.adobecar.com" target="_blank" rel="noopener">Book Now</a></div>
+      </div>
+
+    </div>
+
+    <div class="book-group-label">Excursions</div>
+    <div class="booking-list">
+
+      <div class="booking-item">
+        <div class="booking-num">7</div>
+        <div class="booking-info">
+          <h4>Manuel Antonio National Park</h4>
+          <div class="when urgent">⚡ Online booking window opens 90 days before your visit date — reserve your entry time slot the moment it opens</div>
+          <div class="contact-phone">📞 SINAC: <a href="tel:+50627775185">+506 2777 5185</a></div>
+        </div>
+        <div class="booking-link"><a href="https://serviciosenlinea.sinac.go.cr" target="_blank" rel="noopener">Book Now</a></div>
+      </div>
+
+      <div class="booking-item">
+        <div class="booking-num">8</div>
+        <div class="booking-info">
+          <h4>100% Aventura Zip-lining</h4>
+          <div class="when urgent">⚡ Sells out fast in peak season — book as early as possible</div>
+          <div class="contact-phone missing">📞 No published phone number found — book online</div>
+        </div>
+        <div class="booking-link"><a href="https://montetours.com/100-aventura-zip-lines/" target="_blank" rel="noopener">Book Now</a></div>
+      </div>
+
+      <div class="booking-item">
+        <div class="booking-num">9</div>
+        <div class="booking-info">
+          <h4>Tabacón Hot Springs Day Pass</h4>
+          <div class="when urgent">⚡ At least 1 week before your visit</div>
+          <div class="contact-phone">📞 <a href="tel:+50625191999">+506 2519 1999</a></div>
+        </div>
+        <div class="booking-link"><a href="https://www.tabacon.com/product-category/one-day-pass/" target="_blank" rel="noopener">Book Now</a></div>
+      </div>
+
+      <div class="booking-item">
+        <div class="booking-num">10</div>
+        <div class="booking-info">
+          <h4>Mistico Hanging Bridges</h4>
+          <div class="when">Advance booking strongly recommended</div>
+          <div class="contact-phone">📞 <a href="tel:+50624798282">+506 2479 8282</a></div>
+        </div>
+        <div class="booking-link"><a href="https://www.getyourguide.com/mistico-arenal-hanging-bridges-park-l87313/hanging-bridges-walk-in-arenal-volcano-t411384/" target="_blank" rel="noopener">Book Now</a></div>
+      </div>
+
+      <div class="booking-item">
+        <div class="booking-num">11</div>
+        <div class="booking-info">
+          <h4>Nauyaca Waterfall Shuttle (Don Lulo)</h4>
+          <div class="when urgent">⚡ Book in advance — start as early as possible to beat crowds</div>
+          <div class="contact-phone">📞 <a href="tel:+50627870541">+506 2787 0541</a> · <a href="tel:+50662801790">+506 6280 1790</a></div>
+        </div>
+        <div class="booking-link"><a href="https://www.walkmyworld.com/posts/nauyaca-waterfall" target="_blank" rel="noopener">Full Guide</a></div>
+      </div>
+
+      <div class="booking-item">
+        <div class="booking-num">12</div>
+        <div class="booking-info">
+          <h4>Surf Lessons — Glen Castro</h4>
+          <div class="when">Alternate to Nauyaca on Day 9 — arrange ahead if you want it locked in</div>
+          <div class="contact-phone missing">📞 No published phone number found — book via GetYourGuide/Viator, or find his tent on Playa Espadilla Norte</div>
+        </div>
+        <div class="booking-link"><a href="https://www.getyourguide.com/manuel-antonio-l142888/manuel-antonio-surf-lessons-t669034/" target="_blank" rel="noopener">Book Now</a></div>
       </div>
 
     </div>
