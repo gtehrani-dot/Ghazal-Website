@@ -110,6 +110,9 @@
   .tl-items li.alt{ font-style:italic; opacity:0.8; }
   .tl-items li.meal{ background:rgba(244,192,93,0.12); border-radius:6px; padding:8px 12px; margin:6px 0; }
   .tl-items li.meal::before{ content:''; }
+  .tl-subhead{ font-family:'Space Mono',monospace; font-size:11px; letter-spacing:0.08em; text-transform:uppercase; color:var(--aqua); opacity:0.8; margin:14px 0 8px; padding-top:12px; border-top:1px dashed var(--line); }
+  .tl-subhead:first-of-type{ margin-top:0; padding-top:0; border-top:none; }
+  .rating-badge{ display:inline-block; font-family:'Space Mono',monospace; font-size:11px; color:var(--gold); background:rgba(244,192,93,0.14); padding:2px 8px; border-radius:100px; margin-left:6px; }
   .day-weather{ display:flex; align-items:center; gap:10px; flex-wrap:wrap; font-family:'Space Mono',monospace; font-size:11.5px; color:var(--aqua); background:rgba(127,227,212,0.08); border:1px solid var(--line); border-radius:8px; padding:8px 12px; margin:8px 0 14px; }
   .day-weather b{ color:var(--gold); }
   .day-weather .wx-note{ color:rgba(251,246,234,0.55); font-style:italic; }
@@ -266,7 +269,7 @@
           <span>📍 Strada Prov Lariana 583 n 89, 22025 Lezzeno (CO), Italy</span>
           <span>📞 <a href="tel:+390319914035">+39 031 914035</a></span>
         </div>
-        <div class="hotel-note">✅ Booked — Two-Bedroom Residence in the annex (75sqm, lake-view terrace, private beach and infinity pool on site, water-taxi service on request). Booked via Design Hotels (reservations@filario.it), 3 guests, 1 room. Confirmation number is in the Print/Offline Copy tab. Cancel or modify 21+ days before arrival to avoid a full-stay penalty.</div>
+        <div class="hotel-note">✅ Booked — Two-Bedroom Residence in the annex (75sqm, lake-view terrace, private beach and infinity pool on site, water-taxi service on request). Breakfast included every morning. Booked via Design Hotels (reservations@filario.it), 3 guests, 1 room. Confirmation number is in the Print/Offline Copy tab. Cancel or modify 21+ days before arrival to avoid a full-stay penalty.</div>
       </div>
     </div>
   </div>
@@ -289,6 +292,7 @@
           <div class="tl-title">Settle in at Filario</div>
           <span class="tl-base">✈️🚂⛴ Arrive LIN → shuttle bus + train + ferry — chosen for the scenic approach</span>
           <div class="day-weather">🌤️ <b>Weather</b> · Temp: 22–29°C (72–84°F) · Precip: low, ~20% chance of a PM storm · Wind: light 5–10 km/h lake breeze <span class="wx-note">(typical for August — trip is beyond the live forecast window)</span></div>
+          <div class="tl-subhead">🚏 Getting there</div>
           <ul class="tl-items">
             <li><strong>Arrival flight not yet booked — routing decided:</strong> fly into <strong>Milan Linate (LIN)</strong>, chosen for the scenic train approach into Varenna over the Malpensa/Como-town alternative.</li>
             <li><strong>Leg 1:</strong> shared shuttle bus from LIN to Milano Centrale (Linate Shuttle/Air Pullman or Starfly/Airport Bus Express), ~25 min, ~€5–8pp, departures roughly every 20–30 min.</li>
@@ -296,8 +300,11 @@
             <li><strong>Leg 3:</strong> Varenna–Bellagio ferry, ~15 min, ~€4.60pp (Navigazione Laghi).</li>
             <li><strong>Leg 4:</strong> C130 bus from Bellagio to the <strong>Pescaù–Bivio Bagnana</strong> stop — confirmed by the hotel as the stop closest to Filario (not the Lezzeno–Piazza Roma stop), ~15–25 min depending on which Bellagio stop you board at.</li>
             <li>Total door-to-door: roughly 2.5–3 hrs and ~€17–20pp, door-to-door pricing depending on shuttle bus fare — plus whatever the LIN flight itself costs.</li>
-            <li>Check in at <strong>Filario Hotel &amp; Residences</strong>, Lezzeno.</li>
-            <li class="meal">🍽 <strong>Can't-miss dinner:</strong> <a href="https://www.filario.it/en/food-section/filo-restaurant/" target="_blank" rel="noopener" class="title-lnk">Filo</a> — the hotel's fine-dining terrace, first-night splurge (4.7★, 312 reviews).</li>
+          </ul>
+          <div class="tl-subhead">🏡 Check-in &amp; dinner</div>
+          <ul class="tl-items">
+            <li>Check in at <strong>Filario Hotel &amp; Residences</strong>, Lezzeno. Breakfast is included for all 4 mornings.</li>
+            <li class="meal">🍽 <strong>Can't-miss dinner:</strong> <a href="https://www.filario.it/en/food-section/filo-restaurant/" target="_blank" rel="noopener" class="title-lnk">Filo</a> — the hotel's fine-dining terrace, first-night splurge <span class="rating-badge">4.7, $$$</span>.</li>
           </ul>
         </div>
       </div>
@@ -314,7 +321,7 @@
             <li><strong>Morning:</strong> beach and pool time at Filario — recover from travel.</li>
             <li><strong>Afternoon:</strong> C130 bus from <strong>Pescaù–Bivio Bagnana</strong> (stop nearest Filario, per the hotel) to Bellagio. Good departures for an early-to-mid afternoon start: <strong>1:41pm, 2:06pm, or 2:41pm</strong> (Aug 3–30 reduced-summer timetable) — walk Salita Serbelloni, the promenade, Punta Spartivento.</li>
             <li>Gelato at <strong>Gelateria del Borgo</strong>, Via Giuseppe Garibaldi 46.</li>
-            <li class="meal">🍽 <strong>Can't-miss dinner:</strong> <a href="https://trattoriabellagio.it/en/" target="_blank" rel="noopener" class="title-lnk">Trattoria San Giacomo</a> — aim to arrive ~7pm; no reservations taken.</li>
+            <li class="meal">🍽 <strong>Can't-miss dinner:</strong> <a href="https://trattoriabellagio.it/en/" target="_blank" rel="noopener" class="title-lnk">Trattoria San Giacomo</a> <span class="rating-badge">4.4, $</span> — aim to arrive ~7pm; no reservations taken.</li>
             <li class="alt">Alternate if there's a wait: La Punta / Bar Il Molo — peninsula-tip lake view.</li>
             <li><strong>Bus home after dinner:</strong> C130 from Bellagio–Lido — good options around <strong>8:03pm, 9:00pm, or 9:03pm</strong>. Get off at <strong>Pescaù–Bivio Bagnana</strong> (nearest Filario, per the hotel), a few minutes past the Lezzeno–Piazza Roma stop. Last bus of the night departs Bellagio around <strong>11:00pm</strong> (reaches Pescaù ~11:24pm) — don't miss it, there's no later option.</li>
           </ul>
@@ -333,7 +340,7 @@
             <li><strong>Bus to Bellagio:</strong> C130 from <strong>Pescaù–Bivio Bagnana</strong> (stop nearest Filario, per the hotel) at <strong>9:11am</strong> gets you there with buffer before the van pickup; <strong>9:41am</strong> is the fallback if running a little behind.</li>
             <li><strong>Late morning:</strong> <a href="https://www.viator.com/tours/Lake-Como/COOK-WITH-A-VIEW-VILLA-MELZI-Bellagio/d26113-254673P16" target="_blank" rel="noopener" class="title-lnk">Cook with a View</a> cooking class at Il Perlo, above Bellagio — includes lunch and Villa Melzi garden tickets. Pickup is outside Banca Intesa Sanpaolo, Via Lungo Lario Manzoni 24, Bellagio (green/white VW ID.Buzz van).</li>
             <li><strong>Afternoon:</strong> <a href="https://www.giardinidivillamelzi.it/en/home2/" target="_blank" rel="noopener" class="title-lnk">Villa Melzi gardens</a>, then back to the hotel for pool/beach.</li>
-            <li class="meal">🍽 <strong>Easy dinner:</strong> <a href="https://www.filario.it/app/uploads/2026/05/YEAST2026-ALL-REV-1805-Ultima.pdf" target="_blank" rel="noopener" class="title-lnk">Yeast Side</a> at the hotel, 7pm — open until 8, casual pizzas and apps on the beach.</li>
+            <li class="meal">🍽 <strong>Easy dinner:</strong> <a href="https://www.filario.it/app/uploads/2026/05/YEAST2026-ALL-REV-1805-Ultima.pdf" target="_blank" rel="noopener" class="title-lnk">Yeast Side</a> <span class="rating-badge">new, $</span> at the hotel, 7pm — open until 8, casual pizzas and apps on the beach.</li>
           </ul>
         </div>
       </div>
@@ -350,10 +357,10 @@
           <ul class="tl-items">
             <li><strong>Bus to Bellagio:</strong> C130 from <strong>Pescaù–Bivio Bagnana</strong> (stop nearest Filario, per the hotel) at <strong>9:41am or 10:11am</strong>, then the <strong>Bellagio–Varenna ferry</strong> (~15 min crossing). Boats run roughly every 20–30 min in season, first ~7:30am / last ~8pm — no need to sprint for a specific one, but don't miss the last boat back.</li>
             <li><strong>La Passeggiata degli Innamorati</strong> (Lovers' Walk) — starts right at the Varenna ferry dock.</li>
-            <li class="meal">🍽 <strong>Can't-miss lunch:</strong> <a href="https://www.cavatappivarenna.it/" target="_blank" rel="noopener" class="title-lnk">Il Cavatappi</a> — small, reserve ahead by phone or WhatsApp.</li>
+            <li class="meal">🍽 <strong>Can't-miss lunch:</strong> <a href="https://www.cavatappivarenna.it/" target="_blank" rel="noopener" class="title-lnk">Il Cavatappi</a> <span class="rating-badge">4.6, $$</span> — small, reserve ahead by phone or WhatsApp.</li>
             <li>Gelato at Gelateria Riva, on the harbor.</li>
             <li><strong>Return:</strong> ferry back to Bellagio, then the C130 bus — good options at <strong>4:03pm, 4:31pm, or 5:03pm</strong> from Bellagio–Lido, getting off at <strong>Pescaù–Bivio Bagnana</strong> (nearest Filario, per the hotel) roughly 20–25 min later, plenty of buffer before the 7pm dinner.</li>
-            <li class="meal">🍽 <strong>Last-night dinner:</strong> <a href="https://osteriailgoverno.com/en/" target="_blank" rel="noopener" class="title-lnk">Osteria Il Governo 1801</a> in Lezzeno — no travel needed, best-rated meal of the trip.</li>
+            <li class="meal">🍽 <strong>Last-night dinner:</strong> <a href="https://osteriailgoverno.com/en/" target="_blank" rel="noopener" class="title-lnk">Osteria Il Governo 1801</a> <span class="rating-badge">4.8, $$</span> in Lezzeno — no travel needed, best-rated meal of the trip.</li>
             <li class="alt">Alternate: Ristorante Aurora — 4.6★ Google, also in Lezzeno, zero travel.</li>
           </ul>
         </div>
@@ -363,12 +370,23 @@
         <div class="tl-dot">5</div>
         <div class="tl-card">
           <div class="tl-date">Fri, Aug 14 · Departure</div>
-          <div class="tl-title">Lezzeno → Milan Malpensa (MXP)</div>
-          <span class="tl-base">🚗 65–90 min drive · leave the hotel by 11:00–11:30am for the 3:20pm United flight (confirmed)</span>
-          <a class="tl-gmaps-btn" href="https://www.google.com/maps/dir/?api=1&origin=Filario+Hotel+%26+Residences%2C+Lezzeno&destination=Milan+Malpensa+Airport" target="_blank" rel="noopener">🧭 Send route to Google Maps</a>
+          <div class="tl-title">Lezzeno → Milan Malpensa (MXP) — ferry &amp; train</div>
+          <span class="tl-base">🚌⛴🚆 C130 bus + ferry + train + Malpensa Express · leave Lezzeno by ~9:30am for the 3:20pm United flight (confirmed)</span>
+          <a class="tl-ferry-btn" href="https://www.asfautolinee.it/wp-content/uploads/pdf/estivo/C130.pdf" target="_blank" rel="noopener">🚌 C130 current schedule (PDF)</a>
+          <a class="tl-ferry-btn" href="https://www.navigazionelaghi.it/en/tickets-and-timetables-lake-como/" target="_blank" rel="noopener">⛴ Ferry timetable (Navigazione Laghi)</a>
+          <a class="tl-ferry-btn" href="https://www.trenord.it/en/" target="_blank" rel="noopener">🚆 Trenord (Como → Milano Centrale)</a>
+          <a class="tl-ferry-btn" href="https://www.malpensaexpress.it/en/" target="_blank" rel="noopener">🚆 Malpensa Express</a>
           <div class="day-weather">🌤️ <b>Weather</b> · Temp: 22–29°C (72–84°F) · Precip: low, ~20% chance of a PM storm · Wind: light 5–10 km/h <span class="wx-note">(typical for August)</span></div>
+          <div class="tl-subhead">🚏 Getting to MXP</div>
           <ul class="tl-items">
-            <li>Water taxi won't save time (MXP is on the far side of Milan from the lake) — private car instead. <a href="https://www.taxilezzeno.com/transfer-to-hotel-filario/" target="_blank" rel="noopener" class="title-lnk">Taxi Lezzeno</a> explicitly serves Filario, fixed price.</li>
+            <li><strong>Not booking a private car this time</strong> — taking the ferry and train out instead, which is both cheaper and part of the scenery. No advance booking needed for any of these legs; pay/tap on board or at the station.</li>
+            <li><strong>Leg 1:</strong> C130 bus from <strong>Pescaù–Bivio Bagnana</strong> to Como (or transfer via Bellagio, whichever the day-of timetable favors) — ~15–20 min to Bellagio, then the lake ferry on to Como town, ~1hr–1.5hrs total depending on which boat connects (Bellagio–Como direct crossings run roughly every 4 hrs; confirm the exact day-of times on <a href="https://www.navigazionelaghi.it/en/tickets-and-timetables-lake-como/" target="_blank" rel="noopener">Navigazione Laghi</a> close to travel, and always keep the earlier of two viable connections).</li>
+            <li><strong>Leg 2:</strong> from the Como ferry dock, it's ~15 min on foot to <strong>Como San Giovanni</strong> station. Trenord regional train to <strong>Milano Centrale</strong>, ~40–60 min, ~€5–8pp.</li>
+            <li><strong>Leg 3:</strong> <strong>Malpensa Express</strong> from Milano Centrale to Malpensa T1, ~51 min, ~€15pp, departs roughly every 30 min (5:25am–11:25pm) — no need to pre-book, buy at the station or via the app.</li>
+            <li>Total door-to-door: roughly 3–3.5 hrs and ~€20–25pp — leaving Lezzeno by <strong>9:30am</strong> targets arrival at MXP by early-to-mid afternoon, a comfortable buffer ahead of a 3:20pm international departure. Double-check the Bellagio–Como ferry and Como–Milano train times a few days out, since both run on seasonal schedules.</li>
+          </ul>
+          <div class="tl-subhead">✈️ Flight</div>
+          <ul class="tl-items">
             <li>✅ <strong>Flight booked:</strong> United, MXP → Chicago O'Hare (ORD) → Washington (DCA), departs 3:20 PM, arrives ORD 6:10 PM, connects (1h35m) to a 7:45 PM departure landing DCA 10:52 PM. Confirmation <strong>CTVQ69</strong>, all 3 travelers, 108,000 miles + $153.89. First checked bag included MXP→DCA; second bag $120/traveler if needed.</li>
           </ul>
         </div>
@@ -385,7 +403,7 @@
     <div class="card-grid">
       <div class="card gold">
         <div class="card-eyebrow">Arrival night · Fine dining</div>
-        <h3>Filo</h3>
+        <h3>Filo <span class="rating-badge">4.7, $$$</span></h3>
         <div class="meta"><b>4.7★ Google</b> (312 reviews) · Filario Hotel, Lezzeno</div>
         <p>Lake-view terrace, tasting menus and à la carte.</p>
         <div class="poi-actions"><a class="site" href="https://www.filario.it/en/food-section/filo-restaurant/" target="_blank" rel="noopener">🌐 Website</a><a class="dir" href="https://www.google.com/maps/dir/?api=1&destination=45.951%2C9.282" target="_blank" rel="noopener">🧭 Directions</a></div>
@@ -393,7 +411,7 @@
 
       <div class="card">
         <div class="card-eyebrow">Day 2 dinner · Bellagio</div>
-        <h3>Trattoria San Giacomo</h3>
+        <h3>Trattoria San Giacomo <span class="rating-badge">4.4, $</span></h3>
         <div class="meta"><b>4.4★ Google</b> (667 reviews) · Salita Serbelloni 45, Bellagio</div>
         <p>No reservations — arrive at opening or expect a wait. Ravioli and fettuccine ragù are the standouts.</p>
         <div class="alt"><b>Alt:</b> La Punta / Bar Il Molo — peninsula-tip lake view.</div>
@@ -410,7 +428,7 @@
 
       <div class="card">
         <div class="card-eyebrow">Day 4 lunch · Varenna</div>
-        <h3>Il Cavatappi</h3>
+        <h3>Il Cavatappi <span class="rating-badge">4.6, $$</span></h3>
         <div class="meta"><b>4.6★ Tripadvisor</b> (1,000+ reviews) · Via XX Settembre 10, Varenna</div>
         <p>Tiny, romantic, excellent homemade pasta. Reserve for dinner ahead by phone/WhatsApp — lunch tends to be first-come, so arrive early.</p>
         <div class="alt"><b>Alt:</b> Al Prato — waterfront terrace, pumpkin ravioli.</div>
@@ -419,7 +437,7 @@
 
       <div class="card gold">
         <div class="card-eyebrow">Last-night dinner · Lezzeno</div>
-        <h3>Osteria Il Governo 1801</h3>
+        <h3>Osteria Il Governo 1801 <span class="rating-badge">4.8, $$</span></h3>
         <div class="meta"><b>4.8★ Google</b> · highest-rated of the trip</div>
         <p>Lakeside garden, 7th-generation family osteria. Pistachio pasta is the dish everyone mentions.</p>
         <div class="alt"><b>Alt:</b> Ristorante Aurora — 4.6★ Google, also in Lezzeno, zero travel.</div>
@@ -455,7 +473,7 @@
         <div class="card-eyebrow">Above Varenna</div>
         <h3>Castello di Vezio</h3>
         <p>Medieval castle overlooking Varenna with falconry demonstrations — a steep 20-minute walk up from the village. Skipped on Day 4 to keep time for the Lovers' Walk and lunch, but an easy add if Varenna gets a return visit.</p>
-        <div class="poi-actions"><a class="site" href="https://castellodivezio.it/en/" target="_blank" rel="noopener">🌐 Website</a><a class="dir" href="https://www.google.com/maps/dir/?api=1&destination=46.0177%2C9.2843" target="_blank" rel="noopener">🧭 Directions</a></div>
+        <div class="poi-actions"><a class="site" href="https://www.castellodivezio.it/en/" target="_blank" rel="noopener">🌐 Website</a><a class="dir" href="https://www.google.com/maps/dir/?api=1&destination=46.0177%2C9.2843" target="_blank" rel="noopener">🧭 Directions</a></div>
       </div>
     </div>
   </div>
@@ -475,7 +493,7 @@
     <ul class="checklist">
       <li data-book-id="arrival-flight-lin" data-book-shared-id="lin-connector-flight"><span class="checkbox"></span><div><span class="lbl"><a href="../sardinia/index.html#tab-book">Arrival flight — Milan Linate (LIN)</a></span>Same flight as Sardinia's Aeroitalia XZ2624 (OLB → LIN, Aug 10) — it's tracked and purchased on the Sardinia leg's Book Now tab since that's where it originates; checking it off there checks it off here too. Routing onward from LIN into Lezzeno (shuttle bus + train + ferry + C130 bus) is the full leg-by-leg breakdown in Day 1 of the Itinerary tab.
       </div></li>
-      <li data-book-id="taxi-lezzeno"><span class="checkbox"></span><div><span class="lbl"><a href="https://www.taxilezzeno.com/transfer-to-hotel-filario/" target="_blank" rel="noopener">Taxi Lezzeno</a> — private car to MXP <a class="tel-ico" href="tel:+39329703270" title="Call">📞</a></span>Fri Aug 14 departure — flight is now confirmed (3:20 PM), so this can be booked · <a href="mailto:info@taxilezzeno.com">info@taxilezzeno.com</a>
+      <li data-book-id="mxp-ferry-train"><span class="checkbox"></span><div><span class="lbl"><a href="https://www.navigazionelaghi.it/en/tickets-and-timetables-lake-como/" target="_blank" rel="noopener">Departure to MXP — ferry + train</a> (no private car) <a class="tel-ico" href="tel:+390315792111" title="Call">📞</a></span>Fri Aug 14 — C130 bus + Bellagio–Como ferry + Trenord to Milano Centrale + Malpensa Express to MXP T1, full leg-by-leg breakdown in Day 5 of the Itinerary tab. Nothing to book in advance, but re-check the ferry and train timetables a few days out · <a href="mailto:infocomo@navigazionelaghi.it">infocomo@navigazionelaghi.it</a>
       </div></li>
       <li data-book-id="bellagio-varenna-ferry"><span class="checkbox"></span><div><span class="lbl"><a href="https://www.navigazionelaghi.it/en/tickets-and-timetables-lake-como/" target="_blank" rel="noopener">Bellagio–Varenna ferry</a> <a class="tel-ico" href="tel:+390315792111" title="Call">📞</a></span>Thu Aug 13 — single crossings don't need advance booking, but check the current timetable (valid Jul 1–Oct 4, 2026) · <a href="mailto:infocomo@navigazionelaghi.it">infocomo@navigazionelaghi.it</a>
       </div></li>
@@ -527,13 +545,17 @@
       <div class="contact-line">First checked bag included MXP→DCA; second bag $120/traveler if needed.</div>
     </div>
     <div class="contact-block">
-      <h4>Taxi Lezzeno (private car, MXP transfer)</h4>
-      <div class="contact-line">Phone/WhatsApp: +39 329 703 270 &nbsp;·&nbsp; info@taxilezzeno.com &nbsp;·&nbsp; taxilezzeno.com</div>
-    </div>
-    <div class="contact-block">
       <h4>Navigazione Laghi (Lake Como ferries)</h4>
       <div class="contact-line">Via per Cernobbio 18, 22100 Como, Italy</div>
       <div class="contact-line">Phone: +39 031 579211 (or 800 551 801 within Italy) &nbsp;·&nbsp; infocomo@navigazionelaghi.it &nbsp;·&nbsp; navigazionelaghi.it</div>
+    </div>
+    <div class="contact-block">
+      <h4>Trenord (Como San Giovanni → Milano Centrale)</h4>
+      <div class="contact-line">trenord.it &nbsp;·&nbsp; ~40–60 min, ~€5–8pp, no advance booking needed</div>
+    </div>
+    <div class="contact-block">
+      <h4>Malpensa Express (Milano Centrale → MXP T1)</h4>
+      <div class="contact-line">malpensaexpress.it &nbsp;·&nbsp; ~51 min, ~€15pp, departs every ~30 min, 5:25am–11:25pm</div>
     </div>
     <div class="contact-block">
       <h4>ASF Autolinee (C130 bus, signed locally as "C30" — Pescaù–Bivio Bagnana ↔ Bellagio)</h4>
@@ -606,9 +628,12 @@
       </ul>
     </div>
     <div class="print-day">
-      <h4>Day 5 · Fri Aug 14 · Departure — Lezzeno → Milan Malpensa</h4>
+      <h4>Day 5 · Fri Aug 14 · Departure — Lezzeno → Milan Malpensa (ferry + train)</h4>
       <ul>
-        <li>Taxi Lezzeno (private car)<span class="contact-line">+39 329 703 270 · info@taxilezzeno.com · taxilezzeno.com</span></li>
+        <li>C130 bus, Pescaù–Bivio Bagnana → Bellagio<span class="contact-line">+39 031 247 111 · asfautolinee.it</span></li>
+        <li>Bellagio–Como ferry<span class="contact-line">~1–1.5 hrs, runs roughly every 4 hrs · +39 031 579211 · navigazionelaghi.it</span></li>
+        <li>Trenord train, Como San Giovanni → Milano Centrale<span class="contact-line">~40–60 min, ~€5–8pp · trenord.it</span></li>
+        <li>Malpensa Express, Milano Centrale → MXP T1<span class="contact-line">~51 min, ~€15pp, every ~30 min · malpensaexpress.it</span></li>
         <li>Milan Malpensa Airport (MXP)<span class="contact-line">21010 Ferno VA, Italy</span></li>
         <li>Flight — United, MXP → ORD → DCA<span class="contact-line">Departs 3:20 PM MXP · arrives 10:52 PM DCA · Confirmation CTVQ69 · united.com</span></li>
       </ul>
@@ -628,8 +653,8 @@
   }
 
   const map = L.map('map', { scrollWheelZoom:false }).setView([45.975, 9.28], 12);
-  L.tileLayer('https://{s}.basemaps.cartocdn.com/dark_nolabels/{z}/{x}/{y}{r}.png', {
-    attribution:'&copy; OpenStreetMap &copy; CARTO', subdomains:'abcd', maxZoom:19
+  L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+    attribution:'&copy; OpenStreetMap contributors', maxZoom:19
   }).addTo(map);
 
   var colors = { base:'#7fe3d4', town:'#f4c05d', experience:'#1fb8a6', food:'#ff7a5c', also:'#c96a52' };
@@ -646,16 +671,17 @@
     {name:'Varenna', cat:'town', note:"Lovers' Walk, Il Cavatappi", lat:46.0142, lng:9.2830, img:'https://commons.wikimedia.org/wiki/Special:FilePath/Varenna%209831.jpg?width=400'},
     {name:'Osteria Il Governo 1801', cat:'food', note:'Last-night dinner', lat:45.945, lng:9.278, site:'https://osteriailgoverno.com/en/'},
     {name:'Villa del Balbianello', cat:'also', note:'Also worth seeing — Lenno', lat:45.9791, lng:9.2138, site:'https://fondoambiente.it/luoghi/villa-del-balbianello'},
-    {name:'Castello di Vezio', cat:'also', note:'Also worth seeing — above Varenna', lat:46.0177, lng:9.2843, site:'https://castellodivezio.it/en/'}
+    {name:'Castello di Vezio', cat:'also', note:'Also worth seeing — above Varenna', lat:46.0177, lng:9.2843, site:'https://www.castellodivezio.it/en/'}
   ];
 
   var markers = pins.map(function(p){
     var thumbHtml = p.img ? '<img src="'+p.img+'" style="width:100%;height:90px;object-fit:cover;border-radius:6px;margin-bottom:6px;">' : '';
     var noteHtml = p.note ? '<br><span style="color:#888;font-size:12px;">'+p.note+'</span>' : '';
+    var siteHtml = p.site ? '<br><a href="'+p.site+'" target="_blank" rel="noopener" style="font-size:11px;">Website →</a>' : '';
     var gmapsUrl = 'https://www.google.com/maps/dir/?api=1&destination=' + p.lat + ',' + p.lng;
     var linkHtml = '<br><a href="'+gmapsUrl+'" target="_blank" rel="noopener" style="font-size:11px;">Open in Google Maps →</a>';
     return L.marker([p.lat, p.lng], { icon: pin(colors[p.cat]) }).addTo(map)
-      .bindPopup(thumbHtml + '<b>'+p.name+'</b>' + noteHtml + linkHtml, {maxWidth:220});
+      .bindPopup(thumbHtml + '<b>'+p.name+'</b>' + noteHtml + siteHtml + linkHtml, {maxWidth:220});
   });
   var group = new L.featureGroup(markers);
   map.fitBounds(group.getBounds().pad(0.3));

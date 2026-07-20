@@ -153,6 +153,9 @@
     padding:4px 9px; border-radius:100px; border:1px solid var(--line); color:rgba(251,246,234,0.6); white-space:nowrap;
   }
   .todo-item a.todo-link{ font-size:12.5px; color:var(--gold); text-decoration:underline; text-underline-offset:2px; }
+  .todo-group-label{ font-family:'Space Mono',monospace; font-size:11px; letter-spacing:.1em; text-transform:uppercase; color:var(--gold); margin:26px 0 8px; }
+  .todo-group-label:first-child{ margin-top:0; }
+  .todo-item.fyi .todo-tag{ opacity:0.6; }
 
   footer{ padding:36px 0 60px; border-top:1px solid var(--line); color:rgba(251,246,234,0.45); font-size:12.5px; }
 </style>
@@ -206,8 +209,10 @@
   <div class="todo-section">
     <div class="todo-head">
       <h2>Top booking needs</h2>
-      <p>One consolidated list across both legs, most time-sensitive first — full checklists (with contact info) live on each trip's own Book Now tab. An item that touches both legs (like the connecting flight) is listed once.</p>
+      <p>Every currently-open item across both legs, in one place — full checklists (with contact info) still live on each trip's own Book Now tab. An item that touches both legs (like the connecting flight) is listed once.</p>
     </div>
+
+    <div class="todo-group-label">Accommodations</div>
     <ul class="todo-list" id="todoList">
       <li class="todo-item" data-id="sardinia-casagliana">
         <input type="checkbox">
@@ -217,27 +222,127 @@
         </div>
         <span class="todo-tag">Sardinia</span>
       </li>
+    </ul>
+
+    <div class="todo-group-label">Transportation</div>
+    <ul class="todo-list" id="todoList2">
       <li class="todo-item" data-id="lin-connector-flight">
         <input type="checkbox">
         <div class="todo-text">
           <div class="todo-title">Purchase Aeroitalia XZ2624 — Olbia → Milan Linate, Aug 10</div>
-          <div class="todo-sub">Priced (~€180 for 3, Classic fare) but not yet bought — this closes out Sardinia and is also the flight that opens the Como leg, tracked once. <a class="todo-link" href="sardinia/index.html#tab-book">See Sardinia Book Now ↗</a></div>
+          <div class="todo-sub">Priced (~€180 for 3, Classic fare) but not yet bought — closes out Sardinia and opens the Como leg, tracked once. <a class="todo-link" href="sardinia/index.html#tab-book">See Sardinia Book Now ↗</a></div>
         </div>
         <span class="todo-tag">Sardinia → Como</span>
       </li>
-      <li class="todo-item" data-id="como-taxi-lezzeno">
+      <li class="todo-item" data-id="chase-alerts">
         <input type="checkbox">
         <div class="todo-text">
-          <div class="todo-title">Book Taxi Lezzeno — private car to MXP, Aug 14</div>
-          <div class="todo-sub">Departure flight time is confirmed (3:20 PM), so this can be locked in now. <a class="todo-link" href="como/index.html#tab-book">See Como Book Now ↗</a></div>
+          <div class="todo-title">Add Ghazal to Chase flight-alert contacts</div>
+          <div class="todo-sub">So delay/gate updates go to her directly — done in Chase account/travel booking settings. <a class="todo-link" href="sardinia/index.html#tab-book">See Sardinia Book Now ↗</a></div>
+        </div>
+        <span class="todo-tag">Sardinia</span>
+      </li>
+      <li class="todo-item fyi" data-id="mxp-ferry-train">
+        <input type="checkbox">
+        <div class="todo-text">
+          <div class="todo-title">Confirm ferry + train times to MXP — Aug 14 departure</div>
+          <div class="todo-sub">No private car this time — ferry, train, and Malpensa Express instead. Nothing to book, but re-check timetables closer to the date. <a class="todo-link" href="como/index.html#tab-book">See Como Book Now ↗</a></div>
         </div>
         <span class="todo-tag">Como</span>
+      </li>
+      <li class="todo-item fyi" data-id="bellagio-varenna-ferry">
+        <input type="checkbox">
+        <div class="todo-text">
+          <div class="todo-title">Check Bellagio–Varenna ferry timetable — Aug 13</div>
+          <div class="todo-sub">No advance booking needed for single crossings, but confirm the current timetable. <a class="todo-link" href="como/index.html#tab-book">See Como Book Now ↗</a></div>
+        </div>
+        <span class="todo-tag">Como</span>
+      </li>
+      <li class="todo-item fyi" data-id="c130-bus">
+        <input type="checkbox">
+        <div class="todo-text">
+          <div class="todo-title">Double-check C130 bus schedule with the front desk</div>
+          <div class="todo-sub">Pay on board, no booking needed — worth a quick confirm at check-in in case of last-minute changes. <a class="todo-link" href="como/index.html#tab-book">See Como Book Now ↗</a></div>
+        </div>
+        <span class="todo-tag">Como</span>
+      </li>
+    </ul>
+
+    <div class="todo-group-label">Excursions</div>
+    <ul class="todo-list" id="todoList3">
+      <li class="todo-item" data-id="dolphin-watching-dst">
+        <input type="checkbox">
+        <div class="todo-text">
+          <div class="todo-title">Book DST Sardegna dolphin watching — Day 1, Aug 6 evening</div>
+          <div class="todo-sub">Golfo Aranci harbor, ~1.5 hrs, ~€37/$40pp — high priority given how high dolphins are on the list. <a class="todo-link" href="sardinia/index.html#tab-book">See Sardinia Book Now ↗</a></div>
+        </div>
+        <span class="todo-tag">Sardinia</span>
+      </li>
+      <li class="todo-item" data-id="maddalena-delfino">
+        <input type="checkbox">
+        <div class="todo-text">
+          <div class="todo-title">Book Maddalena Islands excursion — Delfino Tours, Aug 7</div>
+          <div class="todo-sub">~7 hr boat trip from Palau — Spargi, Santa Maria, Pink Beach view. <a class="todo-link" href="sardinia/index.html#tab-book">See Sardinia Book Now ↗</a></div>
+        </div>
+        <span class="todo-tag">Sardinia</span>
+      </li>
+      <li class="todo-item" data-id="orosei-palmasera">
+        <input type="checkbox">
+        <div class="todo-text">
+          <div class="todo-title">Book Orosei charter — Palmasera Boat Rental, Aug 8</div>
+          <div class="todo-sub">Cala Luna &amp; Cala Mariolu from Cala Gonone, ~9 AM departure typical. <a class="todo-link" href="sardinia/index.html#tab-book">See Sardinia Book Now ↗</a></div>
+        </div>
+        <span class="todo-tag">Sardinia</span>
+      </li>
+      <li class="todo-item" data-id="la-pelosa">
+        <input type="checkbox">
+        <div class="todo-text">
+          <div class="todo-title">Reserve La Pelosa entry — Aug 9</div>
+          <div class="todo-sub">Required timed online reservation, €3.50pp — book via the 500-seat allocation now rather than waiting for the 48-hr release. <a class="todo-link" href="sardinia/index.html#tab-book">See Sardinia Book Now ↗</a></div>
+        </div>
+        <span class="todo-tag">Sardinia</span>
       </li>
       <li class="todo-item" data-id="como-cooking-class">
         <input type="checkbox">
         <div class="todo-text">
           <div class="todo-title">Book Cook with a View cooking class — Il Perlo, Wed Aug 12</div>
           <div class="todo-sub">Small-group tour, sells out ahead — book via Viator before the date closes in. <a class="todo-link" href="como/index.html#tab-book">See Como Book Now ↗</a></div>
+        </div>
+        <span class="todo-tag">Como</span>
+      </li>
+    </ul>
+
+    <div class="todo-group-label">Restaurants</div>
+    <ul class="todo-list" id="todoList4">
+      <li class="todo-item" data-id="dinner-cucumiao">
+        <input type="checkbox">
+        <div class="todo-text">
+          <div class="todo-title">Reserve CuCumiao — Palau dinner, Aug 7</div>
+          <div class="todo-sub">June–August is busy — reserve ahead. Alt: O'Belau. <a class="todo-link" href="sardinia/index.html#tab-book">See Sardinia Book Now ↗</a></div>
+        </div>
+        <span class="todo-tag">Sardinia</span>
+      </li>
+      <li class="todo-item fyi" data-id="trattoria-san-giacomo">
+        <input type="checkbox">
+        <div class="todo-text">
+          <div class="todo-title">Trattoria San Giacomo — Bellagio dinner, Aug 11</div>
+          <div class="todo-sub">No reservations taken — arrive at opening or expect a wait. <a class="todo-link" href="como/index.html#tab-book">See Como Book Now ↗</a></div>
+        </div>
+        <span class="todo-tag">Como</span>
+      </li>
+      <li class="todo-item" data-id="il-cavatappi">
+        <input type="checkbox">
+        <div class="todo-text">
+          <div class="todo-title">Reserve Il Cavatappi — Varenna lunch, Aug 13</div>
+          <div class="todo-sub">Dinner reservations accepted by phone; lunch tends to be walk-in, so arrive early. <a class="todo-link" href="como/index.html#tab-book">See Como Book Now ↗</a></div>
+        </div>
+        <span class="todo-tag">Como</span>
+      </li>
+      <li class="todo-item" data-id="osteria-il-governo">
+        <input type="checkbox">
+        <div class="todo-text">
+          <div class="todo-title">Reserve Osteria Il Governo 1801 — last-night dinner, Aug 13</div>
+          <div class="todo-sub">Lezzeno, no travel needed — best-rated meal of the trip. <a class="todo-link" href="como/index.html#tab-book">See Como Book Now ↗</a></div>
         </div>
         <span class="todo-tag">Como</span>
       </li>
@@ -249,14 +354,18 @@
 
 <script>
   (function(){
-    var items = document.querySelectorAll('#todoList .todo-item');
+    // Items whose id matches a data-book-shared-id used on the leg pages share that
+    // same storage key, so checking one off here checks it off there too.
+    var SHARED_IDS = { 'lin-connector-flight': true };
+    var items = document.querySelectorAll('.todo-list .todo-item');
     items.forEach(function(item){
-      var id = 'todo_' + item.dataset.id;
+      var rawId = item.dataset.id;
+      var key = SHARED_IDS[rawId] ? ('bookdone::shared::' + rawId) : ('todo_' + rawId);
       var box = item.querySelector('input[type="checkbox"]');
-      if(localStorage.getItem(id) === '1'){ box.checked = true; item.classList.add('done'); }
+      if(localStorage.getItem(key) === '1'){ box.checked = true; item.classList.add('done'); }
       box.addEventListener('change', function(){
         item.classList.toggle('done', box.checked);
-        localStorage.setItem(id, box.checked ? '1' : '0');
+        localStorage.setItem(key, box.checked ? '1' : '0');
       });
     });
   })();
