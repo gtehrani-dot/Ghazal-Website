@@ -122,6 +122,38 @@
     box-shadow:0 6px 14px rgba(0,0,0,0.3); border:1px solid rgba(6,37,39,0.15);
   }
 
+  /* to-dos / bookings */
+  .todo-section{ padding:0 0 80px; }
+  .todo-head{ margin-bottom:20px; }
+  .todo-head h2{ font-size:clamp(26px,3vw,34px); }
+  .todo-head p{ color:rgba(251,246,234,0.65); font-size:14px; max-width:44ch; margin-top:6px; }
+  .todo-list{ list-style:none; border:1px solid var(--line); border-radius:16px; overflow:hidden; }
+  .todo-item{
+    display:flex; align-items:flex-start; gap:14px;
+    padding:16px 20px; border-bottom:1px solid var(--line);
+    background:rgba(251,246,234,0.03);
+  }
+  .todo-item:last-child{ border-bottom:none; }
+  .todo-item input[type="checkbox"]{
+    appearance:none; -webkit-appearance:none; width:19px; height:19px; flex:0 0 19px;
+    border:1.5px solid rgba(251,246,234,0.4); border-radius:5px; margin-top:2px;
+    cursor:pointer; position:relative; background:transparent;
+  }
+  .todo-item input[type="checkbox"]:checked{ background:var(--gold); border-color:var(--gold); }
+  .todo-item input[type="checkbox"]:checked::after{
+    content:""; position:absolute; left:5px; top:1px; width:5px; height:10px;
+    border:solid var(--ink); border-width:0 2px 2px 0; transform:rotate(45deg);
+  }
+  .todo-text{ flex:1; }
+  .todo-text .todo-title{ font-size:14.5px; font-weight:600; }
+  .todo-item.done .todo-title{ text-decoration:line-through; color:rgba(251,246,234,0.45); }
+  .todo-text .todo-sub{ font-size:12.5px; color:rgba(251,246,234,0.55); margin-top:3px; }
+  .todo-tag{
+    flex:0 0 auto; font-family:'Space Mono',monospace; font-size:10px; letter-spacing:0.05em; text-transform:uppercase;
+    padding:4px 9px; border-radius:100px; border:1px solid var(--line); color:rgba(251,246,234,0.6); white-space:nowrap;
+  }
+  .todo-item a.todo-link{ font-size:12.5px; color:var(--gold); text-decoration:underline; text-underline-offset:2px; }
+
   footer{ padding:36px 0 60px; border-top:1px solid var(--line); color:rgba(251,246,234,0.45); font-size:12.5px; }
 </style>
 </head>
@@ -171,9 +203,40 @@
     <div id="map"></div>
   </div>
 
+  <div class="todo-section">
+    <div class="todo-head">
+      <h2>Bookings &amp; to-dos</h2>
+      <p>Everything to book or confirm before the trip — for both legs. Check items off as they're done.</p>
+    </div>
+    <ul class="todo-list" id="todoList">
+      <li class="todo-item" data-id="easyjet-bags">
+        <input type="checkbox">
+        <div class="todo-text">
+          <div class="todo-title">Add checked bags to the easyJet booking — flight to Sardinia (Olbia)</div>
+          <div class="todo-sub">Cheaper to add in advance than at the airport. <a class="todo-link" href="https://www.easyjet.com/en/manage-bookings" target="_blank" rel="noopener">Manage booking on easyJet ↗</a></div>
+        </div>
+        <span class="todo-tag">Sardinia</span>
+      </li>
+    </ul>
+  </div>
+
   <footer>Built for the 2026 trips · tap a pin for details</footer>
 </div>
 
+<script>
+  (function(){
+    var items = document.querySelectorAll('#todoList .todo-item');
+    items.forEach(function(item){
+      var id = 'todo_' + item.dataset.id;
+      var box = item.querySelector('input[type="checkbox"]');
+      if(localStorage.getItem(id) === '1'){ box.checked = true; item.classList.add('done'); }
+      box.addEventListener('change', function(){
+        item.classList.toggle('done', box.checked);
+        localStorage.setItem(id, box.checked ? '1' : '0');
+      });
+    });
+  })();
+</script>
 <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
 <script>
   const map = L.map('map', { scrollWheelZoom:false }).setView([43.6, 10.0], 6);
