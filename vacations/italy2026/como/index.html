@@ -141,8 +141,11 @@
   .checklist{ list-style:none; }
   .checklist li{ display:flex; gap:14px; align-items:flex-start; padding:16px 0; border-bottom:1px solid var(--line); font-size:14.5px; color:rgba(251,246,234,0.85); }
   .checklist li:last-child{ border-bottom:none; }
-  .checkbox{ width:19px; height:19px; border:1.5px solid var(--aqua); border-radius:5px; flex-shrink:0; margin-top:2px; }
+  .checkbox{ width:19px; height:19px; border:1.5px solid var(--aqua); border-radius:5px; flex-shrink:0; margin-top:2px; cursor:pointer; }
   .checklist .lbl{ color:var(--gold); font-family:'Space Mono',monospace; font-size:10.5px; letter-spacing:0.06em; text-transform:uppercase; display:block; margin-bottom:3px; }
+  .checklist .lbl a{ color:inherit; text-decoration:underline; text-decoration-color:rgba(127,227,212,0.45); text-underline-offset:2px; }
+  .checklist .lbl a:hover{ text-decoration-color:currentColor; }
+  .checklist .lbl a.tel-ico{ text-decoration:none; margin-left:4px; font-size:11px; }
   .checklist .lbl a{ color:var(--gold); }
   .checklist .contact{ display:block; font-family:'Space Mono',monospace; font-size:11.5px; color:var(--muted); margin-top:5px; }
   .checklist .contact a{ color:var(--aqua); }
@@ -469,55 +472,44 @@
     <div class="section-sub">Everything that needs advance booking or a decision, with direct contact info.</div>
 
     <div class="callout muted">
-      <strong>Arrival routing decided — LIN + Varenna:</strong> Flying into <strong>Milan Linate (LIN)</strong>, shared shuttle bus to Milano Centrale (~25 min), train to Varenna-Esino (~1 hr, scenic lake-shore approach), ferry to Bellagio (~15 min), then the C130 bus to the <strong>Pescaù–Bivio Bagnana</strong> stop nearest Filario. Chosen over Malpensa + car via Como town for the more scenic approach. Flight itself still needs booking.
+      <strong>Arrival routing decided — LIN + Varenna:</strong> Flying into <strong>Milan Linate (LIN)</strong> on Aeroitalia XZ2624 from Olbia (Aug 10, 2:10 PM departure — the same flight that closes out the Sardinia leg, priced but not yet purchased on Sardinia's Book Now tab), then a shared shuttle bus to Milano Centrale (~25 min), train to Varenna-Esino (~1 hr, scenic lake-shore approach), ferry to Bellagio (~15 min), then the C130 bus to the <strong>Pescaù–Bivio Bagnana</strong> stop nearest Filario. Chosen over Malpensa + car via Como town for the more scenic approach.
     </div>
 
     <div class="book-group-label">Accommodations</div>
     <ul class="checklist">
-      <li class="done"><span class="checkbox"></span><div><span class="lbl">Filario Hotel &amp; Residences</span>Booked — Two Bedroom Residence, Aug 10–14 · matches the plan on this page · cancel 21+ days out to avoid a full-stay penalty · confirmation number is in the Print/Offline Copy tab
-        <span class="contact">📞 <a href="tel:+390319914035">+39 031 914035</a> &nbsp;·&nbsp; <a href="mailto:reservations@filario.it">reservations@filario.it</a></span>
+      <li class="done" data-book-id="filario-hotel"><span class="checkbox"></span><div><span class="lbl"><a href="https://www.filario.it/en/" target="_blank" rel="noopener">Filario Hotel &amp; Residences</a> <a class="tel-ico" href="tel:+390319914035" title="Call">📞</a></span>Booked — Two Bedroom Residence, Aug 10–14 · matches the plan on this page · cancel 21+ days out to avoid a full-stay penalty · confirmation number is in the Print/Offline Copy tab · <a href="mailto:reservations@filario.it">reservations@filario.it</a>
       </div></li>
     </ul>
 
     <div class="book-group-label">Transportation</div>
     <ul class="checklist">
-      <li><span class="checkbox"></span><div><span class="lbl">Arrival flight — Milan Linate (LIN)</span>Routing decided (see callout above): shuttle bus + train + ferry + C130 bus into Lezzeno. Just need to book the flight itself.
-        <span class="contact">No contact yet — this is a flight booking, not a routing decision</span>
+      <li data-book-id="arrival-flight-lin" data-book-shared-id="lin-connector-flight"><span class="checkbox"></span><div><span class="lbl"><a href="../sardinia/index.html#tab-book">Arrival flight — Milan Linate (LIN)</a></span>Same flight as Sardinia's Aeroitalia XZ2624 (OLB → LIN, Aug 10) — it's tracked and purchased on the Sardinia leg's Book Now tab since that's where it originates; checking it off there checks it off here too. Routing onward from LIN is decided (see callout above): shuttle bus + train + ferry + C130 bus into Lezzeno.
       </div></li>
-      <li class="done"><span class="checkbox"></span><div><span class="lbl">Departure flight</span>Booked — United, MXP → ORD → DCA, Fri Aug 14, departs 3:20 PM MXP, arrives 10:52 PM DCA, confirmation CTVQ69, all 3 travelers
-        <span class="contact"><a href="https://www.united.com/en/us/manageres/mytrips" target="_blank" rel="noopener">Manage booking at united.com</a></span>
+      <li class="done" data-book-id="departure-flight"><span class="checkbox"></span><div><span class="lbl"><a href="https://www.united.com/en/us/manageres/mytrips" target="_blank" rel="noopener">Departure flight</a></span>Booked — United, MXP → ORD → DCA, Fri Aug 14, departs 3:20 PM MXP, arrives 10:52 PM DCA, confirmation CTVQ69, all 3 travelers
       </div></li>
-      <li><span class="checkbox"></span><div><span class="lbl"><a href="https://www.taxilezzeno.com/transfer-to-hotel-filario/" target="_blank" rel="noopener">Taxi Lezzeno</a> — private car to MXP</span>Fri Aug 14 departure — flight is now confirmed (3:20 PM), so this can be booked
-        <span class="contact">📞 <a href="tel:+39329703270">+39 329 703 270</a> &nbsp;·&nbsp; <a href="mailto:info@taxilezzeno.com">info@taxilezzeno.com</a></span>
+      <li data-book-id="taxi-lezzeno"><span class="checkbox"></span><div><span class="lbl"><a href="https://www.taxilezzeno.com/transfer-to-hotel-filario/" target="_blank" rel="noopener">Taxi Lezzeno</a> — private car to MXP <a class="tel-ico" href="tel:+39329703270" title="Call">📞</a></span>Fri Aug 14 departure — flight is now confirmed (3:20 PM), so this can be booked · <a href="mailto:info@taxilezzeno.com">info@taxilezzeno.com</a>
       </div></li>
-      <li><span class="checkbox"></span><div><span class="lbl"><a href="https://www.navigazionelaghi.it/en/tickets-and-timetables-lake-como/" target="_blank" rel="noopener">Bellagio–Varenna ferry</a></span>Thu Aug 13 — single crossings don't need advance booking, but check the current timetable (valid Jul 1–Oct 4, 2026)
-        <span class="contact">📞 <a href="tel:+390315792111">+39 031 579211</a> &nbsp;·&nbsp; <a href="mailto:infocomo@navigazionelaghi.it">infocomo@navigazionelaghi.it</a></span>
+      <li data-book-id="bellagio-varenna-ferry"><span class="checkbox"></span><div><span class="lbl"><a href="https://www.navigazionelaghi.it/en/tickets-and-timetables-lake-como/" target="_blank" rel="noopener">Bellagio–Varenna ferry</a> <a class="tel-ico" href="tel:+390315792111" title="Call">📞</a></span>Thu Aug 13 — single crossings don't need advance booking, but check the current timetable (valid Jul 1–Oct 4, 2026) · <a href="mailto:infocomo@navigazionelaghi.it">infocomo@navigazionelaghi.it</a>
       </div></li>
-      <li><span class="checkbox"></span><div><span class="lbl"><a href="https://www.asfautolinee.it/wp-content/uploads/pdf/estivo/C130.pdf" target="_blank" rel="noopener">C130 bus</a> (signed locally as "C30") — Pescaù–Bivio Bagnana ↔ Bellagio</span>No booking needed, pay on board — nearest stop to Filario is <strong>Pescaù–Bivio Bagnana</strong>, confirmed directly by the hotel (not Lezzeno–Piazza Roma). Current schedule linked is the Aug 3–30, 2026 reduced-summer timetable that covers this whole trip; worth a quick double-check with the front desk at check-in in case of last-minute changes
-        <span class="contact">📞 <a href="tel:+390312471111">+39 031 247 111</a> &nbsp;·&nbsp; <a href="https://www.asfautolinee.it/wp-content/uploads/pdf/estivo/C130.pdf" target="_blank" rel="noopener">Current schedule (PDF)</a></span>
+      <li data-book-id="c130-bus"><span class="checkbox"></span><div><span class="lbl"><a href="https://www.asfautolinee.it/wp-content/uploads/pdf/estivo/C130.pdf" target="_blank" rel="noopener">C130 bus</a> (signed locally as "C30") — Pescaù–Bivio Bagnana ↔ Bellagio <a class="tel-ico" href="tel:+390312471111" title="Call">📞</a></span>No booking needed, pay on board — nearest stop to Filario is <strong>Pescaù–Bivio Bagnana</strong>, confirmed directly by the hotel (not Lezzeno–Piazza Roma). Current schedule linked is the Aug 3–30, 2026 reduced-summer timetable that covers this whole trip; worth a quick double-check with the front desk at check-in in case of last-minute changes
       </div></li>
     </ul>
 
     <div class="book-group-label">Excursions</div>
     <ul class="checklist">
-      <li><span class="checkbox"></span><div><span class="lbl"><a href="https://www.viator.com/tours/Lake-Como/COOK-WITH-A-VIEW-VILLA-MELZI-Bellagio/d26113-254673P16" target="_blank" rel="noopener">Cook with a View cooking class</a></span>Il Perlo, Wed Aug 12 — small-group, book ahead. Product code 254673P16
-        <span class="contact">📞 <a href="tel:+18552755071">+1 855 275 5071</a> (Viator) &nbsp;·&nbsp; <a href="https://www.viator.com/tours/Lake-Como/COOK-WITH-A-VIEW-VILLA-MELZI-Bellagio/d26113-254673P16" target="_blank" rel="noopener">Book online</a></span>
+      <li data-book-id="cook-with-a-view"><span class="checkbox"></span><div><span class="lbl"><a href="https://www.viator.com/tours/Lake-Como/COOK-WITH-A-VIEW-VILLA-MELZI-Bellagio/d26113-254673P16" target="_blank" rel="noopener">Cook with a View cooking class</a> <a class="tel-ico" href="tel:+18552755071" title="Call Viator">📞</a></span>Il Perlo, Wed Aug 12 — small-group, book ahead. Product code 254673P16
       </div></li>
-      <li><span class="checkbox"></span><div><span class="lbl"><a href="https://www.giardinidivillamelzi.it/en/home2/" target="_blank" rel="noopener">Villa Melzi Gardens</a></span>Wed Aug 12 — no reservation needed for general entry (already bundled with the cooking-class ticket); guided tours need an email in advance
-        <span class="contact">📞 <a href="tel:+393334877427">+39 333 487 7427</a> &nbsp;·&nbsp; <a href="mailto:visite@giardinidivillamelzi.it">visite@giardinidivillamelzi.it</a></span>
+      <li data-book-id="villa-melzi"><span class="checkbox"></span><div><span class="lbl"><a href="https://www.giardinidivillamelzi.it/en/home2/" target="_blank" rel="noopener">Villa Melzi Gardens</a> <a class="tel-ico" href="tel:+393334877427" title="Call">📞</a></span>Wed Aug 12 — no reservation needed for general entry (already bundled with the cooking-class ticket); guided tours need an email in advance · <a href="mailto:visite@giardinidivillamelzi.it">visite@giardinidivillamelzi.it</a>
       </div></li>
     </ul>
 
     <div class="book-group-label">Restaurants</div>
     <ul class="checklist">
-      <li><span class="checkbox"></span><div><span class="lbl"><a href="https://www.cavatappivarenna.it/" target="_blank" rel="noopener">Il Cavatappi</a> — Varenna lunch</span>Thu Aug 13. Dinner reservations accepted by phone; lunch tends to be walk-in, so arrive early
-        <span class="contact">📞 <a href="tel:+390341815349">+39 0341 815349</a></span>
+      <li data-book-id="il-cavatappi"><span class="checkbox"></span><div><span class="lbl"><a href="https://www.cavatappivarenna.it/" target="_blank" rel="noopener">Il Cavatappi</a> — Varenna lunch <a class="tel-ico" href="tel:+390341815349" title="Call">📞</a></span>Thu Aug 13. Dinner reservations accepted by phone; lunch tends to be walk-in, so arrive early
       </div></li>
-      <li><span class="checkbox"></span><div><span class="lbl"><a href="https://osteriailgoverno.com/en/" target="_blank" rel="noopener">Osteria Il Governo 1801</a> — last-night dinner</span>Thu Aug 13, Lezzeno
-        <span class="contact">📞 <a href="tel:+390315478129">+39 031 5478129</a> &nbsp;·&nbsp; <a href="https://osteriailgoverno.com/en/" target="_blank" rel="noopener">Website</a></span>
+      <li data-book-id="osteria-il-governo"><span class="checkbox"></span><div><span class="lbl"><a href="https://osteriailgoverno.com/en/" target="_blank" rel="noopener">Osteria Il Governo 1801</a> — last-night dinner <a class="tel-ico" href="tel:+390315478129" title="Call">📞</a></span>Thu Aug 13, Lezzeno
       </div></li>
-      <li><span class="checkbox"></span><div><span class="lbl">Trattoria San Giacomo</span>Tue Aug 11 — no reservations taken, call only with questions
-        <span class="contact">📞 <a href="tel:+39031950329">+39 031 950329</a></span>
+      <li data-book-id="trattoria-san-giacomo"><span class="checkbox"></span><div><span class="lbl"><a href="tel:+39031950329">Trattoria San Giacomo</a></span>Tue Aug 11 — no reservations taken, call only with questions
       </div></li>
     </ul>
   </div>
@@ -526,9 +518,7 @@
   <div id="tab-print" class="section">
     <div class="section-title">Print / Offline Copy</div>
     <div class="section-sub">A no-internet-needed version — every phone number, address, and website spelled out as plain text. Print this tab or grab the PDF before you lose signal — the ferry dock in particular is a spot where you won't have it.</div>
-
-    <button class="print-btn" onclick="window.print()">🖨 Print this page</button>
-    <a class="print-btn outline" href="Como-Itinerary-Printable.pdf" target="_blank" rel="noopener">⬇ Download PDF</a>
+    <a class="print-btn" href="Como-Itinerary-Printable.pdf" target="_blank" rel="noopener">⬇ Download PDF</a>
 
     <h3 style="font-family:'Fraunces',serif; font-size:20px; margin:28px 0 14px; color:var(--cream);">Key Contacts</h3>
 
@@ -679,6 +669,27 @@
   });
   var group = new L.featureGroup(markers);
   map.fitBounds(group.getBounds().pad(0.3));
+
+  // Book Now: manual complete toggle. A booking confirmation doesn't always land in Ghazal's
+  // own inbox (a travel companion may book something) — clicking the checkbox lets her mark
+  // any item done herself, independent of the automatic email-sync "done" state.
+  (function(){
+    var PAGE_KEY = 'como';
+    document.querySelectorAll('.checklist li[data-book-id]').forEach(function(li){
+      // Items that also appear on another leg's page (e.g. a connecting flight) share one
+      // storage key via data-book-shared-id, so checking it off in one place checks it off everywhere.
+      var sharedId = li.getAttribute('data-book-shared-id');
+      var key = sharedId ? ('bookdone::shared::' + sharedId) : ('bookdone::' + PAGE_KEY + '::' + li.getAttribute('data-book-id'));
+      var stored = localStorage.getItem(key);
+      if (stored === '1') li.classList.add('done');
+      else if (stored === '0') li.classList.remove('done');
+      var box = li.querySelector('.checkbox');
+      if (box) box.addEventListener('click', function(){
+        var nowDone = li.classList.toggle('done');
+        localStorage.setItem(key, nowDone ? '1' : '0');
+      });
+    });
+  })();
 </script>
 </body>
 </html>

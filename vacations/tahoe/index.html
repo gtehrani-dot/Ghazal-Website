@@ -211,8 +211,11 @@
   .checklist{ list-style:none; }
   .checklist li{ display:flex; gap:14px; align-items:flex-start; padding:16px 0; border-bottom:1px solid var(--line); font-size:14.5px; color:var(--granite); }
   .checklist li:last-child{ border-bottom:none; }
-  .checkbox{ width:20px; height:20px; border:2px solid var(--sky); border-radius:5px; flex-shrink:0; margin-top:1px; }
+  .checkbox{ width:20px; height:20px; border:2px solid var(--sky); border-radius:5px; flex-shrink:0; margin-top:1px; cursor:pointer; }
   .checklist .lbl{ color:var(--sky-deep); font-family:'JetBrains Mono',monospace; font-size:10.5px; letter-spacing:0.06em; text-transform:uppercase; display:block; margin-bottom:3px; }
+  .checklist .lbl a{ color:inherit; text-decoration:underline; text-decoration-color:rgba(59,110,165,0.4); text-underline-offset:2px; }
+  .checklist .lbl a:hover{ text-decoration-color:currentColor; }
+  .checklist .lbl a.tel-ico{ text-decoration:none; margin-left:4px; font-size:11px; }
   .checklist .contact{ display:block; font-family:'JetBrains Mono',monospace; font-size:11.5px; color:var(--granite); margin-top:4px; }
   .checklist .contact a{ color:var(--sky-deep); }
 
@@ -667,39 +670,31 @@
 
     <div class="book-group-label">Accommodations</div>
     <ul class="checklist">
-      <li><span class="checkbox"></span><div><span class="lbl">Lodging × 1</span>Incline Village / North Shore, all 7 nights — no mid-trip move. See Hotels tab — property name/confirmation still needed.
+      <li data-book-id="lodging"><span class="checkbox"></span><div><span class="lbl">Lodging × 1</span>Incline Village / North Shore, all 7 nights — no mid-trip move. See Hotels tab — property name/confirmation still needed.
       </div></li>
     </ul>
 
     <div class="book-group-label">Transportation</div>
     <ul class="checklist">
-      <li><span class="checkbox"></span><div><span class="lbl">Flights</span>DCA/IAD → RNO, arrive Wed Aug 5 / depart Wed Aug 12
-        <span class="contact">Airline/confirmation not yet on file — add once booked</span>
+      <li data-book-id="flights"><span class="checkbox"></span><div><span class="lbl">Flights</span>DCA/IAD → RNO, arrive Wed Aug 5 / depart Wed Aug 12 — airline/confirmation not yet on file, add once booked
       </div></li>
-      <li><span class="checkbox"></span><div><span class="lbl">Rental car</span>One car for the full week
-        <span class="contact">Agency not yet on file — add once booked</span>
+      <li data-book-id="rental-car"><span class="checkbox"></span><div><span class="lbl">Rental car</span>One car for the full week — agency not yet on file, add once booked
       </div></li>
     </ul>
 
     <div class="book-group-label">Excursions</div>
     <ul class="checklist">
-      <li><span class="checkbox"></span><div><span class="lbl"><a href="https://truckeeriverraft.com/" target="_blank" rel="noopener" class="title-lnk">Truckee River rafting</a></span>Book the earliest Saturday Aug 8 slot
-        <span class="contact">📞 <a href="tel:5305830123">(530) 583-0123</a> &nbsp;·&nbsp; <a href="https://truckeeriverraft.com/" target="_blank" rel="noopener">Book online</a></span>
+      <li data-book-id="rafting"><span class="checkbox"></span><div><span class="lbl"><a href="https://truckeeriverraft.com/" target="_blank" rel="noopener" class="title-lnk">Truckee River rafting</a> <a class="tel-ico" href="tel:5305830123" title="Call">📞</a></span>Book the earliest Saturday Aug 8 slot
       </div></li>
-      <li><span class="checkbox"></span><div><span class="lbl"><a href="https://tahoetreetop.com/tahoe-city-treetop/" target="_blank" rel="noopener" class="title-lnk">Tree Tops Adventure Park (optional)</a></span>Tahoe City/Granlibakken — only if you decide to do it on the Day 7 flex day, reserve ahead if so
-        <span class="contact">📞 <a href="tel:5308071004">(530) 807-1004</a> &nbsp;·&nbsp; <a href="mailto:Reservations@TahoeTreetop.com">Reservations@TahoeTreetop.com</a></span>
+      <li data-book-id="tree-tops"><span class="checkbox"></span><div><span class="lbl"><a href="https://tahoetreetop.com/tahoe-city-treetop/" target="_blank" rel="noopener" class="title-lnk">Tree Tops Adventure Park (optional)</a> <a class="tel-ico" href="tel:5308071004" title="Call">📞</a></span>Tahoe City/Granlibakken — only if you decide to do it on the Day 7 flex day, reserve ahead if so · <a href="mailto:Reservations@TahoeTreetop.com">Reservations@TahoeTreetop.com</a>
       </div></li>
-      <li><span class="checkbox"></span><div><span class="lbl"><a href="https://clearlytahoerentals.com/" target="_blank" rel="noopener" class="title-lnk">SUP rental</a></span>Clearly Tahoe at Sand Harbor, Thursday Aug 6 — first-come at their beach kiosk, no advance booking needed/available
-        <span class="contact">📞 <a href="tel:5305544664">(530) 554-4664</a></span>
+      <li data-book-id="sup-rental"><span class="checkbox"></span><div><span class="lbl"><a href="https://clearlytahoerentals.com/" target="_blank" rel="noopener" class="title-lnk">SUP rental</a> <a class="tel-ico" href="tel:5305544664" title="Call">📞</a></span>Clearly Tahoe at Sand Harbor, Thursday Aug 6 — first-come at their beach kiosk, no advance booking needed/available
       </div></li>
-      <li><span class="checkbox"></span><div><span class="lbl">Sand Harbor parking</span>No reservation — arrive by 8am, Thursday Aug 6
-        <span class="contact">📞 Nevada State Parks, Lake Tahoe: <a href="tel:7758310494">(775) 831-0494</a></span>
+      <li data-book-id="sand-harbor-parking"><span class="checkbox"></span><div><span class="lbl"><a href="tel:7758310494">Sand Harbor parking</a></span>No reservation — arrive by 8am, Thursday Aug 6 · Nevada State Parks, Lake Tahoe 📞
       </div></li>
-      <li><span class="checkbox"></span><div><span class="lbl">Vikingsholm tour tickets</span>Check current summer tour schedule closer to the date — Monday Aug 10
-        <span class="contact">📞 Visitor Center: <a href="tel:5305257232">(530) 525-7232</a> &nbsp;·&nbsp; <a href="https://www.sierrastateparks.org/vikingsholm" target="_blank" rel="noopener">sierrastateparks.org</a></span>
+      <li data-book-id="vikingsholm"><span class="checkbox"></span><div><span class="lbl"><a href="https://www.sierrastateparks.org/vikingsholm" target="_blank" rel="noopener">Vikingsholm tour tickets</a> <a class="tel-ico" href="tel:5305257232" title="Call Visitor Center">📞</a></span>Check current summer tour schedule closer to the date — Monday Aug 10
       </div></li>
-      <li><span class="checkbox"></span><div><span class="lbl"><a href="https://www.zephyrcove.com/lake-tahoe-cruises/our-fleet" target="_blank" rel="noopener" class="title-lnk">M.S. Dixie II (optional, Day 7)</a></span>Only if the flex day goes this direction instead of Tree Tops
-        <span class="contact">📞 Zephyr Cove Resort: <a href="tel:7755894901">(775) 589-4901</a></span>
+      <li data-book-id="ms-dixie"><span class="checkbox"></span><div><span class="lbl"><a href="https://www.zephyrcove.com/lake-tahoe-cruises/our-fleet" target="_blank" rel="noopener" class="title-lnk">M.S. Dixie II (optional, Day 7)</a> <a class="tel-ico" href="tel:7755894901" title="Call Zephyr Cove Resort">📞</a></span>Only if the flex day goes this direction instead of Tree Tops
       </div></li>
     </ul>
   </div>
@@ -708,9 +703,7 @@
   <div id="tab-print" class="section">
     <div class="section-title">Print / Offline Copy</div>
     <div class="section-sub">A no-internet-needed version — every phone number, address, and website spelled out as plain text. Print this tab (or grab the PDF) before you lose signal at the trailhead or on the water.</div>
-
-    <button class="print-btn" onclick="window.print()">🖨 Print this page</button>
-    <a class="print-btn outline" href="Tahoe-Itinerary-Printable.pdf" target="_blank" rel="noopener">⬇ Download PDF</a>
+    <a class="print-btn" href="Tahoe-Itinerary-Printable.pdf" target="_blank" rel="noopener">⬇ Download PDF</a>
 
     <h3 style="font-family:'Fraunces',serif; font-size:20px; margin:28px 0 14px; color:var(--ink);">Key Contacts</h3>
 
@@ -877,6 +870,24 @@
   });
 
   setTimeout(function(){ map.invalidateSize(); }, 150);
+
+  // Book Now: manual complete toggle. A booking confirmation doesn't always land in Ghazal's
+  // own inbox (a travel companion may book something) — clicking the checkbox lets her mark
+  // any item done herself, independent of the automatic email-sync "done" state.
+  (function(){
+    var PAGE_KEY = 'tahoe';
+    document.querySelectorAll('.checklist li[data-book-id]').forEach(function(li){
+      var key = 'bookdone::' + PAGE_KEY + '::' + li.getAttribute('data-book-id');
+      var stored = localStorage.getItem(key);
+      if (stored === '1') li.classList.add('done');
+      else if (stored === '0') li.classList.remove('done');
+      var box = li.querySelector('.checkbox');
+      if (box) box.addEventListener('click', function(){
+        var nowDone = li.classList.toggle('done');
+        localStorage.setItem(key, nowDone ? '1' : '0');
+      });
+    });
+  })();
 </script>
 
 </body>

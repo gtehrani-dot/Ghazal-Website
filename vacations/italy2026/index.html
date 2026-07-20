@@ -49,10 +49,10 @@
   .eyebrow{ color:var(--aqua); font-size:12px; margin-bottom:18px; }
   header h1{ font-size:clamp(40px, 6vw, 68px); line-height:1.02; max-width:14ch; }
   header h1 em{ font-style:italic; color:var(--turquoise); }
-  header p{ margin-top:18px; max-width:52ch; color:rgba(251,246,234,0.72); font-size:17px; }
+  header p{ margin-top:18px; max-width:none; color:rgba(251,246,234,0.72); font-size:17px; }
 
   /* trip cards */
-  .cards{ display:grid; grid-template-columns:1fr 1fr; gap:28px; padding:24px 0 64px; }
+  .cards{ display:grid; grid-template-columns:1fr 1fr; gap:28px; padding:24px 0 64px; max-width:940px; margin:0 auto; }
   @media (max-width:840px){ .cards{ grid-template-columns:1fr; } }
 
   .card{
@@ -206,7 +206,7 @@
   <div class="todo-section">
     <div class="todo-head">
       <h2>Top booking needs</h2>
-      <p>The two most pressing open items on each leg — full checklists (with contact info) live on each trip's own Book Now tab.</p>
+      <p>One consolidated list across both legs, most time-sensitive first — full checklists (with contact info) live on each trip's own Book Now tab. An item that touches both legs (like the connecting flight) is listed once.</p>
     </div>
     <ul class="todo-list" id="todoList">
       <li class="todo-item" data-id="sardinia-casagliana">
@@ -217,19 +217,19 @@
         </div>
         <span class="todo-tag">Sardinia</span>
       </li>
-      <li class="todo-item" data-id="sardinia-aeroitalia">
+      <li class="todo-item" data-id="lin-connector-flight">
         <input type="checkbox">
         <div class="todo-text">
           <div class="todo-title">Purchase Aeroitalia XZ2624 — Olbia → Milan Linate, Aug 10</div>
-          <div class="todo-sub">Priced (~€180 for 3, Classic fare) but not yet bought — this is also the flight that starts the Como leg. <a class="todo-link" href="sardinia/index.html#tab-book">See Sardinia Book Now ↗</a></div>
+          <div class="todo-sub">Priced (~€180 for 3, Classic fare) but not yet bought — this closes out Sardinia and is also the flight that opens the Como leg, tracked once. <a class="todo-link" href="sardinia/index.html#tab-book">See Sardinia Book Now ↗</a></div>
         </div>
-        <span class="todo-tag">Sardinia</span>
+        <span class="todo-tag">Sardinia → Como</span>
       </li>
-      <li class="todo-item" data-id="como-arrival-flight">
+      <li class="todo-item" data-id="como-taxi-lezzeno">
         <input type="checkbox">
         <div class="todo-text">
-          <div class="todo-title">Book the Milan Linate (LIN) arrival flight</div>
-          <div class="todo-sub">Routing is decided (LIN + train + ferry, the scenic approach) — just the flight itself still needs booking. <a class="todo-link" href="como/index.html#tab-book">See Como Book Now ↗</a></div>
+          <div class="todo-title">Book Taxi Lezzeno — private car to MXP, Aug 14</div>
+          <div class="todo-sub">Departure flight time is confirmed (3:20 PM), so this can be locked in now. <a class="todo-link" href="como/index.html#tab-book">See Como Book Now ↗</a></div>
         </div>
         <span class="todo-tag">Como</span>
       </li>

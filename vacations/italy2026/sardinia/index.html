@@ -163,8 +163,11 @@
   .checklist{ list-style:none; }
   .checklist li{ display:flex; gap:14px; align-items:flex-start; padding:16px 0; border-bottom:1px solid var(--line); font-size:14.5px; color:var(--muted); }
   .checklist li:last-child{ border-bottom:none; }
-  .checkbox{ width:19px; height:19px; border:2px solid var(--gold); border-radius:5px; flex-shrink:0; margin-top:1px; }
+  .checkbox{ width:19px; height:19px; border:2px solid var(--gold); border-radius:5px; flex-shrink:0; margin-top:1px; cursor:pointer; }
   .checklist .lbl{ color:var(--gold); font-family:'IBM Plex Mono',monospace; font-size:10.5px; letter-spacing:.06em; text-transform:uppercase; display:block; margin-bottom:3px; }
+  .checklist .lbl a{ color:inherit; text-decoration:underline; text-decoration-color:rgba(211,169,74,0.45); text-underline-offset:2px; }
+  .checklist .lbl a:hover{ text-decoration-color:currentColor; }
+  .checklist .lbl a.tel-ico{ text-decoration:none; margin-left:4px; font-size:11px; }
   .checklist .contact{ display:block; font-family:'IBM Plex Mono',monospace; font-size:11.5px; color:var(--muted); margin-top:4px; }
   .checklist .contact a{ color:var(--gold); }
   .checklist li.done{ opacity:0.55; }
@@ -207,7 +210,7 @@
 
 <div class="topbar">
   <div class="hero-eyebrow">Sardinia Leg · Aug 6–10, 2026</div>
-  <h1>Four days,<br>three coasts.<span>One home base in Gallura — north, east, and northwest shorelines, each its own day</span></h1>
+  <h1>Sardinia<span>Four days, three coasts — one home base in Gallura, north, east, and northwest shorelines each its own day</span></h1>
   <div class="hero-meta">
     <div class="meta-chip">✈️ <strong>MXP → OLB</strong> · easyJet, lands 12:05 PM</div>
     <div class="meta-chip">🗓 <strong>4 nights</strong> · Aug 6–10</div>
@@ -486,57 +489,47 @@
 
     <div class="book-group-label">Accommodations</div>
     <ul class="checklist">
-      <li><span class="checkbox"></span><div>
-        <span class="lbl">Lodging — Casagliana Suite Resort</span>4 nights, Aug 6–10, Via Sole Ruju 14, Olbia — still not booked, no confirmation on file
-        <span class="contact">📞 <a href="tel:+390789733029">+39 0789 733029</a> &nbsp;·&nbsp; <a href="https://en.casagliana.com/609/booking-form.html" target="_blank" rel="noopener">Book online</a></span>
+      <li data-book-id="lodging-casagliana"><span class="checkbox"></span><div>
+        <span class="lbl"><a href="https://en.casagliana.com/609/booking-form.html" target="_blank" rel="noopener">Lodging — Casagliana Suite Resort</a> <a class="tel-ico" href="tel:+390789733029" title="Call">📞</a></span>4 nights, Aug 6–10, Via Sole Ruju 14, Olbia — still not booked, no confirmation on file
       </div></li>
     </ul>
 
     <div class="book-group-label">Transportation</div>
     <ul class="checklist">
-      <li class="done"><span class="checkbox"></span><div>
-        <span class="lbl">Overnight flight — Washington (DCA) → Milan (MXP)</span>Booked — JetBlue via Boston, Wed Aug 5 2:25 PM → Thu Aug 6 8:10 AM, confirmation LLBWSJ, all 3 travelers
-        <span class="contact">Chase Travel Trip #1020695551</span>
+      <li class="done" data-book-id="flight-dca-mxp"><span class="checkbox"></span><div>
+        <span class="lbl">Overnight flight — Washington (DCA) → Milan (MXP)</span>Booked — JetBlue via Boston, Wed Aug 5 2:25 PM → Thu Aug 6 8:10 AM, confirmation LLBWSJ, all 3 travelers · Chase Travel Trip #1020695551
       </div></li>
-      <li class="done"><span class="checkbox"></span><div>
-        <span class="lbl">Flight — Milan (MXP) → Olbia (OLB)</span>Booked — easyJet, Thu Aug 6, departs 10:45 AM, lands 12:05 PM, checked bags included · matches the plan on this page · booking reference is in the Print/Offline Copy tab
-        <span class="contact"><a href="https://www.easyjet.com/en/manage-bookings" target="_blank" rel="noopener">Manage booking at easyjet.com</a></span>
+      <li class="done" data-book-id="flight-mxp-olb"><span class="checkbox"></span><div>
+        <span class="lbl"><a href="https://www.easyjet.com/en/manage-bookings" target="_blank" rel="noopener">Flight — Milan (MXP) → Olbia (OLB)</a></span>Booked — easyJet, Thu Aug 6, departs 10:45 AM, lands 12:05 PM, checked bags included · matches the plan on this page · booking reference is in the Print/Offline Copy tab
       </div></li>
-      <li class="done"><span class="checkbox"></span><div>
-        <span class="lbl">Rental car — Only Sardinia Autonoleggio</span>Booked — ticket #056258, Group E Compact Wagon (manual), Aug 6 12:00 → Aug 10 12:00, pickup/dropoff at OLB airport rental terminal, €683.24 total paid
-        <span class="contact">📞 <a href="tel:+390789689470">+39 0789 68947</a> &nbsp;·&nbsp; <a href="https://www.only-sardinia.com/en/sardinia-car-rental/" target="_blank" rel="noopener">Manage booking</a></span>
+      <li class="done" data-book-id="rental-car"><span class="checkbox"></span><div>
+        <span class="lbl"><a href="https://www.only-sardinia.com/en/sardinia-car-rental/" target="_blank" rel="noopener">Rental car — Only Sardinia Autonoleggio</a> <a class="tel-ico" href="tel:+390789689470" title="Call">📞</a></span>Booked — ticket #056258, Group E Compact Wagon (manual), Aug 6 12:00 → Aug 10 12:00, pickup/dropoff at OLB airport rental terminal, €683.24 total paid
       </div></li>
-      <li><span class="checkbox"></span><div>
-        <span class="lbl">Purchase Aeroitalia XZ2624 — OLB → LIN</span>Priced, not yet purchased: Aug 10, departs 2:10 PM, arrives 3:20 PM, ~€179.97 for 3 on Classic fare (carry-on only — decide on a checked bag or Biz upgrade before buying)
-        <span class="contact">No vendor yet — <a href="https://book.aeroitalia.com/" target="_blank" rel="noopener">book.aeroitalia.com</a></span>
+      <li data-book-id="aeroitalia-xz2624" data-book-shared-id="lin-connector-flight"><span class="checkbox"></span><div>
+        <span class="lbl"><a href="https://book.aeroitalia.com/" target="_blank" rel="noopener">Purchase Aeroitalia XZ2624 — OLB → LIN</a></span>Priced, not yet purchased: Aug 10, departs 2:10 PM, arrives 3:20 PM, ~€179.97 for 3 on Classic fare (carry-on only — decide on a checked bag or Biz upgrade before buying). This is also the flight that gets you into the Como leg — booking it here checks it off there too.
       </div></li>
-      <li><span class="checkbox"></span><div>
-        <span class="lbl">Add Ghazal to Chase flight-alert contacts</span>Add Ghazal's profile/contact info (phone &amp; email) to the Chase travel booking so flight status updates (delays, gate changes) go to her directly
-        <span class="contact">No vendor — update via Chase account/travel booking settings</span>
+      <li data-book-id="chase-alerts"><span class="checkbox"></span><div>
+        <span class="lbl">Add Ghazal to Chase flight-alert contacts</span>Add Ghazal's profile/contact info (phone &amp; email) to the Chase travel booking so flight status updates (delays, gate changes) go to her directly — done via Chase account/travel booking settings, no separate vendor link
       </div></li>
     </ul>
 
     <div class="book-group-label">Excursions</div>
     <ul class="checklist">
-      <li><span class="checkbox"></span><div>
-        <span class="lbl">Maddalena Islands boat excursion — Delfino Tours</span>~7 hr, Fri Aug 7 from Palau — Spargi, Santa Maria, Pink Beach view
-        <span class="contact">📞 <a href="tel:+393348520671">+39 334 852 0671</a> &nbsp;·&nbsp; <a href="https://gitearcipelago.it/en/" target="_blank" rel="noopener">Book online</a></span>
+      <li data-book-id="maddalena-delfino"><span class="checkbox"></span><div>
+        <span class="lbl"><a href="https://gitearcipelago.it/en/" target="_blank" rel="noopener">Maddalena Islands boat excursion — Delfino Tours</a> <a class="tel-ico" href="tel:+393348520671" title="Call">📞</a></span>~7 hr, Fri Aug 7 from Palau — Spargi, Santa Maria, Pink Beach view
       </div></li>
-      <li><span class="checkbox"></span><div>
-        <span class="lbl">Orosei charter — Palmasera Boat Rental</span>Cala Luna &amp; Cala Mariolu, Sat Aug 8 from Cala Gonone, ~9 AM departure typical
-        <span class="contact">📞 <a href="tel:+393476027626">+39 347 602 7626</a> &nbsp;·&nbsp; <a href="https://www.palmaseraboatrental.com/en/" target="_blank" rel="noopener">Book online</a></span>
+      <li data-book-id="orosei-palmasera"><span class="checkbox"></span><div>
+        <span class="lbl"><a href="https://www.palmaseraboatrental.com/en/" target="_blank" rel="noopener">Orosei charter — Palmasera Boat Rental</a> <a class="tel-ico" href="tel:+393476027626" title="Call">📞</a></span>Cala Luna &amp; Cala Mariolu, Sat Aug 8 from Cala Gonone, ~9 AM departure typical
       </div></li>
-      <li><span class="checkbox"></span><div>
-        <span class="lbl">La Pelosa entry reservation</span>Sun Aug 9 — required timed online reservation, €3.50 pp (kids under 12 free) — book now via the no-time-limit 500-seat allocation; don't wait for the 48-hr release
-        <span class="contact"><a href="https://spiaggialapelosa.it/en/" target="_blank" rel="noopener">Reserve at spiaggialapelosa.it</a> (official site only)</span>
+      <li data-book-id="la-pelosa"><span class="checkbox"></span><div>
+        <span class="lbl"><a href="https://spiaggialapelosa.it/en/" target="_blank" rel="noopener">La Pelosa entry reservation</a></span>Sun Aug 9 — required timed online reservation, €3.50 pp (kids under 12 free) — book now via the no-time-limit 500-seat allocation; don't wait for the 48-hr release. Official site only.
       </div></li>
     </ul>
 
     <div class="book-group-label">Restaurants</div>
     <ul class="checklist">
-      <li><span class="checkbox"></span><div>
-        <span class="lbl">Dinner reservation — CuCumiao</span>Fri Aug 7, Palau — reserve ahead, June–August is busy
-        <span class="contact">📞 <a href="tel:+390789707064">+39 0789 707064</a> &nbsp;·&nbsp; <a href="https://www.cucumiao.it/en/" target="_blank" rel="noopener">cucumiao.it</a> &nbsp;·&nbsp; alt: O'Belau 📞 <a href="tel:+393478961670">+39 347 896 1670</a></span>
+      <li data-book-id="dinner-cucumiao"><span class="checkbox"></span><div>
+        <span class="lbl"><a href="https://www.cucumiao.it/en/" target="_blank" rel="noopener">Dinner reservation — CuCumiao</a> <a class="tel-ico" href="tel:+390789707064" title="Call">📞</a></span>Fri Aug 7, Palau — reserve ahead, June–August is busy. Alt: O'Belau <a href="tel:+393478961670">📞 +39 347 896 1670</a>
       </div></li>
     </ul>
   </div>
@@ -545,9 +538,7 @@
   <div id="tab-print" class="section">
     <div class="section-title">Print / Offline Copy</div>
     <div class="section-sub">A no-internet-needed version — every phone number, address, and website spelled out as plain text. Print this tab or grab the PDF before you lose signal.</div>
-
-    <button class="print-btn" onclick="window.print()">🖨 Print this page</button>
-    <a class="print-btn outline" href="Sardinia-Itinerary-Printable.pdf" target="_blank" rel="noopener">⬇ Download PDF</a>
+    <a class="print-btn" href="Sardinia-Itinerary-Printable.pdf" target="_blank" rel="noopener">⬇ Download PDF</a>
 
     <h3 style="font-family:'Fraunces',serif; font-size:20px; margin:28px 0 14px; color:var(--paper);">Key Contacts</h3>
 
@@ -711,6 +702,27 @@
   });
 
   setTimeout(function(){ map.invalidateSize(); }, 150);
+
+  // Book Now: manual complete toggle. A booking confirmation doesn't always land in Ghazal's
+  // own inbox (a travel companion may book something) — clicking the checkbox lets her mark
+  // any item done herself, independent of the automatic email-sync "done" state.
+  (function(){
+    var PAGE_KEY = 'sardinia';
+    document.querySelectorAll('.checklist li[data-book-id]').forEach(function(li){
+      // Items that also appear on another leg's page (e.g. a connecting flight) share one
+      // storage key via data-book-shared-id, so checking it off in one place checks it off everywhere.
+      var sharedId = li.getAttribute('data-book-shared-id');
+      var key = sharedId ? ('bookdone::shared::' + sharedId) : ('bookdone::' + PAGE_KEY + '::' + li.getAttribute('data-book-id'));
+      var stored = localStorage.getItem(key);
+      if (stored === '1') li.classList.add('done');
+      else if (stored === '0') li.classList.remove('done');
+      var box = li.querySelector('.checkbox');
+      if (box) box.addEventListener('click', function(){
+        var nowDone = li.classList.toggle('done');
+        localStorage.setItem(key, nowDone ? '1' : '0');
+      });
+    });
+  })();
 </script>
 
 </body>

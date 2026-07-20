@@ -180,10 +180,15 @@
   .book-group-label { font-family:'JetBrains Mono',monospace; font-size: 11px; letter-spacing: .1em; text-transform: uppercase; color: var(--jungle); margin: 30px 0 6px; display: flex; align-items: center; gap: 10px; }
   .book-group-label:first-child { margin-top: 0; }
   .book-group-label::after { content: ''; flex: 1; height: 1px; background: var(--mist); }
-  .booking-item { background: white; border: 1px solid var(--mist); border-radius: 10px; padding: 18px 22px; display: grid; grid-template-columns: 28px 1fr auto; align-items: center; gap: 14px; transition: box-shadow 0.2s; }
+  .booking-item { background: white; border: 1px solid var(--mist); border-radius: 10px; padding: 18px 22px; display: grid; grid-template-columns: 28px 1fr; align-items: center; gap: 14px; transition: box-shadow 0.2s; }
   .booking-item:hover { box-shadow: 0 4px 16px rgba(26,58,42,0.08); }
-  .booking-num { width: 28px; height: 28px; background: var(--jungle); color: white; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 12px; font-weight: 500; flex-shrink: 0; }
+  .booking-item.done { opacity: 0.55; }
+  .booking-item.done .booking-num { background: #2e7d32 !important; }
+  .booking-item.done h4 { text-decoration: line-through; text-decoration-color: var(--warm-grey); }
+  .booking-num { width: 28px; height: 28px; background: var(--jungle); color: white; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 12px; font-weight: 500; flex-shrink: 0; cursor: pointer; }
   .booking-info h4 { font-size: 14px; font-weight: 500; color: var(--jungle); margin-bottom: 2px; }
+  .booking-info h4 a { color: inherit; text-decoration: underline; text-decoration-color: rgba(26,58,42,0.3); text-underline-offset: 2px; }
+  .booking-info h4 a:hover { text-decoration-color: currentColor; }
   .booking-info .when { font-size: 12px; color: var(--warm-grey); }
   .booking-info .when.urgent { color: var(--sunset); font-weight: 500; }
   .booking-info .contact-phone { font-size: 11.5px; font-family:'JetBrains Mono',monospace; color: var(--water); margin-top: 3px; }
@@ -859,44 +864,40 @@
     <div class="book-group-label">Accommodations</div>
     <div class="booking-list">
 
-      <div class="booking-item">
+      <div class="booking-item" data-book-id="hampton-hilton">
         <div class="booking-num">1</div>
         <div class="booking-info">
-          <h4>Hampton by Hilton SJO Airport</h4>
+          <h4><a href="https://www.hilton.com/en/hotels/sjcaphx-hampton-san-jose-airport/" target="_blank" rel="noopener">Hampton by Hilton SJO Airport</a></h4>
           <div class="when">Book now</div>
           <div class="contact-phone">📞 <a href="tel:+50624360000">+506 2436 0000</a></div>
         </div>
-        <div class="booking-link"><a href="https://www.hilton.com/en/hotels/sjcaphx-hampton-san-jose-airport/" target="_blank" rel="noopener">Book Now</a></div>
       </div>
 
-      <div class="booking-item">
+      <div class="booking-item" data-book-id="springs-resort">
         <div class="booking-num">2</div>
         <div class="booking-info">
-          <h4>The Springs Resort &amp; Spa — Arenal</h4>
+          <h4><a href="https://www.thespringscostarica.com" target="_blank" rel="noopener">The Springs Resort &amp; Spa — Arenal</a></h4>
           <div class="when urgent">⚡ Book now — limited rooms at peak pricing</div>
           <div class="contact-phone">📞 <a href="tel:+50624013313">+506 2401 3313</a></div>
         </div>
-        <div class="booking-link"><a href="https://www.thespringscostarica.com" target="_blank" rel="noopener">Book Now</a></div>
       </div>
 
-      <div class="booking-item">
+      <div class="booking-item" data-book-id="hotel-belmar">
         <div class="booking-num">3</div>
         <div class="booking-info">
-          <h4>Hotel Belmar — Monteverde</h4>
+          <h4><a href="https://www.hotelbelmar.net" target="_blank" rel="noopener">Hotel Belmar — Monteverde</a></h4>
           <div class="when">Book now for availability</div>
           <div class="contact-phone">📞 <a href="tel:+50626455201">+506 2645 5201</a></div>
         </div>
-        <div class="booking-link"><a href="https://www.hotelbelmar.net" target="_blank" rel="noopener">Book Now</a></div>
       </div>
 
-      <div class="booking-item">
+      <div class="booking-item" data-book-id="tulemar-resort">
         <div class="booking-num">4</div>
         <div class="booking-info">
-          <h4>Tulemar Resort — Manuel Antonio</h4>
+          <h4><a href="https://www.tulemarresort.com" target="_blank" rel="noopener">Tulemar Resort — Manuel Antonio</a></h4>
           <div class="when">Book now for availability</div>
           <div class="contact-phone">📞 <a href="tel:+50640015878">+506 4001 5878</a></div>
         </div>
-        <div class="booking-link"><a href="https://www.tulemarresort.com" target="_blank" rel="noopener">Book Now</a></div>
       </div>
 
       <div class="booking-item" style="grid-column:1/-1;background:#fdf6e8;border-color:#e8d5a0;">
@@ -912,24 +913,22 @@
     <div class="book-group-label">Transportation</div>
     <div class="booking-list">
 
-      <div class="booking-item">
+      <div class="booking-item" data-book-id="flights-avianca">
         <div class="booking-num">5</div>
         <div class="booking-info">
-          <h4>Flights — Avianca</h4>
+          <h4><a href="https://www.avianca.com" target="_blank" rel="noopener">Flights — Avianca</a></h4>
           <div class="when">IAD ⇄ SJO, book once dates are confirmed</div>
           <div class="contact-phone">📞 <a href="tel:18669190081">1-866-919-0081</a></div>
         </div>
-        <div class="booking-link"><a href="https://www.avianca.com" target="_blank" rel="noopener">Book Now</a></div>
       </div>
 
-      <div class="booking-item">
+      <div class="booking-item" data-book-id="adobe-rental-car">
         <div class="booking-num">6</div>
         <div class="booking-info">
-          <h4>Adobe Rental Car — 4WD SUV</h4>
+          <h4><a href="https://www.adobecar.com" target="_blank" rel="noopener">Adobe Rental Car — 4WD SUV</a></h4>
           <div class="when urgent">⚡ Book now — directly, NOT third-party</div>
           <div class="contact-phone">📞 CR: <a href="tel:+50624422422">+506 2442 2422</a> · US toll-free: <a href="tel:18558611250">1-855-861-1250</a></div>
         </div>
-        <div class="booking-link"><a href="https://www.adobecar.com" target="_blank" rel="noopener">Book Now</a></div>
       </div>
 
     </div>
@@ -937,64 +936,58 @@
     <div class="book-group-label">Excursions</div>
     <div class="booking-list">
 
-      <div class="booking-item">
+      <div class="booking-item" data-book-id="manuel-antonio-np">
         <div class="booking-num">7</div>
         <div class="booking-info">
-          <h4>Manuel Antonio National Park</h4>
+          <h4><a href="https://serviciosenlinea.sinac.go.cr" target="_blank" rel="noopener">Manuel Antonio National Park</a></h4>
           <div class="when urgent">⚡ Online booking window opens 90 days before your visit date — reserve your entry time slot the moment it opens</div>
           <div class="contact-phone">📞 SINAC: <a href="tel:+50627775185">+506 2777 5185</a></div>
         </div>
-        <div class="booking-link"><a href="https://serviciosenlinea.sinac.go.cr" target="_blank" rel="noopener">Book Now</a></div>
       </div>
 
-      <div class="booking-item">
+      <div class="booking-item" data-book-id="aventura-ziplining">
         <div class="booking-num">8</div>
         <div class="booking-info">
-          <h4>100% Aventura Zip-lining</h4>
+          <h4><a href="https://montetours.com/100-aventura-zip-lines/" target="_blank" rel="noopener">100% Aventura Zip-lining</a></h4>
           <div class="when urgent">⚡ Sells out fast in peak season — book as early as possible</div>
           <div class="contact-phone missing">📞 No published phone number found — book online</div>
         </div>
-        <div class="booking-link"><a href="https://montetours.com/100-aventura-zip-lines/" target="_blank" rel="noopener">Book Now</a></div>
       </div>
 
-      <div class="booking-item">
+      <div class="booking-item" data-book-id="tabacon-hot-springs">
         <div class="booking-num">9</div>
         <div class="booking-info">
-          <h4>Tabacón Hot Springs Day Pass</h4>
+          <h4><a href="https://www.tabacon.com/product-category/one-day-pass/" target="_blank" rel="noopener">Tabacón Hot Springs Day Pass</a></h4>
           <div class="when urgent">⚡ At least 1 week before your visit</div>
           <div class="contact-phone">📞 <a href="tel:+50625191999">+506 2519 1999</a></div>
         </div>
-        <div class="booking-link"><a href="https://www.tabacon.com/product-category/one-day-pass/" target="_blank" rel="noopener">Book Now</a></div>
       </div>
 
-      <div class="booking-item">
+      <div class="booking-item" data-book-id="mistico-hanging-bridges">
         <div class="booking-num">10</div>
         <div class="booking-info">
-          <h4>Mistico Hanging Bridges</h4>
+          <h4><a href="https://www.getyourguide.com/mistico-arenal-hanging-bridges-park-l87313/hanging-bridges-walk-in-arenal-volcano-t411384/" target="_blank" rel="noopener">Mistico Hanging Bridges</a></h4>
           <div class="when">Advance booking strongly recommended</div>
           <div class="contact-phone">📞 <a href="tel:+50624798282">+506 2479 8282</a></div>
         </div>
-        <div class="booking-link"><a href="https://www.getyourguide.com/mistico-arenal-hanging-bridges-park-l87313/hanging-bridges-walk-in-arenal-volcano-t411384/" target="_blank" rel="noopener">Book Now</a></div>
       </div>
 
-      <div class="booking-item">
+      <div class="booking-item" data-book-id="nauyaca-waterfall">
         <div class="booking-num">11</div>
         <div class="booking-info">
-          <h4>Nauyaca Waterfall Shuttle (Don Lulo)</h4>
+          <h4><a href="https://www.walkmyworld.com/posts/nauyaca-waterfall" target="_blank" rel="noopener">Nauyaca Waterfall Shuttle (Don Lulo)</a></h4>
           <div class="when urgent">⚡ Book in advance — start as early as possible to beat crowds</div>
           <div class="contact-phone">📞 <a href="tel:+50627870541">+506 2787 0541</a> · <a href="tel:+50662801790">+506 6280 1790</a></div>
         </div>
-        <div class="booking-link"><a href="https://www.walkmyworld.com/posts/nauyaca-waterfall" target="_blank" rel="noopener">Full Guide</a></div>
       </div>
 
-      <div class="booking-item">
+      <div class="booking-item" data-book-id="surf-lessons">
         <div class="booking-num">12</div>
         <div class="booking-info">
-          <h4>Surf Lessons — Glen Castro</h4>
+          <h4><a href="https://www.getyourguide.com/manuel-antonio-l142888/manuel-antonio-surf-lessons-t669034/" target="_blank" rel="noopener">Surf Lessons — Glen Castro</a></h4>
           <div class="when">Alternate to Nauyaca on Day 9 — arrange ahead if you want it locked in</div>
           <div class="contact-phone missing">📞 No published phone number found — book via GetYourGuide/Viator, or find his tent on Playa Espadilla Norte</div>
         </div>
-        <div class="booking-link"><a href="https://www.getyourguide.com/manuel-antonio-l142888/manuel-antonio-surf-lessons-t669034/" target="_blank" rel="noopener">Book Now</a></div>
       </div>
 
     </div>
@@ -1004,9 +997,7 @@
   <div id="tab-print" class="section">
     <div class="section-title">Print / Offline Copy</div>
     <div class="section-sub">A no-internet-needed version — every phone number, address, and website spelled out as plain text. Print this tab or grab the PDF before you lose signal in the rainforest.</div>
-
-    <button class="print-btn" onclick="window.print()">🖨 Print this page</button>
-    <a class="print-btn outline" href="Costa-Rica-Itinerary-Printable.pdf" target="_blank" rel="noopener">⬇ Download PDF</a>
+    <a class="print-btn" href="Costa-Rica-Itinerary-Printable.pdf" target="_blank" rel="noopener">⬇ Download PDF</a>
 
     <h3 style="font-family:'Cormorant Garamond',serif; font-size:20px; margin:28px 0 14px; color:var(--jungle); font-weight:500;">Key Contacts</h3>
 
@@ -1190,6 +1181,30 @@
   });
 
   setTimeout(function(){ map.invalidateSize(); }, 150);
+
+  // Book Now: manual complete toggle. A booking confirmation doesn't always land in Ghazal's
+  // own inbox (a travel companion may book something) — clicking the numbered circle lets her
+  // mark any item done herself.
+  (function(){
+    var PAGE_KEY = 'costarica';
+    document.querySelectorAll('.booking-item[data-book-id]').forEach(function(item){
+      var key = 'bookdone::' + PAGE_KEY + '::' + item.getAttribute('data-book-id');
+      var stored = localStorage.getItem(key);
+      if (stored === '1') item.classList.add('done');
+      else if (stored === '0') item.classList.remove('done');
+      var num = item.querySelector('.booking-num');
+      if (!num) return;
+      if (!num.dataset.num) num.dataset.num = num.textContent.trim();
+      function render(){ num.textContent = item.classList.contains('done') ? '✅' : num.dataset.num; }
+      render();
+      num.title = 'Click to mark booked/complete';
+      num.addEventListener('click', function(){
+        item.classList.toggle('done');
+        localStorage.setItem(key, item.classList.contains('done') ? '1' : '0');
+        render();
+      });
+    });
+  })();
 </script>
 
 </body>
