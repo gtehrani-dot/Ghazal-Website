@@ -348,11 +348,6 @@
     <div class="section-title">Day-by-Day Itinerary</div>
     <div class="section-sub">One base for the whole trip — Incline Village — so no packing up mid-week. Drive time from Incline is noted on each day; the active days (rafting, the hike) are spread out rather than stacked so nothing runs back-to-back.</div>
 
-    <div class="callout muted">
-      <strong>Drive times from Incline Village (your only base):</strong><br>
-      Sand Harbor 10 min · Thunderbird Lodge 10 min · Kings Beach 15 min · Secret Cove 20 min · Tahoe City / Commons Beach 25–30 min · Zephyr Cove 30 min · Nevada Beach 35 min · Meeks Bay 40–45 min · Bliss Beach 45–50 min · Eagle Falls / Emerald Bay 50–60 min (longer in summer traffic). The West Shore days (4–6) are your longest commutes of the trip — everything else stays close.
-    </div>
-
     <div class="timeline">
 
       <div class="tl-day">
@@ -859,8 +854,9 @@
     });
     var thumbHtml = p.img ? '<img src="'+p.img+'" style="width:100%;height:90px;object-fit:cover;border-radius:6px;margin-bottom:6px;">' : '';
     var noteHtml = p.note ? '<br><span style="color:#888;font-size:12px;">'+p.note+'</span>' : '';
+    var siteHtml = p.site ? '<br><a href="'+p.site+'" target="_blank" rel="noopener" style="font-size:11px;">Website →</a>' : '';
     L.marker([p.lat, p.lng], {icon:icon}).addTo(map)
-      .bindPopup(thumbHtml + '<b>'+p.name+'</b>' + noteHtml, {maxWidth:220});
+      .bindPopup(thumbHtml + '<b>'+p.name+'</b>' + noteHtml + siteHtml, {maxWidth:220});
   });
 
   setTimeout(function(){ map.invalidateSize(); }, 150);

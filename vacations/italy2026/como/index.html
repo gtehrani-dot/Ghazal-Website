@@ -232,7 +232,7 @@
   <nav class="tab-nav">
     <div class="tab-nav-inner">
     <button class="tab-btn active" onclick="showTab('overview')">📋 Overview</button>
-    <button class="tab-btn" onclick="showTab('hotels')">🏨 Hotels</button>
+    <button class="tab-btn" onclick="showTab('hotels')">🏨 Hotel &amp; Transportation</button>
     <button class="tab-btn" onclick="showTab('itinerary')">📅 Itinerary</button>
     <button class="tab-btn" onclick="showTab('restaurants')">🍽 Restaurants</button>
     <button class="tab-btn" onclick="showTab('more')">⭐ Also Worth Seeing</button>
@@ -260,9 +260,10 @@
 
   <!-- ═══════════ HOTELS ═══════════ -->
   <div id="tab-hotels" class="section">
-    <div class="section-title">Where You're Staying</div>
-    <div class="section-sub">One base for all four nights — Filario Hotel &amp; Residences, Lezzeno.</div>
+    <div class="section-title">Hotel &amp; Transportation</div>
+    <div class="section-sub">Where you're staying, plus every flight and how you get around locally — the full logistics chain in one place, so day cards can stay focused on what you're actually doing.</div>
 
+    <div class="book-group-label">Lodging</div>
     <div class="hotels-grid">
       <div class="hotel-card">
         <div class="hotel-header">
@@ -276,16 +277,61 @@
         <div class="hotel-note">✅ Booked — Two-Bedroom Residence in the annex (75sqm, lake-view terrace, private beach and infinity pool on site, water-taxi service on request). Breakfast included every morning. Booked via Design Hotels (reservations@filario.it), 3 guests, 1 room. Confirmation number is in the Print/Offline Copy tab. Cancel or modify 21+ days before arrival to avoid a full-stay penalty.</div>
       </div>
     </div>
+
+    <div class="book-group-label">Transportation</div>
+    <div class="hotels-grid">
+      <div class="hotel-card">
+        <div class="hotel-header">
+          <div class="hotel-name">Arrival flight — Milan Linate (LIN)</div>
+          <div class="hotel-dates">Mon Aug 10, 2026</div>
+        </div>
+        <div class="hotel-meta-row">
+          <span>✈️ Routing decided, not yet booked</span>
+        </div>
+        <div class="hotel-note">⏳ Same flight as Sardinia's Aeroitalia XZ2624 (OLB → LIN) — tracked and purchased on the Sardinia leg's Book Now tab since that's where it originates. Chosen for the scenic train approach into Varenna over the Malpensa/Como-town alternative.</div>
+      </div>
+
+      <div class="hotel-card">
+        <div class="hotel-header">
+          <div class="hotel-name">LIN → Filario — shuttle, train &amp; ferry</div>
+          <div class="hotel-dates">Mon Aug 10, ~2.5–3 hrs door-to-door</div>
+        </div>
+        <div class="hotel-meta-row">
+          <span>🚌 Shuttle to Milano Centrale → 🚆 Trenord to Varenna-Esino → ⛴ ferry to Bellagio → 🚌 C130 to Pescaù–Bivio Bagnana</span>
+        </div>
+        <div class="hotel-note">Full leg-by-leg timing and pricing (~€17–20pp) is on the Day 1 Itinerary card and in the Print tab.</div>
+      </div>
+
+      <div class="hotel-card">
+        <div class="hotel-header">
+          <div class="hotel-name"><a href="https://www.asfautolinee.it/wp-content/uploads/pdf/estivo/C130.pdf" target="_blank" rel="noopener">Local transport — C130 bus &amp; lake ferry</a></div>
+          <div class="hotel-dates">Daily, Aug 10–14</div>
+        </div>
+        <div class="hotel-meta-row">
+          <span>🚌 <strong>Nearest stop to Filario: "Pescaù – Bivio Bagnana"</strong> (not Lezzeno–Piazza Roma)</span>
+          <span>💳 Pay on board — cash or contactless tap (SwipeOnLake)</span>
+        </div>
+        <div class="hotel-note">The C130 (still signed locally as "the C30") is how you get to/from Bellagio every day, ~15–20 min; the Bellagio–Varenna ferry (~15 min, every 20–30 min in season, ~7:30am–8pm) covers the rest. Current schedule linked is the Aug 3–30, 2026 reduced-summer timetable that covers this whole trip. No advance booking needed for either.</div>
+      </div>
+
+      <div class="hotel-card">
+        <div class="hotel-header">
+          <div class="hotel-name"><a href="https://www.united.com/en/us/manageres/mytrips" target="_blank" rel="noopener">Departure flight — MXP → ORD → DCA</a></div>
+          <div class="hotel-dates">Fri Aug 14, 3:20 PM → 10:52 PM</div>
+        </div>
+        <div class="hotel-meta-row">
+          <span>✈️ United, 1h35m connection at ORD</span>
+          <span>🔖 Conf. CTVQ69</span>
+        </div>
+        <div class="hotel-note">✅ Booked — all 3 travelers, 108,000 miles + $153.89. First checked bag included MXP→DCA; second bag $120/traveler if needed.</div>
+      </div>
+    </div>
   </div>
 
   <!-- ═══════════ ITINERARY ═══════════ -->
   <div id="tab-itinerary" class="section">
     <div class="section-title">Day-by-Day Itinerary</div>
     <div class="section-sub">One base for the whole trip — Filario in Lezzeno — with day trips out to Bellagio and Varenna. Transport alternates between the C130 bus, the lake ferry, and (on arrival/departure day) a private car.</div>
-
-    <div class="callout muted">
-      <strong>Getting around from Lezzeno:</strong> C130 bus (still signed locally as "the C30") to Bellagio ~15–20 min — <strong>per the hotel, the stop closest to Filario is "Pescaù – Bivio Bagnana"</strong> (also signed "Pescaù – Località Bagnana"), not the Lezzeno–Piazza Roma stop further down the line — far more frequent than Lezzeno's own small ferry stop · Bellagio–Varenna ferry ~15 min, boats roughly every 20–30 min in season (~7:30am–8pm) · Lezzeno → Milan Malpensa by car 65–90 min. Current schedule (Aug 3–30, 2026 reduced-summer timetable, which covers this whole trip): <a href="https://www.asfautolinee.it/wp-content/uploads/pdf/estivo/C130.pdf" target="_blank" rel="noopener" class="title-lnk">C130 Como–Nesso–Bellagio PDF</a>. <strong>C130 tickets:</strong> pay the driver on board — cash (small bills/coins) or a contactless card/phone tap (ASF's "SwipeOnLake" system). No app needed, though myCicero is there if you'd rather buy ahead.
-    </div>
 
     <div class="timeline">
 
@@ -303,12 +349,7 @@
           </div>
           <div class="tl-subhead">🚏 Getting there</div>
           <ul class="tl-items">
-            <li><strong>Arrival flight not yet booked — routing decided:</strong> fly into <strong>Milan Linate (LIN)</strong>, chosen for the scenic train approach into Varenna over the Malpensa/Como-town alternative.</li>
-            <li><strong>Leg 1:</strong> shared shuttle bus from LIN to Milano Centrale (Linate Shuttle/Air Pullman or Starfly/Airport Bus Express), ~25 min, ~€5–8pp, departures roughly every 20–30 min.</li>
-            <li><strong>Leg 2:</strong> Trenord regional train, Milano Centrale → Varenna-Esino, ~1 hr, ~€7.40pp — this is the scenic stretch, hugging the lake shore on the final approach.</li>
-            <li><strong>Leg 3:</strong> Varenna–Bellagio ferry, ~15 min, ~€4.60pp (Navigazione Laghi).</li>
-            <li><strong>Leg 4:</strong> C130 bus from Bellagio to the <strong>Pescaù–Bivio Bagnana</strong> stop — confirmed by the hotel as the stop closest to Filario (not the Lezzeno–Piazza Roma stop), ~15–25 min depending on which Bellagio stop you board at.</li>
-            <li>Total door-to-door: roughly 2.5–3 hrs and ~€17–20pp, door-to-door pricing depending on shuttle bus fare — plus whatever the LIN flight itself costs.</li>
+            <li>Land at <strong>Milan Linate (LIN)</strong>, then ~2.5–3 hrs door-to-door via shuttle bus → train → ferry → C130 bus to <strong>Pescaù–Bivio Bagnana</strong> (stop nearest Filario). Full leg-by-leg breakdown, timing, and pricing are on the Hotel &amp; Transportation tab and the Print tab.</li>
           </ul>
           <div class="tl-subhead">🏡 Check-in &amp; dinner</div>
           <ul class="tl-items">
@@ -523,12 +564,6 @@
     <ul class="checklist">
       <li data-book-id="arrival-flight-lin" data-book-shared-id="lin-connector-flight"><span class="checkbox"></span><div><span class="lbl"><a href="../sardinia/index.html#tab-book">Arrival flight — Milan Linate (LIN)</a></span>Same flight as Sardinia's Aeroitalia XZ2624 (OLB → LIN, Aug 10) — it's tracked and purchased on the Sardinia leg's Book Now tab since that's where it originates; checking it off there checks it off here too. Routing onward from LIN into Lezzeno (shuttle bus + train + ferry + C130 bus) is the full leg-by-leg breakdown in Day 1 of the Itinerary tab.
       </div></li>
-      <li data-book-id="mxp-ferry-train"><span class="checkbox"></span><div><span class="lbl"><a href="https://www.navigazionelaghi.it/en/tickets-and-timetables-lake-como/" target="_blank" rel="noopener">Departure to MXP — ferry + train</a> (no private car) <a class="tel-ico" href="tel:+390315792111" title="Call">📞</a></span>Fri Aug 14 — C130 bus + Bellagio–Como ferry + Trenord to Milano Centrale + Malpensa Express to MXP T1, full leg-by-leg breakdown in Day 5 of the Itinerary tab. Nothing to book in advance, but re-check the ferry and train timetables a few days out · <a href="mailto:infocomo@navigazionelaghi.it">infocomo@navigazionelaghi.it</a>
-      </div></li>
-      <li data-book-id="bellagio-varenna-ferry"><span class="checkbox"></span><div><span class="lbl"><a href="https://www.navigazionelaghi.it/en/tickets-and-timetables-lake-como/" target="_blank" rel="noopener">Bellagio–Varenna ferry</a> <a class="tel-ico" href="tel:+390315792111" title="Call">📞</a></span>Thu Aug 13 — single crossings don't need advance booking, but check the current timetable (valid Jul 1–Oct 4, 2026) · <a href="mailto:infocomo@navigazionelaghi.it">infocomo@navigazionelaghi.it</a>
-      </div></li>
-      <li data-book-id="c130-bus"><span class="checkbox"></span><div><span class="lbl"><a href="https://www.asfautolinee.it/wp-content/uploads/pdf/estivo/C130.pdf" target="_blank" rel="noopener">C130 bus</a> (signed locally as "C30") — Pescaù–Bivio Bagnana ↔ Bellagio <a class="tel-ico" href="tel:+390312471111" title="Call">📞</a></span>No booking needed — nearest stop to Filario is <strong>Pescaù–Bivio Bagnana</strong>, confirmed directly by the hotel (not Lezzeno–Piazza Roma). <strong>Pay on board:</strong> cash (small bills/coins) or tap a contactless card/phone via ASF's SwipeOnLake system — no app required, myCicero is optional if you'd rather buy ahead. Current schedule linked is the Aug 3–30, 2026 reduced-summer timetable that covers this whole trip; worth a quick double-check with the front desk at check-in in case of last-minute changes
-      </div></li>
       <li class="done" data-book-id="departure-flight"><span class="checkbox"></span><div><span class="lbl"><a href="https://www.united.com/en/us/manageres/mytrips" target="_blank" rel="noopener">Departure flight</a></span>Booked — United, MXP → ORD → DCA, Fri Aug 14, departs 3:20 PM MXP, arrives 10:52 PM DCA, confirmation CTVQ69, all 3 travelers
       </div></li>
     </ul>
@@ -549,6 +584,9 @@
       </div></li>
       <li data-book-id="trattoria-san-giacomo"><span class="checkbox"></span><div><span class="lbl"><a href="tel:+39031950329">Trattoria San Giacomo</a></span>Tue Aug 11 — no reservations taken, call only with questions
       </div></li>
+      <li data-book-id="lunch-day2-bellagio"><span class="checkbox"></span><div>
+        <span class="lbl">Identify &amp; book lunch — Bellagio day</span>Tue Aug 11 — no lunch plan yet between the beach morning and the Bellagio walk. Research and book, or plan on grabbing something casual in Bellagio.
+      </div></li>
     </ul>
   </div>
 
@@ -563,7 +601,7 @@
     <div class="contact-block">
       <h4>Filario Hotel &amp; Residences</h4>
       <div class="contact-line">Strada Prov Lariana 583 n 89, 22025 Lezzeno (CO), Italy</div>
-      <div class="contact-line">Phone: +39 031 914035 &nbsp;·&nbsp; reservations@filario.it &nbsp;·&nbsp; filario.it &nbsp;·&nbsp; Conf# 64745SG029227</div>
+      <div class="contact-line">Phone: <a href="tel:+39031914035">+39 031 914035</a> &nbsp;·&nbsp; reservations@filario.it &nbsp;·&nbsp; filario.it &nbsp;·&nbsp; Conf# 64745SG029227</div>
     </div>
     <div class="contact-block tbd">
       <h4>Arrival flight — Milan Linate (LIN) — routing decided, flight still needs booking</h4>
@@ -577,7 +615,7 @@
     <div class="contact-block">
       <h4>Navigazione Laghi (Lake Como ferries)</h4>
       <div class="contact-line">Via per Cernobbio 18, 22100 Como, Italy</div>
-      <div class="contact-line">Phone: +39 031 579211 (or 800 551 801 within Italy) &nbsp;·&nbsp; infocomo@navigazionelaghi.it &nbsp;·&nbsp; navigazionelaghi.it</div>
+      <div class="contact-line">Phone: <a href="tel:+39031579211">+39 031 579211</a> (or 800 551 801 within Italy) &nbsp;·&nbsp; infocomo@navigazionelaghi.it &nbsp;·&nbsp; navigazionelaghi.it</div>
     </div>
     <div class="contact-block">
       <h4>Trenord (Como San Giovanni → Milano Centrale)</h4>
@@ -589,7 +627,7 @@
     </div>
     <div class="contact-block">
       <h4>ASF Autolinee (C130 bus, signed locally as "C30" — Pescaù–Bivio Bagnana ↔ Bellagio)</h4>
-      <div class="contact-line">Phone: +39 031 247 111 &nbsp;·&nbsp; urp@asfautolinee.it &nbsp;·&nbsp; asfautolinee.it</div>
+      <div class="contact-line">Phone: <a href="tel:+39031247111">+39 031 247 111</a> &nbsp;·&nbsp; urp@asfautolinee.it &nbsp;·&nbsp; asfautolinee.it</div>
       <div class="contact-line"><strong>Nearest stop to Filario: "Pescaù – Bivio Bagnana"</strong> (also signed "Pescaù – Località Bagnana"), confirmed directly by the hotel — not the Lezzeno–Piazza Roma stop.</div>
       <div class="contact-line">Current schedule (Aug 3–30, 2026 reduced-summer timetable): asfautolinee.it/wp-content/uploads/pdf/estivo/C130.pdf</div>
       <div class="contact-line">Pescaù→Bellagio (afternoon): 1:41pm, 2:06pm, 2:41pm &nbsp;·&nbsp; Pescaù→Bellagio (~9:30am for Day 3): 9:11am, 9:41am &nbsp;·&nbsp; Pescaù→Bellagio (~10am for Day 4): 9:41am, 10:11am</div>
@@ -603,22 +641,22 @@
     </div>
     <div class="contact-block">
       <h4>Villa Melzi Gardens</h4>
-      <div class="contact-line">Phone: +39 333 487 7427 &nbsp;·&nbsp; visite@giardinidivillamelzi.it &nbsp;·&nbsp; giardinidivillamelzi.it</div>
+      <div class="contact-line">Phone: <a href="tel:+393334877427">+39 333 487 7427</a> &nbsp;·&nbsp; visite@giardinidivillamelzi.it &nbsp;·&nbsp; giardinidivillamelzi.it</div>
     </div>
     <div class="contact-block">
       <h4>Trattoria San Giacomo (Day 2 dinner)</h4>
       <div class="contact-line">Salita Serbelloni 45, 22021 Bellagio, Italy</div>
-      <div class="contact-line">Phone: +39 031 950329 &nbsp;·&nbsp; trattoriabellagio.it &nbsp;·&nbsp; No reservations taken</div>
+      <div class="contact-line">Phone: <a href="tel:+39031950329">+39 031 950329</a> &nbsp;·&nbsp; trattoriabellagio.it &nbsp;·&nbsp; No reservations taken</div>
     </div>
     <div class="contact-block">
       <h4>Il Cavatappi (Day 4 lunch)</h4>
       <div class="contact-line">Via XX Settembre 10, 23829 Varenna, Italy</div>
-      <div class="contact-line">Phone: +39 0341 815349 &nbsp;·&nbsp; cavatappivarenna.it</div>
+      <div class="contact-line">Phone: <a href="tel:+390341815349">+39 0341 815349</a> &nbsp;·&nbsp; cavatappivarenna.it</div>
     </div>
     <div class="contact-block">
       <h4>Osteria Il Governo 1801 (last-night dinner)</h4>
       <div class="contact-line">Località Rozzo 18, 22025 Lezzeno (CO), Italy</div>
-      <div class="contact-line">Phone: +39 031 5478129 &nbsp;·&nbsp; osteriailgoverno.com</div>
+      <div class="contact-line">Phone: <a href="tel:+390315478129">+39 031 5478129</a> &nbsp;·&nbsp; osteriailgoverno.com</div>
     </div>
 
     <h3 style="font-family:'Fraunces',serif; font-size:20px; margin:32px 0 14px; color:var(--cream);">Day-by-Day Contacts</h3>
@@ -628,42 +666,42 @@
       <ul>
         <li>Milan Linate Airport (LIN)<span class="contact-line">Shared shuttle bus to Milano Centrale, ~25 min</span></li>
         <li>Trenord train, Centrale → Varenna-Esino<span class="contact-line">~1 hr, ~€7.40pp, scenic lake-shore approach</span></li>
-        <li>Varenna–Bellagio ferry<span class="contact-line">~15 min · +39 031 579211 · navigazionelaghi.it</span></li>
-        <li>C130 bus, Bellagio → Pescaù–Bivio Bagnana<span class="contact-line">Nearest stop to Filario, per the hotel · +39 031 247 111</span></li>
-        <li>Filario Hotel &amp; Residences<span class="contact-line">Strada Prov Lariana 583 n 89, Lezzeno · GPS 45.951, 9.282 · +39 031 914035 · filario.it</span></li>
+        <li>Varenna–Bellagio ferry<span class="contact-line">~15 min · <a href="tel:+39031579211">+39 031 579211</a> · navigazionelaghi.it</span></li>
+        <li>C130 bus, Bellagio → Pescaù–Bivio Bagnana<span class="contact-line">Nearest stop to Filario, per the hotel · <a href="tel:+39031247111">+39 031 247 111</a></span></li>
+        <li>Filario Hotel &amp; Residences<span class="contact-line">Strada Prov Lariana 583 n 89, Lezzeno · GPS 45.951, 9.282 · <a href="tel:+39031914035">+39 031 914035</a> · filario.it</span></li>
         <li>Filo (dinner)<span class="contact-line">At the hotel · filario.it/en/food-section/filo-restaurant</span></li>
       </ul>
     </div>
     <div class="print-day">
       <h4>Day 2 · Tue Aug 11 · Bellagio — village walk + rest</h4>
       <ul>
-        <li>C130 bus (ASF Autolinee, signed locally as "C30") — board/alight at Pescaù–Bivio Bagnana<span class="contact-line">+39 031 247 111 · asfautolinee.it</span></li>
-        <li>Optional: Menaggio, ferry loop or private charter (instead of pool morning)<span class="contact-line">Ferry: ~€4.60 one-way or €15.20 day pass · +39 031 579211 · navigazionelaghi.it — Private: from ~€75/hr, no license needed · boathirebellagio.com</span></li>
+        <li>C130 bus (ASF Autolinee, signed locally as "C30") — board/alight at Pescaù–Bivio Bagnana<span class="contact-line"><a href="tel:+39031247111">+39 031 247 111</a> · asfautolinee.it</span></li>
+        <li>Optional: Menaggio, ferry loop or private charter (instead of pool morning)<span class="contact-line">Ferry: ~€4.60 one-way or €15.20 day pass · <a href="tel:+39031579211">+39 031 579211</a> · navigazionelaghi.it — Private: from ~€75/hr, no license needed · boathirebellagio.com</span></li>
         <li>Gelateria del Borgo<span class="contact-line">Via Giuseppe Garibaldi 46, Bellagio</span></li>
-        <li>Trattoria San Giacomo (dinner)<span class="contact-line">Salita Serbelloni 45, Bellagio · GPS 45.9860, 9.2571 · +39 031 950329 · trattoriabellagio.it</span></li>
+        <li>Trattoria San Giacomo (dinner)<span class="contact-line">Salita Serbelloni 45, Bellagio · GPS 45.9860, 9.2571 · <a href="tel:+39031950329">+39 031 950329</a> · trattoriabellagio.it</span></li>
       </ul>
     </div>
     <div class="print-day">
       <h4>Day 3 · Wed Aug 12 · Cook with a View + Villa Melzi</h4>
       <ul>
         <li>Cook with a View (Il Perlo)<span class="contact-line">Pickup: Banca Intesa Sanpaolo, Bellagio · +1 855 275 5071 · viator.com</span></li>
-        <li>Villa Melzi Gardens<span class="contact-line">GPS 45.9838, 9.2586 · +39 333 487 7427 · giardinidivillamelzi.it</span></li>
+        <li>Villa Melzi Gardens<span class="contact-line">GPS 45.9838, 9.2586 · <a href="tel:+393334877427">+39 333 487 7427</a> · giardinidivillamelzi.it</span></li>
         <li>Yeast Side (dinner)<span class="contact-line">At the hotel, Lezzeno</span></li>
       </ul>
     </div>
     <div class="print-day">
       <h4>Day 4 · Thu Aug 13 · Varenna — Lovers' Walk + last dinner</h4>
       <ul>
-        <li>Navigazione Laghi (ferry)<span class="contact-line">+39 031 579211 · navigazionelaghi.it</span></li>
-        <li>Il Cavatappi (lunch)<span class="contact-line">Via XX Settembre 10, Varenna · GPS 46.0142, 9.2830 · +39 0341 815349 · cavatappivarenna.it</span></li>
-        <li>Osteria Il Governo 1801 (dinner)<span class="contact-line">Località Rozzo 18, Lezzeno · GPS 45.945, 9.278 · +39 031 5478129 · osteriailgoverno.com</span></li>
+        <li>Navigazione Laghi (ferry)<span class="contact-line"><a href="tel:+39031579211">+39 031 579211</a> · navigazionelaghi.it</span></li>
+        <li>Il Cavatappi (lunch)<span class="contact-line">Via XX Settembre 10, Varenna · GPS 46.0142, 9.2830 · <a href="tel:+390341815349">+39 0341 815349</a> · cavatappivarenna.it</span></li>
+        <li>Osteria Il Governo 1801 (dinner)<span class="contact-line">Località Rozzo 18, Lezzeno · GPS 45.945, 9.278 · <a href="tel:+390315478129">+39 031 5478129</a> · osteriailgoverno.com</span></li>
       </ul>
     </div>
     <div class="print-day">
       <h4>Day 5 · Fri Aug 14 · Departure — Lezzeno → Milan Malpensa (ferry + train)</h4>
       <ul>
-        <li>C130 bus, Pescaù–Bivio Bagnana → Bellagio<span class="contact-line">+39 031 247 111 · asfautolinee.it</span></li>
-        <li>Bellagio–Como ferry<span class="contact-line">~1–1.5 hrs, runs roughly every 4 hrs · +39 031 579211 · navigazionelaghi.it</span></li>
+        <li>C130 bus, Pescaù–Bivio Bagnana → Bellagio<span class="contact-line"><a href="tel:+39031247111">+39 031 247 111</a> · asfautolinee.it</span></li>
+        <li>Bellagio–Como ferry<span class="contact-line">~1–1.5 hrs, runs roughly every 4 hrs · <a href="tel:+39031579211">+39 031 579211</a> · navigazionelaghi.it</span></li>
         <li>Trenord train, Como San Giovanni → Milano Centrale<span class="contact-line">~40–60 min, ~€5–8pp · trenord.it</span></li>
         <li>Malpensa Express, Milano Centrale → MXP T1<span class="contact-line">~51 min, ~€15pp, every ~30 min · malpensaexpress.it</span></li>
         <li>Milan Malpensa Airport (MXP)<span class="contact-line">21010 Ferno VA, Italy</span></li>
