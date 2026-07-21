@@ -132,6 +132,10 @@
   .tl-subhead{ font-family:'IBM Plex Mono',monospace; font-size:11px; letter-spacing:.08em; text-transform:uppercase; color:var(--sea-light); opacity:0.9; margin:16px 0 8px; padding-top:12px; border-top:1px dashed var(--line); }
   .tl-subhead:first-of-type{ margin-top:0; padding-top:0; border-top:none; }
   .rating-badge{ display:inline-block; font-family:'IBM Plex Mono',monospace; font-size:11px; color:var(--gold); background:var(--pale); padding:2px 8px; border-radius:100px; margin-left:4px; }
+  .meal-row{ display:flex; gap:8px; flex-wrap:wrap; margin:2px 0 16px; }
+  .meal-chip{ font-family:'IBM Plex Mono',monospace; font-size:11px; padding:5px 12px; border-radius:100px; }
+  .meal-chip.filled{ background:var(--pale); color:var(--gold); }
+  .meal-chip.empty{ background:transparent; color:rgba(247,243,232,0.35); border:1px dashed var(--line); }
   .tl-items li a{ border-bottom:1px solid rgba(211,169,74,0.35); text-decoration:none; }
   .tl-items li a:hover{ color:var(--gold); }
   .day-weather{ display:flex; align-items:center; gap:10px; flex-wrap:wrap; font-family:'IBM Plex Mono',monospace; font-size:11.5px; color:var(--sea-light); background:rgba(143,207,196,0.07); border-radius:6px; padding:9px 13px; margin:10px 0 14px; }
@@ -279,7 +283,7 @@
   <!-- ═══════════ HOTELS ═══════════ -->
   <div id="tab-hotels" class="section">
     <div class="section-title">Where You're Staying</div>
-    <div class="section-sub">One base for all 4 nights — Olbia, Gallura.</div>
+    <div class="section-sub">One base for all 4 nights — Olbia, Gallura. Rental car pickup/drop-off lives here too, alongside lodging.</div>
 
     <div class="hotels-grid">
       <div class="hotel-card">
@@ -293,6 +297,19 @@
           <span>🔖 Conf# — add once you have the paperwork in hand</span>
         </div>
         <div class="hotel-note">✅ Booked — Standard Apartment (1 adult + 2 kids), direct with Casagliana. Total quoted as "$2,499" in the host's email, but given the property is in Italy this may actually be €2,499 (≈$2,850 at current rates), not $2,499 — worth checking your card/bank statement to see which currency you were actually charged. The anchor point for all four excursion days, ~15–20 min from OLB airport. Breakfast included every morning. Add the confirmation number here and to the Print tab once you have it on hand.</div>
+      </div>
+
+      <div class="hotel-card">
+        <div class="hotel-header">
+          <div class="hotel-name"><a href="https://www.only-sardinia.com/en/sardinia-car-rental/" target="_blank" rel="noopener">Rental Car — Only Sardinia Autonoleggio</a></div>
+          <div class="hotel-dates">Thu Aug 6, 12:00 PM → Mon Aug 10, 12:00 PM</div>
+        </div>
+        <div class="hotel-meta-row">
+          <span>📍 OLB airport rental terminal, pickup &amp; drop-off</span>
+          <span>📞 <a href="tel:+390789689470">+39 0789 68947</a></span>
+          <span>🔖 Ticket #056258</span>
+        </div>
+        <div class="hotel-note">✅ Booked — Group E Compact Wagon (manual), €683.24 total, paid. Pickup right after landing at OLB; return due back by 12:00 PM on departure day (see Day 5 in the Itinerary tab).</div>
       </div>
     </div>
   </div>
@@ -314,6 +331,11 @@
           <span class="tl-base">🚗 ~15–20 min OLB → Casagliana · leave for Sos Aranzos by 2:15 PM</span>
           <a class="tl-gmaps-btn" href="https://www.google.com/maps/dir/?api=1&origin=Olbia+Costa+Smeralda+Airport&waypoints=40.9950,9.4550|40.96956,9.58767&destination=41.0000,9.6170" target="_blank" rel="noopener">🧭 Send route to Google Maps</a>
           <div class="day-weather">🌤️ <b>Weather</b> · Temp: ~30°C/86°F day, ~19–21°C/66–70°F night · Precip: rare, ~6 rainy days/month · Wind: light <span class="wx-note">(typical for August — trip is beyond the live forecast window)</span></div>
+          <div class="meal-row">
+            <span class="meal-chip empty">🍳 Breakfast — not planned (arrival day)</span>
+            <span class="meal-chip empty">🥪 Lunch — not planned</span>
+            <span class="meal-chip filled">🍽 Dinner — Ristorante da Ciro</span>
+          </div>
           <div class="tl-subhead">🛬 Arrival &amp; settle in</div>
           <ul class="tl-items">
             <li>✅ <strong>Overnight flight booked:</strong> JetBlue, Washington (DCA) → Milan (MXP) via Boston (2h11m layover), departs Wed Aug 5 2:25 PM, arrives Thu Aug 6 8:10 AM local — confirmation <strong>LLBWSJ</strong> (Chase Travel Trip #1020695551), all 3 travelers, Even More fare (checked bags + carry-on + seats included)</li>
@@ -321,7 +343,7 @@
             <li><strong>12:05 PM:</strong> land at <strong>Olbia (OLB)</strong>. ✅ <strong>Rental car booked</strong> — pick up at the OLB airport rental terminal (Only Sardinia Autonoleggio, ticket #056258).</li>
             <li><strong>~12:30 PM:</strong> arrive at <strong>Casagliana Suite Resort</strong> (~15–20 min drive), check in.</li>
             <li><strong>12:30–1:30 PM:</strong> unpack, settle in — no agenda pressure today.</li>
-            <li><strong>1:30–2:15 PM:</strong> time at the pool before heading out — there's room for it. Breakfasts included.</li>
+            <li><strong>1:30–2:15 PM:</strong> time at the pool before heading out — there's room for it.</li>
           </ul>
           <div class="tl-subhead">🏖️🐬 Sos Aranzos — beach + dolphin tour (same spot, no driving between)</div>
           <ul class="tl-items">
@@ -329,13 +351,14 @@
             <li><strong>2:30–4:50 PM — beach:</strong> Sos Aranzos, calm turquoise water and fine sand, right at the dolphin-tour meeting point — no second drive needed before check-in.</li>
             <li class="alt">Prefer the village atmosphere instead? <strong>Cinque Spiagge</strong>, Golfo Aranci's five town beaches, or <a href="https://www.portodiolbia.it/en/directory/spiaggia-di-portisco" target="_blank" rel="noopener" class="title-lnk">Spiaggia di Portisco</a> / <a href="https://www.portodiolbia.it/en/directory/beach-cala-banana" target="_blank" rel="noopener" class="title-lnk">Cala Banana</a> are all options — just note you'd then need the ~10 min drive to Sos Aranzos for the dolphin tour rather than staying put.</li>
             <li><strong>5:10 PM — check-in:</strong> <a href="https://www.dstsardegna.it/en/dolphin-watching/" target="_blank" rel="noopener" class="title-lnk">DST Sardegna</a>, Via Spiaggia Sos Aranzos 8 — right on the beach (20 min early check-in required).</li>
-            <li>🐬 <strong>✅ Booked, 5:30–7:00 PM — dolphin watching:</strong> eco-friendly boat trip out to Figarolo Island, 90 min, 98€ total for 3 (2 adults + 1 child), ~95% sighting rate thanks to a resident bottlenose pod that's frequented these waters for over a decade. Booking ID DYLC-210726. <em>A request to shift to the 6:00 PM tour was sent — if that came through instead, shift everything below by 30 min.</em></li>
+            <li>🐬 <strong>✅ Booked, 5:30–7:00 PM — dolphin watching:</strong> eco-friendly boat trip out to Figarolo Island, 90 min, 98€ total for 3 (2 adults + 1 child), ~95% sighting rate thanks to a resident bottlenose pod that's frequented these waters for over a decade. Booking ID DYLC-210726. <em>Note: a request to shift to 6:00 PM was sent when booking but never confirmed back — treat 5:30 PM as the real time unless DST tells you otherwise, and this itinerary is built around it.</em></li>
           </ul>
           <div class="tl-subhead">🍽️ Dinner in Golfo Aranci village (~10 min drive from Sos Aranzos)</div>
           <ul class="tl-items">
             <li><strong>7:00–7:20 PM:</strong> drive from Sos Aranzos into <strong>Golfo Aranci village</strong> for dinner.</li>
-            <li class="meal">🍽 <strong>~7:30 PM — can't-miss dinner:</strong> <a href="https://ristorantedacirogolfoaranci.it/en/home-english/" target="_blank" rel="noopener" class="title-lnk">Ristorante da Ciro</a> <span class="rating-badge">4.4, $$</span> — historic-center trattoria right on the harbor, fish caught daily by the fishermen out front; branzino and spaghetti alle vongole are the standouts. Worth a reservation in August.</li>
-            <li class="alt">Backup: <a href="https://restaurantguru.com/Pescheria-and-Friggitoria-Del-Golfo-Golfo-Aranci" target="_blank" rel="noopener" class="title-lnk">Pescheria del Golfo</a> <span class="rating-badge">4.8, $</span> — pick-your-fish counter, fried fresh, dockside paper tray. Casual, cash-and-carry, no reservations taken.</li>
+            <li class="meal">🍽 <strong>Dinner, ~7:30 PM:</strong> <a href="https://ristorantedacirogolfoaranci.it/en/home-english/" target="_blank" rel="noopener" class="title-lnk">Ristorante da Ciro</a> <span class="rating-badge">4.4, $$</span> — historic-center trattoria right on the harbor, fish caught daily by the fishermen out front; branzino and spaghetti alle vongole are the standouts. <strong>Call and reserve for 7:30 PM</strong> — it's August, and that's right at the dinner rush.</li>
+            <li class="alt">Backup #1: <a href="https://restaurantguru.com/Pescheria-and-Friggitoria-Del-Golfo-Golfo-Aranci" target="_blank" rel="noopener" class="title-lnk">Pescheria del Golfo</a> <span class="rating-badge">4.8, $</span> — pick-your-fish counter, fried fresh, dockside paper tray. Casual, cash-and-carry, no reservations taken.</li>
+            <li class="alt">Backup #2: <a href="https://restaurantguru.com/La-Finestrella-sul-Porto-Golfo-Aranci" target="_blank" rel="noopener" class="title-lnk">Bistro di Mare — La Finestrella sul Molo</a> <span class="rating-badge">4.5, $$</span> — seaside bistro right on the pier, Via Libertà 239.</li>
             <li>After dinner: sunset stroll on the Lungomare promenade past the colorful fishermen's houses, the bronze mermaid statue, and the old port.</li>
           </ul>
         </div>
@@ -349,6 +372,11 @@
           <span class="tl-base">🚗 ~40–45 min Casagliana → Palau · leave by 8:00 AM</span>
           <a class="tl-gmaps-btn" href="https://www.google.com/maps/dir/?api=1&origin=40.9950,9.4550&destination=41.1791,9.3872" target="_blank" rel="noopener">🧭 Send route to Google Maps</a>
           <div class="day-weather">🌤️ <b>Weather</b> · Temp: ~30°C/86°F day, ~19–21°C/66–70°F night · Precip: rare, ~6 rainy days/month · Wind: light <span class="wx-note">(typical for August — trip is beyond the live forecast window)</span></div>
+          <div class="meal-row">
+            <span class="meal-chip filled">🍳 Breakfast — Le Dolcezze Napoletane</span>
+            <span class="meal-chip empty">🥪 Lunch — not planned, confirm with operator</span>
+            <span class="meal-chip filled">🍽 Dinner — CuCumiao</span>
+          </div>
           <ul class="tl-items">
             <li>All-day (~7 hr) <strong>Maddalena Islands boat excursion</strong> — leaving Casagliana by 8:00 AM gets you into Palau ~8:45, with time for breakfast before most operators' mid-morning boarding</li>
             <li>Recommended operator: <a href="https://gitearcipelago.it/en/" target="_blank" rel="noopener" class="title-lnk">Delfino Tours</a> — daily excursions to Spargi, Budelli, La Maddalena &amp; Santa Maria, with a stop at the Pink Beach (Spiaggia Rosa) view</li>
@@ -369,6 +397,11 @@
           <span class="tl-base">🚗 ~1h 25–35m Casagliana → Cala Gonone · leave by 6:45 AM — longest one-way drive on the trip</span>
           <a class="tl-gmaps-btn" href="https://www.google.com/maps/dir/?api=1&origin=40.9950,9.4550&destination=40.2790,9.6345" target="_blank" rel="noopener">🧭 Send route to Google Maps</a>
           <div class="day-weather">🌤️ <b>Weather</b> · Temp: ~30°C/86°F day, ~19–21°C/66–70°F night · Precip: rare, ~6 rainy days/month · Wind: light <span class="wx-note">(typical for August — trip is beyond the live forecast window)</span></div>
+          <div class="meal-row">
+            <span class="meal-chip filled">🍳 Breakfast — Bar Puddu</span>
+            <span class="meal-chip filled">🥪 Lunch — Il Nuovo Gabbiano</span>
+            <span class="meal-chip empty">🍽 Dinner — not planned</span>
+          </div>
           <ul class="tl-items">
             <li>The furthest day-trip base on this itinerary, so an early start pays off — leaving Casagliana by 6:45 AM gets you to Cala Gonone ~8:10–8:20, time for breakfast before a typical 9:00 AM charter departure</li>
             <li>Recommended operator: <a href="https://www.palmaseraboatrental.com/en/" target="_blank" rel="noopener" class="title-lnk">Palmasera Boat Rental</a> — Piazza del Porto Box 14, visits Cala Luna, Cala Mariolu, and the other calas in the Gulf of Orosei</li>
@@ -389,6 +422,11 @@
           <span class="tl-base">🚗 ~2h 15m Casagliana → Stintino · leave 8:30–9:00 AM — biggest driving day, ~4.5 hrs round trip</span>
           <a class="tl-gmaps-btn" href="https://www.google.com/maps/dir/?api=1&origin=40.9950,9.4550&destination=40.9491,8.2231" target="_blank" rel="noopener">🧭 Send route to Google Maps</a>
           <div class="day-weather">🌤️ <b>Weather</b> · Temp: ~30°C/86°F day, ~19–21°C/66–70°F night · Precip: rare, ~6 rainy days/month · Wind: light <span class="wx-note">(typical for August — trip is beyond the live forecast window)</span></div>
+          <div class="meal-row">
+            <span class="meal-chip filled">🍳 Breakfast — Bar I Ginepri</span>
+            <span class="meal-chip filled">🥪 Lunch — Bar I Ginepri</span>
+            <span class="meal-chip empty">🍽 Dinner — not planned</span>
+          </div>
           <ul class="tl-items">
             <li>La Pelosa sits on the far northwest tip of the island — the furthest point on this itinerary</li>
             <li>⚠️ <strong>Leaving later (8:30–9:00 AM) means arriving ~10:45–11:15 AM</strong> — past the ~8–9 AM window locals use specifically to beat the parking crunch; the main lot (~320 car spaces, €2–2.50/hr) reportedly fills by ~10 AM in August. The beach itself isn't at risk (1,500-visitor cap via reservations, entry open until 6 PM), but if the lot's full, overflow is roadside parking further back along the access road toward Stintino — up to ~2 km away, a 20–25 min walk in full midday sun (~30°C). A quick taxi from Stintino village is the easiest way to skip that walk if it comes to it</li>
@@ -409,10 +447,16 @@
           <span class="tl-base">🚗 ~15–20 min Casagliana → OLB · flight 2:10–3:20 PM (priced, not yet purchased)</span>
           <a class="tl-gmaps-btn" href="https://www.google.com/maps/dir/?api=1&origin=40.9950,9.4550&destination=Olbia+Costa+Smeralda+Airport" target="_blank" rel="noopener">🧭 Send route to Google Maps</a>
           <div class="day-weather">🌤️ <b>Weather</b> · Temp: ~30°C/86°F day, ~19–21°C/66–70°F night · Precip: rare, ~6 rainy days/month · Wind: light <span class="wx-note">(typical for August — trip is beyond the live forecast window)</span></div>
+          <div class="meal-row">
+            <span class="meal-chip filled">🍳 Breakfast — included at Casagliana</span>
+            <span class="meal-chip empty">🥪 Lunch — not planned (flight lands 3:20 PM)</span>
+            <span class="meal-chip empty">🍽 Dinner — not planned</span>
+          </div>
           <ul class="tl-items">
             <li>⏳ <strong>Flight priced but not purchased:</strong> Aeroitalia XZ2624, OLB → Milan Linate (LIN), departs 2:10 PM, arrives 3:20 PM, ~€179.97 for 3 (2 adults + 1 child) on the Classic fare. Classic includes only carry-on (large cabin trolley + small under-seat bag) — <strong>no checked bag</strong>. Decide before booking: add a checked bag under the "Bags" tab, or upgrade to Biz (32kg checked bag included).</li>
             <li>With a ~2:10 PM departure, the morning has real breathing room — just not enough for a full Golfo Aranci detour on top of checkout</li>
-            <li>Breakfast &amp; pool at the resort, checkout by 11:30 AM, depart hotel by 12:00–12:15 PM, straight to OLB (~15–20 min) — arrives with a ~90 min buffer, enough but not extra</li>
+            <li class="meal">🍳 <strong>Breakfast is included</strong> at Casagliana every morning — enjoy it this last morning before checkout.</li>
+            <li>Checkout by 11:30 AM, depart hotel by 12:00–12:15 PM, straight to OLB (~15–20 min) — arrives with a ~90 min buffer, enough but not extra</li>
             <li>🚗 <strong>Rental car drop-off:</strong> return to the Only Sardinia Autonoleggio counter at the OLB airport rental terminal, due back by 12:00 PM (rental runs Aug 6 12:00 → Aug 10 12:00) — same stop as the airport drive above</li>
             <li class="alt">Once purchased: lock the checkout time as a hard deadline in Todoist rather than a range</li>
           </ul>
@@ -555,7 +599,7 @@
     <div class="book-group-label">Restaurants</div>
     <ul class="checklist">
       <li data-book-id="dinner-daciro"><span class="checkbox"></span><div>
-        <span class="lbl"><a href="https://ristorantedacirogolfoaranci.it/en/home-english/" target="_blank" rel="noopener">Dinner reservation — Ristorante da Ciro</a> <a class="tel-ico" href="tel:+393313099325" title="Call">📞</a></span>Thu Aug 6, Golfo Aranci village — worth a reservation in August. Backup: Pescheria del Golfo (no reservations, cash-and-carry).
+        <span class="lbl"><a href="https://ristorantedacirogolfoaranci.it/en/home-english/" target="_blank" rel="noopener">Dinner reservation — Ristorante da Ciro</a> <a class="tel-ico" href="tel:+393313099325" title="Call">📞</a></span>Thu Aug 6, Golfo Aranci village — <strong>reserve for 7:30 PM</strong> (right after the 5:30 PM dolphin tour + drive back from Sos Aranzos), August is busy. Backups: Pescheria del Golfo or Bistro di Mare (both walk-in, no reservation needed).
       </div></li>
       <li data-book-id="dinner-cucumiao"><span class="checkbox"></span><div>
         <span class="lbl"><a href="https://www.cucumiao.it/en/" target="_blank" rel="noopener">Dinner reservation — CuCumiao</a> <a class="tel-ico" href="tel:+390789707064" title="Call">📞</a></span>Fri Aug 7, Palau — reserve ahead, June–August is busy. Alt: O'Belau <a href="tel:+393478961670">📞 +39 347 896 1670</a>
@@ -607,9 +651,14 @@
       <div class="contact-line">dstsardegna.it/en/dolphin-watching &nbsp;·&nbsp; Booking ID DYLC-210726 &nbsp;·&nbsp; 5:30 PM departure (90 min), 98€ total, paid in full</div>
     </div>
     <div class="contact-block">
-      <h4>Ristorante da Ciro — dinner, Day 1</h4>
+      <h4>Ristorante da Ciro — dinner, Day 1 (reserve for 7:30 PM)</h4>
       <div class="contact-line">Via dei Caduti, Golfo Aranci village</div>
       <div class="contact-line">📞 +39 331 309 9325 &nbsp;·&nbsp; ristorantedacirogolfoaranci.it</div>
+    </div>
+    <div class="contact-block">
+      <h4>Bistro di Mare — La Finestrella sul Molo (dinner backup #2, Day 1)</h4>
+      <div class="contact-line">Via Libertà 239, Golfo Aranci village</div>
+      <div class="contact-line">restaurantguru.com/La-Finestrella-sul-Porto-Golfo-Aranci</div>
     </div>
     <div class="contact-block">
       <h4>Delfino Tours — Maddalena Islands boat excursion</h4>
@@ -648,8 +697,9 @@
         <li>Only Sardinia Autonoleggio (rental car pickup)<span class="contact-line">OLB airport rental terminal · ticket #056258 · 📞 +39 0789 68947</span></li>
         <li>Casagliana Suite Resort<span class="contact-line">Via Sole Ruju 14, Olbia · GPS 40.9950, 9.4550 · 📞 +39 0789 733029</span></li>
         <li>DST Sardegna (dolphin watching, 5:30 PM, booked)<span class="contact-line">Via Spiaggia Sos Aranzos 8 (Sos Aranzos beach, not the harbor) · ID DYLC-210726 · 📞 +39 338 2727841 · dstsardegna.it/en/dolphin-watching</span></li>
-        <li>Ristorante da Ciro (dinner)<span class="contact-line">Via dei Caduti, Golfo Aranci village · 📞 +39 331 309 9325 · ristorantedacirogolfoaranci.it</span></li>
-        <li>Pescheria del Golfo (dinner backup)<span class="contact-line">Golfo Aranci · GPS 41.0000, 9.6170 · no reservations, cash-and-carry</span></li>
+        <li>Ristorante da Ciro (dinner, reserve 7:30 PM)<span class="contact-line">Via dei Caduti, Golfo Aranci village · 📞 +39 331 309 9325 · ristorantedacirogolfoaranci.it</span></li>
+        <li>Pescheria del Golfo (dinner backup #1)<span class="contact-line">Golfo Aranci · GPS 41.0000, 9.6170 · no reservations, cash-and-carry</span></li>
+        <li>Bistro di Mare (dinner backup #2)<span class="contact-line">Via Libertà 239, Golfo Aranci village · no reservations needed</span></li>
       </ul>
     </div>
     <div class="print-day">

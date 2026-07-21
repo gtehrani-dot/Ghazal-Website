@@ -113,6 +113,10 @@
   .tl-subhead{ font-family:'Space Mono',monospace; font-size:11px; letter-spacing:0.08em; text-transform:uppercase; color:var(--aqua); opacity:0.8; margin:14px 0 8px; padding-top:12px; border-top:1px dashed var(--line); }
   .tl-subhead:first-of-type{ margin-top:0; padding-top:0; border-top:none; }
   .rating-badge{ display:inline-block; font-family:'Space Mono',monospace; font-size:11px; color:var(--gold); background:rgba(244,192,93,0.14); padding:2px 8px; border-radius:100px; margin-left:6px; }
+  .meal-row{ display:flex; gap:8px; flex-wrap:wrap; margin:2px 0 14px; }
+  .meal-chip{ font-family:'Space Mono',monospace; font-size:11px; padding:5px 12px; border-radius:100px; }
+  .meal-chip.filled{ background:rgba(244,192,93,0.14); color:var(--gold); }
+  .meal-chip.empty{ background:transparent; color:rgba(251,246,234,0.35); border:1px dashed var(--line); }
   .day-weather{ display:flex; align-items:center; gap:10px; flex-wrap:wrap; font-family:'Space Mono',monospace; font-size:11.5px; color:var(--aqua); background:rgba(127,227,212,0.08); border:1px solid var(--line); border-radius:8px; padding:8px 12px; margin:8px 0 14px; }
   .day-weather b{ color:var(--gold); }
   .day-weather .wx-note{ color:rgba(251,246,234,0.55); font-style:italic; }
@@ -292,6 +296,11 @@
           <div class="tl-title">Settle in at Filario</div>
           <span class="tl-base">✈️🚂⛴ Arrive LIN → shuttle bus + train + ferry — chosen for the scenic approach</span>
           <div class="day-weather">🌤️ <b>Weather</b> · Temp: 22–29°C (72–84°F) · Precip: low, ~20% chance of a PM storm · Wind: light 5–10 km/h lake breeze <span class="wx-note">(typical for August — trip is beyond the live forecast window)</span></div>
+          <div class="meal-row">
+            <span class="meal-chip empty">🍳 Breakfast — not planned (arrival day)</span>
+            <span class="meal-chip empty">🥪 Lunch — not planned</span>
+            <span class="meal-chip filled">🍽 Dinner — Filo</span>
+          </div>
           <div class="tl-subhead">🚏 Getting there</div>
           <ul class="tl-items">
             <li><strong>Arrival flight not yet booked — routing decided:</strong> fly into <strong>Milan Linate (LIN)</strong>, chosen for the scenic train approach into Varenna over the Malpensa/Como-town alternative.</li>
@@ -317,6 +326,11 @@
           <span class="tl-base">🚌 C130 bus, ~15–20 min from Pescaù–Bivio Bagnana (stop nearest Filario, per the hotel)</span>
           <a class="tl-ferry-btn" href="https://www.asfautolinee.it/wp-content/uploads/pdf/estivo/C130.pdf" target="_blank" rel="noopener">🚌 C130 current schedule (PDF)</a>
           <div class="day-weather">🌤️ <b>Weather</b> · Temp: 22–29°C (72–84°F) · Precip: low, ~20% chance of a PM storm · Wind: light 5–10 km/h <span class="wx-note">(typical for August)</span></div>
+          <div class="meal-row">
+            <span class="meal-chip filled">🍳 Breakfast — included at Filario</span>
+            <span class="meal-chip empty">🥪 Lunch — not planned</span>
+            <span class="meal-chip filled">🍽 Dinner — Trattoria San Giacomo</span>
+          </div>
           <ul class="tl-items">
             <li><strong>Morning:</strong> beach and pool time at Filario — recover from travel.</li>
             <li class="alt">🚤 <strong>Optional swap for the morning — ferry loop or private charter:</strong> instead of the pool, take an earlier C130 bus to Bellagio, then either (1) hop the <a href="https://www.navigazionelaghi.it/en/tickets-and-timetables-lake-como/" target="_blank" rel="noopener" class="title-lnk">central-lake ferry</a> across to <strong>Menaggio</strong> (~20–30 min crossing, every 20–30 min in season, ~€4.60 one-way or €15.20 day pass covering unlimited Bellagio–Varenna–Menaggio–Cadenabbia crossings, pay at the dock, no booking needed), or (2) a <a href="https://www.boathirebellagio.com/en/" target="_blank" rel="noopener" class="title-lnk">private self-drive boat rental</a> from Bellagio (no license needed, from ~€75/hr, fuel + insurance included) for a more flexible loop past Menaggio and the villas in between. Either way, an hour or so around Menaggio's lakefront, then back to Bellagio in time for the afternoon walk below.</li>
@@ -337,6 +351,11 @@
           <span class="tl-base">🚌 C130 bus to Bellagio, then included van pickup · leave Lezzeno by ~9:30am for a late-morning class start</span>
           <a class="tl-ferry-btn" href="https://www.asfautolinee.it/wp-content/uploads/pdf/estivo/C130.pdf" target="_blank" rel="noopener">🚌 C130 current schedule (PDF)</a>
           <div class="day-weather">🌤️ <b>Weather</b> · Temp: 22–29°C (72–84°F) · Precip: low, ~20% chance of a PM storm · Wind: light 5–10 km/h <span class="wx-note">(typical for August)</span></div>
+          <div class="meal-row">
+            <span class="meal-chip filled">🍳 Breakfast — included at Filario</span>
+            <span class="meal-chip filled">🥪 Lunch — included in Cook with a View</span>
+            <span class="meal-chip filled">🍽 Dinner — Yeast Side</span>
+          </div>
           <ul class="tl-items">
             <li><strong>Bus to Bellagio:</strong> C130 from <strong>Pescaù–Bivio Bagnana</strong> (stop nearest Filario, per the hotel) at <strong>9:11am</strong> gets you there with buffer before the van pickup; <strong>9:41am</strong> is the fallback if running a little behind.</li>
             <li><strong>Late morning:</strong> <a href="https://www.viator.com/tours/Lake-Como/COOK-WITH-A-VIEW-VILLA-MELZI-Bellagio/d26113-254673P16" target="_blank" rel="noopener" class="title-lnk">Cook with a View</a> cooking class at Il Perlo, above Bellagio — includes lunch and Villa Melzi garden tickets. Pickup is outside Banca Intesa Sanpaolo, Via Lungo Lario Manzoni 24, Bellagio (green/white VW ID.Buzz van).</li>
@@ -355,6 +374,11 @@
           <a class="tl-ferry-btn" href="https://www.asfautolinee.it/wp-content/uploads/pdf/estivo/C130.pdf" target="_blank" rel="noopener">🚌 C130 current schedule (PDF)</a>
           <a class="tl-ferry-btn" href="https://www.navigazionelaghi.it/en/tickets-and-timetables-lake-como/" target="_blank" rel="noopener">⛴ Ferry timetable (Navigazione Laghi)</a>
           <div class="day-weather">🌤️ <b>Weather</b> · Temp: 22–29°C (72–84°F) · Precip: low, ~20% chance of a PM storm · Wind: light 5–10 km/h <span class="wx-note">(typical for August)</span></div>
+          <div class="meal-row">
+            <span class="meal-chip filled">🍳 Breakfast — included at Filario</span>
+            <span class="meal-chip filled">🥪 Lunch — Il Cavatappi</span>
+            <span class="meal-chip filled">🍽 Dinner — Osteria Il Governo 1801</span>
+          </div>
           <ul class="tl-items">
             <li><strong>Bus to Bellagio:</strong> C130 from <strong>Pescaù–Bivio Bagnana</strong> (stop nearest Filario, per the hotel) at <strong>9:41am or 10:11am</strong>, then the <strong>Bellagio–Varenna ferry</strong> (~15 min crossing). Boats run roughly every 20–30 min in season, first ~7:30am / last ~8pm — no need to sprint for a specific one, but don't miss the last boat back.</li>
             <li><strong>La Passeggiata degli Innamorati</strong> (Lovers' Walk) — starts right at the Varenna ferry dock.</li>
@@ -378,6 +402,11 @@
           <a class="tl-ferry-btn" href="https://www.trenord.it/en/" target="_blank" rel="noopener">🚆 Trenord (Como → Milano Centrale)</a>
           <a class="tl-ferry-btn" href="https://www.malpensaexpress.it/en/" target="_blank" rel="noopener">🚆 Malpensa Express</a>
           <div class="day-weather">🌤️ <b>Weather</b> · Temp: 22–29°C (72–84°F) · Precip: low, ~20% chance of a PM storm · Wind: light 5–10 km/h <span class="wx-note">(typical for August)</span></div>
+          <div class="meal-row">
+            <span class="meal-chip filled">🍳 Breakfast — included at Filario</span>
+            <span class="meal-chip empty">🥪 Lunch — not planned (en route, flight departs 3:20 PM)</span>
+            <span class="meal-chip empty">🍽 Dinner — not planned (in transit)</span>
+          </div>
           <div class="tl-subhead">🚏 Getting to MXP</div>
           <ul class="tl-items">
             <li><strong>Not booking a private car this time</strong> — taking the ferry and train out instead, which is both cheaper and part of the scenery. No advance booking needed for any of these legs; pay/tap on board or at the station.</li>
