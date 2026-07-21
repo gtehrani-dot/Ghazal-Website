@@ -95,6 +95,11 @@
   .card .go svg{ width:14px; height:14px; transition:transform .3s ease; }
   .card:hover .go svg{ transform:translateX(4px); }
 
+  /* hero stat chips, matching the leg-page masthead style */
+  .hero-meta{ display:flex; flex-wrap:wrap; gap:10px; margin-top:22px; }
+  .meta-chip{ font-family:'Space Mono',monospace; font-size:12.5px; background:rgba(251,246,234,0.06); border:1px solid var(--line); color:var(--cream); padding:8px 14px; border-radius:100px; }
+  .meta-chip strong{ color:var(--gold); }
+
   /* map section */
   .map-section{ padding:8px 0 90px; }
   .map-head{ display:flex; align-items:flex-end; justify-content:space-between; gap:20px; margin-bottom:20px; flex-wrap:wrap; }
@@ -168,6 +173,12 @@
     <div class="eyebrow mono">2026 · Two trips, one summer</div>
     <h1>Italy, <em>two ways</em> — mountains &amp; sea</h1>
     <p>One trip climbs into the pre-Alps to a lake the color of slate glass. The other drops onto granite coves where the water runs Caribbean-turquoise. Pick a destination to open the full day-by-day itinerary.</p>
+    <div class="hero-meta">
+      <div class="meta-chip">✈️ <strong>DCA → MXP</strong> → Olbia / Lake Como</div>
+      <div class="meta-chip">🗓 <strong>8 nights total</strong> · Aug 6–14, 2026</div>
+      <div class="meta-chip">📍 <strong>2 legs</strong> · Sardinia then Lake Como</div>
+      <div class="meta-chip">🏨 <strong>Two bases</strong> · Casagliana, Olbia → Filario, Lezzeno</div>
+    </div>
   </header>
 
   <div class="cards">
@@ -211,18 +222,6 @@
       <h2>Top booking needs</h2>
       <p>Every currently-open item across both legs, in one place — full checklists (with contact info) still live on each trip's own Book Now tab. An item that touches both legs (like the connecting flight) is listed once.</p>
     </div>
-
-    <div class="todo-group-label">Accommodations</div>
-    <ul class="todo-list" id="todoList">
-      <li class="todo-item" data-id="sardinia-casagliana">
-        <input type="checkbox">
-        <div class="todo-text">
-          <div class="todo-title">Book Casagliana Suite Resort — Aug 6–10, Olbia</div>
-          <div class="todo-sub">Still no confirmation on file — the home base for the whole Sardinia leg. <a class="todo-link" href="sardinia/index.html#tab-book">See Sardinia Book Now ↗</a></div>
-        </div>
-        <span class="todo-tag">Sardinia</span>
-      </li>
-    </ul>
 
     <div class="todo-group-label">Transportation</div>
     <ul class="todo-list" id="todoList2">
@@ -270,14 +269,6 @@
 
     <div class="todo-group-label">Excursions</div>
     <ul class="todo-list" id="todoList3">
-      <li class="todo-item" data-id="dolphin-watching-dst">
-        <input type="checkbox">
-        <div class="todo-text">
-          <div class="todo-title">Book DST Sardegna dolphin watching — Day 1, Aug 6 evening</div>
-          <div class="todo-sub">Golfo Aranci harbor, ~1.5 hrs, ~€37/$40pp — high priority given how high dolphins are on the list. <a class="todo-link" href="sardinia/index.html#tab-book">See Sardinia Book Now ↗</a></div>
-        </div>
-        <span class="todo-tag">Sardinia</span>
-      </li>
       <li class="todo-item" data-id="maddalena-delfino">
         <input type="checkbox">
         <div class="todo-text">
