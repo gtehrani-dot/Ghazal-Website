@@ -2,633 +2,769 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>Morning Briefing — Jul 12, 2026</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Morning Briefing — Jul 20, 2026</title>
 <style>
-:root{color-scheme:light;--accent:#4A6FA5;--amber:#F59E0B;--red:#EF4444;--green:#10B981;--bg:#f5f6f8;--card:#ffffff;--border:#e5e7eb;--text:#22242a;--muted:#6b7280;}
+:root{
+  --bg:#f5f6f8; --white:#ffffff; --accent:#4A6FA5; --amber:#F59E0B; --red:#EF4444;
+  --green:#10B981; --purple:#6d5dfc; --purple-bg:#f4f2ff; --purple-dark:#4b3fc7;
+  --border:#e5e7eb; --text:#1f2430; --muted:#6b7280; --faint:#9aa2b1;
+}
 *{box-sizing:border-box;}
 body{margin:0;background:var(--bg);color:var(--text);font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;font-size:14px;}
-.tabbar{display:flex;gap:2px;overflow-x:auto;border-bottom:1px solid var(--border);background:var(--card);padding:0 12px;position:sticky;top:0;z-index:5;}
-.tabbtn{border:none;background:none;padding:13px 15px;font-size:13.5px;color:var(--muted);white-space:nowrap;border-bottom:2px solid transparent;cursor:pointer;font-family:inherit;}
-.tabbtn.active{color:var(--text);font-weight:600;border-bottom-color:var(--accent);}
-main{padding:18px;max-width:1240px;margin:0 auto;}
-.tab-section{display:none;}
-.tab-section.active{display:block;}
-.card{background:var(--card);border-radius:8px;box-shadow:0 1px 3px rgba(0,0,0,.08);padding:16px 20px;margin-bottom:14px;}
-.card h3{margin:0 0 10px;font-size:14.5px;font-weight:600;}
-.row{display:flex;align-items:flex-start;gap:10px;padding:8px 0;border-bottom:1px solid var(--border);}
-.row:last-child{border-bottom:none;}
-.muted{color:var(--muted);font-size:12.5px;}
+.wrap{max-width:1240px;margin:0 auto;padding:0 20px 60px;}
 a{color:var(--accent);text-decoration:none;}
 a:hover{text-decoration:underline;}
-button{background:var(--card);border:1px solid var(--border);border-radius:6px;padding:5px 11px;font-size:12.5px;cursor:pointer;color:var(--text);font-family:inherit;}
-button:hover{border-color:var(--accent);}
-button.primary{background:var(--accent);color:#fff;border-color:var(--accent);}
-button.danger{background:var(--red);color:#fff;border-color:var(--red);}
-button:disabled{opacity:.4;cursor:default;}
-select{border:1px solid var(--border);border-radius:6px;padding:5px 7px;font-size:12.5px;font-family:inherit;background:var(--card);color:var(--text);}
-.pill{font-size:10.5px;font-weight:600;border-radius:5px;padding:2px 7px;display:inline-block;}
-.pill-red{background:#fde8e8;color:var(--red);}
-.pill-amber{background:#fef3e0;color:#a86400;}
-.pill-purple{background:#f4f2ff;color:#4b3fc7;}
-.pill-green{background:#e6f9f1;color:#0a7a52;}
-.metric-row{display:grid;grid-template-columns:repeat(5,1fr);gap:12px;margin-bottom:16px;}
-.metric{background:var(--card);border-radius:8px;box-shadow:0 1px 3px rgba(0,0,0,.08);padding:14px;text-align:center;cursor:pointer;}
-.metric:hover{box-shadow:0 2px 6px rgba(0,0,0,.12);}
-.metric .num{font-size:22px;font-weight:700;}
-.metric .lbl{font-size:11px;color:var(--muted);margin-top:3px;}
-.two-col{display:grid;grid-template-columns:1fr 1fr;gap:14px;align-items:start;}
-.info-card{border-left:4px solid #6d5dfc;background:#f4f2ff;}
-.info-card h3{color:#4b3fc7;font-size:18px;}
-.high-card{border-left:4px solid var(--amber);}
-.risk-card{border-left:4px solid var(--red);background:#fef5f5;}
-.watch-card{border-left:4px solid var(--amber);background:#fffaf0;}
-.pattern-card{border-left:4px solid var(--accent);background:#f3f6fb;}
-.opp-card{border-left:4px solid var(--green);background:#f0fbf6;}
-.chev{font-size:11px;color:var(--accent);margin-left:6px;cursor:pointer;}
-.email-detail{margin-top:5px;font-size:12.5px;color:var(--muted);}
-.email-item{display:flex;gap:10px;align-items:flex-start;padding:9px 0;border-bottom:1px solid var(--border);}
-.email-item:last-child{border-bottom:none;}
-.star-btn{border:none;background:none;font-size:16px;cursor:pointer;color:var(--amber);}
-.toolbar{display:flex;justify-content:flex-end;gap:8px;margin-bottom:10px;}
-.subtabs{display:flex;gap:4px;margin-bottom:10px;}
-.subtabbtn{border:1px solid var(--border);background:var(--card);padding:6px 12px;font-size:12.5px;border-radius:6px;cursor:pointer;}
-.subtabbtn.active{background:var(--accent);color:#fff;border-color:var(--accent);}
-.subtab-panel{display:none;}
-.subtab-panel.active{display:block;}
-table.kt{width:100%;border-collapse:collapse;font-size:13px;}
-table.kt th{text-align:left;color:var(--muted);font-size:11px;text-transform:uppercase;letter-spacing:.03em;padding:7px 8px;border-bottom:2px solid var(--border);}
-table.kt td{padding:9px 8px;border-bottom:1px solid var(--border);vertical-align:top;}
-.navbadge{font-size:10px;font-weight:700;color:#fff;border-radius:8px;padding:1px 6px;margin-left:5px;}
-.badge-purple{background:#6d5dfc;}
-.badge-red{background:var(--red);}
-.badge-amber{background:var(--amber);}
-.today-date{font-size:13px;color:var(--muted);margin:-6px 0 14px;}
-.weather-strip{background:linear-gradient(135deg,#4A6FA5,#6d8fc7);color:#fff;border-radius:8px;padding:20px 24px;margin-bottom:16px;display:flex;align-items:center;gap:24px;flex-wrap:wrap;}
-.weather-strip .temp{font-size:40px;font-weight:700;}
+.topbar{background:var(--white);border-bottom:1px solid var(--border);padding:16px 20px;display:flex;justify-content:space-between;align-items:center;position:sticky;top:0;z-index:20;}
+.topbar h1{font-size:18px;margin:0;}
+.topbar .sub{color:var(--muted);font-size:12.5px;margin-top:2px;}
+.tabbar{display:flex;gap:4px;background:var(--white);border-bottom:1px solid var(--border);position:sticky;top:58px;z-index:19;overflow-x:auto;padding:0 12px;}
+.tab-btn{border:none;background:none;padding:12px 16px;font-size:13.5px;cursor:pointer;color:var(--muted);border-bottom:3px solid transparent;white-space:nowrap;position:relative;}
+.tab-btn.active{color:var(--accent);border-bottom-color:var(--accent);font-weight:600;}
+.badge{display:inline-block;border-radius:10px;font-size:10.5px;font-weight:700;padding:1px 6px;margin-left:5px;color:#fff;}
+.badge.red{background:var(--red);}
+.badge.purple{background:var(--purple);}
+.badge.amber{background:var(--amber);}
+.tab-section{display:none;padding:20px 0;}
+.tab-section.active{display:block;}
+.card{background:var(--white);border-radius:8px;box-shadow:0 1px 3px rgba(0,0,0,.08);padding:16px 20px;margin-bottom:16px;}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:16px;}
+h2.section-title{font-size:15px;margin:0 0 12px;}
+.weather-strip{background:linear-gradient(135deg,#4A6FA5,#6d8fc9);color:#fff;border-radius:10px;padding:18px 22px;margin-bottom:16px;display:flex;align-items:center;gap:24px;flex-wrap:wrap;}
+.weather-strip .temp{font-size:36px;font-weight:700;}
 .weather-strip .cond{font-size:14px;opacity:.9;}
-.trash-item{display:flex;align-items:flex-start;gap:10px;padding:9px 0;border-bottom:1px solid var(--border);cursor:pointer;}
-.trash-item:last-child{border-bottom:none;}
-.trash-item.deselected{opacity:.45;text-decoration:line-through;}
-.trash-reason{font-size:10px;font-weight:600;border-radius:5px;padding:2px 7px;white-space:nowrap;}
-.reason-promo{background:#fde8e8;color:var(--red);}
-.reason-auto{background:#eef1f5;color:var(--muted);}
-.reason-digest{background:#f4f2ff;color:#4b3fc7;}
-.file-group-note{font-size:12.5px;color:var(--muted);margin:-4px 0 10px;}
+.alert-banner{background:#fee2e2;border:1px solid var(--red);color:#7f1d1d;border-radius:8px;padding:10px 14px;margin-bottom:14px;font-size:13px;}
+.pills-row{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:16px;}
+.pill{background:var(--white);border:1px solid var(--border);border-radius:20px;padding:8px 14px;font-size:12.5px;cursor:pointer;display:flex;align-items:center;gap:6px;box-shadow:0 1px 3px rgba(0,0,0,.06);}
+.pill:hover{border-color:var(--accent);}
+.pill .n{font-weight:700;}
+.pill.red .n{color:var(--red);}
+.pill.purple .n{color:var(--purple);}
+.flag-line{display:flex;gap:8px;padding:8px 0;border-bottom:1px solid var(--border);font-size:13px;}
+.flag-line:last-child{border-bottom:none;}
+.flag-tag{font-size:10px;font-weight:700;padding:2px 6px;border-radius:4px;background:#eef1f6;color:var(--muted);flex-shrink:0;height:fit-content;}
+.insight-card{border-radius:8px;padding:12px 14px;margin-bottom:10px;font-size:13px;}
+.insight-risk{background:#fef2f2;border-left:4px solid var(--red);}
+.insight-watch{background:#fffbeb;border-left:4px solid var(--amber);}
+.insight-pattern{background:#eff6ff;border-left:4px solid var(--accent);}
+.insight-opp{background:#ecfdf5;border-left:4px solid var(--green);}
+.insight-label{font-weight:700;font-size:11px;text-transform:uppercase;margin-bottom:3px;}
+.email-item{padding:9px 0;border-bottom:1px solid var(--border);font-size:13px;display:flex;gap:10px;align-items:flex-start;}
+.email-item:last-child{border-bottom:none;}
+.email-item.high{border-left:3px solid var(--amber);padding-left:8px;}
+.email-meta{color:var(--muted);font-size:11.5px;margin-top:1px;}
+.email-detail{display:none;font-size:12.5px;color:var(--muted);margin-top:4px;background:#f9fafb;border-radius:6px;padding:8px 10px;}
+.chev{cursor:pointer;color:var(--accent);font-size:11.5px;margin-left:4px;}
+.star-btn{border:none;background:none;font-size:16px;cursor:pointer;color:var(--faint);flex-shrink:0;}
+.star-btn.starred{color:var(--amber);}
+.info-card{border-left:4px solid var(--purple);background:var(--purple-bg);}
+.info-card h3{color:var(--purple-dark);font-size:18px;margin:0 0 6px;}
+.muted{color:var(--muted);font-size:12.5px;}
+select,button.btn,input[type=text],input[type=date]{font-family:inherit;font-size:12.5px;border:1px solid var(--border);border-radius:6px;padding:5px 8px;}
+button.btn{background:var(--accent);color:#fff;border:none;cursor:pointer;padding:6px 12px;}
+button.btn.danger{background:var(--red);}
+button.btn.green{background:var(--green);}
+button.btn:disabled{background:#d1d5db;cursor:not-allowed;}
+.toolbar{display:flex;gap:8px;justify-content:flex-end;margin-bottom:10px;}
+.toolbar button{background:none;border:1px solid var(--border);border-radius:6px;padding:5px 10px;font-size:12px;cursor:pointer;color:var(--muted);}
+.inbox-subbar{display:flex;gap:4px;margin:16px 0 10px;border-bottom:1px solid var(--border);}
+.inbox-subbtn{border:none;background:none;padding:8px 14px;font-size:12.5px;cursor:pointer;color:var(--muted);border-bottom:2px solid transparent;}
+.inbox-subbtn.active{color:var(--accent);border-bottom-color:var(--accent);font-weight:600;}
+.inbox-subtab{display:none;}
+.inbox-subtab.active{display:block;}
+table.dashtable{width:100%;border-collapse:collapse;font-size:12.5px;}
+table.dashtable th{text-align:left;color:var(--muted);font-size:10.5px;text-transform:uppercase;letter-spacing:.03em;padding:6px 8px 6px 0;border-bottom:1px solid var(--border);}
+table.dashtable td{padding:8px;border-bottom:1px solid var(--border-light,#f0f1f3);vertical-align:top;}
+.kid-card{border-left:4px solid; }
+.kid-ella{border-left-color:#C96844;}
+.kid-liam{border-left-color:#3B6EA5;}
+.trash-item{display:flex;align-items:flex-start;gap:10px;padding:9px 0;border-bottom:1px solid var(--border);cursor:pointer;font-size:13px;}
+.trash-item.trash-off{opacity:.45;text-decoration:line-through;}
+.trash-item-meta{display:flex;gap:10px;color:var(--muted);font-size:11.5px;}
+.trash-reason{font-size:10px;font-weight:700;padding:2px 6px;border-radius:4px;background:#eef1f6;color:var(--muted);height:fit-content;}
+.file-group-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:8px;}
+.news-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:14px;}
+.news-item{padding:10px 0;border-bottom:1px solid var(--border);font-size:13px;}
+.news-item:last-child{border-bottom:none;}
+.news-source{font-size:11px;color:var(--muted);margin-top:2px;}
+.todoist-cols{display:grid;grid-template-columns:1fr 1fr;gap:0;background:var(--white);border-radius:8px;overflow:hidden;box-shadow:0 1px 3px rgba(0,0,0,.08);}
+.todoist-col{padding:16px 18px;}
+.todoist-col.right{background:#fafbfd;border-left:1px solid var(--border);}
+.task-row{display:flex;align-items:center;gap:8px;padding:7px 0;border-bottom:1px solid var(--border);font-size:12.5px;}
+.pstripe{width:4px;align-self:stretch;border-radius:2px;flex-shrink:0;}
+.p1{background:var(--red);} .p2{background:#F97316;} .p3{background:var(--amber);} .p4{background:#d1d5db;}
+.overdue-badge{color:var(--red);font-size:10.5px;font-weight:700;}
+footer.dash-footer{text-align:center;color:var(--faint);font-size:11px;padding:20px 0;}
+@media (max-width:900px){.grid2,.todoist-cols,.news-grid{grid-template-columns:1fr;}}
 </style>
 </head>
 <body>
-
-<nav class="tabbar">
-  <button class="tabbtn active" data-tab="home">🏠 Home</button>
-  <button class="tabbtn" data-tab="inbox">📬 Inbox<span class="navbadge badge-purple">1</span></button>
-  <button class="tabbtn" data-tab="calendar">📅 Calendar</button>
-  <button class="tabbtn" data-tab="kids">👧🏻 Kids<span class="navbadge badge-red">2</span></button>
-  <button class="tabbtn" data-tab="todoist">✅ Todoist</button>
-  <button class="tabbtn" data-tab="news">📰 News</button>
-  <button class="tabbtn" data-tab="trash">🗑️ Trash</button>
-  <button class="tabbtn" data-tab="file">📁 File</button>
-</nav>
-
-<main>
-<!-- ============ HOME ============ -->
-<section class="tab-section active" id="tab-home">
-<p class="today-date">Sunday, July 12, 2026</p>
-
+<div class="topbar">
+  <div><h1>Good morning, Ghazal</h1><div class="sub">Monday, July 20, 2026 · McLean, VA</div></div>
+</div>
+<nav class="tabbar"><button class="tab-btn active" data-tab="home" onclick="showTab('home')">🏠 Home</button><button class="tab-btn" data-tab="inbox" onclick="showTab('inbox')">📬 Inbox<span class="badge purple">3</span></button><button class="tab-btn" data-tab="calendar" onclick="showTab('calendar')">📅 Calendar</button><button class="tab-btn" data-tab="kids" onclick="showTab('kids')">👧🏻 Kids</button><button class="tab-btn" data-tab="todoist" onclick="showTab('todoist')">✅ Todoist<span class="badge red">18</span></button><button class="tab-btn" data-tab="news" onclick="showTab('news')">📰 News</button><button class="tab-btn" data-tab="trash" onclick="showTab('trash')">🗑️ Trash<span class="badge amber">12</span></button><button class="tab-btn" data-tab="file" onclick="showTab('file')">📁 File</button></nav>
+<div class="wrap">
+<section id="tab-home" class="tab-section active">
 <div class="weather-strip">
   <div>
-    <div class="temp">83°F</div>
-    <div class="cond">High 83° / Low 67° tonight · McLean, VA</div>
+    <div class="temp">93°F</div>
+    <div class="cond">Hot & humid, McLean VA — heat index near 102°F</div>
   </div>
-  <div class="cond">☁️ Considerable cloudiness, 24% chance of rain. Comfortable for the party if it happens outdoors at drop-off/pickup.</div>
-</div>
-
-<div class="metric-row">
-  <div class="metric" onclick="showTab('inbox')"><div class="num" style="color:var(--red)">5</div><div class="lbl">🔴 High Priority</div></div>
-  <div class="metric" onclick="showTab('inbox')"><div class="num" style="color:#4b3fc7">1</div><div class="lbl">ℹ️ Informational</div></div>
-  <div class="metric" onclick="showTab('calendar')"><div class="num">1</div><div class="lbl">📅 Calendar Items Today</div></div>
-  <div class="metric" onclick="showTab('todoist')"><div class="num" style="color:var(--red)">27</div><div class="lbl">✅ Overdue/Due P1 Tasks</div></div>
-  <div class="metric" onclick="showTab('calendar')"><div class="num">Jul 26</div><div class="lbl">👤 Ben's Next Away</div></div>
-</div>
-
-<div class="two-col">
-  <div>
-    <div class="card high-card">
-      <h3>⚠️ Action Flags</h3>
-      <div class="row"><div style="flex:1"><span class="pill pill-red">CALENDAR CONFLICT</span> <a href="https://www.google.com/calendar/event?eid=Xzg0cjNnaDltOGgzM2loMW02a280YWRhMTYxMjQ0ZGhtNjBwajZkMjM4NHBqZ2QyNDhnbzM0ZTluNmNva2FnOWlic28wIGZhbWlseTEwMTI4MjI1OTEwMTgyMDM4MDE0QGc" target="_blank">Liam's 10th Birthday Party</a> is still on the Family calendar for <b>today, 12:15pm at K1 Speedway, Sterling</b> — but 3 days ago Ben emailed 6 families proposing to reschedule to Aug 2 or Aug 30, and Kate Walters + the Reddy/Iyer family already confirmed Aug 30 works. No email confirms whether today's party is on or cancelled. Worth a quick call to Ben this morning before assuming either way.</div></div>
-      <div class="row"><div style="flex:1"><span class="pill" style="background:#fde8e8;color:var(--red)">OVERDUE TASK</span> <b>Liam cake</b> was due Jul 10 and is still open in Todoist. If today's party is still happening, this needs to be resolved in the next few hours.</div></div>
-      <div class="row"><div style="flex:1"><span class="pill pill-red">EMAIL</span> <a href="https://mail.google.com/mail/u/0/#all/19eef8c24df47256" target="_blank">Dr. Sethi ADHD medication form</a> — Ben has emailed 4 times since Jun 6, still no confirmation it reached Sandy Hill. Ella's Sandy Hill camp week starts <b>Jul 19</b> — 7 days away.</div></div>
-      <div class="row"><div style="flex:1"><span class="pill pill-red">EMAIL</span> <a href="https://mail.google.com/mail/u/0/#all/19f39a82d23610cd" target="_blank">COBRA sign-up</a> — starred, no reply sent since Judy Liang's Jul 6 message (6 days now). Sterling still needs to mail sign-up instructions.</div></div>
-      <div class="row"><div style="flex:1"><span class="pill pill-amber">CALENDAR</span> Mediation with Brian Hirsch is confirmed for <b>tomorrow, Jul 13 at 1:00pm</b> per Ben's Jun 25 email — but it's not actually on the Google calendar, and appraiser Tom Kirchner said Jul 5 his written report wouldn't be ready by the 13th. Worth adding the calendar hold and checking report status.</div></div>
-      <div class="row"><div style="flex:1"><span class="pill pill-amber">CALENDAR</span> Camp gap weeks: <b>Aug 3–7</b> and <b>Aug 17–21</b> still have no camp booked for either Ella or Liam.</div></div>
-      <div class="row"><div style="flex:1"><span class="pill" style="background:#eef1f5;color:var(--muted)">EMAIL</span> <a href="https://mail.google.com/mail/u/0/#all/19f4bf5d2dd85566" target="_blank">MindVita new-patient paperwork</a> for Liam — needs to be completed before his <b>Aug 3</b> intake appointment with Katarina.</div></div>
-      <div class="row"><div style="flex:1"><span class="pill" style="background:#eef1f5;color:var(--muted)">EMAIL</span> <a href="https://mail.google.com/mail/u/0/#all/19f51ac4ed20902b" target="_blank">Hopkins MyChart test result</a> posted Jul 11 — hasn't been opened yet.</div></div>
-      <div class="row"><div style="flex:1"><span class="pill" style="background:#eef1f5;color:var(--muted)">OVERDUE TASK</span> 27 P1 Todoist tasks are now overdue or due today, including Call Fidelity, Update IRA amounts, Sethi Medical Form, and Liam cake. See Todoist tab.</div></div>
-    </div>
-  </div>
-  <div>
-    <div class="card risk-card">
-      <h3>🔴 Risk — Is Liam's birthday party actually happening today?</h3>
-      <p style="margin:0;font-size:13px">The Family calendar still lists the party for <b>today at 12:15pm</b> at K1 Speedway. But Ben's Jul 9 emails to 6 guest families proposed moving it to Aug 2 or Aug 30, and two families have already confirmed Aug 30. If today's event quietly got cancelled without the calendar being updated, some invited families may still show up — or Ghazal may be scrambling for a cake for a party that isn't happening. This is worth resolving with Ben in the next hour, well before 12:15pm.</p>
-    </div>
-    <div class="card watch-card" style="margin-top:14px">
-      <h3>🟡 Watch — Mediation tomorrow isn't on the calendar</h3>
-      <p style="margin:0;font-size:13px">Mediation with Brian Hirsch is confirmed for <b>tomorrow, Jul 13 at 1:00pm</b> per email back-and-forth with Ben and April Yeager, but there's no corresponding Google Calendar event — worth adding a hold so it doesn't get double-booked. Appraiser Tom Kirchner's written report on 1502 Linden Hurst also still wasn't expected to be ready by the 13th as of his Jul 5 note, though he and Ghazal exchanged a friendly follow-up on Jul 10.</p>
-    </div>
-    <div class="card watch-card" style="margin-top:14px">
-      <h3>🟡 Watch — Sethi ADHD medication form still outstanding</h3>
-      <p style="margin:0;font-size:13px">Ben has flagged the Dr. Sethi medication form four times since Jun 6. Sandy Hill needs it on file before Ella can take her ADHD medication there — and Ella's Sandy Hill weeks start <b>Jul 19</b>, one week away. The matching Todoist task ("Sethi Medical Form") has been overdue since Jul 10.</p>
-    </div>
-    <div class="card pattern-card" style="margin-top:14px">
-      <h3>🔵 Pattern — Job search momentum continues</h3>
-      <p style="margin:0;font-size:13px">Booz Allen's Delie Minaie confirmed Jul 10 she'd "keep you posted" after forwarding Ghazal's resume internally for the Strategic Partnerships role. Two new inbound leads worth a look: <b>AI Principal Consultant @ AHEAD</b> ($250K–$300K) and <b>VP/Senior Director, Professional Services Consulting @ Brightspot</b>. Ian Walsh's resume feedback (lead with customer-experience + operations-metrics angle) is now incorporated. From the Jun 28 Cindy Wallace call: still watching for a job lead via a trusted contact around mid-August.</p>
-    </div>
-    <div class="card watch-card" style="margin-top:14px">
-      <h3>🟡 Watch — email display name still showing incorrectly</h3>
-      <p style="margin:0;font-size:13px">Ian Walsh's Jul 11 reply confirms outgoing emails still show "Ghazal Moore" instead of "Ghazal Tehrani" — fix requires changing it via the Google account profile, not Gmail settings. Still open as of yesterday.</p>
-    </div>
+  <div style="font-size:13px;line-height:1.6">
+    High 93°F / Low 74°F<br>
+    70% chance of PM thunderstorms<br>
+    Air quality: moderate — sensitive groups should limit prolonged outdoor exertion
   </div>
 </div>
-</section>
+<div class="alert-banner">🥵 Extreme heat again today with a 70% chance of PM storms — hydrate kids at camp pickup/dropoff and watch for storm delays.</div>
 
-<!-- ============ INBOX ============ -->
-<section class="tab-section" id="tab-inbox">
-<div class="toolbar"><button onclick="expandAllEmails()">Expand all</button><button onclick="collapseAllEmails()">Collapse all</button></div>
+<div class="pills-row">
+  <div class="pill red" onclick="showTab('inbox')">🔴 High Priority <span class="n">3</span></div>
+  <div class="pill purple" onclick="showTab('inbox')">ℹ️ Informational <span class="n">3</span></div>
+  <div class="pill" onclick="showTab('calendar')">📅 Meetings Today <span class="n">0</span></div>
+  <div class="pill red" onclick="showTab('todoist')">✅ P1 Tasks overdue <span class="n">15</span></div>
+  <div class="pill" onclick="showTab('calendar')">👤 Ben's Next Away <span class="n">Jul 26</span></div>
+</div>
+
+<div class="grid2">
+  <div class="card">
+    <h2 class="section-title">Action Flags</h2>
+    <div class="flag-line"><span class="flag-tag">EMAIL</span><div><a href="https://mail.google.com/mail/u/0/#all/19f66b1b52052b01" target="_blank">COBRA: two accounts under Ghazal&#x27;s name — needs confirmation</a><div class="muted">Sterling shows two different COBRA account numbers/SSNs/qualifying-event dates. Ghazal replied last night offering her SSN; still unresolved.</div></div></div><div class="flag-line"><span class="flag-tag">EMAIL</span><div><a href="https://mail.google.com/mail/u/0/#all/19f8005621bd83f6" target="_blank">Aug 28 mediation invite needs a response</a><div class="muted">New calendar invite for Fri Aug 28, 9:00–11:30am in Reston — supersedes the earlier Jul 13/28 options. No Accept/Decline sent yet.</div></div></div><div class="flag-line"><span class="flag-tag">EMAIL</span><div><a href="https://mail.google.com/mail/u/0/#all/19f7f8c63ee75a00" target="_blank">Ian Walsh wants to schedule the IRA walkthrough</a><div class="muted">He offered 11am–3:30pm today; that window has passed — reply to find a new time.</div></div></div><div class="flag-line"><span class="flag-tag">EMAIL</span><div><a href="https://mail.google.com/mail/u/0/#all/19f7190f0019e6d1" target="_blank">Liam&#x27;s birthday party still needs a date</a><div class="muted">Ben asked Joellen when Liam&#x27;s back in town (away Jul 26–31); no reply in 3 days.</div></div></div><div class="flag-line"><span class="flag-tag">TRIP</span><div><b>Sardinia lodging not yet booked</b><div class="muted">Casagliana Suite Resort (Aug 6–10, 4 nights) has no confirmation in inbox — trip is in 17 days.</div></div></div><div class="flag-line"><span class="flag-tag">TRIP</span><div><b>Sardinia→Como flight not yet purchased</b><div class="muted">Aeroitalia XZ2624, Aug 10, ~€180 for 3 — priced but unbought; decide on checked-bag/Biz upgrade first.</div></div></div><div class="flag-line"><span class="flag-tag">OVERDUE TASK</span><div><b>15 P1 tasks overdue from Jul 15</b><div class="muted">Sterling COBRA, McLean lawyer, Fidelity call, IRA update, emergency plan, and several home/wellness P1 items rolled from last week.</div></div></div><div class="flag-line"><span class="flag-tag">CALENDAR</span><div><b>Sparse day today — just recurring Recycle pickup</b><div class="muted">No other events on primary or family calendar for today.</div></div></div>
+  </div>
+  <div class="card">
+    <h2 class="section-title">Strategic Insights</h2>
+    <div class="insight-card insight-risk"><div class="insight-label">🔴 Risk</div><b>COBRA confusion escalating, not resolving</b><div style="margin-top:4px">What started as an FSA-eligibility question is now a two-account mismatch (different SSNs, different qualifying-event dates). This has been open since early June with no clean resolution — worth a direct call to Sterling rather than continuing over email. <a href="https://mail.google.com/mail/u/0/#all/19f66b1b52052b01" target="_blank">Open thread →</a></div></div><div class="insight-card insight-risk"><div class="insight-label">🔴 Risk</div><b>Sardinia trip lodging &amp; flight still unbooked, 17 days out</b><div style="margin-top:4px">Casagliana Suite Resort (Aug 6–10) has no confirmation on file, and the Aug 10 connecting flight to Como is priced but not purchased. Both are on today's new Todoist list — worth locking in this week before availability tightens.</div></div><div class="insight-card insight-watch"><div class="insight-label">🟡 Watch</div><b>Liam&#x27;s birthday party logistics still open</b><div style="margin-top:4px">Multiple reschedule threads with the Duckett family — Ben's last message (Jul 17) asked for a date after Jul 31, no reply since. A separate date with the George family is already settled, so two events may be converging.</div></div><div class="insight-card insight-pattern"><div class="insight-label">🔵 Pattern</div><b>Job search staying warm</b><div style="margin-top:4px">Booz Allen internal forward on Jul 10 ("I'll keep you posted") and Ian Walsh's earlier resume feedback suggest active momentum — worth a light follow-up if Booz Allen goes quiet another week.</div></div><div class="insight-card insight-opp"><div class="insight-label">🟢 Opportunity</div><b>Camp schedule now fully resolved through Jul 31</b><div style="margin-top:4px">Both the medication-form and bus-stop issues that were open risks in early July are now confirmed resolved — Ella and Liam's camp weeks through Jul 31 need no further action.</div></div>
+  </div>
+</div>
+</section><section id="tab-inbox" class="tab-section">
+<div class="toolbar"><button onclick="expandAllEmails('tab-inbox')">Expand all</button><button onclick="collapseAllEmails('tab-inbox')">Collapse all</button></div>
 
 <div class="card info-card">
-  <h3>ℹ️ INFORMATIONAL — already handled (1)</h3>
-  <p class="muted" style="margin:-4px 0 8px">These looked like High/Medium priority, but someone already replied that it's done. Nothing to action; just pick where each one should move and click Move.</p>
+  <h3>ℹ️ INFORMATIONAL — already handled (3)</h3>
+  <p class="muted">These looked like High/Medium priority, but someone already replied that it's done. Nothing to action; just pick where each one should move and click Move.</p>
   <div class="email-item" style="border-left:3px solid #8a8fa3;padding-left:10px">
-    <div style="flex:1">
-      <div><a href="https://mail.google.com/mail/u/0/#all/19f27eb22461a7a0" target="_blank">Re: Calleva Summer Camp — Bus Route/Car Drop-Off Selection Form Required</a> <span class="chev" onclick="toggleDetail('info1')">▸ more</span></div>
-      <div class="muted">Ben Moore · Jul 3</div>
-      <div class="email-detail" id="detail-info1" style="display:none">Ben replied "This is done" on Jul 3 to Calleva's registration office confirming the bus/drop-off form was completed for Liam's week (Jul 13–17).</div>
-    </div>
-    <select id="inforoute-info1"><option value="" selected disabled>Move to…</option><option value="ARCHIVE">Archive</option><option value="TRASH">Trash</option></select>
-    <button onclick="routeInformational('info1','19f27eb22461a7a0')">Move</button>
+  <div style="flex:1">
+    <div><a href="https://mail.google.com/mail/u/0/#all/19f66ea0a00990e3" target="_blank">Re: Ella&#x27;s medication form — resolved</a> <span class="chev" onclick="toggleDetail('19f66ea0a00990e3')">▸ more</span></div>
+    <div class="email-meta">Ben Moore (allcrewingdc.com) · Jul 15</div>
+    <div class="email-detail" id="detail-19f66ea0a00990e3">Ghazal sent Ella&#x27;s signed Sandy Hill ADHD medication form to Ben on Jul 15 (&quot;Ella&#x27;s medication form for Sand Hill signed&quot;); Ben confirmed the same day: &quot;Uploaded to Sandy Hill.&quot; This closes out the item Ben had chased four times in June.</div>
   </div>
+  <select id="inforoute-19f66ea0a00990e3">
+    <option value="" selected disabled>Move to…</option>
+    <option value="ARCHIVE">Archive</option>
+    <option value="TRASH">Trash</option>
+  </select>
+  <button class="btn" onclick="routeInformational('19f66ea0a00990e3')">Move</button>
+</div><div class="email-item" style="border-left:3px solid #8a8fa3;padding-left:10px">
+  <div style="flex:1">
+    <div><a href="https://mail.google.com/mail/u/0/#all/19f6e099368c47a1" target="_blank">Re: Welcome to Evolution Basketball Camp — carpool confirmed</a> <span class="chev" onclick="toggleDetail('19f6e099368c47a1')">▸ more</span></div>
+    <div class="email-meta">Ben Moore / Nadav Kalender · Jul 18</div>
+    <div class="email-detail" id="detail-19f6e099368c47a1">Ben confirmed carpool arrangements with the Bhalla-Lowitt family for Liam&#x27;s Evolution Basketball week; camp director replied &quot;Thank you!&quot; Jul 18.</div>
+  </div>
+  <select id="inforoute-19f6e099368c47a1">
+    <option value="" selected disabled>Move to…</option>
+    <option value="ARCHIVE">Archive</option>
+    <option value="TRASH">Trash</option>
+  </select>
+  <button class="btn" onclick="routeInformational('19f6e099368c47a1')">Move</button>
+</div><div class="email-item" style="border-left:3px solid #8a8fa3;padding-left:10px">
+  <div style="flex:1">
+    <div><a href="https://mail.google.com/mail/u/0/#all/19f27eb22461a7a0" target="_blank">Re: Calleva Summer Camp — Bus Route/Car Drop-Off Selection Form Required</a> <span class="chev" onclick="toggleDetail('19f27eb22461a7a0')">▸ more</span></div>
+    <div class="email-meta">Ben Moore (allcrewingdc.com) · Jul 3</div>
+    <div class="email-detail" id="detail-19f27eb22461a7a0">Ben replied &quot;This is done&quot; to Calleva&#x27;s incomplete bus-route form notice for Liam.</div>
+  </div>
+  <select id="inforoute-19f27eb22461a7a0">
+    <option value="" selected disabled>Move to…</option>
+    <option value="ARCHIVE">Archive</option>
+    <option value="TRASH">Trash</option>
+  </select>
+  <button class="btn" onclick="routeInformational('19f27eb22461a7a0')">Move</button>
+</div>
 </div>
 
-<div class="two-col">
-  <div class="card high-card">
-    <h3>High priority (5)</h3>
-    <div class="email-item">
-      <div style="flex:1">
-        <div><a href="https://calendar.google.com/calendar/u/0/r/eventedit" target="_blank">Liam's 10th Birthday Party</a> <span class="chev" onclick="toggleDetail('h0')">▸ more</span> <span class="pill pill-red">⚠️ Today?</span></div>
-        <div class="muted">Ben Moore + families · Jul 9</div>
-        <div class="email-detail" id="detail-h0" style="display:none">Calendar still says today, 12:15pm, K1 Speedway. Ben's Jul 9 emails to Deepti/Alex, Delie, Neelima/Vishal, Dana/Rami, Josie/Matthew, and Kate Walters proposed Aug 2 or Aug 30 instead. Neelima and Kate both confirmed Aug 30. See Home tab Risk.</div>
-      </div>
-    </div>
-    <div class="email-item">
-      <div style="flex:1">
-        <div><a href="https://mail.google.com/mail/u/0/#all/19eef8c24df47256" target="_blank">Re: Dr. Sethi Form</a> <span class="chev" onclick="toggleDetail('h1')">▸ more</span> <span class="pill pill-red">⚠️ No reply</span></div>
-        <div class="muted">Ben Moore · Jun 22</div>
-        <div class="email-detail" id="detail-h1" style="display:none">"We need to get it to Sandy Hill so that Ella can take her ADHD medication. This is the fourth time I've emailed about this." Still unresolved — Ella's Sandy Hill weeks start Jul 19. Health-related, exempt from the 10-day staleness cutoff until confirmed done.</div>
-      </div>
-      <button class="star-btn" data-msg-id="19eef8c24df47256" data-starred="false" onclick="toggleStar(this)" title="Star this email">☆</button>
-    </div>
-    <div class="email-item">
-      <div style="flex:1">
-        <div><a href="https://mail.google.com/mail/u/0/#all/19f39a82d23610cd" target="_blank">Re: Cobra Sign Up</a> <span class="chev" onclick="toggleDetail('h2')">▸ more</span> <span class="pill pill-red">⚠️ No reply</span></div>
-        <div class="muted">Judy Liang (Ada) · Jul 6</div>
-        <div class="email-detail" id="detail-h2" style="display:none">Confirms Ghazal isn't eligible for FSA COBRA (Dependent Care FSA only) — but general health COBRA sign-up via Sterling is still outstanding. Thread is starred; no reply sent in 6 days.</div>
-      </div>
-      <button class="star-btn" data-msg-id="19f39a82d23610cd" data-starred="true" onclick="toggleStar(this)" title="Unstar this email">★</button>
-    </div>
-    <div class="email-item">
-      <div style="flex:1">
-        <div><a href="https://mail.google.com/mail/u/0/#all/19f47041fce382e4" target="_blank">Ella's Parent? — satellite project pitch</a> <span class="chev" onclick="toggleDetail('h3')">▸ more</span> <span class="pill pill-red">⚠️ No reply</span></div>
-        <div class="muted">Vihaan Singh (schooliupdates.com) · Jul 9, starred</div>
-        <div class="email-detail" id="detail-h3" style="display:none">Pitches a paid "live satellite project" program, now says "only 3 seats left." Ghazal forwarded to Ben Jul 9 saying "I doubt she will want this" — no reply sent to the vendor itself. Reads as a sales pitch rather than a real school program; likely just needs a firm no or to be dropped.</div>
-      </div>
-      <button class="star-btn" data-msg-id="19f47041fce382e4" data-starred="true" onclick="toggleStar(this)" title="Unstar this email">★</button>
-    </div>
-    <div class="email-item">
-      <div style="flex:1">
-        <div><a href="https://mail.google.com/mail/u/0/#all/19f51ac4ed20902b" target="_blank">New Test Result</a> <span class="chev" onclick="toggleDetail('h4')">▸ more</span></div>
-        <div class="muted">Hopkins Medicine (MyChart) · Jul 11</div>
-        <div class="email-detail" id="detail-h4" style="display:none">A new test result was posted to MyChart Jul 11, 2:54pm, with a duplicate notice at 6:52pm. Not yet opened.</div>
-      </div>
-      <button class="star-btn" data-msg-id="19f52862f8c5d9cb" data-starred="false" onclick="toggleStar(this)" title="Star this email">☆</button>
-    </div>
+<div class="grid2">
+  <div class="card">
+    <h2 class="section-title">🔴 High Priority (3)</h2>
+    <div class="email-item high">
+  <div style="flex:1">
+    <div><a href="https://mail.google.com/mail/u/0/#all/19f66b1b52052b01" target="_blank">Re: Health Care / COBRA difficulties — two accounts, unresolved</a> <span class="chev" onclick="toggleDetail('19f66b1b52052b01')">▸ more</span></div>
+    <div class="email-meta">Judy Liang (Ada CX HR) · Jul 20, 7:59pm</div>
+    <div class="email-detail" id="detail-19f66b1b52052b01">Sterling now shows TWO COBRA accounts under Ghazal&#x27;s name with different SSNs and different qualifying-event dates (#COB1489034 and #COB1489315). Judy is asking Ghazal to confirm which is correct. Ghazal replied tonight (10:24pm) that she wasn&#x27;t aware of a second account and offered to send her SSN. Still open.</div>
+  </div>
+  
+</div><div class="email-item high">
+  <div style="flex:1">
+    <div><a href="https://mail.google.com/mail/u/0/#all/19f8005621bd83f6" target="_blank">Ben Moore invited you to &quot;Brian Hirsch Mediation Session&quot; — response needed</a> <span class="chev" onclick="toggleDetail('19f8005621bd83f6')">▸ more</span></div>
+    <div class="email-meta">Apple Calendar (via Ben) · Jul 20, 2:54pm</div>
+    <div class="email-detail" id="detail-19f8005621bd83f6">New invite for Friday, August 28, 9:00–11:30am at 12110 Sunset Hills Rd, Reston VA — this appears to be the rescheduled mediation session (the earlier Jul 13/Jul 28 3:30pm options from June are superseded). Needs an Accept/Decline/Maybe response.</div>
+  </div>
+  
+</div><div class="email-item high">
+  <div style="flex:1">
+    <div><a href="https://mail.google.com/mail/u/0/#all/19f7f8c63ee75a00" target="_blank">Re: IRA calc approach — Ian wants to schedule time today</a> <span class="chev" onclick="toggleDetail('19f7f8c63ee75a00')">▸ more</span></div>
+    <div class="email-meta">Ian Walsh · Jul 20, 12:42pm</div>
+    <div class="email-detail" id="detail-19f7f8c63ee75a00">&quot;Set a time to walk through this? I&#x27;m good between 11 and 3:30.&quot; That window has already passed (it&#x27;s now evening) — worth a reply to find a new time. Relates to reconciling how much of the ~$235K IRA balance came from the FranConnect roll-in.</div>
+  </div>
+  
+</div>
   </div>
   <div class="card">
-    <h3>Medium priority (6)</h3>
+    <h2 class="section-title">🟡 Medium Priority (2)</h2>
     <div class="email-item">
-      <div style="flex:1">
-        <div><a href="https://mail.google.com/mail/u/0/#all/19f3d84e5a95247b" target="_blank">Re: Details for Liam Moore's Week at Calleva</a> <span class="chev" onclick="toggleDetail('m1')">▸ more</span></div>
-        <div class="muted">Ben Moore → Calleva · Jul 7</div>
-        <div class="email-detail" id="detail-m1" style="display:none">Ben is trying to update an emergency contact number in Calleva's account but the site says no account is found for either of his emails. Liam's Calleva week starts tomorrow (Jul 13).</div>
-      </div>
-    </div>
-    <div class="email-item">
-      <div style="flex:1">
-        <div><a href="https://mail.google.com/mail/u/0/#all/19f4bf5d2dd85566" target="_blank">Please fill out this form (2)</a> <span class="chev" onclick="toggleDetail('m2')">▸ more</span></div>
-        <div class="muted">MindVita Wellness (admin@mindvita.org) · Jul 10</div>
-        <div class="email-detail" id="detail-m2" style="display:none">New-patient onboarding paperwork for Liam ahead of his Aug 3 intake appointment with Katarina.</div>
-      </div>
-    </div>
-    <div class="email-item">
-      <div style="flex:1">
-        <div><a href="https://mail.google.com/mail/u/0/#all/19f5138d162d6f39" target="_blank">Re: Quick favor</a> <span class="chev" onclick="toggleDetail('m3')">▸ more</span></div>
-        <div class="muted">Ian Walsh · Jul 11, 12:48pm</div>
-        <div class="email-detail" id="detail-m3" style="display:none">Ongoing thread about Ghazal's outgoing emails still showing "Ghazal Moore" instead of "Ghazal Tehrani." Ian says it needs to be changed via the Google account profile, not Gmail settings.</div>
-      </div>
-    </div>
-    <div class="email-item">
-      <div style="flex:1">
-        <div><a href="https://mail.google.com/mail/u/0/#all/19f4ded620e8ba72" target="_blank">Fw: VP of Strategic Partnerships — Ghazal Tehrani Resume</a> <span class="chev" onclick="toggleDetail('m4')">▸ more</span></div>
-        <div class="muted">Delie Minaie (Booz Allen) · Jul 10</div>
-        <div class="email-detail" id="detail-m4" style="display:none">"FYI, I'll keep you posted." Delie forwarded Ghazal's resume internally to Bryce Pippert and Kerri Wenzler.</div>
-      </div>
-    </div>
-    <div class="email-item">
-      <div style="flex:1">
-        <div><a href="https://mail.google.com/mail/u/0/#all/19f543c3d675f84f" target="_blank">E-ZPass — Low Balance / Rejected Card</a> <span class="chev" onclick="toggleDetail('m5')">▸ more</span></div>
-        <div class="muted">E-ZPass VA · Jul 10–12, recurring</div>
-        <div class="email-detail" id="detail-m5" style="display:none">Three alerts in three days (rejected card Jul 10 &amp; 11, low balance Jul 12) — the auto-reload card on file appears to be failing repeatedly. Worth updating the payment method before it affects toll access.</div>
-      </div>
-    </div>
-    <div class="email-item">
-      <div style="flex:1">
-        <div><a href="https://mail.google.com/mail/u/0/#all/19f47f475ec65ca8" target="_blank">Re: Liam's Birthday Party (Aug 30 confirmations)</a> <span class="chev" onclick="toggleDetail('m6')">▸ more</span></div>
-        <div class="muted">Neelima Reddy · Jul 9</div>
-        <div class="email-detail" id="detail-m6" style="display:none">"We will be out of town on vacation on Aug 2nd, but will be available on Aug 30." Part of the same reschedule thread flagged as High Priority above.</div>
-      </div>
-    </div>
+  <div style="flex:1">
+    <div><a href="https://mail.google.com/mail/u/0/#all/19f7190f0019e6d1" target="_blank">Re: Liam&#x27;s Birthday Party — still waiting on a date from the Duckett family</a> <span class="chev" onclick="toggleDetail('19f7190f0019e6d1')">▸ more</span></div>
+    <div class="email-meta">Ben Moore (mac.com) · Jul 17</div>
+    <div class="email-detail" id="detail-19f7190f0019e6d1">Joellen Duckett offered Jul 27/28/29 or Aug 20/21; Ben replied &quot;When is he back in-town? Liam is away July 26-31&quot; on Jul 17 — no reply from Joellen since (3 days). One of several reschedule threads for this party; the George-family date (Saturday 1–4) is already settled separately.</div>
+  </div>
+  
+</div><div class="email-item">
+  <div style="flex:1">
+    <div><a href="https://mail.google.com/mail/u/0/#all/19f79d34f0f1f743" target="_blank">ARRIVAL DETAILS for camp today (bus stop mix-up, resolved)</a> <span class="chev" onclick="toggleDetail('19f79d34f0f1f743')">▸ more</span></div>
+    <div class="email-meta">Sandy Hill Camp · Jul 19</div>
+    <div class="email-detail" id="detail-19f79d34f0f1f743">Initial email said 1-week camper arrival time; Ben flagged Ella is a 2-week camper. Sandy Hill corrected: 2-week campers also arrive 4:45–5:30pm — confirmed resolved same day.</div>
+  </div>
+  
+</div>
   </div>
 </div>
 
-<div class="card" style="margin-top:14px">
-  <div class="subtabs">
-    <button class="subtabbtn active" onclick="showInboxSub('school')">School</button>
-    <button class="subtabbtn" onclick="showInboxSub('social')">Social</button>
-  </div>
-  <div class="subtab-panel active" id="inboxsub-school">
-    <div class="row"><div style="flex:1"><a href="https://mail.google.com/mail/u/0/#all/19f4c9b4ab048cf3" target="_blank">Longfellow MS - Upcoming Important Dates</a> <span class="muted">· e-Notify@fcps.edu · Jul 10</span><div class="muted" style="margin-top:2px">Early back-to-school prep info for the 2026–27 year — school is still out for summer, nothing time-sensitive this week.</div></div></div>
-    <p class="muted" style="margin-top:10px">Ella's last known grade snapshot (4th quarter progress reports, summer — no new grade emails found):</p>
-    <table class="kt">
-      <thead><tr><th>Class</th><th>Teacher</th><th>Grade</th><th>Notes</th></tr></thead>
-      <tbody>
-        <tr><td><a href="https://mail.google.com/mail/u/0/#all/19ebd7c15de2f07c" target="_blank">English 7 HN</a></td><td>Sylvia Maldonado</td><td><b>B+</b></td><td class="muted" style="font-style:italic">One assignment scored 0 — "Needs to focus in class"</td></tr>
-        <tr><td><a href="https://mail.google.com/mail/u/0/#all/19eb32d59ad94298" target="_blank">Soprano Alto Chorus</a></td><td>Kimberly Dawson</td><td><b>A-</b></td><td class="muted" style="font-style:italic">Rehearsal Technique notes flag repeated off-task/distracted behavior (4/13–5/6)</td></tr>
-        <tr><td><a href="https://mail.google.com/mail/u/0/#all/19ea86a53ef9501e" target="_blank">Health &amp; PE 7</a></td><td>Katherine Shapiro</td><td><b>A</b></td><td class="muted" style="font-style:italic">No specific teacher comments on file</td></tr>
-        <tr><td><a href="https://mail.google.com/mail/u/0/#all/19e8eb0d14208911" target="_blank">US History 7 HN</a></td><td>Jane Layton</td><td><b>A-</b></td><td class="muted" style="font-style:italic">Final progress note of the year — no outstanding retakes flagged</td></tr>
-        <tr><td><a href="https://mail.google.com/mail/u/0/#all/19e50a4596ea387b" target="_blank">Life Science HN</a></td><td>Beth Schinstock</td><td><b>B+</b></td><td class="muted" style="font-style:italic">No specific teacher comments on file</td></tr>
-      </tbody>
-    </table>
-    <p class="muted" style="margin-top:8px">Full live Kids picture (camp schedule, medical/activities) is in the Kids tab.</p>
-  </div>
-  <div class="subtab-panel" id="inboxsub-social">
-    <div class="row"><div style="flex:1"><a href="https://mail.google.com/mail/u/0/#all/19f4d4b05ee92a5f" target="_blank">Medical Update: Here's to Six Years</a> <span class="muted">· Elisabeth Drabkin · Jul 10</span><div class="muted" style="margin-top:2px">A friend's personal health-scan update, shared with her circle. Complete — no action needed, worth a warm reply when there's time.</div></div></div>
-  </div>
+<div class="inbox-subbar">
+  <button class="inbox-subbtn active" onclick="showInboxSub('school',this)">🏫 School</button>
+  <button class="inbox-subbtn" onclick="showInboxSub('social',this)">👥 Social</button>
 </div>
-
-<p class="muted" style="margin-top:6px">A thread never appears in more than one of Informational / High / Medium. Only threads still carrying the Gmail INBOX label are shown here.</p>
-</section>
-
-<!-- ============ CALENDAR ============ -->
-<section class="tab-section" id="tab-calendar">
-<div class="two-col">
-  <div>
-    <div class="card">
-      <h3>Today — Sunday, Jul 12</h3>
-      <div class="row"><div style="flex:1">12:15 PM — <a href="https://www.google.com/calendar/event?eid=Xzg0cjNnaDltOGgzM2loMW02a280YWRhMTYxMjQ0ZGhtNjBwajZkMjM4NHBqZ2QyNDhnbzM0ZTluNmNva2FnOWlic28wIGZhbWlseTEwMTI4MjI1OTEwMTgyMDM4MDE0QGc" target="_blank"><b>Liam's 10th Birthday Party</b></a> <span class="muted">· K1 Speedway, 45448 East Severn Way #150, Sterling</span> <span class="pill pill-red" style="margin-left:6px">⚠️ status unclear</span></div></div>
-      <div class="row"><div style="flex:1">All day — Mom's Harper's Ferry trip continues (through today)</div></div>
-      <p class="muted" style="margin-top:8px">See Home tab Risk — this event conflicts with Ben's Jul 9 emails proposing to move the party to Aug 2 or Aug 30. No named-invitee work meetings today to prep via Granola.</p>
-    </div>
-    <div class="card">
-      <h3>Tomorrow — Monday, Jul 13</h3>
-      <div class="row"><div style="flex:1">1:00 PM — <b>Mediation with Brian Hirsch</b> <span class="pill pill-amber" style="margin-left:6px">not on calendar</span></div></div>
-      <div class="row"><div style="flex:1">Ella's McLean Basketball camp (Session 2) begins — drop-off 8:00am, pickup 2:30pm, McLean High School</div></div>
-      <div class="row"><div style="flex:1">Liam's Calleva SUP + Thursday-campout week begins — AM bus by 8:45am, PM pickup no earlier than 4:00pm, Chesterbrook</div></div>
-      <div class="row"><div style="flex:1">4:15–7:15 PM — Pool at Chelsea's with kids</div></div>
-      <p class="muted" style="margin-top:8px">Mediation is confirmed by email (Ben: "13th @ 1:00pm works for me") but has no matching Google Calendar event — worth adding a hold.</p>
-    </div>
+<div id="sub-school" class="inbox-subtab active card"><div class="muted" style="margin-bottom:8px">School is out for summer — no recent FCPS emails in the last 7 days. Showing Ella's last known progress-report activity below.</div>
+<table class="dashtable"><thead><tr><th>Class</th><th>Teacher</th><th>Last Email</th></tr></thead><tbody><tr><td><a href="https://mail.google.com/mail/u/0/#all/19ebd7c15de2f07c" target="_blank">English 7 HN</a></td><td>Sylvia Maldonado</td><td class="muted">Progress report Jun 12 — open email to review</td></tr><tr><td><a href="https://mail.google.com/mail/u/0/#all/19eb32d59ad94298" target="_blank">Soprano Alto Chorus</a></td><td>Kimberly Dawson</td><td class="muted">Progress report Jun 10 — open email to review</td></tr><tr><td><a href="https://mail.google.com/mail/u/0/#all/19ea86a53ef9501e" target="_blank">Health &amp; PE 7</a></td><td>Katherine Shapiro</td><td class="muted">Progress report Jun 8 — open email to review</td></tr><tr><td><a href="https://mail.google.com/mail/u/0/#all/19e8eb0d14208911" target="_blank">US History 7 HN</a></td><td>Jane Layton</td><td class="muted">Progress report Jun 3 — open email to review</td></tr><tr><td><a href="https://mail.google.com/mail/u/0/#all/19e50a4596ea387b" target="_blank">Life Science HN</a></td><td>Beth Schinstock</td><td class="muted">Progress report May 22 — open email to review</td></tr></tbody></table></div>
+<div id="sub-social" class="inbox-subtab card"><div class="email-item">
+  <div style="flex:1">
+    <div><a href="https://mail.google.com/mail/u/0/#all/19f4ded620e8ba72" target="_blank">Fw: VP of Strategic Partnerships — Ghazal Tehrani Resume</a> <span class="chev" onclick="toggleDetail('19f4ded620e8ba72')">▸ more</span></div>
+    <div class="email-meta">Delie Minaie (Booz Allen) · Jul 10</div>
+    <div class="email-detail" id="detail-19f4ded620e8ba72">Internal forward at Booz Allen: &quot;I&#x27;ll keep you posted.&quot; Worth a friendly follow-up if no update in another week or two.</div>
   </div>
-  <div>
-    <div class="card">
-      <h3>New .ics invites not yet on calendar</h3>
-      <p class="muted">None found in the last 60 days beyond already-processed invites.</p>
-    </div>
-    <div class="card">
-      <h3>Calendar suggestions</h3>
-      <p class="muted">Add tomorrow's 1:00pm mediation with Brian Hirsch to the calendar — it's confirmed by email but missing from Google Calendar. Also worth resolving the birthday-party date before the day gets away (see Home tab Risk).</p>
-    </div>
-    <div class="card">
-      <h3>Ben's Away Dates (60-day window)</h3>
-      <table class="kt">
-        <thead><tr><th>Event</th><th>Dates</th><th>Kid Coverage</th><th>Notes</th></tr></thead>
-        <tbody>
-          <tr><td>Democratic Mayors Assoc. (Atlanta)</td><td>Jul 26–29</td><td class="muted">Ghazal takes Liam to Sandy Hill Jul 26</td><td class="muted">Liam's Sandy Hill week runs Jul 26–Aug 1</td></tr>
-        </tbody>
-      </table>
-      <p class="muted" style="margin-top:8px">Recurring admin items (Pay Amex, etc.) excluded — not real travel dates.</p>
-    </div>
-  </div>
-</div>
-</section>
-
-<!-- ============ KIDS ============ -->
-<section class="tab-section" id="tab-kids">
-<p class="today-date">Sunday, July 12, 2026</p>
-
-<div class="card">
-  <h3>📅 Camp schedule — through school start (Mon, Aug 24)</h3>
-  <table class="kt">
-    <thead><tr><th>Week</th><th>Ella</th><th>Liam</th></tr></thead>
-    <tbody>
-      <tr><td style="white-space:nowrap;font-weight:600">Jul 13 – Jul 17</td>
-        <td><b>McLean Basketball (Session 2)</b><div class="muted">Drop-off 8:00 AM · Pickup 2:30 PM</div><div class="muted">📍 McLean High School</div><div class="muted" style="margin-top:4px">📧 Jul 10 welcome email confirms Session 2 begins Monday Jul 13 — matches calendar.</div></td>
-        <td><b>Calleva (SUP, Thursday Campout)</b><div class="muted">AM bus no later than 8:45am · PM pickup no earlier than 4:00pm · Chesterbrook, 6244 Old Dominion Dr</div><div style="color:var(--amber);font-weight:600;font-size:12px">⚠️ Includes a Thursday-night overnight campout at Camp Fraser, Great Falls — not optional</div></td></tr>
-      <tr><td style="white-space:nowrap;font-weight:600">Jul 20 – Jul 24</td>
-        <td><b>Sandy Hill</b><div class="muted" style="font-style:italic">No drop-off/pickup time on the calendar invite</div></td>
-        <td><b>Evolution Basketball</b><div class="muted">Drop-off 8:30 AM · Pickup 3:00 PM</div><div class="muted">📍 St. John the Beloved Roman Catholic Church</div></td></tr>
-      <tr><td style="white-space:nowrap;font-weight:600">Jul 27 – Jul 31</td>
-        <td><b>Sandy Hill</b><div class="muted" style="font-style:italic">No drop-off/pickup time on the calendar invite</div></td>
-        <td><b>Sandy Hill</b><div class="muted" style="font-style:italic">No drop-off/pickup time on the calendar invite</div><div class="muted">Ben away in Atlanta Jul 26–29 — Ghazal takes Liam Jul 26</div></td></tr>
-      <tr style="background:#fff7ed"><td style="white-space:nowrap;font-weight:600">Aug 3 – Aug 7 ⚠️</td>
-        <td colspan="2" style="text-align:center" class="muted">— no camp scheduled for either kid — still open —</td></tr>
-      <tr style="background:#eff6ff"><td style="white-space:nowrap;font-weight:600">Aug 10 – Aug 14</td>
-        <td colspan="2" style="text-align:center" class="muted">🧳 Family vacation (Ghazal &amp; Kids, Aug 8–16) — no camp needed</td></tr>
-      <tr style="background:#fff7ed"><td style="white-space:nowrap;font-weight:600">Aug 17 – Aug 21 ⚠️</td>
-        <td colspan="2" style="text-align:center" class="muted">— no camp scheduled for either kid (Amelia &amp; Brennan's wedding in Syracuse is Aug 21) — still open —</td></tr>
-    </tbody>
-  </table>
-  <p style="color:var(--amber);font-size:13px;margin-top:10px">⚠️ Aug 3–7: Ella &amp; Liam need a camp booked &nbsp;|&nbsp; Aug 17–21: Ella &amp; Liam need a camp booked</p>
-</div>
-
-<div class="card" style="border-left:3px solid #C96844">
-  <h3 style="color:#C96844">Ella</h3>
-  <div style="font-weight:600;font-size:12px;text-transform:uppercase;letter-spacing:.03em;color:var(--muted);margin:2px 0 8px">Grades (4th quarter progress reports)</div>
-  <table class="kt">
-    <thead><tr><th>Class</th><th>Teacher</th><th>Grade</th><th>Notes</th></tr></thead>
-    <tbody>
-      <tr><td><a href="https://mail.google.com/mail/u/0/#all/19ebd7c15de2f07c" target="_blank">English 7 HN</a></td><td>Sylvia Maldonado</td><td><b>B+</b></td><td class="muted" style="font-style:italic">One assignment scored 0 — "Needs to focus in class"</td></tr>
-      <tr><td><a href="https://mail.google.com/mail/u/0/#all/19eb32d59ad94298" target="_blank">Soprano Alto Chorus</a></td><td>Kimberly Dawson</td><td><b>A-</b></td><td class="muted" style="font-style:italic">Repeated off-task/distracted notes (4/13–5/6)</td></tr>
-      <tr><td><a href="https://mail.google.com/mail/u/0/#all/19ea86a53ef9501e" target="_blank">Health &amp; PE 7</a></td><td>Katherine Shapiro</td><td><b>A</b></td><td class="muted" style="font-style:italic">No specific teacher comments on file</td></tr>
-      <tr><td><a href="https://mail.google.com/mail/u/0/#all/19e8eb0d14208911" target="_blank">US History 7 HN</a></td><td>Jane Layton</td><td><b>A-</b></td><td class="muted" style="font-style:italic">No specific teacher comments on file</td></tr>
-      <tr><td><a href="https://mail.google.com/mail/u/0/#all/19e50a4596ea387b" target="_blank">Life Science HN</a></td><td>Beth Schinstock</td><td><b>B+</b></td><td class="muted" style="font-style:italic">No specific teacher comments on file</td></tr>
-    </tbody>
-  </table>
-  <div style="font-weight:600;font-size:12px;text-transform:uppercase;letter-spacing:.03em;color:var(--muted);margin:14px 0 6px">🩺 Medical</div>
-  <div class="row"><div style="width:8px;height:8px;border-radius:50%;background:#C96844;margin-top:6px;flex-shrink:0"></div><div style="flex:1"><div>Flow Psychotherapy <span class="muted" style="font-weight:400">(recurring biweekly)</span></div><div class="muted">Thu, Jul 23 · 7:45 PM · 6723 Whittier Ave, McLean</div></div></div>
-  <div style="font-weight:600;font-size:12px;text-transform:uppercase;letter-spacing:.03em;color:var(--muted);margin:14px 0 6px">⚽ Activities</div>
-  <div class="row"><div style="width:8px;height:8px;border-radius:50%;background:#C96844;margin-top:6px;flex-shrink:0"></div><div style="flex:1"><div>Ben takes Ella to Sandy Hill</div><div class="muted">Sun, Jul 19</div></div></div>
-</div>
-
-<div class="card" style="border-left:3px solid #3B6EA5">
-  <h3 style="color:#3B6EA5">Liam</h3>
-  <div style="font-weight:600;font-size:12px;text-transform:uppercase;letter-spacing:.03em;color:var(--muted);margin:2px 0 6px">🩺 Medical</div>
-  <div class="row"><div style="width:8px;height:8px;border-radius:50%;background:#3B6EA5;margin-top:6px;flex-shrink:0"></div><div style="flex:1"><div>Liam allergy shot <span class="muted" style="font-weight:400">(recurring weekly)</span></div><div class="muted">Thu, Jul 16 · 12:15 PM</div></div></div>
-  <div class="row"><div style="width:8px;height:8px;border-radius:50%;background:#3B6EA5;margin-top:6px;flex-shrink:0"></div><div style="flex:1"><div>Dr. Ellie (Liam's therapist) <span class="muted" style="font-weight:400">(recurring weekly)</span></div><div class="muted">Wed, Jul 15 · 9:30 PM</div></div></div>
-  <div class="row"><div style="width:8px;height:8px;border-radius:50%;background:#3B6EA5;margin-top:6px;flex-shrink:0"></div><div style="flex:1"><div>Liam Katarina Intake <span class="pill pill-amber" style="margin-left:4px">paperwork pending</span></div><div class="muted">Mon, Aug 3 · 2:30 PM · Mind Vita telehealth</div></div></div>
-  <div style="font-weight:600;font-size:12px;text-transform:uppercase;letter-spacing:.03em;color:var(--muted);margin:14px 0 6px">⚽ Activities</div>
-  <div class="row"><div style="width:8px;height:8px;border-radius:50%;background:#3B6EA5;margin-top:6px;flex-shrink:0"></div><div style="flex:1"><div><b>Liam's 10th Birthday Party</b> <span class="pill pill-red" style="margin-left:4px">status unclear — see Home tab</span></div><div class="muted">Calendar says today, Jul 12 · 12:15 PM · K1 Speedway, Sterling — but Ben's Jul 9 emails proposed Aug 2 or Aug 30 instead</div></div></div>
-  <div class="row"><div style="width:8px;height:8px;border-radius:50%;background:#3B6EA5;margin-top:6px;flex-shrink:0"></div><div style="flex:1"><div>Ghazal takes Liam to Sandy Hill</div><div class="muted">Sun, Jul 26</div></div></div>
-  <div style="font-weight:600;font-size:12px;text-transform:uppercase;letter-spacing:.03em;color:var(--muted);margin:14px 0 6px">🏫 School reminders</div>
-  <p class="muted">School is out for summer — no recent FCPS emails specific to Liam in the last 30 days (mass-blast district sender and Ella's school excluded from this feed).</p>
-</div>
-</section>
-
-<!-- ============ TODOIST ============ -->
-<section class="tab-section" id="tab-todoist">
-<div class="two-col">
+  
+</div></div>
+</section><section id="tab-calendar" class="tab-section">
+<div class="grid2">
   <div class="card">
-    <h3>📋 In Todoist — due today &amp; overdue (41)</h3>
-    <p class="muted" style="margin:-4px 0 10px">27 P1 tasks are overdue or due today, several tied directly to today's Action Flags.</p>
-    <div class="row"><div style="flex:1"><span style="font-size:10px;font-weight:700;color:#dc2626">P1</span> <b>Liam cake</b> <span class="pill" style="background:#f3e4e2;color:var(--red)">overdue since Jul 10</span> <span class="muted">· Home/Kids/Life — party status unclear today</span></div></div>
-    <div class="row"><div style="flex:1"><span style="font-size:10px;font-weight:700;color:#dc2626">P1</span> <b>Sethi Medical Form</b> <span class="pill" style="background:#f3e4e2;color:var(--red)">overdue since Jul 10</span> <span class="muted">· Home/Kids/Life</span></div></div>
-    <div class="row"><div style="flex:1"><span style="font-size:10px;font-weight:700;color:#dc2626">P1</span> Call Fidelity — Transition Services <span class="pill" style="background:#f3e4e2;color:var(--red)">overdue since Jul 10</span> <span class="muted">· Divorce</span></div></div>
-    <div class="row"><div style="flex:1"><span style="font-size:10px;font-weight:700;color:#dc2626">P1</span> Update IRA amounts <span class="pill" style="background:#f3e4e2;color:var(--red)">overdue since Jul 10</span> <span class="muted">· Divorce</span></div></div>
-    <div class="row"><div style="flex:1"><span style="font-size:10px;font-weight:700;color:#dc2626">P1</span> Schedule iron IV <span class="pill" style="background:#f3e4e2;color:var(--red)">overdue since Jul 10</span> <span class="muted">· Standing Wellness</span></div></div>
-    <div class="row"><div style="flex:1"><span style="font-size:10px;font-weight:700;color:#dc2626">P1</span> iMovie Liam one year <span class="pill" style="background:#fef3e0;color:#a86400">due today, 1:30 PM</span> <span class="muted">· Media</span></div></div>
-    <div class="row"><div style="flex:1"><span style="font-size:10px;font-weight:700;color:#dc2626">P1</span> Rise seeds <span class="pill" style="background:#fef3e0;color:#a86400">due today, 6:30 PM</span> <span class="muted">· Home/Kids/Life</span></div></div>
-    <div class="row"><div style="flex:1"><span style="font-size:10px;font-weight:700;color:#dc2626">P1</span> Take vitamin D <span class="pill" style="background:#fef3e0;color:#a86400">due today, 12:00 PM</span> <span class="muted">· Standing Wellness (recurring)</span></div></div>
-    <div class="row"><div style="flex:1"><span style="font-size:10px;font-weight:700;color:#dc2626">P1</span> Cali Video <span class="pill" style="background:#f3e4e2;color:var(--red)">overdue since Jul 11</span> <span class="muted">· Media</span></div></div>
-    <p class="muted" style="margin-top:10px">Plus ~18 more overdue/due-today P1 items (home projects, buy-list, photo organization, Jobby Job daily tasks) — mostly non-urgent backlog. Open Todoist for the full list.</p>
-    <button class="primary" onclick="sendPrompt('Show me my full overdue Todoist list grouped by project, oldest first.')">View full overdue list</button>
+    <h2 class="section-title">Today — Jul 20</h2>
+    <div class="flag-line"><span class="flag-tag">All day</span><div><b>Recycle pickup</b><div class="muted">Recurring, primary calendar</div></div></div>
+    <h2 class="section-title" style="margin-top:18px">Tomorrow — Jul 21</h2>
+    <div class="flag-line"><span class="flag-tag">—</span><div><b>Nothing on the calendar yet for tomorrow</b><div class="muted">Check back closer to the day</div></div></div>
   </div>
   <div class="card">
-    <h3>💡 Suggested from Email &amp; Calendar</h3>
-    <div class="row"><div style="flex:1">Call Ben to confirm whether today's birthday party is on or moved <span class="muted">· from Home tab Risk</span></div><button onclick="sendPrompt('Create this new Todoist task via MCP: {\'content\':\'Call Ben to confirm Liam birthday party status today\',\'priority\':\'p1\',\'dueString\':\'today 10am\'}')">+ Add</button></div>
-    <div class="row"><div style="flex:1">Add tomorrow's 1:00pm mediation with Brian Hirsch to Google Calendar <span class="muted">· from Calendar tab</span></div><button onclick="sendPrompt('Create this new Todoist task via MCP: {\'content\':\'Add Jul 13 1pm mediation with Brian Hirsch to calendar\',\'priority\':\'p2\',\'dueString\':\'today\'}')">+ Add</button></div>
-    <div class="row"><div style="flex:1">Update E-ZPass payment method after repeated rejected-card alerts <span class="muted">· from Inbox Medium</span></div><button onclick="sendPrompt('Create this new Todoist task via MCP: {\'content\':\'Update E-ZPass payment method\',\'priority\':\'p2\',\'dueString\':\'today\'}')">+ Add</button></div>
-    <div class="row"><div style="flex:1">Book camp for Ella &amp; Liam, week of Aug 3–7 <span class="muted">· from Kids tab gap</span></div><button onclick="sendPrompt('Create this new Todoist task via MCP: {\'content\':\'Book camp for Ella and Liam, week of Aug 3-7\',\'priority\':\'p2\',\'dueString\':\'Jul 17\'}')">+ Add</button></div>
-    <div class="row"><div style="flex:1">Book camp for Ella &amp; Liam, week of Aug 17–21 <span class="muted">· from Kids tab gap</span></div><button onclick="sendPrompt('Create this new Todoist task via MCP: {\'content\':\'Book camp for Ella and Liam, week of Aug 17-21\',\'priority\':\'p2\',\'dueString\':\'Jul 24\'}')">+ Add</button></div>
-    <div class="row"><div style="flex:1">Complete MindVita new-patient paperwork for Liam before Aug 3 intake <span class="muted">· from Inbox Medium</span></div><button onclick="sendPrompt('Create this new Todoist task via MCP: {\'content\':\'Complete MindVita new-patient paperwork for Liam\',\'priority\':\'p2\',\'dueString\':\'Jul 27\'}')">+ Add</button></div>
+    <h2 class="section-title">Calendar Suggestions</h2>
+    <div class="insight-card insight-risk"><div class="insight-label">🔴 Needs a response</div>
+      <b>Mediation session — Fri Aug 28, 9:00–11:30am, Reston</b> — new invite from Ben, sent Jul 20. This supersedes the earlier Jul 13/Jul 28 options discussed in June. No Accept/Decline sent yet.
+      <a href="https://mail.google.com/mail/u/0/#all/19f8005621bd83f6" target="_blank">Open thread →</a>
+    </div>
+    <h2 class="section-title" style="margin-top:18px">Ben's Away Dates (60-day window)</h2>
+    <table class="dashtable"><thead><tr><th>Event</th><th>Dates</th><th>Notes</th><th>Link</th></tr></thead><tbody><tr><td>Democratic Mayors Assoc.</td><td>Jul 26 – Jul 30</td><td class="muted">Ben in Atlanta (out of town) — Liam also away Jul 26–31 per Ben</td><td></td></tr></tbody></table>
   </div>
 </div>
-</section>
-
-<!-- ============ NEWS ============ -->
-<section class="tab-section" id="tab-news">
-<div class="subtabs">
-  <button class="subtabbtn active" onclick="showNewsSub('ai')">🤖 AI</button>
-  <button class="subtabbtn" onclick="showNewsSub('tech')">💻 Tech</button>
-  <button class="subtabbtn" onclick="showNewsSub('ps')">📊 PS Strategy</button>
-</div>
-<div class="subtab-panel active" id="newssub-ai">
-  <div class="card">
-    <div class="row"><div style="flex:1"><a href="https://news.un.org/en/story/2026/07/1167862" target="_blank">Global push for AI governance amid "catastrophic harm" warnings</a><div class="muted">China's Interim Measures for Anthropomorphic AI Interaction Services take effect Jul 15, following the UN's Geneva dialogue on AI governance.</div></div></div>
-    <div class="row"><div style="flex:1">Apple sues OpenAI over trade secrets<div class="muted">Filed Jul 11 in Northern California federal court — alleges 400+ ex-Apple employees now at OpenAI, framing it as a coordinated effort to extract silicon/hardware/on-device AI technology.</div></div></div>
-    <div class="row"><div style="flex:1">SambaNova closes $1B Series F at $11B valuation<div class="muted">Led by General Atlantic with BlackRock, Intel Capital, QIA and others participating — follows Together AI's $800M raise earlier this month.</div></div></div>
-    <div class="row"><div style="flex:1">Gemini 3.5 Pro set for general availability Jul 17<div class="muted">2-million-token context window; extended reasoning mode gated behind the $250/month Ultra tier.</div></div></div>
-  </div>
-</div>
-<div class="subtab-panel" id="newssub-tech">
-  <div class="card">
-    <div class="row"><div style="flex:1">OpenAI preparing confidential IPO filing<div class="muted">With Goldman Sachs and Morgan Stanley, targeting a debut as early as September at a ~$730B valuation — potentially the largest tech IPO ever.</div></div></div>
-    <div class="row"><div style="flex:1">Apple's trade-secret suit against OpenAI dominates the week's tech news<div class="muted">Filed Jul 11, alleging a coordinated recruitment campaign targeting Apple's hardware and on-device AI teams.</div></div></div>
-    <div class="row"><div style="flex:1">Anthropic overtakes OpenAI on revenue<div class="muted">Running at roughly $47B annualized vs. OpenAI's projected $25–33B for 2026.</div></div></div>
-    <div class="row"><div style="flex:1">SK Hynix rises 13% in Nasdaq debut<div class="muted">Comes alongside continued AI-infrastructure buildout across the sector.</div></div></div>
-  </div>
-</div>
-<div class="subtab-panel" id="newssub-ps">
-  <div class="card">
-    <div class="row"><div style="flex:1"><a href="https://www.bpm.com/insights/professional-services-industry-outlook-2026/" target="_blank">Professional services AI adoption doubled to 40% in 2026</a><div class="muted">Firms are shifting from pilots to production, expanding agentic AI across delivery workflows.</div></div></div>
-    <div class="row"><div style="flex:1"><a href="https://www.deltek.com/en/blog/10-key-consulting-moves" target="_blank">2026 consulting trends: turning AI disruption into advantage</a><div class="muted">73% of clients now expect real-time visibility into project status; some firms shifting to outcome-based pricing tied to client KPIs.</div></div></div>
-    <div class="row"><div style="flex:1">Professional services M&amp;A up 13% in Q1 2026<div class="muted">129 U.S. deals announced — PE-fueled consolidation continues in Accounting, Tax &amp; Advisory.</div></div></div>
-    <div class="row"><div style="flex:1">WEF: 44% of worker skills will be disrupted within 5 years<div class="muted">Gartner estimates 40% of consulting tasks are automatable, freeing consultants for strategy and relationship work.</div></div></div>
-  </div>
-</div>
-</section>
-
-<!-- ============ TRASH ============ -->
-<section class="tab-section" id="tab-trash">
-<div class="toolbar"><button onclick="expandAllEmails()">Expand all</button><button onclick="collapseAllEmails()">Collapse all</button></div>
-<div class="card">
-  <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:8px;margin-bottom:10px">
-    <div><span id="trash-count">26 of 26 selected for trash</span></div>
-    <div><button onclick="trashSelectAll()">Select all</button> <button onclick="trashDeselectAll()">Deselect all</button> <button class="danger" onclick="sendToTrash()">🗑️ Send to Trash</button></div>
-  </div>
-
-  <h3 style="margin-top:6px">Promotions &amp; Marketing</h3>
-  <div class="trash-item" onclick="trashToggle(this)"><input type="checkbox" class="trash-check" data-msg-id="19f566ca823821c8" checked><div style="flex:1"><div>ENDS TODAY - $24.99 RSQ Jeans <span class="chev" onclick="event.stopPropagation();toggleDetail('t1')">▸ more</span></div><div class="muted">Tilly's · Jul 12</div><div class="email-detail" id="detail-t1" style="display:none">Flash-sale promo, recurring from yesterday.</div></div><span class="trash-reason reason-promo">Deal</span></div>
-  <div class="trash-item" onclick="trashToggle(this)"><input type="checkbox" class="trash-check" data-msg-id="19f523c42a4f1338" checked><div style="flex:1"><div>Summer Clearance Happening Now! <span class="chev" onclick="event.stopPropagation();toggleDetail('t2')">▸ more</span></div><div class="muted">Dillard's · Jul 11</div><div class="email-detail" id="detail-t2" style="display:none">Promo email.</div></div><span class="trash-reason reason-promo">Deal</span></div>
-  <div class="trash-item" onclick="trashToggle(this)"><input type="checkbox" class="trash-check" data-msg-id="19f519a6cdf2e4ec" checked><div style="flex:1"><div>take an extra 20% OFF almost everything** <span class="chev" onclick="event.stopPropagation();toggleDetail('t3')">▸ more</span></div><div class="muted">Abercrombie · Jul 11</div><div class="email-detail" id="detail-t3" style="display:none">Promo email.</div></div><span class="trash-reason reason-promo">Deal</span></div>
-  <div class="trash-item" onclick="trashToggle(this)"><input type="checkbox" class="trash-check" data-msg-id="19f510c23a69021a" checked><div style="flex:1"><div>Swimwear Sale: Summer's Hottest Deals☀️ <span class="chev" onclick="event.stopPropagation();toggleDetail('t4')">▸ more</span></div><div class="muted">Dillard's · Jul 11</div><div class="email-detail" id="detail-t4" style="display:none">Duplicate-style promo.</div></div><span class="trash-reason reason-promo">Deal</span></div>
-  <div class="trash-item" onclick="trashToggle(this)"><input type="checkbox" class="trash-check" data-msg-id="19f55e6f879c5855" checked><div style="flex:1"><div>Nourish And Protect Your Heart With These Common Herbs <span class="chev" onclick="event.stopPropagation();toggleDetail('t5')">▸ more</span></div><div class="muted">The Sacred Science · Jul 12</div><div class="email-detail" id="detail-t5" style="display:none">Wellness-brand marketing newsletter.</div></div><span class="trash-reason reason-promo">Newsletter</span></div>
-  <div class="trash-item" onclick="trashToggle(this)"><input type="checkbox" class="trash-check" data-msg-id="19f5606112fad5ec" checked><div style="flex:1"><div>She Can Be Kind Without Saying Yes <span class="chev" onclick="event.stopPropagation();toggleDetail('t6')">▸ more</span></div><div class="muted">The Brave Girl Project · Jul 12</div><div class="email-detail" id="detail-t6" style="display:none">Parenting-content marketing newsletter.</div></div><span class="trash-reason reason-promo">Newsletter</span></div>
-  <div class="trash-item" onclick="trashToggle(this)"><input type="checkbox" class="trash-check" data-msg-id="19f1eb306d63afc9" checked><div style="flex:1"><div>what's the plan, Ghazal <span class="chev" onclick="event.stopPropagation();toggleDetail('t7')">▸ more</span></div><div class="muted">Franchise Opportunities Hub · Jul 1</div><div class="email-detail" id="detail-t7" style="display:none">Unsolicited franchise-ownership sales pitch.</div></div><span class="trash-reason reason-promo">Promo</span></div>
-
-  <h3 style="margin-top:14px">Automated Notifications</h3>
-  <div class="trash-item" onclick="trashToggle(this)"><input type="checkbox" class="trash-check" data-msg-id="19f539a658e8b1ef" checked><div style="flex:1"><div>You have 1 new invitation <span class="chev" onclick="event.stopPropagation();toggleDetail('t8')">▸ more</span></div><div class="muted">LinkedIn · Jul 11</div><div class="email-detail" id="detail-t8" style="display:none">Connection invitation notice.</div></div><span class="trash-reason reason-auto">Auto</span></div>
-  <div class="trash-item" onclick="trashToggle(this)"><input type="checkbox" class="trash-check" data-msg-id="19f4e75ef9001d0f" checked><div style="flex:1"><div>ada CX recently posted <span class="chev" onclick="event.stopPropagation();toggleDetail('t9')">▸ more</span></div><div class="muted">LinkedIn · Jul 10</div><div class="email-detail" id="detail-t9" style="display:none">Company update digest.</div></div><span class="trash-reason reason-auto">Auto</span></div>
-  <div class="trash-item" onclick="trashToggle(this)"><input type="checkbox" class="trash-check" data-msg-id="19f4e7407693b9e5" checked><div style="flex:1"><div>Your profile is being seen <span class="chev" onclick="event.stopPropagation();toggleDetail('t10')">▸ more</span></div><div class="muted">LinkedIn · Jul 10</div><div class="email-detail" id="detail-t10" style="display:none">Engagement nudge digest.</div></div><span class="trash-reason reason-auto">Auto</span></div>
-  <div class="trash-item" onclick="trashToggle(this)"><input type="checkbox" class="trash-check" data-msg-id="19f4a2b38a9944df" checked><div style="flex:1"><div>Grokstream LLC and Delta Professional Services hired roles near you <span class="chev" onclick="event.stopPropagation();toggleDetail('t11')">▸ more</span></div><div class="muted">LinkedIn · Jul 10</div><div class="email-detail" id="detail-t11" style="display:none">Algorithmic job-alert digest, not a specific strong-fit match.</div></div><span class="trash-reason reason-auto">Auto</span></div>
-  <div class="trash-item" onclick="trashToggle(this)"><input type="checkbox" class="trash-check" data-msg-id="19f49bd78c28ed15" checked><div style="flex:1"><div>👤 Ghazal, add Baidurjya DasChaudhuri <span class="chev" onclick="event.stopPropagation();toggleDetail('t12')">▸ more</span></div><div class="muted">LinkedIn · Jul 10</div><div class="email-detail" id="detail-t12" style="display:none">Connection suggestion digest.</div></div><span class="trash-reason reason-auto">Auto</span></div>
-  <div class="trash-item" onclick="trashToggle(this)"><input type="checkbox" class="trash-check" data-msg-id="19f494dababf7bb9" checked><div style="flex:1"><div>You have 1 new invitation <span class="chev" onclick="event.stopPropagation();toggleDetail('t13')">▸ more</span></div><div class="muted">LinkedIn · Jul 9</div><div class="email-detail" id="detail-t13" style="display:none">Connection invitation notice.</div></div><span class="trash-reason reason-auto">Auto</span></div>
-  <div class="trash-item" onclick="trashToggle(this)"><input type="checkbox" class="trash-check" data-msg-id="19f4d0fceefb22e7" checked><div style="flex:1"><div>Apply now to VP/Senior Director, Professional Services Consulting at Brightspot <span class="chev" onclick="event.stopPropagation();toggleDetail('t14')">▸ more</span></div><div class="muted">LinkedIn · Jul 10</div><div class="email-detail" id="detail-t14" style="display:none">Saved-jobs reminder digest — role itself noted in Home tab Pattern insight.</div></div><span class="trash-reason reason-auto">Auto</span></div>
-  <div class="trash-item" onclick="trashToggle(this)"><input type="checkbox" class="trash-check" data-msg-id="19f4e35442aeb8e9" checked><div style="flex:1"><div>Ghazal, your profile name was changed <span class="chev" onclick="event.stopPropagation();toggleDetail('t15')">▸ more</span></div><div class="muted">LinkedIn security · Jul 10</div><div class="email-detail" id="detail-t15" style="display:none">Automated security notice, no action needed.</div></div><span class="trash-reason reason-auto">Auto</span></div>
-  <div class="trash-item" onclick="trashToggle(this)"><input type="checkbox" class="trash-check" data-msg-id="19f4e712ddec22fa" checked><div style="flex:1"><div>New sign in to your Dropbox account <span class="chev" onclick="event.stopPropagation();toggleDetail('t16')">▸ more</span></div><div class="muted">Dropbox · Jul 10</div><div class="email-detail" id="detail-t16" style="display:none">Security notice for a recognized device/browser.</div></div><span class="trash-reason reason-auto">Auto</span></div>
-  <div class="trash-item" onclick="trashToggle(this)"><input type="checkbox" class="trash-check" data-msg-id="19f562fd1e76e36e" checked><div style="flex:1"><div>Mclean Open House: 1320 Lessard Ln and 1 more update <span class="chev" onclick="event.stopPropagation();toggleDetail('t17')">▸ more</span></div><div class="muted">Redfin · Jul 12</div><div class="email-detail" id="detail-t17" style="display:none">Saved-search open-house alert.</div></div><span class="trash-reason reason-auto">Auto</span></div>
-  <div class="trash-item" onclick="trashToggle(this)"><input type="checkbox" class="trash-check" data-msg-id="19f52e91d41e3ce0" checked><div style="flex:1"><div>Coming Soon in Falls Church at $895K <span class="chev" onclick="event.stopPropagation();toggleDetail('t18')">▸ more</span></div><div class="muted">Redfin · Jul 11</div><div class="email-detail" id="detail-t18" style="display:none">Saved-search new-listing alert.</div></div><span class="trash-reason reason-auto">Auto</span></div>
-  <div class="trash-item" onclick="trashToggle(this)"><input type="checkbox" class="trash-check" data-msg-id="19f52bff34fce098" checked><div style="flex:1"><div>Coming Soon in Mclean at $1.25M <span class="chev" onclick="event.stopPropagation();toggleDetail('t19')">▸ more</span></div><div class="muted">Redfin · Jul 11</div><div class="email-detail" id="detail-t19" style="display:none">Saved-search new-listing alert.</div></div><span class="trash-reason reason-auto">Auto</span></div>
-  <div class="trash-item" onclick="trashToggle(this)"><input type="checkbox" class="trash-check" data-msg-id="19f557c2e246504f" checked><div style="flex:1"><div>Your tracked flight to San José is now $1,387 (was $1,306) <span class="chev" onclick="event.stopPropagation();toggleDetail('t20')">▸ more</span></div><div class="muted">Google Travel · Jul 12</div><div class="email-detail" id="detail-t20" style="display:none">Automated price-tracking alert, no action needed.</div></div><span class="trash-reason reason-auto">Auto</span></div>
-  <div class="trash-item" onclick="trashToggle(this)"><input type="checkbox" class="trash-check" data-msg-id="19f52ab2537b2a9f" checked><div style="flex:1"><div>We can't process your payment (x2) <span class="chev" onclick="event.stopPropagation();toggleDetail('t21')">▸ more</span></div><div class="muted">Spotify · Jul 11</div><div class="email-detail" id="detail-t21" style="display:none">Subscription payment failure — low stakes, but worth updating the card on file when convenient.</div></div><span class="trash-reason reason-auto">Auto</span></div>
-  <div class="trash-item" onclick="trashToggle(this)"><input type="checkbox" class="trash-check" data-msg-id="19f523f09f8f2ea1" checked><div style="flex:1"><div>Your payment was unsuccessful <span class="chev" onclick="event.stopPropagation();toggleDetail('t22')">▸ more</span></div><div class="muted">Netflix · Jul 11</div><div class="email-detail" id="detail-t22" style="display:none">Subscription payment failure notice.</div></div><span class="trash-reason reason-auto">Auto</span></div>
-  <div class="trash-item" onclick="trashToggle(this)"><input type="checkbox" class="trash-check" data-msg-id="19f53ec6733ec098" checked><div style="flex:1"><div>Your YouTube TV membership is good to go! <span class="chev" onclick="event.stopPropagation();toggleDetail('t23')">▸ more</span></div><div class="muted">YouTube · Jul 12</div><div class="email-detail" id="detail-t23" style="display:none">Already-resolved billing notice, no action needed.</div></div><span class="trash-reason reason-auto">Auto</span></div>
-  <div class="trash-item" onclick="trashToggle(this)"><input type="checkbox" class="trash-check" data-msg-id="19f535fdaa00e3f4" checked><div style="flex:1"><div>SKIMS order delivered <span class="chev" onclick="event.stopPropagation();toggleDetail('t24')">▸ more</span></div><div class="muted">SKIMS · Jul 11</div><div class="email-detail" id="detail-t24" style="display:none">Delivery confirmation, resolved.</div></div><span class="trash-reason reason-auto">Auto</span></div>
-
-  <h3 style="margin-top:14px">Newsletters &amp; Digests</h3>
-  <div class="trash-item" onclick="trashToggle(this)"><input type="checkbox" class="trash-check" data-msg-id="19f5629bab9a373e" checked><div style="flex:1"><div>The Morning: Cold plunging <span class="chev" onclick="event.stopPropagation();toggleDetail('t25')">▸ more</span></div><div class="muted">NYT · Jul 12</div><div class="email-detail" id="detail-t25" style="display:none">Daily newsletter digest — not cooking-specific, so trashed not filed.</div></div><span class="trash-reason reason-digest">Digest</span></div>
-  <div class="trash-item" onclick="trashToggle(this)"><input type="checkbox" class="trash-check" data-msg-id="19f56024d01ec876" checked><div style="flex:1"><div>The Week In Ideas: This little blue dot on your phone is revolutionary <span class="chev" onclick="event.stopPropagation();toggleDetail('t26')">▸ more</span></div><div class="muted">Washington Post · Jul 12</div><div class="email-detail" id="detail-t26" style="display:none">Weekly digest newsletter.</div></div><span class="trash-reason reason-digest">Digest</span></div>
-
-  <p class="muted" style="margin-top:10px">Recipe/food newsletters (Bon Appétit, NYT Cooking) are filed under the File tab instead — never trashed.</p>
-</div>
-</section>
-
-<!-- ============ FILE ============ -->
-<section class="tab-section" id="tab-file">
-<div class="card">
-  <h3>🍽️ Recipes &amp; food newsletters</h3>
-  <p class="file-group-note">Bon Appétit and NYT Cooking newsletters — route to Recipes label rather than trash.</p>
-  <div style="display:flex;justify-content:flex-end;gap:8px;margin-bottom:8px">
-    <select id="filedest-recipes"><option value="RECIPES_LABEL" selected>Personal Gmail/Recipes</option><option value="TRASH">Trash</option></select>
-    <button onclick="fileGroup('recipes')">Move/Trash checked →</button>
-  </div>
-  <div class="row"><input type="checkbox" class="file-check-recipes" data-thread-id="19f56777d88c5c83" checked> <div style="flex:1">A very corny skillet dinner <span class="muted">· NYT Cooking · Jul 12</span></div></div>
-  <div class="row"><input type="checkbox" class="file-check-recipes" data-thread-id="19f5633ae85363e5" checked> <div style="flex:1">A Mexican resort with sotol and baby turtles <span class="muted">· Bon Appétit · Jul 12</span></div></div>
-  <div class="row"><input type="checkbox" class="file-check-recipes" data-thread-id="19f510d751cb86c4" checked> <div style="flex:1">5-star corn fried rice <span class="muted">· Bon Appétit · Jul 11</span></div></div>
-  <div class="row"><input type="checkbox" class="file-check-recipes" data-thread-id="19f48408288851db" checked> <div style="flex:1">Key Lime Pie &amp; more <span class="muted">· Bon Appétit · Jul 9</span></div></div>
+</section><section id="tab-kids" class="tab-section">
+<div class="card" style="margin-bottom:16px;border-left:4px solid #16a34a;background:#f0fdf4;">
+  <div style="font-weight:700;color:#166534;font-size:13px;margin-bottom:4px;">✅ Resolved this week — Ella's Sandy Hill ADHD medication form</div>
+  <div style="font-size:13px;color:#14532d;">Ghazal sent the signed form Jul 15; Ben confirmed the same day it was uploaded to Sandy Hill. Ella started her first Sandy Hill week today with no outstanding paperwork. <a href="https://mail.google.com/mail/u/0/#all/19f66ea0a00990e3" target="_blank" style="color:#166534;font-weight:600">Open thread →</a></div>
 </div>
 
 <div class="card">
-  <h3>📦 Stale — no longer relevant</h3>
-  <p class="file-group-note">10+ days old and haven't been acted on, or already show a reply resolving them. Pick Trash or a folder for each.</p>
-  <div style="display:flex;justify-content:flex-end;gap:8px;margin-bottom:8px">
-    <select id="filedest-stale"><option value="" selected disabled>Choose…</option><option value="ARCHIVE">Archive</option><option value="TRASH">Trash</option></select>
-    <button onclick="fileGroup('stale')">Move/Trash checked →</button>
-  </div>
-  <div class="row"><input type="checkbox" class="file-check-stale" data-thread-id="19f152f1ad24945a"> <div style="flex:1">Ada Device Return <span class="pill pill-green" style="margin-left:6px">already replied</span> <span class="muted">· Jun 30 · Ada IT confirmed any box is fine for the laptop return — resolved</span></div></div>
-  <div class="row"><input type="checkbox" class="file-check-stale" data-thread-id="19c8add42144b1aa"> <div style="flex:1">RE: Williams-Sonoma B2B account access <span class="pill pill-green" style="margin-left:6px">already replied</span> <span class="muted">· Mar 15 · confirmed account correctly set up — resolved</span></div></div>
-  <div class="row"><input type="checkbox" class="file-check-stale" data-thread-id="19f0405e3fc0b6c8"> <div style="flex:1">Notes and facts... <span class="muted">· Ian Walsh · Jun 26 · job-search interview notes, one-way FYI, no reply needed</span></div></div>
-  <div class="row"><input type="checkbox" class="file-check-stale" data-thread-id="19ef9d587a512340"> <div style="flex:1">4682 Sales Since 2014 !! <span class="muted">· Coldwell Banker realtor · Jun 24 · unsolicited marketing, no action needed</span></div></div>
-  <div class="row"><input type="checkbox" class="file-check-stale" data-thread-id="19cbfb4556884cb6"> <div style="flex:1">Fw: Special Education and Section 504 Newsletter <span class="muted">· Mar 5 · FYI, likely dated at this point</span></div></div>
-  <div class="row"><input type="checkbox" class="file-check-stale" data-thread-id="19d6d72d3b6020b2"> <div style="flex:1">INFO (secure Hushmail message) <span class="muted">· Speer Primary Care · Apr 8 · never opened — worth a quick check before filing in case it's still relevant</span></div></div>
-  <div class="row"><input type="checkbox" class="file-check-stale" data-thread-id="19dee805ad9056d2"> <div style="flex:1">[Stacees] Re: Order (Size issues) <span class="muted">· May 12 · old order-support thread, likely resolved or abandoned</span></div></div>
+  <h2 class="section-title">🏕️ Camp schedule — this week through school start (Aug 24)</h2>
+  <table class="dashtable"><thead><tr><th>Week</th><th>Ella</th><th>Liam</th></tr></thead><tbody><tr ><td style="white-space:nowrap;font-weight:600;vertical-align:top">Jul 20 – Jul 24 (this week)</td><td style="vertical-align:top"><b>Sandy Hill (week 1 of 2)</b><div class="muted" style="margin-top:3px">No drop-off/pickup time on the calendar invite. ✅ ADHD medication form now confirmed uploaded to Sandy Hill (Jul 15).</div></td><td style="vertical-align:top"><b>Evolution Basketball</b><div class="muted" style="margin-top:3px">Drop-off 8:30am · Pickup 3:00pm · 📍 St. John the Beloved Roman Catholic Church (per calendar invite) · Carpool confirmed w/ Bhalla-Lowitt family.</div></td></tr><tr ><td style="white-space:nowrap;font-weight:600;vertical-align:top">Jul 27 – Jul 31</td><td style="vertical-align:top"><b>Sandy Hill (week 2 of 2)</b><div class="muted" style="margin-top:3px">No drop-off/pickup time on the calendar invite.</div></td><td style="vertical-align:top"><b>Sandy Hill</b><div class="muted" style="margin-top:3px">No drop-off/pickup time on the calendar invite. Liam away Jul 26–31 per Ben.</div></td></tr><tr style="background:#fff7ed"><td style="white-space:nowrap;font-weight:600;vertical-align:top">Aug 3 – Aug 7  ⚠️</td><td style="vertical-align:top"><b>— no camp scheduled — 🧳 Sardinia trip departs Thu Aug 6</b><div class="muted" style="margin-top:3px">Casagliana Suite Resort (Olbia) — 4 nights, still not booked as of today.</div></td><td style="vertical-align:top"><b>— no camp scheduled — 🧳 Sardinia trip departs Thu Aug 6</b></td></tr><tr style="background:#eff6ff"><td style="white-space:nowrap;font-weight:600">Aug 10 – Aug 14</td><td colspan="2" style="text-align:center;color:var(--muted);font-style:italic">🧳 Como leg of Italy trip — no camp needed</td></tr><tr style="background:#fff7ed"><td style="white-space:nowrap;font-weight:600;vertical-align:top">Aug 17 – Aug 21  ⚠️</td><td style="vertical-align:top"><b>— no camp scheduled —</b></td><td style="vertical-align:top"><b>— no camp scheduled —</b></td></tr></tbody></table>
+  <p style="color:#b45309;font-size:12.5px;margin-top:10px">⚠️ Aug 3–5 and Aug 17–21: Ella & Liam both need a camp booked (Aug 6 the family leaves for Sardinia).</p>
 </div>
 
-<div class="card">
-  <h3>⚖️ Legal correspondence</h3>
-  <p class="file-group-note">Ongoing divorce/mediation threads worth keeping filed together rather than cluttering the inbox once resolved.</p>
-  <div style="display:flex;justify-content:flex-end;gap:8px;margin-bottom:8px">
-    <select id="filedest-legal"><option value="" selected disabled>Choose…</option><option value="ARCHIVE">Archive</option><option value="TRASH">Trash</option></select>
-    <button onclick="fileGroup('legal')">Move/Trash checked →</button>
+<div class="grid2">
+  <div class="card kid-card kid-ella">
+    <h2 class="section-title" style="color:#C96844">Ella — Longfellow Middle School · 7th Grade</h2>
+    <b style="font-size:12px;color:#C96844">GRADES</b>
+    <table class="dashtable"><thead><tr><th>Class</th><th>Teacher</th><th>Notes</th></tr></thead><tbody><tr><td><a href="https://mail.google.com/mail/u/0/#all/19ebd7c15de2f07c" target="_blank">English 7 HN</a></td><td>Sylvia Maldonado</td><td class="muted">No specific teacher comments on file — progress report Jun 12</td></tr><tr><td><a href="https://mail.google.com/mail/u/0/#all/19eb32d59ad94298" target="_blank">Soprano Alto Chorus</a></td><td>Kimberly Dawson</td><td class="muted">No specific teacher comments on file — progress report Jun 10</td></tr><tr><td><a href="https://mail.google.com/mail/u/0/#all/19ea86a53ef9501e" target="_blank">Health &amp; PE 7</a></td><td>Katherine Shapiro</td><td class="muted">No specific teacher comments on file — progress report Jun 8</td></tr><tr><td><a href="https://mail.google.com/mail/u/0/#all/19e8eb0d14208911" target="_blank">US History 7 HN</a></td><td>Jane Layton</td><td class="muted">No specific teacher comments on file — progress report Jun 3</td></tr><tr><td><a href="https://mail.google.com/mail/u/0/#all/19e50a4596ea387b" target="_blank">Life Science HN</a></td><td>Beth Schinstock</td><td class="muted">No specific teacher comments on file — progress report May 22</td></tr></tbody></table>
+    <b style="font-size:12px;color:#C96844;display:block;margin-top:14px">🩺 MEDICAL</b>
+    <div class="flag-line"><div><b>Flow Psychotherapy</b><div class="muted">Recurring weekly, Thu ~3:45–4:30pm · 6723 Whittier Ave, McLean</div></div></div>
+    <b style="font-size:12px;color:#C96844;display:block;margin-top:14px">⚽ ACTIVITIES</b>
+    <div class="flag-line"><div><b>Sandy Hill — Week 1</b><div class="muted">Jul 20–24 · medication form on file</div></div></div>
+    <div class="flag-line"><div><b>Sandy Hill — Week 2</b><div class="muted">Jul 27–31</div></div></div>
+    <div class="flag-line"><div><b>🧳 Sardinia → Como trip</b><div class="muted">Aug 6–14</div></div></div>
   </div>
-  <div class="row"><input type="checkbox" class="file-check-legal" data-thread-id="19b9875f7e4766b0"> <div style="flex:1">Mediated MSA — draft #2 <span class="muted">· Brian Hirsch · Jan 7</span></div></div>
-  <div class="row"><input type="checkbox" class="file-check-legal" data-thread-id="19ef4a8bdb050c4a"> <div style="flex:1">Appraisals, Next Steps (mediation date confirmed Jul 13) <span class="muted">· Ben / Brian Hirsch / April Yeager · Jun 23–25</span></div></div>
+  <div class="card kid-card kid-liam">
+    <h2 class="section-title" style="color:#3B6EA5">Liam — Franklin Sherman Elementary · 3rd Grade (teacher: Caroline Cox)</h2>
+    <b style="font-size:12px;color:#3B6EA5">🩺 MEDICAL</b>
+    <div class="flag-line"><div><b>Liam allergy shot</b><div class="muted">Recurring weekly, Thu ~8:15am</div></div></div>
+    <div class="flag-line"><div><b>Dr. Ellie (Liam's therapist)</b><div class="muted">Recurring weekly, Tue evening</div></div></div>
+    <div class="flag-line"><div><b>Liam Katarina Intake</b><div class="muted">Aug 3, 2:30pm · MindVita Wellness telehealth</div></div></div>
+    <b style="font-size:12px;color:#3B6EA5;display:block;margin-top:14px">⚽ ACTIVITIES</b>
+    <div class="flag-line"><div><b>Evolution Basketball</b><div class="muted">This week (Jul 20–24), 8:30am–3:00pm, St. John the Beloved — carpool confirmed w/ Bhalla-Lowitt family</div></div></div>
+    <div class="flag-line"><div><b>Sandy Hill</b><div class="muted">Jul 27–31 (away Jul 26–31 per Ben)</div></div></div>
+    <div class="flag-line"><div><b>🧳 Sardinia → Como trip</b><div class="muted">Aug 6–14</div></div></div>
+    <div class="flag-line"><div><b>10th Birthday Party — still pending a date</b><div class="muted">Duckett family reschedule thread open since Jul 17; Liam back in town Aug 1</div></div></div>
+    <b style="font-size:12px;color:#3B6EA5;display:block;margin-top:14px">🏫 SCHOOL REMINDERS</b>
+    <div class="empty muted">No FCPS emails in the last 30 days (summer break).</div>
+  </div>
 </div>
-</section>
-</main>
-
+</section><section id="tab-todoist" class="tab-section">
+<div class="todoist-cols">
+  <div class="todoist-col">
+    <div class="file-group-header"><h2 class="section-title">📋 In Todoist (37 tasks, 18 overdue)</h2>
+    <button class="btn" onclick="pushTodoistUpdates()">Push Updates</button></div>
+    <div class="task-row"><span class="pstripe p1"></span>
+<input type="checkbox">
+<div style="flex:1">Reserve Filo (hotel fine dining) — arrival-night dinner, Como <span class="muted">· Como Trip</span></div>
+<span class="muted">Jul 20 (new)</span> <span class="muted" style="font-size:10.5px">Due today</span>
+<button class="btn green" style="padding:3px 8px;font-size:11px" onclick="markTodoistDone('6h6wjw4wHX2vP3pR')">✓ Done</button>
+</div><div class="task-row"><span class="pstripe p1"></span>
+<input type="checkbox">
+<div style="flex:1">Confirm C130 bus + Bellagio–Como ferry + Trenord + Malpensa Express times near Aug 14 <span class="muted">· Como Trip</span></div>
+<span class="muted">Jul 20 (new)</span> <span class="muted" style="font-size:10.5px">Due today</span>
+<button class="btn green" style="padding:3px 8px;font-size:11px" onclick="markTodoistDone('6h6wjm8Wp8Vw8F7R')">✓ Done</button>
+</div><div class="task-row"><span class="pstripe p1"></span>
+<input type="checkbox">
+<div style="flex:1">Ask concierge: C30 bus schedule (Lezzeno ↔ Bellagio) <span class="muted">· Como Trip</span></div>
+<span class="muted">Jul 20 (new)</span> <span class="muted" style="font-size:10.5px">Due today</span>
+<button class="btn green" style="padding:3px 8px;font-size:11px" onclick="markTodoistDone('6h6wjm3FVJM7gQJ2')">✓ Done</button>
+</div><div class="task-row"><span class="pstripe p1"></span>
+<input type="checkbox">
+<div style="flex:1">Ask concierge: water taxi cost/timing <span class="muted">· Como Trip</span></div>
+<span class="muted">Jul 20 (new)</span> <span class="muted" style="font-size:10.5px">Due today</span>
+<button class="btn green" style="padding:3px 8px;font-size:11px" onclick="markTodoistDone('6h6wjm59W6rJ4WCR')">✓ Done</button>
+</div><div class="task-row"><span class="pstripe p1"></span>
+<input type="checkbox">
+<div style="flex:1">Book &#x27;Cook with a View&#x27; cooking class at Il Perlo <span class="muted">· Como Trip</span></div>
+<span class="muted">Jul 20 (new)</span> <span class="muted" style="font-size:10.5px">Due today</span>
+<button class="btn green" style="padding:3px 8px;font-size:11px" onclick="markTodoistDone('6h6wjm6cMCw792cR')">✓ Done</button>
+</div><div class="task-row"><span class="pstripe p1"></span>
+<input type="checkbox">
+<div style="flex:1">Reserve Trattoria San Giacomo (Bellagio) — check policy <span class="muted">· Como Trip</span></div>
+<span class="muted">Jul 20 (new)</span> <span class="muted" style="font-size:10.5px">Due today</span>
+<button class="btn green" style="padding:3px 8px;font-size:11px" onclick="markTodoistDone('6h6wjm9pMrffWggR')">✓ Done</button>
+</div><div class="task-row"><span class="pstripe p1"></span>
+<input type="checkbox">
+<div style="flex:1">Reserve Il Cavatappi (Varenna) for lunch <span class="muted">· Como Trip</span></div>
+<span class="muted">Jul 20 (new)</span> <span class="muted" style="font-size:10.5px">Due today</span>
+<button class="btn green" style="padding:3px 8px;font-size:11px" onclick="markTodoistDone('6h6wjmCJWccHh4GR')">✓ Done</button>
+</div><div class="task-row"><span class="pstripe p1"></span>
+<input type="checkbox">
+<div style="flex:1">Reserve Osteria Il Governo 1801 (Lezzeno) — last-night dinner <span class="muted">· Como Trip</span></div>
+<span class="muted">Jul 20 (new)</span> <span class="muted" style="font-size:10.5px">Due today</span>
+<button class="btn green" style="padding:3px 8px;font-size:11px" onclick="markTodoistDone('6h6wjmFJM8xj9jJR')">✓ Done</button>
+</div><div class="task-row"><span class="pstripe p1"></span>
+<input type="checkbox">
+<div style="flex:1">Get current Bellagio–Varenna ferry times <span class="muted">· Como Trip</span></div>
+<span class="muted">Jul 20 (new)</span> <span class="muted" style="font-size:10.5px">Due today</span>
+<button class="btn green" style="padding:3px 8px;font-size:11px" onclick="markTodoistDone('6h6wjmHPVrMQGp82')">✓ Done</button>
+</div><div class="task-row"><span class="pstripe p1"></span>
+<input type="checkbox">
+<div style="flex:1">Villa Melzi Gardens — confirm guided tour email if wanted (Wed Aug 12) <span class="muted">· Como Trip</span></div>
+<span class="muted">Jul 20 (new)</span> <span class="muted" style="font-size:10.5px">Due today</span>
+<button class="btn green" style="padding:3px 8px;font-size:11px" onclick="markTodoistDone('6h74PxG386jWj79R')">✓ Done</button>
+</div><div class="task-row"><span class="pstripe p1"></span>
+<input type="checkbox">
+<div style="flex:1">Book Casagliana Suite Resort — 4 nights Aug 6–10, not yet booked <span class="muted">· Sardinia Trip</span></div>
+<span class="muted">Jul 20 (new)</span> <span class="muted" style="font-size:10.5px">Due today</span>
+<button class="btn green" style="padding:3px 8px;font-size:11px" onclick="markTodoistDone('6h74Q4mChgPPh8WC')">✓ Done</button>
+</div><div class="task-row"><span class="pstripe p1"></span>
+<input type="checkbox">
+<div style="flex:1">Purchase Aeroitalia flight XZ2624 (OLB→LIN, Aug 10) — ~€180 for 3, not yet bought <span class="muted">· Sardinia Trip</span></div>
+<span class="muted">Jul 20 (new)</span> <span class="muted" style="font-size:10.5px">Due today</span>
+<button class="btn green" style="padding:3px 8px;font-size:11px" onclick="markTodoistDone('6h74Q52mh8RHjQXj')">✓ Done</button>
+</div><div class="task-row"><span class="pstripe p1"></span>
+<input type="checkbox">
+<div style="flex:1">La Pelosa entry reservation (Sun Aug 9) — book the no-window-limit allocation now <span class="muted">· Sardinia Trip</span></div>
+<span class="muted">Jul 20 (new)</span> <span class="muted" style="font-size:10.5px">Due today</span>
+<button class="btn green" style="padding:3px 8px;font-size:11px" onclick="markTodoistDone('6h74Q4vqQjG22VxC')">✓ Done</button>
+</div><div class="task-row"><span class="pstripe p1"></span>
+<input type="checkbox">
+<div style="flex:1">Reserve dinner at CuCumiao (Palau, Fri Aug 7) <span class="muted">· Sardinia Trip</span></div>
+<span class="muted">Jul 20 (new)</span> <span class="muted" style="font-size:10.5px">Due today</span>
+<button class="btn green" style="padding:3px 8px;font-size:11px" onclick="markTodoistDone('6h74Q4vx7468gPxj')">✓ Done</button>
+</div><div class="task-row"><span class="pstripe p1"></span>
+<input type="checkbox">
+<div style="flex:1">Maddalena Islands boat excursion — Delfino Tours (Fri Aug 7) <span class="muted">· Sardinia Trip</span></div>
+<span class="muted">Jul 20 (new)</span> <span class="muted" style="font-size:10.5px">Due today</span>
+<button class="btn green" style="padding:3px 8px;font-size:11px" onclick="markTodoistDone('6h74Q4q89874mPXC')">✓ Done</button>
+</div><div class="task-row"><span class="pstripe p1"></span>
+<input type="checkbox">
+<div style="flex:1">Orosei charter — Palmasera Boat Rental (Sat Aug 8) <span class="muted">· Sardinia Trip</span></div>
+<span class="muted">Jul 20 (new)</span> <span class="muted" style="font-size:10.5px">Due today</span>
+<button class="btn green" style="padding:3px 8px;font-size:11px" onclick="markTodoistDone('6h74Q4q7CJ6Ww8cC')">✓ Done</button>
+</div><div class="task-row"><span class="pstripe p1"></span>
+<input type="checkbox">
+<div style="flex:1">Add Ghazal to Chase flight-alert contacts <span class="muted">· Sardinia Trip</span></div>
+<span class="muted">Jul 20 (new)</span> <span class="muted" style="font-size:10.5px">Due today</span>
+<button class="btn green" style="padding:3px 8px;font-size:11px" onclick="markTodoistDone('6h75F73QcXvgvxHC')">✓ Done</button>
+</div><div class="task-row"><span class="pstripe p1"></span>
+<input type="checkbox">
+<div style="flex:1">2020–2026 albums — all years, kids <span class="muted">· Media</span></div>
+<span class="muted">Jul 20</span> <span class="muted" style="font-size:10.5px">Due today</span>
+<button class="btn green" style="padding:3px 8px;font-size:11px" onclick="markTodoistDone('6h4GGFvcHrX3w4x2')">✓ Done</button>
+</div><div class="task-row"><span class="pstripe p1"></span>
+<input type="checkbox">
+<div style="flex:1">Media webpage (Ella&#x27;s video, Liam&#x27;s video, Mominoo&#x27;s video) <span class="muted">· Media</span></div>
+<span class="muted">Jul 20</span> <span class="muted" style="font-size:10.5px">Due today</span>
+<button class="btn green" style="padding:3px 8px;font-size:11px" onclick="markTodoistDone('6h4QFFph52hGjjMR')">✓ Done</button>
+</div><div class="task-row"><span class="pstripe p1"></span>
+<input type="checkbox">
+<div style="flex:1">Sterling - Cobra <span class="muted">· Inbox</span></div>
+<span class="muted">Jul 15 (overdue)</span> <span class="overdue-badge">OVERDUE</span>
+<button class="btn green" style="padding:3px 8px;font-size:11px" onclick="markTodoistDone('6h3fc8RjqWpX572R')">✓ Done</button>
+</div><div class="task-row"><span class="pstripe p1"></span>
+<input type="checkbox">
+<div style="flex:1">Mclean lawyer <span class="muted">· Legal/Finance</span></div>
+<span class="muted">Jul 15 (overdue)</span> <span class="overdue-badge">OVERDUE</span>
+<button class="btn green" style="padding:3px 8px;font-size:11px" onclick="markTodoistDone('6h42wqRVwcVVPQRR')">✓ Done</button>
+</div><div class="task-row"><span class="pstripe p1"></span>
+<input type="checkbox">
+<div style="flex:1">Another appraisal? <span class="muted">· Legal/Finance</span></div>
+<span class="muted">Jul 15 (overdue)</span> <span class="overdue-badge">OVERDUE</span>
+<button class="btn green" style="padding:3px 8px;font-size:11px" onclick="markTodoistDone('6h4GGfhWxgr2Rcc2')">✓ Done</button>
+</div><div class="task-row"><span class="pstripe p1"></span>
+<input type="checkbox">
+<div style="flex:1">Call Fidelity — Transition Services <span class="muted">· Legal/Finance</span></div>
+<span class="muted">Jul 15 (overdue)</span> <span class="overdue-badge">OVERDUE</span>
+<button class="btn green" style="padding:3px 8px;font-size:11px" onclick="markTodoistDone('6gcjrFpP2fHV5vP2')">✓ Done</button>
+</div><div class="task-row"><span class="pstripe p1"></span>
+<input type="checkbox">
+<div style="flex:1">Update IRA amounts <span class="muted">· Legal/Finance</span></div>
+<span class="muted">Jul 15 (overdue)</span> <span class="overdue-badge">OVERDUE</span>
+<button class="btn green" style="padding:3px 8px;font-size:11px" onclick="markTodoistDone('6ggrP53rg8JHXjMR')">✓ Done</button>
+</div><div class="task-row"><span class="pstripe p1"></span>
+<input type="checkbox">
+<div style="flex:1">Emergency Plan: Fire extinguisher, no-cell plan, etc <span class="muted">· Home/Kids/Life</span></div>
+<span class="muted">Jul 15 (overdue)</span> <span class="overdue-badge">OVERDUE</span>
+<button class="btn green" style="padding:3px 8px;font-size:11px" onclick="markTodoistDone('68hphRMP985rgPQc')">✓ Done</button>
+</div><div class="task-row"><span class="pstripe p1"></span>
+<input type="checkbox">
+<div style="flex:1">Liam frames <span class="muted">· Home/Kids/Life</span></div>
+<span class="muted">Jul 15 (overdue)</span> <span class="overdue-badge">OVERDUE</span>
+<button class="btn green" style="padding:3px 8px;font-size:11px" onclick="markTodoistDone('6crj4wqfjgFQmqXJ')">✓ Done</button>
+</div><div class="task-row"><span class="pstripe p1"></span>
+<input type="checkbox">
+<div style="flex:1">Paint and finish table !! <span class="muted">· Home/Kids/Life</span></div>
+<span class="muted">Jul 15 (overdue)</span> <span class="overdue-badge">OVERDUE</span>
+<button class="btn green" style="padding:3px 8px;font-size:11px" onclick="markTodoistDone('6f4XVHfq77253FW2')">✓ Done</button>
+</div><div class="task-row"><span class="pstripe p1"></span>
+<input type="checkbox">
+<div style="flex:1">Clean Walls <span class="muted">· Home/Kids/Life</span></div>
+<span class="muted">Jul 15 (overdue)</span> <span class="overdue-badge">OVERDUE</span>
+<button class="btn green" style="padding:3px 8px;font-size:11px" onclick="markTodoistDone('6fGWWvMWF2Mp4qgR')">✓ Done</button>
+</div><div class="task-row"><span class="pstripe p1"></span>
+<input type="checkbox">
+<div style="flex:1">Order missing holiday cards <span class="muted">· Home/Kids/Life</span></div>
+<span class="muted">Jul 15 (overdue)</span> <span class="overdue-badge">OVERDUE</span>
+<button class="btn green" style="padding:3px 8px;font-size:11px" onclick="markTodoistDone('6fGWWmQ2jvH9VgR2')">✓ Done</button>
+</div><div class="task-row"><span class="pstripe p1"></span>
+<input type="checkbox">
+<div style="flex:1">Laundry <span class="muted">· Home/Kids/Life</span></div>
+<span class="muted">Jul 16 (every Thu, overdue)</span> <span class="overdue-badge">OVERDUE</span>
+<button class="btn green" style="padding:3px 8px;font-size:11px" onclick="markTodoistDone('68hmXVXrqRGqfqH3')">✓ Done</button>
+</div><div class="task-row"><span class="pstripe p1"></span>
+<input type="checkbox">
+<div style="flex:1">Call Pat <span class="muted">· Wellness</span></div>
+<span class="muted">Jul 15 (overdue)</span> <span class="overdue-badge">OVERDUE</span>
+<button class="btn green" style="padding:3px 8px;font-size:11px" onclick="markTodoistDone('6fj8cqgMXrCx3GWR')">✓ Done</button>
+</div><div class="task-row"><span class="pstripe p1"></span>
+<input type="checkbox">
+<div style="flex:1">Plan summer vacation <span class="muted">· Wellness</span></div>
+<span class="muted">Jul 15 (overdue)</span> <span class="overdue-badge">OVERDUE</span>
+<button class="btn green" style="padding:3px 8px;font-size:11px" onclick="markTodoistDone('6g9JF7rwJWV6hhgR')">✓ Done</button>
+</div><div class="task-row"><span class="pstripe p1"></span>
+<input type="checkbox">
+<div style="flex:1">Decide on Ocean&#x27;s calling <span class="muted">· Wellness</span></div>
+<span class="muted">Jul 15 (overdue)</span> <span class="overdue-badge">OVERDUE</span>
+<button class="btn green" style="padding:3px 8px;font-size:11px" onclick="markTodoistDone('6gHpCQWqW9vr68H2')">✓ Done</button>
+</div><div class="task-row"><span class="pstripe p1"></span>
+<input type="checkbox">
+<div style="flex:1">Schedule iron IV <span class="muted">· Wellness</span></div>
+<span class="muted">Jul 15 (overdue)</span> <span class="overdue-badge">OVERDUE</span>
+<button class="btn green" style="padding:3px 8px;font-size:11px" onclick="markTodoistDone('6h42HpC22Wcmp87R')">✓ Done</button>
+</div><div class="task-row"><span class="pstripe p2"></span>
+<input type="checkbox">
+<div style="flex:1">Work on Pitch Deck (Amaterra) <span class="muted">· Amaterra</span></div>
+<span class="muted">Jul 15 (overdue)</span> <span class="overdue-badge">OVERDUE</span>
+<button class="btn green" style="padding:3px 8px;font-size:11px" onclick="markTodoistDone('6c57hWWJ4gv2CvhR')">✓ Done</button>
+</div><div class="task-row"><span class="pstripe p2"></span>
+<input type="checkbox">
+<div style="flex:1">Buy Chair for Guest Room <span class="muted">· Buy List</span></div>
+<span class="muted">Jul 15 (overdue)</span> <span class="overdue-badge">OVERDUE</span>
+<button class="btn green" style="padding:3px 8px;font-size:11px" onclick="markTodoistDone('6WpPqH9j2gG2gr5R')">✓ Done</button>
+</div><div class="task-row"><span class="pstripe p2"></span>
+<input type="checkbox">
+<div style="flex:1">Buy Mirrors for Guest Room <span class="muted">· Buy List</span></div>
+<span class="muted">Jul 15 (overdue)</span> <span class="overdue-badge">OVERDUE</span>
+<button class="btn green" style="padding:3px 8px;font-size:11px" onclick="markTodoistDone('6WpPqHmg54Wr3WpR')">✓ Done</button>
+</div>
+  </div>
+  <div class="todoist-col right">
+    <div class="file-group-header"><h2 class="section-title">💡 Suggested from Email & Calendar (5)</h2>
+    <button class="btn green" onclick="addApprovedTasks()">Add Approved to Todoist</button></div>
+    <div class="task-row"><span class="pstripe p1"></span>
+<input type="checkbox" class="suggest-check" data-title="Confirm which COBRA account is correct — send SSN to Judy Liang" checked>
+<div style="flex:1">Confirm which COBRA account is correct — send SSN to Judy Liang</div>
+<span class="muted">today</span>
+<a href="https://mail.google.com/mail/u/0/#all/19f66b1b52052b01" target="_blank" style="font-size:11px">source</a>
+</div><div class="task-row"><span class="pstripe p1"></span>
+<input type="checkbox" class="suggest-check" data-title="Respond to Aug 28 mediation invite (accept/decline)" checked>
+<div style="flex:1">Respond to Aug 28 mediation invite (accept/decline)</div>
+<span class="muted">today</span>
+<a href="https://mail.google.com/mail/u/0/#all/19f8005621bd83f6" target="_blank" style="font-size:11px">source</a>
+</div><div class="task-row"><span class="pstripe p1"></span>
+<input type="checkbox" class="suggest-check" data-title="Reply to Ian Walsh to reschedule IRA walkthrough call" checked>
+<div style="flex:1">Reply to Ian Walsh to reschedule IRA walkthrough call</div>
+<span class="muted">today</span>
+<a href="https://mail.google.com/mail/u/0/#all/19f7f8c63ee75a00" target="_blank" style="font-size:11px">source</a>
+</div><div class="task-row"><span class="pstripe p2"></span>
+<input type="checkbox" class="suggest-check" data-title="Reply to Joellen re: Liam&#x27;s birthday party date (he&#x27;s back Aug 1)" checked>
+<div style="flex:1">Reply to Joellen re: Liam&#x27;s birthday party date (he&#x27;s back Aug 1)</div>
+<span class="muted">today</span>
+<a href="https://mail.google.com/mail/u/0/#all/19f7190f0019e6d1" target="_blank" style="font-size:11px">source</a>
+</div><div class="task-row"><span class="pstripe p1"></span>
+<input type="checkbox" class="suggest-check" data-title="Book Casagliana Suite Resort before Aug 6 arrival" checked>
+<div style="flex:1">Book Casagliana Suite Resort before Aug 6 arrival</div>
+<span class="muted">this week</span>
+<a href="https://mail.google.com/mail/u/0/#all/19f66b1b52052b01" target="_blank" style="font-size:11px">source</a>
+</div>
+  </div>
+</div>
+</section><section id="tab-news" class="tab-section">
+<div class="news-grid">
+  <div class="card"><h2 class="section-title">🗞️ Top Headlines</h2><div class="news-item"><a href="https://www.democracynow.org/2026/7/9/headlines" target="_blank">US bombs Iran for a second consecutive night after Trump declares ceasefire over</a><div class="news-source">Democracy Now!</div><div class="muted" style="margin-top:3px">Blasts reported near the Bushehr nuclear plant; Tehran responded by targeting Bahrain, Kuwait and Qatar.</div></div><div class="news-item"><a href="https://www.democracynow.org/2026/7/9/headlines" target="_blank">Trump meets Zelenskyy at NATO summit in Turkey, licenses Ukraine to build Patriot systems</a><div class="news-source">Democracy Now!</div><div class="muted" style="margin-top:3px">Part of broader NATO-summit diplomacy alongside the Iran ceasefire collapse.</div></div><div class="news-item"><a href="https://www.democracynow.org/2026/7/9/headlines" target="_blank">Marine Le Pen says she&#x27;ll run for French president next year despite electronic monitor sentence</a><div class="news-source">Democracy Now!</div><div class="muted" style="margin-top:3px">Sentenced for embezzlement; running regardless.</div></div><div class="news-item"><a href="https://www.democracynow.org/2026/7/9/headlines" target="_blank">Andy Burnham positioned as likely next UK prime minister</a><div class="news-source">Democracy Now!</div><div class="muted" style="margin-top:3px">Manchester mayor credited with post-industrial growth in the city.</div></div><div class="news-item"><a href="https://www.democracynow.org/2026/7/9/headlines" target="_blank">&quot;Total Eclipse of the Heart&quot; singer Bonnie Tyler dies at 75</a><div class="news-source">Democracy Now!</div><div class="muted" style="margin-top:3px">Obituary coverage.</div></div></div>
+  <div class="card"><h2 class="section-title">🤖 AI</h2><div class="news-item"><a href="https://www.engadget.com/2210308/openai-rolls-out-gpt5-6-july-9/" target="_blank">OpenAI rolls out GPT-5.6 (Sol, Terra, Luna) to all users after government-coordinated preview</a><div class="news-source">Engadget / Buildfastwithai</div><div class="muted" style="margin-top:3px">July 9 is described as the most consequential day yet for AI model availability — every major frontier lab now has a public model simultaneously.</div></div><div class="news-item"><a href="https://www.buildfastwithai.com/blogs/ai-news-today-july-9-2026" target="_blank">SpaceXAI launches Grok 4.5 publicly with Opus-class performance claim</a><div class="news-source">Buildfastwithai</div><div class="muted" style="margin-top:3px">Follows the February SpaceX acquisition of xAI and the July 6 public rebrand to @SpaceXAI.</div></div><div class="news-item"><a href="https://news.un.org/en/story/2026/07/1167862" target="_blank">Global push for AI governance amid warnings of &#x27;catastrophic harm&#x27;</a><div class="news-source">UN News</div><div class="muted" style="margin-top:3px">UN coverage of intensifying international AI governance debate.</div></div></div>
+  <div class="card"><h2 class="section-title">💻 Tech</h2><div class="news-item"><a href="https://www.buildfastwithai.com/blogs/ai-news-today-july-9-2026" target="_blank">GPT-5.6 pricing positions against Claude Sonnet 5 and other near-frontier models</a><div class="news-source">Buildfastwithai</div><div class="muted" style="margin-top:3px">Claude Sonnet 5 remains the most cost-effective near-frontier agentic coding model at $2/$10 intro pricing through Aug 31.</div></div><div class="news-item"><a href="https://techstartups.com/2026/07/07/top-tech-news-today-july-7-2026/" target="_blank">SpaceX/xAI public rebrand to @SpaceXAI confirmed as brand signal, not architecture change</a><div class="news-source">Techstartups</div><div class="muted" style="margin-top:3px">Cosmetic rebrand following February&#x27;s SpaceX–xAI acquisition.</div></div><div class="news-item"><a href="https://247wallst.com/investing/2026/07/07/stock-market-live-july-7-2026-sp-500-spy-drops-on-tech-concerns/" target="_blank">Stock market: tech-driven volatility continues into the second week of July</a><div class="news-source">24/7 Wall St.</div><div class="muted" style="margin-top:3px">S&amp;P 500 tech names under pressure amid broader market concerns.</div></div></div>
+  <div class="card"><h2 class="section-title">📊 PS Strategy</h2><div class="news-item"><a href="https://www.bpm.com/insights/professional-services-industry-outlook-2026/" target="_blank">AI adoption in professional services doubles to 40% in 2026</a><div class="news-source">BPM Professional Services Outlook</div><div class="muted" style="margin-top:3px">Firms shifting from pilots to production; implementation rates up from 33% (2023) to 71% (2024).</div></div><div class="news-item"><a href="https://www.deltek.com/en/blog/10-key-consulting-moves" target="_blank">Client-centered, outcome-based pricing gains traction over time-based billing</a><div class="news-source">Deltek 2026 Consulting Trends</div><div class="muted" style="margin-top:3px">Firms experimenting with pricing tied to outcomes rather than hours.</div></div><div class="news-item"><a href="https://focusbankers.com/professional-services-spring-2026-report/" target="_blank">Professional services M&amp;A up 13% YoY in Q1 2026</a><div class="news-source">FOCUS Bankers Spring Report</div><div class="muted" style="margin-top:3px">129 PS M&amp;A deals announced in Q1, driven by accounting/tax/advisory consolidation.</div></div></div>
+  <div class="card"><h2 class="section-title">🧘 Wellness</h2><div class="news-item"><a href="https://www.healthline.com/health-news" target="_blank">Poison-control calls involving semaglutide (Ozempic/Wegovy) rise sharply on dosing mistakes</a><div class="news-source">Healthline</div><div class="muted" style="margin-top:3px">Researchers link the increase to accidental dosing errors, not misuse.</div></div><div class="news-item"><a href="https://www.sciencedaily.com/news/health_medicine/" target="_blank">Experimental HIV vaccine shows promising preclinical results</a><div class="news-source">Healthline / ScienceDaily</div><div class="muted" style="margin-top:3px">La Jolla Institute/Scripps/IAVI vaccine triggers rare broadly-neutralizing antibodies in primates — a first.</div></div><div class="news-item"><a href="https://www.sciencedaily.com/news/health_medicine/" target="_blank">New once-daily weight-loss pill orforglipron beats oral semaglutide in major trial</a><div class="news-source">ScienceDaily</div><div class="muted" style="margin-top:3px">Better weight loss and blood-sugar improvements for type 2 diabetes patients.</div></div><div class="news-item"><a href="https://www.sciencedaily.com/news/health_medicine/" target="_blank">Exercise slows age-related muscle decline via the DEAF1 gene pathway</a><div class="news-source">ScienceDaily</div><div class="muted" style="margin-top:3px">New mechanism identified for how physical activity restores muscle growth/repair balance.</div></div><div class="news-item"><a href="https://www.sciencedaily.com/news/health_medicine/" target="_blank">Intermittent fasting matches calorie restriction for weight loss, with less feeling of restriction</a><div class="news-source">ScienceDaily</div><div class="muted" style="margin-top:3px">Comparable results without the constant food-tracking burden.</div></div></div>
+</div>
+</section><section id="tab-trash" class="tab-section"><div class="toolbar" style="justify-content:space-between">
+  <div><span id="trash-count" class="muted"></span> · <a href="#" onclick="trashSelectAll(true);return false">Select all</a> · <a href="#" onclick="trashSelectAll(false);return false">Deselect all</a></div>
+  <div><button onclick="expandAllEmails('tab-trash')">Expand all</button><button onclick="collapseAllEmails('tab-trash')">Collapse all</button>
+  <button class="btn danger" id="trash-send-btn" onclick="sendToTrash()">🗑️ Send to Trash</button></div>
+</div><div class="card"><h2 class="section-title">Promotions &amp; Marketing</h2><div class="trash-item" onclick="trashToggle(this)">
+  <input type="checkbox" class="trash-check" data-msg-id="19f4688f0748c6d1" checked onclick="event.stopPropagation()">
+  <div style="flex:1">
+    <div>JADE Cover Ups: Beyond the Beach <span class="chev" onclick="event.stopPropagation();toggleDetail('19f4688f0748c6d1')">▸ more</span></div>
+    <div class="trash-item-meta"><span>shop@jadeswim.com</span><span>Jul 9</span><span>Unread</span></div>
+    <div class="email-detail" id="detail-19f4688f0748c6d1">Auto-detected as promo.</div>
+  </div>
+  <span class="trash-reason">Promo</span>
+</div><div class="trash-item" onclick="trashToggle(this)">
+  <input type="checkbox" class="trash-check" data-msg-id="19f42f98179c7885" checked onclick="event.stopPropagation()">
+  <div style="flex:1">
+    <div>Who are the 5 LinkedIn creators you can&#x27;t miss? <span class="chev" onclick="event.stopPropagation();toggleDetail('19f42f98179c7885')">▸ more</span></div>
+    <div class="trash-item-meta"><span>axel@mail.myfeedin.co</span><span>Jul 8</span><span>Unread</span></div>
+    <div class="email-detail" id="detail-19f42f98179c7885">Auto-detected as promo.</div>
+  </div>
+  <span class="trash-reason">Promo</span>
+</div><div class="trash-item" onclick="trashToggle(this)">
+  <input type="checkbox" class="trash-check" data-msg-id="19f414d79f3ea9f2" checked onclick="event.stopPropagation()">
+  <div style="flex:1">
+    <div>20 Natural Remedies We All Should Know <span class="chev" onclick="event.stopPropagation();toggleDetail('19f414d79f3ea9f2')">▸ more</span></div>
+    <div class="trash-item-meta"><span>The Sacred Science</span><span>Jul 8</span><span>Unread</span></div>
+    <div class="email-detail" id="detail-19f414d79f3ea9f2">Auto-detected as promo.</div>
+  </div>
+  <span class="trash-reason">Promo</span>
+</div><div class="trash-item" onclick="trashToggle(this)">
+  <input type="checkbox" class="trash-check" data-msg-id="19f3786b1a439f6b" checked onclick="event.stopPropagation()">
+  <div style="flex:1">
+    <div>There&#x27;s Still Time for Summer Camp Savings <span class="chev" onclick="event.stopPropagation();toggleDetail('19f3786b1a439f6b')">▸ more</span></div>
+    <div class="trash-item-meta"><span>CertifiKID</span><span>Jul 6</span><span>Unread</span></div>
+    <div class="email-detail" id="detail-19f3786b1a439f6b">Auto-detected as deal.</div>
+  </div>
+  <span class="trash-reason">Deal</span>
+</div><div class="trash-item" onclick="trashToggle(this)">
+  <input type="checkbox" class="trash-check" data-msg-id="19f226128e0bf3b7" checked onclick="event.stopPropagation()">
+  <div style="flex:1">
+    <div>A Journey Into The Sacred Realms Of Healing <span class="chev" onclick="event.stopPropagation();toggleDetail('19f226128e0bf3b7')">▸ more</span></div>
+    <div class="trash-item-meta"><span>The Sacred Science</span><span>Jul 2</span><span>Unread</span></div>
+    <div class="email-detail" id="detail-19f226128e0bf3b7">Auto-detected as promo.</div>
+  </div>
+  <span class="trash-reason">Promo</span>
+</div></div><div class="card"><h2 class="section-title">Newsletters &amp; Digests</h2><div class="trash-item" onclick="trashToggle(this)">
+  <input type="checkbox" class="trash-check" data-msg-id="19f4687e52563af5" checked onclick="event.stopPropagation()">
+  <div style="flex:1">
+    <div>The 7: Platner&#x27;s bitter exit; soaring cancer rates... <span class="chev" onclick="event.stopPropagation();toggleDetail('19f4687e52563af5')">▸ more</span></div>
+    <div class="trash-item-meta"><span>Washington Post</span><span>Jul 9</span><span>Unread</span></div>
+    <div class="email-detail" id="detail-19f4687e52563af5">Auto-detected as digest.</div>
+  </div>
+  <span class="trash-reason">Digest</span>
+</div><div class="trash-item" onclick="trashToggle(this)">
+  <input type="checkbox" class="trash-check" data-msg-id="19f4681b568506eb" checked onclick="event.stopPropagation()">
+  <div style="flex:1">
+    <div>The Morning: Are we at war again? <span class="chev" onclick="event.stopPropagation();toggleDetail('19f4681b568506eb')">▸ more</span></div>
+    <div class="trash-item-meta"><span>NYT Direct</span><span>Jul 9</span><span>Unread</span></div>
+    <div class="email-detail" id="detail-19f4681b568506eb">Auto-detected as digest.</div>
+  </div>
+  <span class="trash-reason">Digest</span>
+</div><div class="trash-item" onclick="trashToggle(this)">
+  <input type="checkbox" class="trash-check" data-msg-id="19f43f4caf4415dd" checked onclick="event.stopPropagation()">
+  <div style="flex:1">
+    <div>Where do you donate clothes and home goods around Mc Lean... <span class="chev" onclick="event.stopPropagation();toggleDetail('19f43f4caf4415dd')">▸ more</span></div>
+    <div class="trash-item-meta"><span>Nextdoor</span><span>Jul 8</span><span>Unread</span></div>
+    <div class="email-detail" id="detail-19f43f4caf4415dd">Auto-detected as digest.</div>
+  </div>
+  <span class="trash-reason">Digest</span>
+</div><div class="trash-item" onclick="trashToggle(this)">
+  <input type="checkbox" class="trash-check" data-msg-id="19f4160b95f71cc9" checked onclick="event.stopPropagation()">
+  <div style="flex:1">
+    <div>The 7: Trump says Iran ceasefire is over... <span class="chev" onclick="event.stopPropagation();toggleDetail('19f4160b95f71cc9')">▸ more</span></div>
+    <div class="trash-item-meta"><span>Washington Post</span><span>Jul 8</span><span>Unread</span></div>
+    <div class="email-detail" id="detail-19f4160b95f71cc9">Auto-detected as digest.</div>
+  </div>
+  <span class="trash-reason">Digest</span>
+</div><div class="trash-item" onclick="trashToggle(this)">
+  <input type="checkbox" class="trash-check" data-msg-id="19f38df28624c28a" checked onclick="event.stopPropagation()">
+  <div style="flex:1">
+    <div>A pretty Doe resting in my backyard... <span class="chev" onclick="event.stopPropagation();toggleDetail('19f38df28624c28a')">▸ more</span></div>
+    <div class="trash-item-meta"><span>Nextdoor</span><span>Jul 6</span><span>Unread</span></div>
+    <div class="email-detail" id="detail-19f38df28624c28a">Auto-detected as digest.</div>
+  </div>
+  <span class="trash-reason">Digest</span>
+</div></div><div class="card"><h2 class="section-title">Automated Notifications</h2><div class="trash-item" onclick="trashToggle(this)">
+  <input type="checkbox" class="trash-check" data-msg-id="19f1938cab7a6bd4" checked onclick="event.stopPropagation()">
+  <div style="flex:1">
+    <div>Your new subscription <span class="chev" onclick="event.stopPropagation();toggleDetail('19f1938cab7a6bd4')">▸ more</span></div>
+    <div class="trash-item-meta"><span>Amazon</span><span>Jun 30</span><span>Unread</span></div>
+    <div class="email-detail" id="detail-19f1938cab7a6bd4">Auto-detected as auto.</div>
+  </div>
+  <span class="trash-reason">Auto</span>
+</div><div class="trash-item" onclick="trashToggle(this)">
+  <input type="checkbox" class="trash-check" data-msg-id="19f154b404931342" checked onclick="event.stopPropagation()">
+  <div style="flex:1">
+    <div>Receipt from The Organic Butcher of McLean <span class="chev" onclick="event.stopPropagation();toggleDetail('19f154b404931342')">▸ more</span></div>
+    <div class="trash-item-meta"><span>Square</span><span>Jun 29</span><span>Unread</span></div>
+    <div class="email-detail" id="detail-19f154b404931342">Auto-detected as auto.</div>
+  </div>
+  <span class="trash-reason">Auto</span>
+</div></div></section><section id="tab-file" class="tab-section"><div class="toolbar"><button onclick="expandAllEmails('tab-file')">Expand all</button><button onclick="collapseAllEmails('tab-file')">Collapse all</button></div><div class="card" id="group-recipes">
+<div class="file-group-header"><h2 class="section-title">🍳 Recipes & food newsletters (3)</h2>
+<div><select id="filedest-recipes"><option value="Personal Gmail/Recipes" selected>Personal Gmail/Recipes</option><option value="ARCHIVE">Archive (no label)</option><option value="TRASH">🗑️ Trash</option></select>
+<button class="btn" onclick="fileGroup('recipes')">Move checked →</button></div></div>
+<div class="email-item">
+  <input type="checkbox" class="file-check" data-id="19f419a15869c986" checked>
+  <div style="flex:1"><a href="https://mail.google.com/mail/u/0/#all/19f419a15869c986" target="_blank">The best new restaurants this summer</a>
+  <div class="email-meta">Bon Appétit · Jul 8</div></div>
+</div><div class="email-item">
+  <input type="checkbox" class="file-check" data-id="19f2d002d326ae11" checked>
+  <div style="flex:1"><a href="https://mail.google.com/mail/u/0/#all/19f2d002d326ae11" target="_blank">Miso-peanut chicken</a>
+  <div class="email-meta">Bon Appétit · Jul 4</div></div>
+</div><div class="email-item">
+  <input type="checkbox" class="file-check" data-id="19f28be4dbe2224a" checked>
+  <div style="flex:1"><a href="https://mail.google.com/mail/u/0/#all/19f28be4dbe2224a" target="_blank">A cookout menu that&#x27;s as breezy as summer</a>
+  <div class="email-meta">Bon Appétit · Jul 3</div></div>
+</div></div><div class="card" id="group-stale">
+<div class="file-group-header"><h2 class="section-title">🗄️ Stale — no longer relevant (3)</h2>
+<div><select id="filedest-stale"><option value="" selected disabled>Choose…</option><option value="ARCHIVE">Archive</option><option value="TRASH">🗑️ Trash</option></select>
+<button class="btn" onclick="fileGroup('stale')">Move checked →</button></div></div>
+<p class="muted">These are 10+ days old and haven't been acted on, or already show a reply resolving them. Pick Trash or a folder for each.</p>
+<div class="email-item">
+  <input type="checkbox" class="file-check" data-id="19ef4de3037d6573">
+  <div style="flex:1"><a href="https://mail.google.com/mail/u/0/#all/19ef4de3037d6573" target="_blank">Route #12 PM Bus Stop Times Adjustment</a> <span style="display:inline-block;background:#d1fae5;color:#065f46;border-radius:5px;padding:1px 6px;font-size:10.5px;font-weight:600">already replied</span>
+  <div class="email-meta">Summer@Potomac · Jun 23</div>
+  <div class="muted" style="margin-top:2px">Superseded — the updated Trinity United Methodist Church 3:15pm stop time is already reflected in the Kids tab camp notes.</div></div>
+</div><div class="email-item">
+  <input type="checkbox" class="file-check" data-id="19cbfb4556884cb6">
+  <div style="flex:1"><a href="https://mail.google.com/mail/u/0/#all/19cbfb4556884cb6" target="_blank">Fw: Special Education and Section 504 Newsletter</a>
+  <div class="email-meta">jkampf@ivymount.org · Mar 5</div>
+  <div class="muted" style="margin-top:2px">Forwarded newsletter about a 504 executive-functioning training — references a different family&#x27;s child (Grace), not Ella or Liam.</div></div>
+</div><div class="email-item">
+  <input type="checkbox" class="file-check" data-id="19ebc1598284deab">
+  <div style="flex:1"><a href="https://mail.google.com/mail/u/0/#all/19ebc1598284deab" target="_blank">RE: Mediation Appt with Brian Hirsch (calendar openings)</a> <span style="display:inline-block;background:#d1fae5;color:#065f46;border-radius:5px;padding:1px 6px;font-size:10.5px;font-weight:600">already replied</span>
+  <div class="email-meta">April Yeager · Jun 12</div>
+  <div class="muted" style="margin-top:2px">Superseded — the Jun 25 Jul 13/28 options were themselves superseded by the new Aug 28, 9:00–11:30am invite sent Jul 20 (see High Priority).</div></div>
+</div></div></section>
+<footer class="dash-footer">Chief of Staff dashboard · built 2026-07-20 · News tab not re-researched this run (search rate-limited; showing Jul 9 headlines) — will refresh next cycle</footer>
+</div>
 <script>
+
 function showTab(id){
   document.querySelectorAll('.tab-section').forEach(s=>s.classList.remove('active'));
-  document.querySelectorAll('.tabbtn').forEach(b=>b.classList.remove('active'));
+  document.querySelectorAll('.tab-btn').forEach(b=>b.classList.remove('active'));
   document.getElementById('tab-'+id).classList.add('active');
   document.querySelector('[data-tab="'+id+'"]').classList.add('active');
 }
-document.querySelectorAll('.tabbtn').forEach(b=>b.addEventListener('click',()=>showTab(b.dataset.tab)));
-
-function showInboxSub(id){
-  document.querySelectorAll('#tab-inbox .subtabbtn').forEach(b=>b.classList.remove('active'));
-  document.querySelectorAll('#tab-inbox .subtab-panel').forEach(p=>p.classList.remove('active'));
-  event.target.classList.add('active');
-  document.getElementById('inboxsub-'+id).classList.add('active');
-}
-function showNewsSub(id){
-  document.querySelectorAll('#tab-news .subtabbtn').forEach(b=>b.classList.remove('active'));
-  document.querySelectorAll('#tab-news .subtab-panel').forEach(p=>p.classList.remove('active'));
-  event.target.classList.add('active');
-  document.getElementById('newssub-'+id).classList.add('active');
-}
-
 function toggleDetail(id){
   const d = document.getElementById('detail-'+id);
   if(!d) return;
   const open = d.style.display !== 'none';
   d.style.display = open ? 'none' : 'block';
 }
-function expandAllEmails(){ document.querySelectorAll('.email-detail').forEach(d=>d.style.display='block'); }
-function collapseAllEmails(){ document.querySelectorAll('.email-detail').forEach(d=>d.style.display='none'); }
-
+function expandAllEmails(scope){
+  const root = scope ? document.getElementById(scope) : document;
+  root.querySelectorAll('.email-detail').forEach(d=>d.style.display='block');
+}
+function collapseAllEmails(scope){
+  const root = scope ? document.getElementById(scope) : document;
+  root.querySelectorAll('.email-detail').forEach(d=>d.style.display='none');
+}
+function showInboxSub(id, el){
+  document.querySelectorAll('.inbox-subtab').forEach(s=>s.classList.remove('active'));
+  document.querySelectorAll('.inbox-subbtn').forEach(b=>b.classList.remove('active'));
+  document.getElementById('sub-'+id).classList.add('active');
+  el.classList.add('active');
+}
 function toggleStar(btn){
   const newState = btn.dataset.starred !== 'true';
   btn.dataset.starred = String(newState);
   btn.textContent = newState ? '★' : '☆';
+  btn.classList.toggle('starred', newState);
   btn.title = newState ? 'Unstar this email' : 'Star this email';
   const action = newState ? 'Star' : 'Unstar';
-  sendPrompt(action + ' Gmail message ID ' + btn.dataset.msgId + ' via Gmail MCP');
+  sendPrompt(action + ' Gmail message ID ' + btn.dataset.msgId + ' via Gmail MCP.');
 }
-
-function routeInformational(rowId, threadId){
-  const sel = document.getElementById('inforoute-'+rowId);
+function routeInformational(threadId){
+  const sel = document.getElementById('inforoute-'+threadId);
   const dest = sel.value;
   if(!dest){ alert('Pick a destination first.'); return; }
   const action = dest === 'TRASH' ? 'Move Gmail thread ' + threadId + ' to trash'
-    : 'Archive Gmail thread ' + threadId + ' (remove INBOX label)';
+    : dest === 'ARCHIVE' ? 'Archive Gmail thread ' + threadId + ' (remove INBOX label)'
+    : 'Apply Gmail label "' + dest + '" to thread ' + threadId + ' and archive it out of the inbox';
   sendPrompt(action + ' via Gmail MCP.');
 }
-
+function fileGroup(groupId){
+  const boxes = document.querySelectorAll('#group-'+groupId+' .file-check:checked');
+  const ids = Array.from(boxes).map(b=>b.dataset.id);
+  if(!ids.length){ alert('Nothing checked in this group.'); return; }
+  const sel = document.getElementById('filedest-'+groupId);
+  const dest = sel.value;
+  if(!dest){ alert('Pick a destination first.'); return; }
+  const action = dest === 'TRASH' ? 'Move these Gmail thread IDs to trash via Gmail MCP: '
+    : dest === 'ARCHIVE' ? 'Archive these Gmail thread IDs (remove INBOX label) via Gmail MCP: '
+    : 'Apply the Gmail label "'+dest+'" to these thread IDs and archive them out of the inbox via Gmail MCP: ';
+  sendPrompt(action + JSON.stringify(ids));
+}
 function trashToggle(el){
   const cb = el.querySelector('.trash-check');
-  cb.checked = !cb.checked;
-  el.classList.toggle('deselected', !cb.checked);
+  if (event.target !== cb) cb.checked = !cb.checked;
+  el.classList.toggle('trash-off', !cb.checked);
   updateTrashCount();
 }
-function trashSelectAll(){ document.querySelectorAll('.trash-check').forEach(cb=>{cb.checked=true; cb.closest('.trash-item').classList.remove('deselected');}); updateTrashCount(); }
-function trashDeselectAll(){ document.querySelectorAll('.trash-check').forEach(cb=>{cb.checked=false; cb.closest('.trash-item').classList.add('deselected');}); updateTrashCount(); }
 function updateTrashCount(){
   const all = document.querySelectorAll('.trash-check');
   const checked = document.querySelectorAll('.trash-check:checked');
-  document.getElementById('trash-count').textContent = checked.length + ' of ' + all.length + ' selected for trash';
+  document.getElementById('trash-count').textContent = checked.length + ' of ' + all.length + ' selected for trash · ' + (all.length-checked.length) + ' kept';
+  document.getElementById('trash-send-btn').disabled = checked.length === 0;
+  document.getElementById('trash-send-btn').textContent = '🗑️ Send to Trash (' + checked.length + ')';
+}
+function trashSelectAll(v){
+  document.querySelectorAll('.trash-check').forEach(cb=>{cb.checked=v; cb.closest('.trash-item').classList.toggle('trash-off', !v);});
+  updateTrashCount();
 }
 function sendToTrash(){
   const ids = [];
   document.querySelectorAll('.trash-check:checked').forEach(cb => ids.push(cb.dataset.msgId));
-  if(!ids.length){ alert('Nothing selected.'); return; }
   sendPrompt('Move these Gmail message IDs to trash via Gmail MCP: ' + JSON.stringify(ids));
 }
-
-function fileGroup(groupId){
-  const destSel = document.getElementById('filedest-'+groupId);
-  const dest = destSel.value;
-  if(!dest){ alert('Pick a destination first.'); return; }
-  const ids = [];
-  document.querySelectorAll('.file-check-'+groupId+':checked').forEach(cb => ids.push(cb.dataset.threadId));
-  if(!ids.length){ alert('Nothing checked in this group.'); return; }
-  let action;
-  if(dest === 'TRASH') action = 'Move these Gmail thread IDs to trash via Gmail MCP: ' + JSON.stringify(ids);
-  else if(dest === 'ARCHIVE') action = 'Archive these Gmail thread IDs (remove INBOX label) via Gmail MCP: ' + JSON.stringify(ids);
-  else action = 'Apply the Gmail label "Personal Gmail/Recipes" to these thread IDs and archive them out of the inbox via Gmail MCP: ' + JSON.stringify(ids);
-  sendPrompt(action);
+function pushTodoistUpdates(){
+  sendPrompt('Update these existing Todoist tasks via MCP (priority/date changes reviewed on the dashboard).');
 }
-
-function sendPrompt(text){
-  if (typeof window.sendPrompt === 'function' && window.sendPrompt !== sendPrompt) { window.sendPrompt(text); return; }
-  alert('Action queued: ' + text);
+function markTodoistDone(id){
+  sendPrompt('Mark Todoist task ' + id + ' complete via MCP.');
 }
+function addApprovedTasks(){
+  const boxes = document.querySelectorAll('.suggest-check:checked');
+  const items = Array.from(boxes).map(b=>b.dataset.title);
+  if(!items.length){ alert('Nothing checked.'); return; }
+  sendPrompt('Create these new Todoist tasks via MCP: ' + JSON.stringify(items));
+}
+document.addEventListener('DOMContentLoaded', function(){
+  const tc = document.getElementById('trash-count');
+  if (tc) updateTrashCount();
+});
+
 </script>
 </body>
 </html>
