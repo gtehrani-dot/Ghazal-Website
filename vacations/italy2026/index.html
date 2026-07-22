@@ -235,14 +235,6 @@
         </div>
         <span class="todo-tag">Sardinia → Como</span>
       </li>
-      <li class="todo-item" data-id="chase-alerts">
-        <input type="checkbox">
-        <div class="todo-text">
-          <div class="todo-title">Add Ghazal to Chase flight-alert contacts</div>
-          <div class="todo-sub">So delay/gate updates go to her directly — done in Chase account/travel booking settings. <a class="todo-link" href="sardinia/index.html#tab-book">See Sardinia Book Now ↗</a></div>
-        </div>
-        <span class="todo-tag">Sardinia</span>
-      </li>
     </ul>
 
     <div class="todo-group-label">Excursions</div>
@@ -317,7 +309,7 @@
   (function(){
     // Items whose id matches a data-book-shared-id used on the leg pages share that
     // same storage key, so checking one off here checks it off there too.
-    var SHARED_IDS = { 'lin-connector-flight': true, 'chase-alerts': true };
+    var SHARED_IDS = { 'lin-connector-flight': true };
     var items = document.querySelectorAll('.todo-list .todo-item');
     items.forEach(function(item){
       var rawId = item.dataset.id;
