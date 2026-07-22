@@ -473,7 +473,7 @@
   <!-- ═══════════ HOTELS ═══════════ -->
   <div id="tab-hotels" class="section">
     <div class="section-title">Hotels</div>
-    <div class="section-sub">Every lodging leg on this trip, in order. Confirmation numbers are flagged where not yet on file — don't lose the reservation, just haven't been given the number.</div>
+    <div class="section-sub">Every lodging leg on this trip, in order, plus the rental car. Confirmation numbers are flagged where not yet on file — don't lose the reservation, just haven't been given the number.</div>
     <div class="hotels-grid">
 
       <div class="hotel-card">
@@ -541,6 +541,20 @@
         </div>
         <div class="hotel-desc">A 33-acre gated jungle resort with private beach, multiple pools, and spectacular Manuel Antonio coastline views. Monkeys, birds, and sloths spotted from balconies daily. On-property sloth sanctuary. Children 10 and under accompanied by an adult stay free. Rated TripAdvisor's #1 Hotel in the World (2022).</div>
         <span class="hotel-badge">🏆 TripAdvisor #1 Hotel in the World · Private Beach</span>
+      </div>
+
+      <div class="hotel-card">
+        <div class="hotel-header">
+          <div class="hotel-name"><a href="https://www.adobecar.com" target="_blank" rel="noopener">Adobe Rental Car — 4WD SUV</a></div>
+          <div class="hotel-meta">
+            <div class="hotel-location">Pickup at SJO airport exit</div>
+          </div>
+        </div>
+        <div class="hotel-contact-row">
+          <span>📍 Meet reps at the SJO airport exit (they hold a sign)</span>
+          <span>📞 CR: <a href="tel:+50624422422">+506 2442 2422</a> · US: <a href="tel:18558611250">1-855-861-1250</a></span>
+        </div>
+        <div class="hotel-desc">⚡ Book directly with Adobe, NOT a third-party site. Full-size 4WD SUV is essential for the Monteverde road.</div>
       </div>
 
     </div>
@@ -1167,10 +1181,11 @@
     });
     var thumbHtml = p.img ? '<img src="'+p.img+'" style="width:100%;height:90px;object-fit:cover;border-radius:6px;margin-bottom:6px;">' : '';
     var noteHtml = p.note ? '<br><span style="color:#888;font-size:12px;">'+p.note+'</span>' : '';
+    var siteHtml = p.site ? '<br><a href="'+p.site+'" target="_blank" rel="noopener" style="font-size:11px;">Website →</a>' : '';
     var gmapsUrl = 'https://www.google.com/maps/dir/?api=1&destination=' + p.lat + ',' + p.lng;
     var linkHtml = '<br><a href="'+gmapsUrl+'" target="_blank" rel="noopener" style="font-size:11px;">Open in Google Maps →</a>';
     L.marker([p.lat, p.lng], {icon:icon}).addTo(map)
-      .bindPopup(thumbHtml + '<b>'+p.name+'</b>' + noteHtml + linkHtml, {maxWidth:220});
+      .bindPopup(thumbHtml + '<b>'+p.name+'</b>' + noteHtml + siteHtml + linkHtml, {maxWidth:220});
   });
 
   setTimeout(function(){ map.invalidateSize(); }, 150);

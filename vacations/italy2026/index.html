@@ -84,6 +84,7 @@
     padding:6px 12px; border-radius:100px; font-size:11px; margin-bottom:14px;
   }
   .card.sardinia .tag{ color:var(--gold); }
+  .card.sardinia img{ object-position:5% center; }
   .card.como .tag{ color:var(--aqua); }
   .card h2{ font-size:clamp(28px, 3.6vw, 38px); color:var(--cream); }
   .card p.sub{ margin-top:8px; color:rgba(251,246,234,0.78); font-size:14.5px; max-width:34ch; }
@@ -94,6 +95,11 @@
   }
   .card .go svg{ width:14px; height:14px; transition:transform .3s ease; }
   .card:hover .go svg{ transform:translateX(4px); }
+
+  /* hero stat chips, matching the leg-page masthead style */
+  .hero-meta{ display:flex; flex-wrap:wrap; gap:10px; margin-top:22px; }
+  .meta-chip{ font-family:'Space Mono',monospace; font-size:12.5px; background:rgba(251,246,234,0.06); border:1px solid var(--line); color:var(--cream); padding:8px 14px; border-radius:100px; }
+  .meta-chip strong{ color:var(--gold); }
 
   /* map section */
   .map-section{ padding:8px 0 90px; }
@@ -127,13 +133,12 @@
   .todo-head{ margin-bottom:20px; }
   .todo-head h2{ font-size:clamp(26px,3vw,34px); }
   .todo-head p{ color:rgba(251,246,234,0.65); font-size:14px; max-width:44ch; margin-top:6px; }
-  .todo-list{ list-style:none; border:1px solid var(--line); border-radius:16px; overflow:hidden; }
+  .todo-list{ list-style:none; display:grid; grid-template-columns:repeat(auto-fit, minmax(300px,1fr)); gap:12px; }
   .todo-item{
     display:flex; align-items:flex-start; gap:14px;
-    padding:16px 20px; border-bottom:1px solid var(--line);
+    padding:16px 20px; border:1px solid var(--line); border-radius:12px;
     background:rgba(251,246,234,0.03);
   }
-  .todo-item:last-child{ border-bottom:none; }
   .todo-item input[type="checkbox"]{
     appearance:none; -webkit-appearance:none; width:19px; height:19px; flex:0 0 19px;
     border:1.5px solid rgba(251,246,234,0.4); border-radius:5px; margin-top:2px;
@@ -146,7 +151,9 @@
   }
   .todo-text{ flex:1; }
   .todo-text .todo-title{ font-size:14.5px; font-weight:600; }
+  .todo-item.done{ opacity:0.55; }
   .todo-item.done .todo-title{ text-decoration:line-through; color:rgba(251,246,234,0.45); }
+  .todo-item.done .todo-title::before{ content:'✅ '; }
   .todo-text .todo-sub{ font-size:12.5px; color:rgba(251,246,234,0.55); margin-top:3px; }
   .todo-tag{
     flex:0 0 auto; font-family:'Space Mono',monospace; font-size:10px; letter-spacing:0.05em; text-transform:uppercase;
@@ -168,11 +175,17 @@
     <div class="eyebrow mono">2026 · Two trips, one summer</div>
     <h1>Italy, <em>two ways</em> — mountains &amp; sea</h1>
     <p>One trip climbs into the pre-Alps to a lake the color of slate glass. The other drops onto granite coves where the water runs Caribbean-turquoise. Pick a destination to open the full day-by-day itinerary.</p>
+    <div class="hero-meta">
+      <div class="meta-chip">✈️ <strong>DCA → MXP</strong> → Olbia / Lake Como</div>
+      <div class="meta-chip">🗓 <strong>8 nights total</strong> · Aug 6–14, 2026</div>
+      <div class="meta-chip">📍 <strong>2 legs</strong> · Sardinia then Lake Como</div>
+      <div class="meta-chip">🏨 <strong>Two bases</strong> · Casagliana, Olbia → Filario, Lezzeno</div>
+    </div>
   </header>
 
   <div class="cards">
     <a class="card sardinia" href="sardinia/index.html">
-      <img src="https://images.unsplash.com/photo-1780914436298-a39fd1b6da60?fm=jpg&q=80&w=1600&auto=format&fit=crop" alt="Turquoise cove on the Sardinian coast">
+      <img src="sardinia/cala_coticcio_caprera.jpg" alt="Cala Coticcio, La Maddalena Archipelago, Sardinia">
       <div class="card-body">
         <span class="tag">☀ Coastal · Costa Smeralda</span>
         <h2>Sardinia</h2>
@@ -182,7 +195,7 @@
     </a>
 
     <a class="card como" href="como/index.html">
-      <img src="https://images.unsplash.com/photo-1683623210055-b76c134c21bd?fm=jpg&q=80&w=1600&auto=format&fit=crop" alt="Bellagio village on Lake Como with mountains behind">
+      <img src="como/bellagio_lakecomo.jpg" alt="Aerial view of Bellagio on Lake Como in golden light">
       <div class="card-body">
         <span class="tag">⛰ Lakeside · Lezzeno &amp; Bellagio</span>
         <h2>Lake Como</h2>
@@ -212,18 +225,6 @@
       <p>Every currently-open item across both legs, in one place — full checklists (with contact info) still live on each trip's own Book Now tab. An item that touches both legs (like the connecting flight) is listed once.</p>
     </div>
 
-    <div class="todo-group-label">Accommodations</div>
-    <ul class="todo-list" id="todoList">
-      <li class="todo-item" data-id="sardinia-casagliana">
-        <input type="checkbox">
-        <div class="todo-text">
-          <div class="todo-title">Book Casagliana Suite Resort — Aug 6–10, Olbia</div>
-          <div class="todo-sub">Still no confirmation on file — the home base for the whole Sardinia leg. <a class="todo-link" href="sardinia/index.html#tab-book">See Sardinia Book Now ↗</a></div>
-        </div>
-        <span class="todo-tag">Sardinia</span>
-      </li>
-    </ul>
-
     <div class="todo-group-label">Transportation</div>
     <ul class="todo-list" id="todoList2">
       <li class="todo-item" data-id="lin-connector-flight">
@@ -234,62 +235,14 @@
         </div>
         <span class="todo-tag">Sardinia → Como</span>
       </li>
-      <li class="todo-item" data-id="chase-alerts">
-        <input type="checkbox">
-        <div class="todo-text">
-          <div class="todo-title">Add Ghazal to Chase flight-alert contacts</div>
-          <div class="todo-sub">So delay/gate updates go to her directly — done in Chase account/travel booking settings. <a class="todo-link" href="sardinia/index.html#tab-book">See Sardinia Book Now ↗</a></div>
-        </div>
-        <span class="todo-tag">Sardinia</span>
-      </li>
-      <li class="todo-item fyi" data-id="mxp-ferry-train">
-        <input type="checkbox">
-        <div class="todo-text">
-          <div class="todo-title">Confirm ferry + train times to MXP — Aug 14 departure</div>
-          <div class="todo-sub">No private car this time — ferry, train, and Malpensa Express instead. Nothing to book, but re-check timetables closer to the date. <a class="todo-link" href="como/index.html#tab-book">See Como Book Now ↗</a></div>
-        </div>
-        <span class="todo-tag">Como</span>
-      </li>
-      <li class="todo-item fyi" data-id="bellagio-varenna-ferry">
-        <input type="checkbox">
-        <div class="todo-text">
-          <div class="todo-title">Check Bellagio–Varenna ferry timetable — Aug 13</div>
-          <div class="todo-sub">No advance booking needed for single crossings, but confirm the current timetable. <a class="todo-link" href="como/index.html#tab-book">See Como Book Now ↗</a></div>
-        </div>
-        <span class="todo-tag">Como</span>
-      </li>
-      <li class="todo-item fyi" data-id="c130-bus">
-        <input type="checkbox">
-        <div class="todo-text">
-          <div class="todo-title">Double-check C130 bus schedule with the front desk</div>
-          <div class="todo-sub">Pay on board, no booking needed — worth a quick confirm at check-in in case of last-minute changes. <a class="todo-link" href="como/index.html#tab-book">See Como Book Now ↗</a></div>
-        </div>
-        <span class="todo-tag">Como</span>
-      </li>
     </ul>
 
     <div class="todo-group-label">Excursions</div>
     <ul class="todo-list" id="todoList3">
-      <li class="todo-item" data-id="dolphin-watching-dst">
-        <input type="checkbox">
-        <div class="todo-text">
-          <div class="todo-title">Book DST Sardegna dolphin watching — Day 1, Aug 6 evening</div>
-          <div class="todo-sub">Golfo Aranci harbor, ~1.5 hrs, ~€37/$40pp — high priority given how high dolphins are on the list. <a class="todo-link" href="sardinia/index.html#tab-book">See Sardinia Book Now ↗</a></div>
-        </div>
-        <span class="todo-tag">Sardinia</span>
-      </li>
-      <li class="todo-item" data-id="maddalena-delfino">
-        <input type="checkbox">
-        <div class="todo-text">
-          <div class="todo-title">Book Maddalena Islands excursion — Delfino Tours, Aug 7</div>
-          <div class="todo-sub">~7 hr boat trip from Palau — Spargi, Santa Maria, Pink Beach view. <a class="todo-link" href="sardinia/index.html#tab-book">See Sardinia Book Now ↗</a></div>
-        </div>
-        <span class="todo-tag">Sardinia</span>
-      </li>
       <li class="todo-item" data-id="orosei-palmasera">
         <input type="checkbox">
         <div class="todo-text">
-          <div class="todo-title">Book Orosei charter — Palmasera Boat Rental, Aug 8</div>
+          <div class="todo-title">Book Orosei charter — Palmasera Boat Rental, Aug 7</div>
           <div class="todo-sub">Cala Luna &amp; Cala Mariolu from Cala Gonone, ~9 AM departure typical. <a class="todo-link" href="sardinia/index.html#tab-book">See Sardinia Book Now ↗</a></div>
         </div>
         <span class="todo-tag">Sardinia</span>
@@ -317,7 +270,7 @@
       <li class="todo-item" data-id="dinner-cucumiao">
         <input type="checkbox">
         <div class="todo-text">
-          <div class="todo-title">Reserve CuCumiao — Palau dinner, Aug 7</div>
+          <div class="todo-title">Reserve CuCumiao — Palau dinner, Aug 8</div>
           <div class="todo-sub">June–August is busy — reserve ahead. Alt: O'Belau. <a class="todo-link" href="sardinia/index.html#tab-book">See Sardinia Book Now ↗</a></div>
         </div>
         <span class="todo-tag">Sardinia</span>
