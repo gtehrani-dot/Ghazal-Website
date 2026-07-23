@@ -225,25 +225,25 @@
       <p>Every currently-open item across both legs, in one place — full checklists (with contact info) still live on each trip's own Book Now tab. An item that touches both legs (like the connecting flight) is listed once.</p>
     </div>
 
-    <div class="todo-group-label">Transportation</div>
-    <ul class="todo-list" id="todoList2">
-      <li class="todo-item" data-id="lin-connector-flight">
+    <div class="todo-group-label">Accommodations</div>
+    <ul class="todo-list" id="todoList1">
+      <li class="todo-item" data-id="casagliana-deposit">
         <input type="checkbox">
         <div class="todo-text">
-          <div class="todo-title">Purchase Aeroitalia XZ2624 — Olbia → Milan Linate, Aug 10</div>
-          <div class="todo-sub">Priced (~€180 for 3, Classic fare) but not yet bought — closes out Sardinia and opens the Como leg, tracked once. <a class="todo-link" href="sardinia/index.html#tab-book">See Sardinia Book Now ↗</a></div>
+          <div class="todo-title">Pay Casagliana's $749 deposit to secure the room</div>
+          <div class="todo-sub">Held, not yet confirmed — reservation only finalizes once the deposit clears. Pay via bank transfer or request a card link. <a class="todo-link" href="sardinia/index.html#tab-book">See Sardinia Book Now ↗</a></div>
         </div>
-        <span class="todo-tag">Sardinia → Como</span>
+        <span class="todo-tag">Sardinia</span>
       </li>
     </ul>
 
     <div class="todo-group-label">Excursions</div>
     <ul class="todo-list" id="todoList3">
-      <li class="todo-item" data-id="orosei-palmasera">
+      <li class="todo-item" data-id="decide-day2-activity">
         <input type="checkbox">
         <div class="todo-text">
-          <div class="todo-title">Book Orosei charter — Palmasera Boat Rental, Aug 7</div>
-          <div class="todo-sub">Cala Luna &amp; Cala Mariolu from Cala Gonone, ~9 AM departure typical. <a class="todo-link" href="sardinia/index.html#tab-book">See Sardinia Book Now ↗</a></div>
+          <div class="todo-title">Decide Day 2 plan — Orosei charter or stay back, Aug 7</div>
+          <div class="todo-sub">Two options: Palmasera Boat Rental charter to Cala Luna &amp; Cala Mariolu (not yet booked), or stay back near Casagliana for rest/pool/local beach. <a class="todo-link" href="sardinia/index.html#tab-book">See Sardinia Book Now ↗</a></div>
         </div>
         <span class="todo-tag">Sardinia</span>
       </li>
@@ -255,11 +255,11 @@
         </div>
         <span class="todo-tag">Sardinia</span>
       </li>
-      <li class="todo-item" data-id="como-cooking-class">
+      <li class="todo-item" data-id="decide-day4-activity">
         <input type="checkbox">
         <div class="todo-text">
-          <div class="todo-title">Book Cook with a View cooking class — Il Perlo, Wed Aug 12</div>
-          <div class="todo-sub">Small-group tour, sells out ahead — book via Viator before the date closes in. <a class="todo-link" href="como/index.html#tab-book">See Como Book Now ↗</a></div>
+          <div class="todo-title">Decide Day 4 activity — Thu Aug 13</div>
+          <div class="todo-sub">Three options: Cook with a View cooking class (Il Perlo), Bike It! Bellagio e-bike tour, or Lido di Lenno beach club day. <a class="todo-link" href="como/index.html#tab-book">See Como Book Now ↗</a></div>
         </div>
         <span class="todo-tag">Como</span>
       </li>
@@ -283,14 +283,6 @@
         </div>
         <span class="todo-tag">Como</span>
       </li>
-      <li class="todo-item" data-id="il-cavatappi">
-        <input type="checkbox">
-        <div class="todo-text">
-          <div class="todo-title">Reserve Il Cavatappi — Varenna lunch, Aug 13</div>
-          <div class="todo-sub">Dinner reservations accepted by phone; lunch tends to be walk-in, so arrive early. <a class="todo-link" href="como/index.html#tab-book">See Como Book Now ↗</a></div>
-        </div>
-        <span class="todo-tag">Como</span>
-      </li>
       <li class="todo-item" data-id="osteria-il-governo">
         <input type="checkbox">
         <div class="todo-text">
@@ -309,7 +301,7 @@
   (function(){
     // Items whose id matches a data-book-shared-id used on the leg pages share that
     // same storage key, so checking one off here checks it off there too.
-    var SHARED_IDS = { 'lin-connector-flight': true };
+    var SHARED_IDS = {};
     var items = document.querySelectorAll('.todo-list .todo-item');
     items.forEach(function(item){
       var rawId = item.dataset.id;
