@@ -278,6 +278,37 @@
   }
   .footer .prep { font-style: italic; }
 
+  #pdf-download-btn {
+    position: fixed;
+    top: 20px;
+    right: 24px;
+    z-index: 100;
+    background: #3c3489;
+    color: #ffffff;
+    border: none;
+    font-size: 13px;
+    font-weight: 700;
+    padding: 10px 18px;
+    border-radius: 999px;
+    cursor: pointer;
+    box-shadow: 0 2px 6px rgba(60,52,137,0.25);
+    font-family: inherit;
+  }
+  #pdf-download-btn:hover { background: #2d276b; }
+
+  @media print {
+    #pdf-download-btn { display: none !important; }
+    body { background: #ffffff; }
+    .page {
+      box-shadow: none;
+      border-radius: 0;
+      margin: 0 auto;
+      page-break-after: always;
+    }
+    .page:last-of-type { page-break-after: auto; }
+    .card:hover { transform: none; box-shadow: none; }
+  }
+
   /* Contribution growth (page 2, Scenario 1) */
   .contrib-phases {
     display: grid;
@@ -548,6 +579,7 @@
 </style>
 </head>
 <body>
+<button id="pdf-download-btn" onclick="window.print()">&darr; Download PDF</button>
 <div class="page">
 
   <p class="eyebrow">Executive summary</p>
@@ -563,8 +595,8 @@
         <div class="when">Rolled 6/2/2008</div>
       </div>
       <div class="input-arrow"></div>
-      <a class="input-amount" href="file:///Users/ghazalmoore/Dropbox/Personal/G%20FILES/Legal/Divorce%20Related/Accounts/IRA/2008%20ING%20Rollover%20Statement.pdf" target="_blank" rel="noopener">$61,103.74 @ 2008</a>
-      <a class="input-amount" href="file:///Users/ghazalmoore/Dropbox/Personal/G%20FILES/Legal/Divorce%20Related/Accounts/IRA/2012_July_Sept_ING%20Rollover.pdf" target="_blank" rel="noopener">$48,537.40 @ 2011</a>
+      <a class="input-amount" href="file:///Users/ghazalmoore/Dropbox/Personal/G%20FILES/Legal/Divorce%20Related/Accounts/IRA/ING%20Sharebuilder_2008_2013/2008%20ING%20Rollover%20Statement.pdf" target="_blank" rel="noopener">$61,103.74 @ 2008</a>
+      <a class="input-amount" href="file:///Users/ghazalmoore/Dropbox/Personal/G%20FILES/Legal/Divorce%20Related/Accounts/IRA/ING%20Sharebuilder_2008_2013/2012_July_Sept_ING%20Rollover.pdf" target="_blank" rel="noopener">$48,537.40 @ 2011</a>
       <div class="input-amount-note">Verified &mdash; ING/Pershing Rollover IRA stmts (linked).<br>Converted to Roth same day in 2008;<br>later recharacterized back to Traditional<br>(date unconfirmed).</div>
     </div>
     <div class="input-slot"></div>
@@ -574,8 +606,8 @@
         <div class="when">Rolled 5/14/2014</div>
       </div>
       <div class="input-arrow"></div>
-      <a class="input-amount" href="file:///Users/ghazalmoore/Library/Application%20Support/Claude/local-agent-mode-sessions/3ab213d4-5381-4954-ab3e-1aa6ed0ee526/b68d0ba4-e497-490b-ac44-17271eefdd3e/local_8f74d1bc-3b05-493b-9f37-37cc32c5eb51/uploads/DL%20401K.pdf" target="_blank" rel="noopener">$19,960.30 @ 2011</a>
-      <a class="input-amount" href="file:///Users/ghazalmoore/Library/Application%20Support/Claude/local-agent-mode-sessions/3ab213d4-5381-4954-ab3e-1aa6ed0ee526/b68d0ba4-e497-490b-ac44-17271eefdd3e/local_8f74d1bc-3b05-493b-9f37-37cc32c5eb51/uploads/DL%20401K.pdf" target="_blank" rel="noopener">$64,526.20 @ 2014</a>
+      <a class="input-amount" href="file:///Users/ghazalmoore/Dropbox/Personal/G%20FILES/Legal/Divorce%20Related/Accounts/IRA/Fidelity%202014_2015/DL%20401K_Fidelity_2008_2014.pdf" target="_blank" rel="noopener">$19,960.30 @ 2011</a>
+      <a class="input-amount" href="file:///Users/ghazalmoore/Dropbox/Personal/G%20FILES/Legal/Divorce%20Related/Accounts/IRA/Fidelity%202014_2015/DL%20401K_Fidelity_2008_2014.pdf" target="_blank" rel="noopener">$64,526.20 @ 2014</a>
       <div class="input-amount-note">Verified &mdash; Fidelity DL 401(k) stmt (linked).<br>Full withdrawal/rollover dated 5/14/2014<br>(employee deferral + employer match).</div>
     </div>
     <div class="input-slot"></div>
@@ -630,13 +662,13 @@
 
   </div>
   <div class="amounts-overlay">
-    <span class="amount-badge" style="left: 60%;">$125,000</span>
-    <a class="amount-badge" href="file:///Users/ghazalmoore/Library/Application%20Support/Claude/local-agent-mode-sessions/3ab213d4-5381-4954-ab3e-1aa6ed0ee526/b68d0ba4-e497-490b-ac44-17271eefdd3e/local_8f74d1bc-3b05-493b-9f37-37cc32c5eb51/uploads/Statement12312020.pdf" target="_blank" rel="noopener" style="left: 80%;">$120,925.57</a>
+    <span class="amount-badge" style="left: 60%;" title="Compiled from Gmail records — no statement on file for the exact day">$125,000 &middot; Oct 2015</span>
+    <a class="amount-badge" href="file:///Users/ghazalmoore/Dropbox/Personal/G%20FILES/Legal/Divorce%20Related/Accounts/IRA/Fidelity%202020_2026%20IRA/2020_July%20Fideltiy%20Statement(pensco%20return).pdf" target="_blank" rel="noopener" style="left: 80%;">$120,925.57 &middot; 7/27/2020</a>
   </div>
   </div>
 
   <div class="footer">
-    <div>Compiled from Gmail records. Dollar amounts shown for transfers with verified figures &mdash; FranConnect $55,906.37 rollover verified via Fidelity/IFAM IRA 2024 year-end statement. Note: from 2017 to 7/27/2020 the consolidated IRA (BAH+DL funds) sat in self-directed real estate, then cash, earning no market growth &mdash; this flat window is carried through the modeled scenarios on the following pages.</div>
+    <div>Compiled from Gmail records. Dollar amounts shown for transfers with verified figures &mdash; FranConnect $55,906.37 rollover verified via Fidelity/IFAM IRA 2024 year-end statement. Note: from 2017 to 7/27/2020 the consolidated IRA (BAH+DL funds) sat in self-directed real estate, then cash, earning no market growth &mdash; this flat window is carried through the modeled scenarios on the following pages. Fidelity&rarr;PENSCO transfer: $125,000 out, October 2015 (exact day compiled from Gmail records; no PENSCO statement from that window has been located yet). PENSCO&rarr;Fidelity transfer back: $120,925.57, confirmed to the day on Fidelity's July 2020 Investment Report (linked above) &mdash; transaction line reads &ldquo;07/27 Transfer Of Assets &middot; Check Received Penscotrustcom &middot; $120,925.57.&rdquo;</div>
     <div class="prep">Prepared for Ghazal Moore</div>
   </div>
 
@@ -673,7 +705,7 @@
     </div>
 
     <div class="phase">
-      <h3>Decision Lens 401(k) <a class="verified-tag" href="file:///Users/ghazalmoore/Library/Application%20Support/Claude/local-agent-mode-sessions/3ab213d4-5381-4954-ab3e-1aa6ed0ee526/b68d0ba4-e497-490b-ac44-17271eefdd3e/local_8f74d1bc-3b05-493b-9f37-37cc32c5eb51/uploads/DL%20401K.pdf" target="_blank" rel="noopener">verified</a></h3>
+      <h3>Decision Lens 401(k) <a class="verified-tag" href="file:///Users/ghazalmoore/Dropbox/Personal/G%20FILES/Legal/Divorce%20Related/Accounts/IRA/Fidelity%202014_2015/DL%20401K_Fidelity_2008_2014.pdf" target="_blank" rel="noopener">verified</a></h3>
       <div class="years">2011 – 2014 marital contributions only &middot; 2011 shown at half value (you married late June 2011, so half that year's contribution is premarital &mdash; see Scenario 3) &middot; modeled at S&amp;P instead of actual growth &middot; includes 2017&ndash;2019 cash/no-growth period</div>
       <div class="contrib-header">
         <span>Year</span><span>Contributed</span><span>S&amp;P growth to today</span><span>Value today</span>
@@ -745,7 +777,7 @@
     </div>
 
     <div class="phase flat">
-      <h3>Decision Lens 401(k) &middot; Premarital <a class="verified-tag" href="file:///Users/ghazalmoore/Library/Application%20Support/Claude/local-agent-mode-sessions/3ab213d4-5381-4954-ab3e-1aa6ed0ee526/b68d0ba4-e497-490b-ac44-17271eefdd3e/local_8f74d1bc-3b05-493b-9f37-37cc32c5eb51/uploads/DL%20401K.pdf" target="_blank" rel="noopener">verified</a></h3>
+      <h3>Decision Lens 401(k) &middot; Premarital <a class="verified-tag" href="file:///Users/ghazalmoore/Dropbox/Personal/G%20FILES/Legal/Divorce%20Related/Accounts/IRA/Fidelity%202014_2015/DL%20401K_Fidelity_2008_2014.pdf" target="_blank" rel="noopener">verified</a></h3>
       <div class="years">Beginning balance as of 4/30/2011 + half of 2011's contribution (pre-wedding, late June 2011) &middot; own actual growth through 5/14/2014</div>
       <div class="contrib-header">
         <span>Item</span><span>Amount</span><span>Actual growth</span><span>Value at withdrawal</span>
@@ -760,7 +792,7 @@
     </div>
 
     <div class="phase">
-      <h3>Decision Lens 401(k) &middot; Marital <a class="verified-tag" href="file:///Users/ghazalmoore/Library/Application%20Support/Claude/local-agent-mode-sessions/3ab213d4-5381-4954-ab3e-1aa6ed0ee526/b68d0ba4-e497-490b-ac44-17271eefdd3e/local_8f74d1bc-3b05-493b-9f37-37cc32c5eb51/uploads/DL%20401K.pdf" target="_blank" rel="noopener">verified</a></h3>
+      <h3>Decision Lens 401(k) &middot; Marital <a class="verified-tag" href="file:///Users/ghazalmoore/Dropbox/Personal/G%20FILES/Legal/Divorce%20Related/Accounts/IRA/Fidelity%202014_2015/DL%20401K_Fidelity_2008_2014.pdf" target="_blank" rel="noopener">verified</a></h3>
       <div class="years">2011 (half) – 2014 contributions &middot; premarital half of 2011 + beginning balance excluded (separate table, left) &middot; fully withdrawn/rolled 5/14/2014</div>
       <div class="contrib-header">
         <span>Year</span><span>Contributed</span><span>Actual growth</span><span>Value at withdrawal</span>
@@ -809,8 +841,8 @@
   <hr class="rule">
 
   <div class="assumptions">
-    <div class="item"><strong>BAH starting balance:</strong> $48,537.40 (12/31/2011) <a class="verified-tag" href="file:///Users/ghazalmoore/Dropbox/Personal/G%20FILES/Legal/Divorce%20Related/Accounts/IRA/2012_July_Sept_ING%20Rollover.pdf" target="_blank" rel="noopener">verified</a></div>
-    <div class="item"><strong>DL starting balance:</strong> $22,632.61 (4/30/2011 balance $19,960.30 + half of 2011 contribution, since you married late June 2011) <a class="verified-tag" href="file:///Users/ghazalmoore/Library/Application%20Support/Claude/local-agent-mode-sessions/3ab213d4-5381-4954-ab3e-1aa6ed0ee526/b68d0ba4-e497-490b-ac44-17271eefdd3e/local_8f74d1bc-3b05-493b-9f37-37cc32c5eb51/uploads/DL%20401K.pdf" target="_blank" rel="noopener">verified</a></div>
+    <div class="item"><strong>BAH starting balance:</strong> $48,537.40 (12/31/2011) <a class="verified-tag" href="file:///Users/ghazalmoore/Dropbox/Personal/G%20FILES/Legal/Divorce%20Related/Accounts/IRA/ING%20Sharebuilder_2008_2013/2012_July_Sept_ING%20Rollover.pdf" target="_blank" rel="noopener">verified</a></div>
+    <div class="item"><strong>DL starting balance:</strong> $22,632.61 (4/30/2011 balance $19,960.30 + half of 2011 contribution, since you married late June 2011) <a class="verified-tag" href="file:///Users/ghazalmoore/Dropbox/Personal/G%20FILES/Legal/Divorce%20Related/Accounts/IRA/Fidelity%202014_2015/DL%20401K_Fidelity_2008_2014.pdf" target="_blank" rel="noopener">verified</a></div>
     <div class="item"><strong>Flat period:</strong> 2017&ndash;2019 no growth, plus a partial 2020 (self-directed PENSCO real estate, then cash, until the 7/27/2020 Fidelity transfer &mdash; not S&amp;P-linked)</div>
     <div class="item"><strong>As of:</strong> July 2026 (2026 return is year-to-date through 7/9)</div>
   </div>
