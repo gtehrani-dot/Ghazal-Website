@@ -160,6 +160,11 @@
   .activity-list li.beach .bullet { color: var(--sunset); }
   .activity-list li.alt { font-style: italic; opacity: 0.82; }
   .activity-list li.meal { background: rgba(196,112,58,0.12); border-radius: 6px; padding: 8px 10px; margin: 2px 0; }
+  .rating-badge { font-family:'JetBrains Mono',monospace; font-size: 11px; color: var(--sunset); background: rgba(196,112,58,0.12); padding: 2px 8px; border-radius: 100px; margin-left: 6px; }
+  .meal-row { display: flex; gap: 8px; flex-wrap: wrap; margin: 6px 0 14px; }
+  .meal-chip { font-family:'JetBrains Mono',monospace; font-size: 11px; padding: 5px 12px; border-radius: 100px; }
+  .meal-chip.filled { background: rgba(196,112,58,0.12); color: var(--sunset); }
+  .meal-chip.empty { background: transparent; color: var(--warm-grey); border: 1px dashed var(--line); }
   .activity-list a { color: var(--jungle); text-decoration: underline; text-decoration-color: var(--lime); text-underline-offset: 2px; font-weight: 500; }
   .activity-list a:hover { color: var(--palm); }
   .activity-meta { font-size: 12px; color: var(--warm-grey); margin-top: 2px; display: block; }
@@ -432,7 +437,7 @@
 <nav class="tab-nav">
   <div class="tab-nav-inner">
   <button class="tab-btn active" onclick="showTab('overview')">📋 Overview</button>
-  <button class="tab-btn" onclick="showTab('hotels')">🏨 Hotels</button>
+  <button class="tab-btn" onclick="showTab('hotels')">🏨 Hotel &amp; Transportation</button>
   <button class="tab-btn" onclick="showTab('itinerary')">📅 Itinerary</button>
   <button class="tab-btn" onclick="showTab('beaches')">🏖 Beaches</button>
   <button class="tab-btn" onclick="showTab('budget')">💰 Budget</button>
@@ -472,8 +477,10 @@
 
   <!-- ═══════════ HOTELS ═══════════ -->
   <div id="tab-hotels" class="section">
-    <div class="section-title">Hotels</div>
-    <div class="section-sub">Every lodging leg on this trip, in order, plus the rental car. Confirmation numbers are flagged where not yet on file — don't lose the reservation, just haven't been given the number.</div>
+    <div class="section-title">Hotel &amp; Transportation</div>
+    <div class="section-sub">Every lodging leg on this trip, in order, plus the flights and rental car. Confirmation numbers are flagged where not yet on file — don't lose the reservation, just haven't been given the number.</div>
+
+    <div class="book-group-label">Lodging</div>
     <div class="hotels-grid">
 
       <div class="hotel-card">
@@ -487,9 +494,10 @@
         <div class="hotel-contact-row">
           <span>📍 Hwy 1 Airport Blvd, Alajuela, Costa Rica</span>
           <span>📞 <a href="tel:+50624360000">+506 2436 0000</a></span>
+          <span>✉️ <a href="mailto:SJCAP_Hampton_Suites@hilton.com">SJCAP_Hampton_Suites@hilton.com</a></span>
           <span class="conf-flag">🔖 Conf# not yet on file</span>
         </div>
-        <div class="hotel-desc">Free 24-hour airport shuttle, outdoor pool, free WiFi. Pure transit hotel — arrive, sleep, leave fresh in the morning. Do NOT pick up the rental car tonight.</div>
+        <div class="hotel-desc">Free 24-hour airport shuttle, outdoor pool, free WiFi. Pure transit hotel — arrive, sleep, leave fresh in the morning. Do NOT pick up the rental car tonight. Free hot breakfast included — typically ~6–10am for this property, confirm exact hours at check-in.</div>
       </div>
 
       <div class="hotel-card">
@@ -503,9 +511,10 @@
         <div class="hotel-contact-row">
           <span>📍 La Fortuna de San Carlos, Alajuela Province, Costa Rica</span>
           <span>📞 <a href="tel:+50624013313">+506 2401 3313</a></span>
+          <span>✉️ <a href="mailto:reservations@thespringscostarica.com">reservations@thespringscostarica.com</a></span>
           <span class="conf-flag">🔖 Conf# not yet on file</span>
         </div>
-        <div class="hotel-desc">165-acre five-star resort with spectacular Arenal Volcano views and 28 mineral-filled natural hot spring pools. CNN Travel named it one of the seven resorts with the most spectacular views in the world. Outstanding for families: waterslide, putt-putt course, kids' game room, and the on-site Club Rio Adventure Center with river tubing, kayaking, horseback riding, rock climbing, and an Animal Sanctuary. Five unique dining experiences including Las Ventanas, a dinner-only restaurant 1,000 feet above the ground with volcano views. Rated 9.8 for families.</div>
+        <div class="hotel-desc">165-acre five-star resort with spectacular Arenal Volcano views and 28 mineral-filled natural hot spring pools. CNN Travel named it one of the seven resorts with the most spectacular views in the world. Outstanding for families: waterslide, putt-putt course, kids' game room, and the on-site Club Rio Adventure Center with river tubing, kayaking, horseback riding, rock climbing, and an Animal Sanctuary. Five unique dining experiences including Las Ventanas, a dinner-only restaurant 1,000 feet above the ground with volcano views (reservations required, 5–10pm). Rated 9.8 for families. Breakfast at Tres Cascadas, served 6:30–10:30am — whether it's complimentary depends on the specific package booked, confirm at check-in.</div>
         <span class="hotel-badge">🌋 Volcano Views · 28 Hot Springs · Family Paradise</span>
       </div>
 
@@ -522,7 +531,7 @@
           <span>📞 <a href="tel:+50626455201">+506 2645 5201</a></span>
           <span class="conf-flag">🔖 Conf# not yet on file</span>
         </div>
-        <div class="hotel-desc">Mountain chalet-style ecolodge high in the cloud forest with a spring-fed pond, onsite microbrewery, and organic farm. The Peninsula Room has two queen beds and a private terrace with hammock — ideal for families. No pool, no A/C needed — Monteverde stays cool year-round and you're outside all day.</div>
+        <div class="hotel-desc">Mountain chalet-style ecolodge high in the cloud forest with a spring-fed pond, onsite microbrewery, and organic farm. The Peninsula Room has two queen beds and a private terrace with hammock — ideal for families. No pool, no A/C needed — Monteverde stays cool year-round and you're outside all day. Breakfast at Celajes Restaurant, served 6:30–10am — sources disagree on whether it's included in the rate or an à la carte add-on (~$16.50/person); confirm which applies to your booking.</div>
         <span class="hotel-badge">🌿 Farm-to-Table · Microbrewery · Cloud Forest</span>
       </div>
 
@@ -536,11 +545,32 @@
         </div>
         <div class="hotel-contact-row">
           <span>📍 Carretera a Manuel Antonio, Km 4, Quepos 60601, Puntarenas, Costa Rica</span>
-          <span>📞 <a href="tel:+50640015878">+506 4001 5878</a></span>
+          <span>📞 <a href="tel:+50640015878">+506 4001 5878</a> · 24hr front desk: <a href="tel:+5062777912">011-506-2777-9121</a></span>
+          <span>✉️ <a href="mailto:Reservations@tulemar.com">Reservations@tulemar.com</a></span>
           <span class="conf-flag">🔖 Conf# not yet on file</span>
         </div>
-        <div class="hotel-desc">A 33-acre gated jungle resort with private beach, multiple pools, and spectacular Manuel Antonio coastline views. Monkeys, birds, and sloths spotted from balconies daily. On-property sloth sanctuary. Children 10 and under accompanied by an adult stay free. Rated TripAdvisor's #1 Hotel in the World (2022).</div>
+        <div class="hotel-desc">A 33-acre gated jungle resort with private beach, multiple pools, and spectacular Manuel Antonio coastline views. Monkeys, birds, and sloths spotted from balconies daily. On-property sloth sanctuary. Children 10 and under accompanied by an adult stay free. Rated TripAdvisor's #1 Hotel in the World (2022). Breakfast at Tule Cafe (6am–10pm daily) is cooked-to-order and billed à la carte, not complimentary — budget for it separately.</div>
         <span class="hotel-badge">🏆 TripAdvisor #1 Hotel in the World · Private Beach</span>
+      </div>
+
+    </div>
+
+    <div class="book-group-label">Transportation</div>
+    <div class="hotels-grid">
+
+      <div class="hotel-card">
+        <div class="hotel-header">
+          <div class="hotel-name"><a href="https://www.avianca.com" target="_blank" rel="noopener">Flights — Avianca, IAD ⇄ SJO</a></div>
+          <div class="hotel-meta">
+            <div class="hotel-location">Day 1 out · Day 10 return</div>
+            <div class="hotel-price">~$452/traveler</div>
+          </div>
+        </div>
+        <div class="hotel-contact-row">
+          <span>📞 <a href="tel:18669190081">1-866-919-0081</a></span>
+          <span class="conf-flag">🔖 Not yet booked</span>
+        </div>
+        <div class="hotel-desc">Outbound: depart IAD 5:35pm → arrive SJO 11:40pm, 1 stop SAL. Return: depart SJO 4:35pm nonstop → arrive IAD 2:15am, 7hr 40min. Checked-bag allowance not yet confirmed — depends on the fare booked, check the actual fare rules once purchased rather than assuming bags are included.</div>
       </div>
 
       <div class="hotel-card">
@@ -553,6 +583,7 @@
         <div class="hotel-contact-row">
           <span>📍 Meet reps at the SJO airport exit (they hold a sign)</span>
           <span>📞 CR: <a href="tel:+50624422422">+506 2442 2422</a> · US: <a href="tel:18558611250">1-855-861-1250</a></span>
+          <span>✉️ <a href="mailto:reservas@adobecar.com">reservas@adobecar.com</a></span>
         </div>
         <div class="hotel-desc">⚡ Book directly with Adobe, NOT a third-party site. Full-size 4WD SUV is essential for the Monteverde road.</div>
       </div>
@@ -575,6 +606,11 @@
           </div>
           <a class="day-gmaps-btn" href="https://www.google.com/maps/dir/?api=1&origin=Juan+Santamaria+International+Airport+SJO&destination=Hampton+by+Hilton+San+Jose+Airport,+Alajuela,+Costa+Rica" target="_blank" rel="noopener">🧭 Send route to Google Maps</a>
           <div class="day-weather">🌤️ <b>Weather</b> · Temp: 66–81°F (19–27°C) · Precip: afternoon showers typical of rainy season · Wind: light <span class="wx-note">(typical for June — trip is beyond the forecast window)</span></div>
+          <div class="meal-row">
+            <span class="meal-chip empty">🍳 Breakfast — travel day, en route</span>
+            <span class="meal-chip empty">🥪 Lunch — travel day, en route</span>
+            <span class="meal-chip empty">🍽 Dinner — travel day, en route/on flight</span>
+          </div>
           <ul class="activity-list">
             <li><span class="bullet">✈</span><span>Depart IAD 5:35pm → arrive SJO 11:40pm (Avianca, 1 stop SAL)</span></li>
             <li><span class="bullet">🏨</span><span>Shuttle to <a href="https://www.hilton.com/en/hotels/sjcaphx-hampton-san-jose-airport/" target="_blank" rel="noopener">Hampton by Hilton SJO Airport</a> — free 24hr shuttle from arrivals</span></li>
@@ -593,11 +629,16 @@
           <span class="day-drive">🚗 ~3 hrs SJO → La Fortuna · leave by 9:00am</span>
           <a class="day-gmaps-btn" href="https://www.google.com/maps/dir/?api=1&origin=Hampton+by+Hilton+San+Jose+Airport,+Alajuela,+Costa+Rica&destination=The+Springs+Resort+%26+Spa,+La+Fortuna,+Costa+Rica&waypoints=Adobe+Rent+A+Car+San+Jose+Airport" target="_blank" rel="noopener">🧭 Send route to Google Maps</a>
           <div class="day-weather">🌤️ <b>Weather</b> · Temp: 77–90°F (25–32°C) · Precip: ~24 rainy days/mo, afternoon storms typical · Wind: light breeze <span class="wx-note">(typical for June — trip is beyond the forecast window)</span></div>
+          <div class="meal-row">
+            <span class="meal-chip empty">🍳 Breakfast — not planned</span>
+            <span class="meal-chip empty">🥪 Lunch — en route/at resort, not planned</span>
+            <span class="meal-chip filled">🍽 Dinner — at The Springs (one of 5 on-site restaurants)</span>
+          </div>
           <ul class="activity-list">
             <li><span class="bullet">🚙</span><span>Pick up 4WD SUV from <a href="https://www.adobecar.com" target="_blank" rel="noopener">Adobe Rent A Car</a> at SJO</span></li>
             <li><span class="bullet">🛣️</span><span>Drive to La Fortuna (~3 hrs) · Check into <a href="https://www.thespringscostarica.com" target="_blank" rel="noopener">The Springs Resort &amp; Spa</a></span></li>
             <li class="resort"><span class="bullet">🌋</span><span><span class="resort-tag">Resort</span>Explore the 165-acre property — volcano views, animal sanctuary, spot wildlife</span></li>
-            <li class="resort"><span class="bullet">♨️</span><span><span class="resort-tag">Resort</span>28 natural hot spring pools, swim-up bar, dinner at one of five on-site restaurants</span></li>
+            <li class="resort meal"><span class="bullet">♨️</span><span><span class="resort-tag">Resort</span>28 natural hot spring pools, swim-up bar, dinner at one of five on-site restaurants</span></li>
           </ul>
         </div>
       </div>
@@ -612,6 +653,11 @@
           <span class="day-drive">🚗 10–20 min from The Springs · leave by 6:45am</span>
           <a class="day-gmaps-btn" href="https://www.google.com/maps/dir/?api=1&origin=The+Springs+Resort+%26+Spa,+La+Fortuna,+Costa+Rica&destination=Mistico+Arenal+Hanging+Bridges+Park,+La+Fortuna,+Costa+Rica&waypoints=La+Fortuna+Waterfall,+Costa+Rica" target="_blank" rel="noopener">🧭 Send route to Google Maps</a>
           <div class="day-weather">🌤️ <b>Weather</b> · Temp: 77–90°F (25–32°C) · Precip: ~24 rainy days/mo, afternoon storms typical · Wind: light breeze <span class="wx-note">(typical for June — trip is beyond the forecast window)</span></div>
+          <div class="meal-row">
+            <span class="meal-chip empty">🍳 Breakfast — not planned</span>
+            <span class="meal-chip empty">🥪 Lunch — not planned</span>
+            <span class="meal-chip filled">🍽 Dinner — Las Ventanas</span>
+          </div>
           <ul class="activity-list">
             <li><span class="bullet">💧</span>
               <span><a href="https://www.cataratalafortuna.com/la-fortuna-waterfall-hike" target="_blank" rel="noopener">La Fortuna Waterfall</a> — self-guided hike, open 7am, arrive early to beat the heat and crowds
@@ -624,6 +670,7 @@
               </span>
             </li>
             <li class="resort"><span class="bullet">♨️</span><span><span class="resort-tag">Resort</span>Hot springs, waterslide, and pools back at The Springs</span></li>
+            <li class="meal"><span class="bullet">🍽️</span><span><strong>Can't-miss dinner:</strong> <a href="https://www.thespringscostarica.com/dining/las-ventanas/" target="_blank" rel="noopener">Las Ventanas</a><span class="rating-badge">fine dining</span> — the resort's dinner-only restaurant, 1,000 ft above the ground with volcano views. Reservations required, open 5–10pm</span></li>
           </ul>
         </div>
       </div>
@@ -638,6 +685,11 @@
           <span class="day-drive">🚗 Short local transfer · leave by 8:15am</span>
           <a class="day-gmaps-btn" href="https://www.google.com/maps/dir/?api=1&origin=The+Springs+Resort+%26+Spa,+La+Fortuna,+Costa+Rica&destination=Tabacon+Thermal+Resort,+La+Fortuna,+Costa+Rica&waypoints=Arenal+River+Tubing+La+Fortuna" target="_blank" rel="noopener">🧭 Send route to Google Maps</a>
           <div class="day-weather">🌤️ <b>Weather</b> · Temp: 77–90°F (25–32°C) · Precip: ~24 rainy days/mo, afternoon storms typical · Wind: light breeze <span class="wx-note">(typical for June — trip is beyond the forecast window)</span></div>
+          <div class="meal-row">
+            <span class="meal-chip empty">🍳 Breakfast — not planned</span>
+            <span class="meal-chip empty">🥪 Lunch — resort, not planned</span>
+            <span class="meal-chip filled">🍽 Dinner — at Tabacón (included with day pass)</span>
+          </div>
           <ul class="activity-list">
             <li><span class="bullet">🛟</span>
               <span><a href="https://www.tripadvisor.com/Attraction_Review-g309226-d5616226-Reviews-Arenal_River_Tubing_Hiking-La_Fortuna_de_San_Carlos_Arenal_Volcano_National_Park_.html" target="_blank" rel="noopener">Arenal River Tubing</a> — jungle float, back by noon
@@ -645,8 +697,8 @@
               </span>
             </li>
             <li class="resort"><span class="bullet">🏊</span><span><span class="resort-tag">Resort</span>Big resort afternoon — waterslide, putt-putt, kids' game room, animal sanctuary, hot springs</span></li>
-            <li><span class="bullet">♨️</span>
-              <span><a href="https://www.tabacon.com/product-category/one-day-pass/" target="_blank" rel="noopener">Tabacón Hot Springs Day Pass</a> — evening session is magical
+            <li class="meal"><span class="bullet">♨️</span>
+              <span><a href="https://www.tabacon.com/product-category/one-day-pass/" target="_blank" rel="noopener">Tabacón Hot Springs Day Pass</a> — evening session is magical, dinner options on-site
                 <span class="activity-meta">~$81/adult · ~$39/child · Book at least 1 week in advance</span>
               </span>
             </li>
@@ -664,11 +716,16 @@
           <span class="day-drive">🚗 ~3.5 hrs around Lake Arenal · leave by 9:00am</span>
           <a class="day-gmaps-btn" href="https://www.google.com/maps/dir/?api=1&origin=The+Springs+Resort+%26+Spa,+La+Fortuna,+Costa+Rica&destination=Hotel+Belmar,+Monteverde,+Costa+Rica" target="_blank" rel="noopener">🧭 Send route to Google Maps</a>
           <div class="day-weather">🌤️ <b>Weather</b> · Temp: 66–84°F (19–29°C) · Precip: ~23 rainy days/mo, often misty · Wind: breezy at elevation <span class="wx-note">(typical for June — trip is beyond the forecast window)</span></div>
+          <div class="meal-row">
+            <span class="meal-chip filled">🍳 Breakfast — Tres Cascadas (The Springs)</span>
+            <span class="meal-chip empty">🥪 Lunch — en route, not planned</span>
+            <span class="meal-chip filled">🍽 Dinner — Celajes Restaurant (Hotel Belmar)</span>
+          </div>
           <ul class="activity-list">
-            <li class="meal"><span class="bullet">🍳</span><span>Leisurely breakfast at The Springs · Checkout</span></li>
+            <li class="meal"><span class="bullet">🍳</span><span>Leisurely breakfast at Tres Cascadas, The Springs (6:30–10:30am) · Checkout</span></li>
             <li><span class="bullet">🛣️</span><span>Drive around Lake Arenal to Monteverde (~3.5 hrs) — scenic paved road, bumpy unpaved final stretch · 4WD essential</span></li>
             <li><span class="bullet">🏨</span><span>Check into <a href="https://www.hotelbelmar.net" target="_blank" rel="noopener">Hotel Belmar</a></span></li>
-            <li class="resort"><span class="bullet">🌿</span><span><span class="resort-tag">Resort</span>Explore Belmar's grounds — hummingbird garden, spring-fed pond, cloud forest sunset views · Dinner at farm-to-table restaurant · Try a beer from the onsite microbrewery</span></li>
+            <li class="resort meal"><span class="bullet">🌿</span><span><span class="resort-tag">Resort</span>Explore Belmar's grounds — hummingbird garden, spring-fed pond, cloud forest sunset views · Dinner at Celajes Restaurant (farm-to-table) · Try a beer from the onsite microbrewery</span></li>
           </ul>
         </div>
       </div>
@@ -683,6 +740,11 @@
           <span class="day-drive">🚗 10–15 min from Belmar · leave by 7:30am</span>
           <a class="day-gmaps-btn" href="https://www.google.com/maps/dir/?api=1&origin=Hotel+Belmar,+Monteverde,+Costa+Rica&destination=100%25+Aventura+Canopy+Tour,+Monteverde,+Costa+Rica&waypoints=Santa+Elena+Cloud+Forest+Reserve,+Costa+Rica" target="_blank" rel="noopener">🧭 Send route to Google Maps</a>
           <div class="day-weather">🌤️ <b>Weather</b> · Temp: 66–84°F (19–29°C) · Precip: ~23 rainy days/mo, often misty · Wind: breezy at elevation <span class="wx-note">(typical for June — trip is beyond the forecast window)</span></div>
+          <div class="meal-row">
+            <span class="meal-chip empty">🍳 Breakfast — not planned</span>
+            <span class="meal-chip filled">🥪 Lunch — Monteverde Brewing Company</span>
+            <span class="meal-chip empty">🍽 Dinner — not planned</span>
+          </div>
           <ul class="activity-list">
             <li><span class="bullet">🌉</span>
               <span>Sky bridges &amp; cloud forest hike at Santa Elena Reserve
@@ -694,6 +756,7 @@
                 <span class="activity-meta">From ~$48/person · Must book in advance · No walk-ins</span>
               </span>
             </li>
+            <li class="meal"><span class="bullet">🍽️</span><span><strong>Lunch:</strong> <a href="https://www.tripadvisor.com/Restaurant_Review-g644053-d21304685-Reviews-Monteverde_Brewing_Company-Santa_Elena_Monteverde_Province_of_Puntarenas.html" target="_blank" rel="noopener">Monteverde Brewing Company</a><span class="rating-badge">4.8, $$</span> — easy stop back into Santa Elena after zip-lining, burgers/salads/sandwiches, craft beer</span></li>
           </ul>
         </div>
       </div>
@@ -708,11 +771,16 @@
           <span class="day-drive">🚗 ~5 hrs on paved roads · leave by 12:00pm (after leisurely breakfast/checkout)</span>
           <a class="day-gmaps-btn" href="https://www.google.com/maps/dir/?api=1&origin=Hotel+Belmar,+Monteverde,+Costa+Rica&destination=Tulemar+Resort,+Manuel+Antonio,+Costa+Rica" target="_blank" rel="noopener">🧭 Send route to Google Maps</a>
           <div class="day-weather">🌤️ <b>Weather</b> · Temp: 75–82°F (24–28°C) · Precip: heavy rain typical, ~22 rainy days/mo, intense afternoon downpours · Wind: light coastal breeze <span class="wx-note">(typical for June — trip is beyond the forecast window)</span></div>
+          <div class="meal-row">
+            <span class="meal-chip filled">🍳 Breakfast — Celajes Restaurant (Hotel Belmar)</span>
+            <span class="meal-chip empty">🥪 Lunch — en route, not planned</span>
+            <span class="meal-chip filled">🍽 Dinner — Tule Cafe (Tulemar)</span>
+          </div>
           <ul class="activity-list">
-            <li class="meal"><span class="bullet">🍳</span><span>Leisurely Hotel Belmar breakfast · Checkout by noon · Enjoy the cloud forest views one last time</span></li>
+            <li class="meal"><span class="bullet">🍳</span><span>Leisurely Hotel Belmar breakfast (Celajes Restaurant, 6:30–10am) · Checkout by noon · Enjoy the cloud forest views one last time</span></li>
             <li><span class="bullet">🛣️</span><span>Drive to Manuel Antonio (~5 hrs on good paved roads)</span></li>
             <li><span class="bullet">🏨</span><span>Check into <a href="https://www.tulemarresort.com" target="_blank" rel="noopener">Tulemar Resort</a></span></li>
-            <li class="resort"><span class="bullet">🏖️</span><span><span class="resort-tag">Resort</span>First taste of Tulemar — pools, private beach walk, spot sloths at the on-property sanctuary · Dinner at the resort restaurant</span></li>
+            <li class="resort meal"><span class="bullet">🏖️</span><span><span class="resort-tag">Resort</span>First taste of Tulemar — pools, private beach walk, spot sloths at the on-property sanctuary · Dinner at Tule Cafe, the resort restaurant (à la carte, 6am–10pm)</span></li>
           </ul>
         </div>
       </div>
@@ -727,6 +795,11 @@
           <span class="day-drive">🚗 ~15–20 min from Tulemar · leave by 6:15am</span>
           <a class="day-gmaps-btn" href="https://www.google.com/maps/dir/?api=1&origin=Tulemar+Resort,+Manuel+Antonio,+Costa+Rica&waypoints=Manuel+Antonio+National+Park,+Costa+Rica&destination=Quepos+Marina,+Costa+Rica" target="_blank" rel="noopener">🧭 Send route to Google Maps</a>
           <div class="day-weather">🌤️ <b>Weather</b> · Temp: 75–82°F (24–28°C) · Precip: heavy rain typical, ~22 rainy days/mo, intense afternoon downpours · Wind: light coastal breeze <span class="wx-note">(typical for June — trip is beyond the forecast window)</span></div>
+          <div class="meal-row">
+            <span class="meal-chip empty">🍳 Breakfast — early departure, grab &amp; go at Tulemar</span>
+            <span class="meal-chip empty">🥪 Lunch — resort, not planned</span>
+            <span class="meal-chip filled">🍽 Dinner — Cuba Libre Restaurant &amp; Bar</span>
+          </div>
           <ul class="activity-list">
             <li><span class="bullet">🐒</span>
               <span><a href="https://serviciosenlinea.sinac.go.cr" target="_blank" rel="noopener">Manuel Antonio National Park</a> — arrive at 7am opening · Hire a certified guide at the entrance
@@ -734,7 +807,7 @@
               </span>
             </li>
             <li class="resort"><span class="bullet">🏊</span><span><span class="resort-tag">Resort</span>Full resort afternoon at Tulemar — multiple pools, private beach with chairs and towels, sloth sanctuary walk</span></li>
-            <li class="meal"><span class="bullet">🌅</span><span>Sunset dinner in Quepos marina</span></li>
+            <li class="meal"><span class="bullet">🌅</span><span><strong>Sunset dinner:</strong> <a href="https://www.tripadvisor.com/Restaurant_Review-g309289-d13499649-Reviews-Cuba_Libre_Restaurant_Bar-Quepos_Province_of_Puntarenas.html" target="_blank" rel="noopener">Cuba Libre Restaurant &amp; Bar</a><span class="rating-badge">4.6, $$</span> — right on Marina Pez Vela, one of the best sunset views in Quepos</span></li>
           </ul>
         </div>
       </div>
@@ -750,6 +823,11 @@
           <a class="day-gmaps-btn" href="https://www.google.com/maps/dir/?api=1&origin=Tulemar+Resort,+Manuel+Antonio,+Costa+Rica&destination=Catarata+Nauyaca+Don+Lulo,+Platanillo,+Costa+Rica" target="_blank" rel="noopener">🧭 Send route to Google Maps</a>
           <div class="day-note">Route note carried over from research: use Waze (not Google Maps) for turn-by-turn via Route 243 — this Google Maps button gets you the same start/end points but the original guide flags Waze as more reliable for the final unpaved stretch.</div>
           <div class="day-weather">🌤️ <b>Weather</b> · Temp: 75–82°F (24–28°C) · Precip: heavy rain typical, ~22 rainy days/mo, intense afternoon downpours · Wind: light coastal breeze <span class="wx-note">(typical for June — trip is beyond the forecast window)</span></div>
+          <div class="meal-row">
+            <span class="meal-chip empty">🍳 Breakfast — early departure, grab &amp; go at Tulemar</span>
+            <span class="meal-chip empty">🥪 Lunch — resort, not planned</span>
+            <span class="meal-chip filled">🍽 Dinner — Barba Roja</span>
+          </div>
           <ul class="activity-list">
             <li><span class="bullet">💦</span>
               <span><a href="https://www.walkmyworld.com/posts/nauyaca-waterfall" target="_blank" rel="noopener">Nauyaca Waterfall</a> — one of Costa Rica's most stunning. Two tiers dropping into an enormous emerald swimming hole. Start early to arrive before crowds.
@@ -762,7 +840,7 @@
               </span>
             </li>
             <li class="resort"><span class="bullet">🏖️</span><span><span class="resort-tag">Resort</span>Afternoon at Tulemar — pools, private beach, sloth sanctuary</span></li>
-            <li class="meal"><span class="bullet">🍽️</span><span>Last dinner in Quepos · Pack up</span></li>
+            <li class="meal"><span class="bullet">🍽️</span><span><strong>Last dinner:</strong> <a href="https://www.tripadvisor.com/Restaurant_Review-g309274-d1226903-Reviews-Barba_Roja_Restaurant-Manuel_Antonio_Quepos_Province_of_Puntarenas.html" target="_blank" rel="noopener">Barba Roja</a><span class="rating-badge">local favorite, $$</span> — Manuel Antonio tradition since 1975, seafood + sushi bar · Pack up</span></li>
           </ul>
         </div>
       </div>
@@ -777,10 +855,16 @@
           <span class="day-drive">🚗 ~3 hrs to San José · leave by 9:00am</span>
           <a class="day-gmaps-btn" href="https://www.google.com/maps/dir/?api=1&origin=Tulemar+Resort,+Manuel+Antonio,+Costa+Rica&destination=Juan+Santamaria+International+Airport+SJO&waypoints=Adobe+Rent+A+Car+San+Jose+Airport" target="_blank" rel="noopener">🧭 Send route to Google Maps</a>
           <div class="day-weather">🌤️ <b>Weather</b> · Temp: 66–81°F (19–27°C) · Precip: afternoon showers typical of rainy season · Wind: light <span class="wx-note">(typical for June — trip is beyond the forecast window)</span></div>
+          <div class="meal-row">
+            <span class="meal-chip filled">🍳 Breakfast — Tule Cafe (Tulemar)</span>
+            <span class="meal-chip filled">🥪 Lunch — Trattoria Ragú</span>
+            <span class="meal-chip empty">🍽 Dinner — on the flight/en route</span>
+          </div>
           <ul class="activity-list">
-            <li class="meal"><span class="bullet">🍳</span><span>Breakfast at Tulemar · Checkout · Leave by 9am</span></li>
+            <li class="meal"><span class="bullet">🍳</span><span>Breakfast at Tule Cafe, Tulemar · Checkout · Leave by 9am</span></li>
             <li><span class="bullet">🛣️</span><span>Drive to San José (~3 hrs)</span></li>
-            <li><span class="bullet">🚙</span><span>Drop rental car at <a href="https://www.adobecar.com" target="_blank" rel="noopener">Adobe SJO office</a> · Lunch near airport</span></li>
+            <li><span class="bullet">🚙</span><span>Drop rental car at <a href="https://www.adobecar.com" target="_blank" rel="noopener">Adobe SJO office</a></span></li>
+            <li class="meal"><span class="bullet">🍝</span><span><strong>Lunch:</strong> <a href="https://www.tripadvisor.com/Restaurant_Review-g309224-d4339980-Reviews-Trattoria_Ragu-Alajuela_Province_of_Alajuela.html" target="_blank" rel="noopener">Trattoria Ragú</a><span class="rating-badge">4.9, $$</span> — highly-rated Italian near the airport in Alajuela, easy stop before the flight</span></li>
             <li><span class="bullet">✈</span><span>Arrive terminal by 2:30pm · Depart SJO 4:35pm nonstop (Avianca) → arrive IAD 2:15am</span></li>
           </ul>
         </div>
@@ -924,7 +1008,7 @@
         <div class="booking-num">5</div>
         <div class="booking-info">
           <h4><a href="https://www.avianca.com" target="_blank" rel="noopener">Flights — Avianca</a></h4>
-          <div class="when">IAD ⇄ SJO, book once dates are confirmed</div>
+          <div class="when">IAD ⇄ SJO, book once dates are confirmed. Once booked, confirm the checked-bag allowance per traveler — don't assume it, check the fare rules</div>
           <div class="contact-phone">📞 <a href="tel:18669190081">1-866-919-0081</a></div>
         </div>
       </div>
@@ -946,7 +1030,7 @@
       <div class="booking-item" data-book-id="manuel-antonio-np">
         <div class="booking-num">7</div>
         <div class="booking-info">
-          <h4><a href="https://serviciosenlinea.sinac.go.cr" target="_blank" rel="noopener">Manuel Antonio National Park</a></h4>
+          <h4><a href="https://serviciosenlinea.sinac.go.cr" target="_blank" rel="noopener">Manuel Antonio National Park</a> <span class="rating-badge">Manuel Antonio</span></h4>
           <div class="when urgent">⚡ Online booking window opens 90 days before your visit date — reserve your entry time slot the moment it opens</div>
           <div class="contact-phone">📞 SINAC: <a href="tel:+50627775185">+506 2777 5185</a></div>
         </div>
@@ -955,7 +1039,7 @@
       <div class="booking-item" data-book-id="aventura-ziplining">
         <div class="booking-num">8</div>
         <div class="booking-info">
-          <h4><a href="https://montetours.com/100-aventura-zip-lines/" target="_blank" rel="noopener">100% Aventura Zip-lining</a></h4>
+          <h4><a href="https://montetours.com/100-aventura-zip-lines/" target="_blank" rel="noopener">100% Aventura Zip-lining</a> <span class="rating-badge">Monteverde</span></h4>
           <div class="when urgent">⚡ Sells out fast in peak season — book as early as possible</div>
           <div class="contact-phone missing">📞 No published phone number found — book online</div>
         </div>
@@ -964,7 +1048,7 @@
       <div class="booking-item" data-book-id="tabacon-hot-springs">
         <div class="booking-num">9</div>
         <div class="booking-info">
-          <h4><a href="https://www.tabacon.com/product-category/one-day-pass/" target="_blank" rel="noopener">Tabacón Hot Springs Day Pass</a></h4>
+          <h4><a href="https://www.tabacon.com/product-category/one-day-pass/" target="_blank" rel="noopener">Tabacón Hot Springs Day Pass</a> <span class="rating-badge">Arenal</span></h4>
           <div class="when urgent">⚡ At least 1 week before your visit</div>
           <div class="contact-phone">📞 <a href="tel:+50625191999">+506 2519 1999</a></div>
         </div>
@@ -973,7 +1057,7 @@
       <div class="booking-item" data-book-id="mistico-hanging-bridges">
         <div class="booking-num">10</div>
         <div class="booking-info">
-          <h4><a href="https://www.getyourguide.com/mistico-arenal-hanging-bridges-park-l87313/hanging-bridges-walk-in-arenal-volcano-t411384/" target="_blank" rel="noopener">Mistico Hanging Bridges</a></h4>
+          <h4><a href="https://www.getyourguide.com/mistico-arenal-hanging-bridges-park-l87313/hanging-bridges-walk-in-arenal-volcano-t411384/" target="_blank" rel="noopener">Mistico Hanging Bridges</a> <span class="rating-badge">Arenal</span></h4>
           <div class="when">Advance booking strongly recommended</div>
           <div class="contact-phone">📞 <a href="tel:+50624798282">+506 2479 8282</a></div>
         </div>
@@ -982,7 +1066,7 @@
       <div class="booking-item" data-book-id="nauyaca-waterfall">
         <div class="booking-num">11</div>
         <div class="booking-info">
-          <h4><a href="https://www.walkmyworld.com/posts/nauyaca-waterfall" target="_blank" rel="noopener">Nauyaca Waterfall Shuttle (Don Lulo)</a></h4>
+          <h4><a href="https://www.walkmyworld.com/posts/nauyaca-waterfall" target="_blank" rel="noopener">Nauyaca Waterfall Shuttle (Don Lulo)</a> <span class="rating-badge">Manuel Antonio</span></h4>
           <div class="when urgent">⚡ Book in advance — start as early as possible to beat crowds</div>
           <div class="contact-phone">📞 <a href="tel:+50627870541">+506 2787 0541</a> · <a href="tel:+50662801790">+506 6280 1790</a></div>
         </div>
@@ -991,131 +1075,34 @@
       <div class="booking-item" data-book-id="surf-lessons">
         <div class="booking-num">12</div>
         <div class="booking-info">
-          <h4><a href="https://www.getyourguide.com/manuel-antonio-l142888/manuel-antonio-surf-lessons-t669034/" target="_blank" rel="noopener">Surf Lessons — Glen Castro</a></h4>
+          <h4><a href="https://www.getyourguide.com/manuel-antonio-l142888/manuel-antonio-surf-lessons-t669034/" target="_blank" rel="noopener">Surf Lessons — Glen Castro</a> <span class="rating-badge">Manuel Antonio</span></h4>
           <div class="when">Alternate to Nauyaca on Day 9 — arrange ahead if you want it locked in</div>
           <div class="contact-phone missing">📞 No published phone number found — book via GetYourGuide/Viator, or find his tent on Playa Espadilla Norte</div>
         </div>
       </div>
 
     </div>
+
+    <div class="book-group-label">Restaurants</div>
+    <div class="booking-list">
+
+      <div class="booking-item" data-book-id="las-ventanas">
+        <div class="booking-num">13</div>
+        <div class="booking-info">
+          <h4><a href="https://www.thespringscostarica.com/dining/las-ventanas/" target="_blank" rel="noopener">Reserve Las Ventanas</a> <span class="rating-badge">Arenal</span></h4>
+          <div class="when">Day 3 dinner at The Springs — reservations required, open 5–10pm</div>
+          <div class="contact-phone">📞 <a href="tel:+50624013313">+506 2401 3313</a></div>
+        </div>
+      </div>
+
+    </div>
   </div>
 
-  <!-- ═══════════ PRINT / OFFLINE COPY (always last) ═══════════ -->
+  <!-- ═══════════ PRINT (always last) ═══════════ -->
   <div id="tab-print" class="section">
-    <div class="section-title">Print / Offline Copy</div>
-    <div class="section-sub">A no-internet-needed version — every phone number, address, and website spelled out as plain text. Print this tab or grab the PDF before you lose signal in the rainforest.</div>
+    <div class="section-title">Print</div>
+    <div class="section-sub">A no-internet-needed version, ready to download before you lose signal in the rainforest.</div>
     <a class="print-btn" href="Costa-Rica-Itinerary-Printable.pdf" target="_blank" rel="noopener">⬇ Download PDF</a>
-
-    <h3 style="font-family:'Cormorant Garamond',serif; font-size:20px; margin:28px 0 14px; color:var(--jungle); font-weight:500;">Key Contacts</h3>
-
-    <div class="contact-block">
-      <h4>Hampton by Hilton San José Airport</h4>
-      <div class="contact-line">Hwy 1 Airport Blvd, Alajuela, Costa Rica</div>
-      <div class="contact-line">📞 +506 2436 0000 &nbsp;·&nbsp; hilton.com/en/hotels/sjcaphx-hampton-san-jose-airport</div>
-      <div class="contact-line">Conf#: not yet on file</div>
-    </div>
-    <div class="contact-block">
-      <h4>The Springs Resort &amp; Spa — Arenal</h4>
-      <div class="contact-line">La Fortuna de San Carlos, Alajuela Province, Costa Rica</div>
-      <div class="contact-line">📞 +506 2401 3313 &nbsp;·&nbsp; thespringscostarica.com</div>
-      <div class="contact-line">Conf#: not yet on file</div>
-    </div>
-    <div class="contact-block">
-      <h4>Hotel Belmar — Monteverde</h4>
-      <div class="contact-line">Calle Samudio, Barrio Copey, Monteverde, Puntarenas Province, Costa Rica</div>
-      <div class="contact-line">📞 +506 2645 5201 &nbsp;·&nbsp; hotelbelmar.net</div>
-      <div class="contact-line">Conf#: not yet on file</div>
-    </div>
-    <div class="contact-block">
-      <h4>Tulemar Resort — Manuel Antonio</h4>
-      <div class="contact-line">Carretera a Manuel Antonio, Km 4, Quepos 60601, Puntarenas, Costa Rica</div>
-      <div class="contact-line">📞 +506 4001 5878 &nbsp;·&nbsp; tulemarresort.com / tulemar.com</div>
-      <div class="contact-line">Conf#: not yet on file</div>
-    </div>
-    <div class="contact-block">
-      <h4>Adobe Rent A Car — SJO Airport</h4>
-      <div class="contact-line">Juan Santamaría International Airport, Alajuela, Costa Rica</div>
-      <div class="contact-line">📞 +506 2442 2422 (CR) · 1-855-861-1250 (US toll-free) &nbsp;·&nbsp; adobecar.com</div>
-    </div>
-    <div class="contact-block">
-      <h4>Manuel Antonio National Park (SINAC)</h4>
-      <div class="contact-line">Quepos, 60601, Puntarenas, Costa Rica</div>
-      <div class="contact-line">📞 +506 2777 5185 &nbsp;·&nbsp; serviciosenlinea.sinac.go.cr</div>
-    </div>
-    <div class="contact-block">
-      <h4>Avianca</h4>
-      <div class="contact-line">📞 1-866-919-0081 &nbsp;·&nbsp; avianca.com</div>
-    </div>
-
-    <h3 style="font-family:'Cormorant Garamond',serif; font-size:20px; margin:28px 0 14px; color:var(--jungle); font-weight:500;">Day-by-Day Contacts</h3>
-
-    <div class="print-day">
-      <h4>Day 1 · Travel Day</h4>
-      <ul>
-        <li>Hampton by Hilton SJO Airport<span class="contact-line">Hwy 1 Airport Blvd, Alajuela &nbsp;·&nbsp; 📞 +506 2436 0000 &nbsp;·&nbsp; hilton.com/en/hotels/sjcaphx-hampton-san-jose-airport</span></li>
-      </ul>
-    </div>
-    <div class="print-day">
-      <h4>Day 2 · SJO → Arenal</h4>
-      <ul>
-        <li>Adobe Rent A Car (SJO)<span class="contact-line">📞 +506 2442 2422 &nbsp;·&nbsp; adobecar.com</span></li>
-        <li>The Springs Resort &amp; Spa<span class="contact-line">La Fortuna, Costa Rica &nbsp;·&nbsp; 📞 +506 2401 3313 &nbsp;·&nbsp; thespringscostarica.com</span></li>
-      </ul>
-    </div>
-    <div class="print-day">
-      <h4>Day 3 · Arenal — Waterfall + Hanging Bridges</h4>
-      <ul>
-        <li>La Fortuna Waterfall<span class="contact-line">La Fortuna, Costa Rica &nbsp;·&nbsp; cataratalafortuna.com/la-fortuna-waterfall-hike</span></li>
-        <li>Mistico Hanging Bridges<span class="contact-line">📞 +506 2479 8282 &nbsp;·&nbsp; misticopark.com</span></li>
-      </ul>
-    </div>
-    <div class="print-day">
-      <h4>Day 4 · Arenal — Tubing + Tabacón</h4>
-      <ul>
-        <li>Arenal River Tubing<span class="contact-line">Near La Fortuna &nbsp;·&nbsp; tripadvisor.com listing</span></li>
-        <li>Tabacón Hot Springs<span class="contact-line">📞 +506 2519 1999 &nbsp;·&nbsp; tabacon.com</span></li>
-      </ul>
-    </div>
-    <div class="print-day">
-      <h4>Day 5 · Arenal → Monteverde</h4>
-      <ul>
-        <li>Hotel Belmar<span class="contact-line">Monteverde, Costa Rica &nbsp;·&nbsp; 📞 +506 2645 5201 &nbsp;·&nbsp; hotelbelmar.net</span></li>
-      </ul>
-    </div>
-    <div class="print-day">
-      <h4>Day 6 · Monteverde — Reserve + Zip-lining</h4>
-      <ul>
-        <li>Santa Elena Cloud Forest Reserve<span class="contact-line">Monteverde, Costa Rica</span></li>
-        <li>100% Aventura Zip-lining<span class="contact-line">San Bosco, Monteverde &nbsp;·&nbsp; No published phone found &nbsp;·&nbsp; montetours.com/100-aventura-zip-lines</span></li>
-      </ul>
-    </div>
-    <div class="print-day">
-      <h4>Day 7 · Monteverde → Manuel Antonio</h4>
-      <ul>
-        <li>Tulemar Resort<span class="contact-line">Km 4, Quepos, Costa Rica &nbsp;·&nbsp; 📞 +506 4001 5878 &nbsp;·&nbsp; tulemarresort.com</span></li>
-      </ul>
-    </div>
-    <div class="print-day">
-      <h4>Day 8 · Manuel Antonio — Park Day</h4>
-      <ul>
-        <li>Manuel Antonio National Park<span class="contact-line">Quepos, Costa Rica &nbsp;·&nbsp; 📞 +506 2777 5185 &nbsp;·&nbsp; serviciosenlinea.sinac.go.cr</span></li>
-        <li>Quepos Marina (dinner)<span class="contact-line">Quepos, Costa Rica</span></li>
-      </ul>
-    </div>
-    <div class="print-day">
-      <h4>Day 9 · Nauyaca Waterfall + Beach</h4>
-      <ul>
-        <li>Nauyaca Waterfall (Don Lulo)<span class="contact-line">Platanillo, Costa Rica &nbsp;·&nbsp; 📞 +506 2787 0541 / +506 6280 1790 &nbsp;·&nbsp; cataratasnauyaca.com &nbsp;·&nbsp; use Waze, not Google Maps, for the last stretch</span></li>
-        <li>Surf Lessons — Glen Castro (alternate)<span class="contact-line">Playa Espadilla Norte &nbsp;·&nbsp; No published phone found &nbsp;·&nbsp; book via GetYourGuide/Viator</span></li>
-      </ul>
-    </div>
-    <div class="print-day">
-      <h4>Day 10 · Fly Home</h4>
-      <ul>
-        <li>Adobe Rent A Car (SJO drop-off)<span class="contact-line">📞 +506 2442 2422 &nbsp;·&nbsp; adobecar.com</span></li>
-        <li>Avianca — depart SJO 4:35pm nonstop → IAD 2:15am<span class="contact-line">📞 1-866-919-0081 &nbsp;·&nbsp; avianca.com</span></li>
-      </ul>
-    </div>
   </div>
 
 </div>

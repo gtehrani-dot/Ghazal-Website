@@ -181,6 +181,11 @@
   .tl-items li.alt{ font-style:italic; opacity:0.85; }
   .tl-items li.meal{ background:rgba(224,165,60,0.14); border-radius:6px; padding:8px 12px; margin:6px 0; }
   .tl-items li.meal::before{ content:''; }
+  .rating-badge{ font-family:'JetBrains Mono',monospace; font-size:11px; color:var(--gold); background:#fbf3e3; padding:2px 8px; border-radius:100px; margin-left:6px; }
+  .meal-row{ display:flex; gap:8px; flex-wrap:wrap; margin:2px 0 16px; }
+  .meal-chip{ font-family:'JetBrains Mono',monospace; font-size:11px; padding:5px 12px; border-radius:100px; }
+  .meal-chip.filled{ background:#fbf3e3; color:#a5761f; }
+  .meal-chip.empty{ background:transparent; color:var(--granite); border:1px dashed var(--line); }
 
   /* ── OVERVIEW TAB ── */
   .at-a-glance{ width:100%; border-collapse:collapse; margin-top:8px; }
@@ -295,7 +300,7 @@
 <nav class="tab-nav">
   <div class="tab-nav-inner">
   <button class="tab-btn active" onclick="showTab('overview')">📋 Overview</button>
-  <button class="tab-btn" onclick="showTab('hotels')">🏨 Hotels</button>
+  <button class="tab-btn" onclick="showTab('hotels')">🏨 Hotel &amp; Transportation</button>
   <button class="tab-btn" onclick="showTab('itinerary')">📅 Itinerary</button>
   <button class="tab-btn" onclick="showTab('beaches')">🏖 Beaches</button>
   <button class="tab-btn" onclick="showTab('adventures')">🥾 Hikes &amp; Adventures</button>
@@ -329,9 +334,10 @@
 
   <!-- ═══════════ HOTELS ═══════════ -->
   <div id="tab-hotels" class="section">
-    <div class="section-title">Where You're Staying</div>
-    <div class="section-sub">One base for all 7 nights — Incline Village, North Shore.</div>
+    <div class="section-title">Where You're Staying &amp; Getting Around</div>
+    <div class="section-sub">One base for all 7 nights — Incline Village, North Shore — plus the flights and rental car that get you there.</div>
 
+    <div class="book-group-label">Lodging</div>
     <div class="hotels-grid">
       <div class="hotel-card tbd">
         <div class="hotel-header">
@@ -339,6 +345,24 @@
           <div class="hotel-dates">Wed Aug 5 → Wed Aug 12</div>
         </div>
         <div class="hotel-note">The itinerary and Book Now tab both assume one Incline Village property for all 7 nights, but the actual hotel/rental name, address, confirmation number, and phone haven't been specified yet — this card is a placeholder so the tab exists and is easy to fill in. Tell me the property (e.g. Hyatt Regency Lake Tahoe, a VRBO, etc.) and I'll fill in the rest, including its own map pin.</div>
+      </div>
+    </div>
+
+    <div class="book-group-label">Transportation</div>
+    <div class="hotels-grid">
+      <div class="hotel-card tbd">
+        <div class="hotel-header">
+          <div class="hotel-name">Flights — DCA/IAD → RNO</div>
+          <div class="hotel-dates">Arrive Wed Aug 5 · Depart Wed Aug 12</div>
+        </div>
+        <div class="hotel-note">Airline and confirmation number not yet on file — add once booked. Checked-bag allowance will depend on the airline/fare chosen; once booked, confirm how many bags are included per traveler and the cost to add more before travel.</div>
+      </div>
+      <div class="hotel-card tbd">
+        <div class="hotel-header">
+          <div class="hotel-name">Rental car — full week</div>
+          <div class="hotel-dates">Wed Aug 5 → Wed Aug 12</div>
+        </div>
+        <div class="hotel-note">Agency, pickup location, and confirmation number not yet on file — add once booked.</div>
       </div>
     </div>
   </div>
@@ -358,11 +382,16 @@
           <span class="tl-base">🚗 45–60 min, RNO → Incline Village</span>
           <a class="tl-gmaps-btn" href="https://www.google.com/maps/dir/?api=1&origin=Reno-Tahoe+International+Airport&destination=Incline+Village,+NV" target="_blank" rel="noopener">🧭 Send route to Google Maps</a>
           <div class="day-weather">🌤️ <b>Weather</b> · Temp: — · Precip: — · Wind: — <span class="wx-note">(Forecasts open up ~10 days out)</span></div>
+          <div class="meal-row">
+            <span class="meal-chip empty">🍳 Breakfast — travel day, en route</span>
+            <span class="meal-chip empty">🥪 Lunch — travel day, en route</span>
+            <span class="meal-chip filled">🍽 Dinner — Big Water Grille</span>
+          </div>
           <ul class="tl-items">
             <li>Fly DCA or IAD → <strong>RNO (Reno-Tahoe Intl)</strong></li>
             <li>Drive south on 431 (Mt. Rose Hwy) into the basin — first lake view from the summit pullout is worth the stop</li>
             <li>Check in, early night to shake off travel</li>
-            <li class="meal">🍽 <strong>Can't-miss dinner:</strong> <strong><a href="https://www.loneeaglegrille.com/" target="_blank" rel="noopener" class="title-lnk">Lone Eagle Grille</a></strong> at the Hyatt — lakeside, fire pits, big windows over the water. <strong><a href="https://www.sageleaftahoe.com/" target="_blank" rel="noopener" class="title-lnk">Sage Leaf</a></strong> is the local favorite if you want something a notch more casual</li>
+            <li class="meal">🍽 <strong>Can't-miss dinner:</strong> <strong><a href="https://www.bigwatergrille.com/" target="_blank" rel="noopener" class="title-lnk">Big Water Grille</a></strong><span class="rating-badge">4.4, $$$</span> — lake-view fine dining on Ski Way (heads up: Lone Eagle Grille at the Hyatt is closed for a multi-year redevelopment, not reopening until ~2027, so this is the lakeside splurge pick instead). <strong><a href="https://www.sageleaftahoe.com/" target="_blank" rel="noopener" class="title-lnk">Sage Leaf</a></strong><span class="rating-badge">4.5, $$</span> is the local favorite if you want something a notch more casual</li>
           </ul>
         </div>
       </div>
@@ -375,6 +404,11 @@
           <span class="tl-base">🚗 10 min from Incline Village · leave by 7:45am</span>
           <a class="tl-gmaps-btn" href="https://www.google.com/maps/dir/?api=1&origin=Incline+Village,+NV&destination=39.1972,-119.9317" target="_blank" rel="noopener">🧭 Send route to Google Maps</a>
           <div class="day-weather">🌤️ <b>Weather</b> · Temp: — · Precip: — · Wind: — <span class="wx-note">(Forecasts open up ~10 days out)</span></div>
+          <div class="meal-row">
+            <span class="meal-chip empty">🍳 Breakfast — not planned</span>
+            <span class="meal-chip filled">🥪 Lunch — picnic on the beach</span>
+            <span class="meal-chip empty">🍽 Dinner — not planned</span>
+          </div>
           <ul class="tl-items">
             <li><strong>Arrive Sand Harbor by 8–8:30am</strong> — the lot fills and closes by mid-morning in August</li>
             <li><strong><a href="https://clearlytahoerentals.com/" target="_blank" rel="noopener" class="title-lnk">SUP here — rent from Clearly Tahoe</a></strong>, the official on-site concessionaire inside the state park (right on the sand, no need to bring your own gear). 11' board runs $42/1hr up to $112 for a full day, 1-hour minimum. Sand Harbor itself doesn't allow outside delivery vendors since Clearly Tahoe holds the park concession</li>
@@ -393,8 +427,13 @@
           <span class="tl-base">🚗 20–35 min from Incline Village (Secret Cove 20, Zephyr Cove 30, Nevada Beach 35) · no fixed start, aim to leave by 1pm to land golden hour at the last stop</span>
           <a class="tl-gmaps-btn" href="https://www.google.com/maps/dir/?api=1&origin=Incline+Village,+NV&waypoints=39.1553,-119.9426|39.0034,-119.9539&destination=38.9767,-119.9445" target="_blank" rel="noopener">🧭 Send route to Google Maps</a>
           <div class="day-weather">🌤️ <b>Weather</b> · Temp: — · Precip: — · Wind: — <span class="wx-note">(Forecasts open up ~10 days out)</span></div>
+          <div class="meal-row">
+            <span class="meal-chip empty">🍳 Breakfast — not planned</span>
+            <span class="meal-chip filled">🥪 Lunch — Mountain High Sandwich Co (packed)</span>
+            <span class="meal-chip empty">🍽 Dinner — not planned, back in Incline</span>
+          </div>
           <ul class="tl-items">
-            <li>Pack lunch before you go — no food right at Secret Cove or Nevada Beach. <strong><a href="http://www.mountainhighsandwichco.com/" target="_blank" rel="noopener" class="title-lnk">Mountain High Sandwich Co</a></strong> in Incline Village is the move (gourmet deli, order ahead)</li>
+            <li>Pack lunch before you go — no food right at Secret Cove or Nevada Beach. <strong><a href="http://www.mountainhighsandwichco.com/" target="_blank" rel="noopener" class="title-lnk">Mountain High Sandwich Co</a></strong><span class="rating-badge">4.5, $</span> in Incline Village is the move (gourmet deli, order ahead)</li>
             <li><strong>Secret Cove</strong> — stunning boulder cove; heads up, it's clothing-optional with a mixed crowd. Your call whether it's a swim stop or just a photo stop</li>
             <li><strong>Zephyr Cove Beach</strong> — wide sandy beach, restaurant/bar on site (can't-miss lunch or drinks right on the sand), watercraft rentals</li>
             <li><strong>Nevada Beach</strong> — quieter, walk-in, big mountain views</li>
@@ -412,9 +451,14 @@
           <span class="tl-base">🚗 25–30 min from Incline Village, each way · leave by ~8:30am for the earliest launch slot</span>
           <a class="tl-gmaps-btn" href="https://www.google.com/maps/dir/?api=1&origin=Incline+Village,+NV&destination=39.1679,-120.1428" target="_blank" rel="noopener">🧭 Send route to Google Maps</a>
           <div class="day-weather">🌤️ <b>Weather</b> · Temp: — · Precip: — · Wind: — <span class="wx-note">(Forecasts open up ~10 days out)</span></div>
+          <div class="meal-row">
+            <span class="meal-chip empty">🍳 Breakfast — not planned</span>
+            <span class="meal-chip filled">🥪 Lunch — River Ranch Lodge</span>
+            <span class="meal-chip empty">🍽 Dinner — not planned, back in Incline</span>
+          </div>
           <ul class="tl-items">
             <li><strong>Truckee River rafting</strong> — <a class="lnk" href="https://truckeeriverraft.com/" target="_blank">truckeeriverraft.com</a>, self-guided, ~5 miles, 2–3 hrs, ends at River Ranch Lodge. $77 adult / $40 kids — book the earliest slot you can</li>
-            <li class="meal">🍽 <strong>Can't-miss lunch:</strong> <a href="https://www.riverranchlodge.com/" target="_blank" rel="noopener" class="title-lnk"><strong>River Ranch Lodge</strong></a> is a destination in its own right — riverside patio right at the take-out, worth lingering over</li>
+            <li class="meal">🍽 <strong>Can't-miss lunch:</strong> <a href="https://www.riverranchlodge.com/" target="_blank" rel="noopener" class="title-lnk"><strong>River Ranch Lodge</strong></a><span class="rating-badge">4.2, $$</span> is a destination in its own right — riverside patio right at the take-out, worth lingering over</li>
             <li>Easy afternoon after — browse Tahoe City, then the drive back to Incline Village, no second big activity today</li>
           </ul>
         </div>
@@ -428,8 +472,13 @@
           <span class="tl-base">🚗 40–45 min from Incline Village to Meeks Bay · no fixed start, aim to be at Meeks Bay by late morning</span>
           <a class="tl-gmaps-btn" href="https://www.google.com/maps/dir/?api=1&origin=Incline+Village,+NV&waypoints=Tahoe+City,+CA|39.0325,-120.1183&destination=39.1699,-120.1439" target="_blank" rel="noopener">🧭 Send route to Google Maps</a>
           <div class="day-weather">🌤️ <b>Weather</b> · Temp: — · Precip: — · Wind: — <span class="wx-note">(Forecasts open up ~10 days out)</span></div>
+          <div class="meal-row">
+            <span class="meal-chip empty">🍳 Breakfast — not planned</span>
+            <span class="meal-chip filled">🥪 Lunch — West Shore Market (picnic)</span>
+            <span class="meal-chip empty">🍽 Dinner — not planned</span>
+          </div>
           <ul class="tl-items">
-            <li class="meal">🍽 <strong>Quick grab:</strong> pick up a picnic from <strong><a href="https://www.westshoremarket.com/" target="_blank" rel="noopener" class="title-lnk">West Shore Market</a></strong> in Tahoe City on the way — chic little deli, great sandwiches, perfect for the beach</li>
+            <li class="meal">🍽 <strong>Quick grab:</strong> pick up a picnic from <strong><a href="https://www.westshoremarket.com/" target="_blank" rel="noopener" class="title-lnk">West Shore Market</a></strong><span class="rating-badge">4.5, $</span> in Tahoe City on the way — chic little deli, great sandwiches, perfect for the beach</li>
             <li><strong>Meeks Bay</strong> — calm, shallow, sandy cove, a low-key morning after yesterday's rafting</li>
             <li>Afternoon: a shady walk at <strong><a href="https://www.parks.ca.gov/?page_id=510" target="_blank" rel="noopener" class="title-lnk">Sugar Pine Point State Park</a></strong>, or just more beach time — nothing strenuous today on purpose</li>
             <li>🎵 <strong>Concerts at Commons Beach</strong> — free Sunday show, 4–7pm, right on the water in Tahoe City. You'll already be out west today, so it's just a short hop back up from Meeks Bay before the longer drive home to Incline after</li>
@@ -445,14 +494,19 @@
           <span class="tl-base">🚗 50–60 min from Incline Village to the trailhead — the longest drive of the trip · leave by 6–6:15am</span>
           <a class="tl-gmaps-btn" href="https://www.google.com/maps/dir/?api=1&origin=Incline+Village,+NV&waypoints=38.9548,-120.1006&destination=38.9975,-120.0989" target="_blank" rel="noopener">🧭 Send route to Google Maps</a>
           <div class="day-weather">🌤️ <b>Weather</b> · Temp: — · Precip: — · Wind: — <span class="wx-note">(Forecasts open up ~10 days out)</span></div>
+          <div class="meal-row">
+            <span class="meal-chip filled">🍳 Breakfast — Tahoe House Bakery (grab &amp; go)</span>
+            <span class="meal-chip empty">🥪 Lunch — not planned</span>
+            <span class="meal-chip filled">🍽 Dinner — Wolfdale's or Sunnyside</span>
+          </div>
           <ul class="tl-items">
-            <li class="meal">🍽 Grab coffee/pastries the night before or from <strong><a href="https://www.tahoe-house.com/" target="_blank" rel="noopener" class="title-lnk">Tahoe House Bakery</a></strong> in Tahoe City if it's open on your way through — Fire Sign Cafe (the local favorite) won't be open yet at this hour</li>
+            <li class="meal">🍽 Grab coffee/pastries the night before or from <strong><a href="https://www.tahoe-house.com/" target="_blank" rel="noopener" class="title-lnk">Tahoe House Bakery</a></strong><span class="rating-badge">4.6, $</span> in Tahoe City if it's open on your way through — Fire Sign Cafe (the local favorite, 4.6★) won't be open yet at this hour</li>
             <li>Drive to the <strong>Eagle Falls / Emerald Bay trailhead</strong> — leave Incline by 6–6:15am to arrive by 7–7:30am, the small lot fills fast</li>
             <li>💡 <strong>Light tip:</strong> the early departure isn't just about parking — Emerald Bay at sunrise is the single most photographed view on the lake. Be at the overlook as the light comes up</li>
             <li><strong>Eagle Falls Trail</strong> — ~1.7 mi RT to the upper falls; extend to Eagle Lake (~4.4 mi RT) if the group's game</li>
             <li><strong>Emerald Bay / Vikingsholm Trail</strong> — ~1 mile down (real climb back up) to the historic mansion and beach</li>
             <li>Cool off after at <strong>Bliss Beach (D.L. Bliss State Park)</strong> — some of the clearest water on the lake, a few minutes up the road, before the drive back to Incline</li>
-            <li class="meal">🍽 <strong>Can't-miss dinner tonight:</strong> you've earned it — stop in Tahoe City on the way home for <strong><a href="https://www.wolfdales.com/" target="_blank" rel="noopener" class="title-lnk">Wolfdale's</a></strong> (upscale Cal-Asian) or <strong><a href="https://www.sunnysidelodge.com/" target="_blank" rel="noopener" class="title-lnk">Sunnyside</a></strong> (lakefront deck) rather than driving all the way back first</li>
+            <li class="meal">🍽 <strong>Can't-miss dinner tonight:</strong> you've earned it — stop in Tahoe City on the way home for <strong><a href="https://www.wolfdales.com/" target="_blank" rel="noopener" class="title-lnk">Wolfdale's</a></strong><span class="rating-badge">4.6, $$$</span> (upscale Cal-Asian) or <strong><a href="https://www.sunnysidelodge.com/" target="_blank" rel="noopener" class="title-lnk">Sunnyside</a></strong><span class="rating-badge">4.2, $$</span> (lakefront deck) rather than driving all the way back first</li>
           </ul>
         </div>
       </div>
@@ -465,10 +519,15 @@
           <span class="tl-base">🚗 10–30 min from Incline Village — your pick, this is the easy day</span>
           <a class="tl-gmaps-btn" href="https://www.google.com/maps/dir/?api=1&origin=Incline+Village,+NV&destination=39.1522,-120.1544" target="_blank" rel="noopener">🧭 Send Tree Tops route to Google Maps</a>
           <div class="day-weather">🌤️ <b>Weather</b> · Temp: — · Precip: — · Wind: — <span class="wx-note">(Forecasts open up ~10 days out)</span></div>
+          <div class="meal-row">
+            <span class="meal-chip empty">🍳 Breakfast — not planned</span>
+            <span class="meal-chip empty">🥪 Lunch — not planned</span>
+            <span class="meal-chip filled">🍽 Dinner — Bite</span>
+          </div>
           <ul class="tl-items">
             <li>Built-in buffer day after yesterday's long drive — a good spot for <strong>Tree Tops Adventure Park</strong> (Tahoe City/Granlibakken, ~25–30 min) if everyone still has the energy for it, entirely optional</li>
             <li>Closer-to-home alternatives: <strong>Thunderbird Lodge</strong> tour if not done (10 min), a second Sand Harbor morning (10 min), or the <strong><a href="https://www.zephyrcove.com/lake-tahoe-cruises/our-fleet" target="_blank" rel="noopener" class="title-lnk">M.S. Dixie II</a></strong> paddlewheeler from Zephyr Cove (30 min)</li>
-            <li>Last dinner back in Incline Village</li>
+            <li class="meal">🍽 <strong>Last-night dinner:</strong> <strong><a href="https://bitetahoe.com/" target="_blank" rel="noopener" class="title-lnk">Bite</a></strong><span class="rating-badge">4.7, $$</span> — American tapas, right in Incline Village, no long drive on your last night. Tue–Sat 5–9pm only, so confirm it's open the night you go</li>
           </ul>
         </div>
       </div>
@@ -481,9 +540,14 @@
           <span class="tl-base">🚗 45–60 min, Incline Village → RNO</span>
           <a class="tl-gmaps-btn" href="https://www.google.com/maps/dir/?api=1&origin=Incline+Village,+NV&destination=Reno-Tahoe+International+Airport" target="_blank" rel="noopener">🧭 Send route to Google Maps</a>
           <div class="day-weather">🌤️ <b>Weather</b> · Temp: — · Precip: — · Wind: — <span class="wx-note">(Forecasts open up ~10 days out)</span></div>
+          <div class="meal-row">
+            <span class="meal-chip filled">🍳 Breakfast — Sage Leaf</span>
+            <span class="meal-chip empty">🥪 Lunch — travel day, en route</span>
+            <span class="meal-chip empty">🍽 Dinner — travel day, en route</span>
+          </div>
           <ul class="tl-items">
             <li>Same drive as Day 1, in reverse — build it into your flight timing</li>
-            <li>Grab breakfast in Incline Village before the drive</li>
+            <li class="meal">🍽 Grab breakfast in Incline Village before the drive — <strong><a href="https://www.sageleaftahoe.com/" target="_blank" rel="noopener" class="title-lnk">Sage Leaf</a></strong><span class="rating-badge">4.5, $$</span> does a great brunch if there's time before your flight</li>
           </ul>
         </div>
       </div>
@@ -665,7 +729,7 @@
 
     <div class="book-group-label">Transportation</div>
     <ul class="checklist">
-      <li data-book-id="flights"><span class="checkbox"></span><div><span class="lbl">Flights</span>DCA/IAD → RNO, arrive Wed Aug 5 / depart Wed Aug 12 — airline/confirmation not yet on file, add once booked
+      <li data-book-id="flights"><span class="checkbox"></span><div><span class="lbl">Flights</span>DCA/IAD → RNO, arrive Wed Aug 5 / depart Wed Aug 12 — airline/confirmation not yet on file, add once booked. Once booked, confirm the checked-bag allowance (how many included per traveler, cost to add more) — don't assume, check the actual fare rules
       </div></li>
       <li data-book-id="rental-car"><span class="checkbox"></span><div><span class="lbl">Rental car</span>One car for the full week — agency not yet on file, add once booked
       </div></li>
@@ -686,128 +750,21 @@
       <li data-book-id="ms-dixie"><span class="checkbox"></span><div><span class="lbl"><a href="https://www.zephyrcove.com/lake-tahoe-cruises/our-fleet" target="_blank" rel="noopener" class="title-lnk">M.S. Dixie II (optional, Day 7)</a> <a class="tel-ico" href="tel:7755894901" title="Call Zephyr Cove Resort">📞</a></span>Only if the flex day goes this direction instead of Tree Tops
       </div></li>
     </ul>
+
+    <div class="book-group-label">Restaurants</div>
+    <ul class="checklist">
+      <li data-book-id="big-water-grille"><span class="checkbox"></span><div><span class="lbl"><a href="https://www.bigwatergrille.com/" target="_blank" rel="noopener" class="title-lnk">Reserve Big Water Grille</a> <a class="tel-ico" href="tel:7758330606" title="Call">📞</a></span>Day 1 dinner, Wed Aug 5 — lake-view fine dining, worth a reservation in August. Replaces Lone Eagle Grille, which is closed for redevelopment
+      </div></li>
+      <li data-book-id="bite"><span class="checkbox"></span><div><span class="lbl"><a href="https://bitetahoe.com/" target="_blank" rel="noopener" class="title-lnk">Reserve Bite</a> <a class="tel-ico" href="tel:7758311000" title="Call">📞</a></span>Day 7 last-night dinner, Tue Aug 11 — small plates, popular spot, closed Sun/Mon so confirm it's open
+      </div></li>
+    </ul>
   </div>
 
-  <!-- ═══════════ PRINT / OFFLINE COPY ═══════════ -->
+  <!-- ═══════════ PRINT ═══════════ -->
   <div id="tab-print" class="section">
-    <div class="section-title">Print / Offline Copy</div>
-    <div class="section-sub">A no-internet-needed version — every phone number, address, and website spelled out as plain text. Print this tab (or grab the PDF) before you lose signal at the trailhead or on the water.</div>
+    <div class="section-title">Print</div>
+    <div class="section-sub">A no-internet-needed version, ready to download before you lose signal at the trailhead or on the water.</div>
     <a class="print-btn" href="Tahoe-Itinerary-Printable.pdf" target="_blank" rel="noopener">⬇ Download PDF</a>
-
-    <h3 style="font-family:'Fraunces',serif; font-size:20px; margin:28px 0 14px; color:var(--ink);">Key Contacts</h3>
-
-    <div class="contact-block" style="border-color:var(--coral); background:#fdefe9;">
-      <h4>Incline Village lodging — TBD</h4>
-      <div class="contact-line">Property name/address/confirmation not yet on file — see Hotels tab</div>
-    </div>
-    <div class="contact-block" style="border-color:var(--coral); background:#fdefe9;">
-      <h4>Rental car — TBD</h4>
-      <div class="contact-line">Agency/confirmation not yet on file</div>
-    </div>
-    <div class="contact-block">
-      <h4>Reno-Tahoe International Airport (RNO)</h4>
-      <div class="contact-line">2001 E Plumb Ln, Reno, NV 89502</div>
-    </div>
-    <div class="contact-block">
-      <h4>Truckee River Raft Company</h4>
-      <div class="contact-line">185 River Rd, Tahoe City, CA 96145</div>
-      <div class="contact-line">📞 (530) 583-0123 &nbsp;·&nbsp; truckeeriverraft.com</div>
-      <div class="contact-line" style="color:#c25636;">Not to be confused with "Truckee River Rafting" next door — (530) 583-1111, a different company</div>
-    </div>
-    <div class="contact-block">
-      <h4>Tahoe Treetop Adventure Park (optional, Day 7)</h4>
-      <div class="contact-line">725 Granlibakken Rd, Tahoe City, CA 96145</div>
-      <div class="contact-line">📞 (530) 807-1004 &nbsp;·&nbsp; Reservations@TahoeTreetop.com &nbsp;·&nbsp; tahoetreetop.com</div>
-    </div>
-    <div class="contact-block">
-      <h4>Clearly Tahoe — SUP rentals</h4>
-      <div class="contact-line">On-site kiosk, Sand Harbor State Park, Hwy 28, Incline Village, NV</div>
-      <div class="contact-line">📞 (530) 554-4664 &nbsp;·&nbsp; clearlytahoerentals.com</div>
-    </div>
-    <div class="contact-block">
-      <h4>Sand Harbor / Lake Tahoe Nevada State Park</h4>
-      <div class="contact-line">Hwy 28, Incline Village, NV 89451 · GPS 39.1972, -119.9317</div>
-      <div class="contact-line">📞 (775) 831-0494 &nbsp;·&nbsp; parks.nv.gov/parks/lake-tahoe-nevada-state-park</div>
-    </div>
-    <div class="contact-block">
-      <h4>Vikingsholm / Emerald Bay Visitor Center</h4>
-      <div class="contact-line">Emerald Bay State Park, Hwy 89, South Lake Tahoe, CA · GPS 38.9548, -120.1042</div>
-      <div class="contact-line">📞 (530) 525-7232 &nbsp;·&nbsp; sierrastateparks.org/vikingsholm</div>
-    </div>
-    <div class="contact-block">
-      <h4>Zephyr Cove Resort (M.S. Dixie II)</h4>
-      <div class="contact-line">760 US-50, Zephyr Cove, NV 89448</div>
-      <div class="contact-line">📞 (775) 589-4901 &nbsp;·&nbsp; zephyrcove.com</div>
-    </div>
-
-    <h3 style="font-family:'Fraunces',serif; font-size:20px; margin:32px 0 14px; color:var(--ink);">Day-by-Day Contacts</h3>
-
-    <div class="print-day">
-      <h4>Day 1 · Wed Aug 5 · DC → Reno-Tahoe → Incline Village</h4>
-      <ul>
-        <li>Reno-Tahoe Intl Airport (RNO)<span class="contact-line">2001 E Plumb Ln, Reno, NV 89502</span></li>
-        <li>Lone Eagle Grille (dinner)<span class="contact-line">loneeaglegrille.com</span></li>
-        <li>Sage Leaf (casual alt.)<span class="contact-line">sageleaftahoe.com</span></li>
-      </ul>
-    </div>
-    <div class="print-day">
-      <h4>Day 2 · Thu Aug 6 · Sand Harbor — SUP day</h4>
-      <ul>
-        <li>Sand Harbor State Park<span class="contact-line">Hwy 28, Incline Village, NV · GPS 39.1972, -119.9317 · 📞 (775) 831-0494 · parks.nv.gov/parks/lake-tahoe-nevada-state-park</span></li>
-        <li>Clearly Tahoe (SUP rental)<span class="contact-line">On-site kiosk, Sand Harbor · 📞 (530) 554-4664 · clearlytahoerentals.com</span></li>
-        <li>Thunderbird Lodge (optional boat tour)<span class="contact-line">GPS 39.2136, -119.9407 · thunderbirdtahoe.org</span></li>
-      </ul>
-    </div>
-    <div class="print-day">
-      <h4>Day 3 · Fri Aug 7 · Secret Cove, Zephyr Cove &amp; Nevada Beach</h4>
-      <ul>
-        <li>Mountain High Sandwich Co (lunch, order ahead)<span class="contact-line">Incline Village · mountainhighsandwichco.com</span></li>
-        <li>Secret Cove<span class="contact-line">Hwy 28, south of Sand Harbor · GPS 39.1553, -119.9426</span></li>
-        <li>Zephyr Cove Beach<span class="contact-line">760 US-50, Zephyr Cove, NV · GPS 39.0034, -119.9539 · zephyrcove.com</span></li>
-        <li>Nevada Beach<span class="contact-line">GPS 38.9767, -119.9445 · fs.usda.gov (Lake Tahoe Basin)</span></li>
-      </ul>
-    </div>
-    <div class="print-day">
-      <h4>Day 4 · Sat Aug 8 · Truckee River rafting</h4>
-      <ul>
-        <li>Truckee River Raft Company (put-in)<span class="contact-line">185 River Rd, Tahoe City, CA 96145 · GPS 39.1679, -120.1428 · 📞 (530) 583-0123 · truckeeriverraft.com</span></li>
-        <li>River Ranch Lodge (lunch, take-out)<span class="contact-line">Tahoe City, CA · riverranchlodge.com</span></li>
-      </ul>
-    </div>
-    <div class="print-day">
-      <h4>Day 5 · Sun Aug 9 · Meeks Bay, then live music</h4>
-      <ul>
-        <li>West Shore Market (picnic pickup)<span class="contact-line">Tahoe City, CA · westshoremarket.com</span></li>
-        <li>Meeks Bay<span class="contact-line">GPS 39.0325, -120.1183 · meeksbayresort.com</span></li>
-        <li>Sugar Pine Point State Park<span class="contact-line">Hwy 89, Tahoma, CA 96142 · parks.ca.gov</span></li>
-        <li>Concerts at Commons Beach<span class="contact-line">Tahoe City, CA · GPS 39.1699, -120.1439 · Sundays 4–7pm · tcpud.org</span></li>
-      </ul>
-    </div>
-    <div class="print-day">
-      <h4>Day 6 · Mon Aug 10 · Eagle Falls + Emerald Bay, then Bliss Beach</h4>
-      <ul>
-        <li>Tahoe House Bakery (coffee/pastries)<span class="contact-line">Tahoe City, CA · tahoe-house.com</span></li>
-        <li>Eagle Falls Trailhead<span class="contact-line">GPS 38.9548, -120.1006 · fs.usda.gov</span></li>
-        <li>Emerald Bay / Vikingsholm<span class="contact-line">GPS 38.9548, -120.1042 · 📞 (530) 525-7232 · sierrastateparks.org/vikingsholm</span></li>
-        <li>Bliss Beach (D.L. Bliss SP)<span class="contact-line">GPS 38.9975, -120.0989 · parks.ca.gov</span></li>
-        <li>Wolfdale's (dinner)<span class="contact-line">Tahoe City, CA · wolfdales.com</span></li>
-        <li>Sunnyside (casual alt.)<span class="contact-line">Tahoe City, CA · sunnysidelodge.com</span></li>
-      </ul>
-    </div>
-    <div class="print-day">
-      <h4>Day 7 · Tue Aug 11 · Flex Day</h4>
-      <ul>
-        <li>Tahoe Treetop Adventure Park (optional)<span class="contact-line">725 Granlibakken Rd, Tahoe City, CA · GPS 39.1522, -120.1544 · 📞 (530) 807-1004 · tahoetreetop.com</span></li>
-        <li>Thunderbird Lodge (if not done Day 2)<span class="contact-line">GPS 39.2136, -119.9407 · thunderbirdtahoe.org</span></li>
-        <li>M.S. Dixie II Paddlewheeler (optional)<span class="contact-line">760 US-50, Zephyr Cove, NV · 📞 (775) 589-4901 · zephyrcove.com</span></li>
-      </ul>
-    </div>
-    <div class="print-day">
-      <h4>Day 8 · Wed Aug 12 · Incline Village → Reno-Tahoe → Home</h4>
-      <ul>
-        <li>Reno-Tahoe Intl Airport (RNO)<span class="contact-line">2001 E Plumb Ln, Reno, NV 89502</span></li>
-      </ul>
-    </div>
   </div>
 
 </div>
