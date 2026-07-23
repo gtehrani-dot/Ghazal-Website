@@ -131,6 +131,33 @@
     text-align: center;
     line-height: 1.3;
   }
+  .growth-connector {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    margin-top: 8px;
+  }
+  .growth-connector .input-amount { margin-top: 0; }
+  .growth-arrow-h {
+    display: inline-block;
+    width: 16px;
+    height: 0;
+    border-top: 1.5px dashed #afa9ec;
+    position: relative;
+    flex-shrink: 0;
+  }
+  .growth-arrow-h::after {
+    content: "";
+    position: absolute;
+    right: -1px;
+    top: 50%;
+    width: 0;
+    height: 0;
+    transform: translateY(-50%);
+    border-top: 4px solid transparent;
+    border-bottom: 4px solid transparent;
+    border-left: 6px solid #afa9ec;
+  }
   .timeline-wrap { position: relative; padding-top: 30px; }
   .timeline {
     display: grid;
@@ -686,9 +713,20 @@
       <div class="input-arrow"></div>
       <a class="input-amount" href="https://drive.google.com/file/d/1qsAn_TAhyC9jqxcNmGHTRauR0o1EdebL/view?usp=drive_link" target="_blank" rel="noopener">$61,103.74 @ 2008</a>
       <a class="input-amount" href="https://drive.google.com/file/d/1siso6mjnRxljROEfwyDS_GhYm_7G24JK/view?usp=drive_link" target="_blank" rel="noopener">$48,537.40 @ 2011</a>
-      <div class="input-amount-note">Verified &mdash; ING/Pershing Rollover IRA stmts (linked).<br>Converted to Roth same day in 2008;<br>later recharacterized back to Traditional<br>(date unconfirmed). Grew to $69,007.64 by 4/30/2014, the day before DL merged in &mdash; see the growth arrow above &mdash; 100% premarital, used as the Step 1 basis in the proposal.</div>
+      <div class="input-amount-note">Verified &mdash; ING/Pershing Rollover IRA stmts (linked).<br>Converted to Roth same day in 2008;<br>later recharacterized back to Traditional<br>(date unconfirmed). Grew to $69,007.64 by 4/30/2014, the day before DL merged in &mdash; see the connected box to the right &mdash; 100% premarital, used as the Step 1 basis in the proposal.</div>
     </div>
-    <div class="input-slot"></div>
+    <div class="input-slot">
+      <div class="input-pill" style="visibility:hidden;" aria-hidden="true">
+        <div class="name">spacer</div>
+        <div class="when">spacer</div>
+      </div>
+      <div class="input-arrow" style="visibility:hidden;" aria-hidden="true"></div>
+      <div class="input-amount" style="visibility:hidden;" aria-hidden="true">spacer</div>
+      <div class="growth-connector">
+        <span class="growth-arrow-h" aria-hidden="true"></span>
+        <a class="input-amount" href="https://drive.google.com/file/d/1C_ZcHB11iTJZHEQhSN7NMHkqhz4GbPYy/view?usp=drive_link" target="_blank" rel="noopener" title="BAH's own account (657-538062), grew from its 2011 marriage-date value to this figure by 4/30/2014, the day before DL merged in — 100% premarital">$69,007.64 @ 4/2014</a>
+      </div>
+    </div>
     <div class="input-slot">
       <div class="input-pill">
         <div class="name">Decision Lens 401(k)</div>
@@ -751,14 +789,13 @@
 
   </div>
   <div class="amounts-overlay">
-    <a class="amount-badge" href="https://drive.google.com/file/d/1C_ZcHB11iTJZHEQhSN7NMHkqhz4GbPYy/view?usp=drive_link" target="_blank" rel="noopener" style="left: 40%;" title="BAH's own account (657-538062), grew from its 2011 marriage-date value to this figure by 4/30/2014, the day before DL merged in — 100% premarital">$48K in 2011 &rarr; $69K in 2014</a>
     <span class="amount-badge" style="left: 60%;" title="Compiled from Gmail records — no statement on file for the exact day">$125,000 &middot; Oct 2015</span>
     <a class="amount-badge" href="https://drive.google.com/file/d/1ckCHhiUXftJ5TZPDfbc942h8FTEY5A1O/view?usp=drive_link" target="_blank" rel="noopener" style="left: 80%;">$120,925.57 &middot; 7/27/2020</a>
   </div>
   </div>
 
   <div class="footer">
-    <div>Compiled from Gmail records. Dollar amounts shown for transfers with verified figures &mdash; FranConnect $55,906.37 rollover verified via Fidelity/IFAM IRA 2024 year-end statement. Note: from 2017 to 7/27/2020 the consolidated IRA (BAH+DL funds) sat in self-directed real estate, then cash, earning no market growth &mdash; this flat window is carried through the modeled scenarios on the following pages. Fidelity&rarr;PENSCO transfer: $125,000 out, October 2015 (exact day compiled from Gmail records; no PENSCO statement from that window has been located yet). PENSCO&rarr;Fidelity transfer back: $120,925.57, confirmed to the day on Fidelity's July 2020 Investment Report (linked above) &mdash; transaction line reads &ldquo;07/27 Transfer Of Assets &middot; Check Received Penscotrustcom &middot; $120,925.57.&rdquo;</div>
+    <div>Compiled from Gmail records. Dollar amounts shown for transfers with verified figures &mdash; FranConnect $55,906.37 rollover verified via Fidelity/IFAM IRA 2024 year-end statement. Note: from 2017 to 7/27/2020 the consolidated IRA (BAH+DL funds) sat in self-directed real estate, then cash, earning no market growth &mdash; this flat window is carried through the modeled scenarios on the following pages. Fidelity&rarr;PENSCO transfer: $125,000 out, October 2015 (exact day compiled from Gmail records; no PENSCO statement from that window has been located yet). PENSCO&rarr;Fidelity transfer back: $120,925.57, confirmed to the day on Fidelity's July 2020 Investment Report (linked above) &mdash; transaction line reads &ldquo;07/27 Transfer Of Assets &middot; Check Received Penscotrustcom &middot; $120,925.57.&rdquo; Note: the household Fidelity statements from this era also show Ben's separate SEP-IRA (acct 657-538060) and a joint brokerage account (657-538061) &mdash; neither is part of this IRA. See the final page (Retirement Account Timeline Details) for the trail on Ben's SEP-IRA/old 401(k), including what is and isn't confirmed.</div>
     <div class="prep">Prepared for Ghazal Moore</div>
   </div>
 
@@ -980,7 +1017,14 @@
     <li>By this point Svetlana had spun out from UBS into her own firm &mdash; IFAM Capital (her email was now svetlana@ifmcapital.com).</li>
     <li>DL 401(k) at Fidelity &rarr; rolled directly into the existing Traditional IRA, now custodied at Fidelity (via National Financial Services, Fidelity&rsquo;s clearing firm) with IFAM Capital as the investment advisor. So both legs (BAH IRA + DL 401(k)) consolidated into one Traditional IRA at Fidelity, managed by IFAM.</li>
     <li>This is when &ldquo;Fidelity + IFAM&rdquo; as you know it today actually starts: spring 2014.</li>
-    <li><b>Note on Ben&rsquo;s SEP-IRA:</b> the April&ndash;October 2014 Fidelity/IFAM statements were mailed as one combined household report (&ldquo;Benjamin &amp; Ghazal Moore&rdquo;) covering three separately-numbered accounts: your Rollover IRA (657-538062), Ben&rsquo;s SEP-IRA (657-538060, funded from the old 401(k) he rolled over via UBS in early 2013), and a joint taxable brokerage account (657-538061). Same mailing, same advisor &mdash; but three distinct accounts. Ben&rsquo;s SEP-IRA has never been merged into your Traditional IRA; it's excluded from the premarital/marital calculation in this proposal.</li>
+    <li><b>Note on Ben&rsquo;s SEP-IRA and old 401(k) &mdash; what's confirmed and what isn't:</b> the April&ndash;October 2014 Fidelity/IFAM statements were mailed as one combined household report (&ldquo;Benjamin &amp; Ghazal Moore&rdquo;) covering three separately-numbered accounts: your Rollover IRA (657-538062), Ben&rsquo;s SEP-IRA (657-538060), and a joint taxable brokerage account (657-538061). Same mailing, same advisor &mdash; but three distinct accounts, and Ben&rsquo;s SEP-IRA has never been merged into your Traditional IRA. Digging further into the trail on Ben&rsquo;s side:
+      <ul class="doc-list">
+        <li><i>Confirmed:</i> Ben's Jan 2, 2013 email to Svetlana attaches three separate statements &mdash; &ldquo;Ghazal's IRA,&rdquo; &ldquo;my old 401K,&rdquo; and &ldquo;my SepIRA held at UBS&rdquo; &mdash; and says he'd &ldquo;had it [the SEP-IRA] active&rdquo; for &ldquo;the two years&rdquo; prior, i.e. since roughly 2011. A separate Jan 3, 2013 email confirms his old 401(k) rollover was still in progress at that point (Svetlana was completing the rollover form for his signature).</li>
+        <li><i>Confirmed:</i> the SEP-IRA balance barely moved across the six 2014 household statements ($12,263.56 in April to $12,413.59 in October) &mdash; consistent with Ben's own description that it &ldquo;never varied more than a few dollars.&rdquo; That's more consistent with a dormant balance than with ongoing contributions during 2014.</li>
+        <li><i>Not confirmed:</i> whether the old 401(k) rolled into this same SEP-IRA (SEP-IRAs can legally accept a 401(k) rollover) or into a separate account &mdash; the two were still listed as separate statements as of Jan 2013. Also not confirmed: the old 401(k)'s dollar balance, or whether Ben made SEP contributions (from self-employment/1099 income &mdash; he had 1099 income in 2011) either before or after the 2011 marriage. None of the three January 2013 attachments were readable from this inbox search &mdash; getting the actual dollar trail on Ben's side would need those statements directly from him, or through discovery.</li>
+        <li>Because Ben's SEP-IRA opened around the same year as the 2011 marriage, its premarital/marital split &mdash; if it's addressed in your settlement &mdash; would hinge on the exact 2011 opening date and contribution history, similar to how DL's split hinges on the exact 2011 balance here.</li>
+      </ul>
+    </li>
   </ul>
 
   <h2 class="doc-h2">September 29, 2015 &mdash; Opened PENSCO self-directed IRA</h2>
