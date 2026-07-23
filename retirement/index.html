@@ -588,6 +588,83 @@
     font-style: italic;
   }
 
+
+  .doc-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 16px 0 8px;
+    font-size: 12.5px;
+  }
+  .doc-table th {
+    background: #1f3864;
+    color: #ffffff;
+    text-align: left;
+    padding: 8px 12px;
+    font-size: 11.5px;
+    letter-spacing: 0.2px;
+  }
+  .doc-table th.num, .doc-table td.num { text-align: right; }
+  .doc-table td {
+    padding: 8px 12px;
+    border-bottom: 1px solid #e8e6df;
+    vertical-align: top;
+    color: #1a1a1a;
+  }
+  .doc-table tr:nth-child(even) td { background: #f7f6f2; }
+  .doc-table tr.total-row td { font-weight: 700; border-top: 2px solid #1f3864; }
+  .doc-note {
+    font-size: 11.5px;
+    color: #7a786f;
+    font-style: italic;
+    line-height: 1.5;
+    margin: 4px 0 20px;
+  }
+  .doc-body {
+    font-size: 13px;
+    color: #3d3d3d;
+    line-height: 1.65;
+    margin: 0 0 16px;
+  }
+  .doc-frac {
+    font-size: 13px;
+    color: #3d3d3d;
+    margin: -4px 0 20px;
+  }
+  .doc-frac b { color: #3c3489; }
+  h2.doc-h2 {
+    font-size: 16px;
+    font-weight: 700;
+    color: #1f3864;
+    margin: 28px 0 10px;
+    letter-spacing: -0.2px;
+  }
+  h3.doc-h3 {
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: 0.3px;
+    text-transform: uppercase;
+    color: #3d3d3d;
+    margin: 24px 0 6px;
+  }
+  ul.doc-list {
+    margin: 0 0 16px;
+    padding-left: 20px;
+    font-size: 13px;
+    color: #3d3d3d;
+    line-height: 1.7;
+  }
+  ul.doc-list li { margin-bottom: 10px; }
+  .section-tag {
+    display: inline-block;
+    background: #eeedfe;
+    border: 1px solid #afa9ec;
+    color: #3c3489;
+    font-size: 10.5px;
+    font-weight: 700;
+    padding: 2px 10px;
+    border-radius: 999px;
+    margin-bottom: 10px;
+  }
 </style>
 </head>
 <body>
@@ -689,66 +766,38 @@
 
 <div class="page">
 
-  <p class="eyebrow">Scenario 1 &middot; Marital: DL and FC</p>
-  <h1>Decision Lens &amp; FranConnect 401(k) contributions, modeled at S&amp;P 500 return</h1>
-  <p class="subtitle">Each year's Box 12 (401(k)) contribution compounded using actual S&amp;P 500 annual total returns (dividends reinvested), year-by-year, through today &mdash; not an average rate applied to the total</p>
+  <span class="section-tag">IRA Division Proposal &middot; Section 1</span>
+  <p class="eyebrow">Methodology</p>
+  <h1>The Three Funding Sources</h1>
+  <p class="subtitle">Every dollar in this IRA traces back to one of three 401(k) rollovers &mdash; no direct contributions were ever made to the IRA itself</p>
   <hr class="rule">
 
-  <div class="assumptions">
-    <div class="item"><strong>Method:</strong> each contribution grows at its own year's actual return, then every year after, multiplied in sequence</div>
-    <div class="item"><strong>As of:</strong> July 2026 &nbsp;(2026 return is year-to-date through 7/9)</div>
-  </div>
+  <table class="doc-table">
+    <tr><th style="width:16%">Source</th><th style="width:22%">Rolled into IRA</th><th>Amount / Character</th></tr>
+    <tr>
+      <td><b>BAH 401(k)</b></td>
+      <td>6/2/2008 (custodian chain: ING &rarr; UBS &rarr; Fidelity)</td>
+      <td>$61,103.74 initial (2008); $48,537.40 as of 12/31/2011 (marriage); $82,071.29 as of 4/30/2014 (just before merging with DL). 100% premarital &mdash; no contributions before or during the marriage.</td>
+    </tr>
+    <tr>
+      <td><b>Decision Lens (DL) 401(k)</b></td>
+      <td>5/14/2014</td>
+      <td>$64,526.20 total, of which $19,960.30 was already in the account as of 4/30/2011. Split: the $19,960.30 premarital principal plus its own proportional share of DL's real 2011&ndash;2014 growth ($23,967.13) is premarital; the $33,778.39 of marital contributions plus their share of that same growth ($40,559.07) is marital.</td>
+    </tr>
+    <tr>
+      <td><b>FranConnect 401(k)</b></td>
+      <td>11/13/2024</td>
+      <td>$55,906.37. 100% marital &mdash; employment began after the 2011 marriage; entire balance accrued during the marriage.</td>
+    </tr>
+  </table>
+  <div class="doc-note">Why BAH dropped from $61,103.74 (2008) to $48,537.40 (2011) before growing to $82,071.29 (2014): the 2008 ING statement shows the rollover was converted to a Roth IRA the same month, with 10% federal tax withheld ($6,114.41) &mdash; only $55,029.65 actually reached the Roth. It was later recharacterized back to a Traditional IRA, and the remaining balance was invested through the 2008&ndash;2009 financial crisis before partially recovering. This is real, statement-documented history, not a data error &mdash; and it doesn't inflate the analysis, since the model uses the actual, lower 2011 value as its marriage-date starting point, not the original 2008 rollover amount.</div>
 
-  <div class="contrib-phases">
-
-    <div class="phase active">
-      <h3>FranConnect 401(k) <span class="verified-tag">verified</span></h3>
-      <div class="years">2021 – 2024 contributions &middot; box 12 code D &middot; click a year for its W-2</div>
-      <div class="contrib-header">
-        <span>Year</span><span>Contributed</span><span>S&amp;P growth to today</span><span>Value today</span>
-      </div>
-      <div class="contrib-row"><a class="yr src-link" href="file:///Users/ghazalmoore/Dropbox/Personal/G%20FILES/Economics/Taxes/2021/2021%20W2.pdf" target="_blank" rel="noopener">2021</a><span class="amt">$4,100.01</span><span class="pct">+117.5%</span><span class="bal">$8,918</span></div>
-      <div class="contrib-row"><a class="yr src-link" href="file:///Users/ghazalmoore/Dropbox/Personal/G%20FILES/Economics/Taxes/2022/2022%20W2.pdf" target="_blank" rel="noopener">2022</a><span class="amt">$10,317.27</span><span class="pct">+69.0%</span><span class="bal">$17,436</span></div>
-      <div class="contrib-row"><a class="yr src-link" href="file:///Users/ghazalmoore/Dropbox/Archive%20Files/Archive_Professional/OneDrive%20-%20FranConnect/Microsoft%20Teams%20Chat%20Files/2023_G%20W2.pdf" target="_blank" rel="noopener">2023</a><span class="amt">$10,638.30</span><span class="pct">+106.4%</span><span class="bal">$21,954</span></div>
-      <div class="contrib-row"><a class="yr src-link" href="file:///Users/ghazalmoore/Dropbox/Personal/G%20FILES/Economics/Taxes/2024/W2.pdf" target="_blank" rel="noopener">2024</a><span class="amt">$8,452.89</span><span class="pct">+63.4%</span><span class="bal">$13,813</span></div>
-      <div class="phase-total">
-        <span class="lbl">Total contributed &rarr; value today</span>
-        <span class="val">$33,508.47 &rarr; $62,120</span>
-      </div>
-    </div>
-
-    <div class="phase">
-      <h3>Decision Lens 401(k) <a class="verified-tag" href="file:///Users/ghazalmoore/Dropbox/Personal/G%20FILES/Legal/Divorce%20Related/IRA/Fidelity%202014_2015/DL%20401K_Fidelity_2008_2014.pdf" target="_blank" rel="noopener">verified</a></h3>
-      <div class="years">2011 – 2014 marital contributions only &middot; 2011 shown at half value (you married late June 2011, so half that year's contribution is premarital &mdash; see Scenario 3) &middot; modeled at S&amp;P instead of actual growth &middot; includes 2017&ndash;2019 cash/no-growth period</div>
-      <div class="contrib-header">
-        <span>Year</span><span>Contributed</span><span>S&amp;P growth to today</span><span>Value today</span>
-      </div>
-      <div class="contrib-row"><span class="yr">2011*</span><span class="amt">$2,672.30</span><span class="pct">+364.2%</span><span class="bal">$12,405</span></div>
-      <div class="contrib-row"><span class="yr">2012</span><span class="amt">$9,450.31</span><span class="pct">+354.6%</span><span class="bal">$42,962</span></div>
-      <div class="contrib-row"><span class="yr">2013</span><span class="amt">$14,528.85</span><span class="pct">+291.9%</span><span class="bal">$56,939</span></div>
-      <div class="contrib-row"><span class="yr">2014</span><span class="amt">$4,454.62</span><span class="pct">+196.0%</span><span class="bal">$13,187</span></div>
-      <div class="phase-total">
-        <span class="lbl">Total contributed &rarr; value today</span>
-        <span class="val">$31,106.08 &rarr; $125,492</span>
-      </div>
-      <div style="font-size:10px; color:#a09e93; margin-top:6px;">*2011's full contribution was $5,344.61; half ($2,672.30) is marital (shown here), half ($2,672.31) is premarital (see Scenario 3).</div>
-      <div style="margin-top:14px; padding-top:12px; border-top:1px dashed #d3d1c7;">
-        <div style="font-size:10px; font-weight:700; letter-spacing:0.5px; text-transform:uppercase; color:#7a786f; margin-bottom:8px;">Alternative: actual rollover value continued at S&amp;P</div>
-        <div style="display:flex; justify-content:space-between; font-size:12px; padding:4px 0;"><span>$37,350.32 actual marital value at rollover (5/14/14) &middot; S&amp;P 2015&ndash;16, flat 2017&ndash;19, actual partial 2020, S&amp;P 2021&ndash;26</span><span style="font-weight:700;">$37,350.32 &rarr; $97,248</span></div>
-        <div style="font-size:10px; color:#a09e93; margin-top:4px; line-height:1.4;">This starts from the real, actual $37,350.32 marital value at the 5/14/2014 rollover (see Scenario 2), then models it forward at S&amp;P 500 returns &mdash; growth years 2015&ndash;2016, flat 2017&ndash;2019 (self-directed PENSCO real estate/cash years), the actual documented +5.46% partial-year 2020 return, then growth resuming 2021&ndash;2026 &mdash; rather than modeling each year's contribution from its own start date as the table above does. The two approaches answer slightly different questions and won't match exactly. This is a modeled projection; there's no actual statement for this money after it merged into the family's consolidated IRA in 2014.</div>
-      </div>
-      <div style="margin-top:14px; padding-top:12px; border-top:1px dashed #d3d1c7;">
-        <div style="font-size:10px; font-weight:700; letter-spacing:0.5px; text-transform:uppercase; color:#7a786f; margin-bottom:8px;">Same DL account, two tracks</div>
-        <div style="display:flex; justify-content:space-between; font-size:12px; padding:4px 0;"><span>Premarital &mdash; beginning balance + half of 2011 (Scenario 3)</span><span style="font-weight:700;">$22,632.61 &rarr; $70,757</span></div>
-        <div style="display:flex; justify-content:space-between; font-size:12px; padding:4px 0;"><span>Marital &mdash; contributions incl. half of 2011 (this page)</span><span style="font-weight:700;">$31,106.08 &rarr; $125,492</span></div>
-        <div style="display:flex; justify-content:space-between; font-size:13px; padding:8px 0 0; margin-top:4px; border-top:1px solid #e8e6df; font-weight:700; color:#3c3489;"><span>Combined DL total, value today (S&amp;P-modeled)</span><span>$196,249</span></div>
-      </div>
-    </div>
-
-  </div>
+  <h2 class="doc-h2">Why actual account performance, not the S&amp;P 500</h2>
+  <p class="doc-body">Applying an S&amp;P 500 return to the premarital portion would overstate today's marital estate, because this account's actual, documented performance lagged the market &mdash; including a multi-year stretch (2015&ndash;2020) in illiquid real estate investments and cash at PENSCO that earned little to no return. Using a market index as a stand-in for growth only makes sense when the real numbers aren't available; here, they are.</p>
+  <p class="doc-body">Because the BAH, DL, and FranConnect rollovers were pooled into the same investment lineup once inside the IRA, every dollar in the account earned the identical percentage gain or loss during any period they were together. That's what makes a pro-rata (&ldquo;coverture fraction&rdquo;) tracing approach both mathematically sound and easy to verify against the statements: once a premarital/marital ownership percentage is established at the moment funds combine, that same percentage carries forward automatically as the whole account rises or falls.</p>
 
   <div class="footer">
-    <div>S&amp;P 500 total returns (dividends reinvested), Slickcharts. Decision Lens marital contributions above use the same per-year figures as Scenario 2's Marital table &mdash; actual dates/amounts from the DL 401(k) transaction detail (employee deferral + employer match) &mdash; rather than the W-2 box-12 figures used previously ($28,978.05 total), with 2011 split 50/50 between marital and premarital since you married in late June 2011; this page still models growth at actual S&amp;P 500 returns rather than the account's real growth, so it's directly comparable to Scenario 2's actual figures on the same contribution base. FranConnect box 12 amounts verified from actual 2021&ndash;2024 W-2s, click any year above to open its source W-2. Decision Lens figures above reflect 0% growth for 2017&ndash;2019 and the actual documented +5.46% partial-year return for 2020 (funds sat in cash until the 7/27/2020 Fidelity transfer, then $118,397.95 was invested 7/30/20 &mdash; see Statement12312020.pdf, Change in Investment Value $6,465.64), since these DL dollars had merged into the same consolidated IRA as BAH by 2014. FranConnect contributions (2021&ndash;2024) began after the transfer and are unaffected. The $196,249 combined DL figure sums this page's per-contribution-year modeled total with Scenario 3's premarital-balance track &mdash; both parts of the same account, modeled separately because one is a marital contribution and the other is a premarital asset.</div>
+    <div>See Section 5 (Summary) for the bottom-line split, and Section 3 for open items to confirm with counsel.</div>
     <div class="prep">Prepared for Ghazal Moore</div>
   </div>
 
@@ -756,91 +805,38 @@
 
 <div class="page">
 
-  <p class="eyebrow">Scenario 2 &middot; Marital: Actual</p>
-  <h1>Actual statement amounts (marital period)</h1>
-  <p class="subtitle">Real custodian-verified figures through each rollover date, then continued to today at modeled S&amp;P 500 returns since no further actual statements exist for this money after it merged into consolidated accounts</p>
+  <span class="section-tag">IRA Division Proposal &middot; Section 2</span>
+  <p class="eyebrow">Methodology</p>
+  <h1>Step-by-Step Calculation</h1>
+  <p class="subtitle">Every figure below is tied to an actual Fidelity, UBS, or ING statement &mdash; not an assumed growth rate</p>
   <hr class="rule">
 
-  <div class="assumptions">
-    <div class="item"><strong>Method:</strong> contributed total vs. the actual value verified on a real account statement, then continued at S&amp;P to today</div>
-    <div class="item"><strong>FranConnect as of:</strong> 11/13/2024 rollover (verified) &nbsp;&middot;&nbsp; <strong>Decision Lens as of:</strong> 5/14/2014 full withdrawal (verified)</div>
-  </div>
+  <h2 class="doc-h2">Step 1 &mdash; Split DL's own growth first, then establish the premarital/marital split at the moment BAH and DL combine (May 2014)</h2>
+  <p class="doc-body">Before combining with BAH, DL's own 2011&ndash;2014 growth is traced the same way as everywhere else in this proposal: proportionally, by source. DL's Fidelity statement documents its full activity over that period: a $19,960.30 premarital principal, $33,778.39 of marital contributions (employee deferral + employer match, 4/30/2011&ndash;5/14/2014), and $10,787.51 of real investment growth (net of $162.51 in fees) &mdash; all sitting in the same pooled investments the whole time. So that growth is split in proportion to each side's share of DL's own basis ($53,738.69 total): premarital is 37.14% of that basis and carries 37.14% of the growth; marital is 62.86% and carries the rest.</p>
 
-  <div class="contrib-phases">
+  <table class="doc-table">
+    <tr><th>Component</th><th class="num">Basis</th><th>Character</th></tr>
+    <tr><td>BAH (100% premarital)</td><td class="num">$82,071.29</td><td>Premarital</td></tr>
+    <tr><td>DL &mdash; premarital ($19,960.30 principal + $4,006.83 of DL's own growth)</td><td class="num">$23,967.13</td><td>Premarital</td></tr>
+    <tr><td>DL &mdash; marital ($33,778.39 contributions + $6,780.68 of DL's own growth)</td><td class="num">$40,559.07</td><td>Marital</td></tr>
+    <tr class="total-row"><td>Combined basis</td><td class="num">$146,597.49</td><td>&mdash;</td></tr>
+  </table>
+  <p class="doc-frac">Premarital share of the combined account: <b>72.33%</b> &nbsp;&nbsp; Marital (DL) share of the combined account: <b>27.67%</b></p>
 
-    <div class="phase active" style="grid-column: 1 / -1;">
-      <h3>FranConnect 401(k) <a class="verified-tag" href="file:///Users/ghazalmoore/Dropbox/Personal/G%20FILES/Legal/Divorce%20Related/IRA/Fidelity%202021_2024%20IRA/Statement12312024.pdf" target="_blank" rel="noopener">verified</a></h3>
-      <div class="years">2021 – 2024 contributions &middot; box 12 code D &middot; rolled into Fidelity/IFAM IRA 11/13/2024</div>
-      <div class="contrib-header">
-        <span>Year</span><span>Contributed</span><span>Actual growth</span><span>Value at rollover</span>
-      </div>
-      <div class="contrib-row"><span class="yr">2021</span><span class="amt">$4,100.01</span><span class="pct">&mdash;</span><span class="bal">&mdash;</span></div>
-      <div class="contrib-row"><span class="yr">2022</span><span class="amt">$10,317.27</span><span class="pct">&mdash;</span><span class="bal">&mdash;</span></div>
-      <div class="contrib-row"><span class="yr">2023</span><span class="amt">$10,638.30</span><span class="pct">&mdash;</span><span class="bal">&mdash;</span></div>
-      <div class="contrib-row"><span class="yr">2024</span><span class="amt">$8,452.89</span><span class="pct">&mdash;</span><span class="bal">&mdash;</span></div>
-      <div class="phase-total">
-        <span class="lbl">Total contributed &rarr; actual rollover value (11/13/24)</span>
-        <span class="val">$33,508.47 &rarr; $55,906.37 (+66.8%)</span>
-      </div>
-      <div style="margin-top:14px; padding-top:12px; border-top:1px dashed #d3d1c7;">
-        <div style="font-size:10px; font-weight:700; letter-spacing:0.5px; text-transform:uppercase; color:#7a786f; margin-bottom:8px;">Continued to today (S&amp;P modeled, not actual &mdash; no 2025/2026 statement)</div>
-        <div style="display:flex; justify-content:space-between; font-size:12px; padding:4px 0;"><span>$55,906.37 at rollover (11/13/24) &middot; S&amp;P 500 2025&ndash;2026</span><span style="font-weight:700;">$55,906.37 &rarr; $73,073</span></div>
-        <div style="font-size:10px; color:#a09e93; margin-top:4px; line-height:1.4;">I don't have an actual 2025 or 2026 statement for this account, so 2025 (+17.88%) and 2026 YTD (+10.88%) are modeled at S&amp;P 500 returns rather than verified. No flat/cash period applies here &mdash; this money was already at Fidelity, invested normally, well after the 2020 PENSCO transfer.</div>
-      </div>
-    </div>
-
-    <div class="phase flat">
-      <h3>Decision Lens 401(k) &middot; Premarital <a class="verified-tag" href="file:///Users/ghazalmoore/Dropbox/Personal/G%20FILES/Legal/Divorce%20Related/IRA/Fidelity%202014_2015/DL%20401K_Fidelity_2008_2014.pdf" target="_blank" rel="noopener">verified</a></h3>
-      <div class="years">Beginning balance as of 4/30/2011 + half of 2011's contribution (pre-wedding, late June 2011) &middot; own actual growth through 5/14/2014</div>
-      <div class="contrib-header">
-        <span>Item</span><span>Amount</span><span>Actual growth</span><span>Value at withdrawal</span>
-      </div>
-      <div class="contrib-row"><span class="yr">4/30/11</span><span class="amt">$19,960.30</span><span class="pct">&mdash;</span><span class="bal">&mdash;</span></div>
-      <div class="contrib-row"><span class="yr">2011 (half)</span><span class="amt">$2,672.31</span><span class="pct">&mdash;</span><span class="bal">&mdash;</span></div>
-      <div class="phase-total">
-        <span class="lbl">Premarital total &rarr; actual value at withdrawal (5/14/14)</span>
-        <span class="val">$22,632.61 &rarr; $27,175.88 (+20.1%)</span>
-      </div>
-      <div style="font-size:10.5px; color:#a09e93; margin-top:10px; line-height:1.5;">The beginning balance predates the marriage; half of 2011's $5,344.61 contribution is added here since you married in late June 2011 (the other half is marital, see the table at right). Growth is this table's own 42.1% pro-rata share of the account's real $10,787.51 growth. Carried forward at S&amp;P 500 modeled returns from 5/14/2014 in Scenario 3.</div>
-    </div>
-
-    <div class="phase">
-      <h3>Decision Lens 401(k) &middot; Marital <a class="verified-tag" href="file:///Users/ghazalmoore/Dropbox/Personal/G%20FILES/Legal/Divorce%20Related/IRA/Fidelity%202014_2015/DL%20401K_Fidelity_2008_2014.pdf" target="_blank" rel="noopener">verified</a></h3>
-      <div class="years">2011 (half) – 2014 contributions &middot; premarital half of 2011 + beginning balance excluded (separate table, left) &middot; fully withdrawn/rolled 5/14/2014</div>
-      <div class="contrib-header">
-        <span>Year</span><span>Contributed</span><span>Actual growth</span><span>Value at withdrawal</span>
-      </div>
-      <div class="contrib-row"><span class="yr">2011 (half)</span><span class="amt">$2,672.30</span><span class="pct">&mdash;</span><span class="bal">&mdash;</span></div>
-      <div class="contrib-row"><span class="yr">2012</span><span class="amt">$9,450.31</span><span class="pct">&mdash;</span><span class="bal">&mdash;</span></div>
-      <div class="contrib-row"><span class="yr">2013</span><span class="amt">$14,528.85</span><span class="pct">&mdash;</span><span class="bal">&mdash;</span></div>
-      <div class="contrib-row"><span class="yr">2014</span><span class="amt">$4,454.62</span><span class="pct">&mdash;</span><span class="bal">&mdash;</span></div>
-      <div class="phase-total">
-        <span class="lbl">Total contributed &rarr; actual value at withdrawal (5/14/14)</span>
-        <span class="val">$31,106.08 &rarr; $37,350.32 (+20.1%)</span>
-      </div>
-      <div style="font-size:10.5px; color:#a09e93; margin-top:10px; line-height:1.5;">*Per-year contributions above are actual dates/amounts from the DL 401(k) transaction detail (employee deferral + employer match), not W-2 box 12; 2011's $5,344.61 full-year total is split 50/50 with the premarital table (left) since you married in late June 2011. The account's real growth ($10,787.51 net of fees, on a $53,738.69 basis) is split pro-rata by principal: marital is 57.9% of that basis ($31,106.08 / $53,738.69), so it carries 57.9% of the growth (+$6,244.24, +20.1%) to reach $37,350.32 here. The premarital table (left) carries the other 42.1% (+$4,543.27, also +20.1%, same rate since both shares sit in the same pooled investments) to reach $27,175.88. The two tables sum back to the account's real $64,526.20 ending balance.</div>
-      <div style="margin-top:14px; padding-top:12px; border-top:1px dashed #d3d1c7;">
-        <div style="font-size:10px; font-weight:700; letter-spacing:0.5px; text-transform:uppercase; color:#7a786f; margin-bottom:8px;">Continued to today (S&amp;P modeled, not actual)</div>
-        <div style="display:flex; justify-content:space-between; font-size:12px; padding:4px 0;"><span>$37,350.32 at rollover (5/14/14) &middot; S&amp;P 2015&ndash;16, flat 2017&ndash;19, actual partial 2020, S&amp;P 2021&ndash;26</span><span style="font-weight:700;">$37,350.32 &rarr; $97,248</span></div>
-        <div style="font-size:10px; color:#a09e93; margin-top:4px; line-height:1.4;">This account was fully cashed out 5/14/2014, so there's no further real statement history for this money specifically once it merged into the family's consolidated IRA. This row models what the actual $37,350.32 would be worth today: S&amp;P 500 growth for 2015&ndash;2016, flat 2017&ndash;2019 (self-directed PENSCO years), the actual documented +5.46% partial-2020 return, then S&amp;P 500 growth resuming 2021&ndash;2026. It's a modeled projection, not a verified actual figure &mdash; same calculation shown in Scenario 1.</div>
-      </div>
-    </div>
-
-    <div class="ledger-final" style="grid-column: 1 / -1; margin-top:4px;">
-      <span class="lbl">Reconciliation &mdash; premarital ending value + marital ending value = actual DL rollover</span>
-      <span class="val" style="font-size:16px;">$27,175.88 + $37,350.32 = $64,526.20</span>
-    </div>
-    <div style="grid-column: 1 / -1; font-size:10.5px; color:#a09e93; margin-top:-8px;">Note: the two tables' <em>starting</em> amounts ($22,632.61 premarital + $31,106.08 marital contributed = $53,738.69) do not by themselves equal $64,526.20 &mdash; that's the pre-growth basis. Adding the account's real growth of $10,787.51 (split 42.1% / 57.9% between the two tables above) bridges the $53,738.69 basis up to the actual $64,526.20 rolled over on 5/14/2014.</div>
-
-    <div class="ledger-final" style="grid-column: 1 / -1; margin-top:12px; background:#eeedfe; border-color:#afa9ec;">
-      <span class="lbl" style="color:#3c3489;">Marital total, value today &mdash; DL ($97,248) + FranConnect ($73,073)</span>
-      <span class="val" style="font-size:22px;">$170,321</span>
-    </div>
-
-  </div>
+  <h2 class="doc-h2">Step 2 &mdash; Track the combined account's actual performance, 2014&ndash;2023</h2>
+  <p class="doc-body">From Fidelity (2014&ndash;2015) to PENSCO (2015&ndash;2020, real estate then cash &mdash; no growth 2017&ndash;2020) and back to Fidelity (2020&ndash;present). No new contributions were added between May 2014 and November 2024, so the 72.33% / 27.67% split from Step 1 carries forward unchanged.</p>
+  <table class="doc-table">
+    <tr><th>Date</th><th class="num">Total Account Value</th><th class="num">Premarital (72.33%)</th><th class="num">Marital &ndash; DL (27.67%)</th></tr>
+    <tr><td>5/31/2014 (BAH+DL merge)</td><td class="num">$148,051.41</td><td class="num">$107,090.08</td><td class="num">$40,961.33</td></tr>
+    <tr><td>12/31/2020</td><td class="num">$127,155.82</td><td class="num">$91,975.67</td><td class="num">$35,180.15</td></tr>
+    <tr><td>12/31/2021</td><td class="num">$137,124.60</td><td class="num">$99,186.39</td><td class="num">$37,938.21</td></tr>
+    <tr><td>12/31/2022</td><td class="num">$121,195.61</td><td class="num">$87,664.47</td><td class="num">$33,531.14</td></tr>
+    <tr><td>12/31/2023</td><td class="num">$132,297.25</td><td class="num">$95,694.62</td><td class="num">$36,602.63</td></tr>
+  </table>
+  <div class="doc-note">The account lost value net of its 2014 basis in some years and gained in others &mdash; this is the account's own real, after-fee performance.</div>
 
   <div class="footer">
-    <div>FranConnect verified from Fidelity/IFAM Traditional IRA 2024 year-end statement (acct 645-581788): $55,906.37 rollover check received 11/13/2024, vs. $33,508.47 total box-12 contributions 2021&ndash;2024. The $22,397.90 gap reflects employer match and/or investment growth inside the FranConnect plan itself prior to rollover &mdash; not separately itemized on the Fidelity statement. Its 2025&ndash;2026 continuation above is S&amp;P-modeled since no newer statement exists. Decision Lens verified from the Fidelity DL 401(k) Plan statement (period 5/1/2011&ndash;7/31/2015): Beginning Balance $19,960.30 (4/30/11), Contributions $33,778.39 (employee $26,934.83 + employer match $6,843.56, itemized by year above from the transaction detail, with 2011 split 50/50 marital/premarital), Fees &minus;$162.51, Change in Market Value +$10,950.02, Ending Balance $64,526.20 (full withdrawal/rollover 5/14/2014) &mdash; figures reconcile exactly. Note: the $33,778.39 total (and its per-year breakdown) differs from the $28,978.05 W-2 box-12 sum used in Scenario 1 &mdash; 2014 matches exactly ($2,001.90 either way) but 2011&ndash;2013 don't, most likely because contributions post to the account on a payroll-settlement lag relative to the W-2 tax year, and/or because some Jan&ndash;Apr 2011 payroll deferrals are already embedded in the $19,960.30 beginning balance rather than posted as separate contributions in this statement window. The $170,321 marital total sums both accounts' actual-then-modeled values &mdash; if you have any statements for either account between their rollover date and today, send them and I'll swap in real figures for the modeled ones.</div>
+    <div>Continued on the next page &mdash; Steps 3 and 4.</div>
     <div class="prep">Prepared for Ghazal Moore</div>
   </div>
 
@@ -848,123 +844,104 @@
 
 <div class="page">
 
-  <p class="eyebrow">Scenario 3 &middot; Pre-Marital: BAH/DL S&amp;P</p>
-  <h1>BAH 401(k) + Decision Lens IRA, modeled at S&amp;P 500 return</h1>
-  <p class="subtitle">Real, verified 2011 starting balance (BAH side) compounded at actual S&amp;P 500 annual total returns, year-by-year, through today &mdash; not a flat rate, and not a placeholder</p>
+  <span class="section-tag">IRA Division Proposal &middot; Section 2 (cont.)</span>
+  <p class="eyebrow">Methodology</p>
+  <h1>Step-by-Step Calculation, continued</h1>
   <hr class="rule">
 
-  <div class="assumptions">
-    <div class="item"><strong>BAH starting balance:</strong> $48,537.40 (12/31/2011) <a class="verified-tag" href="file:///Users/ghazalmoore/Dropbox/Personal/G%20FILES/Legal/Divorce%20Related/IRA/ING%20Sharebuilder_2008_2013/2012_July_Sept_ING%20Rollover.pdf" target="_blank" rel="noopener">verified</a></div>
-    <div class="item"><strong>DL starting balance:</strong> $22,632.61 (4/30/2011 balance $19,960.30 + half of 2011 contribution, since you married late June 2011) <a class="verified-tag" href="file:///Users/ghazalmoore/Dropbox/Personal/G%20FILES/Legal/Divorce%20Related/IRA/Fidelity%202014_2015/DL%20401K_Fidelity_2008_2014.pdf" target="_blank" rel="noopener">verified</a></div>
-    <div class="item"><strong>Flat period:</strong> 2017&ndash;2019 no growth, plus a partial 2020 (self-directed PENSCO real estate, then cash, until the 7/27/2020 Fidelity transfer &mdash; not S&amp;P-linked)</div>
-    <div class="item"><strong>As of:</strong> July 2026 (2026 return is year-to-date through 7/9)</div>
-  </div>
+  <h2 class="doc-h2">Step 3 &mdash; FranConnect rolls in (November 2024) as a new, entirely marital deposit</h2>
+  <p class="doc-body">On 11/13/2024, $55,906.37 from the FranConnect 401(k) rolled into the same Fidelity IRA. From that date forward, FranConnect's dollars are commingled with the BAH/DL dollars and earn the same rate of return.</p>
+  <p class="doc-body">Fidelity's November 2024 monthly statement documents this exactly: Beginning Account Value $140,762.95 (11/1), a $55,906.37 contribution dated 11/13 (&ldquo;Check Received&rdquo;), and an Ending Account Value of $199,481.78 (11/30), on total investment growth of $2,812.46 for the month. Since the statement doesn't break out growth by day, that $2,812.46 is prorated by elapsed days before/after the 11/13 deposit (12 days pre / 17 days post) &mdash; the only estimated step in this entire calculation, and a small one given the short window. Everything else in the table below comes directly from statements.</p>
+  <table class="doc-table">
+    <tr><th>Date</th><th class="num">BAH+DL Lineage</th><th class="num">FranConnect Lineage</th><th class="num">Total</th></tr>
+    <tr><td>11/13/2024 (pre-FranConnect, statement-based)</td><td class="num">$141,926.73</td><td class="num">&mdash;</td><td class="num">$141,926.73</td></tr>
+    <tr><td>11/30/2024 (statement)</td><td class="num">$143,109.50</td><td class="num">$56,372.28</td><td class="num">$199,481.78</td></tr>
+    <tr><td>12/31/2024 (statement)</td><td class="num">$140,773.47</td><td class="num">$55,452.09</td><td class="num">$196,225.56</td></tr>
+    <tr><td>12/31/2025 (statement)</td><td class="num">$154,928.18</td><td class="num">$61,027.77</td><td class="num">$215,955.95</td></tr>
+    <tr><td>6/30/2026 (latest statement)</td><td class="num">$168,859.53</td><td class="num">$66,515.48</td><td class="num">$235,375.01</td></tr>
+  </table>
 
-  <h3 style="font-size:12.5px; font-weight:700; letter-spacing:0.5px; text-transform:uppercase; color:#3d3d3d; margin:0 0 12px;">BAH 401(k) &middot; verified 2011 balance, modeled at S&amp;P forward</h3>
+  <h2 class="doc-h2">Step 4 &mdash; Final allocation</h2>
+  <p class="doc-body">Apply the 72.33% / 27.67% split (Step 1) to the BAH+DL lineage's current value; FranConnect's lineage is entirely marital.</p>
+  <table class="doc-table">
+    <tr><th>Bucket</th><th class="num">Amount</th><th class="num">% of Total</th></tr>
+    <tr><td>Premarital &ndash; BAH-sourced</td><td class="num">$94,534.49</td><td class="num">40.2%</td></tr>
+    <tr><td>Premarital &ndash; DL-sourced (principal + its own growth)</td><td class="num">$27,606.74</td><td class="num">11.7%</td></tr>
+    <tr class="total-row"><td>Premarital total</td><td class="num">$122,141.23</td><td class="num">51.9%</td></tr>
+    <tr><td>Marital &ndash; DL-sourced (contributions + their own growth)</td><td class="num">$46,718.30</td><td class="num">19.8%</td></tr>
+    <tr><td>Marital &ndash; FranConnect-sourced</td><td class="num">$66,515.48</td><td class="num">28.3%</td></tr>
+    <tr class="total-row"><td>Marital total</td><td class="num">$113,233.78</td><td class="num">48.1%</td></tr>
+    <tr class="total-row"><td>Grand total</td><td class="num">$235,375.01</td><td class="num">100.0%</td></tr>
+  </table>
 
-  <div class="ledger-grid">
-
-    <div class="ledger-card">
-      <h4>Initial growth phase</h4>
-      <div class="sub">2012&ndash;2016 &middot; actual S&amp;P 500 total return</div>
-      <div class="ledger-row"><span class="yr">2012</span><span class="delta pos">+$7,765.98 (+16.00%)</span><span class="running">$56,303.38</span></div>
-      <div class="ledger-row"><span class="yr">2013</span><span class="delta pos">+$18,236.67 (+32.39%)</span><span class="running">$74,540.05</span></div>
-      <div class="ledger-row"><span class="yr">2014</span><span class="delta pos">+$10,204.53 (+13.69%)</span><span class="running">$84,744.58</span></div>
-      <div class="ledger-row"><span class="yr">2015</span><span class="delta pos">+$1,169.48 (+1.38%)</span><span class="running">$85,914.06</span></div>
-      <div class="ledger-row"><span class="yr">2016</span><span class="delta pos">+$10,275.32 (+11.96%)</span><span class="running">$96,189.38</span></div>
-      <div class="ledger-end"><span>Ending balance</span><span class="val">$96,189.38</span></div>
-    </div>
-
-    <div class="ledger-card flat">
-      <h4>Flat period</h4>
-      <div class="sub">2017&ndash;2019 &middot; cash, no growth applied</div>
-      <div class="ledger-row"><span class="yr">2017</span><span class="delta zero">+$0.00</span><span class="running">$96,189.38</span></div>
-      <div class="ledger-row"><span class="yr">2018</span><span class="delta zero">+$0.00</span><span class="running">$96,189.38</span></div>
-      <div class="ledger-row"><span class="yr">2019</span><span class="delta zero">+$0.00</span><span class="running">$96,189.38</span></div>
-      <div class="ledger-end"><span>Ending balance</span><span class="val">$96,189.38</span></div>
-    </div>
-
-    <div class="ledger-card active">
-      <h4>Resumed growth phase</h4>
-      <div class="sub">2020 actual partial-yr return (post 7/27/20 transfer) &middot; 2021&ndash;2026 actual S&amp;P 500</div>
-      <div class="ledger-row"><span class="yr">2020*</span><span class="delta pos">+$5,251.94 (+5.46%)</span><span class="running">$101,441.32</span></div>
-      <div class="ledger-row"><span class="yr">2021</span><span class="delta pos">+$29,123.80 (+28.71%)</span><span class="running">$130,565.12</span></div>
-      <div class="ledger-row"><span class="yr">2022</span><span class="delta neg">&minus;$23,645.34 (&minus;18.11%)</span><span class="running">$106,919.78</span></div>
-      <div class="ledger-row"><span class="yr">2023</span><span class="delta pos">+$28,109.21 (+26.29%)</span><span class="running">$135,028.99</span></div>
-      <div class="ledger-row"><span class="yr">2024</span><span class="delta pos">+$33,784.25 (+25.02%)</span><span class="running">$168,813.24</span></div>
-      <div class="ledger-row"><span class="yr">2025</span><span class="delta pos">+$30,183.81 (+17.88%)</span><span class="running">$198,997.05</span></div>
-      <div class="ledger-row"><span class="yr">2026 (YTD)</span><span class="delta pos">+$21,650.88 (+10.88%)</span><span class="running">$220,647.93</span></div>
-      <div class="ledger-end"><span>Ending balance</span><span class="val">$220,647.93</span></div>
-    </div>
-
-  </div>
-
-  <div class="ledger-final">
-    <span class="lbl">BAH portion &mdash; value today (S&amp;P-modeled)</span>
-    <span class="val">$220,647.93</span>
-  </div>
-  <div style="font-size:10.5px; color:#a09e93; margin-top:6px;">*2020 uses the actual documented return (+5.46%) from the 2020 Fidelity statement, not a modeled full-year S&amp;P return, since funds only became invested on 7/30/20.</div>
-
-  <h3 style="font-size:12.5px; font-weight:700; letter-spacing:0.5px; text-transform:uppercase; color:#3d3d3d; margin:20px 0 12px;">Decision Lens 401(k) &middot; premarital principal preserved, modeled at S&amp;P forward</h3>
-
-  <div class="ledger-grid" style="grid-template-columns: repeat(4, 1fr);">
-
-    <div class="ledger-card active">
-      <h4>Actual growth (statement)</h4>
-      <div class="sub">4/30/11&ndash;5/14/14 &middot; real DL 401(k) statement, pro-rata share of growth &mdash; not modeled</div>
-      <div class="ledger-row"><span class="yr">2011&ndash;14</span><span class="delta pos">+$4,543.27 (+20.1%)</span><span class="running">$27,175.88</span></div>
-      <div class="ledger-end"><span>Ending balance</span><span class="val">$27,175.88</span></div>
-    </div>
-
-    <div class="ledger-card">
-      <h4>S&amp;P modeled growth</h4>
-      <div class="sub">2015&ndash;2016 &middot; actual S&amp;P 500 total return</div>
-      <div class="ledger-row"><span class="yr">2015</span><span class="delta pos">+$375.03 (+1.38%)</span><span class="running">$27,550.91</span></div>
-      <div class="ledger-row"><span class="yr">2016</span><span class="delta pos">+$3,295.09 (+11.96%)</span><span class="running">$30,846.00</span></div>
-      <div class="ledger-end"><span>Ending balance</span><span class="val">$30,846.00</span></div>
-    </div>
-
-    <div class="ledger-card flat">
-      <h4>Flat period</h4>
-      <div class="sub">2017&ndash;2019 &middot; cash, no growth applied</div>
-      <div class="ledger-row"><span class="yr">2017</span><span class="delta zero">+$0.00</span><span class="running">$30,846.00</span></div>
-      <div class="ledger-row"><span class="yr">2018</span><span class="delta zero">+$0.00</span><span class="running">$30,846.00</span></div>
-      <div class="ledger-row"><span class="yr">2019</span><span class="delta zero">+$0.00</span><span class="running">$30,846.00</span></div>
-      <div class="ledger-end"><span>Ending balance</span><span class="val">$30,846.00</span></div>
-    </div>
-
-    <div class="ledger-card active">
-      <h4>Resumed growth phase</h4>
-      <div class="sub">2020 actual partial-yr return (post 7/27/20 transfer) &middot; 2021&ndash;2026 actual S&amp;P 500</div>
-      <div class="ledger-row"><span class="yr">2020*</span><span class="delta pos">+$1,684.19 (+5.46%)</span><span class="running">$32,530.19</span></div>
-      <div class="ledger-row"><span class="yr">2021</span><span class="delta pos">+$9,339.41 (+28.71%)</span><span class="running">$41,869.60</span></div>
-      <div class="ledger-row"><span class="yr">2022</span><span class="delta neg">&minus;$7,582.59 (&minus;18.11%)</span><span class="running">$34,287.01</span></div>
-      <div class="ledger-row"><span class="yr">2023</span><span class="delta pos">+$9,014.05 (+26.29%)</span><span class="running">$43,301.06</span></div>
-      <div class="ledger-row"><span class="yr">2024</span><span class="delta pos">+$10,833.93 (+25.02%)</span><span class="running">$54,134.99</span></div>
-      <div class="ledger-row"><span class="yr">2025</span><span class="delta pos">+$9,679.34 (+17.88%)</span><span class="running">$63,814.33</span></div>
-      <div class="ledger-row"><span class="yr">2026 (YTD)</span><span class="delta pos">+$6,943.00 (+10.88%)</span><span class="running">$70,757.33</span></div>
-      <div class="ledger-end"><span>Ending balance</span><span class="val">$70,757.33</span></div>
-    </div>
-
-  </div>
-
-  <div class="ledger-final">
-    <span class="lbl">DL portion &mdash; value today (actual 2011&ndash;14, S&amp;P-modeled after)</span>
-    <span class="val">$70,757.33</span>
-  </div>
-  <div style="font-size:10.5px; color:#a09e93; margin-top:6px;">*2020 uses the actual documented return (+5.46%) from the 2020 Fidelity statement, not a modeled full-year S&amp;P return, since funds only became invested on 7/30/20.</div>
-
-  <div class="ledger-final" style="margin-top:12px; background:#f4f2ec; border-color:#d3d1c7;">
-    <span class="lbl" style="color:#3d3d3d;">Combined BAH + DL &mdash; value today (S&amp;P-modeled)</span>
-    <span class="val">$291,405.26</span>
-  </div>
-
-  <div class="footer" style="margin-top:24px;">
-    <div>BAH figures from the Pershing/ING Rollover IRA statement, acct 35E-729708: $61,103.74 rollover contribution (2008 YTD). That account was converted to a Roth IRA the same month (2008), then later recharacterized back to Traditional &mdash; confirmed by Ghazal &mdash; which is why the account shows a Year-End Fair Market Value of $48,537.40 as of 12/31/2011 (disclosed on the Jul&ndash;Sep 2012 statement) rather than a simple continuation of the original $61,103.74. $48,537.40 is used as the real starting balance above; the 2008&ndash;2011 gap reflects the conversion/recharacterization, not straight market performance, and no statements from that interim window have been located; BAH is modeled at S&amp;P 500 returns from 2012 forward since no actual per-year statements exist for that stretch, and it doesn't need a 2011 marital/premarital split since it's a static rollover balance (no 2011 contributions) dated 12/31/2011, safely after the wedding. DL figures from the Decision Lens 401(k) Plan Fidelity statement (period 5/1/2011&ndash;7/31/2015): Beginning Balance $19,960.30 (4/30/2011), plus half of 2011's $5,344.61 contribution ($2,672.31) since you married in late June 2011 &mdash; giving a premarital basis of $22,632.61. Unlike BAH, we have a real statement covering this account's actual performance through its 5/14/2014 full withdrawal, so the premarital share of that real growth is used directly here instead of being modeled: of the account's total real growth ($10,787.51 net of fees, on a $53,738.69 basis of premarital + marital), the premarital $22,632.61 share (42.1% of that basis) carries 42.1% of the growth to reach an actual $27,175.88 &mdash; the marital contributions' 57.9% share of the same growth is shown separately in Scenario 2, reaching $37,350.32. The two split the account's real $64,526.20 ending balance between them. From 5/14/2014 forward &mdash; once this money merged into the same consolidated IRA as BAH &mdash; DL is modeled at S&amp;P 500 returns the same way BAH is, including growth years 2015&ndash;2016, the 2017&ndash;2019 flat/cash period, and the actual +5.46% partial-2020 return (per the 2020 Fidelity Year-End Investment Report: $118,397.95 invested 7/30/2020 after the 7/27/2020 PENSCO transfer, $6,465.64 Change in Investment Value for the year). For comparison, the FranConnect 401(k)'s actual rollover into the Fidelity/IFAM IRA ($55,906.37, 11/13/2024) is documented in that account's 2024 Year-End Investment Report, continued to today &mdash; see Scenario 2.</div>
+  <div class="footer">
+    <div>Continued on the next page &mdash; Assumptions and Source Documents.</div>
     <div class="prep">Prepared for Ghazal Moore</div>
   </div>
 
 </div>
+
+<div class="page">
+
+  <span class="section-tag">IRA Division Proposal &middot; Section 3&ndash;4</span>
+  <p class="eyebrow">Open items</p>
+  <h1>Assumptions to Confirm with Counsel / Mediator Before Finalizing</h1>
+  <hr class="rule">
+
+  <ul class="doc-list">
+    <li><b>Valuation date:</b> this proposal uses the 6/30/2026 Fidelity statement as a placeholder. It should be re-run using whichever date is the controlling valuation date (date of separation, date of filing, or another negotiated date) &mdash; the model updates cleanly to any date with an available statement.</li>
+    <li><b>DL 401(k) growth, 2011&ndash;2014:</b> rather than treating DL's entire increase in value as marital, this proposal traces DL's own real growth ($10,787.51, net of fees) proportionally between its premarital principal and its marital contributions, based on their actual share of DL's basis (37.14% / 62.86%) &mdash; the same pro-rata tracing approach used everywhere else in this proposal. A more granular alternative would match each individual paycheck contribution to the fund performance from its specific contribution date forward, rather than using one blended proportion for the whole 2011&ndash;2014 period; given all contributions sat in the same pooled holdings throughout, the practical difference is likely small, but your attorney may want that finer cut if precision here is contested.</li>
+    <li><b>Treatment of passive appreciation on separate property:</b> Virginia follows the source-of-funds rule (Va. Code &sect; 20-107.3), under which passive, market-driven growth on separate property stays separate even when it occurs during the marriage. That's the rule this proposal applies to BAH's growth. It's worth confirming with your attorney that a court would characterize BAH's growth as passive (no active management by either spouse) rather than active &mdash; that's the one fact question underlying this legal conclusion. Separately, Va. Code &sect; 20-107.3(G) caps what a non-owning spouse may be awarded from the marital share of a retirement account at 50% of that share.</li>
+    <li>The Fidelity&rarr;PENSCO (2015) and PENSCO&rarr;Fidelity (2020) transfers were treated as in-kind/cash movements of the same IRA assets, not new contributions or distributions &mdash; consistent with the statements, which show no tax withholding or distribution coding on these transfers.</li>
+  </ul>
+
+  <h2 class="doc-h2">Source Documents</h2>
+  <ul class="doc-list">
+    <li>2008 ING Rollover Statement (BAH 401(k) rollover, 6/2/2008)</li>
+    <li>ING/Pershing Rollover IRA Statement, Q3 2012 (confirms $48,537.40 year-end value as of 12/31/2011)</li>
+    <li>UBS Statement, February 2013</li>
+    <li>Fidelity Decision Lens 401(k) Retirement Savings Statement, 5/1/2011&ndash;7/31/2015 (confirms $19,960.30 beginning balance and $64,526.20 withdrawal on 5/14/2014)</li>
+    <li>Fidelity monthly statements, March&ndash;August &amp; October 2014, and the 2014 annual statement</li>
+    <li>Fidelity monthly statement, November 2024 (documents the exact FranConnect deposit: $55,906.37 on 11/13/2024, plus the account's beginning/ending values and investment growth for the month)</li>
+    <li>Fidelity annual statements, 12/31/2020 through 12/31/2025, and the 6/30/2026 statement</li>
+    <li>Retirement Account Timeline (Ghazal Moore's compiled rollover history)</li>
+    <li>Va. Code &sect; 20-107.3 (Court may decree as to property and debts of the parties) &mdash; source-of-funds rule and the 50%-of-marital-share cap on retirement account awards</li>
+  </ul>
+
+  <div class="footer">
+    <div>Full detail on each of these in the IRA Division Proposal document.</div>
+    <div class="prep">Prepared for Ghazal Moore</div>
+  </div>
+
+</div>
+
+<div class="page">
+
+  <span class="section-tag">IRA Division Proposal &middot; Section 5</span>
+  <p class="eyebrow">Bottom line</p>
+  <h1>Summary</h1>
+  <p class="subtitle">Premarital vs. Marital Allocation of the Fidelity IRA</p>
+  <hr class="rule">
+
+  <p class="doc-body">The IRA at Fidelity was funded entirely by three 401(k) rollovers &mdash; no direct contributions were ever made to the IRA itself. Using each rollover's own documented value and the account's own actual investment performance (not an assumed market index), the proposed premarital/marital split is:</p>
+
+  <table class="doc-table">
+    <tr><th>Category</th><th class="num">Amount</th><th class="num">% of Total</th></tr>
+    <tr><td>Premarital</td><td class="num">$122,141.23</td><td class="num">51.9%</td></tr>
+    <tr><td>Marital</td><td class="num">$113,233.78</td><td class="num">48.1%</td></tr>
+    <tr class="total-row"><td>Total (as of 6/30/2026 statement)</td><td class="num">$235,375.01</td><td class="num">100.0%</td></tr>
+  </table>
+  <div class="doc-note">Figures above will shift slightly once re-run against the account's value as of the agreed valuation date &mdash; see Assumptions.</div>
+
+  <p class="doc-body">Virginia's rule on growth: under Va. Code &sect; 20-107.3, Virginia applies the source-of-funds rule &mdash; retirement value earned before marriage is separate property, and passive (market-driven) appreciation on that separate share stays separate even when it occurs during the marriage. BAH sat untouched with no active management by either spouse, so its full documented growth &mdash; including the 2011&ndash;2014 stretch, before it merged with DL &mdash; stays premarital. This is why Step 1 uses BAH's actual value at the moment of merger ($82,071.29, April 2014) rather than its lower value at the 2011 marriage date ($48,537.40): both figures represent the same 100%-premarital money, just measured at different points in its real, documented history.</p>
+
+  <div class="footer">
+    <div style="font-style:italic;">Prepared by Ghazal Moore. This document is a proposed framework for discussion &mdash; not legal or financial advice. Please review with your attorney before presenting to the mediator.</div>
+    <div class="prep">Prepared for Ghazal Moore</div>
+  </div>
+
+</div>
+
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
 <script>
