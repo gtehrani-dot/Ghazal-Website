@@ -238,6 +238,7 @@
     <button class="tab-btn active" onclick="showTab('overview')">📋 Overview</button>
     <button class="tab-btn" onclick="showTab('hotels')">🏨 Hotel &amp; Transportation</button>
     <button class="tab-btn" onclick="showTab('itinerary')">📅 Itinerary</button>
+    <button class="tab-btn" onclick="showTab('comoregion')">🗺 Como Region</button>
     <button class="tab-btn" onclick="showTab('restaurants')">🍽 Restaurants</button>
     <button class="tab-btn" onclick="showTab('more')">⭐ Also Worth Seeing</button>
     <button class="tab-btn" onclick="showTab('book')">✅ Book Now</button>
@@ -500,6 +501,42 @@
     </div>
   </div>
 
+  <!-- ═══════════ COMO REGION (trip-specific) ═══════════ -->
+  <div id="tab-comoregion" class="section">
+    <div class="section-title">The Como Region</div>
+    <div class="section-sub">Where this trip actually sits on the lake, and the three towns that make up the ferry-connected center.</div>
+
+    <p style="font-size:14.5px; color:rgba(251,246,234,0.85); max-width:68ch; margin-bottom:24px; line-height:1.65;">Lezzeno sits on the eastern shore of the <strong>Bellagio peninsula</strong> — the wedge of land where Lake Como splits into its two southern arms, the Como branch to the southwest and the Lecco branch to the southeast. <strong>Bellagio</strong> itself perches right at the tip of that peninsula, nicknamed "the Pearl of the Lake" for exactly that reason — it's the one town where you can stand and see all three arms of the lake at once. North of that point, the lake widens into a single upper basin, with <strong>Varenna</strong> on the eastern shore and <strong>Menaggio</strong> across on the western shore. All three towns sit on the same Navigazione Laghi ferry network, which is what makes it possible to string them together into a single day without a car — this trip's itinerary already uses two of the three (Bellagio and Varenna); Menaggio comes up as the gateway for the Day 4 Lido di Lenno option, but is worth knowing on its own even if that day goes a different direction.</p>
+
+    <div id="como-region-map" style="height:380px; border-radius:16px; overflow:hidden; border:1px solid var(--line); margin-bottom:12px;"></div>
+    <div class="legend" style="margin-bottom:28px;">
+      <span><strong style="color:#f4c05d">●</strong> Towns</span>
+      <span><strong style="color:#7fe3d4">●</strong> Home base</span>
+      <span><strong style="color:#1fb8a6">—</strong> Ferry routes</span>
+    </div>
+
+    <div class="card-grid">
+      <div class="card gold">
+        <div class="card-eyebrow">The peninsula's tip</div>
+        <h3>Bellagio</h3>
+        <p>"The Pearl of Lake Como" — perched right where the lake's two southern arms meet, elegant lanes climbing from the water, the waterfront promenade, Villa Melzi's gardens. This trip's main hub for dinners and daytime wandering — Days 2 and 3 both center here.</p>
+        <div class="poi-actions"><a class="dir" href="https://www.google.com/maps/dir/?api=1&destination=45.9860,9.2571" target="_blank" rel="noopener">🧭 Directions</a></div>
+      </div>
+      <div class="card">
+        <div class="card-eyebrow">Upper lake, east shore</div>
+        <h3>Varenna</h3>
+        <p>Quieter and more colorful than Bellagio — a working fishing-village feel, pastel houses stacked above the harbor, the Passeggiata degli Innamorati (Lovers' Walk) along the water, and Castello di Vezio on the hill above. This trip's Day 3 lunch stop.</p>
+        <div class="poi-actions"><a class="dir" href="https://www.google.com/maps/dir/?api=1&destination=46.0142,9.2830" target="_blank" rel="noopener">🧭 Directions</a></div>
+      </div>
+      <div class="card">
+        <div class="card-eyebrow">Upper lake, west shore</div>
+        <h3>Menaggio</h3>
+        <p>The more laid-back of the three — a lakefront promenade, easy onward access to Tremezzo and Cadenabbia's villa gardens (Villa Carlotta, Villa del Balbianello), and a common jumping-off point for hikes into the hills behind town. Not on this trip's day-by-day plan, but it's the gateway for the Day 4 Lido di Lenno option and worth a look if a ferry day heads that way.</p>
+        <div class="poi-actions"><a class="dir" href="https://www.google.com/maps/dir/?api=1&destination=46.0164,9.2464" target="_blank" rel="noopener">🧭 Directions</a></div>
+      </div>
+    </div>
+  </div>
+
   <!-- ═══════════ RESTAURANTS (trip-specific) ═══════════ -->
   <div id="tab-restaurants" class="section">
     <div class="section-title">Restaurants</div>
@@ -646,6 +683,7 @@
     document.getElementById('tab-' + id).classList.add('active');
     document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
     event.target.classList.add('active');
+    if(id === 'comoregion'){ initComoRegionMap(); }
   }
 
   const map = L.map('map', { scrollWheelZoom:false }).setView([45.975, 9.28], 12);
@@ -687,6 +725,44 @@
   });
   var group = new L.featureGroup(markers);
   map.fitBounds(group.getBounds().pad(0.3));
+
+  // Como Region tab: a second, lazily-initialized map showing the peninsula and
+  // the three-town ferry triangle. Lazy init because Leaflet sizes itself off the
+  // container's dimensions at creation time, and this tab's container is display:none
+  // until first clicked — invalidateSize() on repeat visits handles resizes correctly.
+  var comoRegionMap = null;
+  function initComoRegionMap(){
+    if(comoRegionMap){ comoRegionMap.invalidateSize(); return; }
+    comoRegionMap = L.map('como-region-map', { scrollWheelZoom:false }).setView([46.00, 9.26], 12);
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+      attribution:'&copy; OpenStreetMap contributors', maxZoom:19
+    }).addTo(comoRegionMap);
+
+    var regionTowns = [
+      {name:'Bellagio', note:'The peninsula\'s tip — Days 2 &amp; 3 hub', lat:45.9860, lng:9.2571, color:colors.town},
+      {name:'Varenna', note:"Day 3 lunch + Lovers' Walk", lat:46.0142, lng:9.2830, color:colors.town},
+      {name:'Menaggio', note:'West shore — gateway to Tremezzo/Cadenabbia', lat:46.0164, lng:9.2464, color:colors.town},
+      {name:'Lezzeno (Filario)', note:'Home base, Aug 10–14', lat:45.951, lng:9.282, color:colors.base}
+    ];
+    var regionMarkers = regionTowns.map(function(t){
+      return L.marker([t.lat, t.lng], { icon: pin(t.color) }).addTo(comoRegionMap)
+        .bindPopup('<b>'+t.name+'</b><br><span style="color:#888;font-size:12px;">'+t.note+'</span>', {maxWidth:200});
+    });
+
+    // Ferry routes forming the central-lake triangle (straight lines, illustrative —
+    // actual boats follow the water, not literally these paths).
+    var ferryRoutes = [
+      [[45.9860,9.2571],[46.0142,9.2830]], // Bellagio – Varenna
+      [[46.0142,9.2830],[46.0164,9.2464]], // Varenna – Menaggio
+      [[46.0164,9.2464],[45.9860,9.2571]]  // Menaggio – Bellagio (via Cadenabbia)
+    ];
+    ferryRoutes.forEach(function(route){
+      L.polyline(route, { color: colors.experience, weight:3, opacity:0.75, dashArray:'2 8' }).addTo(comoRegionMap);
+    });
+
+    var regionGroup = new L.featureGroup(regionMarkers);
+    comoRegionMap.fitBounds(regionGroup.getBounds().pad(0.35));
+  }
 
   // Book Now: manual complete toggle. A booking confirmation doesn't always land in Ghazal's
   // own inbox (a travel companion may book something) — clicking the checkbox lets her mark
