@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Bali & Thailand — Ghazal Tehrani</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300;9..144,500;9..144,600&family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
+<style>
+  :root{
+    --primary:#14532d; --primary-deep:#052e16;
+    --accent-1:#65a30d; --accent-2:#fbbf24; --accent-3:#fb923c;
+    --ink:#1c2416; --muted:#5f6b57; --cream:#fbf9f2; --line:#e2ddc9; --card:#ffffff;
+    --serif:'Fraunces',Georgia,serif; --sans:'Inter',system-ui,sans-serif; --mono:'JetBrains Mono',monospace;
+  }
+  *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+  body{font-family:var(--sans); background:var(--cream); color:var(--ink); line-height:1.6;}
+  a{color:inherit;}
+  .back-link{ display:inline-block; margin:18px 0 0 32px; font-family:var(--mono); font-size:12.5px; color:var(--primary); text-decoration:none; }
+  .back-link:hover{ text-decoration:underline; }
+
+  .hero{ background:linear-gradient(135deg,var(--primary-deep) 0%, var(--primary) 55%, #65a30d 100%); color:#fff; padding:36px 32px 46px; position:relative; overflow:hidden;}
+  .hero::before{ content:''; position:absolute; inset:0; background:radial-gradient(ellipse at 85% 15%, rgba(251,191,36,0.2) 0%, transparent 55%);}
+  .hero-inner{ position:relative; max-width:980px; margin:0 auto;}
+  .hero-eyebrow{ font-family:var(--mono); font-size:11px; letter-spacing:3px; text-transform:uppercase; color:#bef264; margin-bottom:14px;}
+  .hero h1{ font-family:var(--serif); font-weight:500; font-size:clamp(38px,6vw,64px); line-height:1.05;}
+  .hero h1 span{ display:block; font-size:0.4em; font-weight:300; font-style:italic; color:#ecfccb; margin-top:8px;}
+  .hero-meta{ display:flex; flex-wrap:wrap; gap:10px; margin-top:26px;}
+  .meta-chip{ font-family:var(--mono); font-size:12px; padding:8px 15px; border:1px solid rgba(255,255,255,0.25); border-radius:100px; background:rgba(255,255,255,0.08);}
+  .meta-chip strong{ color:#fde68a; }
+
+  #map{ height:320px; max-width:980px; margin:-30px auto 0; border-radius:16px; box-shadow:0 12px 34px rgba(5,46,22,0.25); position:relative; z-index:2; border:4px solid #fff;}
+
+  .timeline-strip{ max-width:980px; margin:22px auto 0; padding:0 32px; display:flex; gap:8px; overflow-x:auto; }
+  .tl-seg{ flex:1; min-width:120px; background:var(--card); border:1px solid var(--line); border-radius:10px; padding:10px 12px; text-align:center; }
+  .tl-seg .place{ font-family:var(--serif); font-size:14px; font-weight:500; }
+  .tl-seg .dates{ font-family:var(--mono); font-size:10.5px; color:var(--muted); }
+
+  .tabs{ max-width:980px; margin:26px auto 0; display:flex; flex-wrap:wrap; gap:6px; padding:0 32px;}
+  .tab-btn{ font-family:var(--mono); font-size:12px; letter-spacing:0.4px; padding:9px 16px; border-radius:100px; background:var(--card); border:1px solid var(--line); cursor:pointer; color:var(--muted);}
+  .tab-btn.active{ background:var(--primary); color:#fff; border-color:var(--primary);}
+  .wrap{ max-width:980px; margin:0 auto; padding:26px 32px 80px;}
+  .section{ display:none; }
+  .section.active{ display:block; }
+  .section-title{ font-family:var(--serif); font-size:24px; font-weight:500; margin-bottom:6px;}
+  .section-sub{ font-size:13.5px; color:var(--muted); margin-bottom:22px;}
+
+  table.overview{ width:100%; border-collapse:collapse; font-size:13.5px;}
+  table.overview th{ text-align:left; font-family:var(--mono); font-size:11px; letter-spacing:1px; text-transform:uppercase; color:var(--muted); padding:8px 10px; border-bottom:2px solid var(--line);}
+  table.overview td{ padding:10px; border-bottom:1px solid var(--line); vertical-align:top;}
+
+  .book-group-label{ font-family:var(--mono); font-size:11px; letter-spacing:2px; text-transform:uppercase; color:var(--primary); margin:24px 0 10px; padding-bottom:6px; border-bottom:1px solid var(--line);}
+  .book-group-label:first-child{ margin-top:0; }
+  .hotel-card{ background:var(--card); border:1px solid var(--line); border-radius:12px; padding:18px 20px; margin-bottom:14px;}
+  .hotel-card h4{ font-family:var(--serif); font-size:18px; font-weight:500; margin-bottom:4px;}
+  .hotel-card a{ color:var(--primary); text-decoration:none; }
+  .hotel-card .meta{ font-size:12.5px; color:var(--muted); margin-top:4px; }
+  .hotel-card .note{ font-size:13px; margin-top:8px; color:var(--ink); }
+
+  .tl-day{ background:var(--card); border:1px solid var(--line); border-radius:12px; padding:18px 20px; margin-bottom:16px;}
+  .tl-title{ font-family:var(--serif); font-size:18px; font-weight:500; margin-bottom:2px;}
+  .tl-sub{ font-family:var(--mono); font-size:11.5px; color:var(--muted); text-transform:uppercase; letter-spacing:0.5px; margin-bottom:10px;}
+  ul.tl-items{ list-style:none; }
+  ul.tl-items li{ padding:5px 0 5px 18px; position:relative; font-size:13.8px;}
+  ul.tl-items li::before{ content:'–'; position:absolute; left:0; color:var(--muted);}
+  ul.tl-items li.meal{ background:rgba(101,163,13,0.10); border-radius:6px; padding:8px 12px; margin:6px 0; }
+  ul.tl-items li.meal::before{ content:''; }
+
+  .card-grid{ display:grid; grid-template-columns:repeat(auto-fill,minmax(220px,1fr)); gap:14px; }
+  .card{ background:var(--card); border:1px solid var(--line); border-radius:12px; padding:14px 16px; }
+  .card h4{ font-family:var(--serif); font-size:16px; font-weight:500; margin-bottom:4px; }
+  .card p{ font-size:12.8px; color:var(--muted); }
+
+  .checklist{ list-style:none; }
+  .checklist li{ background:var(--card); border:1px solid var(--line); border-radius:10px; padding:12px 16px; margin-bottom:8px; font-size:13.8px;}
+  .checklist li a{ color:var(--primary); text-decoration:none; font-weight:500; }
+  .checklist li .sub{ display:block; font-size:12px; color:var(--muted); margin-top:3px; font-weight:400;}
+
+  .callout{ background:rgba(101,163,13,0.08); border:1px solid rgba(101,163,13,0.3); border-radius:10px; padding:14px 16px; font-size:13px; margin-bottom:18px; }
+
+  footer{ text-align:center; padding:30px; font-size:12px; color:var(--muted); }
+</style>
+</head>
+<body>
+
+<a class="back-link" href="../index.html">← Back to trips</a>
+
+<div class="hero">
+  <div class="hero-inner">
+    <div class="hero-eyebrow">🌴 Two-Week Trip · February 2012</div>
+    <h1>Bali &amp; Thailand<span>Rice terraces to a private catamaran through the Andaman Sea</span></h1>
+    <div class="hero-meta">
+      <div class="meta-chip">✈️ <strong>IAD → Frankfurt → Bangkok → Denpasar</strong></div>
+      <div class="meta-chip">🗓 <strong>~14 nights</strong> · Feb 9–25</div>
+      <div class="meta-chip">📍 Bali · Chiang Mai · Phi Phi Islands · Railay · Bangkok</div>
+      <div class="meta-chip">⛵ <strong>3-night sailing charter</strong> through the islands</div>
+    </div>
+  </div>
+</div>
+
+<div id="map"></div>
+
+<div class="timeline-strip">
+  <div class="tl-seg"><div class="place">🌺 Seminyak, Bali</div><div class="dates">Feb 11–14</div></div>
+  <div class="tl-seg"><div class="place">🌾 Ubud, Bali</div><div class="dates">Feb 14–16</div></div>
+  <div class="tl-seg"><div class="place">🐘 Chiang Mai</div><div class="dates">Feb 16–19</div></div>
+  <div class="tl-seg"><div class="place">⛵ Sailing (Phi Phi)</div><div class="dates">Feb 19–22</div></div>
+  <div class="tl-seg"><div class="place">🧗 Railay Beach</div><div class="dates">Feb 22–24</div></div>
+  <div class="tl-seg"><div class="place">🏙️ Bangkok</div><div class="dates">Feb 24–25</div></div>
+</div>
+
+<div class="tabs">
+  <button class="tab-btn active" onclick="showTab('overview')">Overview</button>
+  <button class="tab-btn" onclick="showTab('hotel')">Hotel &amp; Transportation</button>
+  <button class="tab-btn" onclick="showTab('itinerary')">Itinerary</button>
+  <button class="tab-btn" onclick="showTab('sailing')">The Sailing Leg</button>
+  <button class="tab-btn" onclick="showTab('book')">Book This Again</button>
+</div>
+
+<div class="wrap">
+
+  <div class="section active" id="tab-overview">
+    <div class="section-title">Overview</div>
+    <div class="section-sub">Six legs, three countries, one sailboat.</div>
+    <table class="overview">
+      <tr><th>Dates</th><th>Base</th><th>Focus</th></tr>
+      <tr><td>Feb 9–11</td><td>In transit</td><td>IAD → Frankfurt → Bangkok → Denpasar</td></tr>
+      <tr><td>Feb 11–14</td><td>Seminyak, Bali</td><td>The W Retreat &amp; Spa</td></tr>
+      <tr><td>Feb 14–16</td><td>Ubud, Bali</td><td>Chedi Club — rice terraces &amp; temples</td></tr>
+      <tr><td>Feb 16–19</td><td>Chiang Mai, Thailand</td><td>U Chiang Mai Hotel</td></tr>
+      <tr><td>Feb 19–22</td><td>Sailing the Andaman Sea</td><td>Phi Phi Lei, Phi Phi Don, Ko Mai Thon, Ko Naka Yai, Hin Klang</td></tr>
+      <tr><td>Feb 22–24</td><td>Railay Beach, Krabi</td><td>Climbing-town beach base</td></tr>
+      <tr><td>Feb 24–25</td><td>Bangkok</td><td>St. Regis, final night before flying home</td></tr>
+    </table>
+    <div class="callout" style="margin-top:22px;">Total trip cost was about $7,176 ($3,588 per person): transportation ~$1,010, Bali rental car ~$350, accommodations with breakfast ~$1,866, the sailing charter (meals, lodging, and excursions included) ~$2,600, food ~$750, and excursions/cooking classes/massages ~$600.</div>
+  </div>
+
+  <div class="section" id="tab-hotel">
+    <div class="section-title">Hotel &amp; Transportation</div>
+    <div class="book-group-label">Lodging</div>
+    <div class="hotel-card">
+      <h4>The W Retreat &amp; Spa — Seminyak</h4>
+      <div class="meta">Jl. Petitenget, Seminyak, Bali · Feb 11–14 · booked with points</div>
+    </div>
+    <div class="hotel-card">
+      <h4>The Chedi Club — Ubud</h4>
+      <div class="meta">Jalan Goa Gajah, Tengkulak Kaja, Gianyar · Feb 14–16 · ~$726</div>
+    </div>
+    <div class="hotel-card">
+      <h4>U Chiang Mai Hotel</h4>
+      <div class="meta">70 Ratchadamnoen Road, Sri-Poom, Chiang Mai · Feb 16–19 · ~$627</div>
+    </div>
+    <div class="hotel-card">
+      <h4>St. Regis Bangkok</h4>
+      <div class="meta">Feb 24–25, final night before the flight home</div>
+    </div>
+    <div class="book-group-label">Transportation</div>
+    <div class="hotel-card">
+      <h4>Outbound: United 932 + Thai Airways</h4>
+      <div class="note">United 932 Dulles → Frankfurt (9:56pm–11:40am); Thai Airways 921 Frankfurt → Bangkok (2:10pm–6:20am); Thai Airways 431 Bangkok → Denpasar (8:40am–2:00pm).</div>
+    </div>
+    <div class="hotel-card">
+      <h4>Bali → Chiang Mai (via Bangkok)</h4>
+      <div class="note">Air Asia FD3678 Denpasar → Bangkok (11:55am–3:15pm); Air Asia FD3238 Bangkok → Chiang Mai (6:35pm–7:40pm).</div>
+    </div>
+    <div class="hotel-card">
+      <h4>Chiang Mai → Phuket (via Bangkok)</h4>
+      <div class="note">Air Asia FD3231 Chiang Mai → Bangkok; Air Asia FD3025 Bangkok → Phuket (10:50am–12:15pm) — connecting into the sailing charter.</div>
+    </div>
+    <div class="hotel-card">
+      <h4>Rental car — Bali</h4>
+      <div class="note">Self-drive for the Bali leg, ~$350.</div>
+    </div>
+  </div>
+
+  <div class="section" id="tab-itinerary">
+    <div class="section-title">Itinerary</div>
+
+    <div class="tl-day">
+      <div class="tl-title">Bali — Seminyak &amp; Ubud</div>
+      <div class="tl-sub">Feb 11–16</div>
+      <ul class="tl-items">
+        <li>Sunrise ~6:21am, sunset ~6:45pm this time of year</li>
+        <li>Seminyak base at the W, then a self-drive loop: Tanah Lot → Kuta → Uluwatu → Jimbaran → Nusa Dua → Sanur → Nusa Lembongan → Bali Orchid Garden</li>
+        <li>Ubud leg at the Chedi Club — rice terraces, temples, the slower half of the Bali stay</li>
+      </ul>
+    </div>
+
+    <div class="tl-day">
+      <div class="tl-title">Chiang Mai</div>
+      <div class="tl-sub">Feb 16–19</div>
+      <ul class="tl-items">
+        <li>Based at U Chiang Mai Hotel in the old city</li>
+        <li>Northern Thai food and temple-hopping before flying south to the islands</li>
+      </ul>
+    </div>
+
+    <div class="tl-day">
+      <div class="tl-title">Sailing the Andaman Sea — Phuket to Railay</div>
+      <div class="tl-sub">Feb 19–22 · 3 nights aboard a private charter</div>
+      <ul class="tl-items">
+        <li>Sunrise ~6:45am, sunset ~6:35pm</li>
+        <li>Islands and stops: Ko Mai Thon, Ko Naka Yai, Maya Bay (Phi Phi Lei), Ton Sai Bay (Phi Phi Don), Loh Samah Bay, Hin Klang</li>
+        <li>Meals, accommodations, and excursions included in the charter price</li>
+      </ul>
+    </div>
+
+    <div class="tl-day">
+      <div class="tl-title">Railay Beach, Krabi</div>
+      <div class="tl-sub">Feb 22–24</div>
+      <ul class="tl-items">
+        <li>Two nights in Railay Beach Village — the climbing-town beach base, accessible only by longtail boat</li>
+      </ul>
+    </div>
+
+    <div class="tl-day">
+      <div class="tl-title">Bangkok &amp; departure</div>
+      <div class="tl-sub">Feb 24–25</div>
+      <ul class="tl-items">
+        <li>One-way flight Krabi → Bangkok</li>
+        <li>Final night at the St. Regis, near Lebua Tower and the Banyan Tree Bangkok for a last drink</li>
+        <li>Depart for home Feb 25</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="section" id="tab-sailing">
+    <div class="section-title">The Sailing Leg</div>
+    <div class="section-sub">The boats that were compared before booking the charter.</div>
+    <div class="card-grid">
+      <div class="card"><h4>Faraway — Mozart</h4><p>Catamaran, large with a big net deck. Free massage, Italian espresso, snorkeling, kayaks included.</p></div>
+      <div class="card"><h4>Faraway — Oasis</h4><p>Catamaran, similar amenities to the Mozart.</p></div>
+      <div class="card"><h4>Faraway — Full Steam</h4><p>Catamaran, good condition, snorkeling &amp; kayak included.</p></div>
+      <div class="card"><h4>Island Cruises — Full Steam</h4><p>Catamaran, kayak included.</p></div>
+      <div class="card"><h4>Yacht Pro — Jeanneau Sun Odyssey 32i</h4><p>Monohull, well-reviewed, Railay drop-off included in price.</p></div>
+      <div class="card"><h4>Blue Water Sailing</h4><p>Monohull, good reviews, does not depart from Phuket directly.</p></div>
+      <div class="card"><h4>Island Cruises — Nakamal</h4><p>Monohull, kayak included.</p></div>
+      <div class="card"><h4>Lanta (Wyn) — Chameleon</h4><p>Catamaran option considered for the same route.</p></div>
+    </div>
+  </div>
+
+  <div class="section" id="tab-book">
+    <div class="section-title">Book This Again</div>
+    <div class="section-sub">If this route gets a repeat, here's where to start.</div>
+    <ul class="checklist">
+      <li><strong>The W Retreat &amp; Spa, Seminyak</strong><span class="sub">Jl. Petitenget, Seminyak, Bali · phone (62)(361) 738 106</span></li>
+      <li><strong>The Chedi Club, Ubud</strong><span class="sub">Jalan Goa Gajah, Tengkulak Kaja, Gianyar · +62 361 975 685</span></li>
+      <li><strong>U Chiang Mai Hotel</strong><span class="sub">70 Ratchadamnoen Road, Chiang Mai · (66) 53 327 000</span></li>
+      <li><strong>Sailing charter — Phuket to Railay</strong><span class="sub">Book 3+ nights aboard a catamaran (Faraway or Island Cruises were the standouts); confirm the Phi Phi route and Railay drop-off</span></li>
+      <li><strong>Air Asia</strong> — inter-country hops (Bali↔Bangkok↔Chiang Mai↔Phuket)<span class="sub">All short regional flights, easy to rebook</span></li>
+    </ul>
+  </div>
+
+</div>
+
+<footer><a href="../index.html">← Back to Vacations</a></footer>
+
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+<script>
+  var map = L.map('map', {scrollWheelZoom:false}).setView([5, 100], 4);
+  L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {attribution:'© OpenStreetMap'}).addTo(map);
+  var pts = [
+    [-8.6905,115.1685,"1. Seminyak, Bali","The W Retreat & Spa"],
+    [-8.5069,115.2625,"2. Ubud, Bali","The Chedi Club"],
+    [18.7883,98.9853,"3. Chiang Mai","U Chiang Mai Hotel"],
+    [7.8975,98.7784,"4. Phuket → sailing start","Charter departs for Phi Phi & the Andaman islands"],
+    [7.7407,98.7784,"5. Phi Phi Islands","Maya Bay, Ton Sai Bay"],
+    [8.0104,98.8375,"6. Railay Beach, Krabi","Second-to-last stop"],
+    [13.7563,100.5018,"7. Bangkok","St. Regis, final night"]
+  ];
+  pts.forEach(function(p){
+    L.marker([p[0],p[1]]).addTo(map).bindPopup("<strong>"+p[2]+"</strong><br>"+p[3]+"<br><a href='https://www.google.com/maps/dir/?api=1&destination="+p[0]+","+p[1]+"' target='_blank'>Directions →</a>");
+  });
+  var poly = L.polyline(pts.map(function(p){return [p[0],p[1]];}), {color:'#65a30d', weight:2, dashArray:'4,6'}).addTo(map);
+  map.fitBounds(poly.getBounds(), {padding:[30,30]});
+  function showTab(id){
+    document.querySelectorAll('.section').forEach(function(s){ s.classList.remove('active'); });
+    document.querySelectorAll('.tab-btn').forEach(function(b){ b.classList.remove('active'); });
+    document.getElementById('tab-'+id).classList.add('active');
+    event.target.classList.add('active');
+  }
+</script>
+</body>
+</html>

@@ -66,7 +66,7 @@
 
   /* HERO */
   .hero {
-    padding: 140px 48px 56px;
+    padding: 140px 48px 32px;
     max-width: 1100px;
     margin: 0 auto;
   }
@@ -81,18 +81,42 @@
   .hero-sub {
     font-size: 0.95rem;
     color: var(--ink-soft);
-    max-width: 560px;
+    max-width: 620px;
     line-height: 1.7;
+  }
+
+  /* SECTIONS */
+  .trip-section {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 40px 48px 8px;
+  }
+  .section-head {
+    display: flex;
+    align-items: baseline;
+    gap: 16px;
+    margin-bottom: 20px;
+    padding-bottom: 12px;
+    border-bottom: 1px solid var(--rule);
+  }
+  .section-head h2 {
+    font-family: var(--serif);
+    font-weight: 500;
+    font-size: 1.7rem;
+    color: var(--ink);
+  }
+  .section-note {
+    font-size: 0.8rem;
+    color: var(--ink-soft);
+    letter-spacing: 0.02em;
   }
 
   /* TRIP GRID */
   .trip-grid {
-    max-width: 1100px;
-    margin: 0 auto;
-    padding: 0 48px 96px;
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-    gap: 24px;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 22px;
+    padding-bottom: 16px;
   }
   .trip-card {
     display: block;
@@ -116,17 +140,59 @@
     display: block;
     background: var(--mist);
   }
-  .trip-body { padding: 18px 20px 20px; }
+  .trip-thumb.grad {
+    display: flex;
+    align-items: flex-end;
+    padding: 14px;
+    font-family: var(--serif);
+    font-style: italic;
+    font-size: 0.85rem;
+    color: rgba(255,255,255,0.85);
+  }
+  .trip-body { padding: 16px 18px 18px; }
   .trip-title {
     font-family: var(--serif);
-    font-size: 1.2rem;
+    font-size: 1.15rem;
     font-weight: 500;
     margin-bottom: 4px;
   }
   .trip-dates {
-    font-size: 0.78rem;
+    font-size: 0.76rem;
     color: var(--ink-soft);
     letter-spacing: 0.02em;
+  }
+
+  /* UP NEXT — larger feature card */
+  .feature-card {
+    display: grid;
+    grid-template-columns: 1.1fr 1fr;
+    background: var(--warm-white);
+    border: 1px solid var(--rule);
+    border-radius: 16px;
+    overflow: hidden;
+    text-decoration: none;
+    color: var(--ink);
+    transition: box-shadow 0.2s, transform 0.15s;
+  }
+  .feature-card:hover { box-shadow: 0 10px 34px rgba(184,146,42,0.16); transform: translateY(-2px); }
+  .feature-thumb {
+    min-height: 220px;
+    background: linear-gradient(135deg, #2f4d3a 0%, #6b8f6f 55%, #cdd98a 100%);
+  }
+  .feature-body { padding: 28px 30px; display: flex; flex-direction: column; justify-content: center; }
+  .feature-eyebrow {
+    font-family: var(--sans);
+    font-size: 0.72rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--gold-text);
+    margin-bottom: 10px;
+  }
+  .feature-title { font-family: var(--serif); font-size: 1.7rem; font-weight: 500; margin-bottom: 8px; }
+  .feature-dates { font-size: 0.85rem; color: var(--ink-soft); }
+  @media (max-width: 640px) {
+    .feature-card { grid-template-columns: 1fr; }
+    .feature-thumb { min-height: 140px; }
   }
 
   /* EMPTY / COMING SOON CARD */
@@ -134,7 +200,7 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    min-height: 220px;
+    min-height: 180px;
     border-style: dashed;
     color: var(--ink-soft);
     font-size: 0.82rem;
@@ -148,7 +214,7 @@
 
   footer {
     text-align: center;
-    padding: 40px 48px;
+    padding: 48px 48px 40px;
     font-size: 0.75rem;
     color: var(--ink-soft);
   }
@@ -156,7 +222,7 @@
 
   @media (max-width: 640px) {
     nav { padding: 16px 20px; }
-    .hero, .trip-grid { padding-left: 20px; padding-right: 20px; }
+    .hero, .trip-section { padding-left: 20px; padding-right: 20px; }
     .hero { padding-top: 110px; }
   }
 </style>
@@ -172,36 +238,178 @@
 
 <div class="hero">
   <h1>Vacations</h1>
-  <p class="hero-sub">A running album of family trips — click a trip to open the full page.</p>
+  <p class="hero-sub">The trip that's booked, the ones taking shape, and a running album of everywhere we've already been.</p>
 </div>
 
-<div class="trip-grid">
-  <a class="trip-card" href="https://ghazal-tehrani.me/vacations/costarica2026" target="_blank">
-    <img class="trip-thumb" src="costarica2026/waterfall.jpg" alt="Waterfall in the Costa Rica cloud forest">
-    <div class="trip-body">
-      <div class="trip-title">Costa Rica Family Trip</div>
-      <div class="trip-dates">June 2027</div>
+<!-- UP NEXT -->
+<div class="trip-section">
+  <div class="section-head">
+    <h2>Up Next</h2>
+    <span class="section-note">Booked and coming up</span>
+  </div>
+  <a class="feature-card" href="https://ghazal-tehrani.me/vacations/italy2026" target="_blank">
+    <div class="feature-thumb"></div>
+    <div class="feature-body">
+      <div class="feature-eyebrow">✈️ Aug 6–14, 2026</div>
+      <div class="feature-title">Italy, Two Ways — Sardinia &amp; Como</div>
+      <div class="feature-dates">Two legs · Sardinia then Lake Como</div>
     </div>
   </a>
+</div>
 
-  <a class="trip-card" href="https://ghazal-tehrani.me/vacations/tahoe" target="_blank">
-    <img class="trip-thumb" src="tahoe/secretcove.jpg" alt="Secret Cove, Lake Tahoe">
-    <div class="trip-body">
-      <div class="trip-title">Lake Tahoe</div>
-      <div class="trip-dates">August 2026</div>
-    </div>
-  </a>
+<!-- READY TO GO -->
+<div class="trip-section">
+  <div class="section-head">
+    <h2>Ready to Go Trips</h2>
+    <span class="section-note">In the works — dates may still move</span>
+  </div>
+  <div class="trip-grid">
+    <a class="trip-card" href="https://ghazal-tehrani.me/vacations/tahoe" target="_blank">
+      <img class="trip-thumb" src="tahoe/secretcove.jpg" alt="Secret Cove, Lake Tahoe">
+      <div class="trip-body">
+        <div class="trip-title">Lake Tahoe</div>
+        <div class="trip-dates">Aug 2026 (dates need reconfirming)</div>
+      </div>
+    </a>
+    <a class="trip-card" href="https://ghazal-tehrani.me/vacations/costarica2026" target="_blank">
+      <img class="trip-thumb" src="costarica2026/waterfall.jpg" alt="Waterfall in the Costa Rica cloud forest">
+      <div class="trip-body">
+        <div class="trip-title">Costa Rica Family Trip</div>
+        <div class="trip-dates">Date on file needs reconfirming</div>
+      </div>
+    </a>
+    <div class="trip-card placeholder" aria-hidden="true">More trips coming soon</div>
+  </div>
+</div>
 
-  <a class="trip-card" href="https://ghazal-tehrani.me/vacations/italy2026" target="_blank">
-    <img class="trip-thumb" src="italy2026/como/bellagio_lakecomo.jpg" alt="Aerial view of Bellagio on Lake Como in golden light">
-    <div class="trip-body">
-      <div class="trip-title">Italy, Two Ways — Sardinia &amp; Como</div>
-      <div class="trip-dates">2026</div>
-    </div>
-  </a>
+<!-- MEMORIES CREATED -->
+<div class="trip-section">
+  <div class="section-head">
+    <h2>Memories Created</h2>
+    <span class="section-note">Trips we've already taken</span>
+  </div>
+  <div class="trip-grid">
 
-  <div class="trip-card placeholder" aria-hidden="true">
-    More trips coming soon
+    <a class="trip-card" href="https://ghazal-tehrani.me/vacations/anguilla" target="_blank">
+      <div class="trip-thumb grad" style="background:linear-gradient(135deg,#0c4a6e 0%,#38bdf8 60%,#fef9c3 100%);">Anguilla</div>
+      <div class="trip-body">
+        <div class="trip-title">Anguilla</div>
+        <div class="trip-dates">March 2026</div>
+      </div>
+    </a>
+
+    <a class="trip-card" href="https://ghazal-tehrani.me/vacations/rehoboth-bethany" target="_blank">
+      <div class="trip-thumb grad" style="background:linear-gradient(135deg,#1e3a5f 0%,#f4a259 100%);">Rehoboth &amp; Bethany</div>
+      <div class="trip-body">
+        <div class="trip-title">Rehoboth &amp; Bethany Beach</div>
+        <div class="trip-dates">October 2025 · Mom's 70th</div>
+      </div>
+    </a>
+
+    <a class="trip-card" href="https://ghazal-tehrani.me/vacations/cali-hawaii-2025" target="_blank">
+      <div class="trip-thumb grad" style="background:linear-gradient(135deg,#134e4a 0%,#2dd4bf 55%,#fde68a 100%);">Cali + Hawaii</div>
+      <div class="trip-body">
+        <div class="trip-title">Summer Cali &amp; Hawaii</div>
+        <div class="trip-dates">August 2025</div>
+      </div>
+    </a>
+
+    <a class="trip-card" href="https://ghazal-tehrani.me/vacations/dominican-republic" target="_blank">
+      <div class="trip-thumb grad" style="background:linear-gradient(135deg,#0f766e 0%,#84cc16 100%);">Dominican Republic</div>
+      <div class="trip-body">
+        <div class="trip-title">Dominican Republic</div>
+        <div class="trip-dates">2024 · Samaná</div>
+      </div>
+    </a>
+
+    <a class="trip-card" href="https://ghazal-tehrani.me/vacations/deer-valley" target="_blank">
+      <div class="trip-thumb grad" style="background:linear-gradient(135deg,#1e293b 0%,#93c5fd 60%,#f8fafc 100%);">Deer Valley</div>
+      <div class="trip-body">
+        <div class="trip-title">Deer Valley, Utah</div>
+        <div class="trip-dates">Ski trip · c. 2019</div>
+      </div>
+    </a>
+
+    <a class="trip-card" href="https://ghazal-tehrani.me/vacations/cancun" target="_blank">
+      <div class="trip-thumb grad" style="background:linear-gradient(135deg,#0369a1 0%,#5eead4 60%,#fef3c7 100%);">Cancún</div>
+      <div class="trip-body">
+        <div class="trip-title">Cancún / Puerto Morelos</div>
+        <div class="trip-dates">August 2017</div>
+      </div>
+    </a>
+
+    <a class="trip-card" href="https://ghazal-tehrani.me/vacations/tuscany" target="_blank">
+      <div class="trip-thumb grad" style="background:linear-gradient(135deg,#7c2d12 0%,#ca8a04 60%,#fef9c3 100%);">Tuscany</div>
+      <div class="trip-body">
+        <div class="trip-title">Tuscany, Italy</div>
+        <div class="trip-dates">October–November 2015</div>
+      </div>
+    </a>
+
+    <a class="trip-card" href="https://ghazal-tehrani.me/vacations/bahamas-treasure-cay" target="_blank">
+      <div class="trip-thumb grad" style="background:linear-gradient(135deg,#0e7490 0%,#67e8f9 60%,#ecfccb 100%);">Treasure Cay</div>
+      <div class="trip-body">
+        <div class="trip-title">Treasure Cay, Bahamas</div>
+        <div class="trip-dates">2015</div>
+      </div>
+    </a>
+
+    <a class="trip-card" href="https://ghazal-tehrani.me/vacations/utah-arizona-roadtrip" target="_blank">
+      <div class="trip-thumb grad" style="background:linear-gradient(135deg,#7c2d12 0%,#ea580c 55%,#fed7aa 100%);">Utah &amp; Arizona</div>
+      <div class="trip-body">
+        <div class="trip-title">Utah &amp; Arizona Road Trip</div>
+        <div class="trip-dates">Bryce · Lake Powell · Sedona</div>
+      </div>
+    </a>
+
+    <a class="trip-card" href="https://ghazal-tehrani.me/vacations/seattle" target="_blank">
+      <div class="trip-thumb grad" style="background:linear-gradient(135deg,#1e293b 0%,#22c55e 55%,#e0f2fe 100%);">Seattle</div>
+      <div class="trip-body">
+        <div class="trip-title">Seattle &amp; Mt. Rainier</div>
+        <div class="trip-dates">Pacific Northwest</div>
+      </div>
+    </a>
+
+    <a class="trip-card" href="https://ghazal-tehrani.me/vacations/outer-banks" target="_blank">
+      <div class="trip-thumb grad" style="background:linear-gradient(135deg,#0c4a6e 0%,#7dd3fc 60%,#fef9c3 100%);">Outer Banks</div>
+      <div class="trip-body">
+        <div class="trip-title">Outer Banks, NC — Corolla</div>
+        <div class="trip-dates">July 2013</div>
+      </div>
+    </a>
+
+    <a class="trip-card" href="https://ghazal-tehrani.me/vacations/bali-thailand" target="_blank">
+      <div class="trip-thumb grad" style="background:linear-gradient(135deg,#14532d 0%,#65a30d 55%,#fef08a 100%);">Bali &amp; Thailand</div>
+      <div class="trip-body">
+        <div class="trip-title">Bali &amp; Thailand</div>
+        <div class="trip-dates">February 2012</div>
+      </div>
+    </a>
+
+    <a class="trip-card" href="https://ghazal-tehrani.me/vacations/switzerland-alps" target="_blank">
+      <div class="trip-thumb grad" style="background:linear-gradient(135deg,#1e3a8a 0%,#93c5fd 60%,#ffffff 100%);">Switzerland</div>
+      <div class="trip-body">
+        <div class="trip-title">Switzerland &amp; Italy</div>
+        <div class="trip-dates">2012 · The Alps</div>
+      </div>
+    </a>
+
+    <a class="trip-card" href="https://ghazal-tehrani.me/vacations/rio-de-janeiro" target="_blank">
+      <div class="trip-thumb grad" style="background:linear-gradient(135deg,#166534 0%,#facc15 60%,#0ea5e9 100%);">Rio</div>
+      <div class="trip-body">
+        <div class="trip-title">Rio de Janeiro, Brazil</div>
+        <div class="trip-dates">2012</div>
+      </div>
+    </a>
+
+    <a class="trip-card" href="https://ghazal-tehrani.me/vacations/greece-turkey" target="_blank">
+      <div class="trip-thumb grad" style="background:linear-gradient(135deg,#075985 0%,#38bdf8 55%,#ffffff 100%);">Greece &amp; Turkey</div>
+      <div class="trip-body">
+        <div class="trip-title">Greece &amp; Turkey</div>
+        <div class="trip-dates">May 2010 · Santorini, Istanbul &amp; the Turquoise Coast</div>
+      </div>
+    </a>
+
   </div>
 </div>
 

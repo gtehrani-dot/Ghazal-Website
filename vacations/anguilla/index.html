@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Anguilla — Ghazal Tehrani</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300;9..144,500;9..144,600&family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
+<style>
+  :root{
+    --primary:#0c4a6e; --primary-deep:#082f49;
+    --accent-1:#38bdf8; --accent-2:#fbbf24; --accent-3:#f97316;
+    --ink:#0f2536; --muted:#5b7284; --cream:#fbf9f4; --line:#e3ddd0; --card:#ffffff;
+    --serif:'Fraunces',Georgia,serif; --sans:'Inter',system-ui,sans-serif; --mono:'JetBrains Mono',monospace;
+  }
+  *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+  body{font-family:var(--sans); background:var(--cream); color:var(--ink); line-height:1.6;}
+  a{color:inherit;}
+  .back-link{ display:inline-block; margin:18px 0 0 32px; font-family:var(--mono); font-size:12.5px; color:var(--primary); text-decoration:none; }
+  .back-link:hover{ text-decoration:underline; }
+
+  .hero{ background:linear-gradient(135deg,var(--primary-deep) 0%, var(--primary) 55%, #0891b2 100%); color:#fff; padding:36px 32px 46px; position:relative; overflow:hidden;}
+  .hero::before{ content:''; position:absolute; inset:0; background:radial-gradient(ellipse at 85% 15%, rgba(251,191,36,0.18) 0%, transparent 55%);}
+  .hero-inner{ position:relative; max-width:980px; margin:0 auto;}
+  .hero-eyebrow{ font-family:var(--mono); font-size:11px; letter-spacing:3px; text-transform:uppercase; color:#a5f3fc; margin-bottom:14px;}
+  .hero h1{ font-family:var(--serif); font-weight:500; font-size:clamp(38px,6vw,64px); line-height:1.05;}
+  .hero h1 span{ display:block; font-size:0.4em; font-weight:300; font-style:italic; color:#dbeafe; margin-top:8px;}
+  .hero-meta{ display:flex; flex-wrap:wrap; gap:10px; margin-top:26px;}
+  .meta-chip{ font-family:var(--mono); font-size:12px; padding:8px 15px; border:1px solid rgba(255,255,255,0.25); border-radius:100px; background:rgba(255,255,255,0.08);}
+  .meta-chip strong{ color:#fde68a; }
+
+  #map{ height:320px; max-width:980px; margin:-30px auto 0; border-radius:16px; box-shadow:0 12px 34px rgba(8,47,73,0.25); position:relative; z-index:2; border:4px solid #fff;}
+
+  .tabs{ max-width:980px; margin:34px auto 0; display:flex; flex-wrap:wrap; gap:6px; padding:0 32px;}
+  .tab-btn{ font-family:var(--mono); font-size:12px; letter-spacing:0.4px; padding:9px 16px; border-radius:100px; background:var(--card); border:1px solid var(--line); cursor:pointer; color:var(--muted);}
+  .tab-btn.active{ background:var(--primary); color:#fff; border-color:var(--primary);}
+  .wrap{ max-width:980px; margin:0 auto; padding:26px 32px 80px;}
+  .section{ display:none; }
+  .section.active{ display:block; }
+  .section-title{ font-family:var(--serif); font-size:24px; font-weight:500; margin-bottom:6px;}
+  .section-sub{ font-size:13.5px; color:var(--muted); margin-bottom:22px;}
+
+  table.overview{ width:100%; border-collapse:collapse; font-size:13.5px;}
+  table.overview th{ text-align:left; font-family:var(--mono); font-size:11px; letter-spacing:1px; text-transform:uppercase; color:var(--muted); padding:8px 10px; border-bottom:2px solid var(--line);}
+  table.overview td{ padding:10px; border-bottom:1px solid var(--line); vertical-align:top;}
+
+  .book-group-label{ font-family:var(--mono); font-size:11px; letter-spacing:2px; text-transform:uppercase; color:var(--primary); margin:24px 0 10px; padding-bottom:6px; border-bottom:1px solid var(--line);}
+  .book-group-label:first-child{ margin-top:0; }
+  .hotel-card{ background:var(--card); border:1px solid var(--line); border-radius:12px; padding:18px 20px; margin-bottom:14px;}
+  .hotel-card h4{ font-family:var(--serif); font-size:18px; font-weight:500; margin-bottom:4px;}
+  .hotel-card a{ color:var(--primary); text-decoration:none; }
+  .hotel-card .meta{ font-size:12.5px; color:var(--muted); margin-top:4px; }
+  .hotel-card .note{ font-size:13px; margin-top:8px; color:var(--ink); }
+
+  .timeline{ position:relative; }
+  .tl-day{ background:var(--card); border:1px solid var(--line); border-radius:12px; padding:18px 20px; margin-bottom:16px;}
+  .tl-title{ font-family:var(--serif); font-size:18px; font-weight:500; margin-bottom:2px;}
+  .tl-sub{ font-family:var(--mono); font-size:11.5px; color:var(--muted); text-transform:uppercase; letter-spacing:0.5px; margin-bottom:10px;}
+  ul.tl-items{ list-style:none; }
+  ul.tl-items li{ padding:5px 0 5px 18px; position:relative; font-size:13.8px;}
+  ul.tl-items li::before{ content:'–'; position:absolute; left:0; color:var(--muted);}
+  ul.tl-items li.meal{ background:rgba(56,189,248,0.10); border-radius:6px; padding:8px 12px; margin:6px 0; }
+  ul.tl-items li.meal::before{ content:''; }
+  .tl-note{ font-size:12.5px; color:var(--muted); margin-top:6px; font-style:italic; }
+
+  .card-grid{ display:grid; grid-template-columns:repeat(auto-fill,minmax(220px,1fr)); gap:14px; }
+  .card{ background:var(--card); border:1px solid var(--line); border-radius:12px; padding:14px 16px; }
+  .card h4{ font-family:var(--serif); font-size:16px; font-weight:500; margin-bottom:4px; }
+  .card p{ font-size:12.8px; color:var(--muted); }
+  .card .tag{ font-family:var(--mono); font-size:10.5px; text-transform:uppercase; letter-spacing:1px; color:var(--primary); }
+
+  .checklist{ list-style:none; }
+  .checklist li{ background:var(--card); border:1px solid var(--line); border-radius:10px; padding:12px 16px; margin-bottom:8px; font-size:13.8px;}
+  .checklist li a{ color:var(--primary); text-decoration:none; font-weight:500; }
+  .checklist li a:hover{ text-decoration:underline; }
+  .checklist li .sub{ display:block; font-size:12px; color:var(--muted); margin-top:3px; font-weight:400;}
+
+  footer{ text-align:center; padding:30px; font-size:12px; color:var(--muted); }
+</style>
+</head>
+<body>
+
+<a class="back-link" href="../index.html">← Back to trips</a>
+
+<div class="hero">
+  <div class="hero-inner">
+    <div class="hero-eyebrow">🏝️ Family Trip · Mar 27 – Apr 2, 2026</div>
+    <h1>Anguilla<span>Shoal Bay East to Meads Bay, one grilled lobster at a time</span></h1>
+    <div class="hero-meta">
+      <div class="meta-chip">✈️ <strong>UA 346</strong> → SXM, ferry to Anguilla</div>
+      <div class="meta-chip">🗓 <strong>6 nights</strong> · Mar 27–Apr 2</div>
+      <div class="meta-chip">📍 Shoal Bay East → West End</div>
+      <div class="meta-chip">🏨 <strong>Two bases</strong> · Manoah → Tranquility Beach</div>
+    </div>
+  </div>
+</div>
+
+<div id="map"></div>
+
+<div class="tabs">
+  <button class="tab-btn active" onclick="showTab('overview')">Overview</button>
+  <button class="tab-btn" onclick="showTab('hotel')">Hotel &amp; Transportation</button>
+  <button class="tab-btn" onclick="showTab('itinerary')">Itinerary</button>
+  <button class="tab-btn" onclick="showTab('food')">Food Guide</button>
+  <button class="tab-btn" onclick="showTab('book')">Book This Again</button>
+</div>
+
+<div class="wrap">
+
+  <div class="section active" id="tab-overview">
+    <div class="section-title">Overview</div>
+    <div class="section-sub">The whole trip at a glance.</div>
+    <table class="overview">
+      <tr><th>Date</th><th>Base</th><th>Focus</th></tr>
+      <tr><td>Fri Mar 27</td><td>Manoah, Shoal Bay East</td><td>Fly SXM → ferry via Blowing Point → check in</td></tr>
+      <tr><td>Sat Mar 28</td><td>Manoah</td><td>Sandy Ground → Sandy Hill beach hop, grilled lobster</td></tr>
+      <tr><td>Sun Mar 29</td><td>Manoah</td><td>Beach day, Sharky's dinner + night kayaking</td></tr>
+      <tr><td>Mon Mar 30</td><td>Tranquility Beach</td><td>Check out Manoah, drive the island, check in</td></tr>
+      <tr><td>Tue Mar 31</td><td>Tranquility Beach</td><td>Cap Juluca / Maundays Bay beach day</td></tr>
+      <tr><td>Wed Apr 1</td><td>Tranquility Beach</td><td>Beach, condo breakfast, Mango's dinner</td></tr>
+      <tr><td>Thu Apr 2</td><td>—</td><td>Check out, return car at Bowling Point, ferry to Marigot</td></tr>
+    </table>
+  </div>
+
+  <div class="section" id="tab-hotel">
+    <div class="section-title">Hotel &amp; Transportation</div>
+    <div class="book-group-label">Lodging</div>
+    <div class="hotel-card">
+      <h4>Manoah Boutique Hotel</h4>
+      <div class="meta">Shoal Bay East, Anguilla · Mar 27–30 · Confirmation #44TH39PRMR</div>
+      <div class="note">Booked via Cloudbeds. Beachfront on Shoal Bay East — the powder-white-sand stretch on the island's east end.</div>
+    </div>
+    <div class="hotel-card">
+      <h4>Tranquility Beach Anguilla</h4>
+      <div class="meta">Mar 30–Apr 2 · Reservation #50121532</div>
+      <div class="note">Condo-style stay for the second half of the trip, closer to the West End restaurants and Cap Juluca / Maundays Bay.</div>
+    </div>
+    <div class="book-group-label">Transportation</div>
+    <div class="hotel-card">
+      <h4>Flight — United UA 346 to St. Martin (SXM)</h4>
+      <div class="note">Fly into St. Martin, then taxi to the ferry.</div>
+    </div>
+    <div class="hotel-card">
+      <h4>Ferry — Blowing Point ⇄ Marigot</h4>
+      <div class="note">Two options used on this trip: <strong>Calypso Charters</strong> (private, 1:45pm or 2:45pm pickup near the SXM airport) on arrival, and the <strong>public ferry</strong> from Blowing Point to Marigot (~30 min from the airport) on departure day.</div>
+    </div>
+    <div class="hotel-card">
+      <h4>Rental car</h4>
+      <div class="note">Picked up on arrival (Wendell's Car Rental was the arrival-day contact), returned at Bowling Point on the way out.</div>
+    </div>
+  </div>
+
+  <div class="section" id="tab-itinerary">
+    <div class="section-title">Itinerary</div>
+
+    <div class="tl-day">
+      <div class="tl-title">Day 1 · Fri, Mar 27 · Arrival</div>
+      <div class="tl-sub">Shoal Bay East</div>
+      <ul class="tl-items">
+        <li>Fly into St. Martin (SXM) on UA 346, taxi to the ferry</li>
+        <li>Ferry to Anguilla via Blowing Point — Calypso Charters at 1:45 or 2:45pm, or Wendell's car rental met us there</li>
+        <li>Drive to Manoah Hotel, check in</li>
+        <li class="meal">🍽 Breakfast/lunch options: Roti Hut or Tropical Sunset (conch salad)</li>
+        <li class="meal">🍽 Dinner: Ben's Pitstop 7:30, or Artizan Pizza Napoletana</li>
+      </ul>
+      <div class="tl-note">Have the printed Calypso ticket ready.</div>
+    </div>
+
+    <div class="tl-day">
+      <div class="tl-title">Day 2 · Sat, Mar 28 · Beach day</div>
+      <div class="tl-sub">Sandy Ground → Sandy Hill</div>
+      <ul class="tl-items">
+        <li class="meal">🍳 Breakfast: Le Bon Pain</li>
+        <li>Beach hop from Sandy Ground Beach to Sandy Hill</li>
+        <li class="meal">🍽 Lunch: grilled lobster at Sandy Hill</li>
+        <li class="meal">🍽 Drinks at 20 Knots, then dinner reservation at Veya, 7:30</li>
+      </ul>
+    </div>
+
+    <div class="tl-day">
+      <div class="tl-title">Day 3 · Sun, Mar 29 · Beach day</div>
+      <div class="tl-sub">Shoal Bay East</div>
+      <ul class="tl-items">
+        <li class="meal">🍳 Breakfast: Tasty's or at the hotel</li>
+        <li>Beach</li>
+        <li class="meal">🍽 Lunch options: Gwen's Reggae Bar and Grill (for the vibe), Tasty's, Roti Hut, or Blanchards</li>
+        <li class="meal">🍽 Dinner: Sharky's, 6:15 (reservation needed) — live music Sundays</li>
+        <li>Night kayaking, 8:15pm</li>
+      </ul>
+    </div>
+
+    <div class="tl-day">
+      <div class="tl-title">Day 4 · Mon, Mar 30 · Change of base</div>
+      <div class="tl-sub">Manoah → Tranquility Beach</div>
+      <ul class="tl-items">
+        <li>Check out of Manoah</li>
+        <li class="meal">🍳 Breakfast: yogurts &amp; croissants</li>
+        <li>Drive the island / waterpark</li>
+        <li>Check in to Tranquility Beach</li>
+        <li class="meal">🍽 Dinner: Jacala's — reservation requested for 7pm (steak, tuna tartare)</li>
+      </ul>
+    </div>
+
+    <div class="tl-day">
+      <div class="tl-title">Day 5 · Tue, Mar 31 · West End</div>
+      <div class="tl-sub">Cap Juluca / Maundays Bay</div>
+      <ul class="tl-items">
+        <li>Beach day at Cap Juluca</li>
+        <li class="meal">🍽 Lunch: Valleys (to go) or Sunshine Shack (no reservation needed)</li>
+        <li class="meal">🍽 Dinner: Tokyo Bay (reservation 8:15) or Sandbar (reservation 6:30)</li>
+        <li>Photos on the beach</li>
+      </ul>
+    </div>
+
+    <div class="tl-day">
+      <div class="tl-title">Day 6 · Wed, Apr 1 · Beach day</div>
+      <div class="tl-sub">Tranquility Beach</div>
+      <ul class="tl-items">
+        <li class="meal">🍳 Breakfast: hashbrowns and eggs at the condo</li>
+        <li>Beach</li>
+        <li class="meal">🍽 Lunch: Straw Hat</li>
+        <li class="meal">🍽 Dinner: Mango's — reservation 6:30</li>
+      </ul>
+    </div>
+
+    <div class="tl-day">
+      <div class="tl-title">Day 7 · Thu, Apr 2 · Departure</div>
+      <div class="tl-sub">Return trip</div>
+      <ul class="tl-items">
+        <li>Check out, return rental car at Bowling Point</li>
+        <li class="meal">🍳 Breakfast: yogurts &amp; pastries</li>
+        <li>Public ferry to Marigot (~30 min from the airport)</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="section" id="tab-food">
+    <div class="section-title">Food Guide</div>
+    <div class="section-sub">The "how to cut your Anguilla food bill" cheat sheet, by area.</div>
+    <div class="card-grid">
+      <div class="card"><span class="tag">East</span><h4>Palm Grove</h4><p>Breakfast</p></div>
+      <div class="card"><span class="tag">East</span><h4>20 Knots</h4><p>Lunch &amp; happy hour</p></div>
+      <div class="card"><span class="tag">East</span><h4>Fish Trap</h4><p>Fish tacos, lunch</p></div>
+      <div class="card"><span class="tag">East</span><h4>Le Bon Pain</h4><p>Breakfast pastries</p></div>
+      <div class="card"><span class="tag">Center</span><h4>Veya</h4><p>Lunch &amp; dinner — special occasion</p></div>
+      <div class="card"><span class="tag">Center</span><h4>Da'Vida</h4><p>Lunch &amp; dinner</p></div>
+      <div class="card"><span class="tag">Center</span><h4>Tasty's</h4><p>Avocado toast, French toast, coconut-crusted fish in rum sauce, chicken curry — all-day spot</p></div>
+      <div class="card"><span class="tag">Center</span><h4>Sandbar</h4><p>Lunch &amp; dinner</p></div>
+      <div class="card"><span class="tag">Center</span><h4>Elvis</h4><p>Nachos, happy hour</p></div>
+      <div class="card"><span class="tag">West End</span><h4>Straw Hat</h4><p>Lunch, dinner, happy hour</p></div>
+      <div class="card"><span class="tag">West End</span><h4>D Richards</h4><p>Happy hour</p></div>
+      <div class="card"><span class="tag">West End</span><h4>Breezes</h4><p>Happy hour</p></div>
+      <div class="card"><span class="tag">West End</span><h4>Tokyo Bay</h4><p>Weekend lunch &amp; dinner</p></div>
+      <div class="card"><span class="tag">West End</span><h4>Jacala</h4><p>Dinner — steak, tuna tartare</p></div>
+      <div class="card"><span class="tag">West End</span><h4>Blanchards</h4><p>Dinner</p></div>
+      <div class="card"><span class="tag">West End</span><h4>Cap Juluca (Belmond)</h4><p>Nutella croissant breakfast, lunch</p></div>
+      <div class="card"><span class="tag">West End</span><h4>Cap Shack</h4><p>Happy hour</p></div>
+      <div class="card"><span class="tag">West End</span><h4>Sunshine Shack</h4><p>BBQ breakfast, lunch, no reservation</p></div>
+      <div class="card"><span class="tag">West End</span><h4>Sharky's</h4><p>Lunch &amp; dinner — live music Sundays</p></div>
+      <div class="card"><span class="tag">West End</span><h4>Gwen's Reggae Bar &amp; Grill</h4><p>Lunch, for the vibe</p></div>
+      <div class="card"><span class="tag">West End</span><h4>Mango's</h4><p>Dinner</p></div>
+    </div>
+  </div>
+
+  <div class="section" id="tab-book">
+    <div class="section-title">Book This Again</div>
+    <div class="section-sub">If this trip gets a repeat, here's who to call.</div>
+    <ul class="checklist">
+      <li><a href="https://www.the-manoah.com" target="_blank">Manoah Boutique Hotel</a> — Shoal Bay East<span class="sub">Booked via Cloudbeds; last confirmation #44TH39PRMR</span></li>
+      <li><strong>Tranquility Beach Anguilla</strong><span class="sub">Reservation #50121532 · reservations@tranquilitybeachanguilla.com</span></li>
+      <li><strong>Calypso Charters</strong> — private ferry, St. Martin ⇄ Anguilla<span class="sub">Book ahead for a specific pickup window near the SXM airport</span></li>
+      <li><strong>Wendell's Car Rental</strong><span class="sub">Met us at the ferry dock on arrival</span></li>
+      <li><strong>Veya</strong>, <strong>Sharky's</strong>, <strong>Jacala</strong>, <strong>Tokyo Bay</strong>, <strong>Sandbar</strong>, <strong>Mango's</strong><span class="sub">All needed advance reservations last time — call ahead</span></li>
+    </ul>
+  </div>
+
+</div>
+
+<footer><a href="../index.html">← Back to Vacations</a></footer>
+
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+<script>
+  var map = L.map('map', {scrollWheelZoom:false}).setView([18.208, -63.075], 12);
+  L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {attribution:'© OpenStreetMap'}).addTo(map);
+  var pts = [
+    [18.2231,-63.0247,"1. Manoah Boutique Hotel","Shoal Bay East — first base"],
+    [18.2160,-63.0500,"2. Sandy Ground / Sandy Hill","Beach hop, grilled lobster"],
+    [18.1657,-63.0121,"3. Blowing Point Ferry Terminal","Arrival & departure ferry dock"],
+    [18.1980,-63.1550,"4. Tranquility Beach Anguilla","Second base, near the West End"],
+    [18.1633,-63.1667,"5. Cap Juluca / Maundays Bay","Beach day"],
+    [18.1750,-63.1450,"6. West End restaurants","Jacala, Tokyo Bay, Sandbar, Mango's, Sharky's"]
+  ];
+  pts.forEach(function(p){
+    L.marker([p[0],p[1]]).addTo(map).bindPopup("<strong>"+p[2]+"</strong><br>"+p[3]+"<br><a href='https://www.google.com/maps/dir/?api=1&destination="+p[0]+","+p[1]+"' target='_blank'>Directions →</a>");
+  });
+  function showTab(id){
+    document.querySelectorAll('.section').forEach(function(s){ s.classList.remove('active'); });
+    document.querySelectorAll('.tab-btn').forEach(function(b){ b.classList.remove('active'); });
+    document.getElementById('tab-'+id).classList.add('active');
+    event.target.classList.add('active');
+  }
+</script>
+</body>
+</html>
