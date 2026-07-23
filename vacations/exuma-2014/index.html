@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Exuma, Bahamas (2014) — Ghazal Tehrani</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300;9..144,500;9..144,600&family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
+<style>
+  :root{
+    --primary:#0e7490; --primary-deep:#0b4f5e;
+    --accent-1:#5eead4; --accent-2:#fef9c3; --accent-3:#fb7185;
+    --ink:#12242a; --muted:#5c6f72; --cream:#fbfaf4; --line:#dfe6e6; --card:#ffffff;
+    --serif:'Fraunces',Georgia,serif; --sans:'Inter',system-ui,sans-serif; --mono:'JetBrains Mono',monospace;
+  }
+  *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+  body{font-family:var(--sans); background:var(--cream); color:var(--ink); line-height:1.6;}
+  a{color:inherit;}
+  .back-link{ display:inline-block; margin:18px 0 0 32px; font-family:var(--mono); font-size:12.5px; color:var(--primary); text-decoration:none; }
+  .back-link:hover{ text-decoration:underline; }
+  .hero{ background:linear-gradient(135deg,rgba(11,79,94,0.76) 0%, rgba(14,116,144,0.64) 55%, rgba(94,234,212,0.42) 100%), url('hero.jpg') center 45%/cover; color:#fff; padding:36px 32px 46px; position:relative; overflow:hidden;}
+  .hero::before{ content:''; position:absolute; inset:0; background:radial-gradient(ellipse at 85% 15%, rgba(254,249,195,0.2) 0%, transparent 55%);}
+  .hero-inner{ position:relative; max-width:980px; margin:0 auto;}
+  .hero-eyebrow{ font-family:var(--mono); font-size:11px; letter-spacing:3px; text-transform:uppercase; color:#99f6e4; margin-bottom:14px;}
+  .hero h1{ font-family:var(--serif); font-weight:500; font-size:clamp(38px,6vw,64px); line-height:1.05;}
+  .hero h1 span{ display:block; font-size:0.4em; font-weight:300; font-style:italic; color:#ecfeff; margin-top:8px;}
+  .hero-meta{ display:flex; flex-wrap:wrap; gap:10px; margin-top:26px;}
+  .meta-chip{ font-family:var(--mono); font-size:12px; padding:8px 15px; border:1px solid rgba(255,255,255,0.25); border-radius:100px; background:rgba(255,255,255,0.12);}
+  .meta-chip strong{ color:#fde68a; }
+  .hero-photo-cap{ position:relative; max-width:980px; margin:8px auto 0; font-family:var(--mono); font-size:11px; color:#ecfeff; text-align:right; opacity:0.85; }
+  #map{ height:320px; max-width:980px; margin:-30px auto 0; border-radius:16px; box-shadow:0 12px 34px rgba(11,79,94,0.25); position:relative; z-index:2; border:4px solid #fff;}
+  .tabs{ max-width:980px; margin:34px auto 0; display:flex; flex-wrap:wrap; gap:6px; padding:0 32px;}
+  .tab-btn{ font-family:var(--mono); font-size:12px; letter-spacing:0.4px; padding:9px 16px; border-radius:100px; background:var(--card); border:1px solid var(--line); cursor:pointer; color:var(--muted);}
+  .tab-btn.active{ background:var(--primary); color:#fff; border-color:var(--primary);}
+  .wrap{ max-width:980px; margin:0 auto; padding:26px 32px 80px;}
+  .section{ display:none; } .section.active{ display:block; }
+  .section-title{ font-family:var(--serif); font-size:24px; font-weight:500; margin-bottom:6px;}
+  .section-sub{ font-size:13.5px; color:var(--muted); margin-bottom:22px;}
+  table.overview{ width:100%; border-collapse:collapse; font-size:13.5px;}
+  table.overview th{ text-align:left; font-family:var(--mono); font-size:11px; letter-spacing:1px; text-transform:uppercase; color:var(--muted); padding:8px 10px; border-bottom:2px solid var(--line);}
+  table.overview td{ padding:10px; border-bottom:1px solid var(--line); vertical-align:top;}
+  .book-group-label{ font-family:var(--mono); font-size:11px; letter-spacing:2px; text-transform:uppercase; color:var(--primary); margin:24px 0 10px; padding-bottom:6px; border-bottom:1px solid var(--line);}
+  .book-group-label:first-child{ margin-top:0; }
+  .hotel-card{ background:var(--card); border:1px solid var(--line); border-radius:12px; padding:18px 20px; margin-bottom:14px;}
+  .hotel-card h4{ font-family:var(--serif); font-size:18px; font-weight:500; margin-bottom:4px;}
+  .hotel-card .meta{ font-size:12.5px; color:var(--muted); margin-top:4px; }
+  .hotel-card .note{ font-size:13px; margin-top:8px; color:var(--ink); }
+  .tl-day{ background:var(--card); border:1px solid var(--line); border-radius:12px; padding:18px 20px; margin-bottom:16px;}
+  .tl-title{ font-family:var(--serif); font-size:18px; font-weight:500; margin-bottom:2px;}
+  .tl-sub{ font-family:var(--mono); font-size:11.5px; color:var(--muted); text-transform:uppercase; letter-spacing:0.5px; margin-bottom:10px;}
+  ul.tl-items{ list-style:none; }
+  ul.tl-items li{ padding:5px 0 5px 18px; position:relative; font-size:13.8px;}
+  ul.tl-items li::before{ content:'–'; position:absolute; left:0; color:var(--muted);}
+  .tl-note{ font-size:12.5px; color:var(--muted); margin-top:6px; font-style:italic; }
+  .card-grid{ display:grid; grid-template-columns:repeat(auto-fill,minmax(220px,1fr)); gap:14px; }
+  .card{ background:var(--card); border:1px solid var(--line); border-radius:12px; padding:14px 16px; }
+  .card h4{ font-family:var(--serif); font-size:16px; font-weight:500; margin-bottom:4px; }
+  .card p{ font-size:12.8px; color:var(--muted); }
+  .checklist{ list-style:none; }
+  .checklist li{ background:var(--card); border:1px solid var(--line); border-radius:10px; padding:12px 16px; margin-bottom:8px; font-size:13.8px;}
+  .checklist li .sub{ display:block; font-size:12px; color:var(--muted); margin-top:3px; font-weight:400;}
+  .callout{ background:rgba(94,234,212,0.10); border:1px solid rgba(94,234,212,0.35); border-radius:10px; padding:14px 16px; font-size:13px; margin-bottom:18px; }
+  footer{ text-align:center; padding:30px; font-size:12px; color:var(--muted); }
+</style>
+</head>
+<body>
+
+<a class="back-link" href="../index.html">← Back to trips</a>
+
+<div class="hero">
+  <div class="hero-inner">
+    <div class="hero-eyebrow">🏝️ Family Trip · May 6–13, 2014</div>
+    <h1>Exuma, again<span>A return trip with 15-month-old Ella, decided over a family vote against a Dominican all-inclusive</span></h1>
+    <div class="hero-meta">
+      <div class="meta-chip">🗓 <strong>7 nights</strong> · May 6–13</div>
+      <div class="meta-chip">📍 George Town / Little Exuma</div>
+      <div class="meta-chip">🚗 <strong>Thompson's Car Rental</strong> · toddler car seat</div>
+      <div class="meta-chip">👶 Ella, 15 months</div>
+    </div>
+  </div>
+</div>
+<div class="hero-photo-cap">📷 Tropic of Cancer Beach, Little Exuma</div>
+
+<div id="map"></div>
+
+<div class="tabs">
+  <button class="tab-btn active" onclick="showTab('overview')">Overview</button>
+  <button class="tab-btn" onclick="showTab('hotel')">Lodging &amp; Car</button>
+  <button class="tab-btn" onclick="showTab('book')">Book This Again</button>
+</div>
+
+<div class="wrap">
+
+  <div class="section active" id="tab-overview">
+    <div class="section-title">Overview</div>
+    <div class="section-sub">Your second Exuma trip, four years after the first — this time with 15-month-old Ella along.</div>
+    <div class="callout">Decided by a family vote in March 2014 (Exuma vs. an all-inclusive Dominican Republic resort) — Exuma won. The trip almost started a day late: you missed the original flight because Ella's passport wasn't ready in time, and arrived a day behind schedule instead. The specific villa you finally stayed in isn't confirmed in the surviving records — the email trail shows several properties considered (below) but no final booking confirmation, unlike the car rental which is fully documented.</div>
+    <table class="overview">
+      <tr><th>Category</th><th>Notes</th></tr>
+      <tr><td>Original plan</td><td>Depart Mon May 5, car pickup 4:45pm, return Mon May 12</td></tr>
+      <tr><td>What happened</td><td>Delayed a day getting Ella's passport — flew out Tue May 6 instead, picked up the car that evening, returned it Tue May 13</td></tr>
+      <tr><td>Car seat</td><td>Rear-facing toddler seat arranged in advance with Thompson's — Ella was 14–15 months old</td></tr>
+    </table>
+  </div>
+
+  <div class="section" id="tab-hotel">
+    <div class="section-title">Lodging &amp; Car</div>
+    <div class="book-group-label">Lodging considered</div>
+    <div class="card-grid">
+      <div class="card"><h4>Jolly Hall Waterfront Beach House</h4><p>Inquired via Airbnb, Exuma</p></div>
+      <div class="card"><h4>Belle Mer Cottage</h4><p>$4,320 inclusive of cleaning/tax — over budget, passed</p></div>
+      <div class="card"><h4>HomeAway Listing #3709552</h4><p>Half-mile beach, inquired for May 2–9 — host offered to negotiate</p></div>
+    </div>
+    <div class="book-group-label">Car rental</div>
+    <div class="hotel-card">
+      <h4>Thompson's Car Rental — George Town, Exuma</h4>
+      <div class="meta">Contract #007067 · Nissan Primera (fullsize) · $455 total ($420 rental + $35 car seat)</div>
+      <div class="note">P.O. Box 29190, George Town International Airport · (242) 336-2442 · thompsonsrental@hotmail.com. Same agency used on the 2010 Exuma trip.</div>
+    </div>
+  </div>
+
+  <div class="section" id="tab-book">
+    <div class="section-title">Book This Again</div>
+    <div class="section-sub">Notes for a repeat trip.</div>
+    <ul class="checklist">
+      <li><strong>Thompson's Car Rental</strong> — (242) 336-2442 · thompsonsrental@hotmail.com<span class="sub">Reliable for toddler car seats — arrange in advance</span></li>
+      <li><strong>Passport lead time</strong><span class="sub">Get kids' passports early — this cost a travel day last time</span></li>
+    </ul>
+  </div>
+
+</div>
+
+<footer><a href="../index.html">← Back to Vacations</a></footer>
+
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+<script>
+  var map = L.map('map', {scrollWheelZoom:false}).setView([23.55, -75.75], 10);
+  L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {attribution:'© OpenStreetMap'}).addTo(map);
+  var pts = [
+    [23.5167,-75.7667,"1. George Town","Thompson's Car Rental, airport"],
+    [23.4200,-75.6700,"2. Tropic of Cancer Beach","Little Exuma"]
+  ];
+  pts.forEach(function(p){
+    L.marker([p[0],p[1]]).addTo(map).bindPopup("<strong>"+p[2]+"</strong><br>"+p[3]+"<br><a href='https://www.google.com/maps/dir/?api=1&destination="+p[0]+","+p[1]+"' target='_blank'>Directions →</a>");
+  });
+  function showTab(id){
+    document.querySelectorAll('.section').forEach(function(s){ s.classList.remove('active'); });
+    document.querySelectorAll('.tab-btn').forEach(function(b){ b.classList.remove('active'); });
+    document.getElementById('tab-'+id).classList.add('active');
+    event.target.classList.add('active');
+  }
+</script>
+</body>
+</html>
