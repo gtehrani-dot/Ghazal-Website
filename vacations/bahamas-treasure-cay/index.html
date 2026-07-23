@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Treasure Cay, Bahamas — Ghazal Tehrani</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300;9..144,500;9..144,600&family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
+<style>
+  :root{
+    --primary:#0e7490; --primary-deep:#0b4f5e;
+    --accent-1:#67e8f9; --accent-2:#ecfccb; --accent-3:#fb7185;
+    --ink:#12242a; --muted:#5c6f72; --cream:#fbfaf4; --line:#dfe6e6; --card:#ffffff;
+    --serif:'Fraunces',Georgia,serif; --sans:'Inter',system-ui,sans-serif; --mono:'JetBrains Mono',monospace;
+  }
+  *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+  body{font-family:var(--sans); background:var(--cream); color:var(--ink); line-height:1.6;}
+  a{color:inherit;}
+  .back-link{ display:inline-block; margin:18px 0 0 32px; font-family:var(--mono); font-size:12.5px; color:var(--primary); text-decoration:none; }
+  .back-link:hover{ text-decoration:underline; }
+  .hero{ background:linear-gradient(135deg,rgba(11,79,94,0.78) 0%, rgba(14,116,144,0.68) 55%, rgba(103,232,249,0.45) 100%), url('hero.jpg') center 35%/cover; color:#fff; padding:36px 32px 46px; position:relative; overflow:hidden;}
+  .hero::before{ content:''; position:absolute; inset:0; background:radial-gradient(ellipse at 85% 15%, rgba(236,252,203,0.2) 0%, transparent 55%);}
+  .hero-inner{ position:relative; max-width:980px; margin:0 auto;}
+  .hero-eyebrow{ font-family:var(--mono); font-size:11px; letter-spacing:3px; text-transform:uppercase; color:#a5f3fc; margin-bottom:14px;}
+  .hero h1{ font-family:var(--serif); font-weight:500; font-size:clamp(38px,6vw,64px); line-height:1.05;}
+  .hero h1 span{ display:block; font-size:0.4em; font-weight:300; font-style:italic; color:#ecfeff; margin-top:8px;}
+  .hero-meta{ display:flex; flex-wrap:wrap; gap:10px; margin-top:26px;}
+  .meta-chip{ font-family:var(--mono); font-size:12px; padding:8px 15px; border:1px solid rgba(255,255,255,0.25); border-radius:100px; background:rgba(255,255,255,0.12);}
+  .meta-chip strong{ color:#fde68a; }
+  .hero-photo-cap{ position:relative; max-width:980px; margin:8px auto 0; font-family:var(--mono); font-size:11px; color:#e0f7fa; text-align:right; opacity:0.85; }
+  #map{ height:320px; max-width:980px; margin:-30px auto 0; border-radius:16px; box-shadow:0 12px 34px rgba(11,79,94,0.25); position:relative; z-index:2; border:4px solid #fff;}
+  .tabs{ max-width:980px; margin:34px auto 0; display:flex; flex-wrap:wrap; gap:6px; padding:0 32px;}
+  .tab-btn{ font-family:var(--mono); font-size:12px; letter-spacing:0.4px; padding:9px 16px; border-radius:100px; background:var(--card); border:1px solid var(--line); cursor:pointer; color:var(--muted);}
+  .tab-btn.active{ background:var(--primary); color:#fff; border-color:var(--primary);}
+  .wrap{ max-width:980px; margin:0 auto; padding:26px 32px 80px;}
+  .section{ display:none; } .section.active{ display:block; }
+  .section-title{ font-family:var(--serif); font-size:24px; font-weight:500; margin-bottom:6px;}
+  .section-sub{ font-size:13.5px; color:var(--muted); margin-bottom:22px;}
+  table.overview{ width:100%; border-collapse:collapse; font-size:13.5px;}
+  table.overview th{ text-align:left; font-family:var(--mono); font-size:11px; letter-spacing:1px; text-transform:uppercase; color:var(--muted); padding:8px 10px; border-bottom:2px solid var(--line);}
+  table.overview td{ padding:10px; border-bottom:1px solid var(--line); vertical-align:top;}
+  .book-group-label{ font-family:var(--mono); font-size:11px; letter-spacing:2px; text-transform:uppercase; color:var(--primary); margin:24px 0 10px; padding-bottom:6px; border-bottom:1px solid var(--line);}
+  .book-group-label:first-child{ margin-top:0; }
+  .hotel-card{ background:var(--card); border:1px solid var(--line); border-radius:12px; padding:18px 20px; margin-bottom:14px;}
+  .hotel-card h4{ font-family:var(--serif); font-size:18px; font-weight:500; margin-bottom:4px;}
+  .hotel-card .meta{ font-size:12.5px; color:var(--muted); margin-top:4px; }
+  .hotel-card .note{ font-size:13px; margin-top:8px; color:var(--ink); }
+  .card-grid{ display:grid; grid-template-columns:repeat(auto-fill,minmax(220px,1fr)); gap:14px; }
+  .card{ background:var(--card); border:1px solid var(--line); border-radius:12px; padding:14px 16px; }
+  .card h4{ font-family:var(--serif); font-size:16px; font-weight:500; margin-bottom:4px; }
+  .card p{ font-size:12.8px; color:var(--muted); }
+  .checklist{ list-style:none; }
+  .checklist li{ background:var(--card); border:1px solid var(--line); border-radius:10px; padding:12px 16px; margin-bottom:8px; font-size:13.8px;}
+  .checklist li .sub{ display:block; font-size:12px; color:var(--muted); margin-top:3px; font-weight:400;}
+  .callout{ background:rgba(103,232,249,0.10); border:1px solid rgba(103,232,249,0.35); border-radius:10px; padding:14px 16px; font-size:13px; margin-bottom:18px; }
+  footer{ text-align:center; padding:30px; font-size:12px; color:var(--muted); }
+</style>
+</head>
+<body>
+
+<a class="back-link" href="../index.html">← Back to trips</a>
+
+<div class="hero">
+  <div class="hero-inner">
+    <div class="hero-eyebrow">🏝️ Family Trip · 2015</div>
+    <h1>Treasure Cay<span>Boat days and National-Geographic-ranked sand on Great Abaco</span></h1>
+    <div class="hero-meta">
+      <div class="meta-chip">📍 Treasure Cay, Great Abaco, Bahamas</div>
+      <div class="meta-chip">🏖️ 3.5-mile beach — a Nat Geo Top 10</div>
+      <div class="meta-chip">⛵ Boating to Green Turtle &amp; Guana Cay</div>
+      <div class="meta-chip">👨‍👩‍👧‍👦 With the Was family</div>
+    </div>
+  </div>
+</div>
+<div class="hero-photo-cap">📷 The boys on the rocks, Sea of Abaco</div>
+
+<div id="map"></div>
+
+<div class="tabs">
+  <button class="tab-btn active" onclick="showTab('overview')">Overview</button>
+  <button class="tab-btn" onclick="showTab('boating')">Boating &amp; Day Trips</button>
+  <button class="tab-btn" onclick="showTab('food')">Restaurants</button>
+  <button class="tab-btn" onclick="showTab('book')">Book This Again</button>
+</div>
+
+<div class="wrap">
+
+  <div class="section active" id="tab-overview">
+    <div class="section-title">Overview</div>
+    <div class="section-sub">A beach week on Treasure Cay's famous stretch of sand, traveling with the Was family, with plenty of boating out to nearby cays.</div>
+    <div class="callout">The surviving planning documents for this trip are a restaurant/boating reference sheet and an Abaco activities guide rather than a day-by-day itinerary, so this page captures the options and logistics rather than a fixed daily schedule. A separate spreadsheet in the same folder shows early-stage research into an Exuma, Bahamas trip too — that appears to have been a considered alternative before Treasure Cay/Abaco was the final pick.</div>
+    <table class="overview">
+      <tr><th>Area</th><th>Notes</th></tr>
+      <tr><td>Treasure Cay Beach</td><td>3.5-mile stretch, voted a National Geographic Top 10 beach — Public Beach, Treasure Sands, Coco Beach, Bahama Beach, and "The Point" areas</td></tr>
+      <tr><td>Boat trips</td><td>Green Turtle Cay (25 min), Great Guana Cay (20 min, Nippers Sunday pig roast), Man-O-War (45 min), Elbow Cay (55 min, furthest allowed)</td></tr>
+      <tr><td>Bars</td><td>Coco Beach Bar &amp; Grill, Tipsy Seagull, Russell's Sports Bar, Chico's Sports Bar</td></tr>
+    </table>
+  </div>
+
+  <div class="section" id="tab-boating">
+    <div class="section-title">Boating &amp; Day Trips</div>
+    <div class="book-group-label">Nearby cays by boat</div>
+    <div class="card-grid">
+      <div class="card"><h4>Green Turtle Cay</h4><p>25 min — New Plymouth &amp; the Loyalist Settlement</p></div>
+      <div class="card"><h4>Great Guana Cay</h4><p>20 min — Nippers Sunday pig roast, great north beaches</p></div>
+      <div class="card"><h4>Manjack &amp; No Name Cay</h4><p>Intimate private beaches for picnics</p></div>
+      <div class="card"><h4>Fowl Cay</h4><p>35 min — great snorkeling and fishing</p></div>
+      <div class="card"><h4>Man-O-War Cay</h4><p>45 min away</p></div>
+      <div class="card"><h4>Elbow Cay (Hope Town)</h4><p>55 min — the furthest point planned for</p></div>
+    </div>
+    <div class="book-group-label">Boat rentals</div>
+    <div class="hotel-card">
+      <h4>J.I.C. Boat Rentals (preferred vendor)</h4>
+      <div class="meta">Treasure Cay · 1-242-365-8582 · jicboatrentals.com</div>
+      <div class="note">24' Angler $160/day (8 people), 27' Rambo with Honda 4-stroke $220/day (10 people).</div>
+    </div>
+    <div class="hotel-card">
+      <h4>Capt'n Forty — sightseeing &amp; shelling charter</h4>
+      <div class="meta">Treasure Cay · 1-242-475-8754</div>
+      <div class="note">Phoenix 29.7' with cabin, 12 persons/$650, tours to Hope Town, Man-O-War &amp; Guana Cay, 9am–5pm.</div>
+    </div>
+    <div class="book-group-label">Bike &amp; car rentals</div>
+    <div class="hotel-card">
+      <h4>Wendell's Bicycle Rentals (preferred vendor)</h4>
+      <div class="meta">Treasure Cay Shopping Plaza · 1-242-365-8687</div>
+      <div class="note">Half day $5, full day $7, week $42.</div>
+    </div>
+    <div class="hotel-card">
+      <h4>Cornish Car Rentals (preferred vendor)</h4>
+      <div class="meta">Near Treasure Cay Airport · 1-242-365-8623</div>
+      <div class="note">Car $75/day or $350/week; van $85/day or $450/week.</div>
+    </div>
+  </div>
+
+  <div class="section" id="tab-food">
+    <div class="section-title">Restaurants</div>
+    <div class="section-sub">Ranked by proximity to the beach house, closest walking spots first.</div>
+    <div class="card-grid">
+      <div class="card"><h4>Café La Florence</h4><p>Close — walking distance</p></div>
+      <div class="card"><h4>Coco Beach Bar &amp; Grill</h4><p>Close — walking distance · 1-242-365-8470, open daily 11am–5pm</p></div>
+      <div class="card"><h4>Bahamas Beach Club</h4><p></p></div>
+      <div class="card"><h4>Spinnaker Restaurant</h4><p>At the marina</p></div>
+      <div class="card"><h4>Treasure Sands Club</h4><p>Farthest — top of the peninsula</p></div>
+      <div class="card"><h4>A Touch of Class</h4><p>Farthest away</p></div>
+    </div>
+  </div>
+
+  <div class="section" id="tab-book">
+    <div class="section-title">Book This Again</div>
+    <div class="section-sub">Who to call if this trip gets a repeat.</div>
+    <ul class="checklist">
+      <li><strong>J.I.C. Boat Rentals</strong> — 1-242-365-8582<span class="sub">Preferred boat vendor in Treasure Cay</span></li>
+      <li><strong>Cornish Car Rentals</strong> — 1-242-365-8623<span class="sub">Preferred car rental, near the airport</span></li>
+      <li><strong>Wendell's Bicycle Rentals</strong> — 1-242-365-8687<span class="sub">Preferred bike vendor, Treasure Cay Shopping Plaza</span></li>
+      <li><strong>Coco Beach Bar &amp; Grill</strong> — 1-242-365-8470<span class="sub">Walking distance, open 11am–5pm</span></li>
+    </ul>
+  </div>
+
+</div>
+
+<footer><a href="../index.html">← Back to Vacations</a></footer>
+
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+<script>
+  var map = L.map('map', {scrollWheelZoom:false}).setView([26.75, -77.35], 10);
+  L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {attribution:'© OpenStreetMap'}).addTo(map);
+  var pts = [
+    [26.7434,-77.3025,"1. Treasure Cay Beach","3.5-mile Nat Geo Top 10 beach"],
+    [26.7597,-77.3341,"2. Green Turtle Cay","25 min by boat"],
+    [26.6626,-77.1257,"3. Great Guana Cay","20 min by boat — Nippers"],
+    [26.5865,-77.0432,"4. Man-O-War Cay","45 min by boat"],
+    [26.5424,-76.9776,"5. Elbow Cay / Hope Town","55 min by boat"]
+  ];
+  pts.forEach(function(p){
+    L.marker([p[0],p[1]]).addTo(map).bindPopup("<strong>"+p[2]+"</strong><br>"+p[3]+"<br><a href='https://www.google.com/maps/dir/?api=1&destination="+p[0]+","+p[1]+"' target='_blank'>Directions →</a>");
+  });
+  function showTab(id){
+    document.querySelectorAll('.section').forEach(function(s){ s.classList.remove('active'); });
+    document.querySelectorAll('.tab-btn').forEach(function(b){ b.classList.remove('active'); });
+    document.getElementById('tab-'+id).classList.add('active');
+    event.target.classList.add('active');
+  }
+</script>
+</body>
+</html>

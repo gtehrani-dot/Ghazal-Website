@@ -1,0 +1,367 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Greece &amp; Turkey — Ghazal Tehrani</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300;9..144,500;9..144,600&family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
+<style>
+  :root{
+    --primary:#075985; --primary-deep:#0c4a6e;
+    --accent-1:#38bdf8; --accent-2:#fef9c3; --accent-3:#fb7185;
+    --ink:#12232b; --muted:#5c6b72; --cream:#fbfaf4; --line:#dde6ea; --card:#ffffff;
+    --serif:'Fraunces',Georgia,serif; --sans:'Inter',system-ui,sans-serif; --mono:'JetBrains Mono',monospace;
+  }
+  *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+  body{font-family:var(--sans); background:var(--cream); color:var(--ink); line-height:1.6;}
+  a{color:inherit;}
+  .back-link{ display:inline-block; margin:18px 0 0 32px; font-family:var(--mono); font-size:12.5px; color:var(--primary); text-decoration:none; }
+  .back-link:hover{ text-decoration:underline; }
+  .hero{ background:linear-gradient(135deg,rgba(12,74,110,0.80) 0%, rgba(7,89,133,0.68) 55%, rgba(56,189,248,0.45) 100%), url('hero.jpg') center 25%/cover; color:#fff; padding:36px 32px 46px; position:relative; overflow:hidden;}
+  .hero::before{ content:''; position:absolute; inset:0; background:radial-gradient(ellipse at 85% 15%, rgba(254,249,195,0.2) 0%, transparent 55%);}
+  .hero-inner{ position:relative; max-width:980px; margin:0 auto;}
+  .hero-eyebrow{ font-family:var(--mono); font-size:11px; letter-spacing:3px; text-transform:uppercase; color:#bae6fd; margin-bottom:14px;}
+  .hero h1{ font-family:var(--serif); font-weight:500; font-size:clamp(38px,6vw,64px); line-height:1.05;}
+  .hero h1 span{ display:block; font-size:0.4em; font-weight:300; font-style:italic; color:#e0f2fe; margin-top:8px;}
+  .hero-meta{ display:flex; flex-wrap:wrap; gap:10px; margin-top:26px;}
+  .meta-chip{ font-family:var(--mono); font-size:12px; padding:8px 15px; border:1px solid rgba(255,255,255,0.25); border-radius:100px; background:rgba(255,255,255,0.12);}
+  .meta-chip strong{ color:#fde68a; }
+  .hero-photo-cap{ position:relative; max-width:980px; margin:8px auto 0; font-family:var(--mono); font-size:11px; color:#e0f2fe; text-align:right; opacity:0.85; }
+  .timeline-strip{ max-width:980px; margin:18px auto 0; padding:0 32px; display:flex; gap:8px; overflow-x:auto; }
+  .leg-chip{ flex:0 0 auto; font-family:var(--mono); font-size:11px; padding:8px 14px; border-radius:100px; background:var(--card); border:1px solid var(--line); color:var(--muted); white-space:nowrap; }
+  #map{ height:340px; max-width:980px; margin:18px auto 0; border-radius:16px; box-shadow:0 12px 34px rgba(12,74,110,0.25); position:relative; z-index:2; border:4px solid #fff;}
+  .tabs{ max-width:980px; margin:20px auto 0; display:flex; flex-wrap:wrap; gap:6px; padding:0 32px;}
+  .tab-btn{ font-family:var(--mono); font-size:12px; letter-spacing:0.4px; padding:9px 16px; border-radius:100px; background:var(--card); border:1px solid var(--line); cursor:pointer; color:var(--muted);}
+  .tab-btn.active{ background:var(--primary); color:#fff; border-color:var(--primary);}
+  .wrap{ max-width:980px; margin:0 auto; padding:26px 32px 80px;}
+  .section{ display:none; } .section.active{ display:block; }
+  .section-title{ font-family:var(--serif); font-size:24px; font-weight:500; margin-bottom:6px;}
+  .section-sub{ font-size:13.5px; color:var(--muted); margin-bottom:22px;}
+  .leg-head{ font-family:var(--mono); font-size:12px; letter-spacing:2px; text-transform:uppercase; color:var(--primary); margin:26px 0 12px; padding-bottom:6px; border-bottom:2px solid var(--line); }
+  .leg-head:first-child{ margin-top:0; }
+  table.overview{ width:100%; border-collapse:collapse; font-size:13.5px;}
+  table.overview th{ text-align:left; font-family:var(--mono); font-size:11px; letter-spacing:1px; text-transform:uppercase; color:var(--muted); padding:8px 10px; border-bottom:2px solid var(--line);}
+  table.overview td{ padding:10px; border-bottom:1px solid var(--line); vertical-align:top;}
+  .book-group-label{ font-family:var(--mono); font-size:11px; letter-spacing:2px; text-transform:uppercase; color:var(--primary); margin:24px 0 10px; padding-bottom:6px; border-bottom:1px solid var(--line);}
+  .book-group-label:first-child{ margin-top:0; }
+  .hotel-card{ background:var(--card); border:1px solid var(--line); border-radius:12px; padding:18px 20px; margin-bottom:14px;}
+  .hotel-card h4{ font-family:var(--serif); font-size:18px; font-weight:500; margin-bottom:4px;}
+  .hotel-card .meta{ font-size:12.5px; color:var(--muted); margin-top:4px; }
+  .hotel-card .note{ font-size:13px; margin-top:8px; color:var(--ink); }
+  .tl-day{ background:var(--card); border:1px solid var(--line); border-radius:12px; padding:18px 20px; margin-bottom:16px;}
+  .tl-title{ font-family:var(--serif); font-size:18px; font-weight:500; margin-bottom:2px;}
+  .tl-sub{ font-family:var(--mono); font-size:11.5px; color:var(--muted); text-transform:uppercase; letter-spacing:0.5px; margin-bottom:10px;}
+  ul.tl-items{ list-style:none; }
+  ul.tl-items li{ padding:5px 0 5px 18px; position:relative; font-size:13.8px;}
+  ul.tl-items li::before{ content:'–'; position:absolute; left:0; color:var(--muted);}
+  .tl-note{ font-size:12.5px; color:var(--muted); margin-top:6px; font-style:italic; }
+  .card-grid{ display:grid; grid-template-columns:repeat(auto-fill,minmax(220px,1fr)); gap:14px; }
+  .card{ background:var(--card); border:1px solid var(--line); border-radius:12px; padding:14px 16px; }
+  .card h4{ font-family:var(--serif); font-size:16px; font-weight:500; margin-bottom:4px; }
+  .card p{ font-size:12.8px; color:var(--muted); }
+  .checklist{ list-style:none; }
+  .checklist li{ background:var(--card); border:1px solid var(--line); border-radius:10px; padding:12px 16px; margin-bottom:8px; font-size:13.8px;}
+  .checklist li .sub{ display:block; font-size:12px; color:var(--muted); margin-top:3px; font-weight:400;}
+  .callout{ background:rgba(56,189,248,0.08); border:1px solid rgba(56,189,248,0.3); border-radius:10px; padding:14px 16px; font-size:13px; margin-bottom:18px; }
+  footer{ text-align:center; padding:30px; font-size:12px; color:var(--muted); }
+</style>
+</head>
+<body>
+
+<a class="back-link" href="../index.html">← Back to trips</a>
+
+<div class="hero">
+  <div class="hero-inner">
+    <div class="hero-eyebrow">🇹🇷🇬🇷 Trip · Apr 30 – May 16, 2010</div>
+    <h1>Greece &amp; Turkey<span>London to Istanbul, a driving tour down the Turquoise Coast, then Santorini and Athens</span></h1>
+    <div class="hero-meta">
+      <div class="meta-chip">🗓 <strong>17 days</strong> · Apr 30 – May 16</div>
+      <div class="meta-chip">📍 London → Istanbul → Turkish coast (self-drive) → Bodrum → Kos → Santorini → Athens → London</div>
+      <div class="meta-chip">🚗 Self-drive Turquoise Coast</div>
+    </div>
+  </div>
+</div>
+<div class="hero-photo-cap">📷 Dolmabahçe Palace gate, Istanbul, overlooking the Bosphorus</div>
+
+<div class="timeline-strip">
+  <div class="leg-chip">London Apr 30</div>
+  <div class="leg-chip">Istanbul May 1–4</div>
+  <div class="leg-chip">Çıralı May 4</div>
+  <div class="leg-chip">Kalkan May 5</div>
+  <div class="leg-chip">Kabak/Butterfly Valley May 6</div>
+  <div class="leg-chip">Ölüdeniz May 7</div>
+  <div class="leg-chip">Pamukkale May 8</div>
+  <div class="leg-chip">Bodrum May 9</div>
+  <div class="leg-chip">Santorini May 10–14</div>
+  <div class="leg-chip">Athens May 14</div>
+  <div class="leg-chip">London May 15</div>
+</div>
+
+<div id="map"></div>
+
+<div class="tabs">
+  <button class="tab-btn active" onclick="showTab('overview')">Overview</button>
+  <button class="tab-btn" onclick="showTab('hotel')">Hotels &amp; Route</button>
+  <button class="tab-btn" onclick="showTab('itinerary')">Itinerary</button>
+  <button class="tab-btn" onclick="showTab('food')">Food &amp; Things to Do</button>
+  <button class="tab-btn" onclick="showTab('book')">Book This Again</button>
+</div>
+
+<div class="wrap">
+
+  <div class="section active" id="tab-overview">
+    <div class="section-title">Overview</div>
+    <div class="section-sub">A 17-day trip combining Istanbul, a self-drive tour of Turkey's Turquoise Coast, and the Greek islands.</div>
+    <table class="overview">
+      <tr><th>Date</th><th>Focus</th></tr>
+      <tr><td>Fri Apr 30</td><td>Fly to London, overnight at the Hilton near Heathrow</td></tr>
+      <tr><td>Sat May 1</td><td>Fly to Istanbul, check in at The W</td></tr>
+      <tr><td>Tue May 4</td><td>Fly Istanbul → Antalya, pick up rental car, drive to Çıralı (near Olympos)</td></tr>
+      <tr><td>Wed May 5</td><td>Kaş (shopping/lunch/Kaputaş Beach) en route to Kalkan</td></tr>
+      <tr><td>Thu May 6</td><td>Saklıkent Gorge day trip, then on to Kabak / Butterfly Valley</td></tr>
+      <tr><td>Fri May 7</td><td>Ölüdeniz</td></tr>
+      <tr><td>Sat May 8</td><td>Pamukkale (with a stop at Ephesus)</td></tr>
+      <tr><td>Sun May 9</td><td>Bodrum, drop off rental car</td></tr>
+      <tr><td>Mon May 10</td><td>Ferry Bodrum → Kos → Santorini</td></tr>
+      <tr><td>Fri May 14</td><td>Fly Santorini → Athens</td></tr>
+      <tr><td>Sat May 15</td><td>Fly Athens → London</td></tr>
+      <tr><td>Sun May 16</td><td>Fly home</td></tr>
+    </table>
+  </div>
+
+  <div class="section" id="tab-hotel">
+    <div class="section-title">Hotels &amp; Route</div>
+    <div class="leg-head">London</div>
+    <div class="hotel-card">
+      <h4>Hilton — Bath Road (A4), Hayes, London UB3 5BP</h4>
+      <div class="note">First night, Apr 30, on the way out.</div>
+    </div>
+    <div class="hotel-card">
+      <h4>Sheraton Skyline Hotel, London Heathrow</h4>
+      <div class="note">Bath Road (A4), Hayes — final night, May 15, on the way home.</div>
+    </div>
+    <div class="leg-head">Istanbul</div>
+    <div class="hotel-card">
+      <h4>The W Istanbul</h4>
+      <div class="meta">Süleyman Seba Cad No: 22, Akaretler, Beşiktaş, Istanbul 34357</div>
+    </div>
+    <div class="leg-head">Turquoise Coast (self-drive)</div>
+    <div class="hotel-card">
+      <h4>Bellerofon Holiday — Çıralı</h4>
+      <div class="meta">Akif Köşk, Çıralı, near Olympos · 0090-242-8257336</div>
+      <div class="note">From Antalya, turn left after ~80km at the "Çıralı" road sign; a 7km winding secondary road leads to the village.</div>
+    </div>
+    <div class="hotel-card">
+      <h4>Kulübe Boutique Hotel — Kalkan</h4>
+      <div class="meta">Kalamar Köyü Funda Sk. No:13, 34020 Kalkan · booked via Booking.com</div>
+      <div class="note">Near Kaputaş Beach and Patara Beach.</div>
+    </div>
+    <div class="hotel-card">
+      <h4>The Shambala — Kabak / Butterfly Valley</h4>
+      <div class="meta">Main line 0252-642-11-47 · Yörükhan Ünal 0532-496 08 70</div>
+      <div class="note">Reached via a dirt road forking off the main Fethiye–Ölüdeniz road, past Lycia World Hotel and the village of Faralya, marked by a Shambala signpost.</div>
+    </div>
+    <div class="hotel-card">
+      <h4>Oyster Residences — Ölüdeniz, Fethiye</h4>
+      <div class="meta">Belcekız Mevkii, 1.Sokak, Ölüdeniz/Fethiye · 00 90 252 617 07 65</div>
+    </div>
+    <div class="hotel-card">
+      <h4>Venüs Hotel — Pamukkale</h4>
+      <div class="meta">Pamuk Mh. Hasan Tahsin Cd. No: 16, Pamukkale/Denizli · 0090 258 272 21 52</div>
+    </div>
+    <div class="hotel-card">
+      <h4>Maca Kızı Hotel — Bodrum</h4>
+      <div class="meta">Kesireburnu Mevkii, Narçiçeği Sk., Göltürkbükü / Bodrum, Muğla 48400 · 90 252 377 6272</div>
+      <div class="note">Recommended nearby restaurants at the time: Sait ("fabulous") and Deniz Ann ("fabulous").</div>
+    </div>
+    <div class="leg-head">Greece</div>
+    <div class="hotel-card">
+      <h4>Iliovasilema Suites — Imerovigli, Santorini</h4>
+      <div class="meta">+30 (22860) 25218 / 23611</div>
+    </div>
+    <div class="hotel-card">
+      <h4>Andronis Suites — Oia, Santorini</h4>
+      <div class="meta">Thiras Oias, Oia 84700 · +30 2286072041</div>
+    </div>
+    <div class="hotel-card">
+      <h4>Hotel Grande Bretagne — Athens</h4>
+      <div class="meta">Constitution Square, Athens 10563 · (30)(21) 03330000</div>
+    </div>
+    <div class="leg-head">Car rental</div>
+    <div class="hotel-card">
+      <h4>Auto Europe — Ford Fiesta or similar (manual)</h4>
+      <div class="meta">1-800-223-5555 · autoeurope.com</div>
+      <div class="note">Picked up Antalya Downtown Office, May 4 @ 4pm. Dropped off Bodrum Downtown Office, May 9 @ 4pm.</div>
+    </div>
+  </div>
+
+  <div class="section" id="tab-itinerary">
+    <div class="section-title">Itinerary</div>
+
+    <div class="leg-head">London → Istanbul</div>
+    <div class="tl-day">
+      <div class="tl-title">Fri Apr 30 – Sat May 1</div>
+      <div class="tl-sub">Depart, overnight London, on to Istanbul</div>
+      <ul class="tl-items">
+        <li>Overnight at the Hilton near Heathrow</li>
+        <li>Fly to Istanbul, check in at The W</li>
+      </ul>
+      <div class="tl-note">Istanbul recommendations gathered ahead of the trip: Topkapı Palace Museum ("could have spent another day here"), the Blue Mosque, the Basilica Cistern (underground cisterns), a Sufi/whirling dervish ceremony, the Grand Bazaar, and — a bit further out — the Hagia Sophia.</div>
+    </div>
+
+    <div class="leg-head">Turquoise Coast — self-drive</div>
+    <div class="tl-day">
+      <div class="tl-title">Tue May 4</div>
+      <div class="tl-sub">Istanbul → Antalya → Çıralı</div>
+      <ul class="tl-items">
+        <li>Fly Istanbul → Antalya (Atlasjet, flight KK14, 3:00–4:05)</li>
+        <li>Pick up rental car in Antalya, 4pm</li>
+        <li>Drive to Çıralı, near the town of Olympos</li>
+      </ul>
+    </div>
+    <div class="tl-day">
+      <div class="tl-title">Wed May 5</div>
+      <div class="tl-sub">Çıralı → Kaş → Kalkan</div>
+      <ul class="tl-items">
+        <li>Stop in Kaş for shopping, lunch, and Kaputaş Beach (not staying overnight)</li>
+        <li>Continue to Kalkan for the night</li>
+      </ul>
+    </div>
+    <div class="tl-day">
+      <div class="tl-title">Thu May 6</div>
+      <div class="tl-sub">Saklıkent Gorge → Kabak / Butterfly Valley</div>
+      <ul class="tl-items">
+        <li>Day trip to Saklıkent Gorge, lunch at Saklıkent Restaurant</li>
+        <li>Drive to Kabak, check out Butterfly Valley / Faralya, Kabak Bay (Kabak Köyü) beach</li>
+      </ul>
+    </div>
+    <div class="tl-day">
+      <div class="tl-title">Fri May 7</div>
+      <div class="tl-sub">Ölüdeniz</div>
+      <ul class="tl-items">
+        <li>Ölüdeniz beach and lagoon</li>
+      </ul>
+    </div>
+    <div class="tl-day">
+      <div class="tl-title">Sat May 8</div>
+      <div class="tl-sub">Pamukkale (with Ephesus en route)</div>
+      <ul class="tl-items">
+        <li>Stop at Ephesus (not staying overnight)</li>
+        <li>Pamukkale's travertine terraces</li>
+      </ul>
+    </div>
+    <div class="tl-day">
+      <div class="tl-title">Sun May 9</div>
+      <div class="tl-sub">Bodrum</div>
+      <ul class="tl-items">
+        <li>Drop off rental car, Bodrum Downtown Office, 4pm</li>
+        <li class="meal">🍽 Recommended locally: Sait and Deniz Ann restaurants</li>
+      </ul>
+    </div>
+
+    <div class="leg-head">Greek islands</div>
+    <div class="tl-day">
+      <div class="tl-title">Mon May 10</div>
+      <div class="tl-sub">Bodrum → Kos → Santorini (ferry)</div>
+      <ul class="tl-items">
+        <li>Ferry Bodrum → Kos, then Kos → Santorini</li>
+        <li>Check in at Iliovasilema Suites, Imerovigli</li>
+      </ul>
+      <div class="tl-note">Santorini restaurant list gathered for the stay: Lucky's Souvlakis (Fira), Taverna Imerovigli, Almira Restaurant (Kamari), Ginger Sushi Lounge (Firostefani).</div>
+    </div>
+    <div class="tl-day">
+      <div class="tl-title">Tue–Thu May 11–13</div>
+      <div class="tl-sub">Santorini</div>
+      <ul class="tl-items">
+        <li>Boat trip around the caldera</li>
+        <li>Time based between Imerovigli and Oia (Andronis Suites)</li>
+      </ul>
+    </div>
+    <div class="tl-day">
+      <div class="tl-title">Fri May 14</div>
+      <div class="tl-sub">Santorini → Athens</div>
+      <ul class="tl-items">
+        <li>Flight Olympic Air OA555, 4:40–5:25</li>
+        <li>Check in at Hotel Grande Bretagne, Constitution Square</li>
+      </ul>
+    </div>
+    <div class="tl-day">
+      <div class="tl-title">Sat May 15 – Sun May 16</div>
+      <div class="tl-sub">Athens → London → home</div>
+      <ul class="tl-items">
+        <li>Fly Athens → London, overnight at the Sheraton Skyline Heathrow</li>
+        <li>Fly home</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="section" id="tab-food">
+    <div class="section-title">Food &amp; Things to Do</div>
+    <div class="leg-head">Istanbul recommendations</div>
+    <div class="card-grid">
+      <div class="card"><h4>Topkapı Palace Museum</h4><p>"Could have spent another day here"</p></div>
+      <div class="card"><h4>Blue Mosque</h4><p>Remove shoes; women should bring a head scarf</p></div>
+      <div class="card"><h4>Basilica Cistern</h4><p>Underground museum of the historic water system</p></div>
+      <div class="card"><h4>Sufi Music &amp; Whirling Dervishes</h4><p>Ceremony — interesting, but confirm they're performing</p></div>
+      <div class="card"><h4>Grand Bazaar</h4><p>Jewelry, souvenirs, shopping</p></div>
+      <div class="card"><h4>Hagia Sophia</h4><p>A bit further out — worth a cab</p></div>
+    </div>
+    <div class="leg-head">Santorini restaurants</div>
+    <div class="card-grid">
+      <div class="card"><h4>Lucky's Souvlakis</h4><p>Fira</p></div>
+      <div class="card"><h4>Taverna Imerovigli</h4><p>Imerovigli</p></div>
+      <div class="card"><h4>Almira Restaurant</h4><p>Kamari</p></div>
+      <div class="card"><h4>Ginger Sushi Lounge</h4><p>Firostefani</p></div>
+    </div>
+    <div class="leg-head">Bodrum</div>
+    <div class="card-grid">
+      <div class="card"><h4>Sait</h4><p>Recommended as "fabulous"</p></div>
+      <div class="card"><h4>Deniz Ann</h4><p>Recommended as "fabulous"</p></div>
+    </div>
+  </div>
+
+  <div class="section" id="tab-book">
+    <div class="section-title">Book This Again</div>
+    <div class="section-sub">Who to call if this trip gets a repeat.</div>
+    <ul class="checklist">
+      <li><strong>Maca Kızı Hotel, Bodrum</strong> — 90 252 377 6272<span class="sub">Well-reviewed stay with two recommended restaurants nearby</span></li>
+      <li><strong>The Shambala, Kabak</strong> — 0252-642-11-47<span class="sub">Remote/private setting near Butterfly Valley</span></li>
+      <li><strong>Auto Europe</strong> — 1-800-223-5555<span class="sub">Rental car for the Turquoise Coast self-drive leg</span></li>
+      <li><strong>Andronis Suites, Oia</strong> — +30 2286072041<span class="sub">Santorini caldera-side stay</span></li>
+    </ul>
+  </div>
+
+</div>
+
+<footer><a href="../index.html">← Back to Vacations</a></footer>
+
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+<script>
+  var map = L.map('map', {scrollWheelZoom:false}).setView([38.5, 27.5], 6);
+  L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {attribution:'© OpenStreetMap'}).addTo(map);
+  var pts = [
+    [41.0082,28.9784,"1. Istanbul","The W · Dolmabahçe area"],
+    [36.5544,30.1381,"2. Antalya","Fly in, car pickup"],
+    [36.4331,30.4675,"3. Çıralı / Olympos","Bellerofon Holiday"],
+    [36.3592,29.6417,"4. Kaş → Kalkan","Kaputaş Beach, Kulübe Boutique Hotel"],
+    [36.5219,29.3242,"5. Saklıkent / Kabak","Gorge day trip, Shambala"],
+    [36.5497,29.1197,"6. Ölüdeniz","Oyster Residences"],
+    [37.9203,29.1210,"7. Pamukkale","Travertine terraces, Venüs Hotel"],
+    [37.0344,27.4305,"8. Bodrum","Maca Kızı, car drop-off, ferry"],
+    [36.4167,25.4318,"9. Santorini","Imerovigli & Oia"],
+    [37.9838,23.7275,"10. Athens","Grande Bretagne, Constitution Square"]
+  ];
+  pts.forEach(function(p){
+    L.marker([p[0],p[1]]).addTo(map).bindPopup("<strong>"+p[2]+"</strong><br>"+p[3]+"<br><a href='https://www.google.com/maps/dir/?api=1&destination="+p[0]+","+p[1]+"' target='_blank'>Directions →</a>");
+  });
+  function showTab(id){
+    document.querySelectorAll('.section').forEach(function(s){ s.classList.remove('active'); });
+    document.querySelectorAll('.tab-btn').forEach(function(b){ b.classList.remove('active'); });
+    document.getElementById('tab-'+id).classList.add('active');
+    event.target.classList.add('active');
+  }
+</script>
+</body>
+</html>

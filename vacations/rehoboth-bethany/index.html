@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Rehoboth & Bethany Beach — Ghazal Tehrani</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300;9..144,500;9..144,600&family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
+<style>
+  :root{
+    --primary:#1e3a5f; --primary-deep:#0f2038;
+    --accent-1:#f4a259; --accent-2:#fbbf24; --accent-3:#fb7185;
+    --ink:#182430; --muted:#5c6b78; --cream:#fbf9f4; --line:#e2ddd0; --card:#ffffff;
+    --serif:'Fraunces',Georgia,serif; --sans:'Inter',system-ui,sans-serif; --mono:'JetBrains Mono',monospace;
+  }
+  *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+  body{font-family:var(--sans); background:var(--cream); color:var(--ink); line-height:1.6;}
+  a{color:inherit;}
+  .back-link{ display:inline-block; margin:18px 0 0 32px; font-family:var(--mono); font-size:12.5px; color:var(--primary); text-decoration:none; }
+  .back-link:hover{ text-decoration:underline; }
+  .hero{ background:linear-gradient(135deg,var(--primary-deep) 0%, var(--primary) 55%, #f4a259 100%); color:#fff; padding:36px 32px 46px; position:relative; overflow:hidden;}
+  .hero::before{ content:''; position:absolute; inset:0; background:radial-gradient(ellipse at 85% 15%, rgba(251,191,36,0.2) 0%, transparent 55%);}
+  .hero-inner{ position:relative; max-width:980px; margin:0 auto;}
+  .hero-eyebrow{ font-family:var(--mono); font-size:11px; letter-spacing:3px; text-transform:uppercase; color:#fcd9a8; margin-bottom:14px;}
+  .hero h1{ font-family:var(--serif); font-weight:500; font-size:clamp(38px,6vw,64px); line-height:1.05;}
+  .hero h1 span{ display:block; font-size:0.4em; font-weight:300; font-style:italic; color:#fde8cc; margin-top:8px;}
+  .hero-meta{ display:flex; flex-wrap:wrap; gap:10px; margin-top:26px;}
+  .meta-chip{ font-family:var(--mono); font-size:12px; padding:8px 15px; border:1px solid rgba(255,255,255,0.25); border-radius:100px; background:rgba(255,255,255,0.08);}
+  .meta-chip strong{ color:#fde68a; }
+  #map{ height:320px; max-width:980px; margin:-30px auto 0; border-radius:16px; box-shadow:0 12px 34px rgba(15,32,56,0.25); position:relative; z-index:2; border:4px solid #fff;}
+  .tabs{ max-width:980px; margin:34px auto 0; display:flex; flex-wrap:wrap; gap:6px; padding:0 32px;}
+  .tab-btn{ font-family:var(--mono); font-size:12px; letter-spacing:0.4px; padding:9px 16px; border-radius:100px; background:var(--card); border:1px solid var(--line); cursor:pointer; color:var(--muted);}
+  .tab-btn.active{ background:var(--primary); color:#fff; border-color:var(--primary);}
+  .wrap{ max-width:980px; margin:0 auto; padding:26px 32px 80px;}
+  .section{ display:none; } .section.active{ display:block; }
+  .section-title{ font-family:var(--serif); font-size:24px; font-weight:500; margin-bottom:6px;}
+  .section-sub{ font-size:13.5px; color:var(--muted); margin-bottom:22px;}
+  table.overview{ width:100%; border-collapse:collapse; font-size:13.5px;}
+  table.overview th{ text-align:left; font-family:var(--mono); font-size:11px; letter-spacing:1px; text-transform:uppercase; color:var(--muted); padding:8px 10px; border-bottom:2px solid var(--line);}
+  table.overview td{ padding:10px; border-bottom:1px solid var(--line); vertical-align:top;}
+  .book-group-label{ font-family:var(--mono); font-size:11px; letter-spacing:2px; text-transform:uppercase; color:var(--primary); margin:24px 0 10px; padding-bottom:6px; border-bottom:1px solid var(--line);}
+  .book-group-label:first-child{ margin-top:0; }
+  .hotel-card{ background:var(--card); border:1px solid var(--line); border-radius:12px; padding:18px 20px; margin-bottom:14px;}
+  .hotel-card h4{ font-family:var(--serif); font-size:18px; font-weight:500; margin-bottom:4px;}
+  .hotel-card .meta{ font-size:12.5px; color:var(--muted); margin-top:4px; }
+  .hotel-card .note{ font-size:13px; margin-top:8px; color:var(--ink); }
+  .tl-day{ background:var(--card); border:1px solid var(--line); border-radius:12px; padding:18px 20px; margin-bottom:16px;}
+  .tl-title{ font-family:var(--serif); font-size:18px; font-weight:500; margin-bottom:2px;}
+  .tl-sub{ font-family:var(--mono); font-size:11.5px; color:var(--muted); text-transform:uppercase; letter-spacing:0.5px; margin-bottom:10px;}
+  ul.tl-items{ list-style:none; }
+  ul.tl-items li{ padding:5px 0 5px 18px; position:relative; font-size:13.8px;}
+  ul.tl-items li::before{ content:'–'; position:absolute; left:0; color:var(--muted);}
+  ul.tl-items li.meal{ background:rgba(244,162,89,0.14); border-radius:6px; padding:8px 12px; margin:6px 0; }
+  ul.tl-items li.meal::before{ content:''; }
+  .checklist{ list-style:none; }
+  .checklist li{ background:var(--card); border:1px solid var(--line); border-radius:10px; padding:12px 16px; margin-bottom:8px; font-size:13.8px;}
+  .checklist li .sub{ display:block; font-size:12px; color:var(--muted); margin-top:3px; font-weight:400;}
+  footer{ text-align:center; padding:30px; font-size:12px; color:var(--muted); }
+</style>
+</head>
+<body>
+
+<a class="back-link" href="../index.html">← Back to trips</a>
+
+<div class="hero">
+  <div class="hero-inner">
+    <div class="hero-eyebrow">🎉 Mom's 70th Birthday · Oct 17–22, 2025</div>
+    <h1>Rehoboth &amp; Bethany Beach<span>A five-bedroom house, a crab dinner, and Mom's 70th</span></h1>
+    <div class="hero-meta">
+      <div class="meta-chip">🏠 <strong>5BR / 5.5BA</strong> · heated pool, 5 min to the beach</div>
+      <div class="meta-chip">🗓 <strong>4 nights</strong> · Oct 18–22</div>
+      <div class="meta-chip">📍 Rehoboth Beach, DE</div>
+      <div class="meta-chip">🦀 <strong>Steamers</strong> · crab dinner, the big night</div>
+    </div>
+  </div>
+</div>
+
+<div id="map"></div>
+
+<div class="tabs">
+  <button class="tab-btn active" onclick="showTab('overview')">Overview</button>
+  <button class="tab-btn" onclick="showTab('hotel')">Hotel &amp; Transportation</button>
+  <button class="tab-btn" onclick="showTab('itinerary')">Itinerary</button>
+  <button class="tab-btn" onclick="showTab('prep')">Party Prep Checklist</button>
+  <button class="tab-btn" onclick="showTab('book')">Book This Again</button>
+</div>
+
+<div class="wrap">
+
+  <div class="section active" id="tab-overview">
+    <div class="section-title">Overview</div>
+    <div class="section-sub">A family weekend built around Mom's 70th.</div>
+    <table class="overview">
+      <tr><th>Date</th><th>Focus</th></tr>
+      <tr><td>Fri Oct 17</td><td>Arrive, prep for the party (Mom's actual birthday)</td></tr>
+      <tr><td>Sat Oct 18</td><td>Pick up crab meat, settle in nearby, Mom's 70th birthday dinner — Steamers</td></tr>
+      <tr><td>Sun Oct 19</td><td>Beach walk &amp; brunch; evening — BlueCoast, Off the Hook, or grilled steaks at the house</td></tr>
+      <tr><td>Mon Oct 20</td><td>Bagels, downtown/boardwalk, lunch, ice cream</td></tr>
+      <tr><td>Tue Oct 21</td><td>Smoothies, pack, check out</td></tr>
+    </table>
+  </div>
+
+  <div class="section" id="tab-hotel">
+    <div class="section-title">Hotel &amp; Transportation</div>
+    <div class="book-group-label">Lodging</div>
+    <div class="hotel-card">
+      <h4>5BR / 5.5BA house with heated pool</h4>
+      <div class="meta">Rehoboth Beach, DE · Oct 18–22 · booked via Airbnb, 5-minute walk to the beach</div>
+    </div>
+    <div class="book-group-label">Transportation</div>
+    <div class="hotel-card">
+      <h4>Drive from home</h4>
+      <div class="note">No flights — this was a drive-up trip.</div>
+    </div>
+  </div>
+
+  <div class="section" id="tab-itinerary">
+    <div class="section-title">Itinerary</div>
+
+    <div class="tl-day">
+      <div class="tl-title">Day 1 · Fri, Oct 17 · Arrival &amp; prep</div>
+      <div class="tl-sub">Mom's actual birthday</div>
+      <ul class="tl-items">
+        <li>Arrive, settle in, start party prep for the next day's celebration</li>
+      </ul>
+    </div>
+
+    <div class="tl-day">
+      <div class="tl-title">Day 2 · Sat, Oct 18 · The birthday</div>
+      <div class="tl-sub">Crab dinner night</div>
+      <ul class="tl-items">
+        <li>Pick up crab meat, 10am</li>
+        <li>Drive up / settle in nearby</li>
+        <li class="meal">🍽 Mom's 70th birthday dinner: Steamers, crab dinner</li>
+      </ul>
+    </div>
+
+    <div class="tl-day">
+      <div class="tl-title">Day 3 · Sun, Oct 19</div>
+      <div class="tl-sub">Beach &amp; brunch</div>
+      <ul class="tl-items">
+        <li>Beach walk and brunch (TBD spot)</li>
+        <li>Spreading Mominoo's ashes — a planned, meaningful stop this day</li>
+        <li class="meal">🍽 Dinner out at BlueCoast or Off the Hook, or grilled steaks at the house</li>
+      </ul>
+    </div>
+
+    <div class="tl-day">
+      <div class="tl-title">Day 4 · Mon, Oct 20</div>
+      <div class="tl-sub">Downtown &amp; boardwalk</div>
+      <ul class="tl-items">
+        <li class="meal">🍳 Breakfast: bagels</li>
+        <li>Downtown / boardwalk, lunch, ice cream</li>
+        <li class="meal">🍽 Dinner: TBD, pizza, or BBQ — or repeat one of Sunday's options if saved for this night instead</li>
+      </ul>
+    </div>
+
+    <div class="tl-day">
+      <div class="tl-title">Day 5 · Tue, Oct 21 · Departure</div>
+      <div class="tl-sub">Pack &amp; head home</div>
+      <ul class="tl-items">
+        <li class="meal">🍳 Breakfast: smoothies</li>
+        <li>Pack, check out, drive home</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="section" id="tab-prep">
+    <div class="section-title">Party Prep Checklist</div>
+    <div class="section-sub">The real division-of-labor list from the birthday night — worth reusing for the next family celebration.</div>
+    <ul class="checklist">
+      <li><strong>Everyone:</strong> make beds (Mom &amp; Dad's room too)</li>
+      <li><strong>Farid:</strong> test the grill &amp; outdoor gas table; bring alcohol to the party</li>
+      <li><strong>Parees:</strong> hang the banner &amp; balloons; bring cheese</li>
+      <li><strong>Kids:</strong> set the table for dinner</li>
+      <li><strong>Ghazal:</strong> chill all the white wine, put food away</li>
+      <li><strong>Parents:</strong> take the kids for lunch, 12:30–1:30, bring something back for whoever stays behind</li>
+    </ul>
+  </div>
+
+  <div class="section" id="tab-book">
+    <div class="section-title">Book This Again</div>
+    <div class="section-sub">The essentials if this becomes an annual thing.</div>
+    <ul class="checklist">
+      <li><strong>Steamers</strong> — crab dinner<span class="sub">The birthday-night pick; worth the reservation</span></li>
+      <li><strong>BlueCoast</strong> and <strong>Off the Hook</strong><span class="sub">Backup dinner options, both well-reviewed locally</span></li>
+      <li><strong>5BR/5.5BA Rehoboth Beach house</strong><span class="sub">Heated pool, 5-minute walk to the beach — worth rebooking for the same size group</span></li>
+    </ul>
+  </div>
+
+</div>
+
+<footer><a href="../index.html">← Back to Vacations</a></footer>
+
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+<script>
+  var map = L.map('map', {scrollWheelZoom:false}).setView([38.7159, -75.0757], 12);
+  L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {attribution:'© OpenStreetMap'}).addTo(map);
+  var pts = [
+    [38.7159,-75.0757,"1. Rehoboth Beach house","5BR/5.5BA, heated pool"],
+    [38.7220,-75.0763,"2. Rehoboth Beach boardwalk","Downtown, shopping, ice cream"]
+  ];
+  pts.forEach(function(p){
+    L.marker([p[0],p[1]]).addTo(map).bindPopup("<strong>"+p[2]+"</strong><br>"+p[3]+"<br><a href='https://www.google.com/maps/dir/?api=1&destination="+p[0]+","+p[1]+"' target='_blank'>Directions →</a>");
+  });
+  function showTab(id){
+    document.querySelectorAll('.section').forEach(function(s){ s.classList.remove('active'); });
+    document.querySelectorAll('.tab-btn').forEach(function(b){ b.classList.remove('active'); });
+    document.getElementById('tab-'+id).classList.add('active');
+    event.target.classList.add('active');
+  }
+</script>
+</body>
+</html>

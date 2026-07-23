@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Deer Valley, Utah — Ghazal Tehrani</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300;9..144,500;9..144,600&family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
+<style>
+  :root{
+    --primary:#1e293b; --primary-deep:#0f172a;
+    --accent-1:#93c5fd; --accent-2:#f8fafc; --accent-3:#fb7185;
+    --ink:#1a2027; --muted:#5c6672; --cream:#fbfaf4; --line:#e2e6ea; --card:#ffffff;
+    --serif:'Fraunces',Georgia,serif; --sans:'Inter',system-ui,sans-serif; --mono:'JetBrains Mono',monospace;
+  }
+  *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+  body{font-family:var(--sans); background:var(--cream); color:var(--ink); line-height:1.6;}
+  a{color:inherit;}
+  .back-link{ display:inline-block; margin:18px 0 0 32px; font-family:var(--mono); font-size:12.5px; color:var(--primary); text-decoration:none; }
+  .back-link:hover{ text-decoration:underline; }
+  .hero{ background:linear-gradient(135deg,rgba(15,23,42,0.82) 0%, rgba(30,41,59,0.72) 55%, rgba(147,197,253,0.45) 100%), url('hero.jpg') center 55%/cover; color:#fff; padding:36px 32px 46px; position:relative; overflow:hidden;}
+  .hero::before{ content:''; position:absolute; inset:0; background:radial-gradient(ellipse at 85% 15%, rgba(147,197,253,0.25) 0%, transparent 55%);}
+  .hero-inner{ position:relative; max-width:980px; margin:0 auto;}
+  .hero-eyebrow{ font-family:var(--mono); font-size:11px; letter-spacing:3px; text-transform:uppercase; color:#bfdbfe; margin-bottom:14px;}
+  .hero h1{ font-family:var(--serif); font-weight:500; font-size:clamp(38px,6vw,64px); line-height:1.05;}
+  .hero h1 span{ display:block; font-size:0.4em; font-weight:300; font-style:italic; color:#f1f5f9; margin-top:8px;}
+  .hero-meta{ display:flex; flex-wrap:wrap; gap:10px; margin-top:26px;}
+  .meta-chip{ font-family:var(--mono); font-size:12px; padding:8px 15px; border:1px solid rgba(255,255,255,0.25); border-radius:100px; background:rgba(255,255,255,0.12);}
+  .meta-chip strong{ color:#fde68a; }
+  .hero-photo-cap{ position:relative; max-width:980px; margin:8px auto 0; font-family:var(--mono); font-size:11px; color:#e2e8f0; text-align:right; opacity:0.85; }
+  #map{ height:320px; max-width:980px; margin:-30px auto 0; border-radius:16px; box-shadow:0 12px 34px rgba(15,23,42,0.25); position:relative; z-index:2; border:4px solid #fff;}
+  .tabs{ max-width:980px; margin:34px auto 0; display:flex; flex-wrap:wrap; gap:6px; padding:0 32px;}
+  .tab-btn{ font-family:var(--mono); font-size:12px; letter-spacing:0.4px; padding:9px 16px; border-radius:100px; background:var(--card); border:1px solid var(--line); cursor:pointer; color:var(--muted);}
+  .tab-btn.active{ background:var(--primary); color:#fff; border-color:var(--primary);}
+  .wrap{ max-width:980px; margin:0 auto; padding:26px 32px 80px;}
+  .section{ display:none; } .section.active{ display:block; }
+  .section-title{ font-family:var(--serif); font-size:24px; font-weight:500; margin-bottom:6px;}
+  .section-sub{ font-size:13.5px; color:var(--muted); margin-bottom:22px;}
+  table.overview{ width:100%; border-collapse:collapse; font-size:13.5px;}
+  table.overview th{ text-align:left; font-family:var(--mono); font-size:11px; letter-spacing:1px; text-transform:uppercase; color:var(--muted); padding:8px 10px; border-bottom:2px solid var(--line);}
+  table.overview td{ padding:10px; border-bottom:1px solid var(--line); vertical-align:top;}
+  .book-group-label{ font-family:var(--mono); font-size:11px; letter-spacing:2px; text-transform:uppercase; color:var(--primary); margin:24px 0 10px; padding-bottom:6px; border-bottom:1px solid var(--line);}
+  .book-group-label:first-child{ margin-top:0; }
+  .hotel-card{ background:var(--card); border:1px solid var(--line); border-radius:12px; padding:18px 20px; margin-bottom:14px;}
+  .hotel-card h4{ font-family:var(--serif); font-size:18px; font-weight:500; margin-bottom:4px;}
+  .hotel-card .meta{ font-size:12.5px; color:var(--muted); margin-top:4px; }
+  .hotel-card .note{ font-size:13px; margin-top:8px; color:var(--ink); }
+  .tl-day{ background:var(--card); border:1px solid var(--line); border-radius:12px; padding:18px 20px; margin-bottom:16px;}
+  .tl-title{ font-family:var(--serif); font-size:18px; font-weight:500; margin-bottom:2px;}
+  .tl-sub{ font-family:var(--mono); font-size:11.5px; color:var(--muted); text-transform:uppercase; letter-spacing:0.5px; margin-bottom:10px;}
+  ul.tl-items{ list-style:none; }
+  ul.tl-items li{ padding:5px 0 5px 18px; position:relative; font-size:13.8px;}
+  ul.tl-items li::before{ content:'–'; position:absolute; left:0; color:var(--muted);}
+  ul.tl-items li.meal{ background:rgba(147,197,253,0.14); border-radius:6px; padding:8px 12px; margin:6px 0; }
+  ul.tl-items li.meal::before{ content:''; }
+  .tl-note{ font-size:12.5px; color:var(--muted); margin-top:6px; font-style:italic; }
+  .card-grid{ display:grid; grid-template-columns:repeat(auto-fill,minmax(220px,1fr)); gap:14px; }
+  .card{ background:var(--card); border:1px solid var(--line); border-radius:12px; padding:14px 16px; }
+  .card h4{ font-family:var(--serif); font-size:16px; font-weight:500; margin-bottom:4px; }
+  .card p{ font-size:12.8px; color:var(--muted); }
+  .checklist{ list-style:none; }
+  .checklist li{ background:var(--card); border:1px solid var(--line); border-radius:10px; padding:12px 16px; margin-bottom:8px; font-size:13.8px;}
+  .checklist li .sub{ display:block; font-size:12px; color:var(--muted); margin-top:3px; font-weight:400;}
+  .callout{ background:rgba(147,197,253,0.12); border:1px solid rgba(147,197,253,0.4); border-radius:10px; padding:14px 16px; font-size:13px; margin-bottom:18px; }
+  footer{ text-align:center; padding:30px; font-size:12px; color:var(--muted); }
+</style>
+</head>
+<body>
+
+<a class="back-link" href="../index.html">← Back to trips</a>
+
+<div class="hero">
+  <div class="hero-inner">
+    <div class="hero-eyebrow">⛷️ Ski Trip · Late January 2015</div>
+    <h1>Deer Valley<span>A family ski week at the St. Regis, with a birthday massage on the mountain</span></h1>
+    <div class="hero-meta">
+      <div class="meta-chip">🗓 <strong>~6 nights</strong> · Sun–Fri, late Jan 2015</div>
+      <div class="meta-chip">📍 2300 Deer Valley Dr. East, Park City, UT</div>
+      <div class="meta-chip">🏨 <strong>The St. Regis Deer Valley</strong></div>
+      <div class="meta-chip">👨‍👩‍👧 With parents</div>
+    </div>
+  </div>
+</div>
+<div class="hero-photo-cap">📷 View from the St. Regis, ski run to the pool deck</div>
+
+<div id="map"></div>
+
+<div class="tabs">
+  <button class="tab-btn active" onclick="showTab('overview')">Overview</button>
+  <button class="tab-btn" onclick="showTab('hotel')">Hotel &amp; Lift Tickets</button>
+  <button class="tab-btn" onclick="showTab('itinerary')">Itinerary</button>
+  <button class="tab-btn" onclick="showTab('book')">Book This Again</button>
+</div>
+
+<div class="wrap">
+
+  <div class="section active" id="tab-overview">
+    <div class="section-title">Overview</div>
+    <div class="section-sub">A ski week at the St. Regis Deer Valley with parents along, timed around Ghazal's birthday.</div>
+    <div class="callout">Dates here are our best reconstruction, not a firm record: the itinerary document was created and last edited Jan 18–24, 2015, a ski-rental confirmation was forwarded on Jan 17, 2015, and a "thank you for staying with us" survey arrived Jan 31, 2015 — consistent with a Sunday–Friday stay of Jan 25–30, 2015. (A separate St. Regis Deer Valley reservation exists on the calendar for Jan 29–Feb 4, 2020, but that same week is full of unrelated DC-area commitments — job interviews, jury duty, a comedy show, and a birthday dinner in Bethesda — so that 2020 booking doesn't look like it was actually used for this trip. This 2015 date is the best-supported match for the itinerary below.)</div>
+    <table class="overview">
+      <tr><th>Day</th><th>Focus</th></tr>
+      <tr><td>Sun</td><td>Arrive; J&amp;G Grill lunch; Ghazal's birthday massage at Align Spa (3pm, Park City); Edge Steakhouse dinner (7:30 reservation)</td></tr>
+      <tr><td>Mon</td><td>Terrace Cafe lunch; ski and read/chill; order-in dinner; nightly champagne sabering &amp; s'mores at the fire pit</td></tr>
+      <tr><td>Tue</td><td>Burgers &amp; Bourbon @ Montage (3pm); Eden movie 2:15; Cena Ristorante dinner (8:00 reservation)</td></tr>
+      <tr><td>Wed</td><td>Bald Mountain Pizza @ Silver Lake Village lunch; ski, sneak into the D train run; Café Terigo dinner (8:15pm)</td></tr>
+      <tr><td>Thu</td><td>Lunch at the St. Regis bar/lounge, Terrace Cafe, or Lookout Cabin; ski and chill; RiverHorse on Main dinner (8:15 reservation)</td></tr>
+      <tr><td>Fri</td><td>I Am Michael movie, 9am; Silver Star Café lunch; fly home</td></tr>
+    </table>
+  </div>
+
+  <div class="section" id="tab-hotel">
+    <div class="section-title">Hotel &amp; Lift Tickets</div>
+    <div class="book-group-label">Lodging</div>
+    <div class="hotel-card">
+      <h4>The St. Regis Deer Valley</h4>
+      <div class="meta">2300 Deer Valley Dr. East, Park City, UT</div>
+      <div class="note">Nightly champagne sabering at 6:30pm on the Mountain Side Terrace, and s'mores 7–9pm at the Astor Terrace Fire Pit — both recurring evening rituals at the property worth doing again.</div>
+    </div>
+    <div class="book-group-label">Lift tickets</div>
+    <div class="hotel-card">
+      <h4>Daily &amp; next-day lift tickets</h4>
+      <div class="note">Daily lift tickets: 8:30am–3pm. Next-day tickets can be picked up 3–5pm the day before.</div>
+    </div>
+  </div>
+
+  <div class="section" id="tab-itinerary">
+    <div class="section-title">Itinerary</div>
+
+    <div class="tl-day">
+      <div class="tl-title">Sunday</div>
+      <div class="tl-sub">Arrival &amp; birthday</div>
+      <ul class="tl-items">
+        <li class="meal">🍽 Lunch: J&amp;G Grill</li>
+        <li>Ghazal's birthday massage at Align Spa, 3pm, Park City</li>
+        <li>Nightly champagne sabering, 6:30pm, Mountain Side Terrace</li>
+        <li class="meal">🍽 Dinner: Edge Steakhouse — reservation 7:30pm, (435) 655-2260</li>
+      </ul>
+    </div>
+
+    <div class="tl-day">
+      <div class="tl-title">Monday</div>
+      <div class="tl-sub">Ski &amp; chill</div>
+      <ul class="tl-items">
+        <li class="meal">🍽 Lunch: Terrace Cafe</li>
+        <li>Ski and read / chill</li>
+        <li>Backup plan: 4pm movie, Racing Extinction</li>
+        <li>Champagne sabering 6:30pm; s'mores 7–9pm at the Astor Terrace fire pit</li>
+        <li class="meal">🍽 Dinner: order in — pizza, soup, or salad</li>
+      </ul>
+    </div>
+
+    <div class="tl-day">
+      <div class="tl-title">Tuesday</div>
+      <div class="tl-sub">Montage &amp; a movie</div>
+      <ul class="tl-items">
+        <li class="meal">🍽 Lunch: Burgers &amp; Bourbon @ Montage — 3pm, (435) 604-1300</li>
+        <li>Movie: Eden, 2:15pm</li>
+        <li class="meal">🍽 Dinner: Cena Ristorante — reservation 8:00pm, (435) 940-2200</li>
+      </ul>
+    </div>
+
+    <div class="tl-day">
+      <div class="tl-title">Wednesday</div>
+      <div class="tl-sub">Silver Lake &amp; the D train</div>
+      <ul class="tl-items">
+        <li class="meal">🍽 Lunch: Bald Mountain Pizza @ Silver Lake Village</li>
+        <li>Ski — sneak into the D Train run</li>
+        <li class="meal">🍽 Dinner: Café Terigo, 8:15pm</li>
+      </ul>
+    </div>
+
+    <div class="tl-day">
+      <div class="tl-title">Thursday</div>
+      <div class="tl-sub">Ski &amp; chill</div>
+      <ul class="tl-items">
+        <li class="meal">🍽 Lunch: St. Regis Bar and Lounge, Terrace Cafe, or Lookout Cabin (another on-mountain option)</li>
+        <li>Ski and chill</li>
+        <li class="meal">🍽 Dinner: RiverHorse on Main — reservation 8:15pm, (435) 649-3536</li>
+      </ul>
+    </div>
+
+    <div class="tl-day">
+      <div class="tl-title">Friday · Departure</div>
+      <div class="tl-sub">Fly home</div>
+      <ul class="tl-items">
+        <li>Movie: I Am Michael, 9am</li>
+        <li class="meal">🍽 Lunch: Silver Star Café, (435) 655-3456</li>
+        <li>Fly home</li>
+      </ul>
+      <div class="tl-note">Other food options on the list but not slotted into a specific day: 501 Main (closed that week), Shoyu Sushi &amp; Steakhouse (first-come-first-serve). Snow tubing at Gorgoza Park was also considered (3863 West Kirby Road).</div>
+    </div>
+  </div>
+
+  <div class="section" id="tab-book">
+    <div class="section-title">Book This Again</div>
+    <div class="section-sub">Who to call if this trip gets a repeat.</div>
+    <ul class="checklist">
+      <li><strong>The St. Regis Deer Valley</strong> — 2300 Deer Valley Dr. East<span class="sub">Nightly champagne sabering and s'mores fire pit are worth planning around again</span></li>
+      <li><strong>Edge Steakhouse</strong> — (435) 655-2260<span class="sub">Birthday dinner spot</span></li>
+      <li><strong>Cena Ristorante</strong> — (435) 940-2200<span class="sub">Good enough to book an 8pm reservation last time</span></li>
+      <li><strong>RiverHorse on Main</strong> — (435) 649-3536<span class="sub">Main Street, Park City</span></li>
+      <li><strong>Café Terigo</strong><span class="sub">8:15pm dinner slot</span></li>
+      <li><strong>Align Spa</strong> — Park City<span class="sub">Birthday massage location</span></li>
+    </ul>
+  </div>
+
+</div>
+
+<footer><a href="../index.html">← Back to Vacations</a></footer>
+
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+<script>
+  var map = L.map('map', {scrollWheelZoom:false}).setView([40.64, -111.48], 12);
+  L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {attribution:'© OpenStreetMap'}).addTo(map);
+  var pts = [
+    [40.6374,-111.4783,"1. The St. Regis Deer Valley","2300 Deer Valley Dr. East"],
+    [40.6461,-111.4980,"2. Park City Main Street","RiverHorse, Café Terigo, Silver Star Café"],
+    [40.6292,-111.4586,"3. Silver Lake Village","Bald Mountain Pizza"],
+    [40.6169,-111.4762,"4. Montage Deer Valley","Burgers & Bourbon"]
+  ];
+  pts.forEach(function(p){
+    L.marker([p[0],p[1]]).addTo(map).bindPopup("<strong>"+p[2]+"</strong><br>"+p[3]+"<br><a href='https://www.google.com/maps/dir/?api=1&destination="+p[0]+","+p[1]+"' target='_blank'>Directions →</a>");
+  });
+  function showTab(id){
+    document.querySelectorAll('.section').forEach(function(s){ s.classList.remove('active'); });
+    document.querySelectorAll('.tab-btn').forEach(function(b){ b.classList.remove('active'); });
+    document.getElementById('tab-'+id).classList.add('active');
+    event.target.classList.add('active');
+  }
+</script>
+</body>
+</html>

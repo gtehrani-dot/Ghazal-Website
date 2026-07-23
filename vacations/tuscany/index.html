@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Tuscany, Italy — Ghazal Tehrani</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300;9..144,500;9..144,600&family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
+<style>
+  :root{
+    --primary:#7c2d12; --primary-deep:#4c1d0d;
+    --accent-1:#ca8a04; --accent-2:#fef9c3; --accent-3:#fb7185;
+    --ink:#241a14; --muted:#71655c; --cream:#fbfaf4; --line:#e6ded4; --card:#ffffff;
+    --serif:'Fraunces',Georgia,serif; --sans:'Inter',system-ui,sans-serif; --mono:'JetBrains Mono',monospace;
+  }
+  *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+  body{font-family:var(--sans); background:var(--cream); color:var(--ink); line-height:1.6;}
+  a{color:inherit;}
+  .back-link{ display:inline-block; margin:18px 0 0 32px; font-family:var(--mono); font-size:12.5px; color:var(--primary); text-decoration:none; }
+  .back-link:hover{ text-decoration:underline; }
+  .hero{ background:linear-gradient(135deg,rgba(76,29,13,0.82) 0%, rgba(124,45,18,0.75) 55%, rgba(202,138,4,0.55) 100%), url('hero.jpg') center 55%/cover; color:#fff; padding:36px 32px 46px; position:relative; overflow:hidden;}
+  .hero::before{ content:''; position:absolute; inset:0; background:radial-gradient(ellipse at 85% 15%, rgba(251,191,36,0.2) 0%, transparent 55%);}
+  .hero-inner{ position:relative; max-width:980px; margin:0 auto;}
+  .hero-eyebrow{ font-family:var(--mono); font-size:11px; letter-spacing:3px; text-transform:uppercase; color:#fef08a; margin-bottom:14px;}
+  .hero h1{ font-family:var(--serif); font-weight:500; font-size:clamp(38px,6vw,64px); line-height:1.05;}
+  .hero h1 span{ display:block; font-size:0.4em; font-weight:300; font-style:italic; color:#fef9c3; margin-top:8px;}
+  .hero-meta{ display:flex; flex-wrap:wrap; gap:10px; margin-top:26px;}
+  .meta-chip{ font-family:var(--mono); font-size:12px; padding:8px 15px; border:1px solid rgba(255,255,255,0.25); border-radius:100px; background:rgba(255,255,255,0.12);}
+  .meta-chip strong{ color:#fde68a; }
+  .hero-photo-cap{ position:relative; max-width:980px; margin:8px auto 0; font-family:var(--mono); font-size:11px; color:#fef3c7; text-align:right; opacity:0.85; }
+  #map{ height:320px; max-width:980px; margin:-30px auto 0; border-radius:16px; box-shadow:0 12px 34px rgba(76,29,13,0.25); position:relative; z-index:2; border:4px solid #fff;}
+  .tabs{ max-width:980px; margin:34px auto 0; display:flex; flex-wrap:wrap; gap:6px; padding:0 32px;}
+  .tab-btn{ font-family:var(--mono); font-size:12px; letter-spacing:0.4px; padding:9px 16px; border-radius:100px; background:var(--card); border:1px solid var(--line); cursor:pointer; color:var(--muted);}
+  .tab-btn.active{ background:var(--primary); color:#fff; border-color:var(--primary);}
+  .wrap{ max-width:980px; margin:0 auto; padding:26px 32px 80px;}
+  .section{ display:none; } .section.active{ display:block; }
+  .section-title{ font-family:var(--serif); font-size:24px; font-weight:500; margin-bottom:6px;}
+  .section-sub{ font-size:13.5px; color:var(--muted); margin-bottom:22px;}
+  table.overview{ width:100%; border-collapse:collapse; font-size:13.5px;}
+  table.overview th{ text-align:left; font-family:var(--mono); font-size:11px; letter-spacing:1px; text-transform:uppercase; color:var(--muted); padding:8px 10px; border-bottom:2px solid var(--line);}
+  table.overview td{ padding:10px; border-bottom:1px solid var(--line); vertical-align:top;}
+  .book-group-label{ font-family:var(--mono); font-size:11px; letter-spacing:2px; text-transform:uppercase; color:var(--primary); margin:24px 0 10px; padding-bottom:6px; border-bottom:1px solid var(--line);}
+  .book-group-label:first-child{ margin-top:0; }
+  .hotel-card{ background:var(--card); border:1px solid var(--line); border-radius:12px; padding:18px 20px; margin-bottom:14px;}
+  .hotel-card h4{ font-family:var(--serif); font-size:18px; font-weight:500; margin-bottom:4px;}
+  .hotel-card .meta{ font-size:12.5px; color:var(--muted); margin-top:4px; }
+  .hotel-card .note{ font-size:13px; margin-top:8px; color:var(--ink); }
+  .tl-day{ background:var(--card); border:1px solid var(--line); border-radius:12px; padding:18px 20px; margin-bottom:16px;}
+  .tl-title{ font-family:var(--serif); font-size:18px; font-weight:500; margin-bottom:2px;}
+  .tl-sub{ font-family:var(--mono); font-size:11.5px; color:var(--muted); text-transform:uppercase; letter-spacing:0.5px; margin-bottom:10px;}
+  ul.tl-items{ list-style:none; }
+  ul.tl-items li{ padding:5px 0 5px 18px; position:relative; font-size:13.8px;}
+  ul.tl-items li::before{ content:'–'; position:absolute; left:0; color:var(--muted);}
+  ul.tl-items li.meal{ background:rgba(202,138,4,0.10); border-radius:6px; padding:8px 12px; margin:6px 0; }
+  ul.tl-items li.meal::before{ content:''; }
+  .tl-note{ font-size:12.5px; color:var(--muted); margin-top:6px; font-style:italic; }
+  .card-grid{ display:grid; grid-template-columns:repeat(auto-fill,minmax(220px,1fr)); gap:14px; }
+  .card{ background:var(--card); border:1px solid var(--line); border-radius:12px; padding:14px 16px; }
+  .card h4{ font-family:var(--serif); font-size:16px; font-weight:500; margin-bottom:4px; }
+  .card p{ font-size:12.8px; color:var(--muted); }
+  .checklist{ list-style:none; }
+  .checklist li{ background:var(--card); border:1px solid var(--line); border-radius:10px; padding:12px 16px; margin-bottom:8px; font-size:13.8px;}
+  .checklist li .sub{ display:block; font-size:12px; color:var(--muted); margin-top:3px; font-weight:400;}
+  .callout{ background:rgba(202,138,4,0.08); border:1px solid rgba(202,138,4,0.3); border-radius:10px; padding:14px 16px; font-size:13px; margin-bottom:18px; }
+  footer{ text-align:center; padding:30px; font-size:12px; color:var(--muted); }
+</style>
+</head>
+<body>
+
+<a class="back-link" href="../index.html">← Back to trips</a>
+
+<div class="hero">
+  <div class="hero-inner">
+    <div class="hero-eyebrow">🍷 Autumn Trip · Oct 31 – Nov 7, 2015</div>
+    <h1>Tuscany<span>Wine country by day, a villa and the St. Regis Florence by night</span></h1>
+    <div class="hero-meta">
+      <div class="meta-chip">🗓 <strong>7 nights</strong> · Oct 31 – Nov 7</div>
+      <div class="meta-chip">📍 Sinalunga → Montepulciano/Montalcino → Siena → Florence → Parma</div>
+      <div class="meta-chip">🏡 <strong>Locanda dell'Amorosa</strong> then <strong>St. Regis Florence</strong></div>
+      <div class="meta-chip">✈️ Home via Milan</div>
+    </div>
+  </div>
+</div>
+<div class="hero-photo-cap">📷 The rolling hills near Montalcino</div>
+
+<div id="map"></div>
+
+<div class="tabs">
+  <button class="tab-btn active" onclick="showTab('overview')">Overview</button>
+  <button class="tab-btn" onclick="showTab('hotel')">Hotels &amp; Route</button>
+  <button class="tab-btn" onclick="showTab('itinerary')">Itinerary</button>
+  <button class="tab-btn" onclick="showTab('food')">Food Guide</button>
+  <button class="tab-btn" onclick="showTab('book')">Book This Again</button>
+</div>
+
+<div class="wrap">
+
+  <div class="section active" id="tab-overview">
+    <div class="section-title">Overview</div>
+    <div class="section-sub">A week driving through wine country — Montepulciano and Montalcino — before ending in Florence and a scenic route home through Parma.</div>
+    <table class="overview">
+      <tr><th>Date</th><th>Focus</th></tr>
+      <tr><td>Sat Oct 31</td><td>Check in Locanda dell'Amorosa, Sinalunga — chill day, arrival</td></tr>
+      <tr><td>Sun Nov 1</td><td>Montepulciano, Val d'Orcia, Pienza — wine tasting &amp; lunch at Salcheto</td></tr>
+      <tr><td>Mon Nov 2</td><td>Montalcino — wine tasting at Poggio Antico (10:30am)</td></tr>
+      <tr><td>Tue Nov 3</td><td>Siena, Chianti region, Cortona; check out Amorosa, drive to Florence, check in St. Regis</td></tr>
+      <tr><td>Wed Nov 4</td><td>Evening cooking class at Villa Pandolfini; Florence for Foodies food tour (9:30am–1:30pm)</td></tr>
+      <tr><td>Thu Nov 5</td><td>Florence — Uffizi, Piazzale Michelangelo, Piazza della Signoria, Basilica San Miniato, Accademia Gallery</td></tr>
+      <tr><td>Fri Nov 6</td><td>Check out St. Regis; Lucca, Parma; overnight north of Parma (Polesine Parmense)</td></tr>
+      <tr><td>Sat Nov 7</td><td>Fly home from Milan</td></tr>
+    </table>
+  </div>
+
+  <div class="section" id="tab-hotel">
+    <div class="section-title">Hotels &amp; Route</div>
+    <div class="book-group-label">Lodging</div>
+    <div class="hotel-card">
+      <h4>Locanda dell'Amorosa — Sinalunga</h4>
+      <div class="meta">amorosa.it · Località l'Amorosa, 53048 Sinalunga (Siena) · +39 0577 677211</div>
+      <div class="note">Checked in Oct 31 (11am arrival), checked out Nov 3. Base for the Montepulciano/Montalcino wine-country days.</div>
+    </div>
+    <div class="hotel-card">
+      <h4>St. Regis Florence</h4>
+      <div class="meta">stregisflorence.com · Piazza Ognissanti 1, Florence, 50123 · +39 055 27161</div>
+      <div class="note">Checked in early evening Nov 3, checked out Nov 6.</div>
+    </div>
+    <div class="hotel-card">
+      <h4>Ben Hotel — Polesine Parmense</h4>
+      <div class="note">Overnight stop north of Parma, Nov 6, before flying home from Milan the next morning.</div>
+    </div>
+    <div class="book-group-label">Route</div>
+    <div class="hotel-card">
+      <h4>Sinalunga → Montepulciano/Montalcino → Siena → Florence → Lucca/Parma → Milan</h4>
+      <div class="note">Self-drive road trip through wine country, ending with a fly-out from Milan.</div>
+    </div>
+  </div>
+
+  <div class="section" id="tab-itinerary">
+    <div class="section-title">Itinerary</div>
+
+    <div class="tl-day">
+      <div class="tl-title">Day 1 · Sat, Oct 31 · Arrival</div>
+      <div class="tl-sub">Locanda dell'Amorosa</div>
+      <ul class="tl-items">
+        <li>Check in at Locanda dell'Amorosa, Sinalunga — 11am arrival</li>
+        <li>Chill day inside — sleep, read, settle in</li>
+      </ul>
+    </div>
+
+    <div class="tl-day">
+      <div class="tl-title">Day 2 · Sun, Nov 1</div>
+      <div class="tl-sub">Montepulciano · Val d'Orcia · Pienza</div>
+      <ul class="tl-items">
+        <li>Wine tasting and lunch at Salcheto (Via di Villa Bianca 15, Montepulciano, hours 10–6)</li>
+        <li>Explore castle-hotels and the town of Montepulciano</li>
+      </ul>
+    </div>
+
+    <div class="tl-day">
+      <div class="tl-title">Day 3 · Mon, Nov 2</div>
+      <div class="tl-sub">Montalcino wine country</div>
+      <ul class="tl-items">
+        <li>Wine tasting at Poggio Antico, 10:30am (Montalcino, Siena · +39 0577-848044)</li>
+        <li>Drive-through of Biondi Santi, castle hotels</li>
+        <li>Other wineries researched for this day: Sesti Castello di Argiano, Uccelliera, Casa Raia — and the Terme di Saturnia hot springs was on the list to consider</li>
+      </ul>
+    </div>
+
+    <div class="tl-day">
+      <div class="tl-title">Day 4 · Tue, Nov 3</div>
+      <div class="tl-sub">Siena → Chianti → Cortona → Florence</div>
+      <ul class="tl-items">
+        <li>Check out of Locanda dell'Amorosa</li>
+        <li>Siena Cathedral, Piazza del Campo — aperitif on the piazza</li>
+        <li>San Gimignano 1300, sunset at Panzano (hilltop Chianti village), Cortona spa</li>
+        <li>Chianti wineries considered: Antinori Chianti Classico, Castello Ama</li>
+        <li>Early evening: check in to St. Regis Florence</li>
+      </ul>
+    </div>
+
+    <div class="tl-day">
+      <div class="tl-title">Day 5 · Wed, Nov 4</div>
+      <div class="tl-sub">Florence — cooking &amp; food tour</div>
+      <ul class="tl-items">
+        <li>Florence for Foodies walking tour, 9:30am–1:30pm — starts in the San Lorenzo neighborhood and the central market (info@florenceforfoodies.com)</li>
+        <li class="meal">🍽 Evening cooking class, 5:30pm, at Villa Pandolfini (Via Livornese 334, Firenze)</li>
+      </ul>
+    </div>
+
+    <div class="tl-day">
+      <div class="tl-title">Day 6 · Thu, Nov 5</div>
+      <div class="tl-sub">Florence — museums &amp; galleries</div>
+      <ul class="tl-items">
+        <li>Uffizi Gallery, Piazzale Michelangelo, Piazza della Signoria, Basilica San Miniato al Monte, Accademia Gallery</li>
+        <li>Considered: an evening screening on the Medici at San Giovannino dei Padri Scolopi Library (Piazza di San Lorenzo 6)</li>
+      </ul>
+    </div>
+
+    <div class="tl-day">
+      <div class="tl-title">Day 7 · Fri, Nov 6</div>
+      <div class="tl-sub">Lucca → Parma</div>
+      <ul class="tl-items">
+        <li>Check out of St. Regis Florence</li>
+        <li>Le mura di Lucca — the city walls walk (weather permitting)</li>
+        <li>Drive to Parma; evening check-in north of Parma at Polesine Parmense</li>
+      </ul>
+    </div>
+
+    <div class="tl-day">
+      <div class="tl-title">Day 8 · Sat, Nov 7 · Departure</div>
+      <div class="tl-sub">Fly home from Milan</div>
+      <ul class="tl-items">
+        <li>Breakfast, check out</li>
+        <li>Fly home via Milan (Malpensa/Linate)</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="section" id="tab-food">
+    <div class="section-title">Food Guide</div>
+    <div class="section-sub">Restaurant list assembled by town for this trip.</div>
+    <div class="book-group-label">Montalcino</div>
+    <div class="card-grid">
+      <div class="card"><h4>Ristorante Campo Del Drago</h4><p>In town</p></div>
+      <div class="card"><h4>Trattoria Il Pozzo</h4><p>trattoriailpozzo.com</p></div>
+      <div class="card"><h4>Il Leccio</h4><p></p></div>
+      <div class="card"><h4>Villa del Fattore Ristorante</h4><p></p></div>
+    </div>
+    <div class="book-group-label">Montepulciano</div>
+    <div class="card-grid">
+      <div class="card"><h4>Le Logge del Vignola</h4><p>Via delle Erbe, 6, 53045</p></div>
+      <div class="card"><h4>La Bottega del Nobile</h4><p></p></div>
+    </div>
+    <div class="book-group-label">Pienza</div>
+    <div class="card-grid">
+      <div class="card"><h4>Sette di Vino</h4><p></p></div>
+      <div class="card"><h4>Buon Gusto Gelateria</h4><p></p></div>
+    </div>
+    <div class="book-group-label">Siena</div>
+    <div class="card-grid">
+      <div class="card"><h4>Pizzaland</h4><p></p></div>
+      <div class="card"><h4>La Taverna di San Giuseppe</h4><p></p></div>
+    </div>
+    <div class="book-group-label">Florence</div>
+    <div class="card-grid">
+      <div class="card"><h4>Il Palagio</h4><p>Four Seasons Hotel — dinner</p></div>
+      <div class="card"><h4>Enoteca Pinchiorri</h4><p>Dinner</p></div>
+      <div class="card"><h4>La Prosciutteria</h4><p>Wine and deli</p></div>
+      <div class="card"><h4>Cacio Vino Trallalla</h4><p>Dinner</p></div>
+      <div class="card"><h4>Il Bufalo Trippone</h4><p>Charcuterie</p></div>
+      <div class="card"><h4>50 Sfumature di Gusto</h4><p>Dinner</p></div>
+      <div class="card"><h4>La Buchetta Cafe</h4><p>Pasta carbonara</p></div>
+      <div class="card"><h4>Panini Toscani</h4><p>Lunch, in town</p></div>
+    </div>
+    <div class="book-group-label">Sinalunga</div>
+    <div class="card-grid">
+      <div class="card"><h4>Forcillo Ristorante Locanda</h4><p>Dinner</p></div>
+      <div class="card"><h4>Ristorante Il Fornacino</h4><p></p></div>
+      <div class="card"><h4>Scroccazucche</h4><p></p></div>
+      <div class="card"><h4>Pizzeria Ristorante Cirifo'</h4><p></p></div>
+    </div>
+    <div class="book-group-label">Other towns</div>
+    <div class="card-grid">
+      <div class="card"><h4>Trattoria Al Rientro</h4><p>Castiglione d'Orcia</p></div>
+      <div class="card"><h4>Cum Quibus</h4><p>San Gimignano — dinner</p></div>
+    </div>
+  </div>
+
+  <div class="section" id="tab-book">
+    <div class="section-title">Book This Again</div>
+    <div class="section-sub">Who to call if this trip gets a repeat.</div>
+    <ul class="checklist">
+      <li><strong>Locanda dell'Amorosa</strong> — amorosa.it · +39 0577 677211<span class="sub">Sinalunga base for the wine-country days</span></li>
+      <li><strong>St. Regis Florence</strong> — stregisflorence.com · +39 055 27161<span class="sub">Florence stay</span></li>
+      <li><strong>Poggio Antico winery</strong> — +39 0577-848044<span class="sub">Montalcino tasting, 10:30am slot</span></li>
+      <li><strong>Salcheto</strong> — Montepulciano<span class="sub">Wine tasting and lunch</span></li>
+      <li><strong>Florence for Foodies</strong> — info@florenceforfoodies.com<span class="sub">San Lorenzo market food tour, 9:30am–1:30pm</span></li>
+      <li><strong>Villa Pandolfini</strong> — Via Livornese 334, Firenze<span class="sub">Evening cooking class</span></li>
+    </ul>
+  </div>
+
+</div>
+
+<footer><a href="../index.html">← Back to Vacations</a></footer>
+
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+<script>
+  var map = L.map('map', {scrollWheelZoom:false}).setView([43.15, 11.55], 8);
+  L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {attribution:'© OpenStreetMap'}).addTo(map);
+  var pts = [
+    [43.3372,11.7328,"1. Locanda dell'Amorosa, Sinalunga","First base — wine country"],
+    [43.0937,11.7796,"2. Montepulciano","Wine tasting at Salcheto"],
+    [43.0567,11.4895,"3. Montalcino","Poggio Antico tasting"],
+    [43.3188,11.3308,"4. Siena","Piazza del Campo"],
+    [43.7696,11.2558,"5. Florence — St. Regis","Second base"],
+    [44.8015,10.3279,"6. Parma / Polesine Parmense","Final overnight before flying home"]
+  ];
+  pts.forEach(function(p){
+    L.marker([p[0],p[1]]).addTo(map).bindPopup("<strong>"+p[2]+"</strong><br>"+p[3]+"<br><a href='https://www.google.com/maps/dir/?api=1&destination="+p[0]+","+p[1]+"' target='_blank'>Directions →</a>");
+  });
+  function showTab(id){
+    document.querySelectorAll('.section').forEach(function(s){ s.classList.remove('active'); });
+    document.querySelectorAll('.tab-btn').forEach(function(b){ b.classList.remove('active'); });
+    document.getElementById('tab-'+id).classList.add('active');
+    event.target.classList.add('active');
+  }
+</script>
+</body>
+</html>
