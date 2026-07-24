@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>California — Ghazal Tehrani</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300;9..144,500;9..144,600&family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
+<style>
+  :root{
+    --primary:#c2410c; --primary-deep:#7c2d12;
+    --accent-1:#fbbf24; --accent-2:#0ea5e9; --accent-3:#7e22ce;
+    --ink:#241a12; --muted:#6b5c4f; --cream:#fdf8f3; --line:#e8ddd0; --card:#ffffff;
+    --serif:'Fraunces',Georgia,serif; --sans:'Inter',system-ui,sans-serif; --mono:'JetBrains Mono',monospace;
+  }
+  *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+  body{font-family:var(--sans); background:var(--cream); color:var(--ink); line-height:1.6;}
+  a{color:inherit;}
+  .back-link{ display:inline-block; margin:18px 0 0 32px; font-family:var(--mono); font-size:12.5px; color:var(--primary); text-decoration:none; }
+  .back-link:hover{ text-decoration:underline; }
+  .hero{ background:linear-gradient(135deg,var(--primary-deep) 0%, var(--primary) 55%, #fbbf24 100%); color:#fff; padding:36px 32px 46px; position:relative; overflow:hidden;}
+  .hero::before{ content:''; position:absolute; inset:0; background:radial-gradient(ellipse at 85% 15%, rgba(14,165,233,0.25) 0%, transparent 55%);}
+  .hero-inner{ position:relative; max-width:980px; margin:0 auto;}
+  .hero-eyebrow{ font-family:var(--mono); font-size:11px; letter-spacing:3px; text-transform:uppercase; color:#fde68a; margin-bottom:14px;}
+  .hero h1{ font-family:var(--serif); font-weight:500; font-size:clamp(38px,6vw,64px); line-height:1.05;}
+  .hero h1 span{ display:block; font-size:0.4em; font-weight:300; font-style:italic; color:#ffe8d1; margin-top:8px;}
+  .hero-meta{ display:flex; flex-wrap:wrap; gap:10px; margin-top:26px;}
+  .meta-chip{ font-family:var(--mono); font-size:12px; padding:8px 15px; border:1px solid rgba(255,255,255,0.25); border-radius:100px; background:rgba(255,255,255,0.1);}
+  .meta-chip strong{ color:#fde68a; }
+  #map{ height:320px; max-width:980px; margin:-30px auto 0; border-radius:16px; box-shadow:0 12px 34px rgba(124,45,18,0.25); position:relative; z-index:2; border:4px solid #fff;}
+  .timeline-strip{ max-width:980px; margin:22px auto 0; padding:0 32px; display:flex; gap:8px; overflow-x:auto; }
+  .tl-seg{ flex:1; min-width:120px; background:var(--card); border:1px solid var(--line); border-radius:10px; padding:10px 12px; text-align:center; }
+  .tl-seg .place{ font-family:var(--serif); font-size:13.5px; font-weight:500; }
+  .tl-seg .dates{ font-family:var(--mono); font-size:10.5px; color:var(--muted); }
+  .tabs{ max-width:980px; margin:26px auto 0; display:flex; flex-wrap:wrap; gap:6px; padding:0 32px;}
+  .tab-btn{ font-family:var(--mono); font-size:12px; letter-spacing:0.4px; padding:9px 16px; border-radius:100px; background:var(--card); border:1px solid var(--line); cursor:pointer; color:var(--muted);}
+  .tab-btn.active{ background:var(--primary); color:#fff; border-color:var(--primary);}
+  .wrap{ max-width:980px; margin:0 auto; padding:26px 32px 80px;}
+  .section{ display:none; } .section.active{ display:block; }
+  .section-title{ font-family:var(--serif); font-size:24px; font-weight:500; margin-bottom:6px;}
+  .section-sub{ font-size:13.5px; color:var(--muted); margin-bottom:22px;}
+  table.overview{ width:100%; border-collapse:collapse; font-size:13.5px;}
+  table.overview th{ text-align:left; font-family:var(--mono); font-size:11px; letter-spacing:1px; text-transform:uppercase; color:var(--muted); padding:8px 10px; border-bottom:2px solid var(--line);}
+  table.overview td{ padding:10px; border-bottom:1px solid var(--line); vertical-align:top;}
+  .book-group-label{ font-family:var(--mono); font-size:11px; letter-spacing:2px; text-transform:uppercase; color:var(--primary); margin:24px 0 10px; padding-bottom:6px; border-bottom:1px solid var(--line);}
+  .book-group-label:first-child{ margin-top:0; }
+  .hotel-card{ background:var(--card); border:1px solid var(--line); border-radius:12px; padding:18px 20px; margin-bottom:14px;}
+  .hotel-card h4{ font-family:var(--serif); font-size:18px; font-weight:500; margin-bottom:4px;}
+  .hotel-card .meta{ font-size:12.5px; color:var(--muted); margin-top:4px; }
+  .hotel-card .note{ font-size:13px; margin-top:8px; color:var(--ink); }
+  .leg-head{ font-family:var(--serif); font-size:20px; font-weight:500; margin:30px 0 4px; }
+  .leg-head:first-child{ margin-top:0; }
+  .leg-sub{ font-size:12.5px; color:var(--muted); margin-bottom:14px; }
+  .tl-day{ background:var(--card); border:1px solid var(--line); border-radius:12px; padding:16px 18px; margin-bottom:12px;}
+  .tl-title{ font-family:var(--serif); font-size:17px; font-weight:500; margin-bottom:2px;}
+  .tl-sub{ font-family:var(--mono); font-size:11px; color:var(--muted); text-transform:uppercase; letter-spacing:0.5px; margin-bottom:8px;}
+  ul.tl-items{ list-style:none; }
+  ul.tl-items li{ padding:4px 0 4px 18px; position:relative; font-size:13.5px;}
+  ul.tl-items li::before{ content:'–'; position:absolute; left:0; color:var(--muted);}
+  ul.tl-items li.meal{ background:rgba(251,191,36,0.15); border-radius:6px; padding:7px 12px; margin:5px 0; }
+  ul.tl-items li.meal::before{ content:''; }
+  .tl-note{ font-size:12px; color:var(--muted); margin-top:5px; font-style:italic; }
+  .card-grid{ display:grid; grid-template-columns:repeat(auto-fill,minmax(220px,1fr)); gap:14px; }
+  .card{ background:var(--card); border:1px solid var(--line); border-radius:12px; padding:14px 16px; }
+  .card h4{ font-family:var(--serif); font-size:16px; font-weight:500; margin-bottom:4px; }
+  .card p{ font-size:12.8px; color:var(--muted); }
+  .checklist{ list-style:none; }
+  .checklist li{ background:var(--card); border:1px solid var(--line); border-radius:10px; padding:12px 16px; margin-bottom:8px; font-size:13.8px;}
+  .checklist li .sub{ display:block; font-size:12px; color:var(--muted); margin-top:3px; font-weight:400;}
+  .callout{ background:rgba(251,191,36,0.1); border:1px solid rgba(251,191,36,0.35); border-radius:10px; padding:14px 16px; font-size:13px; margin-bottom:18px; }
+  footer{ text-align:center; padding:30px; font-size:12px; color:var(--muted); }
+</style>
+</head>
+<body>
+
+<a class="back-link" href="../index.html">← Back to trips</a>
+
+<div class="hero">
+  <div class="hero-inner">
+    <div class="hero-eyebrow">🪨🌊🍇 Trip · Aug 16–26, 2025</div>
+    <h1>California<span>Joshua Tree sunrise hikes, then Malibu with friends and a low-key week in Temecula</span></h1>
+    <div class="hero-meta">
+      <div class="meta-chip">✈️ <strong>PSP / San Diego</strong></div>
+      <div class="meta-chip">🗓 <strong>10 nights</strong> · Aug 16–26</div>
+      <div class="meta-chip">📍 Joshua Tree → Malibu → Temecula</div>
+      <div class="meta-chip">🏨 <strong>3 bases</strong> · two Airbnbs, family stay</div>
+    </div>
+  </div>
+</div>
+
+<div id="map"></div>
+
+<div class="timeline-strip">
+  <div class="tl-seg"><div class="place">🪨 Joshua Tree</div><div class="dates">Aug 16–19</div></div>
+  <div class="tl-seg"><div class="place">🌊 Malibu</div><div class="dates">Aug 19–22</div></div>
+  <div class="tl-seg"><div class="place">🍇 Temecula</div><div class="dates">Aug 22–26</div></div>
+</div>
+
+<div class="tabs">
+  <button class="tab-btn active" onclick="showTab('overview')">Overview</button>
+  <button class="tab-btn" onclick="showTab('hotel')">Hotel &amp; Transportation</button>
+  <button class="tab-btn" onclick="showTab('itinerary')">Itinerary</button>
+  <button class="tab-btn" onclick="showTab('book')">Book This Again</button>
+</div>
+
+<div class="wrap">
+
+  <div class="section active" id="tab-overview">
+    <div class="section-title">Overview</div>
+    <div class="section-sub">A road-trip style loop through the desert and the coast with friends, straight off the back of the Maui leg.</div>
+    <table class="overview">
+      <tr><th>Dates</th><th>Base</th><th>Focus</th></tr>
+      <tr><td>Aug 16–19</td><td>Joshua Tree Airbnb</td><td>Sunrise hikes, Skull Rock, Integratron</td></tr>
+      <tr><td>Aug 19–22</td><td>Malibu (with Nima &amp; Tara)</td><td>Beach time, Pourang's birthday</td></tr>
+      <tr><td>Aug 22–26</td><td>Temecula</td><td>Family time, low-key</td></tr>
+    </table>
+  </div>
+
+  <div class="section" id="tab-hotel">
+    <div class="section-title">Hotel &amp; Transportation</div>
+    <div class="book-group-label">Lodging</div>
+    <div class="hotel-card"><h4>Joshua Tree Airbnb</h4><div class="meta">Aug 16–19 · hiking-focused rental near the park</div></div>
+    <div class="hotel-card"><h4>Malibu house</h4><div class="meta">Aug 19–22 · with Nima &amp; Tara</div></div>
+    <div class="hotel-card"><h4>Temecula (family)</h4><div class="meta">Aug 22–26 · low-key final stretch</div></div>
+    <div class="book-group-label">Transportation</div>
+    <div class="hotel-card"><h4>Flight — into San Diego or PSP (Palm Springs)</h4><div class="note">For the Joshua Tree leg — pick up the rental car at PSP.</div></div>
+    <div class="hotel-card"><h4>Flight home — out of San Diego</h4><div class="note">Departed Aug 26.</div></div>
+  </div>
+
+  <div class="section" id="tab-itinerary">
+    <div class="section-title">Itinerary</div>
+
+    <div class="leg-head">🪨 Joshua Tree</div>
+    <div class="leg-sub">Aug 16–19 · Airbnb near the park</div>
+
+    <div class="tl-day"><div class="tl-title">Mon, Aug 16 · Arrival</div><ul class="tl-items">
+      <li>Fly into San Diego or Palm Springs, pick up rental car at PSP</li>
+      <li>Check in to the Airbnb, prep the hiking bag and smoothies for the next morning</li>
+      <li>Sunset at Hidden Valley / Keys</li>
+    </ul></div>
+
+    <div class="tl-day"><div class="tl-title">Tue, Aug 17</div><ul class="tl-items">
+      <li>5am sunrise hike — Dam/Barker Trail</li>
+      <li>Brunch &amp; shopping in town (Crossroads, the Saloon, a couple of shops)</li>
+      <li>Pool time, sunset at the rental</li>
+      <li class="meal">🍽 Dinner: burgers with salad</li>
+    </ul></div>
+
+    <div class="tl-day"><div class="tl-title">Wed, Aug 18</div><ul class="tl-items">
+      <li>Bagels (Roadrunner or Dez, if open); 7am Split Rock &amp; Skull Rock hike</li>
+      <li class="meal">🍽 Lunch: cacio e pepe, salad, and pool at the rental</li>
+      <li>Sunset at Arch Rocks Trail &amp; Cholla Cactus Garden</li>
+      <li class="meal">🍽 Dinner: Lorena's Tacos</li>
+    </ul></div>
+
+    <div class="tl-day"><div class="tl-title">Thu, Aug 19 · Transition to Malibu</div><ul class="tl-items">
+      <li>Integratron tour (ticket at 12pm) &amp; the Sound Bath; breakfast at JT Country Kitchen, 10:15–11:15am</li>
+      <li>Check out, lunch on the road, drive to Malibu</li>
+      <li class="meal">🍽 Dinner: Malibu Seafood (halibut) or a cacio e pepe backup</li>
+    </ul></div>
+
+    <div class="leg-head">🌊 Malibu</div>
+    <div class="leg-sub">Aug 19–22 · with Nima &amp; Tara</div>
+
+    <div class="tl-day"><div class="tl-title">Fri, Aug 20</div><ul class="tl-items">
+      <li class="meal">🍳 Breakfast: hashbrowns, eggs, and avocado</li>
+      <li>Beach and pool time with Nima &amp; Tara; evening beach walk</li>
+    </ul></div>
+
+    <div class="tl-day"><div class="tl-title">Sat, Aug 21 · Pourang's birthday</div><ul class="tl-items">
+      <li>Beach/pool time in Malibu</li>
+      <li>Evening at Nima's for Pourang's birthday</li>
+    </ul></div>
+
+    <div class="leg-head">🍇 Temecula</div>
+    <div class="leg-sub">Aug 22–26 · Family time</div>
+
+    <div class="tl-day"><div class="tl-title">Sun, Aug 22 · Transition</div><ul class="tl-items">
+      <li>Check out of Malibu, smoothies (kids make them), drive to Temecula</li>
+      <li class="meal">🍽 Dinner: In-N-Out Burger</li>
+    </ul></div>
+
+    <div class="tl-day"><div class="tl-title">Mon Aug 23 – Wed Aug 25</div><ul class="tl-items">
+      <li>Low-key family time in Temecula</li>
+    </ul></div>
+
+    <div class="tl-day"><div class="tl-title">Thu, Aug 26 · Depart</div><ul class="tl-items">
+      <li>Fly home out of San Diego</li>
+    </ul></div>
+  </div>
+
+  <div class="section" id="tab-book">
+    <div class="section-title">Book This Again</div>
+    <div class="section-sub">Real vendors worth reusing.</div>
+    <ul class="checklist">
+      <li><strong>Joshua Tree Airbnb</strong><span class="sub">Hiking-focused rental near the park entrance</span></li>
+      <li><strong>Integratron</strong><span class="sub">Buy the sound bath ticket in advance — 12pm slot last time</span></li>
+    </ul>
+  </div>
+
+</div>
+
+<footer><a href="../index.html">← Back to Vacations</a></footer>
+
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+<script>
+  var map = L.map('map', {scrollWheelZoom:false}).setView([33.9, -117.3], 7);
+  L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {attribution:'© OpenStreetMap'}).addTo(map);
+  var pts = [
+    [34.1347,-116.0542,"1. Joshua Tree","Aug 16–19"],
+    [34.0259,-118.7798,"2. Malibu","Aug 19–22"],
+    [33.4936,-117.1484,"3. Temecula","Aug 22–26"]
+  ];
+  pts.forEach(function(p){
+    L.marker([p[0],p[1]]).addTo(map).bindPopup("<strong>"+p[2]+"</strong><br>"+p[3]+"<br><a href='https://www.google.com/maps/dir/?api=1&destination="+p[0]+","+p[1]+"' target='_blank'>Directions →</a>");
+  });
+  function showTab(id){
+    document.querySelectorAll('.section').forEach(function(s){ s.classList.remove('active'); });
+    document.querySelectorAll('.tab-btn').forEach(function(b){ b.classList.remove('active'); });
+    document.getElementById('tab-'+id).classList.add('active');
+    event.target.classList.add('active');
+  }
+</script>
+</body>
+</html>
