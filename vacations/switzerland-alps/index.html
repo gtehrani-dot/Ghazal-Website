@@ -63,12 +63,13 @@
 
 <div class="hero">
   <div class="hero-inner">
-    <div class="hero-eyebrow">🏔️ Trip · Nov 21–27, 2012</div>
-    <h1>Switzerland &amp; Italy<span>Jungfraujoch, the Schilthorn, and Lauterbrunnen's waterfalls</span></h1>
+    <div class="hero-eyebrow">🏔️ Trip · Nov 2012</div>
+    <h1>Switzerland &amp; Italy<span>Lucerne, the Jungfrau region, the Matterhorn, and Lake Geneva</span></h1>
     <div class="hero-meta">
       <div class="meta-chip">🗓 <strong>~1 week</strong> · Late Nov 2012</div>
-      <div class="meta-chip">📍 Lucerne → Bernese Oberland (Wengen/Grindelwald/Mürren) → Montreux</div>
-      <div class="meta-chip">🚡 Jungfraujoch "Top of Europe"</div>
+      <div class="meta-chip">📍 Lucerne → Mürren (Bernese Oberland) → Zermatt (Matterhorn) → Montreux</div>
+      <div class="meta-chip">🚡 Jungfraujoch "Top of Europe" · Gornergrat</div>
+      <div class="meta-chip">🥾 North Face Trail, Mürren</div>
     </div>
   </div>
 </div>
@@ -78,6 +79,7 @@
 
 <div class="tabs">
   <button class="tab-btn active" onclick="showTab('overview')">Overview</button>
+  <button class="tab-btn" onclick="showTab('itinerary')">Itinerary</button>
   <button class="tab-btn" onclick="showTab('peaks')">Peaks &amp; Excursions</button>
   <button class="tab-btn" onclick="showTab('book')">Book This Again</button>
 </div>
@@ -86,16 +88,76 @@
 
   <div class="section active" id="tab-overview">
     <div class="section-title">Overview</div>
-    <div class="section-sub">A week through the Bernese Oberland — mountain trains, cable cars, and one legendary waterfall gorge.</div>
-    <div class="callout">Dates are estimated from photo timestamps (Nov 21–27, 2012); the surviving planning document is a set of notes on the mountain excursions rather than a booked day-by-day itinerary, and it also covered a stop in Italy, though the details captured focus on the Swiss leg.</div>
+    <div class="section-sub">Two Swiss trips, remembered together as one: Lucerne, the Jungfrau region, Zermatt, and Lake Geneva.</div>
+    <div class="callout">This page combines what were actually two separate trips, at Ghazal's request, so every stop lives in one place: a Mürren/Bernese Oberland trip and a separate Zermatt/Matterhorn trip, both anchored by Lucerne and Montreux. Dates for the Mürren leg are estimated from photo timestamps (Nov 21–27, 2012); the surviving planning document is a set of mountain-excursion notes rather than a booked day-by-day itinerary. No dated record survives for the Zermatt leg, so it's included without specific calendar days. One detail we couldn't pin down: a train "to the glacier" with a stop connected to Lake Como, Italy — the real glacier train from Mürren (via Lauterbrunnen and Kleine Scheidegg to the Jungfraujoch) doesn't pass anywhere near Como, so that detail isn't reflected below. Flag it if there's a different train or trip you're thinking of and we'll fix it.</div>
     <table class="overview">
       <tr><th>Stop</th><th>Notes</th></tr>
-      <tr><td>Lucerne area</td><td>Mountain train ride with sweeping panoramic Alps views</td></tr>
+      <tr><td>Lucerne</td><td>Mountain train ride with sweeping panoramic Alps views</td></tr>
       <tr><td>Wengen / Grindelwald</td><td>Base for Männlichen and Jungfraujoch excursions</td></tr>
-      <tr><td>Mürren</td><td>Base for the Schilthorn / Piz Gloria cable car</td></tr>
-      <tr><td>Lauterbrunnen</td><td>Waterfall valley, including Trümmelbach Falls</td></tr>
+      <tr><td>Mürren</td><td>Base for the Schilthorn / Piz Gloria cable car and the North Face Trail hike</td></tr>
+      <tr><td>Lauterbrunnen</td><td>Waterfall valley, including Trümmelbach Falls; departure point for the Jungfraujoch glacier train</td></tr>
+      <tr><td>Zermatt</td><td>Car-free village at the foot of the Matterhorn; Gornergrat cogwheel railway</td></tr>
       <tr><td>Montreux</td><td>Lake Geneva stop</td></tr>
     </table>
+  </div>
+
+  <div class="section" id="tab-itinerary">
+    <div class="section-title">Itinerary</div>
+    <div class="section-sub">Reconstructed from photos and notes, not a confirmed day-by-day booking — but every stop is real.</div>
+
+    <div class="leg-head">🏙️ Lucerne</div>
+    <div class="leg-sub">Arrival</div>
+    <div class="tl-day"><div class="tl-title">Lucerne</div><ul class="tl-items">
+      <li>Old town and the covered Chapel Bridge (Kapellbrücke) over the Reuss</li>
+      <li>Mountain train ride out of Lucerne with sweeping panoramic Alps views</li>
+    </ul></div>
+
+    <div class="leg-head">🏔️ Mürren &amp; the Bernese Oberland</div>
+    <div class="leg-sub">Based in Wengen/Grindelwald/Mürren</div>
+
+    <div class="tl-day"><div class="tl-title">Männlichen</div><ul class="tl-items">
+      <li>Cable car from Wengen (Luftseilbahn Wengen-Männlichen) or gondola from Grindelwald (Gondelbahn Grindelwald-Männlichen), then a 15-minute walk to the 2,343m summit</li>
+      <li>Panoramic viewpoint over the Lauterbrunnen valley</li>
+    </ul></div>
+
+    <div class="tl-day"><div class="tl-title">Jungfraujoch — "Top of Europe"</div><ul class="tl-items">
+      <li>The glacier train: departs Lauterbrunnen on the Wengernalp Railway to Kleine Scheidegg (2,061m), then the Jungfrau Railway through Eigergletscher (2,320m) and Eigerwand, stopping at Eismeer (3,158m — a window cut into the rock over the ice) before reaching the Jungfraujoch itself (3,454m/11,000+ ft) — the highest railway station in Europe</li>
+      <li>Views of the Great Aletsch Glacier (a 13.6-mile ice stream), the Ice Palace, and the Sphinx observation terrace</li>
+      <li>Voucher exchanged at Interlaken Ost, Grindelwald, or Wengen station</li>
+    </ul></div>
+
+    <div class="tl-day"><div class="tl-title">North Face Trail, Mürren</div><ul class="tl-items">
+      <li>The North Face Trail (Nordwand Trail / Nordwandweg) — a cliff-edge terrace hike above the Lauterbrunnen valley, between Mürren and the hamlet of Gimmelwald</li>
+      <li>Uninterrupted views across the valley to the north faces of the Eiger, Mönch, and Jungfrau</li>
+    </ul></div>
+
+    <div class="tl-day"><div class="tl-title">Schilthorn / Piz Gloria — Mürren</div><ul class="tl-items">
+      <li>Round trip from Mürren by a four-segment cable car — the longest cable car system in the world</li>
+      <li>The revolving mountaintop restaurant turns slowly over 200+ peaks; site of the James Bond Bar from "On Her Majesty's Secret Service" — the "Martini, shaken not stirred" is the thing to order</li>
+    </ul></div>
+
+    <div class="tl-day"><div class="tl-title">Trümmelbach Falls — Lauterbrunnen</div><ul class="tl-items">
+      <li>A mountain hollowed out by a series of waterfalls, reached by elevator, then walkable back down</li>
+      <li>Buses run there, or it's a short hike from the Lauterbrunnen train station</li>
+    </ul></div>
+
+    <div class="leg-head">⛰️ Zermatt &amp; the Matterhorn</div>
+    <div class="leg-sub">A separate trip, remembered here alongside the rest</div>
+
+    <div class="tl-day"><div class="tl-title">Zermatt</div><ul class="tl-items">
+      <li>Car-free alpine village at the base of the Matterhorn, reached by train (the Glacier Express connects Zermatt with St. Moritz; the standard rail route runs via Visp)</li>
+      <li>Village walk with Matterhorn views from town</li>
+    </ul></div>
+
+    <div class="tl-day"><div class="tl-title">Gornergrat</div><ul class="tl-items">
+      <li>Gornergrat cogwheel railway — one of Europe's highest, with views of the Matterhorn and the surrounding glaciers</li>
+    </ul></div>
+
+    <div class="leg-head">🚤 Montreux</div>
+    <div class="leg-sub">Lake Geneva, before departure</div>
+    <div class="tl-day"><div class="tl-title">Montreux</div><ul class="tl-items">
+      <li>Lake Geneva promenade and boat views back toward the mountains</li>
+    </ul></div>
   </div>
 
   <div class="section" id="tab-peaks">
@@ -116,6 +178,14 @@
       <h4>Trümmelbach Falls — Lauterbrunnen</h4>
       <div class="note">A mountain hollowed out by a series of waterfalls, accessible by elevator, then walkable back down. Buses run there, or it's a short hike from the Lauterbrunnen train station.</div>
     </div>
+    <div class="hotel-card">
+      <h4>North Face Trail — Mürren</h4>
+      <div class="note">Cliff-edge terrace trail between Mürren and Gimmelwald, also called the Nordwand Trail or Nordwandweg. Continuous, unobstructed views of the north faces of the Eiger, Mönch, and Jungfrau across the valley.</div>
+    </div>
+    <div class="hotel-card">
+      <h4>Gornergrat — Zermatt</h4>
+      <div class="note">Cogwheel railway from Zermatt, one of the highest rack railways in Europe. Views of the Matterhorn and the surrounding glacier fields from the summit station.</div>
+    </div>
   </div>
 
   <div class="section" id="tab-book">
@@ -125,6 +195,8 @@
       <li><strong>Jungfraujoch — Rail Europe voucher</strong><span class="sub">Exchange at Interlaken Ost, Grindelwald, or Wengen station; tickets valid 6 months from purchase</span></li>
       <li><strong>Schilthorn cable car, Mürren</strong><span class="sub">Book the revolving restaurant for a meal with the Piz Gloria views</span></li>
       <li><strong>Trümmelbach Falls</strong><span class="sub">Short hike or bus from Lauterbrunnen station</span></li>
+      <li><strong>North Face Trail, Mürren</strong><span class="sub">Cliff-edge hike toward Gimmelwald — the best-value views on the whole trip</span></li>
+      <li><strong>Gornergrat, Zermatt</strong><span class="sub">Cogwheel train straight up to Matterhorn views</span></li>
     </ul>
   </div>
 
@@ -134,15 +206,18 @@
 
 <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
 <script>
-  var map = L.map('map', {scrollWheelZoom:false}).setView([46.62, 7.95], 10);
+  var map = L.map('map', {scrollWheelZoom:false}).setView([46.35, 7.55], 8);
   L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {attribution:'© OpenStreetMap'}).addTo(map);
   var pts = [
-    [46.7712,7.9904,"1. Wengen","Base for Männlichen & Jungfraujoch"],
-    [46.6863,7.9904,"2. Jungfraujoch","Top of Europe"],
-    [46.5589,7.8944,"3. Mürren","Base for the Schilthorn"],
-    [46.5934,7.9067,"4. Schilthorn / Piz Gloria","Revolving restaurant, James Bond Bar"],
-    [46.5936,7.9086,"5. Lauterbrunnen","Trümmelbach Falls"],
-    [46.4312,6.9107,"6. Montreux","Lake Geneva"]
+    [47.0502,8.3093,"1. Lucerne","Old town, Chapel Bridge, mountain train views"],
+    [46.7712,7.9904,"2. Wengen","Base for Männlichen & Jungfraujoch"],
+    [46.6863,7.9904,"3. Jungfraujoch","Top of Europe, via the glacier train from Lauterbrunnen"],
+    [46.5589,7.8944,"4. Mürren","Base for the Schilthorn and the North Face Trail"],
+    [46.5934,7.9067,"5. Schilthorn / Piz Gloria","Revolving restaurant, James Bond Bar"],
+    [46.5936,7.9086,"6. Lauterbrunnen","Trümmelbach Falls"],
+    [46.0207,7.7491,"7. Zermatt","Car-free village at the base of the Matterhorn"],
+    [45.9828,7.7855,"8. Gornergrat","Cogwheel railway, Matterhorn views"],
+    [46.4312,6.9107,"9. Montreux","Lake Geneva"]
   ];
   pts.forEach(function(p){
     L.marker([p[0],p[1]]).addTo(map).bindPopup("<strong>"+p[2]+"</strong><br>"+p[3]+"<br><a href='https://www.google.com/maps/dir/?api=1&destination="+p[0]+","+p[1]+"' target='_blank'>Directions →</a>");
