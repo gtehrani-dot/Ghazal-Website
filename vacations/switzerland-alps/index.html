@@ -67,7 +67,7 @@
     <h1>Switzerland &amp; Italy<span>Lucerne, the Jungfrau region, the Matterhorn, and Lake Geneva</span></h1>
     <div class="hero-meta">
       <div class="meta-chip">🗓 <strong>~1 week</strong> · Late Nov 2012</div>
-      <div class="meta-chip">📍 Lucerne → Mürren (Bernese Oberland) → Zermatt (Matterhorn) → Montreux</div>
+      <div class="meta-chip">📍 Lucerne → Mürren (Bernese Oberland) → Zermatt (Matterhorn) → Geneva (CERN) → Montreux</div>
       <div class="meta-chip">🚡 Jungfraujoch "Top of Europe" · Gornergrat</div>
       <div class="meta-chip">🥾 North Face Trail, Mürren</div>
     </div>
@@ -89,7 +89,7 @@
   <div class="section active" id="tab-overview">
     <div class="section-title">Overview</div>
     <div class="section-sub">Two Swiss trips, remembered together as one: Lucerne, the Jungfrau region, Zermatt, and Lake Geneva.</div>
-    <div class="callout">This page combines what were actually two separate trips, at Ghazal's request, so every stop lives in one place: a Mürren/Bernese Oberland trip and a separate Zermatt/Matterhorn trip, both anchored by Lucerne and Montreux. Dates for the Mürren leg are estimated from photo timestamps (Nov 21–27, 2012); the surviving planning document is a set of mountain-excursion notes rather than a booked day-by-day itinerary. No dated record survives for the Zermatt leg, so it's included without specific calendar days. One detail we couldn't pin down: a train "to the glacier" with a stop connected to Lake Como, Italy — the real glacier train from Mürren (via Lauterbrunnen and Kleine Scheidegg to the Jungfraujoch) doesn't pass anywhere near Como, so that detail isn't reflected below. Flag it if there's a different train or trip you're thinking of and we'll fix it.</div>
+    <div class="callout">This page combines what were actually two separate trips, at Ghazal's request, so every stop lives in one place: a Mürren/Bernese Oberland trip and a separate Zermatt/Matterhorn trip, both anchored by Lucerne and Montreux. Dates for the Mürren leg are estimated from photo timestamps (Nov 21–27, 2012); the surviving planning document is a set of mountain-excursion notes rather than a booked day-by-day itinerary. No dated record survives for the Zermatt leg, so it's included without specific calendar days. The glacier train was the Mürren/Jungfraujoch route, confirmed — not connected to Como.</div>
     <table class="overview">
       <tr><th>Stop</th><th>Notes</th></tr>
       <tr><td>Lucerne</td><td>Mountain train ride with sweeping panoramic Alps views</td></tr>
@@ -97,6 +97,7 @@
       <tr><td>Mürren</td><td>Base for the Schilthorn / Piz Gloria cable car and the North Face Trail hike</td></tr>
       <tr><td>Lauterbrunnen</td><td>Waterfall valley, including Trümmelbach Falls; departure point for the Jungfraujoch glacier train</td></tr>
       <tr><td>Zermatt</td><td>Car-free village at the foot of the Matterhorn; Gornergrat cogwheel railway</td></tr>
+      <tr><td>Geneva (CERN)</td><td>Stop at CERN on the way to Montreux</td></tr>
       <tr><td>Montreux</td><td>Lake Geneva stop</td></tr>
     </table>
   </div>
@@ -153,6 +154,13 @@
       <li>Gornergrat cogwheel railway — one of Europe's highest, with views of the Matterhorn and the surrounding glaciers</li>
     </ul></div>
 
+    <div class="leg-head">⚛️ CERN, Geneva</div>
+    <div class="leg-sub">A stop on the way to Montreux</div>
+    <div class="tl-day"><div class="tl-title">CERN</div><ul class="tl-items">
+      <li>European Organization for Nuclear Research, Meyrin — home of the Large Hadron Collider</li>
+      <li>Visitor site with exhibits on particle physics, including the Globe of Science and Innovation</li>
+    </ul></div>
+
     <div class="leg-head">🚤 Montreux</div>
     <div class="leg-sub">Lake Geneva, before departure</div>
     <div class="tl-day"><div class="tl-title">Montreux</div><ul class="tl-items">
@@ -186,6 +194,10 @@
       <h4>Gornergrat — Zermatt</h4>
       <div class="note">Cogwheel railway from Zermatt, one of the highest rack railways in Europe. Views of the Matterhorn and the surrounding glacier fields from the summit station.</div>
     </div>
+    <div class="hotel-card">
+      <h4>CERN — Meyrin, Geneva</h4>
+      <div class="note">European Organization for Nuclear Research, home of the Large Hadron Collider. Visitor exhibits on particle physics, including the Globe of Science and Innovation. A stop on the way to Montreux.</div>
+    </div>
   </div>
 
   <div class="section" id="tab-book">
@@ -197,6 +209,7 @@
       <li><strong>Trümmelbach Falls</strong><span class="sub">Short hike or bus from Lauterbrunnen station</span></li>
       <li><strong>North Face Trail, Mürren</strong><span class="sub">Cliff-edge hike toward Gimmelwald — the best-value views on the whole trip</span></li>
       <li><strong>Gornergrat, Zermatt</strong><span class="sub">Cogwheel train straight up to Matterhorn views</span></li>
+      <li><strong>CERN, Meyrin</strong><span class="sub">Particle physics visitor site on the way to Montreux — check ahead for tour availability</span></li>
     </ul>
   </div>
 
@@ -217,7 +230,8 @@
     [46.5936,7.9086,"6. Lauterbrunnen","Trümmelbach Falls"],
     [46.0207,7.7491,"7. Zermatt","Car-free village at the base of the Matterhorn"],
     [45.9828,7.7855,"8. Gornergrat","Cogwheel railway, Matterhorn views"],
-    [46.4312,6.9107,"9. Montreux","Lake Geneva"]
+    [46.2331,6.0559,"9. CERN, Meyrin","Large Hadron Collider, Globe of Science and Innovation"],
+    [46.4312,6.9107,"10. Montreux","Lake Geneva"]
   ];
   pts.forEach(function(p){
     L.marker([p[0],p[1]]).addTo(map).bindPopup("<strong>"+p[2]+"</strong><br>"+p[3]+"<br><a href='https://www.google.com/maps/dir/?api=1&destination="+p[0]+","+p[1]+"' target='_blank'>Directions →</a>");
