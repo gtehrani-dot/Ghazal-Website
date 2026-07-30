@@ -41,13 +41,44 @@ h1 { font-size: 15px; font-weight: 500; color: #0b0b0b; }
   <div class="leg"><div class="dot" style="background:#6366f1"></div> Both appraisers</div>
   <div class="leg"><div class="dot" style="background:#10b981"></div> Your comps only</div>
   <div class="leg"><div class="dot" style="background:#059669"></div> Your comps + appraisers</div>
+  <div class="leg"><div class="dot" style="background:#0891b2"></div> Kirchner comps</div>
 </div>
 
-<div id="status">Geocoding addresses… (11 properties)</div>
+<div id="status">Geocoding addresses… (13 properties)</div>
 <div id="map"></div>
 
 <script>
 const properties = [
+  {
+    address: "1502 Chain Bridge Ct, McLean, VA 22101",
+    type: "kirchner",
+    color: "#0891b2",
+    popup: `<strong>1502 Chain Bridge Ct</strong><br>
+      <span class="tag" style="background:#cffafe;color:#0e7490">Kirchner comp</span><br>
+      <span class="price">$1,949,000</span> &nbsp;<span class="asr">Jun 2026</span><br>
+      <table>
+        <tr><td>GLA</td><td>3,293 sf</td></tr>
+        <tr><td>Lot</td><td>10,670 sf</td></tr>
+        <tr><td>Condition</td><td>Good/Superior</td></tr>
+        <tr><td>Kirchner adj</td><td>$2,099,925</td></tr>
+        <tr><td>Net adj</td><td>+$150,925 (7.7%)</td></tr>
+      </table>`
+  },
+  {
+    address: "7009 Symphony Ct, McLean, VA 22101",
+    type: "kirchner",
+    color: "#0891b2",
+    popup: `<strong>7009 Symphony Ct</strong><br>
+      <span class="tag" style="background:#cffafe;color:#0e7490">Kirchner comp (addendum)</span><br>
+      <span class="price">$2,500,000</span> &nbsp;<span class="asr">Jul 2026</span><br>
+      <table>
+        <tr><td>GLA</td><td>4,493 sf</td></tr>
+        <tr><td>Lot</td><td>11,468 sf</td></tr>
+        <tr><td>Condition</td><td>Good/Superior</td></tr>
+        <tr><td>Kirchner adj</td><td>$2,282,150</td></tr>
+        <tr><td>Net adj</td><td>−$217,850 (−8.7%)</td></tr>
+      </table>`
+  },
   {
     address: "1502 Linden Hurst Ave, McLean, VA 22101",
     type: "subject",

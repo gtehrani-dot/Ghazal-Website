@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>1502 Linden Hurst Ave — Appraisal Comp Analysis</title>
+<title>1502 Linden Hurst Ave — All Appraisal Comps</title>
 <style>
 :root { color-scheme: light; }
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
@@ -67,12 +67,13 @@ tr:hover td { background: #f8f8f6; }
 </head>
 <body>
 
-<h1>1502 Linden Hurst Ave, McLean VA 22101</h1>
-<p class="subtitle">Appraisal comparison · Ryan (05/01/2026) vs Keegan (05/06/2026) · Subject: 3,646 sf GLA · 12,500 sf lot · 4 BR / 3.1 BA · Q3/C3 · 1 FP · 2-car garage</p>
+<h1>1502 Linden Hurst Ave — All Appraisal Comps</h1>
+<p class="subtitle">Ryan (05/01/2026, $1,800,000) · Keegan (05/06/2026, $1,830,000) · Kirchner (07/08/2026, $2,100,000) · Subject: 3,646 sf GLA · 12,500 sf lot · 4 BR / 3.1 BA</p>
 
 <div class="tabs">
-  <button class="tab active" onclick="showTab('adjustments')">Full adjustment grids</button>
+  <button class="tab active" onclick="showTab('adjustments')">Ryan &amp; Keegan grids</button>
   <button class="tab" onclick="showTab('assessments')">County assessments</button>
+  <button class="tab" onclick="showTab('kirchner')">Kirchner comps</button>
 </div>
 
 <!-- TAB 1: ADJUSTMENT GRIDS -->
@@ -360,6 +361,76 @@ tr:hover td { background: #f8f8f6; }
   <div class="note" style="margin-top:14px;">
     <strong>Average sale-to-assessment premiums:</strong> Ryan's 5 comps averaged +7.6% above assessed → implies subject value ~$1,894,000. Keegan's 4 comps (ex-Pathfinder) averaged +5.2% above assessed → implies ~$1,852,000. Both cross-checks exceed their respective concluded values.<br><br>
     <strong>Ingleside</strong> sold $169,210 above county assessment — the largest premium in the set, consistent with superior finishes. <strong>Pathfinder</strong> was the only comp to sell below assessed value (LLC motivated sale, inferior condition). <strong>Tax note:</strong> iCare confirms subject 2026 assessed at $1,760,520, aligning with Ryan's $19,206 tax figure. Keegan's reported $20,713 implies ~$1.91M assessed — inconsistent with the iCare record and likely an error.
+  </div>
+
+</div>
+
+
+<!-- TAB 3: KIRCHNER COMPS -->
+<div id="tab-kirchner" class="panel">
+
+  <div class="section-head" style="background:#fef3c7;color:#92400e;margin-top:0;">Kirchner Appraisal — Thomas Matthew Kirchner Jr. · Commonwealth Appraisals &amp; Consulting · 4 comps · Effective 07/08/2026 · Value $2,100,000</div>
+
+  <div class="scroll">
+  <table>
+    <tr>
+      <th>Address</th><th>Dist</th><th>Sale date</th><th>Sale price</th><th>GLA sf</th>
+      <th>Lot sf</th><th>Condition adj</th><th>GLA adj</th><th>Garage adj</th><th>Other adjs</th>
+      <th>Net adj</th><th>Net %</th><th>Adj value</th>
+    </tr>
+    <tr>
+      <td><span class="addr">1502 Chain Bridge Ct</span><br><span class="meta">Good/Superior · 22yr · 2-car</span></td>
+      <td>0.69 mi W</td><td>Jun 2026</td><td>$1,949,000</td><td>3,293</td>
+      <td>10,670</td>
+      <td class="neg">−$100,000<br><span class="meta">superior cond</span></td>
+      <td class="pos">+$204,125<br><span class="meta">452 sf × implied rate</span></td>
+      <td class="zero">$0</td>
+      <td class="pos">+$46,800<br><span class="meta">lot, other</span></td>
+      <td class="pos bold">+$150,925</td>
+      <td>7.7%</td>
+      <td class="bold">$2,099,925</td>
+    </tr>
+    <tr>
+      <td><span class="addr">6962 Park Ave</span><br><span class="meta">Good/Inferior · 20yr · 3-car</span></td>
+      <td>0.48 mi NW</td><td>Dec 2025</td><td>$2,175,000</td><td>3,836</td>
+      <td>11,250</td>
+      <td class="pos">+$56,500<br><span class="meta">inferior cond</span></td>
+      <td class="pos">+$27,150<br><span class="meta">GLA / other</span></td>
+      <td class="neg">−$10,000<br><span class="meta">3-car vs 2-car</span></td>
+      <td class="neg">−$5,000<br><span class="meta">other</span></td>
+      <td class="pos bold">+$68,650</td>
+      <td>3.2%</td>
+      <td class="bold">$2,243,650</td>
+    </tr>
+    <tr>
+      <td><span class="addr">6941 Pine Crest Ave</span><br><span class="meta">Good/Inferior · 3-car · 2 FP</span></td>
+      <td>0.53 mi NW</td><td>Dec 2025</td><td>$1,890,000</td><td>3,836</td>
+      <td>11,250</td>
+      <td class="pos">+$50,000<br><span class="meta">inferior cond</span></td>
+      <td class="neg">−$20,000<br><span class="meta">larger GLA</span></td>
+      <td class="neg">−$10,000<br><span class="meta">3-car vs 2-car</span></td>
+      <td class="pos">+$10,000<br><span class="meta">lot, other</span></td>
+      <td class="pos bold">+$30,000</td>
+      <td>1.6%</td>
+      <td class="bold">$1,920,000</td>
+    </tr>
+    <tr>
+      <td><span class="addr">7009 Symphony Ct</span><br><span class="meta">Good/Superior · 33yr · 2-car · addendum comp</span></td>
+      <td>0.58 mi SW</td><td>Jul 2026</td><td>$2,500,000</td><td>4,493</td>
+      <td>11,468</td>
+      <td class="neg">−$100,000<br><span class="meta">superior cond</span></td>
+      <td class="neg">−$93,500<br><span class="meta">larger GLA</span></td>
+      <td class="zero">$0</td>
+      <td class="neg">−$24,350<br><span class="meta">lot, other</span></td>
+      <td class="neg bold">−$217,850</td>
+      <td>−8.7%</td>
+      <td class="bold">$2,282,150</td>
+    </tr>
+  </table>
+  </div>
+
+  <div class="note">
+    <strong>Adjusted value range (comps 1–3):</strong> $1,920,000 – $2,243,650. Kirchner concluded <strong>$2,100,000</strong>, toward the mid-range. Comp 4 (Symphony Ct, $2,500,000 under contract → settled 07/15/2026) was used as supporting evidence only. Condition adjustments were verified with listing agents; Kirchner applied ±$50–100K for condition differentials vs Ryan's zero condition adjustments.
   </div>
 
 </div>
