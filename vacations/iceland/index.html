@@ -1,0 +1,979 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="color-scheme" content="light only">
+<meta name="theme-color" content="#f5faf9">
+<title>Iceland · Sept 5–16, 2026</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+<style>
+  :root{
+    --primary:#1f7a8c;
+    --primary-deep:#0b3d4a;
+    --primary-pale:#dcf3f6;
+    --bg:#f5faf9;
+    --white:#ffffff;
+    --ink:#10333d;
+    --muted:#5c7680;
+    --accent-1:#3f7d57;
+    --accent-2:#c99c3a;
+    --accent-3:#d9663b;
+    --line:rgba(16,51,61,0.12);
+  }
+  *{box-sizing:border-box; margin:0; padding:0;}
+  html{ background:var(--bg); color-scheme:light only; }
+  body{ background:var(--bg); color:var(--ink); font-family:'Inter', sans-serif; line-height:1.55; -webkit-font-smoothing:antialiased; min-height:100vh; }
+  h1,h2,h3,.display{ font-family:'Fraunces', serif; }
+  .mono{ font-family:'JetBrains Mono', monospace; }
+  a{ color:var(--primary-deep); }
+  img{ max-width:100%; display:block; }
+
+  .topbar{ max-width:1180px; margin:0 auto; padding:44px 6vw 24px; }
+  .hero-eyebrow{ font-family:'JetBrains Mono', monospace; font-size:11.5px; letter-spacing:0.28em; text-transform:uppercase; color:var(--primary-deep); margin-bottom:12px; }
+  .topbar h1{ font-size:clamp(36px, 6vw, 64px); font-weight:600; line-height:1.0; color:var(--ink); }
+  .topbar h1 span{ display:block; font-style:italic; font-weight:400; color:var(--primary); font-size:0.4em; margin-top:10px; }
+
+  .hero-meta{ display:flex; flex-wrap:wrap; gap:10px; margin-top:24px; }
+  .meta-chip{ font-family:'JetBrains Mono', monospace; font-size:12px; padding:9px 16px; border:1px solid var(--line); border-radius:100px; background:var(--white); color:var(--ink); box-shadow:0 2px 8px rgba(16,51,61,0.05); }
+  .meta-chip strong{ color:var(--primary-deep); }
+
+  .timeline-bar{ background:var(--ink); padding:24px 28px; margin-top:28px; border-radius:14px; overflow-x:auto; }
+  .timeline-bar-inner{ min-width:1000px; }
+  .timeline-track{ position:relative; display:flex; align-items:flex-start; justify-content:space-between; }
+  .timeline-track::before{ content:''; position:absolute; top:16px; left:0; right:0; height:2px; background:rgba(255,255,255,0.15); }
+  .timeline-stop{ position:relative; flex:1; display:flex; flex-direction:column; align-items:center; padding:0 4px; }
+  .timeline-dot{ width:30px; height:30px; border-radius:50%; display:flex; align-items:center; justify-content:center; font-size:12px; position:relative; z-index:1; background:rgba(255,255,255,0.12); border:2px solid var(--primary); }
+  .timeline-place{ margin-top:9px; font-size:10.5px; font-weight:600; letter-spacing:0.3px; color:#fff; text-align:center; }
+  .timeline-dates{ font-size:9.5px; color:rgba(255,255,255,0.5); margin-top:2px; text-align:center; }
+  .timeline-nights{ display:inline-block; font-size:8.5px; font-weight:600; padding:2px 7px; border-radius:10px; margin-top:4px; text-transform:uppercase; background:rgba(255,255,255,0.12); color:#fff; }
+
+  .banner{ max-width:1180px; margin:0 auto; padding:28px 6vw 40px; display:grid; grid-template-columns:1fr 1fr; gap:20px; }
+  .banner-panel{ position:relative; height:460px; border-radius:18px; overflow:hidden; box-shadow:0 16px 40px rgba(16,51,61,0.12); border:1px solid var(--line); background:var(--white); }
+  .banner-photo{ width:100%; height:100%; background-size:cover; background-position:center; }
+  .banner-photo-cap{ position:absolute; left:16px; bottom:14px; font-family:'JetBrains Mono', monospace; font-size:11px; color:#fff; text-shadow:0 1px 5px rgba(0,0,0,0.5); }
+  #map{ background:#dce8ee; }
+  .leaflet-popup-content{ font-family:'Inter', sans-serif; }
+  .leaflet-popup-content b{ font-family:'Fraunces', serif; }
+
+  .tab-nav{ position:sticky; top:0; z-index:50; background:var(--white); border-bottom:1px solid var(--line); }
+  .tab-nav-inner{ display:flex; flex-wrap:wrap; max-width:1180px; margin:0 auto; padding:4px 6vw; gap:2px; }
+  .tab-btn{ font-family:'JetBrains Mono', monospace; font-size:12.5px; white-space:nowrap; background:none; border:none; color:var(--muted); padding:18px 16px; cursor:pointer; border-bottom:2px solid transparent; transition:all .2s; }
+  .tab-btn:hover{ color:var(--primary-deep); }
+  .tab-btn.active{ color:var(--primary-deep); border-bottom-color:var(--primary); }
+
+  .wrap{ max-width:980px; margin:0 auto; padding:56px 6vw 64px; }
+  .section{ display:none; }
+  .section.active{ display:block; animation:fadeIn .4s ease; }
+  @keyframes fadeIn{ from{opacity:0; transform:translateY(8px);} to{opacity:1; transform:translateY(0);} }
+  .section-title{ font-size:clamp(28px,4vw,40px); font-weight:600; margin-bottom:8px; color:var(--ink);}
+  .section-sub{ color:var(--muted); font-size:15px; margin-bottom:40px; max-width:640px; }
+
+  .callout{ border:1px solid var(--line); border-left:3px solid var(--accent-2); background:#faf3e3; border-radius:0 8px 8px 0; padding:16px 20px; font-size:14.5px; color:var(--ink); margin-bottom:36px; }
+  .callout.warn{ border-left-color:var(--accent-3); background:#fbeee7; }
+  .callout.muted{ border-left-color:var(--muted); background:#eaf0f1; }
+  .callout strong{ color:#8a6423; }
+  .callout.warn strong{ color:#a34d29; }
+  .callout.muted strong{ color:var(--ink); }
+
+  .at-a-glance{ width:100%; border-collapse:collapse; margin-top:8px; }
+  .at-a-glance th{ text-align:left; font-family:'JetBrains Mono',monospace; font-size:10.5px; text-transform:uppercase; letter-spacing:0.06em; color:var(--muted); padding:10px 14px; border-bottom:1px solid var(--line); }
+  .at-a-glance td{ padding:12px 14px; border-bottom:1px solid var(--line); font-size:14px; color:var(--ink); }
+  .at-a-glance tr:last-child td{ border-bottom:none; }
+
+  .book-group-label{ font-family:'JetBrains Mono',monospace; font-size:11.5px; text-transform:uppercase; letter-spacing:0.1em; color:var(--primary-deep); margin:36px 0 10px; padding-bottom:6px; border-bottom:1px solid var(--line); }
+  .book-group-label:first-of-type{ margin-top:0; }
+
+  .hotels-grid{ display:grid; gap:16px; margin-bottom:8px; }
+  .hotel-card{ background:var(--white); border:1px solid var(--line); border-radius:12px; padding:24px 28px; }
+  .hotel-header{ display:flex; justify-content:space-between; align-items:flex-start; gap:16px; flex-wrap:wrap; margin-bottom:8px; }
+  .hotel-name{ font-family:'Fraunces', serif; font-size:22px; font-weight:600; }
+  .hotel-name a{ color:var(--ink); text-decoration:none; }
+  .hotel-name a:hover{ color:var(--primary-deep); }
+  .hotel-dates{ font-family:'JetBrains Mono',monospace; font-size:11.5px; color:var(--primary-deep); text-align:right; }
+  .hotel-meta-row{ display:flex; flex-wrap:wrap; gap:16px; margin:10px 0; font-size:13.5px; color:var(--muted); }
+  .hotel-meta-row strong{ color:var(--ink); }
+  .hotel-note{ font-size:13.5px; color:#444; border-top:1px solid var(--line); padding-top:12px; margin-top:12px; }
+
+  .timeline{ position:relative; padding-left:52px; }
+  .timeline::before{ content:''; position:absolute; left:19px; top:6px; bottom:6px; width:2px; background:linear-gradient(180deg, var(--primary), var(--accent-1), var(--accent-2)); }
+  .tl-day{ position:relative; margin-bottom:38px; }
+  .tl-dot{ position:absolute; left:-52px; top:2px; width:38px; height:38px; border-radius:50%; background:var(--white); border:2px solid var(--primary); display:flex; align-items:center; justify-content:center; font-family:'JetBrains Mono', monospace; font-size:13px; font-weight:600; color:var(--primary-deep); box-shadow:0 2px 8px rgba(16,51,61,0.08); }
+  .tl-card{ background:var(--white); border:1px solid var(--line); border-radius:10px; padding:22px 24px; box-shadow:0 2px 12px rgba(16,51,61,0.05); }
+  .tl-date{ font-family:'JetBrains Mono', monospace; font-size:11.5px; letter-spacing:0.1em; text-transform:uppercase; color:var(--primary-deep); margin-bottom:6px; }
+  .tl-title{ font-family:'Fraunces', serif; font-size:22px; font-weight:600; margin-bottom:12px; color:var(--ink); }
+  .tl-base{ display:inline-block; font-size:11.5px; font-family:'JetBrains Mono',monospace; color:#8a6423; background:#faf3e3; padding:3px 10px; border-radius:100px; margin-bottom:12px; margin-right:8px; }
+  .tl-gmaps-btn{ display:inline-flex; align-items:center; gap:5px; font-family:'JetBrains Mono',monospace; font-size:11px; font-weight:600; text-decoration:none; padding:4px 12px; border-radius:100px; background:var(--primary); color:#fff; margin-bottom:12px; }
+  .tl-gmaps-btn:hover{ background:var(--primary-deep); }
+  .day-weather{ display:flex; align-items:center; gap:10px; flex-wrap:wrap; font-family:'JetBrains Mono',monospace; font-size:11.5px; color:var(--muted); background:var(--primary-pale); border-radius:8px; padding:8px 12px; margin:10px 0 12px; }
+  .day-weather b{ color:var(--primary-deep); font-weight:600; }
+  .day-weather .wx-note{ color:var(--muted); font-style:italic; }
+  .meal-row{ display:flex; gap:8px; flex-wrap:wrap; margin:2px 0 16px; }
+  .meal-chip{ font-family:'JetBrains Mono',monospace; font-size:11px; padding:5px 12px; border-radius:100px; }
+  .meal-chip.filled{ background:var(--primary-pale); color:var(--primary-deep); }
+  .meal-chip.empty{ background:transparent; color:var(--muted); border:1px dashed var(--line); }
+  .tl-subhead{ font-family:'JetBrains Mono',monospace; font-size:10.5px; text-transform:uppercase; letter-spacing:0.08em; color:var(--muted); margin:16px 0 8px; }
+  .tl-subhead:first-of-type{ margin-top:0; }
+  .tl-items{ list-style:none; }
+  .tl-items li{ position:relative; padding-left:20px; margin-bottom:9px; font-size:14.5px; color:var(--muted); }
+  .tl-items li::before{ content:'—'; position:absolute; left:0; color:var(--primary); }
+  .tl-items li strong{ color:var(--ink); }
+  .tl-items li.alt{ font-style:italic; opacity:0.85; }
+  .tl-items li.meal{ background:var(--primary-pale); border-radius:8px; padding:8px 12px 8px 12px; margin-left:-12px; }
+  .tl-items li.meal::before{ content:''; }
+  .title-lnk{ color:inherit; text-decoration:underline; text-decoration-color:var(--primary); text-underline-offset:3px; }
+  .title-lnk:hover{ color:var(--primary-deep); }
+  .rating{ font-family:'JetBrains Mono',monospace; font-size:11px; color:var(--accent-2); }
+
+  .card-grid{ display:grid; grid-template-columns:repeat(auto-fit, minmax(260px,1fr)); gap:18px; margin-bottom:16px; }
+  .card{ background:var(--white); border:1px solid var(--line); border-left:3px solid var(--primary); border-radius:0 10px 10px 0; padding:20px 22px; box-shadow:0 2px 12px rgba(16,51,61,0.05); }
+  .card.accent1{ border-left-color:var(--accent-1); }
+  .card.accent2{ border-left-color:var(--accent-2); }
+  .card.accent3{ border-left-color:var(--accent-3); }
+  .card.muted{ border-left-color:var(--muted); opacity:0.8; }
+  .card-eyebrow{ font-family:'JetBrains Mono', monospace; font-size:10.5px; letter-spacing:0.1em; text-transform:uppercase; color:var(--muted); margin-bottom:6px; }
+  .card h3{ font-size:19px; font-weight:600; margin-bottom:10px; color:var(--ink); }
+  .card p{ font-size:14px; color:var(--muted); margin-bottom:8px; }
+  .card .tag{ display:inline-block; font-family:'JetBrains Mono',monospace; font-size:10.5px; padding:3px 9px; border-radius:100px; background:var(--primary-pale); color:var(--primary-deep); margin-right:6px; margin-top:6px; }
+  .poi-actions{ display:flex; gap:8px; flex-wrap:wrap; margin-top:10px; }
+  .poi-actions a{ display:inline-flex; align-items:center; gap:5px; font-family:'JetBrains Mono',monospace; font-size:11px; font-weight:600; text-decoration:none; padding:5px 12px; border-radius:100px; white-space:nowrap; }
+  .poi-actions a.site{ background:var(--primary-pale); color:var(--primary-deep); }
+  .poi-actions a.dir{ background:var(--primary); color:#fff; }
+  .poi-actions a.dir:hover{ background:var(--primary-deep); }
+
+  .shore-heading{ display:flex; align-items:center; gap:12px; margin:44px 0 18px; }
+  .shore-heading:first-child{ margin-top:0; }
+  .shore-heading h3{ font-size:15px; font-family:'JetBrains Mono',monospace; letter-spacing:0.08em; text-transform:uppercase; color:#8a6423; white-space:nowrap; }
+  .shore-heading::after{ content:''; flex:1; height:1px; background:var(--line); }
+
+  .checklist{ list-style:none; }
+  .checklist li{ display:flex; gap:14px; align-items:flex-start; padding:16px 0; border-bottom:1px solid var(--line); font-size:14.5px; color:var(--muted); cursor:default; }
+  .checklist li:last-child{ border-bottom:none; }
+  .checkbox{ width:20px; height:20px; border:2px solid var(--primary); border-radius:5px; flex-shrink:0; margin-top:1px; cursor:pointer; }
+  .checklist .lbl{ color:var(--primary-deep); font-family:'JetBrains Mono',monospace; font-size:10.5px; letter-spacing:0.06em; text-transform:uppercase; display:block; margin-bottom:3px; }
+  .checklist .contact{ display:block; font-family:'JetBrains Mono',monospace; font-size:11.5px; color:var(--muted); margin-top:4px; }
+  .checklist .contact a{ color:var(--primary-deep); }
+  .checklist li.done{ opacity:0.6; }
+  .checklist li.done .lbl{ color:var(--muted); }
+  .checklist li.done::before{ content:'✅'; margin-right:2px; }
+
+  .footer{ text-align:center; padding:40px 6vw 60px; color:var(--muted); font-size:12px; font-family:'JetBrains Mono',monospace; }
+  .footer span{ color:var(--primary-deep); }
+
+  .print-btn{ display:inline-flex; align-items:center; gap:6px; font-family:'JetBrains Mono',monospace; font-size:12px; font-weight:600; text-decoration:none; padding:9px 18px; border-radius:100px; background:var(--primary); color:#fff; border:none; cursor:pointer; margin-bottom:28px; }
+  .print-btn:hover{ background:var(--primary-deep); }
+
+  @media (max-width:820px){ .banner{ grid-template-columns:1fr; } .banner-panel{ height:380px; } }
+  @media (max-width:640px){ .timeline{ padding-left:40px; } .tl-dot{ left:-40px; width:32px; height:32px; font-size:11px; } }
+
+  @media print{
+    .tab-nav, .banner, .topbar .timeline-bar, .print-btn{ display:none !important; }
+    .section{ display:none !important; }
+    #tab-print{ display:block !important; }
+    body{ background:#fff; }
+    .wrap{ padding:0; max-width:100%; }
+    a{ color:#000; text-decoration:none; }
+  }
+</style>
+</head>
+<body>
+
+<div class="topbar">
+  <div class="hero-eyebrow">Family Trip · Sept 5–16, 2026</div>
+  <h1>Iceland<span>Ring Road highlights + the Snæfellsnes peninsula</span></h1>
+  <div class="hero-meta">
+    <div class="meta-chip">✈️ <strong>IAD → KEF</strong> (Icelandair, nonstop)</div>
+    <div class="meta-chip">🗓 <strong>11 nights</strong> · Sept 5–16, 2026</div>
+    <div class="meta-chip">📍 Golden Circle · South Coast · East Fjords · Mývatn/Akureyri · Snæfellsnes</div>
+    <div class="meta-chip">🏨 <strong>8 stops</strong>, rental car (self-drive)</div>
+  </div>
+
+  <div class="timeline-bar">
+    <div class="timeline-bar-inner">
+      <div class="timeline-track">
+        <div class="timeline-stop">
+          <div class="timeline-dot">✈</div>
+          <div class="timeline-place">Reykjavík</div>
+          <div class="timeline-dates">Sep 5</div>
+          <div class="timeline-nights">1 night</div>
+        </div>
+        <div class="timeline-stop">
+          <div class="timeline-dot">🌊</div>
+          <div class="timeline-place">Vík (South Coast)</div>
+          <div class="timeline-dates">Sep 6–7</div>
+          <div class="timeline-nights">2 nights</div>
+        </div>
+        <div class="timeline-stop">
+          <div class="timeline-dot">🧊</div>
+          <div class="timeline-place">Öræfi / Glacier Lagoon</div>
+          <div class="timeline-dates">Sep 8</div>
+          <div class="timeline-nights">1 night</div>
+        </div>
+        <div class="timeline-stop">
+          <div class="timeline-dot">⛰</div>
+          <div class="timeline-place">Egilsstaðir</div>
+          <div class="timeline-dates">Sep 9</div>
+          <div class="timeline-nights">1 night</div>
+        </div>
+        <div class="timeline-stop">
+          <div class="timeline-dot">♨️</div>
+          <div class="timeline-place">Mývatn</div>
+          <div class="timeline-dates">Sep 10</div>
+          <div class="timeline-nights">1 night</div>
+        </div>
+        <div class="timeline-stop">
+          <div class="timeline-dot">🐳</div>
+          <div class="timeline-place">Akureyri</div>
+          <div class="timeline-dates">Sep 11</div>
+          <div class="timeline-nights">1 night</div>
+        </div>
+        <div class="timeline-stop">
+          <div class="timeline-dot">⛪</div>
+          <div class="timeline-place">Snæfellsnes</div>
+          <div class="timeline-dates">Sep 12–13</div>
+          <div class="timeline-nights">2 nights</div>
+        </div>
+        <div class="timeline-stop">
+          <div class="timeline-dot">🏙</div>
+          <div class="timeline-place">Reykjavík</div>
+          <div class="timeline-dates">Sep 14</div>
+          <div class="timeline-nights">1 night</div>
+        </div>
+        <div class="timeline-stop">
+          <div class="timeline-dot">💎</div>
+          <div class="timeline-place">Blue Lagoon</div>
+          <div class="timeline-dates">Sep 15</div>
+          <div class="timeline-nights">1 night</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="banner">
+  <div class="banner-panel">
+    <div class="banner-photo" style="background-image:url('https://commons.wikimedia.org/wiki/Special:FilePath/J%C3%B6kuls%C3%A1rl%C3%B3n_glacier_lagoon,_Iceland,_20240719_1141_2538.jpg');"></div>
+    <div class="banner-photo-cap">Jökulsárlón Glacier Lagoon — Day 4</div>
+  </div>
+  <div>
+    <div class="banner-panel"><div id="map" style="width:100%; height:100%;"></div></div>
+    <div class="legend" style="display:flex; flex-wrap:wrap; gap:8px 16px; padding:10px 2px 0; font-family:'JetBrains Mono',monospace; font-size:11px; color:var(--muted); align-items:center;">
+      <span><strong style="color:#3f7d57">●</strong> Nature & sights</span>
+      <span><strong style="color:#1f7a8c">●</strong> Adventure/activity</span>
+      <span><strong style="color:#c99c3a">●</strong> Town/food</span>
+      <span><strong style="color:#0b3d4a">●</strong> Lodging</span>
+    </div>
+  </div>
+</div>
+
+<nav class="tab-nav">
+  <div class="tab-nav-inner">
+  <button class="tab-btn active" onclick="showTab('overview')">📋 Overview</button>
+  <button class="tab-btn" onclick="showTab('hotels')">🏨 Hotel &amp; Transportation</button>
+  <button class="tab-btn" onclick="showTab('itinerary')">📅 Itinerary</button>
+  <button class="tab-btn" onclick="showTab('waterfalls')">💧 Waterfalls &amp; Glaciers</button>
+  <button class="tab-btn" onclick="showTab('hotsprings')">♨️ Hot Springs &amp; Aurora</button>
+  <button class="tab-btn" onclick="showTab('more')">⭐ Also Worth Seeing</button>
+  <button class="tab-btn" onclick="showTab('book')">✅ Book Now</button>
+  <button class="tab-btn" onclick="showTab('print')">🖨 Print</button>
+  </div>
+</nav>
+
+<div class="wrap">
+
+  <!-- ═══════════ OVERVIEW ═══════════ -->
+  <div id="tab-overview" class="section active">
+    <div class="section-title">Trip Overview</div>
+    <div class="section-sub">Every day at a glance — the full detail lives in the Itinerary tab.</div>
+
+    <div class="callout muted"><strong>Why this route:</strong> A counter-clockwise loop out of Keflavík so the crowded Golden Circle and South Coast come first while jet lag keeps mornings early, glacier country and the East Fjords fill the quiet middle days, and the trip closes with Snæfellsnes and one splurge night at the Blue Lagoon on the way back to the airport — no backtracking anywhere on the route.</div>
+
+    <table class="at-a-glance">
+      <thead><tr><th>Day</th><th>Date</th><th>Base</th><th>Focus</th></tr></thead>
+      <tbody>
+        <tr><td>1</td><td>Sat Sep 5</td><td>Reykjavík</td><td>Land at KEF, easy first day in the city</td></tr>
+        <tr><td>2</td><td>Sun Sep 6</td><td>Vík</td><td>Golden Circle: Þingvellir, Geysir, Gullfoss</td></tr>
+        <tr><td>3</td><td>Mon Sep 7</td><td>Vík</td><td>South Coast waterfalls + Reynisfjara black beach</td></tr>
+        <tr><td>4</td><td>Tue Sep 8</td><td>Öræfi (Glacier Lagoon)</td><td>Skaftafell glacier hike, Jökulsárlón, Diamond Beach</td></tr>
+        <tr><td>5</td><td>Wed Sep 9</td><td>Egilsstaðir</td><td>Höfn lunch, scenic East Fjords drive, Seyðisfjörður</td></tr>
+        <tr><td>6</td><td>Thu Sep 10</td><td>Mývatn</td><td>Dettifoss, Krafla, Earth Lagoon Mývatn</td></tr>
+        <tr><td>7</td><td>Fri Sep 11</td><td>Akureyri</td><td>Húsavík whale watching + GeoSea baths</td></tr>
+        <tr><td>8</td><td>Sat Sep 12</td><td>Snæfellsnes (Búðir)</td><td>Long transfer west, evening at Búðir</td></tr>
+        <tr><td>9</td><td>Sun Sep 13</td><td>Snæfellsnes (Búðir)</td><td>Kirkjufell, Djúpalónssandur, Arnarstapi cliffs</td></tr>
+        <tr><td>10</td><td>Mon Sep 14</td><td>Reykjavík</td><td>Drive back, free afternoon in the city</td></tr>
+        <tr><td>11</td><td>Tue Sep 15</td><td>Blue Lagoon</td><td>Splurge night — Retreat spa + Lava dinner</td></tr>
+        <tr><td>12</td><td>Wed Sep 16</td><td>—</td><td>Morning at the lagoon, fly home from KEF</td></tr>
+      </tbody>
+    </table>
+
+    <div class="callout warn" style="margin-top:28px;"><strong>Flag for you:</strong> September puts you in shoulder season — mild temps, lower prices than summer peak, and a real (not guaranteed) shot at the northern lights once it's dark enough after ~9:30pm. It's also active weather season on the Ring Road; the East Fjords and Mývatn legs (Days 5–7) are the ones most likely to need a plan-B if wind or rain rolls in.</div>
+  </div>
+
+  <!-- ═══════════ HOTEL & TRANSPORTATION ═══════════ -->
+  <div id="tab-hotels" class="section">
+    <div class="section-title">Hotel &amp; Transportation</div>
+    <div class="section-sub">Every lodging, the flight, and the rental car, in order.</div>
+
+    <div class="book-group-label">Lodging</div>
+    <div class="hotels-grid">
+      <div class="hotel-card">
+        <div class="hotel-header">
+          <div class="hotel-name"><a href="https://www.hilton.com/en/hotels/rekcuqq-reykjavik-konsulat-hotel/" target="_blank" rel="noopener">Reykjavík Konsulat Hotel, Curio Collection by Hilton</a></div>
+          <div class="hotel-dates">Sep 5 → Sep 6 &nbsp;&amp;&nbsp; Sep 14 → Sep 15</div>
+        </div>
+        <div class="hotel-meta-row">
+          <span>📍 Pósthússtræti 2, 101 Reykjavík</span>
+          <span>🔖 Not yet booked</span>
+        </div>
+        <div class="hotel-note">Boutique 4-star in a converted 1900s department store, two blocks from the harbor — used on both the arrival night and the free afternoon before the Blue Lagoon. Rates run $220–$946/night depending on dates; breakfast not included, served 7:00–10:30am if added. Book each stay separately since they're not consecutive.</div>
+      </div>
+      <div class="hotel-card">
+        <div class="hotel-header">
+          <div class="hotel-name"><a href="https://www.keahotels.is/en/hotels/hotel-katla" target="_blank" rel="noopener">Hotel Katla by Keahotels</a></div>
+          <div class="hotel-dates">Sep 6 → Sep 8</div>
+        </div>
+        <div class="hotel-meta-row">
+          <span>📍 Just north of Vík on Route 1, near Höfðabrekka</span>
+          <span>🔖 Not yet booked</span>
+        </div>
+        <div class="hotel-note">103 rooms with black-sand-and-glacier views, geothermal hot tub and sauna the kids will want to use both nights. Averages ~$300–$670/night depending on dates; buffet breakfast included.</div>
+      </div>
+      <div class="hotel-card">
+        <div class="hotel-header">
+          <div class="hotel-name"><a href="https://www.islandshotel.is/en/hotels/fosshotel-glacier-lagoon" target="_blank" rel="noopener">Fosshotel Glacier Lagoon</a></div>
+          <div class="hotel-dates">Sep 8 → Sep 9</div>
+        </div>
+        <div class="hotel-meta-row">
+          <span>📍 Fagurhólsmýri, Öræfi — between Skaftafell and Jökulsárlón</span>
+          <span>📞 <a href="tel:+3545148300">+354 514 8300</a></span>
+        </div>
+        <div class="hotel-note">The only real base for this stretch — remote, but puts both the glacier hike and the lagoon within a 20–30 min drive. Averages ~$360–$690/night; paid breakfast 7–10am (ISK 4,700 adult / 2,350 child).</div>
+      </div>
+      <div class="hotel-card">
+        <div class="hotel-header">
+          <div class="hotel-name"><a href="https://www.icelandhotelcollectionbyberjaya.com/en/hotels/east/herad-hotel" target="_blank" rel="noopener">Hérað – Berjaya Iceland Hotels</a></div>
+          <div class="hotel-dates">Sep 9 → Sep 10</div>
+        </div>
+        <div class="hotel-meta-row">
+          <span>📍 Egilsstaðir, East Iceland</span>
+          <span>🔖 Not yet booked</span>
+        </div>
+        <div class="hotel-note">Straightforward base after the East Fjords drive — average ~$140–$200/night, among the more affordable stops on the loop. Buffet breakfast 7–10am (ISK 4,200 adult / 2,900 child).</div>
+      </div>
+      <div class="hotel-card">
+        <div class="hotel-header">
+          <div class="hotel-name"><a href="https://www.islandshotel.is/en/hotels/fosshotel-myvatn" target="_blank" rel="noopener">Fosshotel Mývatn</a></div>
+          <div class="hotel-dates">Sep 10 → Sep 11</div>
+        </div>
+        <div class="hotel-meta-row">
+          <span>📍 Reykjahlíð, Lake Mývatn</span>
+          <span>🔖 Not yet booked</span>
+        </div>
+        <div class="hotel-note">Walking distance to the lake, ~10 min from Earth Lagoon Mývatn. Averages ~$150–$290/night; breakfast included.</div>
+      </div>
+      <div class="hotel-card">
+        <div class="hotel-header">
+          <div class="hotel-name"><a href="https://www.keahotels.is/en/hotels/hotel-kea" target="_blank" rel="noopener">Hotel Kea by Keahotels</a></div>
+          <div class="hotel-dates">Sep 11 → Sep 12</div>
+        </div>
+        <div class="hotel-meta-row">
+          <span>📍 Akureyri town center, harbor-side</span>
+          <span>🔖 Not yet booked</span>
+        </div>
+        <div class="hotel-note">4-star, walkable to Akureyri's restaurants — a good rest-day base before the long transfer to Snæfellsnes. Averages ~$200–$300/night; buffet breakfast (~ISK 3,890/person) not included.</div>
+      </div>
+      <div class="hotel-card">
+        <div class="hotel-header">
+          <div class="hotel-name"><a href="https://www.hotelbudir.is/" target="_blank" rel="noopener">Hotel Búðir</a></div>
+          <div class="hotel-dates">Sep 12 → Sep 14</div>
+        </div>
+        <div class="hotel-meta-row">
+          <span>📍 Búðir, south shore of Snæfellsnes</span>
+          <span>🔖 Not yet booked</span>
+        </div>
+        <div class="hotel-note">The taste-profile pick for this leg — remote oceanfront property next to Iceland's famous black church, glacier and bay views from the room, kitchen rated among the best on the peninsula. This is the one non-Blue-Lagoon splurge of the trip; book the Loft or Deluxe room for the view.</div>
+      </div>
+      <div class="hotel-card">
+        <div class="hotel-header">
+          <div class="hotel-name"><a href="https://www.bluelagoon.com/accommodation/retreat-hotel/suites/lava-view-junior-suite" target="_blank" rel="noopener">The Retreat at Blue Lagoon — Lava View Junior Suite</a></div>
+          <div class="hotel-dates">Sep 15 → Sep 16</div>
+        </div>
+        <div class="hotel-meta-row">
+          <span>📍 Grindavík, Reykjanes Peninsula (20 min from KEF)</span>
+          <span>📞 <a href="tel:+3544208700">+354 420 8700</a></span>
+        </div>
+        <div class="hotel-note"><strong>The splurge night.</strong> Official 2026 one-night summer rate is 300,000 ISK (~$2,400 at today's ~125 ISK/USD — confirm at booking, this runs above the ~$1,800 reference point). Includes private Retreat Lagoon access, à la carte breakfast, and a welcome drink. Kids 8+ are fine in ground-floor suites — both of yours clear that bar. Bookings go through the Retreat sales desk, not a standard OTA — email retreat@bluelagoon.is or call above, 10-day cancellation notice.</div>
+      </div>
+    </div>
+
+    <div class="book-group-label">Transportation</div>
+    <div class="hotels-grid">
+      <div class="hotel-card">
+        <div class="hotel-header">
+          <div class="hotel-name"><a href="https://www.icelandair.com/" target="_blank" rel="noopener">Icelandair FI — IAD to KEF (nonstop)</a></div>
+          <div class="hotel-dates">Depart Thu Sep 4, evening</div>
+        </div>
+        <div class="hotel-meta-row">
+          <span>🕐 ~5h55m nonstop, Boeing 757</span>
+          <span>🔖 Priced, not yet purchased</span>
+        </div>
+        <div class="hotel-note">Overnight flight — departs Washington Dulles in the evening, lands Keflavík early Sep 5 morning. Icelandair flies this route 7x/week. Confirm checked-bag allowance at booking; Icelandair's standard economy fare typically includes 0–1 checked bag depending on fare class, with paid add-ons for a family of four — verify the exact number on your specific fare before packing.</div>
+      </div>
+      <div class="hotel-card">
+        <div class="hotel-header">
+          <div class="hotel-name"><a href="https://www.icelandair.com/" target="_blank" rel="noopener">Icelandair FI — KEF to IAD (nonstop, return)</a></div>
+          <div class="hotel-dates">Depart Wed Sep 16, midday</div>
+        </div>
+        <div class="hotel-meta-row">
+          <span>🕐 ~6h30m nonstop</span>
+          <span>🔖 Priced, not yet purchased</span>
+        </div>
+        <div class="hotel-note">Book alongside the outbound leg for the round-trip fare.</div>
+      </div>
+      <div class="hotel-card">
+        <div class="hotel-header">
+          <div class="hotel-name"><a href="https://www.lotuscarrental.is/our-rental-cars/large-car" target="_blank" rel="noopener">Lotus Car Rental — mid-size SUV (Dacia Duster or similar)</a></div>
+          <div class="hotel-dates">Pickup Sep 5 · Dropoff Sep 16, KEF</div>
+        </div>
+        <div class="hotel-meta-row">
+          <span>📍 Keflavík Airport counter</span>
+          <span>🔖 Not yet booked</span>
+        </div>
+        <div class="hotel-note">Lotus guarantees the vehicle class you book (Blue Car Rental does not) — worth the small premium for an 11-day family trip. A 4WD/AWD mid-size SUV is the right call for September; gravel F-roads aren't needed for this route, but wind and rain on the Ring Road favor the extra clearance and traction. Full-coverage insurance recommended given Iceland's gravel-shoulder and wind-door-damage claims.</div>
+      </div>
+    </div>
+    <div class="callout" style="margin-top:8px;"><strong>Live route reference:</strong> for any day where drive times shift, <a href="https://www.rome2rio.com/" target="_blank" rel="noopener">Rome2Rio</a> gives a quick multi-modal sanity check against the times below.</div>
+  </div>
+
+  <!-- ═══════════ ITINERARY ═══════════ -->
+  <div id="tab-itinerary" class="section">
+    <div class="section-title">Day-by-Day Itinerary</div>
+    <div class="section-sub">Counter-clockwise loop from Keflavík — South Coast first while jet lag keeps mornings early, glacier country and the quiet East Fjords in the middle, Snæfellsnes and the Blue Lagoon on the way back to the airport.</div>
+
+    <div class="callout muted"><strong>Weather note:</strong> Sept 5–16 is well beyond the ~2-week live forecast window (today is Jul 30). Every weather line below is a September climate normal for that region, marked <span class="wx-note">Historical</span> — swap in real forecasts once you're inside the 10–16 day window.</div>
+
+    <div class="timeline">
+
+      <div class="tl-day">
+        <div class="tl-dot">1</div>
+        <div class="tl-card">
+          <div class="tl-date">Day 1 · Sat, Sep 5</div>
+          <div class="tl-title">Land at Keflavík, easy first day in Reykjavík</div>
+          <span class="tl-base">🚗 45 min KEF → Reykjavík</span>
+          <div class="day-weather">🌤️ <b>Weather</b> · Temp: 46–54°F · Precip: scattered showers · Wind: 15–20 mph <span class="wx-note">Historical</span></div>
+          <div class="meal-row">
+            <span class="meal-chip empty">🍳 Breakfast — on the overnight flight</span>
+            <span class="meal-chip filled">🥪 Lunch — Bæjarins Beztu Pylsur (hot dog stand)</span>
+            <span class="meal-chip filled">🍽 Dinner — Messinn</span>
+          </div>
+          <ul class="tl-items">
+            <li>Land KEF ~7am, pick up the rental car, drive straight to Reykjavík — no activities scheduled before early check-in, this is a recovery day.</li>
+            <li>🍽 <strong>Lunch:</strong> <a href="https://www.bbp.is/" target="_blank" rel="noopener" class="title-lnk">Bæjarins Beztu Pylsur</a> <span class="rating">4.5, $</span> — the famous harbor hot dog cart, "one with everything," a fun low-effort first bite for the kids.</li>
+            <li><strong>Walk downtown</strong> — <a href="https://www.hallgrimskirkja.is/" target="_blank" rel="noopener" class="title-lnk">Hallgrímskirkja</a> church tower and the <a href="https://reykjavik.is/en" target="_blank" rel="noopener" class="title-lnk">Sun Voyager</a> sculpture on the harbor, both an easy stroll from the hotel.</li>
+            <li class="meal">🍽 <strong>Dinner:</strong> <a href="https://messinn.com/" target="_blank" rel="noopener" class="title-lnk">Messinn</a> <span class="rating">4.6, $$</span> — pan-fried fish served in the skillet, casual and kid-friendly.</li>
+          </ul>
+          <a class="tl-gmaps-btn" href="https://www.google.com/maps/dir/?api=1&origin=Keflavik+Airport&destination=Hallgr%C3%ADmskirkja+Reykjavik&waypoints=B%C3%A6jarins+Beztu+Pylsur" target="_blank" rel="noopener">🧭 Send today's route to Google Maps</a>
+        </div>
+      </div>
+
+      <div class="tl-day">
+        <div class="tl-dot">2</div>
+        <div class="tl-card">
+          <div class="tl-date">Day 2 · Sun, Sep 6</div>
+          <div class="tl-title">Golden Circle, then on to Vík</div>
+          <span class="tl-base">🚗 ~4.5 hrs driving total · leave by 8:30am</span>
+          <div class="day-weather">🌤️ <b>Weather</b> · Temp: 45–53°F · Precip: light rain likely · Wind: 15–25 mph <span class="wx-note">Historical</span></div>
+          <div class="meal-row">
+            <span class="meal-chip filled">🍳 Breakfast — hotel</span>
+            <span class="meal-chip filled">🥪 Lunch — Friðheimar</span>
+            <span class="meal-chip filled">🍽 Dinner — Suður-Vík</span>
+          </div>
+          <div class="tl-subhead">Golden Circle</div>
+          <ul class="tl-items">
+            <li><strong><a href="https://www.thingvellir.is/en" target="_blank" rel="noopener" class="title-lnk">Þingvellir National Park</a></strong> — walk the rift valley between the tectonic plates; easy, flat trails good for both kids.</li>
+            <li><strong><a href="https://www.geysircenter.com/" target="_blank" rel="noopener" class="title-lnk">Geysir geothermal area</a></strong> — Strokkur erupts every 5–10 min, always a hit with kids.</li>
+            <li><strong><a href="https://gullfoss.is/en/" target="_blank" rel="noopener" class="title-lnk">Gullfoss</a></strong> — Iceland's most famous waterfall, viewing platforms right at the edge.</li>
+            <li>🍽 <strong>Lunch:</strong> <a href="https://fridheimar.is/en/" target="_blank" rel="noopener" class="title-lnk">Friðheimar</a> <span class="rating">4.6, $$</span> — dine inside a working tomato greenhouse, unlimited tomato soup and fresh-baked bread, a genuine kid favorite.</li>
+          </ul>
+          <div class="tl-subhead">On to Vík</div>
+          <ul class="tl-items">
+            <li>~2.5 hr drive south to Vík, check in to Hotel Katla.</li>
+            <li class="meal">🍽 <strong>Dinner:</strong> <a href="https://sudurvik.is/" target="_blank" rel="noopener" class="title-lnk">Suður-Vík</a> <span class="rating">4.4, $$</span> — ocean-view restaurant in a historic house above the village.</li>
+          </ul>
+          <a class="tl-gmaps-btn" href="https://www.google.com/maps/dir/?api=1&origin=Reykjavik&destination=Vik&waypoints=Thingvellir|Geysir|Gullfoss" target="_blank" rel="noopener">🧭 Send today's route to Google Maps</a>
+        </div>
+      </div>
+
+      <div class="tl-day">
+        <div class="tl-dot">3</div>
+        <div class="tl-card">
+          <div class="tl-date">Day 3 · Mon, Sep 7</div>
+          <div class="tl-title">South Coast waterfalls &amp; the black sand beach</div>
+          <span class="tl-base">🚗 ~1.5 hrs driving total · leave by 9:00am</span>
+          <div class="day-weather">🌤️ <b>Weather</b> · Temp: 45–52°F · Precip: 40% chance showers · Wind: 20–30 mph (coastal) <span class="wx-note">Historical</span></div>
+          <div class="meal-row">
+            <span class="meal-chip filled">🍳 Breakfast — hotel</span>
+            <span class="meal-chip filled">🥪 Lunch — Skógakaffi (Skógar)</span>
+            <span class="meal-chip filled">🍽 Dinner — Black Beach Restaurant</span>
+          </div>
+          <ul class="tl-items">
+            <li><strong><a href="https://www.south.is/en/attraction-index/seljalandsfoss" target="_blank" rel="noopener" class="title-lnk">Seljalandsfoss</a></strong> — the waterfall you can walk behind; bring a rain jacket for the kids, they'll want to do the loop twice.</li>
+            <li><strong><a href="https://www.south.is/en/attraction-index/skogafoss" target="_blank" rel="noopener" class="title-lnk">Skógafoss</a></strong> — massive, straight-on falls with a steep staircase to a viewing platform at top, real hike energy for the 13-year-old.</li>
+            <li>🍽 <strong>Lunch:</strong> Skógakaffi <span class="rating">4.3, $</span> — casual café right at the Skógafoss parking area.</li>
+            <li><strong><a href="https://guidetoiceland.is/travel-iceland/drive/reynisfjara" target="_blank" rel="noopener" class="title-lnk">Reynisfjara black sand beach</a></strong> — basalt columns and sea stacks; stay well back from the water, sneaker waves here are genuinely dangerous.</li>
+            <li><strong><a href="https://guidetoiceland.is/travel-iceland/drive/dyrholaey" target="_blank" rel="noopener" class="title-lnk">Dyrhólaey</a></strong> — the arch and puffin colony viewpoint (puffins gone by September, but the cliffs and views hold up).</li>
+            <li class="meal">🍽 <strong>Dinner:</strong> Black Beach Restaurant <span class="rating">4.2, $$$</span> — at Reynisfjara, known for its lobster soup; splurge pick for the day.</li>
+          </ul>
+          <a class="tl-gmaps-btn" href="https://www.google.com/maps/dir/?api=1&origin=Vik&destination=Reynisfjara&waypoints=Seljalandsfoss|Skogafoss|Dyrholaey" target="_blank" rel="noopener">🧭 Send today's route to Google Maps</a>
+        </div>
+      </div>
+
+      <div class="tl-day">
+        <div class="tl-dot">4</div>
+        <div class="tl-card">
+          <div class="tl-date">Day 4 · Tue, Sep 8</div>
+          <div class="tl-title">Glacier hike at Skaftafell, then Jökulsárlón &amp; Diamond Beach</div>
+          <span class="tl-base">🚗 ~2.5 hrs driving total · leave by 9:00am</span>
+          <div class="day-weather">🌤️ <b>Weather</b> · Temp: 43–50°F · Precip: light · Wind: 20–25 mph, colder near the glacier <span class="wx-note">Historical</span></div>
+          <div class="meal-row">
+            <span class="meal-chip filled">🍳 Breakfast — hotel</span>
+            <span class="meal-chip filled">🥪 Lunch — Systrakaffi (Kirkjubæjarklaustur)</span>
+            <span class="meal-chip filled">🍽 Dinner — Fosshotel Glacier Lagoon restaurant</span>
+          </div>
+          <ul class="tl-items">
+            <li>🍽 <strong>Lunch:</strong> Systrakaffi <span class="rating">4.3, $</span> — small-town café roughly halfway, good rest stop before the park.</li>
+            <li><strong><a href="https://www.vatnajokulsthjodgardur.is/en/areas-of-the-park/skaftafell" target="_blank" rel="noopener" class="title-lnk">Skaftafell — Vatnajökull National Park</a></strong> — book a family glacier walk (crampons + guide provided, ~3 hrs, suitable for both kids' ages) or self-guide the Svartifoss trail if you'd rather skip the guided tour.</li>
+            <li><strong><a href="https://icelagoon.is/" target="_blank" rel="noopener" class="title-lnk">Jökulsárlón Glacier Lagoon</a></strong> — icebergs calving into the lagoon; a Zodiac boat tour among the ice is worth booking ahead in September.</li>
+            <li><strong>Diamond Beach</strong> — ice chunks washed up on black sand directly across the road from the lagoon.</li>
+            <li class="meal">🍽 <strong>Dinner:</strong> hotel restaurant at Fosshotel Glacier Lagoon <span class="rating">4.1, $$</span> — this stretch is remote, dinner options are limited to the hotel.</li>
+            <li class="alt">Alternate if the glacier walk is sold out: swap in the Svartifoss basalt-column waterfall hike instead, similar difficulty and time.</li>
+          </ul>
+          <a class="tl-gmaps-btn" href="https://www.google.com/maps/dir/?api=1&origin=Vik&destination=Jokulsarlon&waypoints=Skaftafell|Diamond+Beach" target="_blank" rel="noopener">🧭 Send today's route to Google Maps</a>
+        </div>
+      </div>
+
+      <div class="tl-day">
+        <div class="tl-dot">5</div>
+        <div class="tl-card">
+          <div class="tl-date">Day 5 · Wed, Sep 9</div>
+          <div class="tl-title">Höfn langoustine lunch, then the East Fjords to Egilsstaðir</div>
+          <span class="tl-base">🚗 ~4.5 hrs driving total · leave by 9:00am</span>
+          <div class="day-weather">🌤️ <b>Weather</b> · Temp: 43–50°F · Precip: 50% chance, misty · Wind: 15–20 mph <span class="wx-note">Historical</span></div>
+          <div class="meal-row">
+            <span class="meal-chip filled">🍳 Breakfast — hotel</span>
+            <span class="meal-chip filled">🥪 Lunch — Pakkhús Restaurant</span>
+            <span class="meal-chip filled">🍽 Dinner — Kaffi Hérað</span>
+          </div>
+          <div class="tl-subhead">Lower-key travel day — a deliberate rest day between two adventure-heavy days</div>
+          <ul class="tl-items">
+            <li>🍽 <strong>Lunch:</strong> <a href="https://www.pakkhus.is/" target="_blank" rel="noopener" class="title-lnk">Pakkhús Restaurant</a> <span class="rating">4.6, $$</span> — the can't-miss stop of the day, harbor-side, famous for oven-baked langoustine. No reservations taken; arrive right at opening if it's peak season.</li>
+            <li>Scenic drive through the East Fjords — quiet fishing villages, dramatic coastal cliffs, minimal stops needed.</li>
+            <li><strong><a href="https://visitseydisfjordur.com/" target="_blank" rel="noopener" class="title-lnk">Seyðisfjörður</a></strong> — the rainbow street and colorful wooden houses, a short detour off the main route worth the 30 extra minutes.</li>
+            <li class="meal">🍽 <strong>Dinner:</strong> Kaffi Hérað <span class="rating">4.2, $$</span> — easy, casual option in Egilsstaðir.</li>
+          </ul>
+          <a class="tl-gmaps-btn" href="https://www.google.com/maps/dir/?api=1&origin=Jokulsarlon&destination=Egilsstadir&waypoints=Hofn|Seydisfjordur" target="_blank" rel="noopener">🧭 Send today's route to Google Maps</a>
+        </div>
+      </div>
+
+      <div class="tl-day">
+        <div class="tl-dot">6</div>
+        <div class="tl-card">
+          <div class="tl-date">Day 6 · Thu, Sep 10</div>
+          <div class="tl-title">Dettifoss, Krafla, and the new Earth Lagoon Mývatn</div>
+          <span class="tl-base">🚗 ~3.5 hrs driving total · leave by 9:00am</span>
+          <div class="day-weather">🌤️ <b>Weather</b> · Temp: 41–50°F · Precip: light · Wind: 15–20 mph, drier interior climate <span class="wx-note">Historical</span></div>
+          <div class="meal-row">
+            <span class="meal-chip filled">🍳 Breakfast — hotel</span>
+            <span class="meal-chip filled">🥪 Lunch — Vogafjós Cowshed Café</span>
+            <span class="meal-chip filled">🍽 Dinner — Vogafjós Cowshed Café</span>
+          </div>
+          <ul class="tl-items">
+            <li><strong><a href="https://www.visitvatnajokull.is/en/inspiration/dettifoss" target="_blank" rel="noopener" class="title-lnk">Dettifoss</a></strong> — Europe's most powerful waterfall by volume, a short but rocky/uneven walk from the car park.</li>
+            <li>🍽 <strong>Lunch &amp; dinner:</strong> <a href="https://www.vogafjos.is/" target="_blank" rel="noopener" class="title-lnk">Vogafjós Cowshed Café</a> <span class="rating">4.5, $$</span> — eat literally next to the barn's dairy cows, a genuine novelty for kids and consistently good local food; worth returning to for both meals today.</li>
+            <li><strong><a href="https://www.visitmyvatn.is/en/krafla" target="_blank" rel="noopener" class="title-lnk">Krafla &amp; Víti crater</a></strong> — volcanic caldera with a turquoise crater lake, easy short walk.</li>
+            <li><strong><a href="https://www.earthlagoon.is/" target="_blank" rel="noopener" class="title-lnk">Earth Lagoon Mývatn</a></strong> (formerly Myvatn Nature Baths, reopened Jul 2026 after a full rebuild) — geothermal soak with volcanic-crater views; Earth Signature tier (~$80/adult) includes a towel + drink. Hours can still be settling post-reopening — confirm before you go.</li>
+          </ul>
+          <a class="tl-gmaps-btn" href="https://www.google.com/maps/dir/?api=1&origin=Egilsstadir&destination=Myvatn&waypoints=Dettifoss|Krafla" target="_blank" rel="noopener">🧭 Send today's route to Google Maps</a>
+        </div>
+      </div>
+
+      <div class="tl-day">
+        <div class="tl-dot">7</div>
+        <div class="tl-card">
+          <div class="tl-date">Day 7 · Fri, Sep 11</div>
+          <div class="tl-title">Húsavík whale watching &amp; GeoSea, base in Akureyri</div>
+          <span class="tl-base">🚗 ~2 hrs driving total · leave by 9:00am</span>
+          <div class="day-weather">🌤️ <b>Weather</b> · Temp: 43–52°F · Precip: light · Wind: 10–20 mph <span class="wx-note">Historical</span></div>
+          <div class="meal-row">
+            <span class="meal-chip filled">🍳 Breakfast — hotel</span>
+            <span class="meal-chip filled">🥪 Lunch — Salka Restaurant (Húsavík)</span>
+            <span class="meal-chip filled">🍽 Dinner — Rub23</span>
+          </div>
+          <ul class="tl-items">
+            <li>~1 hr drive north to Húsavík, Iceland's whale-watching capital.</li>
+            <li><strong><a href="https://www.northsailing.is/" target="_blank" rel="noopener" class="title-lnk">Whale watching tour</a></strong> — North Sailing or Gentle Giants, ~3 hrs, humpback sightings common in September; book ahead, dress warm.</li>
+            <li>🍽 <strong>Lunch:</strong> Salka Restaurant <span class="rating">4.4, $$</span> — harbor view, fish soup is the local standard.</li>
+            <li><strong><a href="https://www.geosea.is/" target="_blank" rel="noopener" class="title-lnk">GeoSea Geothermal Baths</a></strong> — infinity-edge sea-view hot pools right in Húsavík; a relaxed close to an active morning.</li>
+            <li>Drive back to Akureyri (~50 min), check in to Hotel Kea.</li>
+            <li class="meal">🍽 <strong>Dinner:</strong> Rub23 <span class="rating">4.5, $$$</span> — Akureyri's best-known sushi/grill fusion spot, the splurge pick for the day.</li>
+          </ul>
+          <a class="tl-gmaps-btn" href="https://www.google.com/maps/dir/?api=1&origin=Myvatn&destination=Akureyri&waypoints=Husavik" target="_blank" rel="noopener">🧭 Send today's route to Google Maps</a>
+        </div>
+      </div>
+
+      <div class="tl-day">
+        <div class="tl-dot">8</div>
+        <div class="tl-card">
+          <div class="tl-date">Day 8 · Sat, Sep 12</div>
+          <div class="tl-title">Long transfer west to Snæfellsnes</div>
+          <span class="tl-base">🚗 ~4.5 hrs driving · leave by 9:30am</span>
+          <div class="day-weather">🌤️ <b>Weather</b> · Temp: 43–52°F · Precip: light · Wind: 15–25 mph, breezier on the coast <span class="wx-note">Historical</span></div>
+          <div class="meal-row">
+            <span class="meal-chip filled">🍳 Breakfast — hotel</span>
+            <span class="meal-chip filled">🥪 Lunch — Settlement Center Café (Borgarnes)</span>
+            <span class="meal-chip filled">🍽 Dinner — Hotel Búðir restaurant</span>
+          </div>
+          <div class="tl-subhead">Deliberately a rest/travel day — no stacked activities after 3 adventure-heavy days in a row</div>
+          <ul class="tl-items">
+            <li>Longest single drive of the trip, mostly via Route 1 then Route 54 onto the peninsula — plan for a couple of short stretch stops.</li>
+            <li>🍽 <strong>Lunch:</strong> Settlement Center Café, Borgarnes <span class="rating">4.3, $</span> — roughly the midpoint, casual and quick.</li>
+            <li class="alt">Optional detour: Bjarnarhöfn Shark Museum, if the kids are up for one more stop before the hotel.</li>
+            <li class="meal">🍽 <strong>Dinner:</strong> Hotel Búðir restaurant <span class="rating">4.7, $$$</span> — reputed to be among the best kitchens in Iceland; the trip's other splurge, book ahead.</li>
+          </ul>
+          <a class="tl-gmaps-btn" href="https://www.google.com/maps/dir/?api=1&origin=Akureyri&destination=Budir+Snaefellsnes&waypoints=Borgarnes" target="_blank" rel="noopener">🧭 Send today's route to Google Maps</a>
+        </div>
+      </div>
+
+      <div class="tl-day">
+        <div class="tl-dot">9</div>
+        <div class="tl-card">
+          <div class="tl-date">Day 9 · Sun, Sep 13</div>
+          <div class="tl-title">Snæfellsnes Peninsula loop</div>
+          <span class="tl-base">🚗 ~2 hrs driving total · leave by 9:30am</span>
+          <div class="day-weather">🌤️ <b>Weather</b> · Temp: 44–52°F · Precip: showers possible · Wind: 20–25 mph <span class="wx-note">Historical</span></div>
+          <div class="meal-row">
+            <span class="meal-chip filled">🍳 Breakfast — hotel</span>
+            <span class="meal-chip filled">🥪 Lunch — Bjargarsteinn Mathús (Grundarfjörður)</span>
+            <span class="meal-chip filled">🍽 Dinner — Fjöruhúsið</span>
+          </div>
+          <ul class="tl-items">
+            <li><strong><a href="https://www.west.is/en/place/kirkjufell" target="_blank" rel="noopener" class="title-lnk">Kirkjufell</a></strong> — Iceland's most photographed mountain, with Kirkjufellsfoss waterfall right at its base; short easy walk.</li>
+            <li>🍽 <strong>Lunch:</strong> Bjargarsteinn Mathús <span class="rating">4.5, $$</span> — seafood with a Kirkjufell view from the dining room, kid-friendly menu.</li>
+            <li><strong><a href="https://www.west.is/en/place/djupalonssandur" target="_blank" rel="noopener" class="title-lnk">Djúpalónssandur</a></strong> — black pebble beach with shipwreck remains and old lifting stones the kids can try to budge.</li>
+            <li><strong><a href="https://www.west.is/en/place/arnarstapi" target="_blank" rel="noopener" class="title-lnk">Arnarstapi</a></strong> — dramatic sea cliffs and arches, an easy coastal walk to Hellnar (~2.5 km round trip).</li>
+            <li><strong>Snæfellsjökull National Park</strong> — the glacier-capped volcano that inspired Jules Verne's "Journey to the Center of the Earth"; viewpoints only today, no summit attempt.</li>
+            <li class="meal">🍽 <strong>Dinner:</strong> Fjöruhúsið <span class="rating">4.6, $$</span> — tiny fish shack in Hellissandur, famous for its fish soup; walk-in only, no booking needed.</li>
+          </ul>
+          <a class="tl-gmaps-btn" href="https://www.google.com/maps/dir/?api=1&origin=Budir&destination=Budir&waypoints=Kirkjufell|Djupalonssandur|Arnarstapi" target="_blank" rel="noopener">🧭 Send today's route to Google Maps</a>
+        </div>
+      </div>
+
+      <div class="tl-day">
+        <div class="tl-dot">10</div>
+        <div class="tl-card">
+          <div class="tl-date">Day 10 · Mon, Sep 14</div>
+          <div class="tl-title">Drive back to Reykjavík, free afternoon in the city</div>
+          <span class="tl-base">🚗 ~2.5 hrs driving · leave by 10:00am</span>
+          <div class="day-weather">🌤️ <b>Weather</b> · Temp: 46–54°F · Precip: scattered showers · Wind: 15–20 mph <span class="wx-note">Historical</span></div>
+          <div class="meal-row">
+            <span class="meal-chip filled">🍳 Breakfast — hotel</span>
+            <span class="meal-chip filled">🥪 Lunch — Settlement Center Café (Borgarnes)</span>
+            <span class="meal-chip filled">🍽 Dinner — Sjávargrillið</span>
+          </div>
+          <ul class="tl-items">
+            <li>Return to Reykjavík by early afternoon, check back in to the Konsulat Hotel.</li>
+            <li>Free afternoon — Laugavegur shopping street, the Sun Voyager and harbor area, or a swim at one of the city's geothermal pools (Sundhöllin or Laugardalslaug) if anyone wants one more soak before the Blue Lagoon splurge.</li>
+            <li class="meal">🍽 <strong>Dinner:</strong> Sjávargrillið <span class="rating">4.5, $$$</span> — seafood grill in downtown Reykjavík, a nice last-city-night option.</li>
+          </ul>
+          <a class="tl-gmaps-btn" href="https://www.google.com/maps/dir/?api=1&origin=Budir&destination=Reykjavik&waypoints=Borgarnes" target="_blank" rel="noopener">🧭 Send today's route to Google Maps</a>
+        </div>
+      </div>
+
+      <div class="tl-day">
+        <div class="tl-dot">11</div>
+        <div class="tl-card">
+          <div class="tl-date">Day 11 · Tue, Sep 15</div>
+          <div class="tl-title">Blue Lagoon splurge night</div>
+          <span class="tl-base">🚗 40 min Reykjavík → Grindavík · leave by 1:00pm</span>
+          <div class="day-weather">🌤️ <b>Weather</b> · Temp: 47–54°F · Precip: light · Wind: 15–20 mph <span class="wx-note">Historical</span></div>
+          <div class="meal-row">
+            <span class="meal-chip filled">🍳 Breakfast — hotel (Reykjavík)</span>
+            <span class="meal-chip empty">🥪 Lunch — grab something en route, no venue set</span>
+            <span class="meal-chip filled">🍽 Dinner — Lava Restaurant</span>
+          </div>
+          <ul class="tl-items">
+            <li>Check out of the Konsulat, drop the rental car early if you'd rather not drive after the spa (Retreat offers transfer options) or keep it through tomorrow's airport run.</li>
+            <li>Check-in at the Retreat is 3:00pm — private Retreat Lagoon access included, separate from the public Blue Lagoon area.</li>
+            <li><strong>Retreat Spa</strong> — book a treatment in advance if you want one; minimum age 12, so this block is more of an adults/older-teen window while the 10-year-old uses the family-friendly public Blue Lagoon area (min age 2, supervised).</li>
+            <li class="meal">🍽 <strong>Dinner:</strong> <a href="https://www.bluelagoon.com/experiences/dining/lava-restaurant" target="_blank" rel="noopener" class="title-lnk">Lava Restaurant</a> <span class="rating">4.5, $$$$</span> — built into the lava wall overlooking the lagoon, the trip's headline splurge meal. (Moss Restaurant is the Retreat's other option but is 12+ only, so Lava is the pick with kids along.)</li>
+          </ul>
+          <a class="tl-gmaps-btn" href="https://www.google.com/maps/dir/?api=1&origin=Reykjavik&destination=Blue+Lagoon+Iceland" target="_blank" rel="noopener">🧭 Send today's route to Google Maps</a>
+        </div>
+      </div>
+
+      <div class="tl-day">
+        <div class="tl-dot">12</div>
+        <div class="tl-card">
+          <div class="tl-date">Day 12 · Wed, Sep 16</div>
+          <div class="tl-title">Morning at the lagoon, fly home</div>
+          <span class="tl-base">🚗 20 min Blue Lagoon → KEF</span>
+          <div class="day-weather">🌤️ <b>Weather</b> · Temp: 46–53°F · Precip: light <span class="wx-note">Historical</span></div>
+          <div class="meal-row">
+            <span class="meal-chip filled">🍳 Breakfast — Retreat à la carte breakfast</span>
+            <span class="meal-chip empty">🥪 Lunch — airport, en route</span>
+            <span class="meal-chip empty">🍽 Dinner — in flight</span>
+          </div>
+          <ul class="tl-items">
+            <li>Checkout is 11:00am — one more soak in the Retreat Lagoon before packing up.</li>
+            <li>20-minute drive to KEF, return the rental car, fly home midday on the direct KEF–IAD leg.</li>
+          </ul>
+          <a class="tl-gmaps-btn" href="https://www.google.com/maps/dir/?api=1&origin=Blue+Lagoon+Iceland&destination=Keflavik+Airport" target="_blank" rel="noopener">🧭 Send today's route to Google Maps</a>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ═══════════ WATERFALLS & GLACIERS ═══════════ -->
+  <div id="tab-waterfalls" class="section">
+    <div class="section-title">Waterfalls &amp; Glaciers</div>
+    <div class="section-sub">The natural landmarks the whole loop is built around.</div>
+    <div class="card-grid">
+      <div class="card accent1">
+        <div class="card-eyebrow">Golden Circle</div>
+        <h3>Gullfoss</h3>
+        <p>Two-tiered waterfall on the Hvítá river, viewing platforms close enough to feel the spray. Easiest big waterfall on the whole trip for a first "wow."</p>
+        <div class="poi-actions"><a class="site" href="https://gullfoss.is/en/" target="_blank" rel="noopener">🌐 Website</a><a class="dir" href="https://www.google.com/maps/dir/?api=1&destination=64.3271%2C-20.1199" target="_blank" rel="noopener">🧭 Directions</a></div>
+      </div>
+      <div class="card accent1">
+        <div class="card-eyebrow">South Coast</div>
+        <h3>Seljalandsfoss</h3>
+        <p>The one you can walk behind — bring a rain jacket. Pairs naturally with Skógafoss the same morning.</p>
+        <div class="poi-actions"><a class="site" href="https://www.south.is/en/attraction-index/seljalandsfoss" target="_blank" rel="noopener">🌐 Website</a><a class="dir" href="https://www.google.com/maps/dir/?api=1&destination=63.6156%2C-19.9886" target="_blank" rel="noopener">🧭 Directions</a></div>
+      </div>
+      <div class="card accent1">
+        <div class="card-eyebrow">South Coast</div>
+        <h3>Skógafoss</h3>
+        <p>60m straight drop, a steep staircase climbs to a platform at the top with views back over the coastline — the best real hike of Day 3.</p>
+        <div class="poi-actions"><a class="site" href="https://www.south.is/en/attraction-index/skogafoss" target="_blank" rel="noopener">🌐 Website</a><a class="dir" href="https://www.google.com/maps/dir/?api=1&destination=63.5321%2C-19.5116" target="_blank" rel="noopener">🧭 Directions</a></div>
+      </div>
+      <div class="card">
+        <div class="card-eyebrow">Vatnajökull National Park</div>
+        <h3>Skaftafell glacier hike</h3>
+        <p>Guided crampon walk onto an outlet glacier of Vatnajökull, Europe's largest ice cap — the trip's headline adventure activity, calibrated for kids 10+.</p>
+        <div class="poi-actions"><a class="site" href="https://www.vatnajokulsthjodgardur.is/en/areas-of-the-park/skaftafell" target="_blank" rel="noopener">🌐 Website</a><a class="dir" href="https://www.google.com/maps/dir/?api=1&destination=64.0165%2C-16.9665" target="_blank" rel="noopener">🧭 Directions</a></div>
+      </div>
+      <div class="card accent1">
+        <div class="card-eyebrow">Southeast</div>
+        <h3>Jökulsárlón &amp; Diamond Beach</h3>
+        <p>Icebergs calving off Breiðamerkurjökull glacier drift out to sea, then wash up as "diamonds" on the black sand beach directly across the road.</p>
+        <div class="poi-actions"><a class="site" href="https://icelagoon.is/" target="_blank" rel="noopener">🌐 Website</a><a class="dir" href="https://www.google.com/maps/dir/?api=1&destination=64.0784%2C-16.2300" target="_blank" rel="noopener">🧭 Directions</a></div>
+      </div>
+      <div class="card accent1">
+        <div class="card-eyebrow">North Iceland</div>
+        <h3>Dettifoss</h3>
+        <p>Europe's most powerful waterfall by water volume — a raw, thunderous contrast to the more manicured Golden Circle falls.</p>
+        <div class="poi-actions"><a class="site" href="https://www.visitvatnajokull.is/en/inspiration/dettifoss" target="_blank" rel="noopener">🌐 Website</a><a class="dir" href="https://www.google.com/maps/dir/?api=1&destination=65.8145%2C-16.3841" target="_blank" rel="noopener">🧭 Directions</a></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══════════ HOT SPRINGS & NORTHERN LIGHTS ═══════════ -->
+  <div id="tab-hotsprings" class="section">
+    <div class="section-title">Hot Springs &amp; Northern Lights</div>
+    <div class="section-sub">Iceland's other headline draw — three very different soaks, plus honest odds on the aurora.</div>
+    <div class="card-grid">
+      <div class="card">
+        <div class="card-eyebrow">Mývatn</div>
+        <h3>Earth Lagoon Mývatn</h3>
+        <p>Reopened July 2026 after a full rebuild, formerly Mývatn Nature Baths. Milky-blue geothermal water with volcanic-crater views, quieter and cheaper than the Blue Lagoon. Earth Signature tier ~$80/adult includes towel + drink.</p>
+        <div class="poi-actions"><a class="site" href="https://www.earthlagoon.is/" target="_blank" rel="noopener">🌐 Website</a><a class="dir" href="https://www.google.com/maps/dir/?api=1&destination=65.6330%2C-16.8300" target="_blank" rel="noopener">🧭 Directions</a></div>
+      </div>
+      <div class="card">
+        <div class="card-eyebrow">Húsavík</div>
+        <h3>GeoSea Geothermal Baths</h3>
+        <p>Infinity-edge sea-water pools built into the cliffside, ocean views instead of a lagoon — a nice contrast after the morning's whale watching. ~$59/adult.</p>
+        <div class="poi-actions"><a class="site" href="https://www.geosea.is/" target="_blank" rel="noopener">🌐 Website</a><a class="dir" href="https://www.google.com/maps/dir/?api=1&destination=66.0470%2C-17.3300" target="_blank" rel="noopener">🧭 Directions</a></div>
+      </div>
+      <div class="card accent2">
+        <div class="card-eyebrow">Reykjanes — the splurge</div>
+        <h3>The Retreat at Blue Lagoon</h3>
+        <p>The one-per-trip splurge from your taste profile. 2026 one-night rate for a Lava View Junior Suite runs ~$2,400 (300,000 ISK) — higher than the ~$1,800 reference point, confirm at booking given ISK/USD swings. Private Retreat Lagoon access included.</p>
+        <div class="poi-actions"><a class="site" href="https://www.bluelagoon.com/" target="_blank" rel="noopener">🌐 Website</a><a class="dir" href="https://www.google.com/maps/dir/?api=1&destination=63.8804%2C-22.4495" target="_blank" rel="noopener">🧭 Directions</a></div>
+      </div>
+      <div class="card muted">
+        <div class="card-eyebrow">Honest odds</div>
+        <h3>Northern Lights</h3>
+        <p>Early September sits right at the start of aurora season — dark enough after ~9:30pm, but not guaranteed. Best shot is a clear night at Mývatn or Snæfellsnes, both dark-sky locations away from Reykjavík's light pollution. Check the <a href="https://en.vedur.is/weather/forecasts/aurora/" target="_blank" rel="noopener" class="title-lnk">Icelandic Met Office aurora forecast</a> each evening once you're on the ground — no way to book this in advance.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══════════ ALSO WORTH SEEING ═══════════ -->
+  <div id="tab-more" class="section">
+    <div class="section-title">Also Worth Seeing</div>
+    <div class="section-sub">Real options that didn't make the day-by-day cut — good swaps if plans change, or ideas for a future trip.</div>
+    <div class="card-grid">
+      <div class="card accent3">
+        <div class="card-eyebrow">Snæfellsnes</div>
+        <h3>Snæfellsjökull summit tour</h3>
+        <p>A guided glacier-summit snowmobile or super-jeep tour is possible but adds a half-day and real cost — skipped in favor of the more kid-paced peninsula loop, worth considering for a return trip without kids.</p>
+        <div class="poi-actions"><a class="dir" href="https://www.google.com/maps/dir/?api=1&destination=64.8080%2C-23.7767" target="_blank" rel="noopener">🧭 Directions</a></div>
+      </div>
+      <div class="card accent3">
+        <div class="card-eyebrow">South Coast</div>
+        <h3>Fjaðrárgljúfur canyon</h3>
+        <p>Dramatic serpentine canyon near Kirkjubæjarklaustur, right along the Day 4 drive — skipped this time to keep the glacier/lagoon day from getting stacked, but only a short detour if you want to add it back in.</p>
+        <div class="poi-actions"><a class="dir" href="https://www.google.com/maps/dir/?api=1&destination=63.7676%2C-18.1719" target="_blank" rel="noopener">🧭 Directions</a></div>
+      </div>
+      <div class="card accent3">
+        <div class="card-eyebrow">Reykjavík</div>
+        <h3>Sky Lagoon</h3>
+        <p>Newer, more design-forward geothermal spa right in Reykjavík — an easy alternative or add-on if the Day 10 free afternoon wants a soak that isn't a full city pool.</p>
+        <div class="poi-actions"><a class="site" href="https://www.skylagoon.com/" target="_blank" rel="noopener">🌐 Website</a></div>
+      </div>
+      <div class="card accent3">
+        <div class="card-eyebrow">Full Ring Road extension</div>
+        <h3>Westfjords</h3>
+        <p>The one major region this loop skips entirely — remote, spectacular, and would add 3–4 days minimum. A genuinely different trip rather than a detour from this one; worth its own dedicated visit.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══════════ BOOK NOW ═══════════ -->
+  <div id="tab-book" class="section">
+    <div class="section-title">Book Now</div>
+    <div class="section-sub">Everything that needs advance booking or a decision, in urgency order.</div>
+
+    <div class="book-group-label">Accommodations</div>
+    <ul class="checklist">
+      <li data-book-id="hotel-reykjavik-arrival"><span class="checkbox"></span><div><span class="lbl">Reykjavík Konsulat Hotel — Sep 5–6</span>Arrival night. <span class="contact"><a href="https://www.hilton.com/en/hotels/rekcuqq-reykjavik-konsulat-hotel/" target="_blank" rel="noopener">Book online</a></span></div></li>
+      <li data-book-id="hotel-vik"><span class="checkbox"></span><div><span class="lbl">Hotel Katla, Vík — Sep 6–8 (2 nights)</span><span class="contact"><a href="https://www.keahotels.is/en/hotels/hotel-katla" target="_blank" rel="noopener">Book online</a></span></div></li>
+      <li data-book-id="hotel-glacier"><span class="checkbox"></span><div><span class="lbl">Fosshotel Glacier Lagoon — Sep 8–9</span><span class="contact">📞 <a href="tel:+3545148300">+354 514 8300</a> &nbsp;·&nbsp; <a href="https://www.islandshotel.is/en/hotels/fosshotel-glacier-lagoon" target="_blank" rel="noopener">Book online</a></span></div></li>
+      <li data-book-id="hotel-egilsstadir"><span class="checkbox"></span><div><span class="lbl">Hérað – Berjaya Iceland Hotels, Egilsstaðir — Sep 9–10</span><span class="contact"><a href="https://www.icelandhotelcollectionbyberjaya.com/en/hotels/east/herad-hotel" target="_blank" rel="noopener">Book online</a></span></div></li>
+      <li data-book-id="hotel-myvatn"><span class="checkbox"></span><div><span class="lbl">Fosshotel Mývatn — Sep 10–11</span><span class="contact"><a href="https://www.islandshotel.is/en/hotels/fosshotel-myvatn" target="_blank" rel="noopener">Book online</a></span></div></li>
+      <li data-book-id="hotel-akureyri"><span class="checkbox"></span><div><span class="lbl">Hotel Kea, Akureyri — Sep 11–12</span><span class="contact"><a href="https://www.keahotels.is/en/hotels/hotel-kea" target="_blank" rel="noopener">Book online</a></span></div></li>
+      <li data-book-id="hotel-budir"><span class="checkbox"></span><div><span class="lbl">Hotel Búðir, Snæfellsnes — Sep 12–14 (2 nights)</span>Request the Loft or Deluxe room for the view. <span class="contact"><a href="https://www.hotelbudir.is/" target="_blank" rel="noopener">Book online</a></span></div></li>
+      <li data-book-id="hotel-reykjavik-return"><span class="checkbox"></span><div><span class="lbl">Reykjavík Konsulat Hotel — Sep 14–15</span>Return night before the Blue Lagoon. <span class="contact"><a href="https://www.hilton.com/en/hotels/rekcuqq-reykjavik-konsulat-hotel/" target="_blank" rel="noopener">Book online</a></span></div></li>
+      <li data-book-id="hotel-bluelagoon"><span class="checkbox"></span><div><span class="lbl">The Retreat at Blue Lagoon, Lava View Junior Suite — Sep 15–16</span>~$2,400/night (300,000 ISK). Book via the sales desk, not a standard OTA. <span class="contact">📞 <a href="tel:+3544208700">+354 420 8700</a> &nbsp;·&nbsp; retreat@bluelagoon.is</span></div></li>
+    </ul>
+
+    <div class="book-group-label">Transportation</div>
+    <ul class="checklist">
+      <li data-book-id="flight-outbound"><span class="checkbox"></span><div><span class="lbl">Flights — Icelandair IAD ⇄ KEF nonstop</span>Depart Thu Sep 4 evening, return Wed Sep 16. Confirm checked-bag allowance for a family of 4 at booking. <span class="contact"><a href="https://www.icelandair.com/" target="_blank" rel="noopener">Book online</a></span></div></li>
+      <li data-book-id="rental-car"><span class="checkbox"></span><div><span class="lbl">Rental car — Lotus Car Rental, mid-size SUV</span>Pickup/dropoff at KEF, Sep 5–16. Add full-coverage insurance. <span class="contact"><a href="https://www.lotuscarrental.is/our-rental-cars/large-car" target="_blank" rel="noopener">Book online</a></span></div></li>
+    </ul>
+
+    <div class="book-group-label">Excursions</div>
+    <ul class="checklist">
+      <li data-book-id="skaftafell-glacier-walk"><span class="checkbox"></span><div><span class="lbl">Skaftafell glacier walk — Day 4</span>Family tour, ~3 hrs, book ahead for September availability. <span class="contact"><a href="https://www.vatnajokulsthjodgardur.is/en/areas-of-the-park/skaftafell" target="_blank" rel="noopener">Book online</a></span></div></li>
+      <li data-book-id="jokulsarlon-boat"><span class="checkbox"></span><div><span class="lbl">Jökulsárlón Zodiac boat tour — Day 4</span>Among the icebergs; September slots fill up. <span class="contact"><a href="https://icelagoon.is/" target="_blank" rel="noopener">Book online</a></span></div></li>
+      <li data-book-id="husavik-whale"><span class="checkbox"></span><div><span class="lbl">Húsavík whale watching — Day 7</span>North Sailing or Gentle Giants, ~3 hrs. <span class="contact"><a href="https://www.northsailing.is/" target="_blank" rel="noopener">Book online</a></span></div></li>
+      <li data-book-id="retreat-spa-treatment"><span class="checkbox"></span><div><span class="lbl">Retreat Spa treatment — Day 11 (optional)</span>Minimum age 12; book ahead if wanted. <span class="contact"><a href="https://www.bluelagoon.com/experiences/the-retreat-spa" target="_blank" rel="noopener">Book online</a></span></div></li>
+    </ul>
+
+    <div class="book-group-label">Restaurants</div>
+    <ul class="checklist">
+      <li data-book-id="dinner-budir"><span class="checkbox"></span><div><span class="lbl">Hotel Búðir restaurant — Day 8 dinner</span>The trip's other splurge meal; reserve when you book the hotel. <span class="contact"><a href="https://www.hotelbudir.is/" target="_blank" rel="noopener">Book online</a></span></div></li>
+      <li data-book-id="dinner-lava"><span class="checkbox"></span><div><span class="lbl">Lava Restaurant, Blue Lagoon — Day 11 dinner</span>Reserve alongside the Retreat stay. <span class="contact"><a href="https://www.bluelagoon.com/experiences/dining/lava-restaurant" target="_blank" rel="noopener">Book online</a></span></div></li>
+    </ul>
+  </div>
+
+  <!-- ═══════════ PRINT (always last) ═══════════ -->
+  <div id="tab-print" class="section">
+    <div class="section-title">Print</div>
+    <div class="section-sub">A no-internet-needed version, ready to download before you lose signal.</div>
+    <a class="print-btn" href="Iceland-Itinerary-Printable.pdf" target="_blank" rel="noopener">⬇ Download PDF</a>
+  </div>
+
+</div>
+
+<div class="footer">Built for the Moore family · <span>Iceland, Sep 5–16, 2026</span></div>
+
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+<script>
+  function showTab(id){
+    document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+    document.getElementById('tab-' + id).classList.add('active');
+    document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+    event.target.closest('.tab-btn').classList.add('active');
+  }
+
+  var pins = [
+    {n:1, name:'Keflavík Airport', cat:'stay', note:'Arrival & departure', lat:63.9850, lng:-22.6056, img:'', site:''},
+    {n:2, name:'Reykjavík Konsulat Hotel', cat:'stay', note:'Nights 1 & 10', lat:64.1466, lng:-21.9426, img:'', site:'https://www.hilton.com/en/hotels/rekcuqq-reykjavik-konsulat-hotel/'},
+    {n:3, name:'Hallgrímskirkja', cat:'town', note:'Day 1', lat:64.1418, lng:-21.9266, img:'', site:'https://www.hallgrimskirkja.is/'},
+    {n:4, name:'Sun Voyager', cat:'town', note:'Day 1', lat:64.1487, lng:-21.9257, img:'', site:''},
+    {n:5, name:'Þingvellir National Park', cat:'nature', note:'Day 2 — Golden Circle', lat:64.2559, lng:-21.1295, img:'', site:'https://www.thingvellir.is/en'},
+    {n:6, name:'Geysir', cat:'nature', note:'Day 2 — Golden Circle', lat:64.3128, lng:-20.3026, img:'', site:'https://www.geysircenter.com/'},
+    {n:7, name:'Gullfoss', cat:'nature', note:'Day 2 — Golden Circle', lat:64.3271, lng:-20.1199, img:'https://commons.wikimedia.org/wiki/Special:FilePath/Gullfoss,_an_iconic_waterfall_of_Iceland.jpg', site:'https://gullfoss.is/en/'},
+    {n:8, name:'Friðheimar', cat:'town', note:'Day 2 lunch — tomato farm', lat:64.2402, lng:-20.5680, img:'', site:'https://fridheimar.is/en/'},
+    {n:9, name:'Hotel Katla, Vík', cat:'stay', note:'Nights 2–3', lat:63.4477, lng:-19.0177, img:'', site:'https://www.keahotels.is/en/hotels/hotel-katla'},
+    {n:10, name:'Seljalandsfoss', cat:'nature', note:'Day 3', lat:63.6156, lng:-19.9886, img:'https://commons.wikimedia.org/wiki/Special:FilePath/Seljalandsfoss_waterfall_(Iceland)_(16096296723).jpg', site:''},
+    {n:11, name:'Skógafoss', cat:'nature', note:'Day 3', lat:63.5321, lng:-19.5116, img:'', site:''},
+    {n:12, name:'Reynisfjara Black Sand Beach', cat:'nature', note:'Day 3', lat:63.4039, lng:-19.0454, img:'', site:''},
+    {n:13, name:'Dyrhólaey', cat:'nature', note:'Day 3', lat:63.4034, lng:-19.1250, img:'', site:''},
+    {n:14, name:'Skaftafell / Vatnajökull NP', cat:'adventure', note:'Day 4 — glacier hike', lat:64.0165, lng:-16.9665, img:'', site:'https://www.vatnajokulsthjodgardur.is/en/areas-of-the-park/skaftafell'},
+    {n:15, name:'Jökulsárlón Glacier Lagoon', cat:'nature', note:'Day 4', lat:64.0784, lng:-16.2300, img:'https://commons.wikimedia.org/wiki/Special:FilePath/J%C3%B6kuls%C3%A1rl%C3%B3n_glacier_lagoon,_Iceland,_20240719_1141_2538.jpg', site:'https://icelagoon.is/'},
+    {n:16, name:'Diamond Beach', cat:'nature', note:'Day 4', lat:64.0480, lng:-16.1798, img:'', site:''},
+    {n:17, name:'Fosshotel Glacier Lagoon', cat:'stay', note:'Night 4', lat:63.8969, lng:-16.6438, img:'', site:'https://www.islandshotel.is/en/hotels/fosshotel-glacier-lagoon'},
+    {n:18, name:'Pakkhús Restaurant, Höfn', cat:'town', note:'Day 5 lunch — langoustine', lat:64.2510, lng:-15.2040, img:'', site:'https://www.pakkhus.is/'},
+    {n:19, name:'Seyðisfjörður', cat:'town', note:'Day 5', lat:65.2652, lng:-14.0006, img:'', site:'https://visitseydisfjordur.com/'},
+    {n:20, name:'Hérað – Berjaya Iceland Hotels', cat:'stay', note:'Night 5', lat:65.2680, lng:-14.3900, img:'', site:'https://www.icelandhotelcollectionbyberjaya.com/en/hotels/east/herad-hotel'},
+    {n:21, name:'Dettifoss', cat:'nature', note:'Day 6', lat:65.8145, lng:-16.3841, img:'https://commons.wikimedia.org/wiki/Special:FilePath/Dettifoss_001.jpg', site:''},
+    {n:22, name:'Krafla / Víti Crater', cat:'nature', note:'Day 6', lat:65.7180, lng:-16.7580, img:'', site:'https://www.visitmyvatn.is/en/krafla'},
+    {n:23, name:'Earth Lagoon Mývatn', cat:'adventure', note:'Day 6', lat:65.6330, lng:-16.8300, img:'', site:'https://www.earthlagoon.is/'},
+    {n:24, name:'Fosshotel Mývatn', cat:'stay', note:'Night 6', lat:65.6330, lng:-16.9280, img:'', site:'https://www.islandshotel.is/en/hotels/fosshotel-myvatn'},
+    {n:25, name:'Húsavík whale watching', cat:'adventure', note:'Day 7', lat:66.0449, lng:-17.3389, img:'', site:'https://www.northsailing.is/'},
+    {n:26, name:'GeoSea Húsavík', cat:'adventure', note:'Day 7', lat:66.0470, lng:-17.3300, img:'', site:'https://www.geosea.is/'},
+    {n:27, name:'Hotel Kea, Akureyri', cat:'stay', note:'Night 7', lat:65.6836, lng:-18.0913, img:'', site:'https://www.keahotels.is/en/hotels/hotel-kea'},
+    {n:28, name:'Kirkjufell', cat:'nature', note:'Day 9', lat:64.9376, lng:-23.3105, img:'https://commons.wikimedia.org/wiki/Special:FilePath/Kirkjufell_Mountain,_Grundarfj%C3%B6r%C3%B0ur,_Iceland_(42317168545).jpg', site:'https://www.west.is/en/place/kirkjufell'},
+    {n:29, name:'Djúpalónssandur', cat:'nature', note:'Day 9', lat:64.7524, lng:-23.9066, img:'', site:'https://www.west.is/en/place/djupalonssandur'},
+    {n:30, name:'Arnarstapi', cat:'nature', note:'Day 9', lat:64.7714, lng:-23.6265, img:'', site:'https://www.west.is/en/place/arnarstapi'},
+    {n:31, name:'Hotel Búðir', cat:'stay', note:'Nights 8–9', lat:64.8228, lng:-23.3947, img:'', site:'https://www.hotelbudir.is/'},
+    {n:32, name:'The Retreat at Blue Lagoon', cat:'adventure', note:'Night 11 — splurge', lat:63.8804, lng:-22.4495, img:'https://commons.wikimedia.org/wiki/Special:FilePath/Iceland_Blue_Lagoon.jpg', site:'https://www.bluelagoon.com/'},
+  ];
+  var colors = { nature:'#3f7d57', adventure:'#1f7a8c', town:'#c99c3a', stay:'#0b3d4a' };
+
+  var map = L.map('map', { scrollWheelZoom:false }).setView([64.9, -19.0], 6);
+  L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+    attribution:'&copy; OpenStreetMap contributors', maxZoom:17
+  }).addTo(map);
+
+  pins.forEach(function(p){
+    var icon = L.divIcon({
+      className:'',
+      html:'<div style="background:'+colors[p.cat]+';width:22px;height:22px;border-radius:50%;border:2.5px solid #fff;box-shadow:0 2px 6px rgba(0,0,0,0.3);display:flex;align-items:center;justify-content:center;color:#fff;font-family:JetBrains Mono,monospace;font-weight:600;font-size:10px;">'+p.n+'</div>',
+      iconSize:[22,22], iconAnchor:[11,11]
+    });
+    var thumbHtml = p.img ? '<img src="'+p.img+'" style="width:100%;height:90px;object-fit:cover;border-radius:6px;margin-bottom:6px;">' : '';
+    var noteHtml = p.note ? '<br><span style="color:#888;font-size:12px;">'+p.note+'</span>' : '';
+    var gmapsUrl = 'https://www.google.com/maps/dir/?api=1&destination=' + p.lat + ',' + p.lng;
+    var siteHtml = p.site ? '<br><a href="'+p.site+'" target="_blank" rel="noopener" style="font-size:11px;">Website →</a>' : '';
+    var linkHtml = '<br><a href="'+gmapsUrl+'" target="_blank" rel="noopener" style="font-size:11px;">Open in Google Maps →</a>';
+    L.marker([p.lat, p.lng], {icon:icon}).addTo(map)
+      .bindPopup(thumbHtml + '<b>'+p.name+'</b>' + noteHtml + siteHtml + linkHtml, {maxWidth:220});
+  });
+
+  setTimeout(function(){ map.invalidateSize(); }, 150);
+
+  // Book Now checkboxes — persisted per-browser via localStorage
+  (function(){
+    var PAGE_KEY = 'iceland-2026';
+    document.querySelectorAll('.checklist li[data-book-id]').forEach(function(li){
+      var key = 'bookdone::' + PAGE_KEY + '::' + li.getAttribute('data-book-id');
+      var stored = localStorage.getItem(key);
+      if (stored === '1') li.classList.add('done');
+      var box = li.querySelector('.checkbox');
+      if (box) box.addEventListener('click', function(){
+        var nowDone = li.classList.toggle('done');
+        localStorage.setItem(key, nowDone ? '1' : '0');
+      });
+    });
+  })();
+</script>
+
+</body>
+</html>
