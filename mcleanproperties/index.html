@@ -2,97 +2,199 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>McLean Property Dashboard — 2026-08-09</title>
+<title>McLean Property Dashboard — August 11, 2026</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.css" />
 <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.js"></script>
 <style>
-:root {
-  --gold: #c8982a;
-  --green: #2e7d32;
-  --blue: #1565c0;
-  --bg: #f7f5f0;
-  --card-bg: #ffffff;
-  --border: #e4e0d8;
-  --text: #2b2b2b;
-  --muted: #888;
-}
-* { box-sizing: border-box; }
-body {
-  margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-  background: var(--bg);
-  color: var(--text);
-}
-header {
-  background: #1b2a3d;
-  color: #fff;
-  padding: 18px 24px;
-}
-header h1 { margin: 0 0 6px 0; font-size: 22px; }
-.stats { font-size: 13px; color: #cfd8e3; margin-bottom: 10px; }
-.header-controls { display: flex; gap: 10px; flex-wrap: wrap; align-items: center; }
-.header-controls button {
-  background: #2c3e54; color: #fff; border: 1px solid #445269; border-radius: 6px;
-  padding: 6px 12px; font-size: 13px; cursor: pointer;
-}
-.header-controls button.active { background: var(--gold); border-color: var(--gold); color: #1b2a3d; font-weight: 600; }
-.sort-toggle { display: inline-flex; border-radius: 6px; overflow: hidden; }
-.sort-toggle button { border-radius: 0; }
-main { padding: 20px; max-width: 1500px; margin: 0 auto; }
-.columns { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; }
-@media (max-width: 900px) { .columns { grid-template-columns: 1fr; } }
-.column h2 { font-size: 18px; border-bottom: 2px solid var(--gold); padding-bottom: 6px; }
-.section-header { font-size: 14px; font-weight: 700; margin: 18px 0 8px; color: #444; }
-.section-header.outside { color: #a67c1f; }
-.subsection-header { font-size: 12px; font-weight: 600; color: var(--muted); margin: 10px 0 6px; text-transform: uppercase; letter-spacing: .04em; }
-.card {
-  background: var(--card-bg); border: 1px solid var(--border); border-radius: 10px;
-  padding: 12px; margin-bottom: 12px; display: flex; gap: 12px; position: relative;
-}
-.card.starred-card { border-left: 4px solid var(--gold); }
-.card img.thumb { width: 120px; height: 90px; object-fit: cover; border-radius: 6px; flex-shrink: 0; }
-.card-body { flex: 1; min-width: 0; }
-.card-top { display: flex; justify-content: space-between; align-items: flex-start; gap: 8px; }
-.addr { font-weight: 600; font-size: 14px; }
-.pill { display: inline-block; font-size: 11px; padding: 1px 7px; border-radius: 10px; margin-left: 6px; white-space: nowrap; }
-.pill.in-zone { background: #e3f3e4; color: var(--green); }
-.pill.out-zone { background: #fbeecb; color: #92660a; }
-.pill.unknown-zone { background: #eee; color: #666; }
-.price { font-weight: 700; color: #1b2a3d; font-size: 15px; margin: 4px 0 2px; }
-.meta { font-size: 12.5px; color: #555; }
-.schools { font-size: 12px; color: #666; margin-top: 2px; }
-.highlights { font-size: 12px; color: #777; margin-top: 2px; font-style: italic; }
-.badge { display: inline-block; font-size: 10px; background: #444; color: #fff; padding: 1px 6px; border-radius: 8px; margin-left: 6px; }
-.card-links { margin-top: 8px; display: flex; flex-wrap: wrap; gap: 8px; font-size: 12px; }
-.card-links a, .card-links button { color: #1565c0; text-decoration: none; font-size: 12px; border: none; background: none; cursor: pointer; padding: 0; }
-.like-btn { position: absolute; top: 10px; right: 10px; font-size: 18px; background: none; border: none; cursor: pointer; color: #c62828; }
-table.log { width: 100%; border-collapse: collapse; margin-top: 10px; font-size: 13px; }
-table.log th, table.log td { border: 1px solid var(--border); padding: 6px 10px; text-align: left; }
-table.log th { background: #eee; }
-#map { height: 420px; border-radius: 10px; margin-top: 24px; border: 1px solid var(--border); }
-.full-width { margin-top: 30px; }
-#saved-panel {
-  position: fixed; top: 0; right: 0; width: 340px; max-height: 100vh; overflow-y: auto;
-  background: #fff; border-left: 1px solid var(--border); box-shadow: -2px 0 10px rgba(0,0,0,0.08);
-  padding: 16px; z-index: 999;
-}
-#saved-panel h3 { margin-top: 0; }
-.saved-header-btns { display: flex; flex-direction: column; gap: 6px; margin-bottom: 12px; }
-.saved-header-btns button {
-  background: #1b2a3d; color: #fff; border: none; border-radius: 6px; padding: 7px 10px; font-size: 12.5px; cursor: pointer;
-}
-.saved-grid { display: flex; flex-direction: column; gap: 8px; }
-.saved-card { border: 1px solid var(--border); border-radius: 8px; padding: 8px; font-size: 12.5px; }
-.saved-card.sold-card { border-left: 4px solid #999; }
-.low-inventory { background: #fff3cd; padding: 8px 12px; border-radius: 6px; font-size: 13px; margin-bottom: 12px; }
+  :root {
+    --gold: #c8982a;
+    --green: #2e7d32;
+    --blue: #1565c0;
+    --bg: #f7f6f3;
+    --card-bg: #ffffff;
+    --border: #e2e0da;
+    --text: #2a2822;
+    --muted: #888;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    background: var(--bg);
+    color: var(--text);
+  }
+  header.dash-header {
+    background: #fff;
+    border-bottom: 1px solid var(--border);
+    padding: 18px 24px;
+    position: sticky;
+    top: 0;
+    z-index: 500;
+  }
+  header.dash-header h1 {
+    margin: 0 0 6px 0;
+    font-size: 22px;
+    font-weight: 700;
+  }
+  .stats-line {
+    color: var(--muted);
+    font-size: 13px;
+    margin-bottom: 12px;
+  }
+  .header-controls {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+    align-items: center;
+  }
+  button {
+    font-family: inherit;
+    font-size: 13px;
+    border: 1px solid var(--border);
+    background: #fff;
+    padding: 7px 14px;
+    border-radius: 20px;
+    cursor: pointer;
+    color: var(--text);
+  }
+  button:hover { background: #f0efe9; }
+  button.active {
+    background: var(--gold);
+    border-color: var(--gold);
+    color: #fff;
+  }
+  .sort-toggle { display: inline-flex; border: 1px solid var(--border); border-radius: 20px; overflow: hidden; }
+  .sort-toggle button { border: none; border-radius: 0; margin: 0; }
+  .sort-toggle button.active { background: var(--gold); color: #fff; }
+
+  #map { height: 380px; margin: 16px 24px; border-radius: 10px; border: 1px solid var(--border); }
+
+  .columns {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+    padding: 0 24px 24px;
+  }
+  @media (max-width: 900px) { .columns { grid-template-columns: 1fr; } }
+  .column h2 {
+    font-size: 17px;
+    border-bottom: 2px solid var(--gold);
+    padding-bottom: 6px;
+  }
+  .section-header {
+    font-size: 14px;
+    font-weight: 700;
+    margin: 18px 0 8px;
+    color: var(--text);
+  }
+  .section-header.muted { color: var(--muted); font-weight: 600; }
+  .subsection-header {
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: .03em;
+    color: var(--muted);
+    margin: 10px 0 6px;
+  }
+
+  .card {
+    background: var(--card-bg);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 12px;
+    margin-bottom: 12px;
+    display: flex;
+    gap: 12px;
+    position: relative;
+  }
+  .card.starred-card { border-left: 4px solid var(--gold); }
+  .card img.thumb {
+    width: 120px;
+    height: 90px;
+    object-fit: cover;
+    border-radius: 6px;
+    flex-shrink: 0;
+    background: #eee;
+  }
+  .card-body { flex: 1; min-width: 0; }
+  .card-top-row { display: flex; justify-content: space-between; align-items: flex-start; gap: 6px; }
+  .card-addr { font-weight: 700; font-size: 14px; line-height: 1.3; }
+  .zone-pill {
+    display: inline-block;
+    font-size: 11px;
+    padding: 1px 7px;
+    border-radius: 10px;
+    margin-left: 6px;
+    white-space: nowrap;
+  }
+  .zone-pill.in { background: #e3f3e4; color: var(--green); }
+  .zone-pill.out { background: #fbeecd; color: #96700c; }
+  .zone-pill.unk { background: #eee; color: #666; }
+  .like-btn {
+    border: none;
+    background: none;
+    font-size: 20px;
+    cursor: pointer;
+    color: #c33;
+    padding: 0 4px;
+    line-height: 1;
+  }
+  .card-price { font-size: 16px; font-weight: 700; margin: 4px 0 2px; }
+  .card-stats { font-size: 12.5px; color: #555; }
+  .card-schools { font-size: 12px; color: var(--muted); margin-top: 3px; }
+  .card-highlights { font-size: 12px; color: #6b5c2a; margin-top: 3px; font-style: italic; }
+  .card-source { font-size: 11px; color: var(--muted); margin-top: 3px; }
+  .fsbo-badge { background: #eee; border-radius: 6px; padding: 1px 6px; font-size: 10px; margin-left: 4px; }
+  .card-links { margin-top: 8px; display: flex; gap: 8px; flex-wrap: wrap; }
+  .card-links a {
+    font-size: 12px;
+    text-decoration: none;
+    color: var(--blue);
+    border: 1px solid var(--border);
+    padding: 4px 8px;
+    border-radius: 6px;
+  }
+  .card-links a:hover { background: #f0efe9; }
+
+  .saved-panel {
+    margin: 0 24px 20px;
+    background: #fff;
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 14px 18px;
+  }
+  .saved-panel-header { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 8px; }
+  .saved-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 10px; margin-top: 10px; }
+  .saved-card {
+    border: 1px solid var(--border);
+    border-left: 4px solid var(--gold);
+    border-radius: 8px;
+    padding: 8px 10px;
+    font-size: 12.5px;
+  }
+  .saved-card.sold-card { border-left-color: #999; }
+  .saved-card a { color: var(--blue); }
+  .saved-card .directions-link { display: inline-block; margin-top: 4px; font-size: 11px; }
+
+  .coverage-section, .excluded-section {
+    margin: 0 24px 24px;
+    background: #fff;
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 14px 18px;
+  }
+  table.simple { width: 100%; border-collapse: collapse; font-size: 12.5px; }
+  table.simple th, table.simple td { text-align: left; padding: 6px 8px; border-bottom: 1px solid var(--border); }
+  table.simple th { color: var(--muted); font-weight: 600; }
+  details summary { cursor: pointer; }
+  .low-inventory-note { background: #fff3cd; border: 1px solid #ffe08a; border-radius: 8px; padding: 8px 12px; font-size: 12.5px; margin: 0 24px 16px; }
 </style>
 </head>
 <body>
 
-<header>
-  <h1>McLean Property Dashboard — 2026-08-09</h1>
-  <div class="stats">18 for-rent · 21 for-sale · 1 liked · Scan: 2026-08-09 · Sources: Redfin, HotPads, Craigslist</div>
+<header class="dash-header">
+  <h1>McLean Property Dashboard — August 11, 2026</h1>
+  <div class="stats-line" id="statsLine">18 for-rent · 20 for-sale (0 FSBO) · <span id='likedCount'>0</span> liked · Scan: August 11, 2026 · Sources: Redfin, HotPads, Craigslist</div>
   <div class="header-controls">
     <button onclick="copyLiked()">📋 Copy Liked</button>
     <div class="sort-toggle">
@@ -103,46 +205,16 @@ table.log th { background: #eee; }
   </div>
 </header>
 
-<main>
-  <div class="columns">
-    <div class="column" id="rent-column">
-      <h2>For Rent</h2>
-      <div id="rent-col"></div>
+<div id="map"></div>
+
+<div class="saved-panel" id="savedPanel">
+  <div class="saved-panel-header">
+    <strong>Saved Picks (<span id="saved-count-header">0</span>)</strong>
+    <div style="display:flex;gap:8px;flex-wrap:wrap;">
+      <button onclick="openRouteInGoogleMaps()">🗺️ Open Route in Google Maps</button>
+      <button onclick="exportLikes()">💾 Export</button>
+      <button onclick="toggleSavedPanel()">Hide/Show</button>
     </div>
-    <div class="column" id="sale-column">
-      <h2>For Sale</h2>
-      <div id="sale-col"></div>
-    </div>
-  </div>
-
-  <div class="full-width">
-    <div id="map"></div>
-  </div>
-
-  <div class="full-width">
-    <h3>Source Coverage Log</h3>
-    <table class="log">
-      <tr><th>Source</th><th>Result</th><th>Listing Count</th></tr>
-      <tr><td>Redfin</td><td>Hit</td><td>36 active (6 search URLs: 22101/22043/22102 × sale/rent)</td></tr>
-      <tr><td>HotPads</td><td>Hit</td><td>3 active (mclean-va/houses-for-rent, 2 pages)</td></tr>
-      <tr><td>Craigslist</td><td>No matches (expected — low McLean SFH/townhouse inventory)</td><td>0</td></tr>
-    </table>
-  </div>
-
-  <div class="full-width">
-    <h3>Excluded</h3>
-    <table class="log" id="excluded-table">
-      <tr><th>Address</th><th>Price</th><th>Reason</th></tr>
-    </table>
-  </div>
-</main>
-
-<div id="saved-panel" style="display:none">
-  <h3>❤ Saved Picks (<span id="saved-count">0</span>)</h3>
-  <div class="saved-header-btns">
-    <button onclick="openRouteInGoogleMaps()">🗺️ Open Route in Google Maps</button>
-    <button onclick="exportLikes()">💾 Export</button>
-    <button onclick="toggleSavedPanel()">Hide</button>
   </div>
   <div class="saved-grid" id="saved-grid"></div>
   <details id="sold-section" style="margin-top:10px">
@@ -153,10 +225,43 @@ table.log th { background: #eee; }
   </details>
 </div>
 
+<div class="columns">
+  <div class="column">
+    <h2>🏠 For Rent</h2>
+    <div id="rent-col"></div>
+  </div>
+  <div class="column">
+    <h2>🏡 For Sale</h2>
+    <div id="sale-col"></div>
+  </div>
+</div>
+
+<div class="coverage-section">
+  <strong>Source Coverage Log</strong>
+  <table class="simple">
+    <tr><th>Source</th><th>Result</th><th>Listing count</th></tr>
+    <tr><td>Redfin (6 searches: 3 zips × sale+rent)</td><td>Hit</td><td>36 matched (22101/22102/22043)</td></tr>
+    <tr><td>HotPads (McLean houses for rent, 2 pages)</td><td>Hit</td><td>51 matched (22101/22102/22043)</td></tr>
+    <tr><td>Craigslist — apa (rentals)</td><td>Zero local results (expected — see note)</td><td>0</td></tr>
+    <tr><td>Craigslist — rea (FSBO/for-sale)</td><td>Zero results</td><td>0</td></tr>
+  </table>
+  <p style="font-size:12px;color:#888;margin-top:8px">Note: Craigslist has very little McLean SFH/townhouse inventory in this price band most days — a zero-result search is normal, not a scrape failure. Also: highlight/description text captured from search-result cards was short (3-word amenity bullets), so the ⭐ starred-feature detector had limited signal this run — most listings likely have more qualifying features (garage, high ceilings, etc.) than could be confirmed from card text alone.</p>
+</div>
+
+<div class="excluded-section">
+  <strong>Excluded (44 listings — price/beds/baths/type mismatch)</strong>
+  <table class="simple" id="excludedTable">
+    <tr><th>Address</th><th>Price</th><th>Type</th><th>Reason</th></tr>
+  </table>
+</div>
+
 <script>
 const PLACEHOLDER_THUMB = 'https://placehold.co/240x160/e8e8e8/999999?text=Photo+unavailable';
+const LISTINGS = [{"addr":"1403 Mclean Mews Ct, Mclean, VA 22101","price":"$1,180,000","priceNum":1180000,"beds":"3","baths":"4","sqft":"2332","homeType":"SFH","source":"redfin","url":"https://www.redfin.com/VA/McLean/1403-McLean-Mews-Ct-22101/home/9394646","thumb":"https://ssl.cdn-redfin.com/photo/235/islphoto/170/genIslnoResize.VAFX2331170_1.webp","zoneLabel":"\u2705 in McLean (confirmed via FCPS Boundary Locator)","zone":"McLean HS","highlights":"Brick walkway \u2022 Marble foyer \u2022 Gas fireplace","starred":false,"lat":38.9329747,"lng":-77.1741688,"kind":"sale","firstSeen":"2026-08-11","daysOnMarket":null},{"addr":"1122 Kensington Rd, Mclean, VA 22101","price":"$1,095,000","priceNum":1095000,"beds":"4","baths":"3.5","sqft":"2458","homeType":"Townhouse","source":"redfin","url":"https://www.redfin.com/VA/McLean/1122-Kensington-Rd-22101/home/9278652","thumb":"https://ssl.cdn-redfin.com/photo/235/islphoto/112/genIslnoResize.VAFX2311112_3.webp","zoneLabel":"\ud83d\udccd Langley High School (confirmed via FCPS Boundary Locator \u2014 different HS)","zone":"Langley High School","highlights":"Custom shades \u2022 All brick townhome \u2022 Built-ins","starred":false,"lat":38.9448619,"lng":-77.1763216,"kind":"sale","firstSeen":"2026-08-11","daysOnMarket":null},{"addr":"1917 Great Falls St, Mclean, VA 22101","price":"$1,179,000","priceNum":1179000,"beds":"4","baths":"3","sqft":"1494","homeType":"SFH","source":"redfin","url":"https://www.redfin.com/VA/McLean/1917-Great-Falls-St-22101/home/9476207","thumb":"https://ssl.cdn-redfin.com/photo/235/islphoto/490/genIslnoResize.VAFX2327490_2.webp","zoneLabel":"\u2705 in McLean (confirmed via FCPS Boundary Locator)","zone":"McLean HS","highlights":"Hardwood floor \u2022 Car port \u2022 Granite countertop","starred":false,"lat":38.9128855,"lng":-77.1848356,"kind":"sale","firstSeen":"2026-08-11","daysOnMarket":0},{"addr":"7348 Lewinsville Square Pl, Mclean, VA 22101","price":"$1,195,000","priceNum":1195000,"beds":"3","baths":"3.5","sqft":"2702","homeType":"SFH","source":"redfin","url":"https://www.redfin.com/VA/McLean/7348-Lewinsville-Square-Pl-22101/home/9389595","thumb":"https://ssl.cdn-redfin.com/photo/235/islphoto/610/genIslnoResize.VAFX2315610_2.webp","zoneLabel":"\u2705 in McLean (confirmed via FCPS Boundary Locator)","zone":"McLean HS","highlights":"","starred":false,"lat":38.9313193,"lng":-77.1980879,"kind":"sale","firstSeen":"2026-08-11","daysOnMarket":null},{"addr":"1537 Cedar Ave, Mclean, VA 22101","price":"$1,125,000","priceNum":1125000,"beds":"4","baths":"4.5","sqft":"3512","homeType":"SFH","source":"redfin","url":"https://www.redfin.com/VA/McLean/1537-Cedar-Ave-22101/home/9394800","thumb":"https://ssl.cdn-redfin.com/photo/235/islphoto/812/genIslnoResize.VAFX2217812_6.webp","zoneLabel":"\u2705 in McLean (confirmed via FCPS Boundary Locator)","zone":"McLean HS","highlights":"","starred":false,"lat":38.9308116,"lng":-77.1824738,"kind":"sale","firstSeen":"2026-08-11","daysOnMarket":null},{"addr":"2243 Kings Garden Way, Falls Church, VA 22043","price":"$910,000","priceNum":910000,"beds":"4","baths":"3.5","sqft":"2270","homeType":"SFH","source":"redfin","url":"https://www.redfin.com/VA/Falls-Church/2243-Kings-Garden-Way-22043/home/9461704","thumb":"https://ssl.cdn-redfin.com/system_files/media/1258046_JPG/genDesktopMapHomeCardUrl/item_40.webp","zoneLabel":"\ud83d\udccd Marshall High School (confirmed via FCPS Boundary Locator \u2014 different HS)","zone":"Marshall High School","highlights":"Hardwood flooring \u2022 Cozy fireplaces \u2022 Walk-in closet","starred":false,"lat":38.88174621474771,"lng":-77.17190041699438,"kind":"sale","firstSeen":"2026-08-11","daysOnMarket":null},{"addr":"1956 Hopewood Dr, Falls Church, VA 22043","price":"$949,000","priceNum":949000,"beds":"3","baths":"3.5","sqft":"2582","homeType":"SFH","source":"redfin","url":"https://www.redfin.com/VA/Falls-Church/1956-Hopewood-Dr-22043/home/9475861","thumb":"https://ssl.cdn-redfin.com/photo/235/islphoto/804/genIslnoResize.VAFX2333804_0.webp","zoneLabel":"\u2705 in McLean (confirmed via FCPS Boundary Locator)","zone":"McLean HS","highlights":"Renovated kitchen \u2022 New roof \u2022 Protected parkland","starred":false,"lat":38.883723564612296,"lng":-77.17092078291923,"kind":"sale","firstSeen":"2026-08-11","daysOnMarket":0},{"addr":"7357 Eldorado Ct, Mclean, VA 22102","price":"$945,000","priceNum":945000,"beds":"3","baths":"3.5","sqft":"2300","homeType":"SFH","source":"redfin","url":"https://www.redfin.com/VA/McLean/7357-Eldorado-Ct-22102/home/9399156","thumb":"https://ssl.cdn-redfin.com/photo/235/islphoto/684/genIslnoResize.VAFX2330684_2.webp","zoneLabel":"\u2705 in McLean (confirmed via FCPS Boundary Locator)","zone":"McLean HS","highlights":"Hardwood flooring \u2022 Welcoming foyer \u2022 Functional layout","starred":false,"lat":38.9296197,"lng":-77.2004383,"kind":"sale","firstSeen":"2026-08-11","daysOnMarket":null},{"addr":"2123 Preston Square Ct, Falls Church, VA 22043","price":"$769,000","priceNum":769000,"beds":"3","baths":"3","sqft":"1159","homeType":"Townhouse","source":"redfin","url":"https://www.redfin.com/VA/Falls-Church/2123-Preston-Square-Ct-22043/home/9477244","thumb":"https://ssl.cdn-redfin.com/photo/235/islphoto/030/genIslnoResize.VAFX2332030_3.webp","zoneLabel":"\u2705 in McLean (confirmed via FCPS Boundary Locator)","zone":"McLean HS","highlights":"Brick townhome \u2022 Unbeatable location \u2022 $113 HOA","starred":false,"lat":38.8826465667198,"lng":-77.17286405395542,"kind":"sale","firstSeen":"2026-08-11","daysOnMarket":null},{"addr":"2100 Glenn Spring Ct, Falls Church, VA 22043","price":"$849,000","priceNum":849000,"beds":"3","baths":"3.5","sqft":"1620","homeType":"SFH","source":"redfin","url":"https://www.redfin.com/VA/Falls-Church/2100-Glenn-Spring-Ct-22043/home/9477215","thumb":"https://ssl.cdn-redfin.com/photo/235/islphoto/500/genIslnoResize.VAFX2329500_4.webp","zoneLabel":"\u2705 in McLean (confirmed via FCPS Boundary Locator)","zone":"McLean HS","highlights":"","starred":false,"lat":38.88440132376573,"lng":-77.1718438443153,"kind":"sale","firstSeen":"2026-08-11","daysOnMarket":null},{"addr":"6611 Rosecroft Pl, Falls Church, VA 22043","price":"$910,000","priceNum":910000,"beds":"3","baths":"3.5","sqft":"2486","homeType":"SFH","source":"redfin","url":"https://www.redfin.com/VA/Falls-Church/6611-Rosecroft-Pl-22043/home/9475746","thumb":"https://ssl.cdn-redfin.com/photo/235/islphoto/730/genIslnoResize.VAFX2328730_1.webp","zoneLabel":"\u2705 in McLean (confirmed via FCPS Boundary Locator)","zone":"McLean HS","highlights":"","starred":false,"lat":38.88458566604984,"lng":-77.1697914,"kind":"sale","firstSeen":"2026-08-11","daysOnMarket":null},{"addr":"7314 Idylwood Rd, Falls Church, VA 22043","price":"$1,100,000","priceNum":1100000,"beds":"5","baths":"4","sqft":"2573","homeType":"SFH","source":"redfin","url":"https://www.redfin.com/VA/Falls-Church/7314-Idylwood-Rd-22043/home/9479083","thumb":"https://ssl.cdn-redfin.com/photo/235/islphoto/632/genIslnoResize.VAFX2323632_0.webp","zoneLabel":"\u2705 in McLean (confirmed via FCPS Boundary Locator)","zone":"McLean HS","highlights":"","starred":false,"lat":38.88145938029286,"lng":-77.17060659037975,"kind":"sale","firstSeen":"2026-08-11","daysOnMarket":null},{"addr":"7328 Aynsley Ln, Mclean, VA 22102","price":"$1,175,000","priceNum":1175000,"beds":"4","baths":"3.5","sqft":"2178","homeType":"SFH","source":"redfin","url":"https://www.redfin.com/VA/McLean/7328-Aynsley-Ln-22102/home/9400964","thumb":"https://ssl.cdn-redfin.com/photo/235/islphoto/604/genIslnoResize.VAFX2321604_1.webp","zoneLabel":"\u2705 in McLean (confirmed via FCPS Boundary Locator)","zone":"McLean HS","highlights":"Gas cooking \u2022 Gourmet kitchen \u2022 Double ovens","starred":false,"lat":38.9291541,"lng":-77.1982078,"kind":"sale","firstSeen":"2026-08-11","daysOnMarket":null},{"addr":"1644 La Salle Ave, Mclean, VA 22102","price":"$1,000,000","priceNum":1000000,"beds":"4","baths":"3","sqft":"2640","homeType":"SFH","source":"redfin","url":"https://www.redfin.com/VA/McLean/1644-La-Salle-Ave-22102/home/9396414","thumb":"https://ssl.cdn-redfin.com/photo/235/islphoto/200/genIslnoResize.VAFX2323200_3.webp","zoneLabel":"\u2705 in McLean (confirmed via FCPS Boundary Locator)","zone":"McLean HS","highlights":"Extra parcel \u2022 Buildable lot \u2022 6,500 sq ft lot","starred":false,"lat":38.9240325,"lng":-77.1987276,"kind":"sale","firstSeen":"2026-08-11","daysOnMarket":null},{"addr":"1646 La Salle Ave, Mclean, VA 22102","price":"$1,000,000","priceNum":1000000,"beds":"4","baths":"3","sqft":"2640","homeType":"SFH","source":"redfin","url":"https://www.redfin.com/VA/McLean/1646-La-Salle-Ave-22102/home/9396416","thumb":"https://ssl.cdn-redfin.com/photo/235/islphoto/256/genIslnoResize.VAFX2323256_3.webp","zoneLabel":"\u2705 in McLean (confirmed via FCPS Boundary Locator)","zone":"McLean HS","highlights":"Extra parcel \u2022 Buildable lot \u2022 6,500 sq ft lot","starred":false,"lat":38.9239082,"lng":-77.1986616,"kind":"sale","firstSeen":"2026-08-11","daysOnMarket":null},{"addr":"2007 Nordlie Pl, Falls Church, VA 22043","price":"$1,199,000","priceNum":1199000,"beds":"4","baths":"2.5","sqft":"3423","homeType":"SFH","source":"redfin","url":"https://www.redfin.com/VA/Falls-Church/2007-Nordlie-Pl-22043/home/9459612","thumb":"https://ssl.cdn-redfin.com/photo/235/islphoto/014/genIslnoResize.VAFX2314014_1.webp","zoneLabel":"\ud83d\udccd Marshall High School (confirmed via FCPS Boundary Locator \u2014 different HS)","zone":"Marshall High School","highlights":"","starred":false,"lat":38.88106516909815,"lng":-77.17049973443356,"kind":"sale","firstSeen":"2026-08-11","daysOnMarket":null},{"addr":"7608 Salem Rd, Falls Church, VA 22043","price":"$1,049,900","priceNum":1049900,"beds":"4","baths":"2.5","sqft":"2775","homeType":"SFH","source":"redfin","url":"https://www.redfin.com/VA/Falls-Church/7608-Salem-Rd-22043/home/9468377","thumb":"https://ssl.cdn-redfin.com/photo/235/islphoto/356/genIslnoResize.VAFX2323356_2.webp","zoneLabel":"\ud83d\udccd Marshall High School (confirmed via FCPS Boundary Locator \u2014 different HS)","zone":"Marshall High School","highlights":"Renovated bathrooms \u2022 Renovated kitchen \u2022 Recessed lighting","starred":false,"lat":38.88399207514511,"lng":-77.17220978580694,"kind":"sale","firstSeen":"2026-08-11","daysOnMarket":null},{"addr":"7621 Virginia Ave, Falls Church, VA 22043","price":"$1,150,000","priceNum":1150000,"beds":"5","baths":"4","sqft":"2750","homeType":"SFH","source":"redfin","url":"https://www.redfin.com/VA/Falls-Church/7621-Virginia-Ave-22043/home/9469165","thumb":"https://ssl.cdn-redfin.com/photo/235/islphoto/198/genIslnoResize.VAFX2329198_1.webp","zoneLabel":"\ud83d\udccd Marshall High School (confirmed via FCPS Boundary Locator \u2014 different HS)","zone":"Marshall High School","highlights":"","starred":false,"lat":38.8842009,"lng":-77.1769561,"kind":"sale","firstSeen":"2026-08-11","daysOnMarket":null},{"addr":"2814 Hyson Ln, Falls Church, VA 22043","price":"$649,900","priceNum":649900,"beds":"3","baths":"3.5","sqft":"2016","homeType":"SFH","source":"redfin","url":"https://www.redfin.com/VA/Falls-Church/2814-Hyson-Ln-22043/home/9543645","thumb":"https://ssl.cdn-redfin.com/photo/235/islphoto/616/genIslnoResize.VAFX2310616_2.webp","zoneLabel":"\ud83d\udccd Marshall High School (confirmed via FCPS Boundary Locator \u2014 different HS)","zone":"Marshall High School","highlights":"","starred":false,"lat":38.8768034,"lng":-77.2144338,"kind":"sale","firstSeen":"2026-08-11","daysOnMarket":null},{"addr":"7718 Trevino Ln, Falls Church, VA 22043","price":"$649,900","priceNum":649900,"beds":"4","baths":"3.5","sqft":"2079","homeType":"SFH","source":"redfin","url":"https://www.redfin.com/VA/Falls-Church/7718-Trevino-Ln-22043/home/9544026","thumb":"https://ssl.cdn-redfin.com/photo/235/islphoto/344/genIslnoResize.VAFX2317344_2.webp","zoneLabel":"\ud83d\udccd Marshall High School (confirmed via FCPS Boundary Locator \u2014 different HS)","zone":"Marshall High School","highlights":"","starred":false,"lat":38.8788431,"lng":-77.2115688,"kind":"sale","firstSeen":"2026-08-11","daysOnMarket":null},{"addr":"1103 Delf Dr, McLean, VA 22101","price":"$5,600","priceNum":5600,"beds":"3","baths":"3","sqft":"2000","homeType":"SFH","source":"redfin","url":"https://www.redfin.com/VA/McLean/1103-Delf-Dr-22101/home/9273180","thumb":"https://ssl.cdn-redfin.com/photo/rent/465da570-86b4-4d38-a89b-d6e9ebb60c14/islphoto/genIsl.0_1.webp","zoneLabel":"\ud83d\udccd Langley High School (confirmed via FCPS Boundary Locator \u2014 different HS)","zone":"Langley High School","highlights":"Pets welcome \u2022 Laundry in unit \u2022 Parking","starred":false,"lat":38.947044,"lng":-77.1985586,"kind":"rent","firstSeen":"2026-08-11","daysOnMarket":0},{"addr":"6806 Thompson Crest Ct, McLean, VA 22101","price":"$5,400","priceNum":5400,"beds":"3","baths":"4.5","sqft":"3096","homeType":"SFH","source":"redfin","url":"https://www.redfin.com/VA/McLean/6806-Thompson-Crest-Ct-22101/home/9395614","thumb":"https://ssl.cdn-redfin.com/photo/rent/8502cec2-1492-43e9-a3dd-19f4a4ee43b3/islphoto/genIsl.0_1.webp","zoneLabel":"\u2705 in McLean (confirmed via FCPS Boundary Locator)","zone":"McLean HS","highlights":"Pets welcome \u2022 Parking \u2022 A/C","starred":false,"lat":38.9391788,"lng":-77.179964,"kind":"rent","firstSeen":"2026-08-11","daysOnMarket":null},{"addr":"1309 McLean Crest Ct, McLean, VA 22101","price":"$5,800","priceNum":5800,"beds":"4","baths":"4.5","sqft":"3100","homeType":"SFH","source":"redfin","url":"https://www.redfin.com/VA/McLean/1309-McLean-Crest-Ct-22101/home/9395676","thumb":"https://ssl.cdn-redfin.com/photo/rent/98810f76-a306-4872-b537-7eb0889fbe9b/islphoto/genIsl.0_1.webp","zoneLabel":"\u2705 in McLean (confirmed via FCPS Boundary Locator)","zone":"McLean HS","highlights":"Parking \u2022 A/C \u2022 Very walkable","starred":false,"lat":38.9392204,"lng":-77.179323,"kind":"rent","firstSeen":"2026-08-11","daysOnMarket":null},{"addr":"7109 Davis Ct, McLean, VA 22101","price":"$6,000","priceNum":6000,"beds":"5","baths":"3.5","sqft":"3360","homeType":"SFH","source":"redfin","url":"https://www.redfin.com/VA/McLean/7109-Davis-Ct-22101/home/9399327","thumb":"https://ssl.cdn-redfin.com/photo/rent/f7b3f36f-5bd8-4f28-84e1-a0ce71e4b0aa/islphoto/genIsl.0_1.webp","zoneLabel":"\u2705 in McLean (confirmed via FCPS Boundary Locator)","zone":"McLean HS","highlights":"Pets welcome \u2022 Laundry in unit \u2022 Parking","starred":false,"lat":38.9244557,"lng":-77.191702,"kind":"rent","firstSeen":"2026-08-11","daysOnMarket":0},{"addr":"6226 Hardy Dr, McLean, VA 22101","price":"$5,600","priceNum":5600,"beds":"5","baths":"2.5","sqft":"2932","homeType":"SFH","source":"redfin","url":"https://www.redfin.com/VA/McLean/6226-Hardy-Dr-22101/home/9407507","thumb":"https://ssl.cdn-redfin.com/photo/rent/befedc46-6b5c-471a-aa80-098da26a230b/islphoto/genIsl.0_1.webp","zoneLabel":"\u2705 in McLean (confirmed via FCPS Boundary Locator)","zone":"McLean HS","highlights":"Pets welcome \u2022 Parking \u2022 A/C","starred":false,"lat":38.9327541,"lng":-77.1541274,"kind":"rent","firstSeen":"2026-08-11","daysOnMarket":null},{"addr":"8020 Agin Ct, McLean, VA 22102","price":"$5,600","priceNum":5600,"beds":"5","baths":"3","sqft":"1560","homeType":"SFH","source":"redfin","url":"https://www.redfin.com/VA/McLean/8020-Agin-Ct-22102/home/9376239","thumb":"https://ssl.cdn-redfin.com/photo/rent/4c94272b-834d-47e4-9c91-0e86e01f8839/islphoto/genIsl.0_1.webp","zoneLabel":"\ud83d\udccd Langley High School (confirmed via FCPS Boundary Locator \u2014 different HS)","zone":"Langley High School","highlights":"Available 09/01 \u2022 Pets welcome \u2022 Parking","starred":false,"lat":38.9397043,"lng":-77.2227118,"kind":"rent","firstSeen":"2026-08-11","daysOnMarket":null},{"addr":"7489 Carriage Hills Dr, McLean, VA 22102","price":"$5,200","priceNum":5200,"beds":"3","baths":"3.5","sqft":"2400","homeType":"SFH","source":"redfin","url":"https://www.redfin.com/VA/McLean/7489-Carriage-Hills-Dr-22102/home/9833507","thumb":"https://ssl.cdn-redfin.com/photo/rent/34fca80a-6f5e-44f7-9228-084070ebcbba/islphoto/genIsl.0_1.webp","zoneLabel":"\u2705 in McLean (confirmed via FCPS Boundary Locator)","zone":"McLean HS","highlights":"Laundry in unit \u2022 Parking \u2022 A/C","starred":false,"lat":38.9251079,"lng":-77.2004515,"kind":"rent","firstSeen":"2026-08-11","daysOnMarket":null},{"addr":"2143 Tysons Ridgeline Rd, Falls Church, VA 22043","price":"$5,000","priceNum":5000,"beds":"3","baths":"3.5","sqft":"1584","homeType":"SFH","source":"redfin","url":"https://www.redfin.com/VA/Falls-Church/2143-Tysons-Ridgeline-Rd-22043/home/186187798","thumb":"https://ssl.cdn-redfin.com/photo/rent/dd1dc1db-f47b-4233-91f7-5e1d40a4c8e4/islphoto/genIsl.0_1.webp","zoneLabel":"\ud83d\udccd Marshall High School (confirmed via FCPS Boundary Locator \u2014 different HS)","zone":"Marshall High School","highlights":"Pets welcome \u2022 Laundry in unit \u2022 A/C","starred":false,"lat":38.88049549333652,"lng":-77.16954870973674,"kind":"rent","firstSeen":"2026-08-11","daysOnMarket":null},{"addr":"1947 Fay Pl, Falls Church, VA 22043","price":"$5,200","priceNum":5200,"beds":"4","baths":"5","sqft":"3543","homeType":"SFH","source":"redfin","url":"https://www.redfin.com/VA/Falls-Church/1947-Fay-Pl-22043/home/9471185","thumb":"https://ssl.cdn-redfin.com/photo/rent/716151b5-6b94-461c-9a8a-1762d9b07743/islphoto/genIsl.0_1.webp","zoneLabel":"\ud83d\udccd Marshall High School (confirmed via FCPS Boundary Locator \u2014 different HS)","zone":"Marshall High School","highlights":"Available 08/28 \u2022 Laundry in unit \u2022 Parking","starred":false,"lat":38.88459924758425,"lng":-77.17273719870641,"kind":"rent","firstSeen":"2026-08-11","daysOnMarket":null},{"addr":"6522 Truman Ln, Falls Church, VA 22043","price":"$5,790","priceNum":5790,"beds":"5","baths":"3.5","sqft":"4000","homeType":"SFH","source":"redfin","url":"https://www.redfin.com/VA/Falls-Church/6522-Truman-Ln-22043/home/9474738","thumb":"https://ssl.cdn-redfin.com/photo/rent/d8fdd246-a82b-404a-ab64-29afb69f2edf/islphoto/genIsl.0_1.webp","zoneLabel":"\u2705 in McLean (confirmed via FCPS Boundary Locator)","zone":"McLean HS","highlights":"Dogs welcome \u2022 Laundry in unit \u2022 Parking","starred":false,"lat":38.88334040468153,"lng":-77.17174496684201,"kind":"rent","firstSeen":"2026-08-11","daysOnMarket":null},{"addr":"2725 Oldewood Dr, Falls Church, VA 22043","price":"$5,500","priceNum":5500,"beds":"4","baths":"3.5","sqft":"4542","homeType":"SFH","source":"redfin","url":"https://www.redfin.com/VA/Falls-Church/2725-Oldewood-Dr-22043/home/9542556","thumb":"https://ssl.cdn-redfin.com/photo/rent/131b9739-cd03-4490-9168-fca2e3ab46cc/islphoto/genIsl.0_1.webp","zoneLabel":"\ud83d\udccd Marshall High School (confirmed via FCPS Boundary Locator \u2014 different HS)","zone":"Marshall High School","highlights":"Pets welcome \u2022 Laundry in unit \u2022 Parking","starred":false,"lat":38.881263391029826,"lng":-77.16990236827922,"kind":"rent","firstSeen":"2026-08-11","daysOnMarket":0},{"addr":"2018 Tysons Ridgeline Rd, Falls Church, VA 22043","price":"$4,900","priceNum":4900,"beds":"3","baths":"3.5","sqft":"1624","homeType":"SFH","source":"redfin","url":"https://www.redfin.com/VA/Falls-Church/2018-Tysons-Ridgeline-Rd-22043/home/186187740","thumb":"https://ssl.cdn-redfin.com/photo/rent/024bc3a1-228c-4a9e-820f-f91aa70fbcc9/islphoto/genIsl.0_3.webp","zoneLabel":"\ud83d\udccd Marshall High School (confirmed via FCPS Boundary Locator \u2014 different HS)","zone":"Marshall High School","highlights":"Pets welcome \u2022 Parking \u2022 A/C","starred":false,"lat":38.882187756787914,"lng":-77.16990034461803,"kind":"rent","firstSeen":"2026-08-11","daysOnMarket":null},{"addr":"2038 Tysons Ridgeline Rd, Falls Church, VA 22043","price":"$4,995","priceNum":4995,"beds":"5","baths":"4.5","sqft":"2034","homeType":"SFH","source":"redfin","url":"https://www.redfin.com/VA/Falls-Church/2038-Tysons-Ridgeline-Rd-22043/home/186187750","thumb":"https://ssl.cdn-redfin.com/photo/rent/50f86c59-0a62-49e1-aa27-cea5a34609b1/islphoto/genIsl.0_1.webp","zoneLabel":"\ud83d\udccd Marshall High School (confirmed via FCPS Boundary Locator \u2014 different HS)","zone":"Marshall High School","highlights":"Laundry in unit \u2022 Parking \u2022 A/C","starred":false,"lat":38.882556676961535,"lng":-77.16950697109,"kind":"rent","firstSeen":"2026-08-11","daysOnMarket":0},{"addr":"2064 Tysons Ridgeline Rd, Falls Church, VA 22043","price":"$5,050","priceNum":5050,"beds":"3","baths":"3.5","sqft":"1636","homeType":"SFH","source":"redfin","url":"https://www.redfin.com/VA/Falls-Church/2064-Tysons-Ridgeline-Rd-22043/home/186187780","thumb":"https://ssl.cdn-redfin.com/photo/rent/d67eff66-74c3-4fdf-899c-e4dcdb5bd359/islphoto/genIsl.0_1.webp","zoneLabel":"\ud83d\udccd Marshall High School (confirmed via FCPS Boundary Locator \u2014 different HS)","zone":"Marshall High School","highlights":"","starred":false,"lat":38.882556676961535,"lng":-77.16950697109,"kind":"rent","firstSeen":"2026-08-11","daysOnMarket":null},{"addr":"2103 Tysons Ridgeline Rd, Falls Church, VA 22043","price":"$4,995","priceNum":4995,"beds":"3","baths":"3.5","sqft":"1604","homeType":"SFH","source":"redfin","url":"https://www.redfin.com/VA/Falls-Church/2103-Tysons-Ridgeline-Rd-22043/home/186187808","thumb":"https://ssl.cdn-redfin.com/photo/rent/8301fb90-c41e-45ee-adac-35ac72fb7de0/islphoto/genIsl.0_1.webp","zoneLabel":"\ud83d\udccd Marshall High School (confirmed via FCPS Boundary Locator \u2014 different HS)","zone":"Marshall High School","highlights":"","starred":false,"lat":38.88431453613748,"lng":-77.17136974620192,"kind":"rent","firstSeen":"2026-08-11","daysOnMarket":null},{"addr":"1040 Warbler Pl Mc Lean, VA 22101","price":"$5,400","priceNum":5400,"beds":"4","baths":"3","sqft":"2700","homeType":"SFH","source":"hotpads","url":"https://hotpads.com/1040-warbler-pl-mc-lean-va-22101-257w370/pad","thumb":"https://photos.zillowstatic.com/fp/75c1dd5548f749f5b2c266c247f30903-cc_ft_960.webp","zoneLabel":"\ud83d\udccd Langley High School (confirmed via FCPS Boundary Locator \u2014 different HS)","zone":"Langley High School","highlights":"","starred":false,"lat":38.92729248642417,"lng":-77.17461788923607,"kind":"rent","firstSeen":"2026-08-11","daysOnMarket":null},{"addr":"1608 Westmoreland St Mc Lean, VA 22101","price":"$5,200","priceNum":5200,"beds":"4","baths":"3","sqft":"3248","homeType":"SFH","source":"hotpads","url":"https://hotpads.com/1608-westmoreland-st-mc-lean-va-22101-1jmp2r8/pad","thumb":"https://photos.zillowstatic.com/fp/494b13bc6afb6294dbb150b08c8bcc6e-cc_ft_960.webp","zoneLabel":"\u2705 in McLean (confirmed via FCPS Boundary Locator)","zone":"McLean HS","highlights":"","starred":false,"lat":38.924985848559054,"lng":-77.1789450434373,"kind":"rent","firstSeen":"2026-08-11","daysOnMarket":null},{"addr":"7002 Tyndale St Mc Lean, VA 22101","price":"$5,200","priceNum":5200,"beds":"5","baths":"3.5","sqft":"3200","homeType":"SFH","source":"hotpads","url":"https://hotpads.com/7002-tyndale-st-mc-lean-va-22101-1jmp7up/pad","thumb":"https://photos.zillowstatic.com/fp/78bd221e28865a786c709fd2695e450d-cc_ft_960.webp","zoneLabel":"\u2705 in McLean (confirmed via FCPS Boundary Locator)","zone":"McLean HS","highlights":"","starred":false,"lat":38.92818832168249,"lng":-77.17716700772115,"kind":"rent","firstSeen":"2026-08-11","daysOnMarket":null}];
+const MCLEAN_GEOJSON = {"type":"FeatureCollection","crs":{"type":"name","properties":{"name":"EPSG:4326"}},"features":[{"type":"Feature","geometry":{"type":"MultiPolygon","coordinates":[[[[-77.1409,38.9423],[-77.1398,38.9419],[-77.1393,38.9417],[-77.1388,38.9415],[-77.1381,38.9412],[-77.1379,38.9412],[-77.1368,38.9407],[-77.1357,38.9402],[-77.1355,38.9401],[-77.1353,38.9399],[-77.1351,38.9399],[-77.135,38.9398],[-77.135,38.9398],[-77.1347,38.9397],[-77.1343,38.9395],[-77.1334,38.9391],[-77.1334,38.939],[-77.133,38.9389],[-77.1329,38.9388],[-77.1327,38.9387],[-77.1326,38.9386],[-77.1321,38.9384],[-77.1319,38.9383],[-77.1318,38.9382],[-77.1314,38.938],[-77.1313,38.9381],[-77.1313,38.9382],[-77.1312,38.9383],[-77.1305,38.9394],[-77.1305,38.9395],[-77.13,38.9402],[-77.1295,38.9402],[-77.1288,38.9404],[-77.1283,38.9407],[-77.1281,38.9409],[-77.1281,38.9409],[-77.1281,38.9409],[-77.1281,38.9409],[-77.1281,38.9409],[-77.128,38.9408],[-77.128,38.9408],[-77.128,38.9408],[-77.1276,38.9406],[-77.1276,38.9406],[-77.1275,38.9406],[-77.1275,38.9405],[-77.1275,38.9405],[-77.1275,38.9405],[-77.1275,38.9405],[-77.1275,38.9405],[-77.1274,38.9405],[-77.1274,38.9405],[-77.1273,38.9404],[-77.1273,38.9404],[-77.1273,38.9404],[-77.1273,38.9404],[-77.1272,38.9404],[-77.1272,38.9404],[-77.1272,38.9404],[-77.1272,38.9404],[-77.1271,38.9403],[-77.1271,38.9403],[-77.1271,38.9403],[-77.127,38.9403],[-77.127,38.9403],[-77.127,38.9403],[-77.1269,38.9403],[-77.1269,38.9403],[-77.1269,38.9402],[-77.1269,38.9402],[-77.1268,38.9402],[-77.1268,38.9402],[-77.1268,38.9402],[-77.1264,38.9399],[-77.1262,38.9398],[-77.1261,38.9398],[-77.1261,38.9398],[-77.1261,38.9398],[-77.1261,38.9398],[-77.126,38.9398],[-77.126,38.9397],[-77.126,38.9397],[-77.1258,38.9396],[-77.1257,38.9395],[-77.1253,38.9393],[-77.1251,38.9391],[-77.1247,38.9388],[-77.1247,38.9388],[-77.1246,38.9387],[-77.1246,38.9387],[-77.1246,38.9387],[-77.1245,38.9386],[-77.1245,38.9386],[-77.1245,38.9386],[-77.1244,38.9386],[-77.1244,38.9385],[-77.1243,38.9385],[-77.1243,38.9384],[-77.1242,38.9384],[-77.1242,38.9384],[-77.1241,38.9383],[-77.1241,38.9383],[-77.1241,38.9383],[-77.1241,38.9382],[-77.124,38.9382],[-77.124,38.9382],[-77.124,38.9381],[-77.124,38.9381],[-77.1239,38.938],[-77.1239,38.938],[-77.1239,38.938],[-77.1238,38.9379],[-77.1238,38.9379],[-77.1238,38.9379],[-77.1237,38.9378],[-77.1237,38.9378],[-77.1237,38.9377],[-77.1236,38.9377],[-77.1236,38.9377],[-77.1235,38.9376],[-77.1234,38.9376],[-77.1234,38.9375],[-77.1234,38.9375],[-77.1232,38.9374],[-77.1232,38.9373],[-77.1231,38.9373],[-77.1231,38.9373],[-77.1231,38.9373],[-77.1231,38.9373],[-77.123,38.9372],[-77.123,38.9372],[-77.1229,38.9372],[-77.1229,38.9371],[-77.1229,38.9371],[-77.1226,38.937],[-77.1226,38.9369],[-77.1225,38.9369],[-77.1224,38.9368],[-77.1224,38.9368],[-77.1223,38.9367],[-77.1223,38.9367],[-77.1223,38.9367],[-77.1222,38.9366],[-77.1221,38.9365],[-77.1219,38.9364],[-77.1219,38.9364],[-77.1218,38.9363],[-77.1217,38.9363],[-77.1216,38.9361],[-77.1216,38.9361],[-77.1215,38.9361],[-77.1215,38.9361],[-77.1214,38.936],[-77.1213,38.9359],[-77.1213,38.9358],[-77.1212,38.9358],[-77.1211,38.9357],[-77.1211,38.9356],[-77.121,38.9356],[-77.1209,38.9355],[-77.1209,38.9355],[-77.1209,38.9355],[-77.1209,38.9355],[-77.1208,38.9354],[-77.1208,38.9354],[-77.1208,38.9354],[-77.1207,38.9353],[-77.1207,38.9353],[-77.1206,38.9352],[-77.1206,38.9352],[-77.1206,38.9352],[-77.1205,38.9351],[-77.1205,38.9351],[-77.1204,38.935],[-77.1204,38.935],[-77.1203,38.9349],[-77.1202,38.9349],[-77.1202,38.9348],[-77.1201,38.9347],[-77.1201,38.9347],[-77.12,38.9346],[-77.12,38.9346],[-77.1199,38.9346],[-77.1199,38.9345],[-77.1199,38.9345],[-77.1198,38.9345],[-77.1198,38.9344],[-77.1197,38.9344],[-77.1198,38.9344],[-77.1198,38.9344],[-77.1199,38.9343],[-77.1199,38.9343],[-77.1211,38.9334],[-77.1212,38.9333],[-77.1212,38.9333],[-77.1217,38.9329],[-77.122,38.9327],[-77.1222,38.9325],[-77.1223,38.9324],[-77.1226,38.9322],[-77.1236,38.9314],[-77.1237,38.9313],[-77.1238,38.9312],[-77.124,38.9311],[-77.1245,38.9307],[-77.1247,38.9306],[-77.1249,38.9304],[-77.1252,38.9302],[-77.1252,38.9302],[-77.1252,38.9302],[-77.1252,38.9301],[-77.1253,38.9301],[-77.1255,38.9299],[-77.1256,38.9299],[-77.1258,38.9297],[-77.1261,38.9295],[-77.1263,38.9293],[-77.1266,38.9291],[-77.1268,38.9289],[-77.1273,38.9285],[-77.1273,38.9285],[-77.1275,38.9284],[-77.1277,38.9282],[-77.1279,38.9281],[-77.1282,38.9278],[-77.1282,38.9278],[-77.1283,38.9277],[-77.1284,38.9276],[-77.1285,38.9276],[-77.1286,38.9275],[-77.1286,38.9275],[-77.1289,38.9273],[-77.1291,38.9271],[-77.1293,38.927],[-77.1296,38.9267],[-77.1298,38.9266],[-77.13,38.9264],[-77.1301,38.9263],[-77.1301,38.9263],[-77.1302,38.9262],[-77.1303,38.9261],[-77.1305,38.926],[-77.1305,38.926],[-77.1307,38.9258],[-77.1308,38.9258],[-77.1309,38.9257],[-77.1311,38.9255],[-77.1314,38.9253],[-77.1314,38.9253],[-77.1315,38.9252],[-77.1318,38.925],[-77.1318,38.925],[-77.1319,38.925],[-77.1318,38.9249],[-77.1318,38.9249],[-77.1321,38.9247],[-77.1321,38.9247],[-77.1323,38.9246],[-77.1323,38.9246],[-77.1324,38.9245],[-77.1325,38.9244],[-77.1326,38.9243],[-77.1331,38.924],[-77.1331,38.924],[-77.1331,38.9239],[-77.1332,38.9239],[-77.1334,38.9237],[-77.1335,38.9237],[-77.1335,38.9236],[-77.1335,38.9236],[-77.1335,38.9236],[-77.1336,38.9235],[-77.1338,38.9234],[-77.134,38.9233],[-77.134,38.9232],[-77.1341,38.9232],[-77.1341,38.9232],[-77.1343,38.923],[-77.1343,38.923],[-77.1344,38.9229],[-77.1345,38.9229],[-77.1346,38.9228],[-77.1347,38.9227],[-77.1348,38.9226],[-77.1348,38.9226],[-77.1349,38.9226],[-77.135,38.9224],[-77.1351,38.9224],[-77.1352,38.9223],[-77.1355,38.9221],[-77.1356,38.922],[-77.1359,38.9218],[-77.136,38.9217],[-77.1362,38.9215],[-77.1364,38.9213],[-77.1366,38.9212],[-77.1368,38.921],[-77.137,38.9209],[-77.1373,38.9207],[-77.1373,38.9206],[-77.1375,38.9205],[-77.1377,38.9203],[-77.138,38.9201],[-77.1382,38.9199],[-77.1385,38.9197],[-77.139,38.9193],[-77.1393,38.9191],[-77.1394,38.919],[-77.1394,38.919],[-77.1394,38.919],[-77.1398,38.9187],[-77.1398,38.9187],[-77.1399,38.9186],[-77.1399,38.9186],[-77.1401,38.9185],[-77.1406,38.9181],[-77.1406,38.9181],[-77.1406,38.918],[-77.1407,38.918],[-77.1407,38.918],[-77.1408,38.9179],[-77.1411,38.9177],[-77.1418,38.9171],[-77.1419,38.9171],[-77.142,38.9169],[-77.1422,38.9168],[-77.1422,38.9168],[-77.1422,38.9168],[-77.1423,38.9167],[-77.1426,38.9165],[-77.1429,38.9163],[-77.1433,38.9159],[-77.1435,38.9158],[-77.1436,38.9157],[-77.1438,38.9156],[-77.1438,38.9156],[-77.1443,38.9152],[-77.1443,38.9152],[-77.1445,38.915],[-77.1448,38.9148],[-77.145,38.9146],[-77.145,38.9146],[-77.1452,38.9145],[-77.1455,38.9143],[-77.1455,38.9142],[-77.1456,38.9142],[-77.1456,38.9142],[-77.1457,38.9141],[-77.1458,38.9141],[-77.1458,38.914],[-77.1458,38.914],[-77.1459,38.914],[-77.1459,38.914],[-77.1459,38.914],[-77.1459,38.9139],[-77.1459,38.9139],[-77.1459,38.9139],[-77.146,38.9139],[-77.146,38.9139],[-77.146,38.9138],[-77.146,38.9138],[-77.1465,38.9135],[-77.1467,38.9134],[-77.1472,38.9129],[-77.1472,38.9129],[-77.1472,38.9129],[-77.1472,38.9129],[-77.1475,38.9127],[-77.1478,38.9125],[-77.148,38.9123],[-77.1481,38.9122],[-77.1481,38.9122],[-77.1485,38.9119],[-77.1486,38.9118],[-77.1486,38.9118],[-77.1488,38.9117],[-77.1491,38.9114],[-77.1491,38.9114],[-77.1492,38.9114],[-77.1493,38.9113],[-77.1493,38.9113],[-77.1493,38.9113],[-77.1498,38.9109],[-77.1498,38.9109],[-77.15,38.9107],[-77.1504,38.9104],[-77.1506,38.9103],[-77.1506,38.9103],[-77.1508,38.9101],[-77.1508,38.9101],[-77.1514,38.9096],[-77.1515,38.9096],[-77.1516,38.9095],[-77.1519,38.9092],[-77.1521,38.9091],[-77.1525,38.9088],[-77.1527,38.9086],[-77.1533,38.9082],[-77.1534,38.9081],[-77.1537,38.9079],[-77.1539,38.9077],[-77.1545,38.9072],[-77.1545,38.9072],[-77.1549,38.9069],[-77.1549,38.9069],[-77.1549,38.9069],[-77.1549,38.9069],[-77.1557,38.9063],[-77.1558,38.9062],[-77.1558,38.9062],[-77.1562,38.9059],[-77.1563,38.9058],[-77.1568,38.9054],[-77.1568,38.9054],[-77.1568,38.9054],[-77.1569,38.9053],[-77.158,38.9045],[-77.1581,38.9044],[-77.1581,38.9044],[-77.1583,38.9042],[-77.1587,38.9039],[-77.1588,38.9039],[-77.1588,38.9038],[-77.1589,38.9038],[-77.159,38.9037],[-77.159,38.9037],[-77.159,38.9037],[-77.159,38.9037],[-77.159,38.9037],[-77.1591,38.9036],[-77.1596,38.9032],[-77.1597,38.9032],[-77.1597,38.9031],[-77.1598,38.9031],[-77.16,38.9029],[-77.1605,38.9025],[-77.1607,38.9023],[-77.1608,38.9023],[-77.1608,38.9023],[-77.1608,38.9023],[-77.1609,38.9022],[-77.1612,38.902],[-77.1616,38.9017],[-77.1617,38.9016],[-77.1617,38.9016],[-77.1618,38.9015],[-77.162,38.9014],[-77.1625,38.9009],[-77.1628,38.9007],[-77.1628,38.9007],[-77.1629,38.9006],[-77.1629,38.9006],[-77.1629,38.9006],[-77.163,38.9005],[-77.1632,38.9004],[-77.1632,38.9004],[-77.1633,38.9003],[-77.1633,38.9003],[-77.1633,38.9003],[-77.1633,38.9003],[-77.1634,38.9003],[-77.1634,38.9002],[-77.1637,38.9],[-77.1639,38.8998],[-77.164,38.8998],[-77.1643,38.8995],[-77.1644,38.8994],[-77.1644,38.8994],[-77.1647,38.8992],[-77.1648,38.8991],[-77.1649,38.8991],[-77.1651,38.8989],[-77.1653,38.8987],[-77.1655,38.8986],[-77.1656,38.8985],[-77.1657,38.8984],[-77.1657,38.8984],[-77.1659,38.8982],[-77.166,38.8982],[-77.166,38.8982],[-77.1663,38.8979],[-77.1663,38.8979],[-77.1664,38.8979],[-77.1664,38.8979],[-77.1668,38.8976],[-77.1668,38.8976],[-77.1668,38.8976],[-77.1668,38.8975],[-77.1668,38.8975],[-77.1668,38.8975],[-77.1668,38.8975],[-77.1671,38.8974],[-77.1671,38.8974],[-77.1673,38.8972],[-77.1675,38.897],[-77.1677,38.8968],[-77.1677,38.8968],[-77.1677,38.8968],[-77.1681,38.8965],[-77.1681,38.8965],[-77.1681,38.8965],[-77.1681,38.8965],[-77.1682,38.8965],[-77.1682,38.8965],[-77.1686,38.8962],[-77.1691,38.8957],[-77.1694,38.8955],[-77.1695,38.8955],[-77.1695,38.8955],[-77.1695,38.8954],[-77.1695,38.8954],[-77.1698,38.8952],[-77.1704,38.8948],[-77.1704,38.8948],[-77.1705,38.8947],[-77.1705,38.8947],[-77.1705,38.8947],[-77.1707,38.8945],[-77.171,38.8943],[-77.1712,38.8941],[-77.1714,38.894],[-77.1714,38.894],[-77.1714,38.8939],[-77.1715,38.8938],[-77.1719,38.8936],[-77.172,38.8935],[-77.172,38.8935],[-77.1721,38.8934],[-77.1723,38.8933],[-77.1723,38.8933],[-77.1724,38.8933],[-77.1724,38.8933],[-77.1724,38.8933],[-77.1726,38.8933],[-77.1729,38.8934],[-77.173,38.8934],[-77.1732,38.8934],[-77.1734,38.8935],[-77.1736,38.8935],[-77.174,38.8936],[-77.174,38.8936],[-77.1743,38.8936],[-77.1747,38.8937],[-77.1748,38.8937],[-77.175,38.8938],[-77.1751,38.8938],[-77.1754,38.8938],[-77.1754,38.8938],[-77.1756,38.8939],[-77.1757,38.8939],[-77.1759,38.8939],[-77.1762,38.894],[-77.1764,38.894],[-77.1764,38.894],[-77.177,38.8941],[-77.1771,38.8941],[-77.1774,38.8942],[-77.1774,38.8942],[-77.1777,38.8942],[-77.1777,38.8942],[-77.1781,38.8943],[-77.1781,38.8943],[-77.1783,38.8943],[-77.1783,38.8944],[-77.1783,38.8944],[-77.1787,38.8944],[-77.1789,38.8945],[-77.1791,38.8945],[-77.1791,38.8945],[-77.1792,38.8945],[-77.1795,38.8946],[-77.1796,38.8946],[-77.1796,38.8946],[-77.1798,38.8946],[-77.1798,38.8946],[-77.18,38.8947],[-77.1801,38.8947],[-77.1801,38.8947],[-77.1804,38.8947],[-77.1804,38.8947],[-77.1807,38.8948],[-77.1807,38.8948],[-77.1808,38.8948],[-77.1811,38.8949],[-77.1811,38.8949],[-77.1813,38.8949],[-77.1814,38.8949],[-77.1814,38.8949],[-77.1816,38.895],[-77.1818,38.895],[-77.1818,38.895],[-77.1819,38.895],[-77.182,38.895],[-77.1821,38.895],[-77.1822,38.8951],[-77.1822,38.8951],[-77.1823,38.8951],[-77.1823,38.8951],[-77.1827,38.8952],[-77.1827,38.8952],[-77.1828,38.8952],[-77.1829,38.8952],[-77.183,38.8952],[-77.183,38.8952],[-77.1832,38.8952],[-77.1836,38.8953],[-77.1838,38.8954],[-77.1844,38.8955],[-77.1844,38.8955],[-77.1845,38.8955],[-77.1848,38.8955],[-77.1848,38.8955],[-77.1848,38.8955],[-77.1849,38.8956],[-77.1852,38.8956],[-77.1852,38.8956],[-77.1855,38.8957],[-77.1855,38.8957],[-77.1856,38.8957],[-77.1856,38.8957],[-77.1861,38.8958],[-77.1862,38.8958],[-77.1863,38.8958],[-77.1863,38.8958],[-77.1864,38.8958],[-77.1866,38.8959],[-77.1868,38.8959],[-77.1871,38.896],[-77.1872,38.896],[-77.1872,38.896],[-77.1876,38.8961],[-77.1876,38.8961],[-77.1878,38.8961],[-77.1878,38.8961],[-77.1879,38.8961],[-77.1879,38.8961],[-77.1882,38.8962],[-77.1882,38.8962],[-77.1884,38.8962],[-77.1884,38.8962],[-77.1886,38.8962],[-77.1887,38.8963],[-77.1888,38.8963],[-77.1889,38.8963],[-77.1889,38.8961],[-77.1889,38.8961],[-77.1892,38.8963],[-77.1894,38.8965],[-77.1903,38.897],[-77.1905,38.8971],[-77.1909,38.8974],[-77.1915,38.8978],[-77.1914,38.8978],[-77.1906,38.8987],[-77.1913,38.8996],[-77.1913,38.8996],[-77.1914,38.8997],[-77.1916,38.8998],[-77.192,38.8998],[-77.1925,38.8998],[-77.193,38.8997],[-77.1932,38.8996],[-77.1934,38.8996],[-77.1936,38.8995],[-77.1938,38.8995],[-77.194,38.8994],[-77.1942,38.8993],[-77.1943,38.8993],[-77.1943,38.8993],[-77.1944,38.8993],[-77.1949,38.8988],[-77.1949,38.8988],[-77.1949,38.8987],[-77.1949,38.8987],[-77.1949,38.8987],[-77.1949,38.8986],[-77.1949,38.8986],[-77.1949,38.8985],[-77.1949,38.8985],[-77.1949,38.8984],[-77.1949,38.8984],[-77.1949,38.8983],[-77.1946,38.8978],[-77.1946,38.8978],[-77.1945,38.8977],[-77.1945,38.8977],[-77.1945,38.8977],[-77.1944,38.8977],[-77.1936,38.8972],[-77.1936,38.8972],[-77.1936,38.8972],[-77.1936,38.8972],[-77.1935,38.8972],[-77.1935,38.8972],[-77.1935,38.8972],[-77.1935,38.8971],[-77.1935,38.8971],[-77.1935,38.8971],[-77.1935,38.8971],[-77.1935,38.8971],[-77.1935,38.897],[-77.1935,38.897],[-77.1936,38.897],[-77.1936,38.897],[-77.1937,38.8969],[-77.1937,38.8969],[-77.1938,38.897],[-77.1938,38.897],[-77.194,38.8971],[-77.1944,38.8973],[-77.1955,38.898],[-77.1962,38.8985],[-77.1965,38.8987],[-77.1966,38.8988],[-77.1975,38.8993],[-77.198,38.8996],[-77.1984,38.8999],[-77.1985,38.9],[-77.1989,38.9002],[-77.1992,38.9004],[-77.1997,38.9007],[-77.2004,38.9012],[-77.2006,38.9013],[-77.2011,38.9016],[-77.2015,38.9019],[-77.202,38.9022],[-77.2019,38.9023],[-77.2018,38.9024],[-77.2018,38.9024],[-77.2017,38.9024],[-77.2017,38.9025],[-77.2015,38.9026],[-77.2015,38.9027],[-77.2014,38.9026],[-77.2013,38.9026],[-77.2011,38.9027],[-77.2009,38.9028],[-77.2009,38.9028],[-77.2007,38.9029],[-77.2006,38.9029],[-77.2005,38.903],[-77.2002,38.9029],[-77.2002,38.9029],[-77.2001,38.9028],[-77.1999,38.9029],[-77.1997,38.903],[-77.1995,38.9032],[-77.1994,38.9032],[-77.1989,38.9032],[-77.1987,38.9035],[-77.1987,38.9035],[-77.1986,38.9036],[-77.1984,38.9038],[-77.1983,38.9039],[-77.1982,38.904],[-77.1981,38.9041],[-77.1981,38.9042],[-77.1981,38.9043],[-77.1981,38.9044],[-77.1981,38.9045],[-77.1981,38.9046],[-77.1981,38.9048],[-77.1981,38.905],[-77.1981,38.9051],[-77.198,38.9053],[-77.198,38.9054],[-77.198,38.9056],[-77.198,38.9058],[-77.198,38.906],[-77.198,38.9062],[-77.198,38.9063],[-77.198,38.9064],[-77.198,38.9064],[-77.198,38.9064],[-77.198,38.9066],[-77.1979,38.9067],[-77.1976,38.9068],[-77.1975,38.9069],[-77.1973,38.907],[-77.1971,38.9071],[-77.1966,38.9074],[-77.1963,38.9074],[-77.1961,38.9074],[-77.1956,38.9074],[-77.1954,38.9084],[-77.1953,38.9086],[-77.1952,38.9089],[-77.1949,38.9091],[-77.1947,38.9092],[-77.1944,38.9095],[-77.1943,38.9096],[-77.1943,38.9097],[-77.1941,38.9098],[-77.1941,38.9098],[-77.1941,38.9101],[-77.1939,38.9102],[-77.1937,38.9103],[-77.1937,38.9103],[-77.1935,38.9104],[-77.1933,38.9105],[-77.1931,38.9105],[-77.1929,38.9106],[-77.1929,38.9107],[-77.1929,38.9109],[-77.193,38.9109],[-77.193,38.9111],[-77.1927,38.9111],[-77.1924,38.9112],[-77.1925,38.9113],[-77.1925,38.9113],[-77.1923,38.9115],[-77.1921,38.9117],[-77.1924,38.9121],[-77.1923,38.9122],[-77.192,38.9125],[-77.191,38.9132],[-77.1907,38.9133],[-77.1905,38.9133],[-77.1905,38.9132],[-77.1905,38.9132],[-77.1902,38.9132],[-77.1901,38.913],[-77.1898,38.9131],[-77.1897,38.9132],[-77.1896,38.9132],[-77.1891,38.9134],[-77.1892,38.9135],[-77.1893,38.9136],[-77.1895,38.9138],[-77.1901,38.9145],[-77.1908,38.9151],[-77.191,38.9153],[-77.1912,38.9155],[-77.1913,38.9156],[-77.1916,38.916],[-77.1917,38.9161],[-77.1919,38.9163],[-77.192,38.9165],[-77.1922,38.9167],[-77.1939,38.9193],[-77.1954,38.9216],[-77.1962,38.9227],[-77.1965,38.9233],[-77.1969,38.9231],[-77.1971,38.923],[-77.1972,38.9229],[-77.1975,38.9228],[-77.1976,38.9228],[-77.1979,38.9226],[-77.1981,38.9225],[-77.1983,38.9223],[-77.1989,38.922],[-77.199,38.9219],[-77.1991,38.9218],[-77.1998,38.9215],[-77.2001,38.9213],[-77.2005,38.921],[-77.2006,38.9209],[-77.2009,38.9208],[-77.2009,38.9207],[-77.2021,38.9201],[-77.2027,38.9197],[-77.2029,38.9197],[-77.2029,38.9197],[-77.2029,38.9198],[-77.2037,38.9199],[-77.2039,38.9199],[-77.2052,38.9201],[-77.2052,38.9201],[-77.2058,38.9202],[-77.2059,38.9202],[-77.2062,38.9203],[-77.2068,38.9205],[-77.2079,38.9209],[-77.208,38.9209],[-77.2089,38.9213],[-77.2091,38.9213],[-77.2094,38.9214],[-77.2092,38.9217],[-77.2091,38.9217],[-77.2091,38.9218],[-77.209,38.9218],[-77.2087,38.9221],[-77.2086,38.9227],[-77.2086,38.9228],[-77.2086,38.9228],[-77.2086,38.9229],[-77.2086,38.9229],[-77.2086,38.9229],[-77.2086,38.923],[-77.2085,38.923],[-77.2085,38.9231],[-77.2085,38.9232],[-77.2084,38.9234],[-77.2085,38.9237],[-77.2087,38.9243],[-77.2087,38.9243],[-77.2087,38.9243],[-77.2087,38.9245],[-77.2088,38.9248],[-77.2087,38.9248],[-77.2083,38.9251],[-77.208,38.9253],[-77.2078,38.9254],[-77.2076,38.9255],[-77.2075,38.9257],[-77.2062,38.9267],[-77.206,38.9268],[-77.2058,38.927],[-77.2053,38.9274],[-77.205,38.9277],[-77.2037,38.9286],[-77.2036,38.9288],[-77.203,38.9292],[-77.203,38.9292],[-77.203,38.9292],[-77.2029,38.9293],[-77.2029,38.9293],[-77.2027,38.9294],[-77.2025,38.9296],[-77.2023,38.9297],[-77.2021,38.9299],[-77.202,38.93],[-77.2018,38.9302],[-77.2015,38.9303],[-77.2013,38.9304],[-77.201,38.9307],[-77.2007,38.9308],[-77.2002,38.9311],[-77.1995,38.9314],[-77.1993,38.9316],[-77.1992,38.9316],[-77.1982,38.932],[-77.198,38.9321],[-77.1978,38.9321],[-77.1973,38.9323],[-77.1956,38.9329],[-77.1954,38.933],[-77.1953,38.933],[-77.1943,38.9334],[-77.1942,38.9335],[-77.1937,38.9337],[-77.1935,38.934],[-77.1927,38.9348],[-77.1927,38.9348],[-77.1937,38.9353],[-77.1946,38.9358],[-77.195,38.936],[-77.1949,38.936],[-77.1948,38.9362],[-77.1948,38.9362],[-77.1946,38.9365],[-77.1943,38.9367],[-77.1943,38.9368],[-77.194,38.9371],[-77.1936,38.937],[-77.1936,38.937],[-77.193,38.9372],[-77.1927,38.9373],[-77.1924,38.9373],[-77.192,38.9374],[-77.1918,38.9375],[-77.1914,38.9376],[-77.191,38.9377],[-77.1908,38.9377],[-77.1905,38.9378],[-77.1896,38.938],[-77.1893,38.9381],[-77.1892,38.9381],[-77.1889,38.938],[-77.1882,38.9379],[-77.1879,38.9379],[-77.1874,38.9378],[-77.187,38.9377],[-77.1869,38.9377],[-77.1868,38.9376],[-77.1867,38.9376],[-77.1863,38.9374],[-77.1862,38.9374],[-77.186,38.9373],[-77.1858,38.9372],[-77.1857,38.9372],[-77.1856,38.9371],[-77.1854,38.9371],[-77.1851,38.9372],[-77.1849,38.9373],[-77.1847,38.9373],[-77.1845,38.9374],[-77.1843,38.9375],[-77.1842,38.9376],[-77.184,38.9376],[-77.1838,38.9377],[-77.1835,38.9379],[-77.1832,38.938],[-77.1831,38.938],[-77.1829,38.9381],[-77.1823,38.9384],[-77.1816,38.9387],[-77.1811,38.939],[-77.1809,38.9391],[-77.1803,38.9394],[-77.1796,38.9397],[-77.1792,38.9398],[-77.1788,38.94],[-77.1784,38.9401],[-77.1782,38.9402],[-77.1781,38.9402],[-77.178,38.9402],[-77.1779,38.9403],[-77.1777,38.9403],[-77.1775,38.9403],[-77.1773,38.9404],[-77.1771,38.9404],[-77.1764,38.9405],[-77.1762,38.9405],[-77.1758,38.9406],[-77.1753,38.9406],[-77.175,38.9407],[-77.1748,38.9407],[-77.1747,38.9407],[-77.1743,38.9408],[-77.1741,38.9409],[-77.1739,38.9409],[-77.1736,38.941],[-77.1735,38.941],[-77.1733,38.941],[-77.1729,38.9412],[-77.1728,38.9412],[-77.1719,38.9414],[-77.1718,38.9415],[-77.1705,38.9418],[-77.17,38.942],[-77.1697,38.942],[-77.1688,38.9423],[-77.1681,38.9425],[-77.168,38.9425],[-77.1675,38.9426],[-77.1674,38.9427],[-77.1672,38.9427],[-77.1671,38.9427],[-77.167,38.9427],[-77.1668,38.9427],[-77.1666,38.9428],[-77.1665,38.9428],[-77.1663,38.9427],[-77.1662,38.9427],[-77.1653,38.9426],[-77.1645,38.9425],[-77.1639,38.9425],[-77.1631,38.9424],[-77.1628,38.9423],[-77.1623,38.9423],[-77.1618,38.9422],[-77.1615,38.9422],[-77.1611,38.9422],[-77.1607,38.9422],[-77.1603,38.9422],[-77.1601,38.9422],[-77.1598,38.9422],[-77.1596,38.9422],[-77.1591,38.9423],[-77.1583,38.9424],[-77.1581,38.9424],[-77.1574,38.9426],[-77.1554,38.9429],[-77.155,38.943],[-77.1547,38.943],[-77.1535,38.9432],[-77.1532,38.9433],[-77.1521,38.9435],[-77.1517,38.9435],[-77.1515,38.9436],[-77.1514,38.9436],[-77.1509,38.9437],[-77.1504,38.9438],[-77.1497,38.9439],[-77.1494,38.9439],[-77.1491,38.944],[-77.1489,38.944],[-77.1485,38.944],[-77.1479,38.944],[-77.1477,38.944],[-77.1475,38.944],[-77.1474,38.944],[-77.1471,38.944],[-77.1468,38.944],[-77.1465,38.9439],[-77.1462,38.9439],[-77.1457,38.9438],[-77.1455,38.9438],[-77.1451,38.9437],[-77.1448,38.9436],[-77.1443,38.9434],[-77.1442,38.9434],[-77.1438,38.9433],[-77.1434,38.9432],[-77.1429,38.943],[-77.1428,38.943],[-77.1425,38.9429],[-77.1424,38.9428],[-77.1422,38.9427],[-77.1412,38.9424],[-77.1409,38.9423]]],[[[-77.1936,38.8873],[-77.1937,38.8872],[-77.1937,38.8872],[-77.1937,38.8872],[-77.1937,38.8871],[-77.1937,38.8871],[-77.1939,38.8868],[-77.1939,38.8868],[-77.194,38.8867],[-77.194,38.8866],[-77.194,38.8866],[-77.1941,38.8865],[-77.1941,38.8864],[-77.1942,38.8862],[-77.1943,38.8861],[-77.1942,38.886],[-77.1939,38.8854],[-77.1938,38.8854],[-77.1937,38.8852],[-77.1936,38.8849],[-77.1935,38.8847],[-77.1933,38.8845],[-77.1933,38.8843],[-77.1932,38.8843],[-77.1931,38.8841],[-77.1931,38.884],[-77.193,38.8839],[-77.1928,38.8836],[-77.1926,38.8832],[-77.1926,38.8831],[-77.1926,38.8831],[-77.1925,38.883],[-77.1925,38.8829],[-77.1923,38.8827],[-77.1923,38.8827],[-77.1923,38.8826],[-77.1923,38.8826],[-77.1923,38.8826],[-77.1922,38.8825],[-77.1922,38.8825],[-77.192,38.8822],[-77.1919,38.8819],[-77.1919,38.8819],[-77.1918,38.8818],[-77.1917,38.8816],[-77.1916,38.8814],[-77.1914,38.8811],[-77.1913,38.8808],[-77.1912,38.8807],[-77.1912,38.8807],[-77.1911,38.8805],[-77.1909,38.8802],[-77.1909,38.8802],[-77.1907,38.8799],[-77.1906,38.8797],[-77.1904,38.8793],[-77.1903,38.8792],[-77.1901,38.8788],[-77.1899,38.8784],[-77.1898,38.8782],[-77.1897,38.8781],[-77.1897,38.8781],[-77.1896,38.8781],[-77.1902,38.8779],[-77.1908,38.8778],[-77.1919,38.8775],[-77.1934,38.8772],[-77.1939,38.8771],[-77.1944,38.877],[-77.1949,38.8769],[-77.1954,38.8768],[-77.1959,38.8767],[-77.1963,38.8766],[-77.197,38.8764],[-77.1974,38.8763],[-77.1976,38.8763],[-77.1982,38.8762],[-77.1986,38.8761],[-77.1989,38.876],[-77.1997,38.8758],[-77.2002,38.8757],[-77.2007,38.8757],[-77.2017,38.8756],[-77.2023,38.8756],[-77.2026,38.8756],[-77.2033,38.8755],[-77.2034,38.8755],[-77.2042,38.8755],[-77.2049,38.8754],[-77.2057,38.8754],[-77.2075,38.8752],[-77.2078,38.8752],[-77.2088,38.8751],[-77.2098,38.8751],[-77.2098,38.8751],[-77.2098,38.8752],[-77.2096,38.8755],[-77.2096,38.8757],[-77.2096,38.8758],[-77.2094,38.8758],[-77.2094,38.8759],[-77.2092,38.8762],[-77.209,38.8765],[-77.2088,38.8767],[-77.2087,38.877],[-77.2085,38.8772],[-77.2088,38.8773],[-77.2086,38.8777],[-77.2087,38.8777],[-77.2088,38.8777],[-77.2094,38.8778],[-77.2094,38.8778],[-77.2099,38.8779],[-77.21,38.8779],[-77.2106,38.878],[-77.2108,38.878],[-77.2109,38.878],[-77.2107,38.8784],[-77.2105,38.8786],[-77.2104,38.8789],[-77.2103,38.8791],[-77.2102,38.8791],[-77.2099,38.8797],[-77.208,38.8794],[-77.2078,38.8794],[-77.2071,38.8793],[-77.2067,38.8793],[-77.2061,38.8792],[-77.2061,38.8792],[-77.206,38.8792],[-77.206,38.8792],[-77.206,38.8792],[-77.2059,38.8792],[-77.2059,38.8792],[-77.2059,38.8792],[-77.2058,38.8792],[-77.2058,38.8792],[-77.2058,38.8792],[-77.2057,38.8792],[-77.2057,38.8792],[-77.2057,38.8792],[-77.2056,38.8792],[-77.2056,38.8792],[-77.2056,38.8792],[-77.2055,38.8791],[-77.2055,38.8791],[-77.2055,38.8791],[-77.2054,38.8791],[-77.2054,38.8791],[-77.2054,38.8791],[-77.2053,38.8791],[-77.2052,38.8792],[-77.2052,38.8794],[-77.2049,38.8797],[-77.2048,38.88],[-77.2047,38.8801],[-77.2045,38.8804],[-77.2044,38.8806],[-77.204,38.8813],[-77.2037,38.8818],[-77.2036,38.8819],[-77.2036,38.882],[-77.2035,38.882],[-77.2035,38.8821],[-77.2034,38.8821],[-77.2034,38.8821],[-77.2034,38.8821],[-77.2033,38.8821],[-77.2033,38.8821],[-77.2033,38.8821],[-77.2032,38.8821],[-77.2029,38.8821],[-77.2024,38.882],[-77.2022,38.882],[-77.2021,38.882],[-77.2019,38.882],[-77.2019,38.8819],[-77.2019,38.8819],[-77.2018,38.8819],[-77.2017,38.8819],[-77.2015,38.8818],[-77.2015,38.8818],[-77.2015,38.8819],[-77.2007,38.8828],[-77.2008,38.8828],[-77.201,38.8829],[-77.2012,38.8831],[-77.2014,38.8832],[-77.2016,38.8834],[-77.2019,38.8835],[-77.2021,38.8837],[-77.2023,38.8838],[-77.2025,38.884],[-77.2027,38.8841],[-77.203,38.8843],[-77.2032,38.8845],[-77.2034,38.8846],[-77.2036,38.8848],[-77.2038,38.8849],[-77.204,38.885],[-77.2042,38.8852],[-77.2045,38.8853],[-77.2044,38.8854],[-77.2042,38.8856],[-77.2041,38.8857],[-77.2042,38.8857],[-77.2041,38.8858],[-77.204,38.8858],[-77.204,38.8859],[-77.2039,38.8859],[-77.2039,38.886],[-77.2038,38.886],[-77.2037,38.886],[-77.2036,38.8861],[-77.2035,38.8861],[-77.2034,38.8862],[-77.2031,38.8863],[-77.2031,38.8863],[-77.203,38.8863],[-77.2027,38.8863],[-77.2025,38.8863],[-77.2024,38.8863],[-77.2021,38.8863],[-77.202,38.8863],[-77.2019,38.8863],[-77.2017,38.8867],[-77.2017,38.8868],[-77.2016,38.8868],[-77.2016,38.8868],[-77.2015,38.8869],[-77.2014,38.8869],[-77.2013,38.8869],[-77.2013,38.887],[-77.2012,38.887],[-77.2012,38.887],[-77.2009,38.8867],[-77.2007,38.887],[-77.2009,38.8871],[-77.2003,38.8873],[-77.2002,38.8873],[-77.2,38.8875],[-77.2,38.8875],[-77.1999,38.8877],[-77.1999,38.8877],[-77.1998,38.8877],[-77.1997,38.8878],[-77.1996,38.8879],[-77.1992,38.8879],[-77.1992,38.8879],[-77.1992,38.888],[-77.1992,38.8881],[-77.1991,38.8882],[-77.1991,38.8882],[-77.1991,38.8884],[-77.1991,38.8885],[-77.199,38.8885],[-77.199,38.8886],[-77.1989,38.8887],[-77.1989,38.8888],[-77.1988,38.8889],[-77.1987,38.889],[-77.1985,38.8892],[-77.1984,38.8893],[-77.1984,38.8893],[-77.1981,38.8897],[-77.1979,38.8898],[-77.1977,38.89],[-77.1976,38.8901],[-77.1974,38.8903],[-77.1973,38.8905],[-77.197,38.8907],[-77.1968,38.891],[-77.1967,38.8911],[-77.1967,38.8912],[-77.1966,38.8912],[-77.1964,38.8912],[-77.1941,38.8914],[-77.1935,38.8914],[-77.193,38.892],[-77.1929,38.8921],[-77.1921,38.8928],[-77.1919,38.8926],[-77.1918,38.8926],[-77.1917,38.8925],[-77.1915,38.8925],[-77.1913,38.8925],[-77.1912,38.8924],[-77.1909,38.8924],[-77.1909,38.8924],[-77.1909,38.8924],[-77.191,38.8923],[-77.1911,38.8922],[-77.1911,38.8921],[-77.1912,38.8919],[-77.1912,38.8919],[-77.1912,38.8918],[-77.1912,38.8918],[-77.1913,38.8917],[-77.1913,38.8916],[-77.1914,38.8916],[-77.1914,38.8914],[-77.1915,38.8913],[-77.1915,38.8913],[-77.1916,38.8912],[-77.1916,38.891],[-77.1917,38.8909],[-77.1919,38.8906],[-77.1919,38.8906],[-77.1919,38.8906],[-77.1919,38.8906],[-77.1919,38.8905],[-77.192,38.8904],[-77.192,38.8904],[-77.1921,38.8902],[-77.1921,38.8902],[-77.1922,38.8901],[-77.1922,38.89],[-77.1922,38.8899],[-77.1922,38.8899],[-77.1925,38.8895],[-77.1926,38.8893],[-77.1927,38.8891],[-77.1927,38.889],[-77.1928,38.8889],[-77.1928,38.8889],[-77.1928,38.8888],[-77.1928,38.8888],[-77.1929,38.8887],[-77.1929,38.8887],[-77.193,38.8884],[-77.193,38.8884],[-77.1931,38.8883],[-77.1931,38.8883],[-77.1932,38.8881],[-77.1934,38.8878],[-77.1934,38.8877],[-77.1934,38.8877],[-77.1934,38.8876],[-77.1934,38.8876],[-77.1936,38.8874],[-77.1936,38.8873]]],[[[-77.2328,38.9337],[-77.232,38.9337],[-77.2317,38.9337],[-77.2314,38.9337],[-77.2311,38.9337],[-77.2308,38.9337],[-77.2302,38.9337],[-77.2297,38.9337],[-77.2292,38.9338],[-77.2286,38.9338],[-77.2282,38.9339],[-77.228,38.9339],[-77.2278,38.9339],[-77.2269,38.934],[-77.2243,38.9342],[-77.2241,38.9342],[-77.2231,38.9342],[-77.2229,38.9342],[-77.2223,38.9342],[-77.222,38.9342],[-77.2214,38.9342],[-77.2205,38.9341],[-77.2193,38.934],[-77.219,38.9339],[-77.218,38.9337],[-77.2173,38.9336],[-77.2163,38.9333],[-77.2161,38.9333],[-77.2159,38.9332],[-77.2159,38.9332],[-77.2158,38.9332],[-77.2156,38.9331],[-77.2153,38.933],[-77.2145,38.9327],[-77.2137,38.9325],[-77.2131,38.9322],[-77.2132,38.9321],[-77.2133,38.932],[-77.2134,38.9319],[-77.2134,38.9319],[-77.2135,38.9317],[-77.2136,38.9315],[-77.2137,38.9313],[-77.2137,38.9313],[-77.2138,38.9311],[-77.2139,38.931],[-77.2139,38.931],[-77.214,38.9309],[-77.214,38.9308],[-77.2141,38.9307],[-77.2141,38.9305],[-77.2142,38.9304],[-77.2142,38.9302],[-77.2142,38.9301],[-77.2143,38.9299],[-77.2143,38.9298],[-77.2143,38.9297],[-77.2143,38.9295],[-77.2143,38.9294],[-77.2143,38.9291],[-77.2143,38.9288],[-77.2142,38.9282],[-77.2141,38.9271],[-77.2141,38.9267],[-77.2142,38.9263],[-77.2142,38.926],[-77.2144,38.9253],[-77.2147,38.9248],[-77.2148,38.9246],[-77.216,38.922],[-77.2161,38.9219],[-77.2161,38.9218],[-77.2161,38.9218],[-77.2166,38.9216],[-77.2169,38.9215],[-77.2185,38.9209],[-77.2187,38.9208],[-77.2189,38.9207],[-77.2191,38.9207],[-77.2192,38.9206],[-77.2198,38.9205],[-77.22,38.9204],[-77.2206,38.9204],[-77.2208,38.9204],[-77.2211,38.9204],[-77.2217,38.9203],[-77.2217,38.9203],[-77.2217,38.9204],[-77.2217,38.9204],[-77.2216,38.9205],[-77.2216,38.9205],[-77.2216,38.9206],[-77.2216,38.9206],[-77.2216,38.9206],[-77.2216,38.9207],[-77.2216,38.9208],[-77.2216,38.9209],[-77.2216,38.9209],[-77.2216,38.921],[-77.2217,38.9211],[-77.2217,38.9212],[-77.2217,38.9213],[-77.2217,38.9215],[-77.2217,38.9216],[-77.2217,38.9217],[-77.2218,38.9218],[-77.2218,38.9219],[-77.2218,38.922],[-77.2218,38.922],[-77.2218,38.9221],[-77.2217,38.9221],[-77.2216,38.9221],[-77.2215,38.9222],[-77.2213,38.9222],[-77.2212,38.9222],[-77.221,38.9223],[-77.2209,38.9223],[-77.2207,38.9223],[-77.2205,38.9224],[-77.2204,38.9224],[-77.2202,38.9225],[-77.22,38.9225],[-77.2199,38.9225],[-77.2198,38.9226],[-77.2197,38.9226],[-77.2196,38.9226],[-77.2194,38.9227],[-77.2192,38.9228],[-77.2191,38.9228],[-77.2191,38.9228],[-77.2188,38.923],[-77.2186,38.9232],[-77.2181,38.9235],[-77.2178,38.9237],[-77.2178,38.9238],[-77.2177,38.9239],[-77.2177,38.9241],[-77.2177,38.9242],[-77.2178,38.9243],[-77.2179,38.9244],[-77.218,38.9245],[-77.2184,38.9248],[-77.2189,38.9251],[-77.219,38.9252],[-77.2199,38.9258],[-77.2206,38.9263],[-77.2217,38.927],[-77.2219,38.9272],[-77.2227,38.9277],[-77.2228,38.9278],[-77.2229,38.9279],[-77.2229,38.9279],[-77.2231,38.928],[-77.2233,38.9281],[-77.2235,38.9282],[-77.2237,38.9283],[-77.2239,38.9284],[-77.2241,38.9285],[-77.2243,38.9285],[-77.2245,38.9286],[-77.2248,38.9287],[-77.225,38.9287],[-77.2254,38.9288],[-77.2259,38.9288],[-77.2262,38.9288],[-77.2265,38.9288],[-77.2269,38.9288],[-77.2271,38.9287],[-77.2273,38.9287],[-77.2275,38.9287],[-77.2277,38.9287],[-77.2278,38.9287],[-77.2279,38.9286],[-77.2279,38.9286],[-77.228,38.9286],[-77.2281,38.9285],[-77.2282,38.9285],[-77.2283,38.9285],[-77.2284,38.9284],[-77.2285,38.9284],[-77.2287,38.9283],[-77.2287,38.9282],[-77.2288,38.9282],[-77.2294,38.9277],[-77.23,38.9274],[-77.2305,38.927],[-77.231,38.9267],[-77.2311,38.9266],[-77.2312,38.9266],[-77.2313,38.9265],[-77.2315,38.9264],[-77.2318,38.9262],[-77.2323,38.9259],[-77.2329,38.9256],[-77.2331,38.9255],[-77.2334,38.9253],[-77.2337,38.9252],[-77.2339,38.925],[-77.234,38.925],[-77.2342,38.9249],[-77.2347,38.9248],[-77.2351,38.9246],[-77.2353,38.9246],[-77.2354,38.9245],[-77.2355,38.9244],[-77.2356,38.9244],[-77.2358,38.9243],[-77.2359,38.9242],[-77.2361,38.9241],[-77.2365,38.9239],[-77.2365,38.9239],[-77.2366,38.924],[-77.2368,38.9242],[-77.2369,38.9243],[-77.2377,38.9251],[-77.238,38.9254],[-77.2382,38.9257],[-77.2383,38.9258],[-77.2384,38.9258],[-77.2385,38.926],[-77.2386,38.9261],[-77.2389,38.9263],[-77.2392,38.9267],[-77.2394,38.9269],[-77.2397,38.9271],[-77.2398,38.9273],[-77.2401,38.9275],[-77.2403,38.9278],[-77.2406,38.9281],[-77.2408,38.9283],[-77.2409,38.9284],[-77.241,38.9285],[-77.2411,38.9286],[-77.2413,38.9288],[-77.2414,38.929],[-77.2416,38.9291],[-77.2417,38.9293],[-77.2419,38.9294],[-77.242,38.9295],[-77.2424,38.93],[-77.2426,38.9301],[-77.2427,38.9303],[-77.2429,38.9305],[-77.2434,38.9309],[-77.2446,38.9322],[-77.2447,38.9323],[-77.2448,38.9325],[-77.2451,38.9327],[-77.2452,38.9329],[-77.2457,38.9334],[-77.2465,38.9341],[-77.2464,38.9341],[-77.2463,38.9342],[-77.2458,38.9343],[-77.2453,38.9344],[-77.245,38.9345],[-77.2449,38.9345],[-77.2445,38.9346],[-77.2438,38.9346],[-77.2433,38.9347],[-77.243,38.9347],[-77.2425,38.9347],[-77.242,38.9347],[-77.2417,38.9347],[-77.2411,38.9347],[-77.2406,38.9347],[-77.2401,38.9346],[-77.24,38.9346],[-77.2399,38.9346],[-77.2398,38.9346],[-77.2395,38.9345],[-77.2394,38.9345],[-77.2393,38.9345],[-77.2391,38.9345],[-77.2388,38.9344],[-77.2386,38.9344],[-77.2382,38.9343],[-77.2381,38.9343],[-77.2377,38.9342],[-77.2375,38.9342],[-77.2368,38.9341],[-77.2367,38.9341],[-77.2366,38.9341],[-77.2363,38.9341],[-77.2357,38.934],[-77.2355,38.9339],[-77.235,38.9339],[-77.2346,38.9338],[-77.2342,38.9338],[-77.2338,38.9338],[-77.2333,38.9337],[-77.2332,38.9337],[-77.233,38.9337],[-77.2328,38.9337]]]]},"properties":{"SCHOOL_NAME":"McLean"}}]};
+const EXCLUDED = [{"addr":"1614 6th Pl McLean, VA 22101","price":"$13,000","kind":"rent","reason":"rent price $13000 outside 4900-6000"},{"addr":"6462 Madison Ct Mc Lean, VA 22101","price":"$8,650","kind":"rent","reason":"rent price $8650 outside 4900-6000"},{"addr":"1934 McFall St Mc Lean, VA 22101","price":"$4,000","kind":"rent","reason":"rent price $4000 outside 4900-6000"},{"addr":"1744 Great Falls St Mc Lean, VA 22101","price":"$4,000","kind":"rent","reason":"rent price $4000 outside 4900-6000"},{"addr":"1103 Roberta Ct Mc Lean, VA 22101","price":"$4,000","kind":"rent","reason":"rent price $4000 outside 4900-6000"},{"addr":"7100 Tyndale St Mc Lean, VA 22101","price":"$4,450","kind":"rent","reason":"rent price $4450 outside 4900-6000"},{"addr":"6608 Fairlawn Dr Mc Lean, VA 22101","price":"$4,475","kind":"rent","reason":"rent price $4475 outside 4900-6000"},{"addr":"6607 Chesterfield Ave Mc Lean, VA 22101","price":"$8,500","kind":"rent","reason":"rent price $8500 outside 4900-6000"},{"addr":"1318 Round Oak Ct Mc Lean, VA 22101","price":"$6,995","kind":"rent","reason":"rent price $6995 outside 4900-6000"},{"addr":"1548 Chain Bridge Rd Mc Lean, VA 22101","price":"$3,684","kind":"rent","reason":"baths 2 < 2.5"},{"addr":"1601 Evers Dr Mc Lean, VA 22101","price":"$1,900","kind":"rent","reason":"rent price $1900 outside 4900-6000"},{"addr":"1912 Corliss Ct Mc Lean, VA 22101","price":"$1,800","kind":"rent","reason":"rent price $1800 outside 4900-6000"},{"addr":"5922 Chesterbrook Rd Mc Lean, VA 22101","price":"$8,500","kind":"rent","reason":"rent price $8500 outside 4900-6000"},{"addr":"1917 Youngblood St Mc Lean, VA 22101","price":"$4,200","kind":"rent","reason":"rent price $4200 outside 4900-6000"},{"addr":"6933 Tyndale St Mc Lean, VA 22101","price":"$4,700","kind":"rent","reason":"rent price $4700 outside 4900-6000"},{"addr":"1809 Macarthur Dr Mc Lean, VA 22101","price":"$9,500","kind":"rent","reason":"rent price $9500 outside 4900-6000"},{"addr":"6312 Old Dominion Dr Mc Lean, VA 22101","price":"$4,300","kind":"rent","reason":"rent price $4300 outside 4900-6000"},{"addr":"1828 Youngblood St Mc Lean, VA 22101","price":"$4,300","kind":"rent","reason":"rent price $4300 outside 4900-6000"},{"addr":"6286 Dunaway Ct Mc Lean, VA 22101","price":"$7,600","kind":"rent","reason":"rent price $7600 outside 4900-6000"},{"addr":"6294 Dunaway Ct Mc Lean, VA 22101","price":"$8,000","kind":"rent","reason":"rent price $8000 outside 4900-6000"},{"addr":"1171 Foxhound Ct Mc Lean, VA 22102","price":"$6,200","kind":"rent","reason":"rent price $6200 outside 4900-6000"},{"addr":"7845 Old Dominion Dr McLean, VA 22102","price":"$9,000","kind":"rent","reason":"rent price $9000 outside 4900-6000"},{"addr":"1633 Warner Ave McLean, VA 22101","price":"$4,785","kind":"rent","reason":"rent price $4785 outside 4900-6000"},{"addr":"805 Balls Hill Rd Mc Lean, VA 22101","price":"$6,495","kind":"rent","reason":"rent price $6495 outside 4900-6000"},{"addr":"1429 Laburnum St McLean, VA 22101","price":"$4,500","kind":"rent","reason":"rent price $4500 outside 4900-6000"},{"addr":"7002 River Oaks Dr Mc Lean, VA 22101","price":"$24,000","kind":"rent","reason":"rent price $24000 outside 4900-6000"},{"addr":"903 Ridge Dr Mc Lean, VA 22101","price":"$6,950","kind":"rent","reason":"rent price $6950 outside 4900-6000"},{"addr":"7104 Old Dominion Dr Mc Lean, VA 22101","price":"$9,000","kind":"rent","reason":"rent price $9000 outside 4900-6000"},{"addr":"1231 Ingleside Ave Mc Lean, VA 22101","price":"$8,500","kind":"rent","reason":"rent price $8500 outside 4900-6000"},{"addr":"929 Woburn Ct Mc Lean, VA 22102","price":"$7,850","kind":"rent","reason":"rent price $7850 outside 4900-6000"},{"addr":"1530 Forest Villa Ln Mc Lean, VA 22101","price":"$8,500","kind":"rent","reason":"rent price $8500 outside 4900-6000"},{"addr":"7518 Old Dominion Dr Mc Lean, VA 22102","price":"$6,800","kind":"rent","reason":"rent price $6800 outside 4900-6000"},{"addr":"6506 Bellamine Ct Mc Lean, VA 22101","price":"$7,000","kind":"rent","reason":"rent price $7000 outside 4900-6000"},{"addr":"6915 Bonheim Ct Mc Lean, VA 22101","price":"$7,300","kind":"rent","reason":"rent price $7300 outside 4900-6000"},{"addr":"7205 Van Ness Ct Mc Lean, VA 22101","price":"$6,400","kind":"rent","reason":"rent price $6400 outside 4900-6000"},{"addr":"7115 Warbler Ln Mc Lean, VA 22101","price":"$6,150","kind":"rent","reason":"rent price $6150 outside 4900-6000"},{"addr":"938 Peacock Station Rd Mc Lean, VA 22102","price":"$32,000","kind":"rent","reason":"rent price $32000 outside 4900-6000"},{"addr":"1131 Marion Ave Mc Lean, VA 22101","price":"$4,250","kind":"rent","reason":"baths 2 < 2.5"},{"addr":"8757 A Brook Rd McLean, VA 22102","price":"$27,000","kind":"rent","reason":"rent price $27000 outside 4900-6000"},{"addr":"8305 Fox Haven Dr Mc Lean, VA 22102","price":"$25,000","kind":"rent","reason":"rent price $25000 outside 4900-6000"},{"addr":"7112 Georgetown Pike Mc Lean, VA 22101","price":"$12,500","kind":"rent","reason":"rent price $12500 outside 4900-6000"},{"addr":"6609 Heidi Ct Mc Lean, VA 22101","price":"$7,750","kind":"rent","reason":"rent price $7750 outside 4900-6000"},{"addr":"1111 Towlston Rd Mc Lean, VA 22102","price":"$26,500","kind":"rent","reason":"rent price $26500 outside 4900-6000"},{"addr":"1706 Olney Rd, Falls Church, VA 22043","price":"$1,200,000","kind":"sale","reason":"beds/baths not listed on card - cannot confirm 3+ bed / 2.5+ bath requirement"}];
 
-// --- localStorage version guard (COPY VERBATIM) ---
+// ---- localStorage version guard (COPY VERBATIM) ----
 const STORAGE_KEY = 'mclean_saved_picks';
 const STORAGE_VER_KEY = 'mclean_saved_picks_ver';
 const STORAGE_VER = '2'; // NEVER change — incrementing wipes all saved likes
@@ -167,33 +272,34 @@ try {
   }
 } catch(e) {}
 
-// PRE-SEEDED LIKED LISTINGS — hardcoded backup that survives localStorage wipes
-// Source: liked_listings.md | Updated: 2026-08-09
+// ---- PRE-SEEDED LIKED LISTINGS ----
+// Source: liked_listings.md | Updated: 2026-08-11
 // Merge rule: existing localStorage wins; seed fills any gaps (e.g., after a clear)
 try {
   const SEED_LIKES = {
-    "1335 Macbeth St, McLean, VA 22102": {addr:"1335 Macbeth St, McLean, VA 22102",price:"$1,619,000",url:"https://www.redfin.com/VA/McLean/1335-Macbeth-St-22102/home/9375701",saved:"2026-06-14"}
-  };
+    "1601 Colonial Hills Dr, McLean 22102": {addr:"1601 Colonial Hills Dr, McLean 22102",price:"$5,500/mo",url:"https://www.redfin.com/VA/Mc-Lean/1601-Colonial-Hills-Dr-22102/home/9833523",saved:"2026-06-14"},
+    "1335 Macbeth St, McLean 22102": {addr:"1335 Macbeth St, McLean 22102",price:"",url:"",saved:"2026-06-14"},
+    "2212 Reddfield Dr, Falls Church 22043": {addr:"2212 Reddfield Dr, Falls Church 22043",price:"",url:"",saved:"2026-06-14"},
+    "2406 Claremont Dr, Falls Church 22043": {addr:"2406 Claremont Dr, Falls Church 22043",price:"",url:"",saved:"2026-06-14"}
+};
   const _existing = JSON.parse(localStorage.getItem(STORAGE_KEY) || '{}');
   const _merged = Object.assign({}, SEED_LIKES, _existing);
   localStorage.setItem(STORAGE_KEY, JSON.stringify(_merged));
 } catch(e) {}
 
-// SOLD_PICKS — shown in "Previously Liked — No Longer Available" section only
-const SOLD_PICKS = [{"addr": "2023 Freedom Ln, Falls Church, VA 22043", "price": "", "url": "", "note": "Sold \u2014 2026-06-14"}, {"addr": "1601 Colonial Hills Dr, McLean, VA 22102", "price": "", "url": "", "note": "Rental removed Jun 19, 2026"}, {"addr": "2212 Reddfield Dr, Falls Church, VA 22043", "price": "", "url": "", "note": "Rental removed Jun 13, 2026"}, {"addr": "2406 Claremont Dr, Falls Church, VA 22043", "price": "", "url": "", "note": "Sold Jul 1, 2026 for $999,000"}];
+const SOLD_PICKS = [
+    {addr:"2023 Freedom Ln, Falls Church 22043",price:"",url:"",note:"Sold — 2026-06-14"}
+];
 
-const LISTINGS = [{"addr": "7348 Lewinsville Square Pl, McLean, VA 22101", "price": "$1,195,000", "priceNum": 1195000, "beds": 3, "baths": 3.5, "sqft": 2702, "homeType": "Townhouse", "source": "Redfin", "url": "https://www.redfin.com/VA/McLean/7348-Lewinsville-Square-Pl-22101/home/9389595", "thumb": "https://ssl.cdn-redfin.com/photo/235/islphoto/610/genIslnoResize.VAFX2315610_2.webp", "zoneLabel": "\u2705 in McLean (confirmed via FCPS Boundary Locator)", "zone": "McLean HS", "highlights": "$153 HOA \u2022 2 parking spots \u2022 Built 1981", "starred": false, "lat": 38.9313193, "lng": -77.1980879, "kind": "sale", "firstSeen": "2026-07-23", "daysOnMarket": null}, {"addr": "1537 Cedar Ave, McLean, VA 22101", "price": "$1,125,000", "priceNum": 1125000, "beds": 4, "baths": 4.5, "sqft": 3512, "homeType": "Townhouse", "source": "Redfin", "url": "https://www.redfin.com/VA/McLean/1537-Cedar-Ave-22101/home/9394800", "thumb": "https://ssl.cdn-redfin.com/photo/235/islphoto/812/genIslnoResize.VAFX2217812_6.webp", "zoneLabel": "\u2705 in McLean (confirmed via FCPS Boundary Locator)", "zone": "McLean HS", "highlights": "$183 HOA \u2022 2 parking spots \u2022 Built 1988 \u2022 Elevator", "starred": false, "lat": 38.9308116, "lng": -77.1824738, "kind": "sale", "firstSeen": "2026-07-23", "daysOnMarket": null}, {"addr": "2243 Kings Garden Way, Falls Church, VA 22043", "price": "$910,000", "priceNum": 910000, "beds": 4, "baths": 3.5, "sqft": 2270, "homeType": "House", "source": "Redfin", "url": "https://www.redfin.com/VA/Falls-Church/2243-Kings-Garden-Way-22043/home/9461704", "thumb": "https://ssl.cdn-redfin.com/system_files/media/1258046_JPG/genDesktopMapHomeCardUrl/item_40.webp", "zoneLabel": "\ud83d\udccd Marshall HS (confirmed via FCPS Boundary Locator \u2014 different HS)", "zone": "Marshall HS", "highlights": "Built 1986 \u2022 Early Access / Coming Soon", "starred": false, "lat": 38.8927, "lng": -77.1879, "kind": "sale", "firstSeen": "2026-07-23", "daysOnMarket": 13}, {"addr": "2100 Glenn Spring Ct, Falls Church, VA 22043", "price": "$849,000", "priceNum": 849000, "beds": 3, "baths": 3.5, "sqft": 1620, "homeType": "Townhouse", "source": "Redfin", "url": "https://www.redfin.com/VA/Falls-Church/2100-Glenn-Spring-Ct-22043/home/9477215", "thumb": "https://ssl.cdn-redfin.com/photo/235/islphoto/500/genIslnoResize.VAFX2329500_4.webp", "zoneLabel": "\u2705 in McLean (confirmed via FCPS Boundary Locator)", "zone": "McLean HS", "highlights": "In-law suite \u2022 Walk-out basement \u2022 Private entrance", "starred": false, "lat": 38.888, "lng": -77.1911, "kind": "sale", "firstSeen": "2026-07-23", "daysOnMarket": null}, {"addr": "7608 Salem Rd, Falls Church, VA 22043", "price": "$1,049,900", "priceNum": 1049900, "beds": 4, "baths": 2.5, "sqft": 2775, "homeType": "House", "source": "Redfin", "url": "https://www.redfin.com/VA/Falls-Church/7608-Salem-Rd-22043/home/9468377", "thumb": "https://ssl.cdn-redfin.com/photo/235/islphoto/356/genIslnoResize.VAFX2323356_2.webp", "zoneLabel": "\ud83d\udccd Marshall HS (confirmed via FCPS Boundary Locator \u2014 different HS)", "zone": "Marshall HS", "highlights": "Renovated bathrooms \u2022 Renovated kitchen \u2022 Recessed lighting \u2022 Price improvement", "starred": false, "lat": 38.8893, "lng": -77.1884, "kind": "sale", "firstSeen": "2026-07-23", "daysOnMarket": null}, {"addr": "7621 Virginia Ave, Falls Church, VA 22043", "price": "$1,150,000", "priceNum": 1150000, "beds": 5, "baths": 4, "sqft": 2750, "homeType": "House", "source": "Redfin", "url": "https://www.redfin.com/VA/Falls-Church/7621-Virginia-Ave-22043/home/9469165", "thumb": "https://ssl.cdn-redfin.com/photo/235/islphoto/198/genIslnoResize.VAFX2329198_1.webp", "zoneLabel": "\ud83d\udccd Marshall HS (confirmed via FCPS Boundary Locator \u2014 different HS)", "zone": "Marshall HS", "highlights": "Jetted soaking tub \u2022 New kitchen \u2022 Quiet no-thru street", "starred": false, "lat": 38.8842009, "lng": -77.1769561, "kind": "sale", "firstSeen": "2026-07-23", "daysOnMarket": null}, {"addr": "7314 Idylwood Rd, Falls Church, VA 22043", "price": "$1,100,000", "priceNum": 1100000, "beds": 5, "baths": 4, "sqft": 2573, "homeType": "House", "source": "Redfin", "url": "https://www.redfin.com/VA/Falls-Church/7314-Idylwood-Rd-22043/home/9479083", "thumb": "https://ssl.cdn-redfin.com/photo/235/islphoto/632/genIslnoResize.VAFX2323632_0.webp", "zoneLabel": "\u2705 in McLean (confirmed via FCPS Boundary Locator)", "zone": "McLean HS", "highlights": "Well-treed half-acre lot \u2022 Teardown/build opportunity", "starred": false, "lat": 38.9027193, "lng": -77.2043269, "kind": "sale", "firstSeen": "2026-07-23", "daysOnMarket": null}, {"addr": "6611 Rosecroft Pl, Falls Church, VA 22043", "price": "$910,000", "priceNum": 910000, "beds": 3, "baths": 3.5, "sqft": 2486, "homeType": "House", "source": "Redfin", "url": "https://www.redfin.com/VA/Falls-Church/6611-Rosecroft-Pl-22043/home/9475746", "thumb": "https://ssl.cdn-redfin.com/photo/235/islphoto/730/genIslnoResize.VAFX2328730_1.webp", "zoneLabel": "\u2705 in McLean (confirmed via FCPS Boundary Locator)", "zone": "McLean HS", "highlights": "", "starred": false, "lat": 38.8896, "lng": -77.1901, "kind": "sale", "firstSeen": "2026-07-23", "daysOnMarket": null}, {"addr": "2814 Hyson Ln, Falls Church, VA 22043", "price": "$649,900", "priceNum": 649900, "beds": 3, "baths": 3.5, "sqft": 2016, "homeType": "House", "source": "Redfin", "url": "https://www.redfin.com/VA/Falls-Church/2814-Hyson-Ln-22043/home/9543645", "thumb": "https://ssl.cdn-redfin.com/photo/235/islphoto/616/genIslnoResize.VAFX2310616_2.webp", "zoneLabel": "\ud83d\udccd Marshall HS (confirmed via FCPS Boundary Locator \u2014 different HS)", "zone": "Marshall HS", "highlights": "", "starred": false, "lat": 38.8768034, "lng": -77.2144338, "kind": "sale", "firstSeen": "2026-07-23", "daysOnMarket": null}, {"addr": "2007 Nordlie Pl, Falls Church, VA 22043", "price": "$1,199,000", "priceNum": 1199000, "beds": 4, "baths": 2.5, "sqft": 3423, "homeType": "House", "source": "Redfin", "url": "https://www.redfin.com/VA/Falls-Church/2007-Nordlie-Pl-22043/home/9459612", "thumb": "https://ssl.cdn-redfin.com/photo/235/islphoto/014/genIslnoResize.VAFX2314014_1.webp", "zoneLabel": "\ud83d\udccd Marshall HS (confirmed via FCPS Boundary Locator \u2014 different HS)", "zone": "Marshall HS", "highlights": "", "starred": false, "lat": 38.8924, "lng": -77.1888, "kind": "sale", "firstSeen": "2026-07-23", "daysOnMarket": null}, {"addr": "7718 Trevino Ln, Falls Church, VA 22043", "price": "$649,900", "priceNum": 649900, "beds": 4, "baths": 3.5, "sqft": 2079, "homeType": "House", "source": "Redfin", "url": "https://www.redfin.com/VA/Falls-Church/7718-Trevino-Ln-22043/home/9544026", "thumb": "https://ssl.cdn-redfin.com/photo/235/islphoto/344/genIslnoResize.VAFX2317344_2.webp", "zoneLabel": "\ud83d\udccd Marshall HS (confirmed via FCPS Boundary Locator \u2014 different HS)", "zone": "Marshall HS", "highlights": "", "starred": false, "lat": 38.8788431, "lng": -77.2115688, "kind": "sale", "firstSeen": "2026-07-23", "daysOnMarket": null}, {"addr": "7328 Aynsley Ln, McLean, VA 22102", "price": "$1,175,000", "priceNum": 1175000, "beds": 4, "baths": 3.5, "sqft": 2178, "homeType": "Townhouse", "source": "Redfin", "url": "https://www.redfin.com/VA/McLean/7328-Aynsley-Ln-22102/home/9400964", "thumb": "https://ssl.cdn-redfin.com/photo/235/islphoto/604/genIslnoResize.VAFX2321604_1.webp", "zoneLabel": "\u2705 in McLean (confirmed via FCPS Boundary Locator)", "zone": "McLean HS", "highlights": "Gas cooking \u2022 Gourmet kitchen \u2022 Double ovens", "starred": false, "lat": 38.9291541, "lng": -77.1982078, "kind": "sale", "firstSeen": "2026-07-23", "daysOnMarket": null}, {"addr": "1644 La Salle Ave, McLean, VA 22102", "price": "$1,000,000", "priceNum": 1000000, "beds": 4, "baths": 3, "sqft": 2640, "homeType": "House", "source": "Redfin", "url": "https://www.redfin.com/VA/McLean/1644-La-Salle-Ave-22102/home/9396414", "thumb": "https://ssl.cdn-redfin.com/photo/235/islphoto/200/genIslnoResize.VAFX2323200_3.webp", "zoneLabel": "\u2705 in McLean (confirmed via FCPS Boundary Locator)", "zone": "McLean HS", "highlights": "Extra parcel \u2022 Buildable lot \u2022 Teardown", "starred": false, "lat": 38.9240325, "lng": -77.1987276, "kind": "sale", "firstSeen": "2026-07-23", "daysOnMarket": null}, {"addr": "1646 La Salle Ave, McLean, VA 22102", "price": "$1,000,000", "priceNum": 1000000, "beds": 4, "baths": 3, "sqft": 2640, "homeType": "House", "source": "Redfin", "url": "https://www.redfin.com/VA/McLean/1646-La-Salle-Ave-22102/home/9396416", "thumb": "https://ssl.cdn-redfin.com/photo/235/islphoto/256/genIslnoResize.VAFX2323256_3.webp", "zoneLabel": "\u2705 in McLean (confirmed via FCPS Boundary Locator)", "zone": "McLean HS", "highlights": "Extra parcel \u2022 Buildable lot \u2022 Teardown", "starred": false, "lat": 38.9239082, "lng": -77.1986616, "kind": "sale", "firstSeen": "2026-07-23", "daysOnMarket": null}, {"addr": "1103 Delf Dr, McLean, VA 22101", "price": "$5,600/mo", "priceNum": 5600, "beds": 3, "baths": 3, "sqft": 2000, "homeType": "House", "source": "Redfin", "url": "https://www.redfin.com/VA/McLean/1103-Delf-Dr-22101/home/9273180", "thumb": "https://ssl.cdn-redfin.com/photo/rent/465da570-86b4-4d38-a89b-d6e9ebb60c14/islphoto/genIsl.0_1.webp", "zoneLabel": "\ud83d\udccd Langley HS (confirmed via FCPS Boundary Locator \u2014 different HS)", "zone": "Langley HS", "highlights": "Available 07/31 \u2022 Pets welcome \u2022 Laundry in unit", "starred": false, "lat": 38.947044, "lng": -77.1985586, "kind": "rent", "firstSeen": "2026-07-23", "daysOnMarket": 1}, {"addr": "1309 McLean Crest Ct, McLean, VA 22101", "price": "$5,800/mo", "priceNum": 5800, "beds": 4, "baths": 4.5, "sqft": 3100, "homeType": "Townhouse", "source": "Redfin", "url": "https://www.redfin.com/VA/McLean/1309-McLean-Crest-Ct-22101/home/9395676", "thumb": "https://ssl.cdn-redfin.com/photo/rent/98810f76-a306-4872-b537-7eb0889fbe9b/islphoto/genIsl.0_1.webp", "zoneLabel": "\u2705 in McLean (confirmed via FCPS Boundary Locator)", "zone": "McLean HS", "highlights": "Available 08/01 \u2022 Parking \u2022 A/C \u2022 Price reduced", "starred": false, "lat": 38.9392204, "lng": -77.179323, "kind": "rent", "firstSeen": "2026-07-23", "daysOnMarket": 0}, {"addr": "6226 Hardy Dr, McLean, VA 22101", "price": "$5,600/mo", "priceNum": 5600, "beds": 5, "baths": 2.5, "sqft": 2932, "homeType": "House", "source": "Redfin", "url": "https://www.redfin.com/VA/McLean/6226-Hardy-Dr-22101/home/9407507", "thumb": "https://ssl.cdn-redfin.com/photo/rent/befedc46-6b5c-471a-aa80-098da26a230b/islphoto/genIsl.0_1.webp", "zoneLabel": "\u2705 in McLean (confirmed via FCPS Boundary Locator)", "zone": "McLean HS", "highlights": "Pets welcome \u2022 Parking \u2022 A/C", "starred": false, "lat": 38.9327541, "lng": -77.1541274, "kind": "rent", "firstSeen": "2026-07-23", "daysOnMarket": 1}, {"addr": "6301 Evermay Dr, McLean, VA 22101", "price": "$4,900/mo", "priceNum": 4900, "beds": 4, "baths": 3, "sqft": 2930, "homeType": "House", "source": "Redfin", "url": "https://www.redfin.com/VA/McLean/6301-Evermay-Dr-22101/home/9408034", "thumb": "https://ssl.cdn-redfin.com/photo/rent/531c54cb-b5e6-4d67-b661-f098f3916c41/islphoto/genIsl.0_1.webp", "zoneLabel": "\u2705 in McLean (confirmed via FCPS Boundary Locator)", "zone": "McLean HS", "highlights": "", "starred": false, "lat": 38.939858, "lng": -77.1532188, "kind": "rent", "firstSeen": "2026-07-23", "daysOnMarket": null}, {"addr": "6522 Truman Ln, Falls Church, VA 22043", "price": "$5,790/mo", "priceNum": 5790, "beds": 5, "baths": 3.5, "sqft": 2456, "homeType": "House", "source": "Redfin", "url": "https://www.redfin.com/VA/Falls-Church/6522-Truman-Ln-22043/home/9474738", "thumb": "https://ssl.cdn-redfin.com/photo/rent/d8fdd246-a82b-404a-ab64-29afb69f2edf/islphoto/genIsl.0_1.webp", "zoneLabel": "\u2705 in McLean (confirmed via FCPS Boundary Locator)", "zone": "McLean HS", "highlights": "Dogs welcome \u2022 Laundry in unit \u2022 Cul-de-sac lot", "starred": false, "lat": 38.8886, "lng": -77.1919, "kind": "rent", "firstSeen": "2026-07-23", "daysOnMarket": null}, {"addr": "2018 Tysons Ridgeline Rd, Falls Church, VA 22043", "price": "$4,900/mo", "priceNum": 4900, "beds": 3, "baths": 3.5, "sqft": 1624, "homeType": "Townhouse", "source": "Redfin", "url": "https://www.redfin.com/VA/Falls-Church/2018-Tysons-Ridgeline-Rd-22043/home/186187740", "thumb": "https://ssl.cdn-redfin.com/photo/rent/024bc3a1-228c-4a9e-820f-f91aa70fbcc9/islphoto/genIsl.0_3.webp", "zoneLabel": "\ud83d\udccd Marshall HS (confirmed via FCPS Boundary Locator \u2014 different HS)", "zone": "Marshall HS", "highlights": "Pets welcome \u2022 Parking \u2022 Built 2024", "starred": false, "lat": 38.8914, "lng": -77.1881, "kind": "rent", "firstSeen": "2026-07-23", "daysOnMarket": null}, {"addr": "2064 Tysons Ridgeline Rd, Falls Church, VA 22043", "price": "$5,050/mo", "priceNum": 5050, "beds": 3, "baths": 3.5, "sqft": 1636, "homeType": "Townhouse", "source": "Redfin", "url": "https://www.redfin.com/VA/Falls-Church/2064-Tysons-Ridgeline-Rd-22043/home/186187780", "thumb": "https://ssl.cdn-redfin.com/photo/rent/d67eff66-74c3-4fdf-899c-e4dcdb5bd359/islphoto/genIsl.0_1.webp", "zoneLabel": "\ud83d\udccd Marshall HS (confirmed via FCPS Boundary Locator \u2014 different HS)", "zone": "Marshall HS", "highlights": "Pets welcome \u2022 Laundry in unit \u2022 Attached 1-car garage", "starred": false, "lat": 38.8889, "lng": -77.191, "kind": "rent", "firstSeen": "2026-07-23", "daysOnMarket": null}, {"addr": "2103 Tysons Ridgeline Rd, Falls Church, VA 22043", "price": "$4,995/mo", "priceNum": 4995, "beds": 3, "baths": 3.5, "sqft": 1604, "homeType": "Townhouse", "source": "Redfin", "url": "https://www.redfin.com/VA/Falls-Church/2103-Tysons-Ridgeline-Rd-22043/home/186187808", "thumb": "https://ssl.cdn-redfin.com/photo/rent/8301fb90-c41e-45ee-adac-35ac72fb7de0/islphoto/genIsl.0_1.webp", "zoneLabel": "\ud83d\udccd Marshall HS (confirmed via FCPS Boundary Locator \u2014 different HS)", "zone": "Marshall HS", "highlights": "Available 08/01 \u2022 Pets welcome \u2022 Laundry in unit", "starred": false, "lat": 38.8899, "lng": -77.1926, "kind": "rent", "firstSeen": "2026-07-23", "daysOnMarket": 0}, {"addr": "8020 Agin Ct, McLean, VA 22102", "price": "$5,600/mo", "priceNum": 5600, "beds": 5, "baths": 3, "sqft": 1560, "homeType": "House", "source": "Redfin", "url": "https://www.redfin.com/VA/McLean/8020-Agin-Ct-22102/home/9376239", "thumb": "https://ssl.cdn-redfin.com/photo/rent/4c94272b-834d-47e4-9c91-0e86e01f8839/islphoto/genIsl.0_1.webp", "zoneLabel": "\ud83d\udccd Langley HS (confirmed via FCPS Boundary Locator \u2014 different HS)", "zone": "Langley HS", "highlights": "Available 09/01 \u2022 Pets welcome \u2022 Quiet cul-de-sac", "starred": false, "lat": 38.9397043, "lng": -77.2227118, "kind": "rent", "firstSeen": "2026-07-23", "daysOnMarket": null}, {"addr": "7489 Carriage Hills Dr, McLean, VA 22102", "price": "$5,200/mo", "priceNum": 5200, "beds": 3, "baths": 3.5, "sqft": 2400, "homeType": "Townhouse", "source": "Redfin", "url": "https://www.redfin.com/VA/McLean/7489-Carriage-Hills-Dr-22102/home/9833507", "thumb": "https://ssl.cdn-redfin.com/photo/rent/34fca80a-6f5e-44f7-9228-084070ebcbba/islphoto/genIsl.0_1.webp", "zoneLabel": "\u2705 in McLean (confirmed via FCPS Boundary Locator)", "zone": "McLean HS", "highlights": "Laundry in unit \u2022 2-car garage", "starred": false, "lat": 38.9251079, "lng": -77.2004515, "kind": "rent", "firstSeen": "2026-07-23", "daysOnMarket": null}, {"addr": "1608 Westmoreland St, McLean, VA 22101", "price": "$5,200/mo", "priceNum": 5200, "beds": 4, "baths": 3, "sqft": null, "homeType": "House", "source": "HotPads", "url": "https://hotpads.com/1608-westmoreland-st-mc-lean-va-22101-1jmp2r8/pad", "thumb": "https://photos.zillowstatic.com/fp/494b13bc6afb6294dbb150b08c8bcc6e-cc_ft_960.webp", "zoneLabel": "\u2705 in McLean (confirmed via FCPS Boundary Locator)", "zone": "McLean HS", "highlights": "Accepts applications", "starred": false, "lat": 38.9254406, "lng": -77.1824453, "kind": "rent", "firstSeen": "2026-07-23", "daysOnMarket": 3}, {"addr": "1403 McLean Mews Ct, McLean, VA 22101", "price": "$1,180,000", "priceNum": 1180000, "beds": 3, "baths": 4, "sqft": 2332, "homeType": "Townhouse", "source": "Redfin", "url": "https://www.redfin.com/VA/McLean/1403-McLean-Mews-Ct-22101/home/9394646", "thumb": "https://ssl.cdn-redfin.com/photo/235/islphoto/170/genIslnoResize.VAFX2331170_1.webp", "zoneLabel": "\u2705 in McLean (confirmed via FCPS Boundary Locator)", "zone": "McLean HS", "highlights": "Brick walkway \u2022 Marble foyer \u2022 Gas fireplace \u2022 Soaring 10-ft ceilings", "starred": false, "lat": 38.9329747, "lng": -77.1741688, "kind": "sale", "firstSeen": "2026-07-28", "daysOnMarket": null}, {"addr": "1956 Hopewood Dr, Falls Church, VA 22043", "price": "$949,000", "priceNum": 949000, "beds": 3, "baths": 3.5, "sqft": 2582, "homeType": "Townhouse", "source": "Redfin", "url": "https://www.redfin.com/VA/Falls-Church/1956-Hopewood-Dr-22043/home/9475861", "thumb": "https://ssl.cdn-redfin.com/photo/235/islphoto/804/genIslnoResize.VAFX2333804_0.webp", "zoneLabel": "\u2705 in McLean (confirmed via FCPS Boundary Locator)", "zone": "McLean HS", "highlights": "Cozy gas fireplace \u2022 Backs to protected parkland \u2022 New roof", "starred": false, "lat": 38.8942, "lng": -77.1868, "kind": "sale", "firstSeen": "2026-07-28", "daysOnMarket": null}, {"addr": "7357 Eldorado Ct, McLean, VA 22102", "price": "$945,000", "priceNum": 945000, "beds": 3, "baths": 3.5, "sqft": 2330, "homeType": "Townhouse", "source": "Redfin", "url": "https://www.redfin.com/VA/McLean/7357-Eldorado-Ct-22102/home/9399156", "thumb": "https://ssl.cdn-redfin.com/photo/235/islphoto/684/genIslnoResize.VAFX2330684_2.webp", "zoneLabel": "\u2705 in McLean (confirmed via FCPS Boundary Locator)", "zone": "McLean HS", "highlights": "Hardwood flooring \u2022 Welcoming foyer \u2022 Functional layout", "starred": false, "lat": 38.9296197, "lng": -77.2004383, "kind": "sale", "firstSeen": "2026-07-28", "daysOnMarket": null}, {"addr": "7109 Davis Ct, McLean, VA 22101", "price": "$6,000/mo", "priceNum": 6000, "beds": 4, "baths": 3.5, "sqft": 3360, "homeType": "House", "source": "Redfin", "url": "https://www.redfin.com/VA/McLean/7109-Davis-Ct-22101/home/9399327", "thumb": "https://ssl.cdn-redfin.com/photo/rent/f7b3f36f-5bd8-4f28-84e1-a0ce71e4b0aa/islphoto/genIsl.0_1.webp", "zoneLabel": "\u2705 in McLean (confirmed via FCPS Boundary Locator)", "zone": "McLean HS", "highlights": "Pets welcome \u2022 Laundry in unit \u2022 Parking \u2022 Quiet cul-de-sac", "starred": false, "lat": 38.9244557, "lng": -77.191702, "kind": "rent", "firstSeen": "2026-07-28", "daysOnMarket": 1}, {"addr": "2143 Tysons Ridgeline Rd, Falls Church, VA 22043", "price": "$5,000/mo", "priceNum": 5000, "beds": 3, "baths": 3.5, "sqft": 1584, "homeType": "Townhouse", "source": "Redfin", "url": "https://www.redfin.com/VA/Falls-Church/2143-Tysons-Ridgeline-Rd-22043/home/186187798", "thumb": "https://ssl.cdn-redfin.com/photo/rent/dd1dc1db-f47b-4233-91f7-5e1d40a4c8e4/islphoto/genIsl.0_1.webp", "zoneLabel": "\ud83d\udccd Marshall HS (confirmed via FCPS Boundary Locator \u2014 different HS)", "zone": "Marshall HS", "highlights": "Available 08/01 \u2022 Pets welcome \u2022 Laundry in unit", "starred": false, "lat": 38.8908, "lng": -77.1893, "kind": "rent", "firstSeen": "2026-07-28", "daysOnMarket": 0}, {"addr": "1917 Great Falls St, McLean, VA 22101", "price": "$1,179,000", "priceNum": 1179000, "beds": 4, "baths": 3, "sqft": 1494, "homeType": "House", "source": "Redfin", "url": "https://www.redfin.com/VA/McLean/1917-Great-Falls-St-22101/home/9476207", "thumb": "https://ssl.cdn-redfin.com/photo/235/islphoto/490/genIslnoResize.VAFX2327490_2.webp", "zoneLabel": "\u2705 in McLean (confirmed via FCPS Boundary Locator)", "zone": "McLean HS", "highlights": "Hardwood floor \u2022 Car port \u2022 Granite countertop", "starred": false, "lat": 38.9128855, "lng": -77.1848356, "kind": "sale", "firstSeen": "2026-07-30", "daysOnMarket": null}, {"addr": "2123 Preston Square Ct, Falls Church, VA 22043", "price": "$769,000", "priceNum": 769000, "beds": 3, "baths": 3, "sqft": 1159, "homeType": "Townhouse", "source": "Redfin", "url": "https://www.redfin.com/VA/Falls-Church/2123-Preston-Square-Ct-22043/home/9477244", "thumb": "https://ssl.cdn-redfin.com/photo/235/islphoto/030/genIslnoResize.VAFX2332030_3.webp", "zoneLabel": "\u2705 in McLean (confirmed via FCPS Boundary Locator)", "zone": "McLean HS", "highlights": "Brick townhome \u2022 Unbeatable location \u2022 $113 HOA", "starred": false, "lat": 38.8907, "lng": -77.1857, "kind": "sale", "firstSeen": "2026-07-30", "daysOnMarket": 0}, {"addr": "1947 Fay Pl, Falls Church, VA 22043", "price": "$5,200/mo", "priceNum": 5200, "beds": 4, "baths": 5, "sqft": 3543, "homeType": "House", "source": "Redfin", "url": "https://www.redfin.com/VA/Falls-Church/1947-Fay-Pl-22043/home/9471185", "thumb": "https://ssl.cdn-redfin.com/photo/rent/716151b5-6b94-461c-9a8a-1762d9b07743/islphoto/genIsl.0_1.webp", "zoneLabel": "\ud83d\udccd Marshall HS (confirmed via FCPS Boundary Locator \u2014 different HS)", "zone": "Marshall HS", "highlights": "Cul-de-sac \u2022 Rebuilt 2010", "starred": false, "lat": 38.8933, "lng": -77.1928, "kind": "rent", "firstSeen": "2026-07-31", "daysOnMarket": 1}, {"addr": "2038 Tysons Ridgeline Rd, Falls Church, VA 22043", "price": "$5,495/mo", "priceNum": 5495, "beds": 5, "baths": 4.5, "sqft": 2034, "homeType": "Townhouse", "source": "Redfin", "url": "https://www.redfin.com/VA/Falls-Church/2038-Tysons-Ridgeline-Rd-22043/home/186187750", "thumb": "https://ssl.cdn-redfin.com/photo/rent/50f86c59-0a62-49e1-aa27-cea5a34609b1/islphoto/genIsl.0_1.webp", "zoneLabel": "\ud83d\udccd Marshall HS (confirmed via FCPS Boundary Locator \u2014 different HS)", "zone": "Marshall HS", "highlights": "", "starred": false, "lat": 38.8893, "lng": -77.1889, "kind": "rent", "firstSeen": "2026-08-02", "daysOnMarket": null}, {"addr": "7002 Tyndale St, McLean, VA 22101", "price": "$5,200/mo", "priceNum": 5200, "beds": 5, "baths": 3.5, "sqft": 3200, "homeType": "House", "source": "HotPads", "url": "https://hotpads.com/7002-tyndale-st-mc-lean-va-22101-1jmp7up/pad", "thumb": "https://photos.zillowstatic.com/fp/78bd221e28865a786c709fd2695e450d-cc_ft_960.webp", "zoneLabel": "\u2705 in McLean (confirmed via FCPS Boundary Locator)", "zone": "McLean HS", "highlights": "", "starred": false, "lat": 38.9197403, "lng": -77.1864632, "kind": "rent", "firstSeen": "2026-08-02", "daysOnMarket": null}, {"addr": "1122 Kensington Rd, McLean, VA 22101", "price": "$1,095,000", "priceNum": 1095000, "beds": 4, "baths": 3.5, "sqft": 2458, "homeType": "Townhouse", "source": "Redfin", "url": "https://www.redfin.com/VA/McLean/1122-Kensington-Rd-22101/home/9278652", "thumb": "https://ssl.cdn-redfin.com/photo/235/islphoto/112/genIslnoResize.VAFX2311112_3.webp", "zoneLabel": "\ud83d\udccd Langley HS (confirmed via FCPS Boundary Locator \u2014 different HS)", "zone": "Langley HS", "highlights": "Custom shades \u2022 All brick townhome \u2022 Built-ins", "starred": false, "lat": 38.9448619, "lng": -77.1763216, "kind": "sale", "firstSeen": "2026-08-08", "daysOnMarket": null}, {"addr": "7113 Norwalk St, Falls Church, VA 22043", "price": "$895,000", "priceNum": 895000, "beds": 4, "baths": 2.5, "sqft": 1101, "homeType": "House", "source": "Redfin", "url": "https://www.redfin.com/VA/Falls-Church/7113-Norwalk-St-22043/home/9473431", "thumb": "https://ssl.cdn-redfin.com/photo/235/islphoto/270/genIslnoResize.VAFX2333270_2.webp", "zoneLabel": "\u2705 in McLean (confirmed via FCPS Boundary Locator)", "zone": "McLean HS", "highlights": "Large lot \u2022 Easy access to 66 \u2022 Easy access to 495", "starred": false, "lat": 38.8929, "lng": -77.193, "kind": "sale", "firstSeen": "2026-08-08", "daysOnMarket": null}, {"addr": "6806 Thompson Crest Ct, McLean, VA 22101", "price": "$5,400/mo", "priceNum": 5400, "beds": 3, "baths": 4.5, "sqft": 3096, "homeType": "House", "source": "Redfin", "url": "https://www.redfin.com/VA/McLean/6806-Thompson-Crest-Ct-22101/home/9395614", "thumb": "https://ssl.cdn-redfin.com/photo/rent/8502cec2-1492-43e9-a3dd-19f4a4ee43b3/islphoto/genIsl.0_1.webp", "zoneLabel": "\u2705 in McLean (confirmed via FCPS Boundary Locator)", "zone": "McLean HS", "highlights": "Pets welcome \u2022 Parking \u2022 A/C", "starred": false, "lat": 38.9391788, "lng": -77.179964, "kind": "rent", "firstSeen": "2026-08-08", "daysOnMarket": null}, {"addr": "1040 Warbler Pl, McLean, VA 22101", "price": "$5,400/mo", "priceNum": 5400, "beds": 4, "baths": 3, "sqft": 2700, "homeType": "House", "source": "HotPads", "url": "https://hotpads.com/1040-warbler-pl-mc-lean-va-22101-257w370/pad", "thumb": "https://photos.zillowstatic.com/fp/75c1dd5548f749f5b2c266c247f30903-cc_ft_960.webp", "zoneLabel": "\ud83d\udccd Langley HS (confirmed via FCPS Boundary Locator \u2014 different HS)", "zone": "Langley HS", "highlights": "Parking", "starred": false, "lat": 38.9480425, "lng": -77.1920443, "kind": "rent", "firstSeen": "2026-08-09", "daysOnMarket": 0}];
-const EXCLUDED = [{"addr": "1706 Olney Rd, Falls Church, VA 22043", "price": "$1,200,000", "reason": "Beds/baths not disclosed on listing \u2014 cannot confirm 3+ bed minimum", "url": "https://www.redfin.com/VA/Falls-Church/1706-Olney-Rd-22043/home/9397037"}];
-const MCLEAN_GEOJSON = {"type": "Feature", "properties": {"SCHOOL_NAME": "McLean"}, "geometry": {"type": "MultiPolygon", "coordinates": [[[[-77.141, 38.942], [-77.13, 38.94], [-77.127, 38.94], [-77.124, 38.939], [-77.123, 38.937], [-77.121, 38.936], [-77.12, 38.934], [-77.127, 38.929], [-77.131, 38.925], [-77.134, 38.923], [-77.14, 38.919], [-77.145, 38.915], [-77.148, 38.912], [-77.155, 38.907], [-77.16, 38.903], [-77.164, 38.9], [-77.168, 38.897], [-77.172, 38.893], [-77.178, 38.894], [-77.182, 38.895], [-77.186, 38.896], [-77.191, 38.898], [-77.195, 38.898], [-77.197, 38.899], [-77.2, 38.903], [-77.198, 38.907], [-77.193, 38.911], [-77.192, 38.917], [-77.205, 38.92], [-77.209, 38.925], [-77.199, 38.932], [-77.192, 38.937], [-77.183, 38.938], [-77.174, 38.941], [-77.161, 38.942], [-77.147, 38.944]]], [[[-77.194, 38.887], [-77.194, 38.887], [-77.194, 38.885], [-77.193, 38.884], [-77.192, 38.883], [-77.192, 38.881], [-77.191, 38.88], [-77.19, 38.878], [-77.196, 38.877], [-77.201, 38.876], [-77.208, 38.875], [-77.209, 38.876], [-77.209, 38.878], [-77.211, 38.878], [-77.207, 38.879], [-77.206, 38.879], [-77.206, 38.879], [-77.205, 38.88], [-77.204, 38.882], [-77.203, 38.882], [-77.201, 38.882], [-77.202, 38.884], [-77.204, 38.885], [-77.204, 38.886], [-77.203, 38.886], [-77.202, 38.887], [-77.201, 38.887], [-77.2, 38.888], [-77.199, 38.888], [-77.198, 38.889], [-77.197, 38.891], [-77.193, 38.892], [-77.191, 38.892], [-77.191, 38.892], [-77.192, 38.891], [-77.192, 38.89], [-77.193, 38.889], [-77.193, 38.888]]], [[[-77.233, 38.934], [-77.229, 38.934], [-77.223, 38.934], [-77.218, 38.934], [-77.215, 38.933], [-77.213, 38.932], [-77.214, 38.931], [-77.214, 38.93], [-77.214, 38.926], [-77.216, 38.922], [-77.22, 38.92], [-77.222, 38.92], [-77.222, 38.921], [-77.222, 38.922], [-77.221, 38.922], [-77.22, 38.922], [-77.219, 38.923], [-77.218, 38.924], [-77.22, 38.926], [-77.223, 38.928], [-77.225, 38.929], [-77.227, 38.929], [-77.228, 38.929], [-77.23, 38.927], [-77.232, 38.926], [-77.235, 38.925], [-77.236, 38.924], [-77.238, 38.926], [-77.24, 38.927], [-77.241, 38.929], [-77.243, 38.93], [-77.245, 38.933], [-77.245, 38.934], [-77.241, 38.935], [-77.239, 38.934], [-77.237, 38.934], [-77.234, 38.934]]]]}};
+function directionsUrl(addr) {
+  return `https://www.google.com/maps/dir/?api=1&destination=${encodeURIComponent(addr)}`;
+}
 
 function getSaved() {
   try { return JSON.parse(localStorage.getItem(STORAGE_KEY) || '{}'); } catch(e) { return {}; }
 }
 function setSaved(obj) {
   try { localStorage.setItem(STORAGE_KEY, JSON.stringify(obj)); } catch(e) {}
-}
-function directionsUrl(addr) {
-  return 'https://www.google.com/maps/dir/?api=1&destination=' + encodeURIComponent(addr);
 }
 
 function toggleLike(btn, addr, price, url) {
@@ -210,33 +316,37 @@ function toggleLike(btn, addr, price, url) {
 }
 
 function cardHtml(item) {
-  const saved = getSaved();
-  const isLiked = !!saved[item.addr];
-  const zoneClass = item.zone === 'McLean HS' ? 'in-zone' : (item.zone === 'Unknown' ? 'unknown-zone' : 'out-zone');
+  const isLiked = !!getSaved()[item.addr];
+  const zoneClass = item.zoneLabel.startsWith('✅') ? 'in' : (item.zoneLabel.startsWith('📍') ? 'out' : 'unk');
   const starClass = item.starred ? ' starred-card' : '';
-  const starEmoji = item.starred ? ' ⭐' : '';
-  const fsboBadge = item.source === 'Craigslist' ? '<span class="badge">FSBO</span>' : '';
-  const thumb = item.thumb && item.thumb.length ? item.thumb : PLACEHOLDER_THUMB;
+  const starMark = item.starred ? ' ⭐' : '';
+  const fsboBadge = item.source === 'craigslist' ? '<span class="fsbo-badge">FSBO</span>' : '';
+  const highlightsLine = item.highlights ? `<div class="card-highlights">${item.highlights}</div>` : '';
+  const photosBtn = item.url ? `<a href="${item.url}" target="_blank">📷 Photos</a>` : '';
+  const viewBtn = item.url ? `<a href="${item.url}" target="_blank">View listing →</a>` : '';
   return `
-    <div class="card${starClass}">
-      <img class="thumb" src="${thumb}" onerror="this.onerror=null;this.src='${PLACEHOLDER_THUMB}';" alt="thumbnail">
-      <div class="card-body">
-        <div class="card-top">
-          <div class="addr">${item.addr}${starEmoji}<span class="pill ${zoneClass}">${item.zone === 'McLean HS' ? '✅' : (item.zone === 'Unknown' ? '❓' : '📍')} ${item.zone}</span></div>
-          <button class="like-btn" data-addr="${item.addr}" onclick="toggleLike(this,'${item.addr.replace(/'/g,"\\'")}','${item.price}','${item.url}')">${isLiked ? '❤' : '♡'}</button>
-        </div>
-        <div class="price">${item.price} ${fsboBadge}</div>
-        <div class="meta">${item.beds ?? '—'} bd / ${item.baths ?? '—'} ba${item.sqft ? ' · ' + item.sqft.toLocaleString() + ' sqft' : ''} · ${item.homeType || ''} · ${item.source}</div>
-        <div class="schools">${item.zoneLabel}</div>
-        ${item.highlights ? `<div class="highlights">${item.highlights}</div>` : ''}
-        <div class="card-links">
-          ${item.url ? `<a href="${item.url}" target="_blank">View listing →</a>` : ''}
-          ${item.url ? `<a href="${item.url}" target="_blank">📷 Photos</a>` : ''}
-          <a href="${directionsUrl(item.addr)}" target="_blank">🧭 Directions</a>
-        </div>
+  <div class="card${starClass}" data-addr="${item.addr}">
+    <img class="thumb" src="${item.thumb || PLACEHOLDER_THUMB}" onerror="this.onerror=null;this.src='${PLACEHOLDER_THUMB}';" alt="">
+    <div class="card-body">
+      <div class="card-top-row">
+        <div class="card-addr">${item.addr}${starMark}<span class="zone-pill ${zoneClass}">${item.zoneLabel.split(' (')[0]}</span></div>
+        <button class="like-btn" data-addr="${item.addr}" onclick="toggleLike(this,'${item.addr.replace(/'/g,"\\'")}','${item.price}','${item.url}')">${isLiked ? '❤' : '♡'}</button>
       </div>
-    </div>`;
+      <div class="card-price">${item.price}</div>
+      <div class="card-stats">${item.beds} bd · ${item.baths} ba · ${item.sqft ? item.sqft + ' sq ft' : ''} · ${item.homeType}</div>
+      <div class="card-schools">Schools: ${item.zoneLabel}</div>
+      ${highlightsLine}
+      <div class="card-source">Source: ${item.source}${fsboBadge}</div>
+      <div class="card-links">
+        ${viewBtn}
+        ${photosBtn}
+        <a href="${directionsUrl(item.addr)}" target="_blank">🧭 Directions</a>
+      </div>
+    </div>
+  </div>`;
 }
+
+let currentSort = 'newest';
 
 function sortItems(items) {
   const copy = items.slice();
@@ -256,90 +366,103 @@ function sortItems(items) {
   return copy;
 }
 
-let currentSort = 'newest';
-
-function setSort(mode) {
-  currentSort = mode;
-  document.getElementById('sort-newest').classList.toggle('active', mode === 'newest');
-  document.getElementById('sort-price').classList.toggle('active', mode === 'price');
-  renderAll();
-}
-
-function renderGroup(items, title, subheaderClass) {
-  if (!items.length) return '';
-  let html = `<div class="section-header ${subheaderClass||''}">${title} (${items.length})</div>`;
-  const beds4 = sortItems(items.filter(i => (i.beds||0) >= 4));
-  const beds3 = sortItems(items.filter(i => (i.beds||0) === 3));
-  const bedsOther = sortItems(items.filter(i => !i.beds || (i.beds < 3)));
-  if (beds4.length) {
-    html += `<div class="subsection-header">4+ Beds</div>` + beds4.map(cardHtml).join('');
+function renderGroup(items, beds4plusLabel, beds3Label) {
+  const g4 = items.filter(i => { const b = parseFloat(i.beds); return !isNaN(b) && b >= 4; });
+  const g3 = items.filter(i => { const b = parseFloat(i.beds); return isNaN(b) || b < 4; });
+  let html = '';
+  if (g4.length) {
+    html += `<div class="subsection-header">${beds4plusLabel}</div>`;
+    html += sortItems(g4).map(cardHtml).join('');
   }
-  if (beds3.length) {
-    html += `<div class="subsection-header">3 Beds</div>` + beds3.map(cardHtml).join('');
-  }
-  if (bedsOther.length) {
-    html += bedsOther.map(cardHtml).join('');
+  if (g3.length) {
+    html += `<div class="subsection-header">${beds3Label}</div>`;
+    html += sortItems(g3).map(cardHtml).join('');
   }
   return html;
 }
 
 function renderAll() {
-  const rent = LISTINGS.filter(i => i.kind === 'rent');
-  const sale = LISTINGS.filter(i => i.kind === 'sale');
-
-  function renderColumn(items) {
-    const inZone = items.filter(i => i.zone === 'McLean HS');
-    const outZone = items.filter(i => i.zone !== 'McLean HS' && i.zone !== 'Unknown');
-    const unknown = items.filter(i => i.zone === 'Unknown');
-    let html = renderGroup(inZone, '✅ In McLean HS Zone', '');
-    html += renderGroup(outZone, '📍 Outside McLean HS Zone', 'outside');
-    html += renderGroup(unknown, '❓ Unknown', 'outside');
-    return html;
-  }
-
-  document.getElementById('rent-col').innerHTML = renderColumn(rent);
-  document.getElementById('sale-col').innerHTML = renderColumn(sale);
+  ['rent','sale'].forEach(kind => {
+    const col = document.getElementById(kind === 'rent' ? 'rent-col' : 'sale-col');
+    const items = LISTINGS.filter(i => i.kind === kind);
+    const inZone = items.filter(i => i.zoneLabel.startsWith('✅'));
+    const outZone = items.filter(i => i.zoneLabel.startsWith('📍'));
+    const unk = items.filter(i => i.zoneLabel.startsWith('❓'));
+    let html = '';
+    if (inZone.length) {
+      html += `<div class="section-header">In McLean HS Zone (${inZone.length})</div>`;
+      html += renderGroup(inZone, '4+ Beds', '3 Beds');
+    }
+    if (outZone.length) {
+      html += `<div class="section-header muted">Outside McLean HS Zone (${outZone.length})</div>`;
+      html += renderGroup(outZone, '4+ Beds', '3 Beds');
+    }
+    if (unk.length) {
+      html += `<div class="section-header muted">Unknown Zone (${unk.length})</div>`;
+      html += renderGroup(unk, '4+ Beds', '3 Beds');
+    }
+    if (!items.length) html = '<p style="color:#888;font-size:13px">No matching listings this scan.</p>';
+    col.innerHTML = html;
+  });
   renderSavedPanel();
+  renderMarkers();
 }
 
+function setSort(mode) {
+  currentSort = mode;
+  document.getElementById('sort-newest').classList.toggle('active', mode==='newest');
+  document.getElementById('sort-price').classList.toggle('active', mode==='price');
+  renderAll();
+}
+
+// ---- Saved panel ----
 function renderSavedPanel() {
-  const saved = getSaved();
+  let saved = getSaved();
   let dirty = false;
   Object.keys(saved).forEach(k => {
     if (!saved[k] || typeof saved[k] !== 'object') { delete saved[k]; dirty = true; }
   });
   if (dirty) setSaved(saved);
 
-  const vals = Object.values(saved);
-  document.getElementById('saved-count').textContent = vals.length;
-  document.getElementById('saved-grid').innerHTML = vals.map(s => {
-    const addr = s.addr || s.address || '';
-    const url = s.url || s.link || '';
-    const thumb = PLACEHOLDER_THUMB;
-    return `<div class="saved-card">
-      <div style="font-weight:600">${addr || '(unknown address)'}</div>
-      <div>${s.price || ''}</div>
-      ${url ? `<a href="${url}" target="_blank">View listing →</a><br>` : ''}
-      <a href="${directionsUrl(addr)}" target="_blank">🧭 Directions</a>
-    </div>`;
-  }).join('') || '<div style="color:#999;font-size:12.5px">No liked properties yet — heart a listing to save it here.</div>';
+  const entries = Object.entries(saved);
+  document.getElementById('saved-count-header').textContent = entries.length;
+  document.getElementById('likedCount').textContent = entries.length;
 
-  document.getElementById('sold-count').textContent = SOLD_PICKS.length;
-  document.getElementById('sold-grid').innerHTML = SOLD_PICKS.map(s => {
-    const addr = s.addr || s.address || '';
+  const grid = document.getElementById('saved-grid');
+  grid.innerHTML = entries.map(([k,s]) => {
+    const addr = s.addr || s.address || k;
     const url = s.url || s.link || '';
-    return `<div class="saved-card sold-card">
-      <div style="font-weight:600">${addr}</div>
-      <div style="color:#888">${s.note || ''}</div>
-      ${url ? `<a href="${url}" target="_blank">View listing →</a><br>` : ''}
-      <a href="${directionsUrl(addr)}" target="_blank">🧭 Directions</a>
+    const linkOrText = url ? `<a href="${url}" target="_blank">${addr}</a>` : addr;
+    return `<div class="saved-card">
+      <div>${linkOrText}</div>
+      <div style="color:#666">${s.price || ''}</div>
+      <a class="directions-link" href="${directionsUrl(addr)}" target="_blank">🧭 Directions</a>
     </div>`;
   }).join('');
+
+  const soldGrid = document.getElementById('sold-grid');
+  document.getElementById('sold-count').textContent = SOLD_PICKS.length;
+  soldGrid.innerHTML = SOLD_PICKS.map(s => {
+    const addr = s.addr || s.address;
+    const url = s.url || s.link || '';
+    const linkOrText = url ? `<a href="${url}" target="_blank">${addr}</a>` : addr;
+    return `<div class="saved-card sold-card">
+      <div>${linkOrText}</div>
+      <div style="color:#666">${s.note || ''}</div>
+      <a class="directions-link" href="${directionsUrl(addr)}" target="_blank">🧭 Directions</a>
+    </div>`;
+  }).join('');
+
+  // update heart icons on cards
+  document.querySelectorAll('.like-btn').forEach(btn => {
+    const addr = btn.getAttribute('data-addr');
+    btn.textContent = saved[addr] ? '❤' : '♡';
+  });
 }
 
 function toggleSavedPanel() {
-  const panel = document.getElementById('saved-panel');
-  panel.style.display = panel.style.display === 'none' ? 'block' : 'none';
+  const p = document.getElementById('savedPanel');
+  p.style.display = (p.style.display === 'none') ? 'block' : 'none';
 }
 
 function openRouteInGoogleMaps() {
@@ -375,63 +498,59 @@ function exportLikes() {
 function copyLiked() {
   const saved = getSaved();
   const lines = Object.values(saved).map(s => `${s.addr} — ${s.price || ''} — ${s.url || ''}`);
-  const text = lines.join('\n') || 'No liked properties yet.';
-  navigator.clipboard.writeText(text).then(() => alert('Copied ' + lines.length + ' liked listing(s) to clipboard.'));
+  const text = lines.join('\n') || '(no liked listings yet)';
+  navigator.clipboard?.writeText(text).then(() => alert('Copied ' + lines.length + ' liked listing(s) to clipboard.'));
 }
 
-// Excluded table
+// ---- Excluded table ----
 (function renderExcluded() {
-  const tbl = document.getElementById('excluded-table');
-  if (!EXCLUDED.length) {
-    tbl.innerHTML += '<tr><td colspan="3" style="color:#999">None this run.</td></tr>';
-    return;
-  }
+  const tbl = document.getElementById('excludedTable');
   EXCLUDED.forEach(e => {
-    tbl.innerHTML += `<tr><td>${e.url ? `<a href="${e.url}" target="_blank">${e.addr}</a>` : e.addr}</td><td>${e.price}</td><td>${e.reason}</td></tr>`;
+    const tr = document.createElement('tr');
+    tr.innerHTML = `<td>${e.addr}</td><td>${e.price||'—'}</td><td>${e.kind}</td><td>${e.reason}</td>`;
+    tbl.appendChild(tr);
   });
 })();
 
-// --- Map ---
+// ---- Map ----
 const map = L.map('map').setView([38.9150, -77.1800], 12);
 L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
   attribution: '&copy; OpenStreetMap contributors'
 }).addTo(map);
+L.geoJSON(MCLEAN_GEOJSON, {
+  style: { color:'#c8982a', weight:2.5, fillColor:'#c8982a', fillOpacity:0.07, dashArray:'6 4' }
+}).addTo(map);
 
-if (MCLEAN_GEOJSON) {
-  L.geoJSON(MCLEAN_GEOJSON, {
-    style: { color: '#c8982a', weight: 2.5, fillColor: '#c8982a', fillOpacity: 0.07, dashArray: '6 4' }
-  }).addTo(map);
+let markerLayer = L.layerGroup().addTo(map);
+function renderMarkers() {
+  markerLayer.clearLayers();
+  let count = 0;
+  LISTINGS.forEach(item => {
+    if (typeof item.lat !== 'number' || typeof item.lng !== 'number') return;
+    const color = item.starred ? '#c8982a' : (item.kind === 'rent' ? '#1565c0' : '#2e7d32');
+    const radius = item.starred ? 6 : 5;
+    const marker = L.circleMarker([item.lat, item.lng], {
+      radius, color, fillColor: color, fillOpacity: 0.85, weight: 1
+    });
+    const popupHtml = `
+      <div style="width:180px">
+        <img src="${item.thumb || PLACEHOLDER_THUMB}" onerror="this.onerror=null;this.src='${PLACEHOLDER_THUMB}';" style="width:100%;height:100px;object-fit:cover;border-radius:4px;">
+        <div style="font-weight:700;font-size:12px;margin-top:4px">${item.addr}</div>
+        <div style="font-size:12px">${item.price}</div>
+        ${item.url ? `<a href="${item.url}" target="_blank" style="font-size:11px">View listing →</a><br>` : ''}
+        <a href="${directionsUrl(item.addr)}" target="_blank" style="font-size:11px">🧭 Directions</a>
+      </div>`;
+    marker.bindPopup(popupHtml);
+    marker.on('mouseover', function(){ this.openPopup(); });
+    marker.on('mouseout', function(){ this.closePopup(); });
+    marker.addTo(markerLayer);
+    count++;
+  });
+  console.log('Map markers rendered:', count, 'of', LISTINGS.length, 'listings');
 }
 
-let markerCount = 0;
-LISTINGS.forEach(item => {
-  if (typeof item.lat !== 'number' || typeof item.lng !== 'number') return;
-  let color = item.kind === 'rent' ? '#1565c0' : '#2e7d32';
-  if (item.starred) color = '#c8982a';
-  const radius = item.starred ? 6 : 5;
-  const marker = L.circleMarker([item.lat, item.lng], {
-    radius, color, fillColor: color, fillOpacity: 0.85, weight: 1.5
-  }).addTo(map);
-  markerCount++;
-  const thumb = item.thumb && item.thumb.length ? item.thumb : PLACEHOLDER_THUMB;
-  const popupHtml = `
-    <div style="min-width:180px">
-      <img src="${thumb}" onerror="this.onerror=null;this.src='${PLACEHOLDER_THUMB}';" style="width:100%;height:90px;object-fit:cover;border-radius:4px;">
-      <div style="font-weight:600;margin-top:4px;font-size:12.5px">${item.addr}</div>
-      <div style="font-size:12px">${item.price}</div>
-      ${item.url ? `<a href="${item.url}" target="_blank" style="font-size:12px">View listing →</a><br>` : ''}
-      <a href="${directionsUrl(item.addr)}" target="_blank" style="font-size:12px">🧭 Directions</a>
-    </div>`;
-  marker.bindPopup(popupHtml);
-  marker.on('mouseover', function() { this.openPopup(); });
-  marker.on('mouseout', function() { this.closePopup(); });
-});
-
-// Sanity check: marker count vs listing card count
-console.log('Marker count:', markerCount, '/ Listing count:', LISTINGS.length);
-
+// init
 setSort('newest');
 </script>
-
 </body>
 </html>
