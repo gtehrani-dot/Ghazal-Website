@@ -83,6 +83,9 @@
   .callout strong{ color:var(--gold); }
   .callout.warn strong{ color:var(--granite); }
   .callout.muted strong{ color:var(--sea-light); }
+  .recap{ border:1px solid var(--line); border-left:3px solid var(--sea-light); background:rgba(143,207,196,0.12); border-radius:0 6px 6px 0; padding:12px 16px; font-size:14px; color:var(--paper); margin:14px 0 4px; }
+  .recap strong{ color:var(--sea-light); }
+  .recap .recap-tag{ display:inline-block; font-size:11px; letter-spacing:.08em; text-transform:uppercase; color:var(--sea-light); font-weight:700; margin-bottom:4px; }
 
   /* ── OVERVIEW: AT-A-GLANCE TABLE ── */
   .at-a-glance{ width:100%; border-collapse:collapse; margin-top:8px; }
@@ -142,6 +145,9 @@
   .meal-chip.empty{ background:transparent; color:rgba(247,243,232,0.35); border:1px dashed var(--line); }
   .tl-items li a{ border-bottom:1px solid rgba(211,169,74,0.35); text-decoration:none; }
   .tl-items li a:hover{ color:var(--gold); }
+  .tel-inline{ display:inline-flex; align-items:center; font-family:'IBM Plex Mono',monospace; font-size:11px; font-weight:600; text-decoration:none !important; border-bottom:none !important; color:var(--gold); margin-left:5px; }
+  .dir-mini{ display:inline-flex; align-items:center; gap:3px; font-family:'IBM Plex Mono',monospace; font-size:10.5px; font-weight:600; text-decoration:none !important; border-bottom:none !important; padding:2px 9px; border-radius:100px; background:var(--sea); color:var(--ink) !important; margin-left:6px; white-space:nowrap; }
+  .dir-mini:hover{ background:var(--sea-light); }
   .day-weather{ display:flex; align-items:center; gap:10px; flex-wrap:wrap; font-family:'IBM Plex Mono',monospace; font-size:11.5px; color:var(--sea-light); background:rgba(143,207,196,0.07); border-radius:6px; padding:9px 13px; margin:10px 0 14px; }
   .day-weather b{ color:var(--gold); font-weight:600; }
   .day-weather .wx-note{ color:rgba(247,243,232,0.5); font-style:italic; }
@@ -373,7 +379,7 @@
           <div class="tl-date">Thu, Aug 6 · Arrival</div>
           <div class="tl-title">Arrive &amp; Check In at Casagliana<span style="display:block;font-size:13px;font-weight:400;opacity:0.75;margin-top:2px;">Evening out in Golfo Aranci</span></div>
           <span class="tl-base">🚗 ~15–20 min OLB → Casagliana, with a grocery stop on the way · leave for the beach by 2:15 PM, aim to reach Sos Aranzos by 5:00 PM</span>
-          <a class="tl-gmaps-btn" href="https://www.google.com/maps/dir/?api=1&origin=Olbia+Costa+Smeralda+Airport&waypoints=40.90999,9.52315|40.9950,9.4550|40.9609,9.5834&destination=41.0000,9.6170" target="_blank" rel="noopener">🧭 Send route to Google Maps</a>
+          <a class="tl-gmaps-btn" href="https://www.google.com/maps/dir/?api=1&origin=Olbia+Costa+Smeralda+Airport&waypoints=Centro+Commerciale+Olbia+Mare%2C+Via+Cesare+Pavese%2C+Olbia|Casagliana+Suite+Resort%2C+Via+Sole+Ruju+14%2C+Olbia|Cinque+Spiagge%2C+Golfo+Aranci|Sos+Aranzos%2C+Golfo+Aranci&destination=Ristorante+da+Ciro%2C+Via+dei+Caduti+14%2C+Golfo+Aranci" target="_blank" rel="noopener">🧭 Send route to Google Maps</a>
           <div class="day-weather">🌤️ <b>Weather</b> · Temp: ~30°C/86°F day, ~19–21°C/66–70°F night · Precip: rare, ~6 rainy days/month · Wind: light <span class="wx-note">Historical</span></div>
           <div class="meal-row">
             <span class="meal-chip empty">🍳 Breakfast — not planned (arrival day)</span>
@@ -482,6 +488,9 @@
             <li>⏰ <strong>Leave the beach by 3:00 PM at the latest</strong> to be back at Casagliana by ~5:00 PM — enough time to shower and change before dinner.</li>
             <li class="meal">🍽 <strong>Dinner, 8:30 PM (✅ confirmed — table on the Veranda), ~15 min out:</strong> <a href="https://agriturismo-agrisole.com/en" target="_blank" rel="noopener" class="title-lnk">Agriturismo Agrisole</a> <span class="rating-badge">4.5, $$</span> — rustic Sardinian agriturismo, fixed country menu (gnocchetti, ricotta ravioli, roast porceddu) with home-grown ingredients. Close and comforting after the long beach day, ~8km/15 min from Casagliana. Surfaced from the host's guest guide.</li>
           </ul>
+          <div class="recap"><span class="recap-tag">✏️ What we actually did</span>
+            <strong>Skipped La Pelosa</strong> — we didn't get the timed-entry tickets, so we changed plans on the fly and spent the day at <strong><a href="https://www.sardegnaturismo.it/en/explore/liscia-ruja" target="_blank" rel="noopener" class="title-lnk">Spiaggia Liscia Ruja</a></strong> on the Costa Smeralda instead. Gorgeous long beach, tons for the kids to do, and an amazing auntie who parked herself out on the water all day. Much easier than the ~3.5-hr round trip to Stintino, and it turned into one of the best beach days of the trip. <br><br>
+            <strong>Dinner swap:</strong> instead of Agrisole we went to <strong><a href="https://mizuna.it/" target="_blank" rel="noopener" class="title-lnk">Mizuna</a></strong>, an excellent Japanese restaurant in San Pantaleo — a fun change of pace from all the Sardinian country cooking.</div>
         </div>
       </div>
 
@@ -520,6 +529,30 @@
         <h3>Spiaggia La Pelosa</h3>
         <p>The far northwest tip of the island — white sand, shallow turquoise water, views to the Asinara and Piana islets and the old Aragonese tower. Requires a paid online reservation, timed 8 AM–6 PM entry, €3.50 pp. The no-limit allocation is gone/sold out — booking now only happens via the 48-hr release, opening 8:00 AM two days before your visit date.</p>
         <div class="poi-actions"><a class="site" href="https://spiaggialapelosa.it/en/" target="_blank" rel="noopener">🌐 Reserve</a><a class="dir" href="https://www.google.com/maps/dir/?api=1&destination=40.9491,8.2231" target="_blank" rel="noopener">🧭 Directions</a></div>
+      </div>
+      <div class="card accent2">
+        <div class="card-eyebrow">✏️ Where we actually spent Day 4 · Costa Smeralda</div>
+        <h3>Spiaggia Liscia Ruja</h3>
+        <p><strong>Our real Day-4 beach after skipping La Pelosa.</strong> The longest beach on the Costa Smeralda (500m+ of white-to-pink sand, emerald water), calm and shallow — ideal for kids and for floating out on the water all day. Free access plus beach clubs, bars and sunbed hire; Mediterranean scrub behind, granite coves at the edges for snorkeling. About 40 min from Casagliana, and far easier than the Stintino haul. No reservation needed.</p>
+        <div class="poi-actions"><a class="site" href="https://www.sardegnaturismo.it/en/explore/liscia-ruja" target="_blank" rel="noopener">🌐 Info</a><a class="dir" href="https://www.google.com/maps/dir/?api=1&destination=Liscia+Ruja+beach+Sardinia" target="_blank" rel="noopener">🧭 Directions</a></div>
+      </div>
+      <div class="card accent1">
+        <div class="card-eyebrow">Reserve well ahead · Baunei coast (Ogliastra), east coast</div>
+        <h3>Cala Goloritzé</h3>
+        <p>One of Sardinia's most special coves — a UNESCO-listed beach of pale pebbles and impossibly clear water beneath a limestone pinnacle, reachable <strong>only on foot</strong> (or by boat, which can't land). <strong>Advance reservation required:</strong> ~250 people/day, €7 pp, booking opens 72 hrs ahead via <a href="https://www.costadibaunei.it/en/cala-goloritze/" target="_blank" rel="noopener" class="title-lnk">costadibaunei.it</a> or the Heart of Sardinia app; free for kids up to 5. It's the <strong>CAI 702 trail</strong> from the Su Porteddu car park on the Golgo plateau above Baunei — ~3.6 km / ~1h30 each way with ~500m of descent (bring water, sun cover, real shoes). Book an early entry (07:30–10:00); checkpoint runs 7:30 AM–4:00 PM. A long day trip (~2.5–3 hrs' drive south of Olbia), so it needs its own dedicated day.</p>
+        <div class="poi-actions"><a class="site" href="https://www.costadibaunei.it/en/cala-goloritze/" target="_blank" rel="noopener">🌐 Booking &amp; info</a><a class="dir" href="https://www.google.com/maps/dir/?api=1&destination=Su+Porteddu+parking+Baunei" target="_blank" rel="noopener">🧭 Trailhead</a></div>
+      </div>
+      <div class="card accent1">
+        <div class="card-eyebrow">Reserve ahead · San Teodoro (with a free-beach workaround)</div>
+        <h3>Cala Brandinchi &amp; La Cinta</h3>
+        <p><strong>Cala Brandinchi</strong> — the "Sardinian Tahiti," fine white sand and shallow turquoise water with Tavolara island as a backdrop. Like La Pelosa, it's an <strong>access-capped beach requiring a reservation</strong> (Jun 1–Sep 30, ~1,349 people/day, ~€2 pp) via <a href="https://santeodorospiagge.it/en/" target="_blank" rel="noopener" class="title-lnk">santeodorospiagge.it</a> or the app; bookable two days ahead from 6 PM, no walk-ins in peak season. <strong>The trick:</strong> if it's booked out, head to <strong>La Cinta</strong> — the long (5 km) free beach on the other side of the same San Teodoro reserve, no reservation needed, always a free-access stretch, shallow and family-friendly, with a kite-surf zone. Same gorgeous water, none of the booking stress.</p>
+        <div class="poi-actions"><a class="site" href="https://santeodorospiagge.it/en/" target="_blank" rel="noopener">🌐 Reserve Brandinchi</a><a class="dir" href="https://www.google.com/maps/dir/?api=1&destination=Spiaggia+La+Cinta+San+Teodoro" target="_blank" rel="noopener">🧭 La Cinta</a></div>
+      </div>
+      <div class="card accent1">
+        <div class="card-eyebrow">Day trip abroad · Southern Corsica (short ferry / boat from north Sardinia)</div>
+        <h3>Palombaggia (Corsica)</h3>
+        <p>Corsica's most famous beach — a ~2 km curve of pale sand, red-granite boulders and umbrella pines, ~10 km south of Porto-Vecchio. Close enough to pair with a northern-Sardinia base: the year-round <strong>Santa Teresa Gallura → Bonifacio ferry</strong> runs ~1 hr (up to 7 daily), then it's a short drive on; a seasonal Porto Torres → Porto-Vecchio ferry runs occasionally, and private boat tours from the north coast also reach it. A full day out, but a memorable one.</p>
+        <div class="poi-actions"><a class="site" href="https://www.go-to-corsica.com/regions/porto-vecchio-region/palombaggia-beach/" target="_blank" rel="noopener">🌐 Info</a><a class="dir" href="https://www.google.com/maps/dir/?api=1&destination=Plage+de+Palombaggia+Corsica" target="_blank" rel="noopener">🧭 Directions</a></div>
       </div>
       <div class="card accent3">
         <div class="card-eyebrow">Day 2 · Optional trip out, ~35 min from Casagliana</div>
@@ -603,7 +636,15 @@
         <div class="card-eyebrow">Day 4 dinner (Aug 9) · ~15 min from Casagliana</div>
         <h3>Agriturismo Agrisole <span class="rating-badge">4.5, $$</span></h3>
         <p>✅ <strong>Confirmed 8:30 PM — table on the Veranda.</strong> Rustic Sardinian agriturismo, fixed country menu (gnocchetti, ricotta ravioli, roast porceddu) with home-grown ingredients. Close and comforting after the long La Pelosa beach day.</p>
+        <div class="recap"><span class="recap-tag">✏️ What we actually did</span>We swapped this last-night reservation and went to <strong>Mizuna</strong> (Japanese, San Pantaleo) instead — see the card below.</div>
         <div class="poi-actions"><a class="site" href="https://agriturismo-agrisole.com/en" target="_blank" rel="noopener">🌐 Website</a><a class="site" href="tel:+393490848163">📞 Call</a><a class="dir" href="https://www.google.com/maps/dir/?api=1&destination=Agriturismo+Agrisole+Olbia" target="_blank" rel="noopener">🧭 Directions</a></div>
+      </div>
+
+      <div class="card accent3">
+        <div class="card-eyebrow">Last-night dinner (Aug 9) · San Pantaleo · where we actually went</div>
+        <h3>Mizuna Japanese Restaurant <span class="rating-badge">4.7, $$$</span></h3>
+        <p>✏️ <strong>Our real last-night dinner, swapped in for Agrisole.</strong> One of Sardinia's best Japanese spots — an Italian chef doing pristine sushi and gyoza with fresh Sardinian fish, plus creative Italian-Japanese desserts, in a serene wabi-sabi room just outside San Pantaleo's village center (Via Zara 5). Not cheap, but a memorable change of pace from the agriturismo nights.</p>
+        <div class="poi-actions"><a class="site" href="https://mizuna.it/" target="_blank" rel="noopener">🌐 Website</a><a class="dir" href="https://www.google.com/maps/dir/?api=1&destination=Mizuna+Japanese+Restaurant+San+Pantaleo" target="_blank" rel="noopener">🧭 Directions</a></div>
       </div>
 
       <div class="card accent1">
@@ -641,6 +682,24 @@
     <div class="section-title">Also Worth Seeing</div>
     <div class="section-sub">Researched, real options that didn't make this trip's four days — too far from Casagliana for a day trip, or skipped in favor of a slower pace, but worth knowing about for a future visit.</div>
     <div class="card-grid">
+      <div class="card accent1">
+        <div class="card-eyebrow">Bucket-list cove · Baunei coast (Ogliastra) · reserve ahead</div>
+        <h3>Cala Goloritzé</h3>
+        <p>A UNESCO-listed cove of pale pebbles and glass-clear water under a soaring limestone pinnacle — one of the most beautiful spots in all of Sardinia. Reachable <strong>only on foot</strong>: the <strong>CAI 702 trail</strong> from the Su Porteddu car park on the Golgo plateau above Baunei, ~3.6 km / ~1h30 each way with ~500m of descent (boats can approach for photos but can't land). <strong>Advance reservation required</strong> — ~250 people/day, €7 pp, opens 72 hrs before via <a href="https://www.costadibaunei.it/en/cala-goloritze/" target="_blank" rel="noopener" class="title-lnk">costadibaunei.it</a> or the Heart of Sardinia app (free for kids ≤5). Book an early slot (07:30–10:00); checkpoint runs 7:30 AM–4:00 PM. It's ~2.5–3 hrs' drive south of Olbia, so plan it as a full dedicated day with real hiking shoes, water and sun cover.</p>
+        <div class="poi-actions"><a class="site" href="https://www.costadibaunei.it/en/cala-goloritze/" target="_blank" rel="noopener">🌐 Booking &amp; info</a><a class="dir" href="https://www.google.com/maps/dir/?api=1&destination=Su+Porteddu+parking+Baunei" target="_blank" rel="noopener">🧭 Trailhead</a></div>
+      </div>
+      <div class="card accent1">
+        <div class="card-eyebrow">San Teodoro · reserve ahead (with a free-beach trick) + a charming town</div>
+        <h3>Cala Brandinchi, La Cinta &amp; San Teodoro village</h3>
+        <p><strong>Cala Brandinchi</strong> ("the Sardinian Tahiti") is another access-capped beach that, like La Pelosa, <strong>needs a reservation</strong> (Jun 1–Sep 30, ~1,349/day, ~€2 pp) via <a href="https://santeodorospiagge.it/en/" target="_blank" rel="noopener" class="title-lnk">santeodorospiagge.it</a> or the app — bookable two days ahead from 6 PM, no peak-season walk-ins. <strong>The workaround:</strong> if it's full, go to <strong>La Cinta</strong>, the 5 km free beach on the other side of the same reserve — no reservation, always a free stretch, shallow and family-friendly. Either way, base yourself in <strong>San Teodoro</strong>, a charming little town worth a wander for its restaurants and shops, and an easy pairing with a La Cinta / Brandinchi beach day.</p>
+        <div class="poi-actions"><a class="site" href="https://santeodorospiagge.it/en/" target="_blank" rel="noopener">🌐 Reserve Brandinchi</a><a class="dir" href="https://www.google.com/maps/dir/?api=1&destination=San+Teodoro+Sardinia" target="_blank" rel="noopener">🧭 San Teodoro</a></div>
+      </div>
+      <div class="card accent2">
+        <div class="card-eyebrow">✏️ Wish we'd had time · ~15 min from Casagliana</div>
+        <h3>Olbia's historic downtown</h3>
+        <p>Olbia's old center (Corso Umberto and the lanes around it) is a charming, walkable stretch of restaurants, cafés, gelaterias and shops, anchored by the Romanesque Basilica di San Simplicio. We ran out of time to explore it this trip and wish we'd fit it in — an easy, low-key evening out next time, right on the way in from the airport.</p>
+        <div class="poi-actions"><a class="dir" href="https://www.google.com/maps/dir/?api=1&destination=Corso+Umberto+Olbia" target="_blank" rel="noopener">🧭 Directions</a></div>
+      </div>
       <div class="card accent2">
         <div class="card-eyebrow">Michelin option · San Pantaleo (~35 min)</div>
         <h3>Ristorante Il Fuoco Sacro</h3>
