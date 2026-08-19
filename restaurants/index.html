@@ -1,0 +1,1062 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>DC / Northern Virginia Restaurant Guide</title>
+<style>
+  :root {
+    --bg: #faf7f2; --bg-card: #ffffff; --ink: #2b2621; --ink-soft: #6b6055;
+    --accent: #b3502f; --border: #e8e0d5;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0; background: var(--bg); color: var(--ink);
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+    -webkit-font-smoothing: antialiased;
+  }
+  header.hero {
+    padding: 48px 24px 28px; text-align: center;
+    background: linear-gradient(180deg, #fff 0%, var(--bg) 100%);
+    border-bottom: 1px solid var(--border);
+  }
+  header.hero h1 { font-family: Georgia, "Times New Roman", serif; font-size: 2.4rem; margin: 0 0 8px; letter-spacing: -0.01em; }
+  header.hero .sub { color: var(--ink-soft); font-size: 0.95rem; max-width: 760px; margin: 0 auto; line-height: 1.55; }
+  header.hero .badge-row { margin-top: 14px; display: flex; gap: 10px; justify-content: center; flex-wrap: wrap; }
+  header.hero .badge { font-size: 0.75rem; font-weight: 600; padding: 5px 12px; border-radius: 20px; background: #f3ece1; color: var(--accent); border: 1px solid #e3d3bf; }
+  header.hero .sources { margin-top: 14px; font-size: 0.8rem; color: var(--ink-soft); }
+  nav.pills {
+    position: sticky; top: 0; z-index: 10; background: rgba(250,247,242,0.95); backdrop-filter: blur(6px);
+    display: flex; flex-wrap: wrap; gap: 8px; padding: 14px 24px; border-bottom: 1px solid var(--border);
+    justify-content: center;
+  }
+  .nav-pill { font-size: 0.82rem; padding: 6px 14px; border-radius: 20px; border: 1px solid var(--border); background: #fff; color: var(--ink); text-decoration: none; white-space: nowrap; }
+  .nav-pill:hover { border-color: var(--accent); color: var(--accent); }
+  main { max-width: 1180px; margin: 0 auto; padding: 20px 24px 80px; }
+  .cat-section { padding-top: 34px; scroll-margin-top: 70px; }
+  .cat-section h2 { font-family: Georgia, serif; font-size: 1.5rem; margin: 0 0 4px; border-bottom: 2px solid var(--accent); display: inline-block; padding-bottom: 6px; }
+  .short-note { color: var(--ink-soft); font-size: 0.85rem; font-style: italic; margin: 8px 0 0; }
+  .card-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 18px; margin-top: 18px; }
+  .card { background: var(--bg-card); border: 1px solid var(--border); border-radius: 12px; overflow: hidden; text-decoration: none; color: var(--ink); display: flex; flex-direction: column; transition: transform .15s ease, box-shadow .15s ease; }
+  .card:hover { transform: translateY(-3px); box-shadow: 0 8px 24px rgba(43,38,33,0.12); }
+  .card-thumb { height: 150px; background-size: cover; background-position: center; }
+  .card-body { padding: 14px 16px 16px; position: relative; }
+  .card-rank { position: absolute; top: -34px; right: 12px; background: var(--accent); color: #fff; font-size: 0.72rem; font-weight: 700; padding: 3px 9px; border-radius: 20px; }
+  .card-name { font-family: Georgia, serif; font-size: 1.08rem; margin: 0 0 2px; line-height: 1.25; }
+  .card-neigh { font-size: 0.78rem; color: var(--ink-soft); margin-bottom: 10px; }
+  .chain-tag { display: inline-block; font-size: 0.65rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.04em; color: #8a6d1f; background: #fbf0cf; border-radius: 10px; padding: 1px 7px; margin-left: 4px; }
+  .card-meta-row { display: flex; flex-wrap: wrap; align-items: center; gap: 10px; margin-bottom: 8px; }
+  .price-tag { font-weight: 700; color: var(--accent); font-size: 0.88rem; }
+  .rating-badge { font-size: 0.82rem; font-weight: 600; }
+  .rating-count { font-weight: 400; color: var(--ink-soft); font-size: 0.72rem; display: block; }
+  .card-why { font-size: 0.85rem; font-style: italic; color: var(--ink); line-height: 1.45; margin: 4px 0 10px; }
+  .card-diff { font-size: 0.76rem; border-left: 3px solid; padding: 6px 10px; background: #f7f4ee; border-radius: 4px; line-height: 1.4; margin-bottom: 8px; }
+  .card-sources { font-size: 0.68rem; color: var(--ink-soft); line-height: 1.4; }
+  footer { text-align: center; padding: 30px 24px 60px; color: var(--ink-soft); font-size: 0.78rem; }
+  @media (max-width: 600px) { header.hero h1 { font-size: 1.7rem; } .card-rank { top: 6px; right: 6px; } }
+</style>
+</head>
+<body>
+
+<header class="hero">
+  <h1>DC / Northern Virginia Restaurant Guide</h1>
+  <p class="sub">Ghazal's standing, critic's-eye answer to "where should we eat?" — refreshed monthly. Every pick appears on at least one trusted list, clears a 4.5+ rating floor, and earns a one-line rationale for why it's a can't-miss.</p>
+  <div class="badge-row">
+    <span class="badge">50 picks, 13 categories</span>
+    <span class="badge">4.5+ only</span>
+    <span class="badge">Source-verified</span>
+  </div>
+  <p class="sub">Last refreshed: 2026-08-19</p>
+  <p class="sources"><strong>Sources checked:</strong> Tripadvisor · Washingtonian Best 40 · Washingtonian Top 100 · Northern Virginia Magazine 50 Best · Eater DC · Arlington Magazine · Michelin Guide DC · James Beard Awards</p>
+</header>
+
+<nav class="pills">
+<a href="#cat-high_end_dc" class="nav-pill">High-End — DC</a>
+<a href="#cat-high_end_nova" class="nav-pill">High-End — Northern VA</a>
+<a href="#cat-moderate_dc" class="nav-pill">Moderate — DC</a>
+<a href="#cat-moderate_nova" class="nav-pill">Moderate — Northern VA</a>
+<a href="#cat-casual_dc" class="nav-pill">Casual / Cheap Eats — DC</a>
+<a href="#cat-casual_nova" class="nav-pill">Casual / Cheap Eats — Northern VA</a>
+<a href="#cat-happy_hour_dc" class="nav-pill">Happy Hour — DC</a>
+<a href="#cat-happy_hour_nova" class="nav-pill">Happy Hour — Northern VA</a>
+<a href="#cat-italian_dc" class="nav-pill">Best Italian — DC</a>
+<a href="#cat-italian_nova" class="nav-pill">Best Italian — Northern VA</a>
+<a href="#cat-persian" class="nav-pill">Best Persian — DC / NoVA</a>
+<a href="#cat-japanese_asian" class="nav-pill">Best Japanese / Asian — DC / NoVA</a>
+<a href="#cat-mexican" class="nav-pill">Best Mexican — DC / NoVA</a>
+</nav>
+
+<main>
+
+    <section class="cat-section" id="cat-high_end_dc">
+      <h2>High-End — DC</h2>
+      <p class="short-note">Only 4 picks cleared the 4.5+ bar this month — every pick must appear on a locked source AND rate 4.5 or higher.</p>
+      <div class="card-grid">
+    <a class="card" href="https://minibarbyjoseandres.com/" target="_blank" rel="noopener">
+      <div class="card-thumb" style="background-image:url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI0MDAiIGhlaWdodD0iMjgwIiB2aWV3Qm94PSIwIDAgNDAwIDI4MCI+CjxkZWZzPjxsaW5lYXJHcmFkaWVudCBpZD0iZyIgeDE9IjAiIHkxPSIwIiB4Mj0iMSIgeTI9IjEiPgo8c3RvcCBvZmZzZXQ9IjAiIHN0b3AtY29sb3I9ImhzbCgzMTgsNDUlLDg4JSkiLz48c3RvcCBvZmZzZXQ9IjEiIHN0b3AtY29sb3I9ImhzbCgzNTgsNDUlLDc4JSkiLz4KPC9saW5lYXJHcmFkaWVudD48L2RlZnM+CjxyZWN0IHdpZHRoPSI0MDAiIGhlaWdodD0iMjgwIiBmaWxsPSJ1cmwoI2cpIi8+Cjx0ZXh0IHg9IjIwMCIgeT0iMTUwIiBmb250LWZhbWlseT0iR2VvcmdpYSxzZXJpZiIgZm9udC1zaXplPSI4OCIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZmlsbD0iaHNsKDMxOCwzNSUsMzIlKSIgZm9udC13ZWlnaHQ9IjYwMCI+TTwvdGV4dD4KPHRleHQgeD0iMjAwIiB5PSIyMzAiIGZvbnQtZmFtaWx5PSJIZWx2ZXRpY2EsQXJpYWwsc2Fucy1zZXJpZiIgZm9udC1zaXplPSIxNiIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZmlsbD0iaHNsKDMxOCwzMCUsMzAlKSIgbGV0dGVyLXNwYWNpbmc9IjEiPkFWQU5ULUdBUkRFIFRBU1RJTkcgTUVOVTwvdGV4dD4KPC9zdmc+')"></div>
+      <div class="card-body">
+        <div class="card-rank">#1</div>
+        <h3 class="card-name">Minibar by José Andrés</h3>
+        <div class="card-neigh">Penn Quarter, DC · Avant-garde tasting menu </div>
+        <div class="card-meta-row">
+          <span class="price-tag">$$$$</span>
+          <span class="rating-badge">★ 4.5 <span class="rating-count">Tripadvisor · 185 reviews</span></span>
+        </div>
+        <p class="card-why">"José Andrés&#x27;s original theater-of-the-absurd tasting counter still out-imagines every other kitchen in the city."</p>
+        <div class="card-diff" style="border-color:#a83246;color:#a83246">
+          <strong>Very Hard to book</strong> — Only ~14 seats; reservations release online at an exact time each quarter and vanish within seconds.
+        </div>
+        <div class="card-sources">On: Michelin Guide DC (2 stars)</div>
+      </div>
+    </a>
+
+    <a class="card" href="https://www.fioladc.com/" target="_blank" rel="noopener">
+      <div class="card-thumb" style="background-image:url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI0MDAiIGhlaWdodD0iMjgwIiB2aWV3Qm94PSIwIDAgNDAwIDI4MCI+CjxkZWZzPjxsaW5lYXJHcmFkaWVudCBpZD0iZyIgeDE9IjAiIHkxPSIwIiB4Mj0iMSIgeTI9IjEiPgo8c3RvcCBvZmZzZXQ9IjAiIHN0b3AtY29sb3I9ImhzbCg1NCw0NSUsODglKSIvPjxzdG9wIG9mZnNldD0iMSIgc3RvcC1jb2xvcj0iaHNsKDk0LDQ1JSw3OCUpIi8+CjwvbGluZWFyR3JhZGllbnQ+PC9kZWZzPgo8cmVjdCB3aWR0aD0iNDAwIiBoZWlnaHQ9IjI4MCIgZmlsbD0idXJsKCNnKSIvPgo8dGV4dCB4PSIyMDAiIHk9IjE1MCIgZm9udC1mYW1pbHk9Ikdlb3JnaWEsc2VyaWYiIGZvbnQtc2l6ZT0iODgiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGZpbGw9ImhzbCg1NCwzNSUsMzIlKSIgZm9udC13ZWlnaHQ9IjYwMCI+RjwvdGV4dD4KPHRleHQgeD0iMjAwIiB5PSIyMzAiIGZvbnQtZmFtaWx5PSJIZWx2ZXRpY2EsQXJpYWwsc2Fucy1zZXJpZiIgZm9udC1zaXplPSIxNiIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZmlsbD0iaHNsKDU0LDMwJSwzMCUpIiBsZXR0ZXItc3BhY2luZz0iMSI+SVRBTElBTiwgVEFTVElORyBNRU5VPC90ZXh0Pgo8L3N2Zz4=')"></div>
+      <div class="card-body">
+        <div class="card-rank">#2</div>
+        <h3 class="card-name">Fiola</h3>
+        <div class="card-neigh">Penn Quarter, DC · Italian, tasting menu </div>
+        <div class="card-meta-row">
+          <span class="price-tag">$$$$</span>
+          <span class="rating-badge">★ 4.5 <span class="rating-count">Tripadvisor · 942 reviews</span></span>
+        </div>
+        <p class="card-why">"Fabio Trabocchi&#x27;s marble-and-crystal dining room delivers hand-rolled-pasta grandeur with a nearly thousand-review track record of consistency."</p>
+        <div class="card-diff" style="border-color:#c85a3a;color:#c85a3a">
+          <strong>Hard to book</strong> — Prime weekend tables need 2-3 weeks&#x27; notice; walk-ins rarely land a seat.
+        </div>
+        <div class="card-sources">On: Michelin Guide DC (1 star)</div>
+      </div>
+    </a>
+
+    <a class="card" href="https://www.albidc.com/" target="_blank" rel="noopener">
+      <div class="card-thumb" style="background-image:url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI0MDAiIGhlaWdodD0iMjgwIiB2aWV3Qm94PSIwIDAgNDAwIDI4MCI+CjxkZWZzPjxsaW5lYXJHcmFkaWVudCBpZD0iZyIgeDE9IjAiIHkxPSIwIiB4Mj0iMSIgeTI9IjEiPgo8c3RvcCBvZmZzZXQ9IjAiIHN0b3AtY29sb3I9ImhzbCg2Miw0NSUsODglKSIvPjxzdG9wIG9mZnNldD0iMSIgc3RvcC1jb2xvcj0iaHNsKDEwMiw0NSUsNzglKSIvPgo8L2xpbmVhckdyYWRpZW50PjwvZGVmcz4KPHJlY3Qgd2lkdGg9IjQwMCIgaGVpZ2h0PSIyODAiIGZpbGw9InVybCgjZykiLz4KPHRleHQgeD0iMjAwIiB5PSIxNTAiIGZvbnQtZmFtaWx5PSJHZW9yZ2lhLHNlcmlmIiBmb250LXNpemU9Ijg4IiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBmaWxsPSJoc2woNjIsMzUlLDMyJSkiIGZvbnQtd2VpZ2h0PSI2MDAiPkE8L3RleHQ+Cjx0ZXh0IHg9IjIwMCIgeT0iMjMwIiBmb250LWZhbWlseT0iSGVsdmV0aWNhLEFyaWFsLHNhbnMtc2VyaWYiIGZvbnQtc2l6ZT0iMTYiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGZpbGw9ImhzbCg2MiwzMCUsMzAlKSIgbGV0dGVyLXNwYWNpbmc9IjEiPlBBTEVTVElOSUFOLCBMRVZBTlRJTkUsIFdPT0QtRklSRUQgVEFTVElORyBNRU5VPC90ZXh0Pgo8L3N2Zz4=')"></div>
+      <div class="card-body">
+        <div class="card-rank">#3</div>
+        <h3 class="card-name">Albi</h3>
+        <div class="card-neigh">Navy Yard, DC · Palestinian, Levantine, wood-fired tasting menu </div>
+        <div class="card-meta-row">
+          <span class="price-tag">$$$</span>
+          <span class="rating-badge">★ 4.7 <span class="rating-count">Google · 908 reviews</span></span>
+        </div>
+        <p class="card-why">"Michael Rafidi&#x27;s live-fire Palestinian tasting menu is the most emotionally resonant fine dining in the city — Michelin star, James Beard win, and Washingtonian&#x27;s top spot two years running."</p>
+        <div class="card-diff" style="border-color:#a83246;color:#a83246">
+          <strong>Very Hard to book</strong> — Washingtonian&#x27;s reigning #1 restaurant; Resy tables for the hearth-side seats go within minutes of release.
+        </div>
+        <div class="card-sources">On: Michelin Guide DC (1 star) · James Beard Awards (Best Chef, 2024) · Washingtonian Top 100 (#1)</div>
+      </div>
+    </a>
+
+    <a class="card" href="https://www.jontdc.com/" target="_blank" rel="noopener">
+      <div class="card-thumb" style="background-image:url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI0MDAiIGhlaWdodD0iMjgwIiB2aWV3Qm94PSIwIDAgNDAwIDI4MCI+CjxkZWZzPjxsaW5lYXJHcmFkaWVudCBpZD0iZyIgeDE9IjAiIHkxPSIwIiB4Mj0iMSIgeTI9IjEiPgo8c3RvcCBvZmZzZXQ9IjAiIHN0b3AtY29sb3I9ImhzbCg0OSw0NSUsODglKSIvPjxzdG9wIG9mZnNldD0iMSIgc3RvcC1jb2xvcj0iaHNsKDg5LDQ1JSw3OCUpIi8+CjwvbGluZWFyR3JhZGllbnQ+PC9kZWZzPgo8cmVjdCB3aWR0aD0iNDAwIiBoZWlnaHQ9IjI4MCIgZmlsbD0idXJsKCNnKSIvPgo8dGV4dCB4PSIyMDAiIHk9IjE1MCIgZm9udC1mYW1pbHk9Ikdlb3JnaWEsc2VyaWYiIGZvbnQtc2l6ZT0iODgiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGZpbGw9ImhzbCg0OSwzNSUsMzIlKSIgZm9udC13ZWlnaHQ9IjYwMCI+SjwvdGV4dD4KPHRleHQgeD0iMjAwIiB5PSIyMzAiIGZvbnQtZmFtaWx5PSJIZWx2ZXRpY2EsQXJpYWwsc2Fucy1zZXJpZiIgZm9udC1zaXplPSIxNiIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZmlsbD0iaHNsKDQ5LDMwJSwzMCUpIiBsZXR0ZXItc3BhY2luZz0iMSI+RlJFTkNILUpBUEFORVNFLCBBVkFOVC1HQVJERSBUQVNUSU5HIENPVU5URVI8L3RleHQ+Cjwvc3ZnPg==')"></div>
+      <div class="card-body">
+        <div class="card-rank">#4</div>
+        <h3 class="card-name">Jônt</h3>
+        <div class="card-neigh">U Street / 14th Street, DC · French-Japanese, avant-garde tasting counter </div>
+        <div class="card-meta-row">
+          <span class="price-tag">$$$$</span>
+          <span class="rating-badge">★ 4.6 <span class="rating-count">Google · 294 reviews</span></span>
+        </div>
+        <p class="card-why">"A blink-and-you&#x27;ll-miss-it counter earning two Michelin stars for technically dazzling French-meets-Japanese courses in a room that seats barely a dozen."</p>
+        <div class="card-diff" style="border-color:#c85a3a;color:#c85a3a">
+          <strong>Hard to book</strong> — Single nightly seating at a tiny counter above Maketto; books out weeks ahead.
+        </div>
+        <div class="card-sources">On: Michelin Guide DC (2 stars)</div>
+      </div>
+    </a></div>
+    </section>
+
+    <section class="cat-section" id="cat-high_end_nova">
+      <h2>High-End — Northern VA</h2>
+      
+      <div class="card-grid">
+    <a class="card" href="https://www.lauberge.com/" target="_blank" rel="noopener">
+      <div class="card-thumb" style="background-image:url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI0MDAiIGhlaWdodD0iMjgwIiB2aWV3Qm94PSIwIDAgNDAwIDI4MCI+CjxkZWZzPjxsaW5lYXJHcmFkaWVudCBpZD0iZyIgeDE9IjAiIHkxPSIwIiB4Mj0iMSIgeTI9IjEiPgo8c3RvcCBvZmZzZXQ9IjAiIHN0b3AtY29sb3I9ImhzbCgxMTcsNDUlLDg4JSkiLz48c3RvcCBvZmZzZXQ9IjEiIHN0b3AtY29sb3I9ImhzbCgxNTcsNDUlLDc4JSkiLz4KPC9saW5lYXJHcmFkaWVudD48L2RlZnM+CjxyZWN0IHdpZHRoPSI0MDAiIGhlaWdodD0iMjgwIiBmaWxsPSJ1cmwoI2cpIi8+Cjx0ZXh0IHg9IjIwMCIgeT0iMTUwIiBmb250LWZhbWlseT0iR2VvcmdpYSxzZXJpZiIgZm9udC1zaXplPSI4OCIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZmlsbD0iaHNsKDExNywzNSUsMzIlKSIgZm9udC13ZWlnaHQ9IjYwMCI+TDwvdGV4dD4KPHRleHQgeD0iMjAwIiB5PSIyMzAiIGZvbnQtZmFtaWx5PSJIZWx2ZXRpY2EsQXJpYWwsc2Fucy1zZXJpZiIgZm9udC1zaXplPSIxNiIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZmlsbD0iaHNsKDExNywzMCUsMzAlKSIgbGV0dGVyLXNwYWNpbmc9IjEiPkZSRU5DSCAoQUxTQVRJQU4pPC90ZXh0Pgo8L3N2Zz4=')"></div>
+      <div class="card-body">
+        <div class="card-rank">#1</div>
+        <h3 class="card-name">L&#x27;Auberge Chez François</h3>
+        <div class="card-neigh">Great Falls, VA · French (Alsatian) </div>
+        <div class="card-meta-row">
+          <span class="price-tag">$$$$</span>
+          <span class="rating-badge">★ 4.7 <span class="rating-count">Tripadvisor · 861 reviews</span></span>
+        </div>
+        <p class="card-why">"A century-old Alsatian institution in a Great Falls farmhouse that still out-romances every newer tasting menu in the region."</p>
+        <div class="card-diff" style="border-color:#c85a3a;color:#c85a3a">
+          <strong>Hard to book</strong> — Reservations release roughly 60 days out; prime weekend slots for the eight-course menu vanish fast.
+        </div>
+        <div class="card-sources">On: Washingtonian Top 100</div>
+      </div>
+    </a>
+
+    <a class="card" href="https://www.nostosrestaurant.com/" target="_blank" rel="noopener">
+      <div class="card-thumb" style="background-image:url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI0MDAiIGhlaWdodD0iMjgwIiB2aWV3Qm94PSIwIDAgNDAwIDI4MCI+CjxkZWZzPjxsaW5lYXJHcmFkaWVudCBpZD0iZyIgeDE9IjAiIHkxPSIwIiB4Mj0iMSIgeTI9IjEiPgo8c3RvcCBvZmZzZXQ9IjAiIHN0b3AtY29sb3I9ImhzbCgyOSw0NSUsODglKSIvPjxzdG9wIG9mZnNldD0iMSIgc3RvcC1jb2xvcj0iaHNsKDY5LDQ1JSw3OCUpIi8+CjwvbGluZWFyR3JhZGllbnQ+PC9kZWZzPgo8cmVjdCB3aWR0aD0iNDAwIiBoZWlnaHQ9IjI4MCIgZmlsbD0idXJsKCNnKSIvPgo8dGV4dCB4PSIyMDAiIHk9IjE1MCIgZm9udC1mYW1pbHk9Ikdlb3JnaWEsc2VyaWYiIGZvbnQtc2l6ZT0iODgiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGZpbGw9ImhzbCgyOSwzNSUsMzIlKSIgZm9udC13ZWlnaHQ9IjYwMCI+TjwvdGV4dD4KPHRleHQgeD0iMjAwIiB5PSIyMzAiIGZvbnQtZmFtaWx5PSJIZWx2ZXRpY2EsQXJpYWwsc2Fucy1zZXJpZiIgZm9udC1zaXplPSIxNiIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZmlsbD0iaHNsKDI5LDMwJSwzMCUpIiBsZXR0ZXItc3BhY2luZz0iMSI+R1JFRUs8L3RleHQ+Cjwvc3ZnPg==')"></div>
+      <div class="card-body">
+        <div class="card-rank">#2</div>
+        <h3 class="card-name">Nostos</h3>
+        <div class="card-neigh">Tysons/Vienna, VA · Greek </div>
+        <div class="card-meta-row">
+          <span class="price-tag">$$$$</span>
+          <span class="rating-badge">★ 4.5 <span class="rating-count">Tripadvisor · 440 reviews</span></span>
+        </div>
+        <p class="card-why">"Tableside saganaki flames and whole grilled fish turn a Tysons office-park address into the DMV&#x27;s most convincing Athens stand-in."</p>
+        <div class="card-diff" style="border-color:#c98a1f;color:#c98a1f">
+          <strong>Moderate to book</strong> — Bookable a few weeks out on OpenTable; Friday/Saturday prime times go first.
+        </div>
+        <div class="card-sources">On: Northern Virginia Magazine 50 Best</div>
+      </div>
+    </a>
+
+    <a class="card" href="https://www.claritysucculents.com/" target="_blank" rel="noopener">
+      <div class="card-thumb" style="background-image:url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI0MDAiIGhlaWdodD0iMjgwIiB2aWV3Qm94PSIwIDAgNDAwIDI4MCI+CjxkZWZzPjxsaW5lYXJHcmFkaWVudCBpZD0iZyIgeDE9IjAiIHkxPSIwIiB4Mj0iMSIgeTI9IjEiPgo8c3RvcCBvZmZzZXQ9IjAiIHN0b3AtY29sb3I9ImhzbCgxNTAsNDUlLDg4JSkiLz48c3RvcCBvZmZzZXQ9IjEiIHN0b3AtY29sb3I9ImhzbCgxOTAsNDUlLDc4JSkiLz4KPC9saW5lYXJHcmFkaWVudD48L2RlZnM+CjxyZWN0IHdpZHRoPSI0MDAiIGhlaWdodD0iMjgwIiBmaWxsPSJ1cmwoI2cpIi8+Cjx0ZXh0IHg9IjIwMCIgeT0iMTUwIiBmb250LWZhbWlseT0iR2VvcmdpYSxzZXJpZiIgZm9udC1zaXplPSI4OCIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZmlsbD0iaHNsKDE1MCwzNSUsMzIlKSIgZm9udC13ZWlnaHQ9IjYwMCI+QzwvdGV4dD4KPHRleHQgeD0iMjAwIiB5PSIyMzAiIGZvbnQtZmFtaWx5PSJIZWx2ZXRpY2EsQXJpYWwsc2Fucy1zZXJpZiIgZm9udC1zaXplPSIxNiIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZmlsbD0iaHNsKDE1MCwzMCUsMzAlKSIgbGV0dGVyLXNwYWNpbmc9IjEiPk1PREVSTiBBTUVSSUNBTjwvdGV4dD4KPC9zdmc+')"></div>
+      <div class="card-body">
+        <div class="card-rank">#3</div>
+        <h3 class="card-name">Clarity</h3>
+        <div class="card-neigh">Vienna, VA · Modern American </div>
+        <div class="card-meta-row">
+          <span class="price-tag">$$$$</span>
+          <span class="rating-badge">★ 4.5 <span class="rating-count">Google · 1,375 reviews</span></span>
+        </div>
+        <p class="card-why">"A kitchen that treats a Vienna strip-mall storefront as a stage for genuine special-occasion cooking, plated like still-lifes."</p>
+        <div class="card-diff" style="border-color:#c85a3a;color:#c85a3a">
+          <strong>Hard to book</strong> — Tasting-menu seatings are limited nightly; book 2-3 weeks ahead for weekends.
+        </div>
+        <div class="card-sources">On: Northern Virginia Magazine 50 Best</div>
+      </div>
+    </a>
+
+    <a class="card" href="https://lerefugealexandria.com/" target="_blank" rel="noopener">
+      <div class="card-thumb" style="background-image:url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI0MDAiIGhlaWdodD0iMjgwIiB2aWV3Qm94PSIwIDAgNDAwIDI4MCI+CjxkZWZzPjxsaW5lYXJHcmFkaWVudCBpZD0iZyIgeDE9IjAiIHkxPSIwIiB4Mj0iMSIgeTI9IjEiPgo8c3RvcCBvZmZzZXQ9IjAiIHN0b3AtY29sb3I9ImhzbCgzNTYsNDUlLDg4JSkiLz48c3RvcCBvZmZzZXQ9IjEiIHN0b3AtY29sb3I9ImhzbCgzNiw0NSUsNzglKSIvPgo8L2xpbmVhckdyYWRpZW50PjwvZGVmcz4KPHJlY3Qgd2lkdGg9IjQwMCIgaGVpZ2h0PSIyODAiIGZpbGw9InVybCgjZykiLz4KPHRleHQgeD0iMjAwIiB5PSIxNTAiIGZvbnQtZmFtaWx5PSJHZW9yZ2lhLHNlcmlmIiBmb250LXNpemU9Ijg4IiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBmaWxsPSJoc2woMzU2LDM1JSwzMiUpIiBmb250LXdlaWdodD0iNjAwIj5MPC90ZXh0Pgo8dGV4dCB4PSIyMDAiIHk9IjIzMCIgZm9udC1mYW1pbHk9IkhlbHZldGljYSxBcmlhbCxzYW5zLXNlcmlmIiBmb250LXNpemU9IjE2IiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBmaWxsPSJoc2woMzU2LDMwJSwzMCUpIiBsZXR0ZXItc3BhY2luZz0iMSI+RlJFTkNIPC90ZXh0Pgo8L3N2Zz4=')"></div>
+      <div class="card-body">
+        <div class="card-rank">#4</div>
+        <h3 class="card-name">Le Refuge</h3>
+        <div class="card-neigh">Old Town Alexandria, VA · French </div>
+        <div class="card-meta-row">
+          <span class="price-tag">$$$$</span>
+          <span class="rating-badge">★ 4.5 <span class="rating-count">Tripadvisor · 426 reviews</span></span>
+        </div>
+        <p class="card-why">"Unapologetically old-school bouillabaisse-and-duck-a-l&#x27;orange cooking that has outlasted every trend in Old Town for three decades."</p>
+        <div class="card-diff" style="border-color:#c98a1f;color:#c98a1f">
+          <strong>Moderate to book</strong> — Small, snug dining room; call ahead for weekend evenings.
+        </div>
+        <div class="card-sources">On: Northern Virginia Magazine 50 Best</div>
+      </div>
+    </a>
+
+    <a class="card" href="https://elyse.lila.llc/" target="_blank" rel="noopener">
+      <div class="card-thumb" style="background-image:url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI0MDAiIGhlaWdodD0iMjgwIiB2aWV3Qm94PSIwIDAgNDAwIDI4MCI+CjxkZWZzPjxsaW5lYXJHcmFkaWVudCBpZD0iZyIgeDE9IjAiIHkxPSIwIiB4Mj0iMSIgeTI9IjEiPgo8c3RvcCBvZmZzZXQ9IjAiIHN0b3AtY29sb3I9ImhzbCgxNiw0NSUsODglKSIvPjxzdG9wIG9mZnNldD0iMSIgc3RvcC1jb2xvcj0iaHNsKDU2LDQ1JSw3OCUpIi8+CjwvbGluZWFyR3JhZGllbnQ+PC9kZWZzPgo8cmVjdCB3aWR0aD0iNDAwIiBoZWlnaHQ9IjI4MCIgZmlsbD0idXJsKCNnKSIvPgo8dGV4dCB4PSIyMDAiIHk9IjE1MCIgZm9udC1mYW1pbHk9Ikdlb3JnaWEsc2VyaWYiIGZvbnQtc2l6ZT0iODgiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGZpbGw9ImhzbCgxNiwzNSUsMzIlKSIgZm9udC13ZWlnaHQ9IjYwMCI+RTwvdGV4dD4KPHRleHQgeD0iMjAwIiB5PSIyMzAiIGZvbnQtZmFtaWx5PSJIZWx2ZXRpY2EsQXJpYWwsc2Fucy1zZXJpZiIgZm9udC1zaXplPSIxNiIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZmlsbD0iaHNsKDE2LDMwJSwzMCUpIiBsZXR0ZXItc3BhY2luZz0iMSI+TU9ERVJOIEFNRVJJQ0FOIChUQVNUSU5HIE1FTlUpPC90ZXh0Pgo8L3N2Zz4=')"></div>
+      <div class="card-body">
+        <div class="card-rank">#5</div>
+        <h3 class="card-name">Elyse</h3>
+        <div class="card-neigh">Fairfax City, VA · Modern American (tasting menu) </div>
+        <div class="card-meta-row">
+          <span class="price-tag">$$$$</span>
+          <span class="rating-badge">★ 4.9 <span class="rating-count">Google · 90 reviews</span></span>
+        </div>
+        <p class="card-why">"A 30-seat speakeasy tasting counter where a chef at the top of his game turns a strip-mall address into the most intentional five courses in Fairfax."</p>
+        <div class="card-diff" style="border-color:#c85a3a;color:#c85a3a">
+          <strong>Hard to book</strong> — Only 30 seats and a single nightly tasting seating; reserve well in advance.
+        </div>
+        <div class="card-sources">On: Northern Virginia Magazine 50 Best</div>
+      </div>
+    </a></div>
+    </section>
+
+    <section class="cat-section" id="cat-moderate_dc">
+      <h2>Moderate — DC</h2>
+      
+      <div class="card-grid">
+    <a class="card" href="https://www.anjurestaurant.com/" target="_blank" rel="noopener">
+      <div class="card-thumb" style="background-image:url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI0MDAiIGhlaWdodD0iMjgwIiB2aWV3Qm94PSIwIDAgNDAwIDI4MCI+CjxkZWZzPjxsaW5lYXJHcmFkaWVudCBpZD0iZyIgeDE9IjAiIHkxPSIwIiB4Mj0iMSIgeTI9IjEiPgo8c3RvcCBvZmZzZXQ9IjAiIHN0b3AtY29sb3I9ImhzbCgxMTgsNDUlLDg4JSkiLz48c3RvcCBvZmZzZXQ9IjEiIHN0b3AtY29sb3I9ImhzbCgxNTgsNDUlLDc4JSkiLz4KPC9saW5lYXJHcmFkaWVudD48L2RlZnM+CjxyZWN0IHdpZHRoPSI0MDAiIGhlaWdodD0iMjgwIiBmaWxsPSJ1cmwoI2cpIi8+Cjx0ZXh0IHg9IjIwMCIgeT0iMTUwIiBmb250LWZhbWlseT0iR2VvcmdpYSxzZXJpZiIgZm9udC1zaXplPSI4OCIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZmlsbD0iaHNsKDExOCwzNSUsMzIlKSIgZm9udC13ZWlnaHQ9IjYwMCI+QTwvdGV4dD4KPHRleHQgeD0iMjAwIiB5PSIyMzAiIGZvbnQtZmFtaWx5PSJIZWx2ZXRpY2EsQXJpYWwsc2Fucy1zZXJpZiIgZm9udC1zaXplPSIxNiIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZmlsbD0iaHNsKDExOCwzMCUsMzAlKSIgbGV0dGVyLXNwYWNpbmc9IjEiPktPUkVBTjwvdGV4dD4KPC9zdmc+')"></div>
+      <div class="card-body">
+        <div class="card-rank">#1</div>
+        <h3 class="card-name">Anju</h3>
+        <div class="card-neigh">Dupont Circle, DC · Korean </div>
+        <div class="card-meta-row">
+          <span class="price-tag">$$</span>
+          <span class="rating-badge">★ 4.5 <span class="rating-count">Tripadvisor · 42 reviews</span></span><span class="rating-badge">★ 4.5 <span class="rating-count">Google · 1,177 reviews</span></span>
+        </div>
+        <p class="card-why">"Soulful, funky-fermented Korean plates and the city&#x27;s best banchan spread make this the rare date-night spot that never feels like it&#x27;s trying too hard."</p>
+        <div class="card-diff" style="border-color:#c98a1f;color:#c98a1f">
+          <strong>Moderate to book</strong> — Resy tables open weekly and go quickly for weekend prime time, but bar/counter walk-in seats are usually available.
+        </div>
+        <div class="card-sources">On: Washingtonian Top 100</div>
+      </div>
+    </a>
+
+    <a class="card" href="https://www.darudc.com/" target="_blank" rel="noopener">
+      <div class="card-thumb" style="background-image:url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI0MDAiIGhlaWdodD0iMjgwIiB2aWV3Qm94PSIwIDAgNDAwIDI4MCI+CjxkZWZzPjxsaW5lYXJHcmFkaWVudCBpZD0iZyIgeDE9IjAiIHkxPSIwIiB4Mj0iMSIgeTI9IjEiPgo8c3RvcCBvZmZzZXQ9IjAiIHN0b3AtY29sb3I9ImhzbCgxMDYsNDUlLDg4JSkiLz48c3RvcCBvZmZzZXQ9IjEiIHN0b3AtY29sb3I9ImhzbCgxNDYsNDUlLDc4JSkiLz4KPC9saW5lYXJHcmFkaWVudD48L2RlZnM+CjxyZWN0IHdpZHRoPSI0MDAiIGhlaWdodD0iMjgwIiBmaWxsPSJ1cmwoI2cpIi8+Cjx0ZXh0IHg9IjIwMCIgeT0iMTUwIiBmb250LWZhbWlseT0iR2VvcmdpYSxzZXJpZiIgZm9udC1zaXplPSI4OCIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZmlsbD0iaHNsKDEwNiwzNSUsMzIlKSIgZm9udC13ZWlnaHQ9IjYwMCI+RDwvdGV4dD4KPHRleHQgeD0iMjAwIiB5PSIyMzAiIGZvbnQtZmFtaWx5PSJIZWx2ZXRpY2EsQXJpYWwsc2Fucy1zZXJpZiIgZm9udC1zaXplPSIxNiIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZmlsbD0iaHNsKDEwNiwzMCUsMzAlKSIgbGV0dGVyLXNwYWNpbmc9IjEiPk1PREVSTiBJTkRJQU48L3RleHQ+Cjwvc3ZnPg==')"></div>
+      <div class="card-body">
+        <div class="card-rank">#2</div>
+        <h3 class="card-name">Daru</h3>
+        <div class="card-neigh">Near Northeast / H Street, DC · Modern Indian </div>
+        <div class="card-meta-row">
+          <span class="price-tag">$$$</span>
+          <span class="rating-badge">★ 5.0 <span class="rating-count">Tripadvisor · 5 reviews</span></span><span class="rating-badge">★ 4.5 <span class="rating-count">Google · 743 reviews</span></span>
+        </div>
+        <p class="card-why">"Turns Indian comfort food into a genuinely exciting tasting menu at a price that still lets you order a second round of naan without flinching."</p>
+        <div class="card-diff" style="border-color:#c85a3a;color:#c85a3a">
+          <strong>Hard to book</strong> — Weekend Resy slots vanish fast on James Beard buzz; weeknights and the bar are easier.
+        </div>
+        <div class="card-sources">On: Michelin Guide DC (Bib Gourmand) · James Beard Awards</div>
+      </div>
+    </a>
+
+    <a class="card" href="https://www.taporidc.com/" target="_blank" rel="noopener">
+      <div class="card-thumb" style="background-image:url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI0MDAiIGhlaWdodD0iMjgwIiB2aWV3Qm94PSIwIDAgNDAwIDI4MCI+CjxkZWZzPjxsaW5lYXJHcmFkaWVudCBpZD0iZyIgeDE9IjAiIHkxPSIwIiB4Mj0iMSIgeTI9IjEiPgo8c3RvcCBvZmZzZXQ9IjAiIHN0b3AtY29sb3I9ImhzbCgzNyw0NSUsODglKSIvPjxzdG9wIG9mZnNldD0iMSIgc3RvcC1jb2xvcj0iaHNsKDc3LDQ1JSw3OCUpIi8+CjwvbGluZWFyR3JhZGllbnQ+PC9kZWZzPgo8cmVjdCB3aWR0aD0iNDAwIiBoZWlnaHQ9IjI4MCIgZmlsbD0idXJsKCNnKSIvPgo8dGV4dCB4PSIyMDAiIHk9IjE1MCIgZm9udC1mYW1pbHk9Ikdlb3JnaWEsc2VyaWYiIGZvbnQtc2l6ZT0iODgiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGZpbGw9ImhzbCgzNywzNSUsMzIlKSIgZm9udC13ZWlnaHQ9IjYwMCI+VDwvdGV4dD4KPHRleHQgeD0iMjAwIiB5PSIyMzAiIGZvbnQtZmFtaWx5PSJIZWx2ZXRpY2EsQXJpYWwsc2Fucy1zZXJpZiIgZm9udC1zaXplPSIxNiIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZmlsbD0iaHNsKDM3LDMwJSwzMCUpIiBsZXR0ZXItc3BhY2luZz0iMSI+SU5ESUFOIFNUUkVFVCBGT09EPC90ZXh0Pgo8L3N2Zz4=')"></div>
+      <div class="card-body">
+        <div class="card-rank">#3</div>
+        <h3 class="card-name">Tapori</h3>
+        <div class="card-neigh">H Street Corridor, DC · Indian street food </div>
+        <div class="card-meta-row">
+          <span class="price-tag">$$</span>
+          <span class="rating-badge">★ 4.6 <span class="rating-count">Google · 223 reviews</span></span>
+        </div>
+        <p class="card-why">"South Asian street food as serious craft — chaat and kathi rolls sharp enough to make you forget you&#x27;re paying moderate-tier prices."</p>
+        <div class="card-diff" style="border-color:#c98a1f;color:#c98a1f">
+          <strong>Moderate to book</strong> — Resy books out on weekends but midweek tables and walk-in bar seats are attainable.
+        </div>
+        <div class="card-sources">On: Washingtonian Top 100 · James Beard Awards</div>
+      </div>
+    </a>
+
+    <a class="card" href="https://allpurposedc.com/locations/shaw/" target="_blank" rel="noopener">
+      <div class="card-thumb" style="background-image:url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI0MDAiIGhlaWdodD0iMjgwIiB2aWV3Qm94PSIwIDAgNDAwIDI4MCI+CjxkZWZzPjxsaW5lYXJHcmFkaWVudCBpZD0iZyIgeDE9IjAiIHkxPSIwIiB4Mj0iMSIgeTI9IjEiPgo8c3RvcCBvZmZzZXQ9IjAiIHN0b3AtY29sb3I9ImhzbCgyOTAsNDUlLDg4JSkiLz48c3RvcCBvZmZzZXQ9IjEiIHN0b3AtY29sb3I9ImhzbCgzMzAsNDUlLDc4JSkiLz4KPC9saW5lYXJHcmFkaWVudD48L2RlZnM+CjxyZWN0IHdpZHRoPSI0MDAiIGhlaWdodD0iMjgwIiBmaWxsPSJ1cmwoI2cpIi8+Cjx0ZXh0IHg9IjIwMCIgeT0iMTUwIiBmb250LWZhbWlseT0iR2VvcmdpYSxzZXJpZiIgZm9udC1zaXplPSI4OCIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZmlsbD0iaHNsKDI5MCwzNSUsMzIlKSIgZm9udC13ZWlnaHQ9IjYwMCI+QTwvdGV4dD4KPHRleHQgeD0iMjAwIiB5PSIyMzAiIGZvbnQtZmFtaWx5PSJIZWx2ZXRpY2EsQXJpYWwsc2Fucy1zZXJpZiIgZm9udC1zaXplPSIxNiIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZmlsbD0iaHNsKDI5MCwzMCUsMzAlKSIgbGV0dGVyLXNwYWNpbmc9IjEiPklUQUxJQU4gLyBORUFQT0xJVEFOIFBJWlpBPC90ZXh0Pgo8L3N2Zz4=')"></div>
+      <div class="card-body">
+        <div class="card-rank">#4</div>
+        <h3 class="card-name">All-Purpose Pizzeria (Shaw)</h3>
+        <div class="card-neigh">Shaw, DC · Italian / Neapolitan pizza </div>
+        <div class="card-meta-row">
+          <span class="price-tag">$$$</span>
+          <span class="rating-badge">★ 4.4 <span class="rating-count">Tripadvisor · 151 reviews</span></span><span class="rating-badge">★ 4.5 <span class="rating-count">Google · 1,024 reviews</span></span>
+        </div>
+        <p class="card-why">"Char-blistered pies, punchy pastas, and a smart natural-wine list make this Shaw stalwart the platonic ideal of a neighborhood Italian date-night spot."</p>
+        <div class="card-diff" style="border-color:#c98a1f;color:#c98a1f">
+          <strong>Moderate to book</strong> — Resy recommended for weekend dinner; walk-in seats at the bar or patio often available.
+        </div>
+        <div class="card-sources">On: Washingtonian Top 100</div>
+      </div>
+    </a>
+
+    <a class="card" href="https://www.revelershour.com/" target="_blank" rel="noopener">
+      <div class="card-thumb" style="background-image:url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI0MDAiIGhlaWdodD0iMjgwIiB2aWV3Qm94PSIwIDAgNDAwIDI4MCI+CjxkZWZzPjxsaW5lYXJHcmFkaWVudCBpZD0iZyIgeDE9IjAiIHkxPSIwIiB4Mj0iMSIgeTI9IjEiPgo8c3RvcCBvZmZzZXQ9IjAiIHN0b3AtY29sb3I9ImhzbCgxNjQsNDUlLDg4JSkiLz48c3RvcCBvZmZzZXQ9IjEiIHN0b3AtY29sb3I9ImhzbCgyMDQsNDUlLDc4JSkiLz4KPC9saW5lYXJHcmFkaWVudD48L2RlZnM+CjxyZWN0IHdpZHRoPSI0MDAiIGhlaWdodD0iMjgwIiBmaWxsPSJ1cmwoI2cpIi8+Cjx0ZXh0IHg9IjIwMCIgeT0iMTUwIiBmb250LWZhbWlseT0iR2VvcmdpYSxzZXJpZiIgZm9udC1zaXplPSI4OCIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZmlsbD0iaHNsKDE2NCwzNSUsMzIlKSIgZm9udC13ZWlnaHQ9IjYwMCI+UjwvdGV4dD4KPHRleHQgeD0iMjAwIiB5PSIyMzAiIGZvbnQtZmFtaWx5PSJIZWx2ZXRpY2EsQXJpYWwsc2Fucy1zZXJpZiIgZm9udC1zaXplPSIxNiIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZmlsbD0iaHNsKDE2NCwzMCUsMzAlKSIgbGV0dGVyLXNwYWNpbmc9IjEiPklUQUxJQU4gV0lORSBCQVI8L3RleHQ+Cjwvc3ZnPg==')"></div>
+      <div class="card-body">
+        <div class="card-rank">#5</div>
+        <h3 class="card-name">Reveler&#x27;s Hour</h3>
+        <div class="card-neigh">Adams Morgan, DC · Italian wine bar </div>
+        <div class="card-meta-row">
+          <span class="price-tag">$$$</span>
+          <span class="rating-badge">★ 4.5 <span class="rating-count">Google · 385 reviews</span></span>
+        </div>
+        <p class="card-why">"A tiny, glowing wine bar turning out pasta good enough to anchor a splurge-adjacent date night without the splurge-adjacent bill."</p>
+        <div class="card-diff" style="border-color:#c85a3a;color:#c85a3a">
+          <strong>Hard to book</strong> — Small wine-bar footprint means Resy tables disappear almost instantly; expect a wait or an early walk-in.
+        </div>
+        <div class="card-sources">On: Washingtonian Top 100 · Michelin Guide DC</div>
+      </div>
+    </a></div>
+    </section>
+
+    <section class="cat-section" id="cat-moderate_nova">
+      <h2>Moderate — Northern VA</h2>
+      <p class="short-note">Only 3 picks cleared the 4.5+ bar this month — every pick must appear on a locked source AND rate 4.5 or higher.</p>
+      <div class="card-grid">
+    <a class="card" href="https://www.aracosiamclean.com/" target="_blank" rel="noopener">
+      <div class="card-thumb" style="background-image:url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI0MDAiIGhlaWdodD0iMjgwIiB2aWV3Qm94PSIwIDAgNDAwIDI4MCI+CjxkZWZzPjxsaW5lYXJHcmFkaWVudCBpZD0iZyIgeDE9IjAiIHkxPSIwIiB4Mj0iMSIgeTI9IjEiPgo8c3RvcCBvZmZzZXQ9IjAiIHN0b3AtY29sb3I9ImhzbCgyNDgsNDUlLDg4JSkiLz48c3RvcCBvZmZzZXQ9IjEiIHN0b3AtY29sb3I9ImhzbCgyODgsNDUlLDc4JSkiLz4KPC9saW5lYXJHcmFkaWVudD48L2RlZnM+CjxyZWN0IHdpZHRoPSI0MDAiIGhlaWdodD0iMjgwIiBmaWxsPSJ1cmwoI2cpIi8+Cjx0ZXh0IHg9IjIwMCIgeT0iMTUwIiBmb250LWZhbWlseT0iR2VvcmdpYSxzZXJpZiIgZm9udC1zaXplPSI4OCIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZmlsbD0iaHNsKDI0OCwzNSUsMzIlKSIgZm9udC13ZWlnaHQ9IjYwMCI+QTwvdGV4dD4KPHRleHQgeD0iMjAwIiB5PSIyMzAiIGZvbnQtZmFtaWx5PSJIZWx2ZXRpY2EsQXJpYWwsc2Fucy1zZXJpZiIgZm9udC1zaXplPSIxNiIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZmlsbD0iaHNsKDI0OCwzMCUsMzAlKSIgbGV0dGVyLXNwYWNpbmc9IjEiPkFGR0hBTiAvIE1JRERMRSBFQVNURVJOPC90ZXh0Pgo8L3N2Zz4=')"></div>
+      <div class="card-body">
+        <div class="card-rank">#1</div>
+        <h3 class="card-name">Aracosia McLean</h3>
+        <div class="card-neigh">McLean, VA · Afghan / Middle Eastern </div>
+        <div class="card-meta-row">
+          <span class="price-tag">$$</span>
+          <span class="rating-badge">★ 4.8 <span class="rating-count">Tripadvisor · 52 reviews</span></span>
+        </div>
+        <p class="card-why">"A quietly extraordinary Afghan kitchen turning kabuli pulao and mantu into date-night food, at a price that makes fine-dining rivals look silly."</p>
+        <div class="card-diff" style="border-color:#c98a1f;color:#c98a1f">
+          <strong>Moderate to book</strong> — Bookable on OpenTable most nights; weekends fill up so reserve a few days out.
+        </div>
+        <div class="card-sources">On: Washingtonian Top 100</div>
+      </div>
+    </a>
+
+    <a class="card" href="https://ambarrestaurant.com/ambarclarendon" target="_blank" rel="noopener">
+      <div class="card-thumb" style="background-image:url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI0MDAiIGhlaWdodD0iMjgwIiB2aWV3Qm94PSIwIDAgNDAwIDI4MCI+CjxkZWZzPjxsaW5lYXJHcmFkaWVudCBpZD0iZyIgeDE9IjAiIHkxPSIwIiB4Mj0iMSIgeTI9IjEiPgo8c3RvcCBvZmZzZXQ9IjAiIHN0b3AtY29sb3I9ImhzbCgzNDUsNDUlLDg4JSkiLz48c3RvcCBvZmZzZXQ9IjEiIHN0b3AtY29sb3I9ImhzbCgyNSw0NSUsNzglKSIvPgo8L2xpbmVhckdyYWRpZW50PjwvZGVmcz4KPHJlY3Qgd2lkdGg9IjQwMCIgaGVpZ2h0PSIyODAiIGZpbGw9InVybCgjZykiLz4KPHRleHQgeD0iMjAwIiB5PSIxNTAiIGZvbnQtZmFtaWx5PSJHZW9yZ2lhLHNlcmlmIiBmb250LXNpemU9Ijg4IiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBmaWxsPSJoc2woMzQ1LDM1JSwzMiUpIiBmb250LXdlaWdodD0iNjAwIj5BPC90ZXh0Pgo8dGV4dCB4PSIyMDAiIHk9IjIzMCIgZm9udC1mYW1pbHk9IkhlbHZldGljYSxBcmlhbCxzYW5zLXNlcmlmIiBmb250LXNpemU9IjE2IiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBmaWxsPSJoc2woMzQ1LDMwJSwzMCUpIiBsZXR0ZXItc3BhY2luZz0iMSI+QkFMS0FOIC8gRUFTVEVSTiBFVVJPUEVBTjwvdGV4dD4KPC9zdmc+')"></div>
+      <div class="card-body">
+        <div class="card-rank">#2</div>
+        <h3 class="card-name">Ambar Clarendon</h3>
+        <div class="card-neigh">Clarendon, Arlington, VA · Balkan / Eastern European <span class="chain-tag">chain — earned it</span></div>
+        <div class="card-meta-row">
+          <span class="price-tag">$$</span>
+          <span class="rating-badge">★ 4.5 <span class="rating-count">Tripadvisor · 619 reviews</span></span>
+        </div>
+        <p class="card-why">"An unlimited small-plates Balkan blowout of stroganoff, lamb, and pickled everything that turns a weeknight into an occasion without wrecking the budget."</p>
+        <div class="card-diff" style="border-color:#c98a1f;color:#c98a1f">
+          <strong>Moderate-Hard to book</strong> — Popular for groups and the unlimited-plates format; book ahead for prime weekend slots.
+        </div>
+        <div class="card-sources">On: Arlington Magazine</div>
+      </div>
+    </a>
+
+    <a class="card" href="https://www.evelynrosevienna.com/" target="_blank" rel="noopener">
+      <div class="card-thumb" style="background-image:url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI0MDAiIGhlaWdodD0iMjgwIiB2aWV3Qm94PSIwIDAgNDAwIDI4MCI+CjxkZWZzPjxsaW5lYXJHcmFkaWVudCBpZD0iZyIgeDE9IjAiIHkxPSIwIiB4Mj0iMSIgeTI9IjEiPgo8c3RvcCBvZmZzZXQ9IjAiIHN0b3AtY29sb3I9ImhzbCgzMzQsNDUlLDg4JSkiLz48c3RvcCBvZmZzZXQ9IjEiIHN0b3AtY29sb3I9ImhzbCgxNCw0NSUsNzglKSIvPgo8L2xpbmVhckdyYWRpZW50PjwvZGVmcz4KPHJlY3Qgd2lkdGg9IjQwMCIgaGVpZ2h0PSIyODAiIGZpbGw9InVybCgjZykiLz4KPHRleHQgeD0iMjAwIiB5PSIxNTAiIGZvbnQtZmFtaWx5PSJHZW9yZ2lhLHNlcmlmIiBmb250LXNpemU9Ijg4IiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBmaWxsPSJoc2woMzM0LDM1JSwzMiUpIiBmb250LXdlaWdodD0iNjAwIj5FPC90ZXh0Pgo8dGV4dCB4PSIyMDAiIHk9IjIzMCIgZm9udC1mYW1pbHk9IkhlbHZldGljYSxBcmlhbCxzYW5zLXNlcmlmIiBmb250LXNpemU9IjE2IiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBmaWxsPSJoc2woMzM0LDMwJSwzMCUpIiBsZXR0ZXItc3BhY2luZz0iMSI+TU9ERVJOIEFNRVJJQ0FOPC90ZXh0Pgo8L3N2Zz4=')"></div>
+      <div class="card-body">
+        <div class="card-rank">#3</div>
+        <h3 class="card-name">Evelyn Rose</h3>
+        <div class="card-neigh">Vienna, VA · Modern American </div>
+        <div class="card-meta-row">
+          <span class="price-tag">$$$</span>
+          <span class="rating-badge">★ 4.5 <span class="rating-count">Tripadvisor · 13 reviews</span></span>
+        </div>
+        <p class="card-why">"A cozy, ingredient-forward newcomer to Church Street that plays it fresh and unfussy — exactly the low-key-special dinner Vienna needed."</p>
+        <div class="card-diff" style="border-color:#c98a1f;color:#c98a1f">
+          <strong>Moderate to book</strong> — Newer arrival with a small dining room; reserve ahead for weekend dinners.
+        </div>
+        <div class="card-sources">On: Northern Virginia Magazine 50 Best</div>
+      </div>
+    </a></div>
+    </section>
+
+    <section class="cat-section" id="cat-casual_dc">
+      <h2>Casual / Cheap Eats — DC</h2>
+      
+      <div class="card-grid">
+    <a class="card" href="https://www.tripadvisor.com/Restaurant_Review-g28970-d3320481-Reviews-Keren_Restaurant-Washington_DC_District_of_Columbia.html" target="_blank" rel="noopener">
+      <div class="card-thumb" style="background-image:url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI0MDAiIGhlaWdodD0iMjgwIiB2aWV3Qm94PSIwIDAgNDAwIDI4MCI+CjxkZWZzPjxsaW5lYXJHcmFkaWVudCBpZD0iZyIgeDE9IjAiIHkxPSIwIiB4Mj0iMSIgeTI9IjEiPgo8c3RvcCBvZmZzZXQ9IjAiIHN0b3AtY29sb3I9ImhzbCgyMjUsNDUlLDg4JSkiLz48c3RvcCBvZmZzZXQ9IjEiIHN0b3AtY29sb3I9ImhzbCgyNjUsNDUlLDc4JSkiLz4KPC9saW5lYXJHcmFkaWVudD48L2RlZnM+CjxyZWN0IHdpZHRoPSI0MDAiIGhlaWdodD0iMjgwIiBmaWxsPSJ1cmwoI2cpIi8+Cjx0ZXh0IHg9IjIwMCIgeT0iMTUwIiBmb250LWZhbWlseT0iR2VvcmdpYSxzZXJpZiIgZm9udC1zaXplPSI4OCIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZmlsbD0iaHNsKDIyNSwzNSUsMzIlKSIgZm9udC13ZWlnaHQ9IjYwMCI+SzwvdGV4dD4KPHRleHQgeD0iMjAwIiB5PSIyMzAiIGZvbnQtZmFtaWx5PSJIZWx2ZXRpY2EsQXJpYWwsc2Fucy1zZXJpZiIgZm9udC1zaXplPSIxNiIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZmlsbD0iaHNsKDIyNSwzMCUsMzAlKSIgbGV0dGVyLXNwYWNpbmc9IjEiPkVSSVRSRUFOL0VUSElPUElBTjwvdGV4dD4KPC9zdmc+')"></div>
+      <div class="card-body">
+        <div class="card-rank">#1</div>
+        <h3 class="card-name">Keren Restaurant</h3>
+        <div class="card-neigh">Adams Morgan, DC · Eritrean/Ethiopian </div>
+        <div class="card-meta-row">
+          <span class="price-tag">$</span>
+          <span class="rating-badge">★ 4.6 <span class="rating-count">Tripadvisor · 315 reviews</span></span>
+        </div>
+        <p class="card-why">"A Little Ethiopia stalwart that still outcooks its flashier neighbors — injera-mopped stews this good shouldn&#x27;t cost this little."</p>
+        <div class="card-diff" style="border-color:#2f8f5b;color:#2f8f5b">
+          <strong>Easy to book</strong> — Walk-in counter/sit-down, rarely a wait outside peak dinner hours.
+        </div>
+        <div class="card-sources">On: Tripadvisor</div>
+      </div>
+    </a>
+
+    <a class="card" href="https://www.tripadvisor.com/Restaurant_Review-g28970-d456607-Reviews-Baked_and_Wired-Washington_DC_District_of_Columbia.html" target="_blank" rel="noopener">
+      <div class="card-thumb" style="background-image:url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI0MDAiIGhlaWdodD0iMjgwIiB2aWV3Qm94PSIwIDAgNDAwIDI4MCI+CjxkZWZzPjxsaW5lYXJHcmFkaWVudCBpZD0iZyIgeDE9IjAiIHkxPSIwIiB4Mj0iMSIgeTI9IjEiPgo8c3RvcCBvZmZzZXQ9IjAiIHN0b3AtY29sb3I9ImhzbCgxNjcsNDUlLDg4JSkiLz48c3RvcCBvZmZzZXQ9IjEiIHN0b3AtY29sb3I9ImhzbCgyMDcsNDUlLDc4JSkiLz4KPC9saW5lYXJHcmFkaWVudD48L2RlZnM+CjxyZWN0IHdpZHRoPSI0MDAiIGhlaWdodD0iMjgwIiBmaWxsPSJ1cmwoI2cpIi8+Cjx0ZXh0IHg9IjIwMCIgeT0iMTUwIiBmb250LWZhbWlseT0iR2VvcmdpYSxzZXJpZiIgZm9udC1zaXplPSI4OCIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZmlsbD0iaHNsKDE2NywzNSUsMzIlKSIgZm9udC13ZWlnaHQ9IjYwMCI+QjwvdGV4dD4KPHRleHQgeD0iMjAwIiB5PSIyMzAiIGZvbnQtZmFtaWx5PSJIZWx2ZXRpY2EsQXJpYWwsc2Fucy1zZXJpZiIgZm9udC1zaXplPSIxNiIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZmlsbD0iaHNsKDE2NywzMCUsMzAlKSIgbGV0dGVyLXNwYWNpbmc9IjEiPkFNRVJJQ0FOIEJBS0VSWS9DQUZFPC90ZXh0Pgo8L3N2Zz4=')"></div>
+      <div class="card-body">
+        <div class="card-rank">#2</div>
+        <h3 class="card-name">Baked and Wired</h3>
+        <div class="card-neigh">Georgetown, DC · American Bakery/Cafe </div>
+        <div class="card-meta-row">
+          <span class="price-tag">$</span>
+          <span class="rating-badge">★ 4.5 <span class="rating-count">Tripadvisor · 1,075 reviews</span></span>
+        </div>
+        <p class="card-why">"Georgetown&#x27;s best cup of coffee comes with a cupcake that actually earns the hype, at prices that predate the neighborhood&#x27;s gentrification."</p>
+        <div class="card-diff" style="border-color:#2f8f5b;color:#2f8f5b">
+          <strong>Easy to book</strong> — Counter service, no reservations; grab-and-go even when the line&#x27;s out the door.
+        </div>
+        <div class="card-sources">On: Tripadvisor</div>
+      </div>
+    </a>
+
+    <a class="card" href="https://www.tripadvisor.com/Restaurant_Review-g28970-d3303409-Reviews-El_Rinconcito_Cafe-Washington_DC_District_of_Columbia.html" target="_blank" rel="noopener">
+      <div class="card-thumb" style="background-image:url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI0MDAiIGhlaWdodD0iMjgwIiB2aWV3Qm94PSIwIDAgNDAwIDI4MCI+CjxkZWZzPjxsaW5lYXJHcmFkaWVudCBpZD0iZyIgeDE9IjAiIHkxPSIwIiB4Mj0iMSIgeTI9IjEiPgo8c3RvcCBvZmZzZXQ9IjAiIHN0b3AtY29sb3I9ImhzbCgxNjksNDUlLDg4JSkiLz48c3RvcCBvZmZzZXQ9IjEiIHN0b3AtY29sb3I9ImhzbCgyMDksNDUlLDc4JSkiLz4KPC9saW5lYXJHcmFkaWVudD48L2RlZnM+CjxyZWN0IHdpZHRoPSI0MDAiIGhlaWdodD0iMjgwIiBmaWxsPSJ1cmwoI2cpIi8+Cjx0ZXh0IHg9IjIwMCIgeT0iMTUwIiBmb250LWZhbWlseT0iR2VvcmdpYSxzZXJpZiIgZm9udC1zaXplPSI4OCIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZmlsbD0iaHNsKDE2OSwzNSUsMzIlKSIgZm9udC13ZWlnaHQ9IjYwMCI+RTwvdGV4dD4KPHRleHQgeD0iMjAwIiB5PSIyMzAiIGZvbnQtZmFtaWx5PSJIZWx2ZXRpY2EsQXJpYWwsc2Fucy1zZXJpZiIgZm9udC1zaXplPSIxNiIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZmlsbD0iaHNsKDE2OSwzMCUsMzAlKSIgbGV0dGVyLXNwYWNpbmc9IjEiPlNBTFZBRE9SQU4vQ0VOVFJBTCBBTUVSSUNBTjwvdGV4dD4KPC9zdmc+')"></div>
+      <div class="card-body">
+        <div class="card-rank">#3</div>
+        <h3 class="card-name">El Rinconcito Cafe</h3>
+        <div class="card-neigh">Mount Vernon Square/Shaw, DC · Salvadoran/Central American </div>
+        <div class="card-meta-row">
+          <span class="price-tag">$</span>
+          <span class="rating-badge">★ 4.5 <span class="rating-count">Tripadvisor · 263 reviews</span></span>
+        </div>
+        <p class="card-why">"Pupusas griddled to order for a few dollars each — the kind of unglamorous spot that makes &#x27;hidden gem&#x27; feel like an understatement."</p>
+        <div class="card-diff" style="border-color:#2f8f5b;color:#2f8f5b">
+          <strong>Easy to book</strong> — Casual sit-down, no reservations, easy walk-in most nights.
+        </div>
+        <div class="card-sources">On: Tripadvisor</div>
+      </div>
+    </a>
+
+    <a class="card" href="https://www.tripadvisor.com/Restaurant_Review-g28970-d10264390-Reviews-Taqueria_Habanero-Washington_DC_District_of_Columbia.html" target="_blank" rel="noopener">
+      <div class="card-thumb" style="background-image:url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI0MDAiIGhlaWdodD0iMjgwIiB2aWV3Qm94PSIwIDAgNDAwIDI4MCI+CjxkZWZzPjxsaW5lYXJHcmFkaWVudCBpZD0iZyIgeDE9IjAiIHkxPSIwIiB4Mj0iMSIgeTI9IjEiPgo8c3RvcCBvZmZzZXQ9IjAiIHN0b3AtY29sb3I9ImhzbCgyNzIsNDUlLDg4JSkiLz48c3RvcCBvZmZzZXQ9IjEiIHN0b3AtY29sb3I9ImhzbCgzMTIsNDUlLDc4JSkiLz4KPC9saW5lYXJHcmFkaWVudD48L2RlZnM+CjxyZWN0IHdpZHRoPSI0MDAiIGhlaWdodD0iMjgwIiBmaWxsPSJ1cmwoI2cpIi8+Cjx0ZXh0IHg9IjIwMCIgeT0iMTUwIiBmb250LWZhbWlseT0iR2VvcmdpYSxzZXJpZiIgZm9udC1zaXplPSI4OCIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZmlsbD0iaHNsKDI3MiwzNSUsMzIlKSIgZm9udC13ZWlnaHQ9IjYwMCI+VDwvdGV4dD4KPHRleHQgeD0iMjAwIiB5PSIyMzAiIGZvbnQtZmFtaWx5PSJIZWx2ZXRpY2EsQXJpYWwsc2Fucy1zZXJpZiIgZm9udC1zaXplPSIxNiIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZmlsbD0iaHNsKDI3MiwzMCUsMzAlKSIgbGV0dGVyLXNwYWNpbmc9IjEiPk1FWElDQU48L3RleHQ+Cjwvc3ZnPg==')"></div>
+      <div class="card-body">
+        <div class="card-rank">#4</div>
+        <h3 class="card-name">Taqueria Habanero</h3>
+        <div class="card-neigh">Petworth, DC · Mexican </div>
+        <div class="card-meta-row">
+          <span class="price-tag">$</span>
+          <span class="rating-badge">★ 4.5 <span class="rating-count">Tripadvisor · 51 reviews</span></span>
+        </div>
+        <p class="card-why">"Michelin gave it a Bib for a reason — mole and al pastor this precise shouldn&#x27;t be sold from behind a taqueria counter for single digits."</p>
+        <div class="card-diff" style="border-color:#2f8f5b;color:#2f8f5b">
+          <strong>Easy to book</strong> — Order-at-counter taqueria; no reservations needed, occasional weekend line.
+        </div>
+        <div class="card-sources">On: Tripadvisor · Michelin Guide DC (Bib Gourmand)</div>
+      </div>
+    </a>
+
+    <a class="card" href="https://www.tripadvisor.com/Restaurant_Review-g28970-d7162281-Reviews-Dog_Tag_Bakery-Washington_DC_District_of_Columbia.html" target="_blank" rel="noopener">
+      <div class="card-thumb" style="background-image:url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI0MDAiIGhlaWdodD0iMjgwIiB2aWV3Qm94PSIwIDAgNDAwIDI4MCI+CjxkZWZzPjxsaW5lYXJHcmFkaWVudCBpZD0iZyIgeDE9IjAiIHkxPSIwIiB4Mj0iMSIgeTI9IjEiPgo8c3RvcCBvZmZzZXQ9IjAiIHN0b3AtY29sb3I9ImhzbCgyNTgsNDUlLDg4JSkiLz48c3RvcCBvZmZzZXQ9IjEiIHN0b3AtY29sb3I9ImhzbCgyOTgsNDUlLDc4JSkiLz4KPC9saW5lYXJHcmFkaWVudD48L2RlZnM+CjxyZWN0IHdpZHRoPSI0MDAiIGhlaWdodD0iMjgwIiBmaWxsPSJ1cmwoI2cpIi8+Cjx0ZXh0IHg9IjIwMCIgeT0iMTUwIiBmb250LWZhbWlseT0iR2VvcmdpYSxzZXJpZiIgZm9udC1zaXplPSI4OCIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZmlsbD0iaHNsKDI1OCwzNSUsMzIlKSIgZm9udC13ZWlnaHQ9IjYwMCI+RDwvdGV4dD4KPHRleHQgeD0iMjAwIiB5PSIyMzAiIGZvbnQtZmFtaWx5PSJIZWx2ZXRpY2EsQXJpYWwsc2Fucy1zZXJpZiIgZm9udC1zaXplPSIxNiIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZmlsbD0iaHNsKDI1OCwzMCUsMzAlKSIgbGV0dGVyLXNwYWNpbmc9IjEiPkFNRVJJQ0FOIEJBS0VSWS9DQUZFPC90ZXh0Pgo8L3N2Zz4=')"></div>
+      <div class="card-body">
+        <div class="card-rank">#5</div>
+        <h3 class="card-name">Dog Tag Bakery</h3>
+        <div class="card-neigh">Georgetown, DC · American Bakery/Cafe </div>
+        <div class="card-meta-row">
+          <span class="price-tag">$</span>
+          <span class="rating-badge">★ 4.7 <span class="rating-count">Tripadvisor · 81 reviews</span></span>
+        </div>
+        <p class="card-why">"A veteran-run bakery training program that happens to bake one of the city&#x27;s best chocolate chip cookies — mission and quality rarely align this well."</p>
+        <div class="card-diff" style="border-color:#2f8f5b;color:#2f8f5b">
+          <strong>Easy to book</strong> — Counter-service cafe, walk-in only.
+        </div>
+        <div class="card-sources">On: Tripadvisor</div>
+      </div>
+    </a></div>
+    </section>
+
+    <section class="cat-section" id="cat-casual_nova">
+      <h2>Casual / Cheap Eats — Northern VA</h2>
+      
+      <div class="card-grid">
+    <a class="card" href="https://www.maharanipalace.com" target="_blank" rel="noopener">
+      <div class="card-thumb" style="background-image:url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI0MDAiIGhlaWdodD0iMjgwIiB2aWV3Qm94PSIwIDAgNDAwIDI4MCI+CjxkZWZzPjxsaW5lYXJHcmFkaWVudCBpZD0iZyIgeDE9IjAiIHkxPSIwIiB4Mj0iMSIgeTI9IjEiPgo8c3RvcCBvZmZzZXQ9IjAiIHN0b3AtY29sb3I9ImhzbCgyODQsNDUlLDg4JSkiLz48c3RvcCBvZmZzZXQ9IjEiIHN0b3AtY29sb3I9ImhzbCgzMjQsNDUlLDc4JSkiLz4KPC9saW5lYXJHcmFkaWVudD48L2RlZnM+CjxyZWN0IHdpZHRoPSI0MDAiIGhlaWdodD0iMjgwIiBmaWxsPSJ1cmwoI2cpIi8+Cjx0ZXh0IHg9IjIwMCIgeT0iMTUwIiBmb250LWZhbWlseT0iR2VvcmdpYSxzZXJpZiIgZm9udC1zaXplPSI4OCIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZmlsbD0iaHNsKDI4NCwzNSUsMzIlKSIgZm9udC13ZWlnaHQ9IjYwMCI+TTwvdGV4dD4KPHRleHQgeD0iMjAwIiB5PSIyMzAiIGZvbnQtZmFtaWx5PSJIZWx2ZXRpY2EsQXJpYWwsc2Fucy1zZXJpZiIgZm9udC1zaXplPSIxNiIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZmlsbD0iaHNsKDI4NCwzMCUsMzAlKSIgbGV0dGVyLXNwYWNpbmc9IjEiPk5PUlRIIElORElBTjwvdGV4dD4KPC9zdmc+')"></div>
+      <div class="card-body">
+        <div class="card-rank">#1</div>
+        <h3 class="card-name">Maharani Palace</h3>
+        <div class="card-neigh">Herndon, VA · North Indian </div>
+        <div class="card-meta-row">
+          <span class="price-tag">$$</span>
+          <span class="rating-badge">★ 4.8 <span class="rating-count">Google · 3,959 reviews</span></span>
+        </div>
+        <p class="card-why">"A Herndon storefront with white-tablecloth ambition at strip-mall prices — the tandoor (and nearly 4,000 five-star-leaning reviews) don&#x27;t lie."</p>
+        <div class="card-diff" style="border-color:#c98a1f;color:#c98a1f">
+          <strong>Moderate to book</strong> — Reservations recommended for dinner and weekends; bar seating available for walk-ins.
+        </div>
+        <div class="card-sources">On: Northern Virginia Magazine 50 Best</div>
+      </div>
+    </a>
+
+    <a class="card" href="https://www.straccipizza.com" target="_blank" rel="noopener">
+      <div class="card-thumb" style="background-image:url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI0MDAiIGhlaWdodD0iMjgwIiB2aWV3Qm94PSIwIDAgNDAwIDI4MCI+CjxkZWZzPjxsaW5lYXJHcmFkaWVudCBpZD0iZyIgeDE9IjAiIHkxPSIwIiB4Mj0iMSIgeTI9IjEiPgo8c3RvcCBvZmZzZXQ9IjAiIHN0b3AtY29sb3I9ImhzbCg5OSw0NSUsODglKSIvPjxzdG9wIG9mZnNldD0iMSIgc3RvcC1jb2xvcj0iaHNsKDEzOSw0NSUsNzglKSIvPgo8L2xpbmVhckdyYWRpZW50PjwvZGVmcz4KPHJlY3Qgd2lkdGg9IjQwMCIgaGVpZ2h0PSIyODAiIGZpbGw9InVybCgjZykiLz4KPHRleHQgeD0iMjAwIiB5PSIxNTAiIGZvbnQtZmFtaWx5PSJHZW9yZ2lhLHNlcmlmIiBmb250LXNpemU9Ijg4IiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBmaWxsPSJoc2woOTksMzUlLDMyJSkiIGZvbnQtd2VpZ2h0PSI2MDAiPlM8L3RleHQ+Cjx0ZXh0IHg9IjIwMCIgeT0iMjMwIiBmb250LWZhbWlseT0iSGVsdmV0aWNhLEFyaWFsLHNhbnMtc2VyaWYiIGZvbnQtc2l6ZT0iMTYiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGZpbGw9ImhzbCg5OSwzMCUsMzAlKSIgbGV0dGVyLXNwYWNpbmc9IjEiPklUQUxJQU4gLyBST01BTi1TVFlMRSBQSVpaQTwvdGV4dD4KPC9zdmc+')"></div>
+      <div class="card-body">
+        <div class="card-rank">#2</div>
+        <h3 class="card-name">Stracci Pizza</h3>
+        <div class="card-neigh">Del Ray, Alexandria, VA · Italian / Roman-style pizza </div>
+        <div class="card-meta-row">
+          <span class="price-tag">$$</span>
+          <span class="rating-badge">★ 4.7 <span class="rating-count">Google · 786 reviews</span></span>
+        </div>
+        <p class="card-why">"A Del Ray storefront turning out blistered, hand-pulled pies with obsessive dough work that usually costs twice as much elsewhere."</p>
+        <div class="card-diff" style="border-color:#c98a1f;color:#c98a1f">
+          <strong>Moderate to book</strong> — No reservations; weekend-night waits are common at this small neighborhood spot.
+        </div>
+        <div class="card-sources">On: Northern Virginia Magazine 50 Best</div>
+      </div>
+    </a>
+
+    <a class="card" href="https://www.tacobamba.com/taco-bamba-taqueria-vienna" target="_blank" rel="noopener">
+      <div class="card-thumb" style="background-image:url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI0MDAiIGhlaWdodD0iMjgwIiB2aWV3Qm94PSIwIDAgNDAwIDI4MCI+CjxkZWZzPjxsaW5lYXJHcmFkaWVudCBpZD0iZyIgeDE9IjAiIHkxPSIwIiB4Mj0iMSIgeTI9IjEiPgo8c3RvcCBvZmZzZXQ9IjAiIHN0b3AtY29sb3I9ImhzbCgxMzEsNDUlLDg4JSkiLz48c3RvcCBvZmZzZXQ9IjEiIHN0b3AtY29sb3I9ImhzbCgxNzEsNDUlLDc4JSkiLz4KPC9saW5lYXJHcmFkaWVudD48L2RlZnM+CjxyZWN0IHdpZHRoPSI0MDAiIGhlaWdodD0iMjgwIiBmaWxsPSJ1cmwoI2cpIi8+Cjx0ZXh0IHg9IjIwMCIgeT0iMTUwIiBmb250LWZhbWlseT0iR2VvcmdpYSxzZXJpZiIgZm9udC1zaXplPSI4OCIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZmlsbD0iaHNsKDEzMSwzNSUsMzIlKSIgZm9udC13ZWlnaHQ9IjYwMCI+VDwvdGV4dD4KPHRleHQgeD0iMjAwIiB5PSIyMzAiIGZvbnQtZmFtaWx5PSJIZWx2ZXRpY2EsQXJpYWwsc2Fucy1zZXJpZiIgZm9udC1zaXplPSIxNiIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZmlsbD0iaHNsKDEzMSwzMCUsMzAlKSIgbGV0dGVyLXNwYWNpbmc9IjEiPk1FWElDQU4gKFRBQ09TKTwvdGV4dD4KPC9zdmc+')"></div>
+      <div class="card-body">
+        <div class="card-rank">#3</div>
+        <h3 class="card-name">Taco Bamba</h3>
+        <div class="card-neigh">Vienna, VA · Mexican (tacos) <span class="chain-tag">chain — earned it</span></div>
+        <div class="card-meta-row">
+          <span class="price-tag">$</span>
+          <span class="rating-badge">★ 4.2 <span class="rating-count">Tripadvisor · 83 reviews</span></span><span class="rating-badge">★ 4.6 <span class="rating-count">Google · 2,656 reviews</span></span>
+        </div>
+        <p class="card-why">"Victor Albisu&#x27;s hometown taqueria empire never lost the plot — the grilled-guac-and-chorizo taco still tastes handmade, not franchised. This is the pre-approved chain exception: real critical acclaim, not just convenience."</p>
+        <div class="card-diff" style="border-color:#2f8f5b;color:#2f8f5b">
+          <strong>Easy to book</strong> — Counter-service fast-casual, no reservation needed; occasional lunch-rush line.
+        </div>
+        <div class="card-sources">On: Tripadvisor · Northern Virginia Magazine (Best of NoVA)</div>
+      </div>
+    </a>
+
+    <a class="card" href="https://www.wooboichicken.com" target="_blank" rel="noopener">
+      <div class="card-thumb" style="background-image:url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI0MDAiIGhlaWdodD0iMjgwIiB2aWV3Qm94PSIwIDAgNDAwIDI4MCI+CjxkZWZzPjxsaW5lYXJHcmFkaWVudCBpZD0iZyIgeDE9IjAiIHkxPSIwIiB4Mj0iMSIgeTI9IjEiPgo8c3RvcCBvZmZzZXQ9IjAiIHN0b3AtY29sb3I9ImhzbCgyNjgsNDUlLDg4JSkiLz48c3RvcCBvZmZzZXQ9IjEiIHN0b3AtY29sb3I9ImhzbCgzMDgsNDUlLDc4JSkiLz4KPC9saW5lYXJHcmFkaWVudD48L2RlZnM+CjxyZWN0IHdpZHRoPSI0MDAiIGhlaWdodD0iMjgwIiBmaWxsPSJ1cmwoI2cpIi8+Cjx0ZXh0IHg9IjIwMCIgeT0iMTUwIiBmb250LWZhbWlseT0iR2VvcmdpYSxzZXJpZiIgZm9udC1zaXplPSI4OCIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZmlsbD0iaHNsKDI2OCwzNSUsMzIlKSIgZm9udC13ZWlnaHQ9IjYwMCI+VzwvdGV4dD4KPHRleHQgeD0iMjAwIiB5PSIyMzAiIGZvbnQtZmFtaWx5PSJIZWx2ZXRpY2EsQXJpYWwsc2Fucy1zZXJpZiIgZm9udC1zaXplPSIxNiIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZmlsbD0iaHNsKDI2OCwzMCUsMzAlKSIgbGV0dGVyLXNwYWNpbmc9IjEiPk5BU0hWSUxMRS1TVFlMRSBIT1QgRlJJRUQgQ0hJQ0tFTjwvdGV4dD4KPC9zdmc+')"></div>
+      <div class="card-body">
+        <div class="card-rank">#4</div>
+        <h3 class="card-name">Wooboi Hot Chicken</h3>
+        <div class="card-neigh">Herndon, VA · Nashville-style hot fried chicken </div>
+        <div class="card-meta-row">
+          <span class="price-tag">$</span>
+          <span class="rating-badge">★ 4.6 <span class="rating-count">Google · 1,500 reviews</span></span>
+        </div>
+        <p class="card-why">"A strip-mall counter that&#x27;s been quietly out-punching DC&#x27;s entire fried-chicken-sandwich boom since 2019."</p>
+        <div class="card-diff" style="border-color:#2f8f5b;color:#2f8f5b">
+          <strong>Easy to book</strong> — Walk-up counter service; order ahead online to skip the line at peak hours.
+        </div>
+        <div class="card-sources">On: Northern Virginia Magazine (Best of NoVA)</div>
+      </div>
+    </a>
+
+    <a class="card" href="https://padaekdc.com" target="_blank" rel="noopener">
+      <div class="card-thumb" style="background-image:url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI0MDAiIGhlaWdodD0iMjgwIiB2aWV3Qm94PSIwIDAgNDAwIDI4MCI+CjxkZWZzPjxsaW5lYXJHcmFkaWVudCBpZD0iZyIgeDE9IjAiIHkxPSIwIiB4Mj0iMSIgeTI9IjEiPgo8c3RvcCBvZmZzZXQ9IjAiIHN0b3AtY29sb3I9ImhzbCgxNzYsNDUlLDg4JSkiLz48c3RvcCBvZmZzZXQ9IjEiIHN0b3AtY29sb3I9ImhzbCgyMTYsNDUlLDc4JSkiLz4KPC9saW5lYXJHcmFkaWVudD48L2RlZnM+CjxyZWN0IHdpZHRoPSI0MDAiIGhlaWdodD0iMjgwIiBmaWxsPSJ1cmwoI2cpIi8+Cjx0ZXh0IHg9IjIwMCIgeT0iMTUwIiBmb250LWZhbWlseT0iR2VvcmdpYSxzZXJpZiIgZm9udC1zaXplPSI4OCIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZmlsbD0iaHNsKDE3NiwzNSUsMzIlKSIgZm9udC13ZWlnaHQ9IjYwMCI+UDwvdGV4dD4KPHRleHQgeD0iMjAwIiB5PSIyMzAiIGZvbnQtZmFtaWx5PSJIZWx2ZXRpY2EsQXJpYWwsc2Fucy1zZXJpZiIgZm9udC1zaXplPSIxNiIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZmlsbD0iaHNsKDE3NiwzMCUsMzAlKSIgbGV0dGVyLXNwYWNpbmc9IjEiPkxBTywgVEhBSSAmYW1wOyBCVVJNRVNFPC90ZXh0Pgo8L3N2Zz4=')"></div>
+      <div class="card-body">
+        <div class="card-rank">#5</div>
+        <h3 class="card-name">Padaek</h3>
+        <div class="card-neigh">Arlington Ridge, Arlington, VA · Lao, Thai &amp; Burmese </div>
+        <div class="card-meta-row">
+          <span class="price-tag">$$</span>
+          <span class="rating-badge">★ 4.6 <span class="rating-count">Google · 261 reviews</span></span>
+        </div>
+        <p class="card-why">"Padaek treats Lao fish sauce like the star ingredient it&#x27;s named for, and has earned a genuine local cult following well past its original Falls Church spot."</p>
+        <div class="card-diff" style="border-color:#c98a1f;color:#c98a1f">
+          <strong>Moderate to book</strong> — Resy recommended; this cult-favorite fills up on weekends.
+        </div>
+        <div class="card-sources">On: Northern Virginia Magazine 50 Best</div>
+      </div>
+    </a></div>
+    </section>
+
+    <section class="cat-section" id="cat-happy_hour_dc">
+      <h2>Happy Hour — DC</h2>
+      <p class="short-note">Only 2 picks cleared the 4.5+ bar this month — every pick must appear on a locked source AND rate 4.5 or higher.</p>
+      <div class="card-grid">
+    <a class="card" href="https://pearldivedc.com/happy-hour/" target="_blank" rel="noopener">
+      <div class="card-thumb" style="background-image:url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI0MDAiIGhlaWdodD0iMjgwIiB2aWV3Qm94PSIwIDAgNDAwIDI4MCI+CjxkZWZzPjxsaW5lYXJHcmFkaWVudCBpZD0iZyIgeDE9IjAiIHkxPSIwIiB4Mj0iMSIgeTI9IjEiPgo8c3RvcCBvZmZzZXQ9IjAiIHN0b3AtY29sb3I9ImhzbCg5OSw0NSUsODglKSIvPjxzdG9wIG9mZnNldD0iMSIgc3RvcC1jb2xvcj0iaHNsKDEzOSw0NSUsNzglKSIvPgo8L2xpbmVhckdyYWRpZW50PjwvZGVmcz4KPHJlY3Qgd2lkdGg9IjQwMCIgaGVpZ2h0PSIyODAiIGZpbGw9InVybCgjZykiLz4KPHRleHQgeD0iMjAwIiB5PSIxNTAiIGZvbnQtZmFtaWx5PSJHZW9yZ2lhLHNlcmlmIiBmb250LXNpemU9Ijg4IiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBmaWxsPSJoc2woOTksMzUlLDMyJSkiIGZvbnQtd2VpZ2h0PSI2MDAiPlA8L3RleHQ+Cjx0ZXh0IHg9IjIwMCIgeT0iMjMwIiBmb250LWZhbWlseT0iSGVsdmV0aWNhLEFyaWFsLHNhbnMtc2VyaWYiIGZvbnQtc2l6ZT0iMTYiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGZpbGw9ImhzbCg5OSwzMCUsMzAlKSIgbGV0dGVyLXNwYWNpbmc9IjEiPkNBSlVOICZhbXA7IENSRU9MRSBTRUFGT09EPC90ZXh0Pgo8L3N2Zz4=')"></div>
+      <div class="card-body">
+        <div class="card-rank">#1</div>
+        <h3 class="card-name">Pearl Dive Oyster Palace</h3>
+        <div class="card-neigh">Logan Circle/Shaw, DC · Cajun &amp; Creole Seafood </div>
+        <div class="card-meta-row">
+          <span class="price-tag">$$</span>
+          <span class="rating-badge">★ 4.5 <span class="rating-count">Tripadvisor · 431 reviews</span></span>
+        </div>
+        <p class="card-why">"Half-price wood-grilled and raw oysters paired with a serious cocktail list make this the rare happy hour where the bar program and the kitchen are equally worth showing up for."</p>
+        <div class="card-diff" style="border-color:#c98a1f;color:#c98a1f">
+          <strong>Moderate to book</strong> — Dining room books up on weekends, but the raw bar and lounge seats are walk-in friendly for happy hour.
+        </div>
+        <div class="card-sources">On: Michelin Guide DC (Bib Gourmand)</div>
+      </div>
+    </a>
+
+    <a class="card" href="https://www.unconventionaldiner.com/" target="_blank" rel="noopener">
+      <div class="card-thumb" style="background-image:url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI0MDAiIGhlaWdodD0iMjgwIiB2aWV3Qm94PSIwIDAgNDAwIDI4MCI+CjxkZWZzPjxsaW5lYXJHcmFkaWVudCBpZD0iZyIgeDE9IjAiIHkxPSIwIiB4Mj0iMSIgeTI9IjEiPgo8c3RvcCBvZmZzZXQ9IjAiIHN0b3AtY29sb3I9ImhzbCgzMzUsNDUlLDg4JSkiLz48c3RvcCBvZmZzZXQ9IjEiIHN0b3AtY29sb3I9ImhzbCgxNSw0NSUsNzglKSIvPgo8L2xpbmVhckdyYWRpZW50PjwvZGVmcz4KPHJlY3Qgd2lkdGg9IjQwMCIgaGVpZ2h0PSIyODAiIGZpbGw9InVybCgjZykiLz4KPHRleHQgeD0iMjAwIiB5PSIxNTAiIGZvbnQtZmFtaWx5PSJHZW9yZ2lhLHNlcmlmIiBmb250LXNpemU9Ijg4IiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBmaWxsPSJoc2woMzM1LDM1JSwzMiUpIiBmb250LXdlaWdodD0iNjAwIj5VPC90ZXh0Pgo8dGV4dCB4PSIyMDAiIHk9IjIzMCIgZm9udC1mYW1pbHk9IkhlbHZldGljYSxBcmlhbCxzYW5zLXNlcmlmIiBmb250LXNpemU9IjE2IiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBmaWxsPSJoc2woMzM1LDMwJSwzMCUpIiBsZXR0ZXItc3BhY2luZz0iMSI+TkVXIEFNRVJJQ0FOIERJTkVSPC90ZXh0Pgo8L3N2Zz4=')"></div>
+      <div class="card-body">
+        <div class="card-rank">#2</div>
+        <h3 class="card-name">Unconventional Diner</h3>
+        <div class="card-neigh">Convention Center/Shaw, DC · New American Diner </div>
+        <div class="card-meta-row">
+          <span class="price-tag">$$</span>
+          <span class="rating-badge">★ 4.5 <span class="rating-count">Tripadvisor · 398 reviews</span></span>
+        </div>
+        <p class="card-why">"A Bib Gourmand kitchen turning out chopped-cheeseburger fries alongside a genuinely well-built cocktail list is exactly what this category demands."</p>
+        <div class="card-diff" style="border-color:#c98a1f;color:#c98a1f">
+          <strong>Moderate to book</strong> — Prime-time dinner and weekend brunch need a reservation, but the bar (happy hour 3-6pm weekdays) takes walk-ins.
+        </div>
+        <div class="card-sources">On: Michelin Guide DC (Bib Gourmand)</div>
+      </div>
+    </a></div>
+    </section>
+
+    <section class="cat-section" id="cat-happy_hour_nova">
+      <h2>Happy Hour — Northern VA</h2>
+      
+      <div class="card-grid">
+    <a class="card" href="https://www.tripadvisor.com/Restaurant_Review-g30242-d465228-Reviews-Carlyle-Arlington_Virginia.html" target="_blank" rel="noopener">
+      <div class="card-thumb" style="background-image:url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI0MDAiIGhlaWdodD0iMjgwIiB2aWV3Qm94PSIwIDAgNDAwIDI4MCI+CjxkZWZzPjxsaW5lYXJHcmFkaWVudCBpZD0iZyIgeDE9IjAiIHkxPSIwIiB4Mj0iMSIgeTI9IjEiPgo8c3RvcCBvZmZzZXQ9IjAiIHN0b3AtY29sb3I9ImhzbCgxMCw0NSUsODglKSIvPjxzdG9wIG9mZnNldD0iMSIgc3RvcC1jb2xvcj0iaHNsKDUwLDQ1JSw3OCUpIi8+CjwvbGluZWFyR3JhZGllbnQ+PC9kZWZzPgo8cmVjdCB3aWR0aD0iNDAwIiBoZWlnaHQ9IjI4MCIgZmlsbD0idXJsKCNnKSIvPgo8dGV4dCB4PSIyMDAiIHk9IjE1MCIgZm9udC1mYW1pbHk9Ikdlb3JnaWEsc2VyaWYiIGZvbnQtc2l6ZT0iODgiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGZpbGw9ImhzbCgxMCwzNSUsMzIlKSIgZm9udC13ZWlnaHQ9IjYwMCI+QzwvdGV4dD4KPHRleHQgeD0iMjAwIiB5PSIyMzAiIGZvbnQtZmFtaWx5PSJIZWx2ZXRpY2EsQXJpYWwsc2Fucy1zZXJpZiIgZm9udC1zaXplPSIxNiIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZmlsbD0iaHNsKDEwLDMwJSwzMCUpIiBsZXR0ZXItc3BhY2luZz0iMSI+TkVXIEFNRVJJQ0FOIEJSQVNTRVJJRTwvdGV4dD4KPC9zdmc+')"></div>
+      <div class="card-body">
+        <div class="card-rank">#1</div>
+        <h3 class="card-name">Carlyle</h3>
+        <div class="card-neigh">Shirlington, Arlington, VA · New American brasserie <span class="chain-tag">chain — earned it</span></div>
+        <div class="card-meta-row">
+          <span class="price-tag">$$</span>
+          <span class="rating-badge">★ 4.5 <span class="rating-count">Tripadvisor · 1,268 reviews</span></span>
+        </div>
+        <p class="card-why">"A Shirlington brasserie with a serious bar program and nearly 1,300 reviews behind it — part of a well-regarded local restaurant group, not a generic chain, and it shows in the kitchen."</p>
+        <div class="card-diff" style="border-color:#c98a1f;color:#c98a1f">
+          <strong>Moderate to book</strong> — Weeknight bar seats are easy; weekend dinner benefits from a reservation.
+        </div>
+        <div class="card-sources">On: Tripadvisor</div>
+      </div>
+    </a>
+
+    <a class="card" href="https://ambarrestaurant.com/ambarclarendon" target="_blank" rel="noopener">
+      <div class="card-thumb" style="background-image:url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI0MDAiIGhlaWdodD0iMjgwIiB2aWV3Qm94PSIwIDAgNDAwIDI4MCI+CjxkZWZzPjxsaW5lYXJHcmFkaWVudCBpZD0iZyIgeDE9IjAiIHkxPSIwIiB4Mj0iMSIgeTI9IjEiPgo8c3RvcCBvZmZzZXQ9IjAiIHN0b3AtY29sb3I9ImhzbCgzNDUsNDUlLDg4JSkiLz48c3RvcCBvZmZzZXQ9IjEiIHN0b3AtY29sb3I9ImhzbCgyNSw0NSUsNzglKSIvPgo8L2xpbmVhckdyYWRpZW50PjwvZGVmcz4KPHJlY3Qgd2lkdGg9IjQwMCIgaGVpZ2h0PSIyODAiIGZpbGw9InVybCgjZykiLz4KPHRleHQgeD0iMjAwIiB5PSIxNTAiIGZvbnQtZmFtaWx5PSJHZW9yZ2lhLHNlcmlmIiBmb250LXNpemU9Ijg4IiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBmaWxsPSJoc2woMzQ1LDM1JSwzMiUpIiBmb250LXdlaWdodD0iNjAwIj5BPC90ZXh0Pgo8dGV4dCB4PSIyMDAiIHk9IjIzMCIgZm9udC1mYW1pbHk9IkhlbHZldGljYSxBcmlhbCxzYW5zLXNlcmlmIiBmb250LXNpemU9IjE2IiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBmaWxsPSJoc2woMzQ1LDMwJSwzMCUpIiBsZXR0ZXItc3BhY2luZz0iMSI+QkFMS0FOIC8gRUFTVEVSTiBFVVJPUEVBTjwvdGV4dD4KPC9zdmc+')"></div>
+      <div class="card-body">
+        <div class="card-rank">#2</div>
+        <h3 class="card-name">Ambar Clarendon</h3>
+        <div class="card-neigh">Clarendon, Arlington, VA · Balkan / Eastern European <span class="chain-tag">chain — earned it</span></div>
+        <div class="card-meta-row">
+          <span class="price-tag">$$</span>
+          <span class="rating-badge">★ 4.5 <span class="rating-count">Tripadvisor · 619 reviews</span></span>
+        </div>
+        <p class="card-why">"A Balkan small-plates blowout with a drink list built for lingering — the bar crowd here is as loyal as the dinner crowd."</p>
+        <div class="card-diff" style="border-color:#c98a1f;color:#c98a1f">
+          <strong>Moderate-Hard to book</strong> — Bar seating and the patio are more walk-in-able than the unlimited-plates dining room.
+        </div>
+        <div class="card-sources">On: Arlington Magazine</div>
+      </div>
+    </a>
+
+    <a class="card" href="https://www.tripadvisor.com/Restaurant_Review-g30242-d19713097-Reviews-The_Commentary-Arlington_Virginia.html" target="_blank" rel="noopener">
+      <div class="card-thumb" style="background-image:url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI0MDAiIGhlaWdodD0iMjgwIiB2aWV3Qm94PSIwIDAgNDAwIDI4MCI+CjxkZWZzPjxsaW5lYXJHcmFkaWVudCBpZD0iZyIgeDE9IjAiIHkxPSIwIiB4Mj0iMSIgeTI9IjEiPgo8c3RvcCBvZmZzZXQ9IjAiIHN0b3AtY29sb3I9ImhzbCgxNzMsNDUlLDg4JSkiLz48c3RvcCBvZmZzZXQ9IjEiIHN0b3AtY29sb3I9ImhzbCgyMTMsNDUlLDc4JSkiLz4KPC9saW5lYXJHcmFkaWVudD48L2RlZnM+CjxyZWN0IHdpZHRoPSI0MDAiIGhlaWdodD0iMjgwIiBmaWxsPSJ1cmwoI2cpIi8+Cjx0ZXh0IHg9IjIwMCIgeT0iMTUwIiBmb250LWZhbWlseT0iR2VvcmdpYSxzZXJpZiIgZm9udC1zaXplPSI4OCIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZmlsbD0iaHNsKDE3MywzNSUsMzIlKSIgZm9udC13ZWlnaHQ9IjYwMCI+VDwvdGV4dD4KPHRleHQgeD0iMjAwIiB5PSIyMzAiIGZvbnQtZmFtaWx5PSJIZWx2ZXRpY2EsQXJpYWwsc2Fucy1zZXJpZiIgZm9udC1zaXplPSIxNiIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZmlsbD0iaHNsKDE3MywzMCUsMzAlKSIgbGV0dGVyLXNwYWNpbmc9IjEiPk5FVyBBTUVSSUNBTjwvdGV4dD4KPC9zdmc+')"></div>
+      <div class="card-body">
+        <div class="card-rank">#3</div>
+        <h3 class="card-name">The Commentary</h3>
+        <div class="card-neigh">Ballston, Arlington, VA · New American </div>
+        <div class="card-meta-row">
+          <span class="price-tag">$$</span>
+          <span class="rating-badge">★ 4.7 <span class="rating-count">Tripadvisor · 65 reviews</span></span>
+        </div>
+        <p class="card-why">"A Ballston newcomer already punching above its weight, with a bar program and small-plates menu built for exactly this occasion."</p>
+        <div class="card-diff" style="border-color:#2f8f5b;color:#2f8f5b">
+          <strong>Easy to book</strong> — Newer, still building its reservation book — usually easy to walk into for happy hour.
+        </div>
+        <div class="card-sources">On: Tripadvisor</div>
+      </div>
+    </a>
+
+    <a class="card" href="https://www.tripadvisor.com/Restaurant_Review-g30226-d25236017-Reviews-Smyrna_Restaurant_aegean_kitchen-Alexandria_Virginia.html" target="_blank" rel="noopener">
+      <div class="card-thumb" style="background-image:url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI0MDAiIGhlaWdodD0iMjgwIiB2aWV3Qm94PSIwIDAgNDAwIDI4MCI+CjxkZWZzPjxsaW5lYXJHcmFkaWVudCBpZD0iZyIgeDE9IjAiIHkxPSIwIiB4Mj0iMSIgeTI9IjEiPgo8c3RvcCBvZmZzZXQ9IjAiIHN0b3AtY29sb3I9ImhzbCgyNyw0NSUsODglKSIvPjxzdG9wIG9mZnNldD0iMSIgc3RvcC1jb2xvcj0iaHNsKDY3LDQ1JSw3OCUpIi8+CjwvbGluZWFyR3JhZGllbnQ+PC9kZWZzPgo8cmVjdCB3aWR0aD0iNDAwIiBoZWlnaHQ9IjI4MCIgZmlsbD0idXJsKCNnKSIvPgo8dGV4dCB4PSIyMDAiIHk9IjE1MCIgZm9udC1mYW1pbHk9Ikdlb3JnaWEsc2VyaWYiIGZvbnQtc2l6ZT0iODgiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGZpbGw9ImhzbCgyNywzNSUsMzIlKSIgZm9udC13ZWlnaHQ9IjYwMCI+UzwvdGV4dD4KPHRleHQgeD0iMjAwIiB5PSIyMzAiIGZvbnQtZmFtaWx5PSJIZWx2ZXRpY2EsQXJpYWwsc2Fucy1zZXJpZiIgZm9udC1zaXplPSIxNiIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZmlsbD0iaHNsKDI3LDMwJSwzMCUpIiBsZXR0ZXItc3BhY2luZz0iMSI+R1JFRUsgLyBUVVJLSVNIIChBRUdFQU4pPC90ZXh0Pgo8L3N2Zz4=')"></div>
+      <div class="card-body">
+        <div class="card-rank">#4</div>
+        <h3 class="card-name">Smyrna</h3>
+        <div class="card-neigh">Old Town Alexandria, VA · Greek / Turkish (Aegean) </div>
+        <div class="card-meta-row">
+          <span class="price-tag">$$</span>
+          <span class="rating-badge">★ 4.7 <span class="rating-count">Tripadvisor · 25 reviews</span></span>
+        </div>
+        <p class="card-why">"Aegean mezze and a tight, well-chosen wine-and-ouzo list turn a modest Old Town storefront into a genuine happy-hour destination."</p>
+        <div class="card-diff" style="border-color:#c98a1f;color:#c98a1f">
+          <strong>Moderate to book</strong> — Small dining room; bar seats for happy hour are the easier ask.
+        </div>
+        <div class="card-sources">On: Tripadvisor</div>
+      </div>
+    </a>
+
+    <a class="card" href="https://www.tripadvisor.com/Restaurant_Review-g30242-d27930905-Reviews-Carbonara-Arlington_Virginia.html" target="_blank" rel="noopener">
+      <div class="card-thumb" style="background-image:url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI0MDAiIGhlaWdodD0iMjgwIiB2aWV3Qm94PSIwIDAgNDAwIDI4MCI+CjxkZWZzPjxsaW5lYXJHcmFkaWVudCBpZD0iZyIgeDE9IjAiIHkxPSIwIiB4Mj0iMSIgeTI9IjEiPgo8c3RvcCBvZmZzZXQ9IjAiIHN0b3AtY29sb3I9ImhzbCg4OSw0NSUsODglKSIvPjxzdG9wIG9mZnNldD0iMSIgc3RvcC1jb2xvcj0iaHNsKDEyOSw0NSUsNzglKSIvPgo8L2xpbmVhckdyYWRpZW50PjwvZGVmcz4KPHJlY3Qgd2lkdGg9IjQwMCIgaGVpZ2h0PSIyODAiIGZpbGw9InVybCgjZykiLz4KPHRleHQgeD0iMjAwIiB5PSIxNTAiIGZvbnQtZmFtaWx5PSJHZW9yZ2lhLHNlcmlmIiBmb250LXNpemU9Ijg4IiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBmaWxsPSJoc2woODksMzUlLDMyJSkiIGZvbnQtd2VpZ2h0PSI2MDAiPkM8L3RleHQ+Cjx0ZXh0IHg9IjIwMCIgeT0iMjMwIiBmb250LWZhbWlseT0iSGVsdmV0aWNhLEFyaWFsLHNhbnMtc2VyaWYiIGZvbnQtc2l6ZT0iMTYiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGZpbGw9ImhzbCg4OSwzMCUsMzAlKSIgbGV0dGVyLXNwYWNpbmc9IjEiPklUQUxJQU48L3RleHQ+Cjwvc3ZnPg==')"></div>
+      <div class="card-body">
+        <div class="card-rank">#5</div>
+        <h3 class="card-name">Carbonara</h3>
+        <div class="card-neigh">Virginia Square, Arlington, VA · Italian </div>
+        <div class="card-meta-row">
+          <span class="price-tag">$$$</span>
+          <span class="rating-badge">★ 4.7 <span class="rating-count">Tripadvisor · 23 reviews</span></span>
+        </div>
+        <p class="card-why">"Tableside cheese-wheel carbonara at the bar is one of the best cheap thrills in Arlington, happy hour or not."</p>
+        <div class="card-diff" style="border-color:#c98a1f;color:#c98a1f">
+          <strong>Moderate to book</strong> — Bar seats often available even when the dining room is full.
+        </div>
+        <div class="card-sources">On: Northern Virginia Magazine 50 Best · Tripadvisor</div>
+      </div>
+    </a></div>
+    </section>
+
+    <section class="cat-section" id="cat-italian_dc">
+      <h2>Best Italian — DC</h2>
+      <p class="short-note">Only 2 picks cleared the 4.5+ bar this month — every pick must appear on a locked source AND rate 4.5 or higher.</p>
+      <div class="card-grid">
+    <a class="card" href="https://www.fioladc.com/" target="_blank" rel="noopener">
+      <div class="card-thumb" style="background-image:url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI0MDAiIGhlaWdodD0iMjgwIiB2aWV3Qm94PSIwIDAgNDAwIDI4MCI+CjxkZWZzPjxsaW5lYXJHcmFkaWVudCBpZD0iZyIgeDE9IjAiIHkxPSIwIiB4Mj0iMSIgeTI9IjEiPgo8c3RvcCBvZmZzZXQ9IjAiIHN0b3AtY29sb3I9ImhzbCg1NCw0NSUsODglKSIvPjxzdG9wIG9mZnNldD0iMSIgc3RvcC1jb2xvcj0iaHNsKDk0LDQ1JSw3OCUpIi8+CjwvbGluZWFyR3JhZGllbnQ+PC9kZWZzPgo8cmVjdCB3aWR0aD0iNDAwIiBoZWlnaHQ9IjI4MCIgZmlsbD0idXJsKCNnKSIvPgo8dGV4dCB4PSIyMDAiIHk9IjE1MCIgZm9udC1mYW1pbHk9Ikdlb3JnaWEsc2VyaWYiIGZvbnQtc2l6ZT0iODgiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGZpbGw9ImhzbCg1NCwzNSUsMzIlKSIgZm9udC13ZWlnaHQ9IjYwMCI+RjwvdGV4dD4KPHRleHQgeD0iMjAwIiB5PSIyMzAiIGZvbnQtZmFtaWx5PSJIZWx2ZXRpY2EsQXJpYWwsc2Fucy1zZXJpZiIgZm9udC1zaXplPSIxNiIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZmlsbD0iaHNsKDU0LDMwJSwzMCUpIiBsZXR0ZXItc3BhY2luZz0iMSI+SVRBTElBTjwvdGV4dD4KPC9zdmc+')"></div>
+      <div class="card-body">
+        <div class="card-rank">#1</div>
+        <h3 class="card-name">Fiola</h3>
+        <div class="card-neigh">Penn Quarter, DC · Italian </div>
+        <div class="card-meta-row">
+          <span class="price-tag">$$$$</span>
+          <span class="rating-badge">★ 4.5 <span class="rating-count">Tripadvisor · 942 reviews</span></span>
+        </div>
+        <p class="card-why">"Fabio Trabocchi&#x27;s flagship remains the gold standard for hand-made-pasta, special-occasion Italian in DC."</p>
+        <div class="card-diff" style="border-color:#c85a3a;color:#c85a3a">
+          <strong>Hard to book</strong> — Prime weekend tables need 2-3 weeks&#x27; notice.
+        </div>
+        <div class="card-sources">On: Michelin Guide DC (1 star)</div>
+      </div>
+    </a>
+
+    <a class="card" href="https://www.revelershour.com/" target="_blank" rel="noopener">
+      <div class="card-thumb" style="background-image:url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI0MDAiIGhlaWdodD0iMjgwIiB2aWV3Qm94PSIwIDAgNDAwIDI4MCI+CjxkZWZzPjxsaW5lYXJHcmFkaWVudCBpZD0iZyIgeDE9IjAiIHkxPSIwIiB4Mj0iMSIgeTI9IjEiPgo8c3RvcCBvZmZzZXQ9IjAiIHN0b3AtY29sb3I9ImhzbCgxNjQsNDUlLDg4JSkiLz48c3RvcCBvZmZzZXQ9IjEiIHN0b3AtY29sb3I9ImhzbCgyMDQsNDUlLDc4JSkiLz4KPC9saW5lYXJHcmFkaWVudD48L2RlZnM+CjxyZWN0IHdpZHRoPSI0MDAiIGhlaWdodD0iMjgwIiBmaWxsPSJ1cmwoI2cpIi8+Cjx0ZXh0IHg9IjIwMCIgeT0iMTUwIiBmb250LWZhbWlseT0iR2VvcmdpYSxzZXJpZiIgZm9udC1zaXplPSI4OCIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZmlsbD0iaHNsKDE2NCwzNSUsMzIlKSIgZm9udC13ZWlnaHQ9IjYwMCI+UjwvdGV4dD4KPHRleHQgeD0iMjAwIiB5PSIyMzAiIGZvbnQtZmFtaWx5PSJIZWx2ZXRpY2EsQXJpYWwsc2Fucy1zZXJpZiIgZm9udC1zaXplPSIxNiIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZmlsbD0iaHNsKDE2NCwzMCUsMzAlKSIgbGV0dGVyLXNwYWNpbmc9IjEiPklUQUxJQU4gV0lORSBCQVI8L3RleHQ+Cjwvc3ZnPg==')"></div>
+      <div class="card-body">
+        <div class="card-rank">#2</div>
+        <h3 class="card-name">Reveler&#x27;s Hour</h3>
+        <div class="card-neigh">Adams Morgan, DC · Italian wine bar </div>
+        <div class="card-meta-row">
+          <span class="price-tag">$$$</span>
+          <span class="rating-badge">★ 4.5 <span class="rating-count">Google · 385 reviews</span></span>
+        </div>
+        <p class="card-why">"A tiny, glowing wine bar turning out housemade pasta good enough to anchor a splurge-adjacent night without the splurge-adjacent bill."</p>
+        <div class="card-diff" style="border-color:#c85a3a;color:#c85a3a">
+          <strong>Hard to book</strong> — Small wine-bar footprint means tables disappear almost instantly.
+        </div>
+        <div class="card-sources">On: Washingtonian Top 100 · Michelin Guide DC</div>
+      </div>
+    </a></div>
+    </section>
+
+    <section class="cat-section" id="cat-italian_nova">
+      <h2>Best Italian — Northern VA</h2>
+      
+      <div class="card-grid">
+    <a class="card" href="https://www.tripadvisor.com/Restaurant_Review-g30242-d27930905-Reviews-Carbonara-Arlington_Virginia.html" target="_blank" rel="noopener">
+      <div class="card-thumb" style="background-image:url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI0MDAiIGhlaWdodD0iMjgwIiB2aWV3Qm94PSIwIDAgNDAwIDI4MCI+CjxkZWZzPjxsaW5lYXJHcmFkaWVudCBpZD0iZyIgeDE9IjAiIHkxPSIwIiB4Mj0iMSIgeTI9IjEiPgo8c3RvcCBvZmZzZXQ9IjAiIHN0b3AtY29sb3I9ImhzbCg4OSw0NSUsODglKSIvPjxzdG9wIG9mZnNldD0iMSIgc3RvcC1jb2xvcj0iaHNsKDEyOSw0NSUsNzglKSIvPgo8L2xpbmVhckdyYWRpZW50PjwvZGVmcz4KPHJlY3Qgd2lkdGg9IjQwMCIgaGVpZ2h0PSIyODAiIGZpbGw9InVybCgjZykiLz4KPHRleHQgeD0iMjAwIiB5PSIxNTAiIGZvbnQtZmFtaWx5PSJHZW9yZ2lhLHNlcmlmIiBmb250LXNpemU9Ijg4IiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBmaWxsPSJoc2woODksMzUlLDMyJSkiIGZvbnQtd2VpZ2h0PSI2MDAiPkM8L3RleHQ+Cjx0ZXh0IHg9IjIwMCIgeT0iMjMwIiBmb250LWZhbWlseT0iSGVsdmV0aWNhLEFyaWFsLHNhbnMtc2VyaWYiIGZvbnQtc2l6ZT0iMTYiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGZpbGw9ImhzbCg4OSwzMCUsMzAlKSIgbGV0dGVyLXNwYWNpbmc9IjEiPklUQUxJQU48L3RleHQ+Cjwvc3ZnPg==')"></div>
+      <div class="card-body">
+        <div class="card-rank">#1</div>
+        <h3 class="card-name">Carbonara</h3>
+        <div class="card-neigh">Virginia Square, Arlington, VA · Italian </div>
+        <div class="card-meta-row">
+          <span class="price-tag">$$$</span>
+          <span class="rating-badge">★ 4.7 <span class="rating-count">Tripadvisor · 23 reviews</span></span>
+        </div>
+        <p class="card-why">"Tableside cheese-wheel carbonara is the draw — a genuine only-here dish done with real technique."</p>
+        <div class="card-diff" style="border-color:#c98a1f;color:#c98a1f">
+          <strong>Moderate to book</strong> — Book ahead for weekend dinner; bar seats often available.
+        </div>
+        <div class="card-sources">On: Northern Virginia Magazine 50 Best · Tripadvisor</div>
+      </div>
+    </a>
+
+    <a class="card" href="https://www.aldositaliankitchen.com/" target="_blank" rel="noopener">
+      <div class="card-thumb" style="background-image:url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI0MDAiIGhlaWdodD0iMjgwIiB2aWV3Qm94PSIwIDAgNDAwIDI4MCI+CjxkZWZzPjxsaW5lYXJHcmFkaWVudCBpZD0iZyIgeDE9IjAiIHkxPSIwIiB4Mj0iMSIgeTI9IjEiPgo8c3RvcCBvZmZzZXQ9IjAiIHN0b3AtY29sb3I9ImhzbCgzNTIsNDUlLDg4JSkiLz48c3RvcCBvZmZzZXQ9IjEiIHN0b3AtY29sb3I9ImhzbCgzMiw0NSUsNzglKSIvPgo8L2xpbmVhckdyYWRpZW50PjwvZGVmcz4KPHJlY3Qgd2lkdGg9IjQwMCIgaGVpZ2h0PSIyODAiIGZpbGw9InVybCgjZykiLz4KPHRleHQgeD0iMjAwIiB5PSIxNTAiIGZvbnQtZmFtaWx5PSJHZW9yZ2lhLHNlcmlmIiBmb250LXNpemU9Ijg4IiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBmaWxsPSJoc2woMzUyLDM1JSwzMiUpIiBmb250LXdlaWdodD0iNjAwIj5BPC90ZXh0Pgo8dGV4dCB4PSIyMDAiIHk9IjIzMCIgZm9udC1mYW1pbHk9IkhlbHZldGljYSxBcmlhbCxzYW5zLXNlcmlmIiBmb250LXNpemU9IjE2IiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBmaWxsPSJoc2woMzUyLDMwJSwzMCUpIiBsZXR0ZXItc3BhY2luZz0iMSI+SVRBTElBTjwvdGV4dD4KPC9zdmc+')"></div>
+      <div class="card-body">
+        <div class="card-rank">#2</div>
+        <h3 class="card-name">Aldo&#x27;s Italian Kitchen</h3>
+        <div class="card-neigh">Alexandria, VA · Italian </div>
+        <div class="card-meta-row">
+          <span class="price-tag">$$</span>
+          <span class="rating-badge">★ 4.8 <span class="rating-count">Tripadvisor · 113 reviews</span></span>
+        </div>
+        <p class="card-why">"An unpretentious, family-run kitchen serving the kind of red-sauce classics that make regulars out of everyone who tries it."</p>
+        <div class="card-diff" style="border-color:#2f8f5b;color:#2f8f5b">
+          <strong>Easy to book</strong> — Casual, family-run; usually easy to walk in, though it&#x27;s earned a loyal following.
+        </div>
+        <div class="card-sources">On: Tripadvisor</div>
+      </div>
+    </a>
+
+    <a class="card" href="https://www.ciao-osteria.com/" target="_blank" rel="noopener">
+      <div class="card-thumb" style="background-image:url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI0MDAiIGhlaWdodD0iMjgwIiB2aWV3Qm94PSIwIDAgNDAwIDI4MCI+CjxkZWZzPjxsaW5lYXJHcmFkaWVudCBpZD0iZyIgeDE9IjAiIHkxPSIwIiB4Mj0iMSIgeTI9IjEiPgo8c3RvcCBvZmZzZXQ9IjAiIHN0b3AtY29sb3I9ImhzbCgxMzIsNDUlLDg4JSkiLz48c3RvcCBvZmZzZXQ9IjEiIHN0b3AtY29sb3I9ImhzbCgxNzIsNDUlLDc4JSkiLz4KPC9saW5lYXJHcmFkaWVudD48L2RlZnM+CjxyZWN0IHdpZHRoPSI0MDAiIGhlaWdodD0iMjgwIiBmaWxsPSJ1cmwoI2cpIi8+Cjx0ZXh0IHg9IjIwMCIgeT0iMTUwIiBmb250LWZhbWlseT0iR2VvcmdpYSxzZXJpZiIgZm9udC1zaXplPSI4OCIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZmlsbD0iaHNsKDEzMiwzNSUsMzIlKSIgZm9udC13ZWlnaHQ9IjYwMCI+QzwvdGV4dD4KPHRleHQgeD0iMjAwIiB5PSIyMzAiIGZvbnQtZmFtaWx5PSJIZWx2ZXRpY2EsQXJpYWwsc2Fucy1zZXJpZiIgZm9udC1zaXplPSIxNiIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZmlsbD0iaHNsKDEzMiwzMCUsMzAlKSIgbGV0dGVyLXNwYWNpbmc9IjEiPklUQUxJQU48L3RleHQ+Cjwvc3ZnPg==')"></div>
+      <div class="card-body">
+        <div class="card-rank">#3</div>
+        <h3 class="card-name">Ciao Osteria</h3>
+        <div class="card-neigh">Centreville, VA · Italian </div>
+        <div class="card-meta-row">
+          <span class="price-tag">$$</span>
+          <span class="rating-badge">★ 4.5 <span class="rating-count">Tripadvisor · 596 reviews</span></span>
+        </div>
+        <p class="card-why">"A Centreville osteria with nearly 600 reviews behind its 4.5 — the kind of reliably excellent neighborhood spot that never makes the DC food press but should."</p>
+        <div class="card-diff" style="border-color:#c98a1f;color:#c98a1f">
+          <strong>Moderate to book</strong> — Popular with locals; reserve ahead for weekend dinner.
+        </div>
+        <div class="card-sources">On: Tripadvisor</div>
+      </div>
+    </a>
+
+    <a class="card" href="https://www.fireworkspizza.com/leesburg" target="_blank" rel="noopener">
+      <div class="card-thumb" style="background-image:url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI0MDAiIGhlaWdodD0iMjgwIiB2aWV3Qm94PSIwIDAgNDAwIDI4MCI+CjxkZWZzPjxsaW5lYXJHcmFkaWVudCBpZD0iZyIgeDE9IjAiIHkxPSIwIiB4Mj0iMSIgeTI9IjEiPgo8c3RvcCBvZmZzZXQ9IjAiIHN0b3AtY29sb3I9ImhzbCgyNzMsNDUlLDg4JSkiLz48c3RvcCBvZmZzZXQ9IjEiIHN0b3AtY29sb3I9ImhzbCgzMTMsNDUlLDc4JSkiLz4KPC9saW5lYXJHcmFkaWVudD48L2RlZnM+CjxyZWN0IHdpZHRoPSI0MDAiIGhlaWdodD0iMjgwIiBmaWxsPSJ1cmwoI2cpIi8+Cjx0ZXh0IHg9IjIwMCIgeT0iMTUwIiBmb250LWZhbWlseT0iR2VvcmdpYSxzZXJpZiIgZm9udC1zaXplPSI4OCIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZmlsbD0iaHNsKDI3MywzNSUsMzIlKSIgZm9udC13ZWlnaHQ9IjYwMCI+RjwvdGV4dD4KPHRleHQgeD0iMjAwIiB5PSIyMzAiIGZvbnQtZmFtaWx5PSJIZWx2ZXRpY2EsQXJpYWwsc2Fucy1zZXJpZiIgZm9udC1zaXplPSIxNiIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZmlsbD0iaHNsKDI3MywzMCUsMzAlKSIgbGV0dGVyLXNwYWNpbmc9IjEiPklUQUxJQU4gLyBXT09ELUZJUkVEIFBJWlpBPC90ZXh0Pgo8L3N2Zz4=')"></div>
+      <div class="card-body">
+        <div class="card-rank">#4</div>
+        <h3 class="card-name">Fire Works Pizza</h3>
+        <div class="card-neigh">Leesburg, VA · Italian / Wood-fired pizza <span class="chain-tag">chain — earned it</span></div>
+        <div class="card-meta-row">
+          <span class="price-tag">$$</span>
+          <span class="rating-badge">★ 4.5 <span class="rating-count">Tripadvisor · 555 reviews</span></span>
+        </div>
+        <p class="card-why">"A small, Loudoun-grown wood-fired pizza group that&#x27;s earned its local following on crust and toppings, not just convenience."</p>
+        <div class="card-diff" style="border-color:#2f8f5b;color:#2f8f5b">
+          <strong>Easy to book</strong> — Casual, walk-in friendly; occasional wait on weekend evenings.
+        </div>
+        <div class="card-sources">On: Tripadvisor</div>
+      </div>
+    </a>
+
+    <a class="card" href="https://www.italianstore.com/" target="_blank" rel="noopener">
+      <div class="card-thumb" style="background-image:url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI0MDAiIGhlaWdodD0iMjgwIiB2aWV3Qm94PSIwIDAgNDAwIDI4MCI+CjxkZWZzPjxsaW5lYXJHcmFkaWVudCBpZD0iZyIgeDE9IjAiIHkxPSIwIiB4Mj0iMSIgeTI9IjEiPgo8c3RvcCBvZmZzZXQ9IjAiIHN0b3AtY29sb3I9ImhzbCgxNDIsNDUlLDg4JSkiLz48c3RvcCBvZmZzZXQ9IjEiIHN0b3AtY29sb3I9ImhzbCgxODIsNDUlLDc4JSkiLz4KPC9saW5lYXJHcmFkaWVudD48L2RlZnM+CjxyZWN0IHdpZHRoPSI0MDAiIGhlaWdodD0iMjgwIiBmaWxsPSJ1cmwoI2cpIi8+Cjx0ZXh0IHg9IjIwMCIgeT0iMTUwIiBmb250LWZhbWlseT0iR2VvcmdpYSxzZXJpZiIgZm9udC1zaXplPSI4OCIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZmlsbD0iaHNsKDE0MiwzNSUsMzIlKSIgZm9udC13ZWlnaHQ9IjYwMCI+VDwvdGV4dD4KPHRleHQgeD0iMjAwIiB5PSIyMzAiIGZvbnQtZmFtaWx5PSJIZWx2ZXRpY2EsQXJpYWwsc2Fucy1zZXJpZiIgZm9udC1zaXplPSIxNiIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZmlsbD0iaHNsKDE0MiwzMCUsMzAlKSIgbGV0dGVyLXNwYWNpbmc9IjEiPklUQUxJQU4gREVMSSAvIFBJWlpBPC90ZXh0Pgo8L3N2Zz4=')"></div>
+      <div class="card-body">
+        <div class="card-rank">#5</div>
+        <h3 class="card-name">The Italian Store</h3>
+        <div class="card-neigh">Lyon Village, Arlington, VA · Italian deli / pizza </div>
+        <div class="card-meta-row">
+          <span class="price-tag">$</span>
+          <span class="rating-badge">★ 4.5 <span class="rating-count">Tripadvisor · 478 reviews</span></span>
+        </div>
+        <p class="card-why">"An Arlington institution since 1980 — the sub sandwiches and NY-style pizza slices are a genuine Northern Virginia rite of passage."</p>
+        <div class="card-diff" style="border-color:#2f8f5b;color:#2f8f5b">
+          <strong>Easy to book</strong> — Counter/deli-style, no reservations; grab a sub or a pizza and go.
+        </div>
+        <div class="card-sources">On: Tripadvisor</div>
+      </div>
+    </a></div>
+    </section>
+
+    <section class="cat-section" id="cat-persian">
+      <h2>Best Persian — DC / NoVA</h2>
+      <p class="short-note">Only 1 pick cleared the 4.5+ bar this month — every pick must appear on a locked source AND rate 4.5 or higher.</p>
+      <div class="card-grid">
+    <a class="card" href="https://www.mazadarva.com/" target="_blank" rel="noopener">
+      <div class="card-thumb" style="background-image:url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI0MDAiIGhlaWdodD0iMjgwIiB2aWV3Qm94PSIwIDAgNDAwIDI4MCI+CjxkZWZzPjxsaW5lYXJHcmFkaWVudCBpZD0iZyIgeDE9IjAiIHkxPSIwIiB4Mj0iMSIgeTI9IjEiPgo8c3RvcCBvZmZzZXQ9IjAiIHN0b3AtY29sb3I9ImhzbCgyNzQsNDUlLDg4JSkiLz48c3RvcCBvZmZzZXQ9IjEiIHN0b3AtY29sb3I9ImhzbCgzMTQsNDUlLDc4JSkiLz4KPC9saW5lYXJHcmFkaWVudD48L2RlZnM+CjxyZWN0IHdpZHRoPSI0MDAiIGhlaWdodD0iMjgwIiBmaWxsPSJ1cmwoI2cpIi8+Cjx0ZXh0IHg9IjIwMCIgeT0iMTUwIiBmb250LWZhbWlseT0iR2VvcmdpYSxzZXJpZiIgZm9udC1zaXplPSI4OCIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZmlsbD0iaHNsKDI3NCwzNSUsMzIlKSIgZm9udC13ZWlnaHQ9IjYwMCI+TTwvdGV4dD4KPHRleHQgeD0iMjAwIiB5PSIyMzAiIGZvbnQtZmFtaWx5PSJIZWx2ZXRpY2EsQXJpYWwsc2Fucy1zZXJpZiIgZm9udC1zaXplPSIxNiIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZmlsbD0iaHNsKDI3NCwzMCUsMzAlKSIgbGV0dGVyLXNwYWNpbmc9IjEiPkFGR0hBTiAvIFBFUlNJQU48L3RleHQ+Cjwvc3ZnPg==')"></div>
+      <div class="card-body">
+        <div class="card-rank">#1</div>
+        <h3 class="card-name">Mazadar Kabob</h3>
+        <div class="card-neigh">Fairfax, VA · Afghan / Persian </div>
+        <div class="card-meta-row">
+          <span class="price-tag">$$</span>
+          <span class="rating-badge">★ 4.5 <span class="rating-count">Tripadvisor · 185 reviews</span></span>
+        </div>
+        <p class="card-why">"Charcoal-grilled kabobs done with real precision — a Fairfax strip-mall spot that quietly outperforms fancier Persian rooms nearby."</p>
+        <div class="card-diff" style="border-color:#2f8f5b;color:#2f8f5b">
+          <strong>Easy to book</strong> — Casual sit-down; usually easy to walk in, busier on weekend evenings.
+        </div>
+        <div class="card-sources">On: Tripadvisor</div>
+      </div>
+    </a></div>
+    </section>
+
+    <section class="cat-section" id="cat-japanese_asian">
+      <h2>Best Japanese / Asian — DC / NoVA</h2>
+      <p class="short-note">Only 3 picks cleared the 4.5+ bar this month — every pick must appear on a locked source AND rate 4.5 or higher.</p>
+      <div class="card-grid">
+    <a class="card" href="https://www.tripadvisor.com/Restaurant_Review-g57722-d1382480-Reviews-Present_Restaurant-Falls_Church_Virginia.html" target="_blank" rel="noopener">
+      <div class="card-thumb" style="background-image:url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI0MDAiIGhlaWdodD0iMjgwIiB2aWV3Qm94PSIwIDAgNDAwIDI4MCI+CjxkZWZzPjxsaW5lYXJHcmFkaWVudCBpZD0iZyIgeDE9IjAiIHkxPSIwIiB4Mj0iMSIgeTI9IjEiPgo8c3RvcCBvZmZzZXQ9IjAiIHN0b3AtY29sb3I9ImhzbCg5MCw0NSUsODglKSIvPjxzdG9wIG9mZnNldD0iMSIgc3RvcC1jb2xvcj0iaHNsKDEzMCw0NSUsNzglKSIvPgo8L2xpbmVhckdyYWRpZW50PjwvZGVmcz4KPHJlY3Qgd2lkdGg9IjQwMCIgaGVpZ2h0PSIyODAiIGZpbGw9InVybCgjZykiLz4KPHRleHQgeD0iMjAwIiB5PSIxNTAiIGZvbnQtZmFtaWx5PSJHZW9yZ2lhLHNlcmlmIiBmb250LXNpemU9Ijg4IiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBmaWxsPSJoc2woOTAsMzUlLDMyJSkiIGZvbnQtd2VpZ2h0PSI2MDAiPlA8L3RleHQ+Cjx0ZXh0IHg9IjIwMCIgeT0iMjMwIiBmb250LWZhbWlseT0iSGVsdmV0aWNhLEFyaWFsLHNhbnMtc2VyaWYiIGZvbnQtc2l6ZT0iMTYiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGZpbGw9ImhzbCg5MCwzMCUsMzAlKSIgbGV0dGVyLXNwYWNpbmc9IjEiPlZJRVROQU1FU0U8L3RleHQ+Cjwvc3ZnPg==')"></div>
+      <div class="card-body">
+        <div class="card-rank">#1</div>
+        <h3 class="card-name">Present Restaurant</h3>
+        <div class="card-neigh">Falls Church, VA · Vietnamese </div>
+        <div class="card-meta-row">
+          <span class="price-tag">$$</span>
+          <span class="rating-badge">★ 4.6 <span class="rating-count">Tripadvisor · 202 reviews</span></span>
+        </div>
+        <p class="card-why">"A Falls Church Vietnamese kitchen turning out pho and shaking beef precise enough to make the drive from DC worth it."</p>
+        <div class="card-diff" style="border-color:#c98a1f;color:#c98a1f">
+          <strong>Moderate to book</strong> — Popular with locals; reserve ahead for weekend dinner.
+        </div>
+        <div class="card-sources">On: Tripadvisor</div>
+      </div>
+    </a>
+
+    <a class="card" href="https://www.anjurestaurant.com/" target="_blank" rel="noopener">
+      <div class="card-thumb" style="background-image:url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI0MDAiIGhlaWdodD0iMjgwIiB2aWV3Qm94PSIwIDAgNDAwIDI4MCI+CjxkZWZzPjxsaW5lYXJHcmFkaWVudCBpZD0iZyIgeDE9IjAiIHkxPSIwIiB4Mj0iMSIgeTI9IjEiPgo8c3RvcCBvZmZzZXQ9IjAiIHN0b3AtY29sb3I9ImhzbCgxMTgsNDUlLDg4JSkiLz48c3RvcCBvZmZzZXQ9IjEiIHN0b3AtY29sb3I9ImhzbCgxNTgsNDUlLDc4JSkiLz4KPC9saW5lYXJHcmFkaWVudD48L2RlZnM+CjxyZWN0IHdpZHRoPSI0MDAiIGhlaWdodD0iMjgwIiBmaWxsPSJ1cmwoI2cpIi8+Cjx0ZXh0IHg9IjIwMCIgeT0iMTUwIiBmb250LWZhbWlseT0iR2VvcmdpYSxzZXJpZiIgZm9udC1zaXplPSI4OCIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZmlsbD0iaHNsKDExOCwzNSUsMzIlKSIgZm9udC13ZWlnaHQ9IjYwMCI+QTwvdGV4dD4KPHRleHQgeD0iMjAwIiB5PSIyMzAiIGZvbnQtZmFtaWx5PSJIZWx2ZXRpY2EsQXJpYWwsc2Fucy1zZXJpZiIgZm9udC1zaXplPSIxNiIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZmlsbD0iaHNsKDExOCwzMCUsMzAlKSIgbGV0dGVyLXNwYWNpbmc9IjEiPktPUkVBTjwvdGV4dD4KPC9zdmc+')"></div>
+      <div class="card-body">
+        <div class="card-rank">#2</div>
+        <h3 class="card-name">Anju</h3>
+        <div class="card-neigh">Dupont Circle, DC · Korean </div>
+        <div class="card-meta-row">
+          <span class="price-tag">$$</span>
+          <span class="rating-badge">★ 4.5 <span class="rating-count">Tripadvisor · 42 reviews</span></span><span class="rating-badge">★ 4.5 <span class="rating-count">Google · 1,177 reviews</span></span>
+        </div>
+        <p class="card-why">"Soulful, funky-fermented Korean cooking and the city&#x27;s best banchan spread, over a thousand reviews deep."</p>
+        <div class="card-diff" style="border-color:#c98a1f;color:#c98a1f">
+          <strong>Moderate to book</strong> — Resy tables open weekly; bar/counter walk-in seats usually available.
+        </div>
+        <div class="card-sources">On: Washingtonian Top 100</div>
+      </div>
+    </a>
+
+    <a class="card" href="https://www.darudc.com/" target="_blank" rel="noopener">
+      <div class="card-thumb" style="background-image:url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI0MDAiIGhlaWdodD0iMjgwIiB2aWV3Qm94PSIwIDAgNDAwIDI4MCI+CjxkZWZzPjxsaW5lYXJHcmFkaWVudCBpZD0iZyIgeDE9IjAiIHkxPSIwIiB4Mj0iMSIgeTI9IjEiPgo8c3RvcCBvZmZzZXQ9IjAiIHN0b3AtY29sb3I9ImhzbCgxMDYsNDUlLDg4JSkiLz48c3RvcCBvZmZzZXQ9IjEiIHN0b3AtY29sb3I9ImhzbCgxNDYsNDUlLDc4JSkiLz4KPC9saW5lYXJHcmFkaWVudD48L2RlZnM+CjxyZWN0IHdpZHRoPSI0MDAiIGhlaWdodD0iMjgwIiBmaWxsPSJ1cmwoI2cpIi8+Cjx0ZXh0IHg9IjIwMCIgeT0iMTUwIiBmb250LWZhbWlseT0iR2VvcmdpYSxzZXJpZiIgZm9udC1zaXplPSI4OCIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZmlsbD0iaHNsKDEwNiwzNSUsMzIlKSIgZm9udC13ZWlnaHQ9IjYwMCI+RDwvdGV4dD4KPHRleHQgeD0iMjAwIiB5PSIyMzAiIGZvbnQtZmFtaWx5PSJIZWx2ZXRpY2EsQXJpYWwsc2Fucy1zZXJpZiIgZm9udC1zaXplPSIxNiIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZmlsbD0iaHNsKDEwNiwzMCUsMzAlKSIgbGV0dGVyLXNwYWNpbmc9IjEiPk1PREVSTiBJTkRJQU48L3RleHQ+Cjwvc3ZnPg==')"></div>
+      <div class="card-body">
+        <div class="card-rank">#3</div>
+        <h3 class="card-name">Daru</h3>
+        <div class="card-neigh">Near Northeast / H Street, DC · Modern Indian </div>
+        <div class="card-meta-row">
+          <span class="price-tag">$$$</span>
+          <span class="rating-badge">★ 4.5 <span class="rating-count">Google · 743 reviews</span></span>
+        </div>
+        <p class="card-why">"Turns Indian comfort food into a genuinely exciting tasting menu — South Asian, but squarely in this category&#x27;s spirit of exceptional Asian cooking."</p>
+        <div class="card-diff" style="border-color:#c85a3a;color:#c85a3a">
+          <strong>Hard to book</strong> — Weekend Resy slots vanish fast; weeknights and the bar are easier.
+        </div>
+        <div class="card-sources">On: Michelin Guide DC (Bib Gourmand) · James Beard Awards</div>
+      </div>
+    </a></div>
+    </section>
+
+    <section class="cat-section" id="cat-mexican">
+      <h2>Best Mexican — DC / NoVA</h2>
+      
+      <div class="card-grid">
+    <a class="card" href="https://www.tacobamba.com/taco-bamba-taqueria-vienna" target="_blank" rel="noopener">
+      <div class="card-thumb" style="background-image:url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI0MDAiIGhlaWdodD0iMjgwIiB2aWV3Qm94PSIwIDAgNDAwIDI4MCI+CjxkZWZzPjxsaW5lYXJHcmFkaWVudCBpZD0iZyIgeDE9IjAiIHkxPSIwIiB4Mj0iMSIgeTI9IjEiPgo8c3RvcCBvZmZzZXQ9IjAiIHN0b3AtY29sb3I9ImhzbCgxMzEsNDUlLDg4JSkiLz48c3RvcCBvZmZzZXQ9IjEiIHN0b3AtY29sb3I9ImhzbCgxNzEsNDUlLDc4JSkiLz4KPC9saW5lYXJHcmFkaWVudD48L2RlZnM+CjxyZWN0IHdpZHRoPSI0MDAiIGhlaWdodD0iMjgwIiBmaWxsPSJ1cmwoI2cpIi8+Cjx0ZXh0IHg9IjIwMCIgeT0iMTUwIiBmb250LWZhbWlseT0iR2VvcmdpYSxzZXJpZiIgZm9udC1zaXplPSI4OCIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZmlsbD0iaHNsKDEzMSwzNSUsMzIlKSIgZm9udC13ZWlnaHQ9IjYwMCI+VDwvdGV4dD4KPHRleHQgeD0iMjAwIiB5PSIyMzAiIGZvbnQtZmFtaWx5PSJIZWx2ZXRpY2EsQXJpYWwsc2Fucy1zZXJpZiIgZm9udC1zaXplPSIxNiIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZmlsbD0iaHNsKDEzMSwzMCUsMzAlKSIgbGV0dGVyLXNwYWNpbmc9IjEiPk1FWElDQU4gKFRBQ09TKTwvdGV4dD4KPC9zdmc+')"></div>
+      <div class="card-body">
+        <div class="card-rank">#1</div>
+        <h3 class="card-name">Taco Bamba</h3>
+        <div class="card-neigh">Vienna, VA · Mexican (tacos) <span class="chain-tag">chain — earned it</span></div>
+        <div class="card-meta-row">
+          <span class="price-tag">$</span>
+          <span class="rating-badge">★ 4.2 <span class="rating-count">Tripadvisor · 83 reviews</span></span><span class="rating-badge">★ 4.6 <span class="rating-count">Google · 2,656 reviews</span></span>
+        </div>
+        <p class="card-why">"Victor Albisu&#x27;s hometown taqueria empire never lost the plot — real critical acclaim, not just convenience, which is why it&#x27;s the approved chain exception here."</p>
+        <div class="card-diff" style="border-color:#2f8f5b;color:#2f8f5b">
+          <strong>Easy to book</strong> — Counter-service, no reservation needed; occasional lunch-rush line.
+        </div>
+        <div class="card-sources">On: Tripadvisor · Northern Virginia Magazine (Best of NoVA)</div>
+      </div>
+    </a>
+
+    <a class="card" href="https://www.chaiatacos.com/" target="_blank" rel="noopener">
+      <div class="card-thumb" style="background-image:url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI0MDAiIGhlaWdodD0iMjgwIiB2aWV3Qm94PSIwIDAgNDAwIDI4MCI+CjxkZWZzPjxsaW5lYXJHcmFkaWVudCBpZD0iZyIgeDE9IjAiIHkxPSIwIiB4Mj0iMSIgeTI9IjEiPgo8c3RvcCBvZmZzZXQ9IjAiIHN0b3AtY29sb3I9ImhzbCg0MSw0NSUsODglKSIvPjxzdG9wIG9mZnNldD0iMSIgc3RvcC1jb2xvcj0iaHNsKDgxLDQ1JSw3OCUpIi8+CjwvbGluZWFyR3JhZGllbnQ+PC9kZWZzPgo8cmVjdCB3aWR0aD0iNDAwIiBoZWlnaHQ9IjI4MCIgZmlsbD0idXJsKCNnKSIvPgo8dGV4dCB4PSIyMDAiIHk9IjE1MCIgZm9udC1mYW1pbHk9Ikdlb3JnaWEsc2VyaWYiIGZvbnQtc2l6ZT0iODgiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGZpbGw9ImhzbCg0MSwzNSUsMzIlKSIgZm9udC13ZWlnaHQ9IjYwMCI+QzwvdGV4dD4KPHRleHQgeD0iMjAwIiB5PSIyMzAiIGZvbnQtZmFtaWx5PSJIZWx2ZXRpY2EsQXJpYWwsc2Fucy1zZXJpZiIgZm9udC1zaXplPSIxNiIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZmlsbD0iaHNsKDQxLDMwJSwzMCUpIiBsZXR0ZXItc3BhY2luZz0iMSI+VkVHRVRBUklBTiBNRVhJQ0FOLUlOU1BJUkVEPC90ZXh0Pgo8L3N2Zz4=')"></div>
+      <div class="card-body">
+        <div class="card-rank">#2</div>
+        <h3 class="card-name">Chaia</h3>
+        <div class="card-neigh">Georgetown, DC · Vegetarian Mexican-inspired <span class="chain-tag">chain — earned it</span></div>
+        <div class="card-meta-row">
+          <span class="price-tag">$$</span>
+          <span class="rating-badge">★ 4.6 <span class="rating-count">Tripadvisor · 111 reviews</span></span>
+        </div>
+        <p class="card-why">"Farm-to-taco vegetarian cooking precise enough to convert dedicated carnivores — genuinely inventive, not just a health-food angle."</p>
+        <div class="card-diff" style="border-color:#2f8f5b;color:#2f8f5b">
+          <strong>Easy to book</strong> — Fast-casual counter; no reservations, order at the register.
+        </div>
+        <div class="card-sources">On: Tripadvisor</div>
+      </div>
+    </a>
+
+    <a class="card" href="https://www.tripadvisor.com/Restaurant_Review-g28970-d10264390-Reviews-Taqueria_Habanero-Washington_DC_District_of_Columbia.html" target="_blank" rel="noopener">
+      <div class="card-thumb" style="background-image:url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI0MDAiIGhlaWdodD0iMjgwIiB2aWV3Qm94PSIwIDAgNDAwIDI4MCI+CjxkZWZzPjxsaW5lYXJHcmFkaWVudCBpZD0iZyIgeDE9IjAiIHkxPSIwIiB4Mj0iMSIgeTI9IjEiPgo8c3RvcCBvZmZzZXQ9IjAiIHN0b3AtY29sb3I9ImhzbCgyNzIsNDUlLDg4JSkiLz48c3RvcCBvZmZzZXQ9IjEiIHN0b3AtY29sb3I9ImhzbCgzMTIsNDUlLDc4JSkiLz4KPC9saW5lYXJHcmFkaWVudD48L2RlZnM+CjxyZWN0IHdpZHRoPSI0MDAiIGhlaWdodD0iMjgwIiBmaWxsPSJ1cmwoI2cpIi8+Cjx0ZXh0IHg9IjIwMCIgeT0iMTUwIiBmb250LWZhbWlseT0iR2VvcmdpYSxzZXJpZiIgZm9udC1zaXplPSI4OCIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZmlsbD0iaHNsKDI3MiwzNSUsMzIlKSIgZm9udC13ZWlnaHQ9IjYwMCI+VDwvdGV4dD4KPHRleHQgeD0iMjAwIiB5PSIyMzAiIGZvbnQtZmFtaWx5PSJIZWx2ZXRpY2EsQXJpYWwsc2Fucy1zZXJpZiIgZm9udC1zaXplPSIxNiIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZmlsbD0iaHNsKDI3MiwzMCUsMzAlKSIgbGV0dGVyLXNwYWNpbmc9IjEiPk1FWElDQU48L3RleHQ+Cjwvc3ZnPg==')"></div>
+      <div class="card-body">
+        <div class="card-rank">#3</div>
+        <h3 class="card-name">Taqueria Habanero</h3>
+        <div class="card-neigh">Petworth, DC · Mexican </div>
+        <div class="card-meta-row">
+          <span class="price-tag">$</span>
+          <span class="rating-badge">★ 4.5 <span class="rating-count">Tripadvisor · 51 reviews</span></span>
+        </div>
+        <p class="card-why">"Michelin gave it a Bib for a reason — mole and al pastor this precise shouldn&#x27;t be sold from behind a taqueria counter for single digits."</p>
+        <div class="card-diff" style="border-color:#2f8f5b;color:#2f8f5b">
+          <strong>Easy to book</strong> — Order-at-counter taqueria; no reservations needed.
+        </div>
+        <div class="card-sources">On: Tripadvisor · Michelin Guide DC (Bib Gourmand)</div>
+      </div>
+    </a>
+
+    <a class="card" href="https://zocalotaco.com/location/reston" target="_blank" rel="noopener">
+      <div class="card-thumb" style="background-image:url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI0MDAiIGhlaWdodD0iMjgwIiB2aWV3Qm94PSIwIDAgNDAwIDI4MCI+CjxkZWZzPjxsaW5lYXJHcmFkaWVudCBpZD0iZyIgeDE9IjAiIHkxPSIwIiB4Mj0iMSIgeTI9IjEiPgo8c3RvcCBvZmZzZXQ9IjAiIHN0b3AtY29sb3I9ImhzbCg5MCw0NSUsODglKSIvPjxzdG9wIG9mZnNldD0iMSIgc3RvcC1jb2xvcj0iaHNsKDEzMCw0NSUsNzglKSIvPgo8L2xpbmVhckdyYWRpZW50PjwvZGVmcz4KPHJlY3Qgd2lkdGg9IjQwMCIgaGVpZ2h0PSIyODAiIGZpbGw9InVybCgjZykiLz4KPHRleHQgeD0iMjAwIiB5PSIxNTAiIGZvbnQtZmFtaWx5PSJHZW9yZ2lhLHNlcmlmIiBmb250LXNpemU9Ijg4IiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBmaWxsPSJoc2woOTAsMzUlLDMyJSkiIGZvbnQtd2VpZ2h0PSI2MDAiPlQ8L3RleHQ+Cjx0ZXh0IHg9IjIwMCIgeT0iMjMwIiBmb250LWZhbWlseT0iSGVsdmV0aWNhLEFyaWFsLHNhbnMtc2VyaWYiIGZvbnQtc2l6ZT0iMTYiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGZpbGw9ImhzbCg5MCwzMCUsMzAlKSIgbGV0dGVyLXNwYWNpbmc9IjEiPk1FWElDQU48L3RleHQ+Cjwvc3ZnPg==')"></div>
+      <div class="card-body">
+        <div class="card-rank">#4</div>
+        <h3 class="card-name">Taco Zocalo</h3>
+        <div class="card-neigh">Reston, VA · Mexican <span class="chain-tag">chain — earned it</span></div>
+        <div class="card-meta-row">
+          <span class="price-tag">$</span>
+          <span class="rating-badge">★ 4.6 <span class="rating-count">Tripadvisor · 35 reviews</span></span>
+        </div>
+        <p class="card-why">"A small NoVA taco group with genuinely well-reviewed, made-to-order tacos — earns its spot on quality, not just proximity."</p>
+        <div class="card-diff" style="border-color:#2f8f5b;color:#2f8f5b">
+          <strong>Easy to book</strong> — Counter-service, walk-in only.
+        </div>
+        <div class="card-sources">On: Tripadvisor</div>
+      </div>
+    </a>
+
+    <a class="card" href="https://laprensarestaurant.com/" target="_blank" rel="noopener">
+      <div class="card-thumb" style="background-image:url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI0MDAiIGhlaWdodD0iMjgwIiB2aWV3Qm94PSIwIDAgNDAwIDI4MCI+CjxkZWZzPjxsaW5lYXJHcmFkaWVudCBpZD0iZyIgeDE9IjAiIHkxPSIwIiB4Mj0iMSIgeTI9IjEiPgo8c3RvcCBvZmZzZXQ9IjAiIHN0b3AtY29sb3I9ImhzbCgxNzAsNDUlLDg4JSkiLz48c3RvcCBvZmZzZXQ9IjEiIHN0b3AtY29sb3I9ImhzbCgyMTAsNDUlLDc4JSkiLz4KPC9saW5lYXJHcmFkaWVudD48L2RlZnM+CjxyZWN0IHdpZHRoPSI0MDAiIGhlaWdodD0iMjgwIiBmaWxsPSJ1cmwoI2cpIi8+Cjx0ZXh0IHg9IjIwMCIgeT0iMTUwIiBmb250LWZhbWlseT0iR2VvcmdpYSxzZXJpZiIgZm9udC1zaXplPSI4OCIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZmlsbD0iaHNsKDE3MCwzNSUsMzIlKSIgZm9udC13ZWlnaHQ9IjYwMCI+TDwvdGV4dD4KPHRleHQgeD0iMjAwIiB5PSIyMzAiIGZvbnQtZmFtaWx5PSJIZWx2ZXRpY2EsQXJpYWwsc2Fucy1zZXJpZiIgZm9udC1zaXplPSIxNiIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZmlsbD0iaHNsKDE3MCwzMCUsMzAlKSIgbGV0dGVyLXNwYWNpbmc9IjEiPk1FWElDQU48L3RleHQ+Cjwvc3ZnPg==')"></div>
+      <div class="card-body">
+        <div class="card-rank">#5</div>
+        <h3 class="card-name">La Prensa Tacos &amp; Tapas</h3>
+        <div class="card-neigh">Sterling, VA · Mexican </div>
+        <div class="card-meta-row">
+          <span class="price-tag">$$</span>
+          <span class="rating-badge">★ 5.0 <span class="rating-count">Tripadvisor · 20 reviews</span></span>
+        </div>
+        <p class="card-why">"A Loudoun County sleeper with a perfect Tripadvisor score and real tapas-meets-taqueria ambition well beyond its strip-mall address."</p>
+        <div class="card-diff" style="border-color:#2f8f5b;color:#2f8f5b">
+          <strong>Easy to book</strong> — Small, casual room; usually easy to walk in.
+        </div>
+        <div class="card-sources">On: Tripadvisor</div>
+      </div>
+    </a></div>
+    </section>
+</main>
+
+<footer>
+  Built and refreshed monthly by Claude · Every pick clears a 4.5+ rating floor and appears on at least one locked source · Reservation-difficulty notes combine review/press mentions with typical booking-window patterns · Thumbnails are placeholder art — real photos will be added as sources permit.
+</footer>
+
+</body>
+</html>
