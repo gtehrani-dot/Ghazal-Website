@@ -1,0 +1,654 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Lab Trends — Ghazal Moore</title>
+<style>
+  :root {
+    color-scheme: light;
+    --surface-1:      #fcfcfb;
+    --page-plane:      #f9f9f7;
+    --text-primary:   #0b0b0b;
+    --text-secondary: #52514e;
+    --text-muted:     #898781;
+    --gridline:       #e1e0d9;
+    --baseline:       #c3c2b7;
+    --border:         rgba(11,11,11,0.10);
+    --series-1:       #2a78d6;   /* blue - default trend line */
+    --status-good:    #0ca30c;
+    --status-warning: #fab219;
+    --status-serious: #ec835a;
+    --status-critical:#d03b3b;
+    --band-good-fill: rgba(12,163,12,0.08);
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:where(:not([data-theme="light"])) {
+      color-scheme: dark;
+      --surface-1:      #1a1a19;
+      --page-plane:      #0d0d0d;
+      --text-primary:   #ffffff;
+      --text-secondary: #c3c2b7;
+      --text-muted:     #898781;
+      --gridline:       #2c2c2a;
+      --baseline:       #383835;
+      --border:         rgba(255,255,255,0.10);
+      --series-1:       #3987e5;
+      --status-good:    #0ca30c;
+      --status-warning: #fab219;
+      --status-serious: #ec835a;
+      --status-critical:#e66767;
+      --band-good-fill: rgba(12,163,12,0.10);
+    }
+  }
+  :root[data-theme="dark"] {
+    color-scheme: dark;
+    --surface-1:      #1a1a19;
+    --page-plane:      #0d0d0d;
+    --text-primary:   #ffffff;
+    --text-secondary: #c3c2b7;
+    --text-muted:     #898781;
+    --gridline:       #2c2c2a;
+    --baseline:       #383835;
+    --border:         rgba(255,255,255,0.10);
+    --series-1:       #3987e5;
+    --status-good:    #0ca30c;
+    --status-warning: #fab219;
+    --status-serious: #ec835a;
+    --status-critical:#e66767;
+    --band-good-fill: rgba(12,163,12,0.10);
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    font-family: system-ui, -apple-system, "Segoe UI", sans-serif;
+    background: var(--page-plane);
+    color: var(--text-primary);
+  }
+  .wrap { max-width: 1180px; margin: 0 auto; padding: 28px 20px 80px; }
+  header.page-head {
+    display: flex; justify-content: space-between; align-items: flex-start;
+    gap: 16px; margin-bottom: 22px; flex-wrap: wrap;
+  }
+  h1 { font-size: 26px; margin: 0 0 4px; letter-spacing: -0.01em; }
+  .sub { color: var(--text-secondary); font-size: 14px; margin: 0; }
+  .sub b { color: var(--text-primary); }
+  .back-link {
+    display: inline-flex; align-items: center; gap: 4px;
+    color: var(--text-secondary); font-size: 12.5px; text-decoration: none;
+    margin-bottom: 14px;
+  }
+  .back-link:hover { color: var(--series-1); }
+  .theme-toggle {
+    border: 1px solid var(--border); background: var(--surface-1); color: var(--text-secondary);
+    border-radius: 8px; padding: 7px 12px; font-size: 13px; cursor: pointer;
+  }
+  .theme-toggle:hover { color: var(--text-primary); }
+
+  .callout {
+    background: var(--surface-1); border: 1px solid var(--border); border-radius: 12px;
+    padding: 16px 18px; margin-bottom: 26px; font-size: 13.5px; line-height: 1.55; color: var(--text-secondary);
+  }
+  .callout b { color: var(--text-primary); }
+
+  .flag-row {
+    display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 10px; margin-bottom: 30px;
+  }
+  .flag-tile {
+    background: var(--surface-1); border: 1px solid var(--border); border-radius: 10px;
+    padding: 12px 14px;
+  }
+  .flag-tile .label { font-size: 12px; color: var(--text-secondary); margin-bottom: 4px; }
+  .flag-tile .value { font-size: 20px; font-weight: 600; }
+  .flag-tile .value.good { color: var(--status-good); }
+  .flag-tile .value.warn { color: #b36b00; }
+  .flag-tile .note { font-size: 11.5px; color: var(--text-muted); margin-top: 3px; }
+
+  section.group { margin-bottom: 34px; }
+  .group-head {
+    display: flex; align-items: baseline; gap: 10px; margin-bottom: 12px;
+    border-bottom: 1px solid var(--gridline); padding-bottom: 8px;
+  }
+  .group-head h2 { font-size: 16px; margin: 0; }
+  .group-head .desc { font-size: 12.5px; color: var(--text-muted); }
+
+  .grid {
+    display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 14px;
+  }
+
+  .card {
+    background: var(--surface-1); border: 1px solid var(--border); border-radius: 12px;
+    padding: 14px 14px 8px;
+  }
+  .card-head { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 2px; }
+  .card-title { font-size: 13.5px; font-weight: 600; color: var(--text-primary); }
+  .card-range { font-size: 11px; color: var(--text-muted); margin-top: 2px; }
+  .card-latest { text-align: right; }
+  .card-latest .val { font-size: 18px; font-weight: 600; line-height: 1.1; }
+  .card-latest .val.flag-high, .card-latest .val.flag-low { color: var(--status-critical); }
+  .card-latest .delta { font-size: 11px; margin-top: 2px; }
+  .delta.up { color: var(--status-critical); }
+  .delta.down { color: var(--status-good); }
+  .delta.flat { color: var(--text-muted); }
+
+  .chart-svg { display: block; width: 100%; height: 132px; overflow: visible; }
+  .chart-svg .band { fill: var(--band-good-fill); }
+  .chart-svg .refline { stroke: var(--baseline); stroke-width: 1; stroke-dasharray: 2 3; }
+  .chart-svg .line { fill: none; stroke: var(--series-1); stroke-width: 2; stroke-linejoin: round; stroke-linecap: round; }
+  .chart-svg .dot { stroke: var(--surface-1); stroke-width: 2; cursor: pointer; }
+  .chart-svg .dot.good { fill: var(--series-1); }
+  .chart-svg .dot.high { fill: var(--status-critical); }
+  .chart-svg .dot.low { fill: var(--status-critical); }
+  .chart-svg .hit { fill: transparent; cursor: pointer; }
+  .chart-svg .flagtxt { font-size: 9px; font-weight: 700; fill: var(--status-critical); }
+  .chart-svg .axis-label { font-size: 9.5px; fill: var(--text-muted); }
+  .chart-svg .src-label { font-size: 8px; fill: var(--text-muted); }
+
+  .tooltip {
+    position: fixed; pointer-events: none; z-index: 50;
+    background: var(--text-primary); color: var(--surface-1);
+    font-size: 11.5px; line-height: 1.4; padding: 7px 10px; border-radius: 7px;
+    opacity: 0; transform: translate(-50%, -110%); transition: opacity .08s ease;
+    white-space: nowrap;
+  }
+  .tooltip.show { opacity: 1; }
+  .tooltip b { font-weight: 700; }
+
+  .single-grid {
+    display: grid; grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)); gap: 10px;
+  }
+  .single-tile {
+    background: var(--surface-1); border: 1px solid var(--border); border-radius: 10px;
+    padding: 12px 14px;
+  }
+  .single-tile .label { font-size: 12px; color: var(--text-secondary); }
+  .single-tile .val { font-size: 20px; font-weight: 600; margin-top: 3px; }
+  .single-tile .val.flag-high, .single-tile .val.flag-low { color: var(--status-critical); }
+  .single-tile .meta { font-size: 11px; color: var(--text-muted); margin-top: 3px; }
+
+  footer.note {
+    margin-top: 30px; font-size: 12px; color: var(--text-muted); line-height: 1.6;
+    border-top: 1px solid var(--gridline); padding-top: 14px;
+  }
+
+  table.data-table { border-collapse: collapse; width: 100%; font-size: 12px; margin-top: 10px; }
+  table.data-table th, table.data-table td { text-align: left; padding: 5px 8px; border-bottom: 1px solid var(--gridline); }
+  table.data-table th { color: var(--text-secondary); font-weight: 600; }
+  table.data-table td.num { font-variant-numeric: tabular-nums; }
+  details.table-toggle { margin-top: 8px; }
+  details.table-toggle summary { cursor: pointer; font-size: 12.5px; color: var(--text-secondary); }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <a class="back-link" href="https://ghazal-tehrani.me/main#personal">&larr; Back to Personal</a>
+
+  <header class="page-head">
+    <div>
+      <h1>Lab Trends</h1>
+      <p class="sub">Ghazal Moore &middot; DOB 01/25/1979 &middot; compiled from Inova MyChart, Johns Hopkins MyChart, Speer Primary Care, and Rupa Health &middot; updated <b>Aug 19, 2026</b></p>
+    </div>
+    <button class="theme-toggle" id="themeToggle">Switch to dark</button>
+  </header>
+
+  <div class="callout">
+    <b>What this covers.</b> Every analyte with two or more time points across your chart history — grouped into Crohn's / inflammation markers, vitamins &amp; minerals, cholesterol &amp; cardiometabolic, liver &amp; kidney (relevant to medication monitoring), and thyroid. The shaded band on each chart is the normal reference range; points outside it are marked in red with an H/L flag. Single-reading analytes (no trend yet — Zinc, Magnesium, Vitamin C, Apolipoprotein B, Lipoprotein(a)) are listed as tiles at the end of their section instead of a line chart. Hover any point for the exact value, date, and source.
+  </div>
+
+  <div class="flag-row" id="flagRow"></div>
+
+  <main id="sections"></main>
+
+  <footer class="note">
+    Reference ranges shown are the lab-reported ranges from each source at the time of the draw and may vary slightly between labs (e.g. Quest vs. hospital lab). Values pulled from Johns Hopkins MyChart, Inova MyChart, Speer Primary Care (via Hushmail/Quest Diagnostics), and Rupa Health (Dr. Afrouz Demeri). This is a personal tracking view, not a diagnostic tool — bring trends you want to discuss to your next visit with Dr. Charabaty or Dr. Speer.
+  </footer>
+</div>
+
+<div class="tooltip" id="tooltip"></div>
+
+<script>
+/* ---------- Data ---------- */
+// Each metric: { key, title, unit, group, range:[lo,hi] (null = unbounded), points:[{date:'YYYY-MM-DD', value, source, note?}] }
+const METRICS = [
+
+  /* ===== Crohn's / Inflammation ===== */
+  { key:'calpro', title:'Calprotectin, Stool', unit:'mcg/g', group:'crohns',
+    range:[null,50], thresholds:[{v:50,label:'borderline'},{v:120,label:'elevated'}],
+    points:[
+      {date:'2026-03-06', value:39, source:'Johns Hopkins'},
+      {date:'2026-07-31', value:10, source:'Johns Hopkins'},
+    ]},
+  { key:'crp', title:'C-Reactive Protein', unit:'mg/L', group:'crohns', range:[null,8.0], censored:true,
+    points:[
+      {date:'2026-02-27', value:3.0, source:'Johns Hopkins', note:'reported as <3.0'},
+      {date:'2026-07-07', value:3.0, source:'Johns Hopkins', note:'reported as <3.0'},
+    ]},
+  { key:'hgb', title:'Hemoglobin', unit:'g/dL', group:'crohns', range:[11.7,15.5],
+    points:[
+      {date:'2016-07-14', value:13.1, source:'Inova'},
+      {date:'2025-09-12', value:14.1, source:'Johns Hopkins'},
+      {date:'2026-02-27', value:14.3, source:'Johns Hopkins'},
+      {date:'2026-07-07', value:14.2, source:'Johns Hopkins'},
+    ]},
+  { key:'hct', title:'Hematocrit', unit:'%', group:'crohns', range:[35,46],
+    points:[
+      {date:'2016-07-14', value:37.8, source:'Inova'},
+      {date:'2025-09-12', value:42.7, source:'Johns Hopkins'},
+      {date:'2026-02-27', value:44.5, source:'Johns Hopkins'},
+      {date:'2026-07-07', value:44.1, source:'Johns Hopkins'},
+    ]},
+  { key:'wbc', title:'White Blood Cell Count', unit:'K/uL', group:'crohns', range:[3.8,10.8],
+    points:[
+      {date:'2016-07-14', value:9.3, source:'Inova'},
+      {date:'2025-09-12', value:5.3, source:'Johns Hopkins'},
+      {date:'2026-02-27', value:9.6, source:'Johns Hopkins'},
+      {date:'2026-07-07', value:5.8, source:'Johns Hopkins'},
+    ]},
+  { key:'plt', title:'Platelet Count', unit:'K/uL', group:'crohns', range:[140,400],
+    points:[
+      {date:'2016-07-14', value:223, source:'Inova'},
+      {date:'2025-09-12', value:214, source:'Johns Hopkins'},
+      {date:'2026-02-27', value:239, source:'Johns Hopkins'},
+      {date:'2026-07-07', value:236, source:'Johns Hopkins'},
+    ]},
+  { key:'alb', title:'Albumin', unit:'g/dL', group:'crohns', range:[3.6,5.1],
+    points:[
+      {date:'2025-09-12', value:4.7, source:'Johns Hopkins'},
+      {date:'2026-02-27', value:4.9, source:'Johns Hopkins'},
+      {date:'2026-04-08', value:5.2, source:'Speer Primary Care'},
+      {date:'2026-07-07', value:4.9, source:'Johns Hopkins'},
+    ]},
+  { key:'eos', title:'Eosinophils, Absolute', unit:'cells/uL', group:'crohns', range:[15,500],
+    points:[
+      {date:'2025-09-12', value:11, source:'Johns Hopkins'},
+      {date:'2026-02-27', value:67, source:'Johns Hopkins'},
+      {date:'2026-07-07', value:17, source:'Johns Hopkins'},
+    ]},
+
+  /* ===== Vitamins & Minerals ===== */
+  { key:'vitd', title:'Vitamin D, 25-Hydroxy', unit:'ng/mL', group:'vitamins', range:[30,100],
+    points:[
+      {date:'2026-02-27', value:21, source:'Johns Hopkins'},
+      {date:'2026-07-07', value:29, source:'Johns Hopkins'},
+    ]},
+  { key:'b12', title:'Vitamin B12', unit:'pg/mL', group:'vitamins', range:[200,1100],
+    points:[
+      {date:'2025-09-12', value:563, source:'Johns Hopkins'},
+      {date:'2026-02-27', value:561, source:'Johns Hopkins'},
+      {date:'2026-04-08', value:621, source:'Speer Primary Care'},
+      {date:'2026-07-07', value:542, source:'Johns Hopkins'},
+    ]},
+  { key:'ferr', title:'Ferritin', unit:'ng/mL', group:'vitamins', range:[16,232],
+    points:[
+      {date:'2026-02-27', value:30, source:'Johns Hopkins'},
+      {date:'2026-07-07', value:30, source:'Johns Hopkins'},
+    ]},
+  { key:'iron', title:'Iron, Total', unit:'mcg/dL', group:'vitamins', range:[40,190],
+    points:[
+      {date:'2025-09-12', value:72, source:'Johns Hopkins'},
+      {date:'2026-02-27', value:51, source:'Johns Hopkins'},
+      {date:'2026-07-07', value:54, source:'Johns Hopkins'},
+    ]},
+  { key:'satfe', title:'Iron % Saturation', unit:'%', group:'vitamins', range:[16,45],
+    points:[
+      {date:'2025-09-12', value:22, source:'Johns Hopkins'},
+      {date:'2026-02-27', value:14, source:'Johns Hopkins'},
+      {date:'2026-07-07', value:16, source:'Johns Hopkins'},
+    ]},
+
+  /* ===== Cholesterol / Cardiometabolic ===== */
+  { key:'tchol', title:'Total Cholesterol', unit:'mg/dL', group:'chol', range:[null,200],
+    points:[
+      {date:'2024-07-10', value:223, source:'Speer Primary Care'},
+      {date:'2026-04-08', value:250, source:'Speer Primary Care'},
+    ]},
+  { key:'ldl', title:'LDL Cholesterol', unit:'mg/dL', group:'chol', range:[null,100],
+    points:[
+      {date:'2024-07-10', value:126, source:'Speer Primary Care'},
+      {date:'2026-04-08', value:128, source:'Speer Primary Care'},
+    ]},
+  { key:'hdl', title:'HDL Cholesterol', unit:'mg/dL', group:'chol', range:[50,null],
+    points:[
+      {date:'2024-07-10', value:80, source:'Speer Primary Care'},
+      {date:'2026-04-08', value:107, source:'Speer Primary Care'},
+    ]},
+  { key:'trig', title:'Triglycerides', unit:'mg/dL', group:'chol', range:[null,150],
+    points:[
+      {date:'2024-07-10', value:76, source:'Speer Primary Care'},
+      {date:'2026-04-08', value:55, source:'Speer Primary Care'},
+    ]},
+  { key:'nonhdl', title:'Non-HDL Cholesterol', unit:'mg/dL', group:'chol', range:[null,130],
+    points:[
+      {date:'2024-07-10', value:143, source:'Speer Primary Care'},
+      {date:'2026-04-08', value:143, source:'Speer Primary Care'},
+    ]},
+  { key:'a1c', title:'Hemoglobin A1c', unit:'%', group:'chol', range:[null,5.7],
+    points:[
+      {date:'2024-07-10', value:5.3, source:'Speer Primary Care'},
+      {date:'2026-04-08', value:5.4, source:'Speer Primary Care'},
+    ]},
+
+  /* ===== Liver & Kidney (medication monitoring) ===== */
+  { key:'ast', title:'AST', unit:'U/L', group:'liver', range:[10,35],
+    points:[
+      {date:'2024-07-10', value:15, source:'Speer Primary Care'},
+      {date:'2025-09-12', value:14, source:'Johns Hopkins'},
+      {date:'2026-02-27', value:15, source:'Johns Hopkins'},
+      {date:'2026-04-08', value:16, source:'Speer Primary Care'},
+      {date:'2026-07-07', value:15, source:'Johns Hopkins'},
+    ]},
+  { key:'alt', title:'ALT', unit:'U/L', group:'liver', range:[6,29],
+    points:[
+      {date:'2024-07-10', value:11, source:'Speer Primary Care'},
+      {date:'2025-09-12', value:16, source:'Johns Hopkins'},
+      {date:'2026-02-27', value:13, source:'Johns Hopkins'},
+      {date:'2026-04-08', value:15, source:'Speer Primary Care'},
+      {date:'2026-07-07', value:12, source:'Johns Hopkins'},
+    ]},
+  { key:'alkphos', title:'Alkaline Phosphatase', unit:'U/L', group:'liver', range:[31,125],
+    points:[
+      {date:'2024-07-10', value:29, source:'Speer Primary Care'},
+      {date:'2025-09-12', value:29, source:'Johns Hopkins'},
+      {date:'2026-02-27', value:34, source:'Johns Hopkins'},
+      {date:'2026-04-08', value:43, source:'Speer Primary Care'},
+      {date:'2026-07-07', value:27, source:'Johns Hopkins'},
+    ]},
+  { key:'creat', title:'Creatinine', unit:'mg/dL', group:'liver', range:[0.50,0.99],
+    points:[
+      {date:'2024-07-10', value:0.62, source:'Speer Primary Care'},
+      {date:'2025-09-12', value:0.53, source:'Johns Hopkins'},
+      {date:'2026-02-27', value:0.59, source:'Johns Hopkins'},
+      {date:'2026-07-07', value:0.64, source:'Johns Hopkins'},
+    ]},
+  { key:'egfr', title:'eGFR', unit:'mL/min/1.73m²', group:'liver', range:[60,null],
+    points:[
+      {date:'2025-09-12', value:115, source:'Johns Hopkins'},
+      {date:'2026-02-27', value:112, source:'Johns Hopkins'},
+      {date:'2026-07-07', value:110, source:'Johns Hopkins'},
+    ]},
+
+  /* ===== Thyroid ===== */
+  { key:'tsh', title:'TSH', unit:'mIU/L', group:'thyroid', range:[0.40,4.50],
+    points:[
+      {date:'2016-08-31', value:0.843, source:'Inova'},
+      {date:'2018-02-23', value:0.39, source:'Inova'},
+      {date:'2020-06-22', value:0.986, source:'Inova'},
+      {date:'2024-07-10', value:0.67, source:'Speer Primary Care'},
+      {date:'2025-09-12', value:0.45, source:'Johns Hopkins'},
+      {date:'2026-04-08', value:1.01, source:'Speer Primary Care'},
+    ]},
+];
+
+const SINGLE_POINTS = [
+  { title:'Zinc', unit:'mcg/dL', group:'vitamins', value:75, range:[60,130], date:'2026-07-07', source:'Johns Hopkins' },
+  { title:'Magnesium', unit:'mg/dL', group:'vitamins', value:2.2, range:[1.5,2.5], date:'2026-07-07', source:'Johns Hopkins' },
+  { title:'Vitamin C', unit:'mg/dL', group:'vitamins', value:0.7, range:[0.3,2.7], date:'2026-07-07', source:'Johns Hopkins' },
+  { title:'Apolipoprotein B', unit:'mg/dL', group:'chol', value:107, range:[null,90], date:'2024-07-10', source:'Speer Primary Care' },
+  { title:'Lipoprotein(a)', unit:'nmol/L', group:'chol', value:48, range:[null,75], date:'2024-07-10', source:'Speer Primary Care' },
+];
+
+const GROUPS = [
+  { key:'crohns', title:"Crohn's / Inflammation Markers", desc:'Calprotectin is the most Crohn’s-specific marker here; CBC/albumin track anemia and nutritional status, both common in active IBD.' },
+  { key:'vitamins', title:'Vitamins & Minerals', desc:'B12 and iron absorption both happen in the terminal ileum — the exact segment affected by the ileitis found in May 2025, so these are worth watching closely.' },
+  { key:'chol', title:'Cholesterol & Cardiometabolic', desc:'From Speer Primary Care’s annual wellness labs.' },
+  { key:'liver', title:'Liver & Kidney (medication monitoring)', desc:'Routinely checked alongside IBD treatment (budesonide / infusion therapy) to make sure the meds aren’t stressing the liver or kidneys.' },
+  { key:'thyroid', title:'Thyroid', desc:'Spans three different providers across ten years — the longest single trend in your chart history.' },
+];
+
+/* ---------- helpers ---------- */
+function parseDate(d){ return new Date(d+'T00:00:00'); }
+function fmtDateShort(d){
+  const dt = parseDate(d);
+  return dt.toLocaleDateString('en-US',{month:'short', year:'2-digit'});
+}
+function fmtDateFull(d){
+  const dt = parseDate(d);
+  return dt.toLocaleDateString('en-US',{month:'short', day:'numeric', year:'numeric'});
+}
+function flagFor(value, range){
+  if(!range) return 'good';
+  const [lo,hi] = range;
+  if(lo!=null && value<lo) return 'low';
+  if(hi!=null && value>hi) return 'high';
+  return 'good';
+}
+function niceNum(n){
+  if (Math.abs(n) >= 100) return Math.round(n).toLocaleString();
+  if (Number.isInteger(n)) return n.toString();
+  return n.toFixed(n < 10 ? 2 : 1);
+}
+
+/* ---------- chart renderer ---------- */
+function renderChart(metric){
+  const W = 300, H = 132, padL = 34, padR = 14, padT = 14, padB = 20;
+  const innerW = W - padL - padR, innerH = H - padT - padB;
+
+  const pts = metric.points;
+  const times = pts.map(p=>parseDate(p.date).getTime());
+  const tMin = Math.min(...times), tMax = Math.max(...times);
+  const tSpan = Math.max(tMax - tMin, 1);
+
+  const values = pts.map(p=>p.value);
+  let [rlo, rhi] = metric.range || [null,null];
+  let domainLo = rlo!=null ? Math.min(rlo, ...values) : Math.min(...values);
+  let domainHi = rhi!=null ? Math.max(rhi, ...values) : Math.max(...values);
+  if (metric.thresholds) metric.thresholds.forEach(t=>{ domainHi = Math.max(domainHi, t.v); });
+  const pad = (domainHi - domainLo) * 0.18 || Math.max(domainHi*0.1, 1);
+  domainLo -= pad; domainHi += pad;
+  if (domainLo < 0 && Math.min(...values) >= 0 && (rlo==null || rlo>=0)) domainLo = 0;
+  const domainSpan = Math.max(domainHi - domainLo, 0.0001);
+
+  function x(t){ return padL + ((t - tMin)/tSpan) * innerW; }
+  function y(v){ return padT + innerH - ((v - domainLo)/domainSpan) * innerH; }
+
+  let svg = `<svg class="chart-svg" viewBox="0 0 ${W} ${H}" preserveAspectRatio="xMidYMid meet">`;
+
+  // reference band
+  if (rlo!=null || rhi!=null){
+    const bandTop = rhi!=null ? y(rhi) : padT;
+    const bandBot = rlo!=null ? y(rlo) : padT+innerH;
+    svg += `<rect class="band" x="${padL}" y="${bandTop}" width="${innerW}" height="${Math.max(bandBot-bandTop,1)}"></rect>`;
+  }
+  // threshold lines (e.g. calprotectin borderline/elevated)
+  if (metric.thresholds){
+    metric.thresholds.forEach(t=>{
+      const yy = y(t.v);
+      svg += `<line class="refline" x1="${padL}" x2="${padL+innerW}" y1="${yy}" y2="${yy}"></line>`;
+    });
+  }
+
+  // y-axis min/max labels
+  svg += `<text class="axis-label" x="${padL-6}" y="${padT+4}" text-anchor="end">${niceNum(domainHi)}</text>`;
+  svg += `<text class="axis-label" x="${padL-6}" y="${padT+innerH}" text-anchor="end">${niceNum(domainLo)}</text>`;
+
+  // line path
+  const path = pts.map((p,i)=> `${i===0?'M':'L'} ${x(times[i]).toFixed(1)} ${y(p.value).toFixed(1)}`).join(' ');
+  svg += `<path class="line" d="${path}"></path>`;
+
+  // x-axis date labels (first/last)
+  svg += `<text class="axis-label" x="${x(times[0])}" y="${H-4}" text-anchor="start">${fmtDateShort(pts[0].date)}</text>`;
+  svg += `<text class="axis-label" x="${x(times[times.length-1])}" y="${H-4}" text-anchor="end">${fmtDateShort(pts[pts.length-1].date)}</text>`;
+
+  // dots + hit targets
+  pts.forEach((p,i)=>{
+    const flag = metric.censored ? 'good' : flagFor(p.value, metric.range);
+    const cx = x(times[i]).toFixed(1), cy = y(p.value).toFixed(1);
+    svg += `<circle class="dot ${flag}" cx="${cx}" cy="${cy}" r="5"></circle>`;
+    if (flag !== 'good'){
+      svg += `<text class="flagtxt" x="${cx}" y="${(+cy)-9}" text-anchor="middle">${flag==='high'?'H':'L'}</text>`;
+    }
+    const label = `${metric.title}: ${p.note? p.note : niceNum(p.value)+' '+metric.unit} — ${fmtDateFull(p.date)} (${p.source})`;
+    svg += `<circle class="hit" cx="${cx}" cy="${cy}" r="12" data-tip="${label.replace(/"/g,'&quot;')}"></circle>`;
+  });
+
+  svg += `</svg>`;
+  return svg;
+}
+
+function latestDeltaInfo(metric){
+  const pts = metric.points;
+  const last = pts[pts.length-1];
+  const prev = pts.length>1 ? pts[pts.length-2] : null;
+  const flag = metric.censored ? 'good' : flagFor(last.value, metric.range);
+  let deltaHtml = '';
+  if (prev){
+    const diff = last.value - prev.value;
+    // Metrics where a higher reading is clinically better (deficiency/filtration markers).
+    const UP_IS_GOOD = ['hdl','egfr','vitd','b12','ferr','iron','satfe'];
+    // Metrics where direction alone doesn't mean better/worse — only being in-range matters.
+    const NEUTRAL = ['hgb','hct','wbc','plt','alb','eos','tsh'];
+    if (Math.abs(diff) > 0.001){
+      if (NEUTRAL.includes(metric.key)){
+        deltaHtml = `<div class="delta flat">${diff>0?'+':''}${niceNum(diff)} vs prior</div>`;
+      } else {
+        const upIsGood = UP_IS_GOOD.includes(metric.key);
+        const dir = diff > 0 ? 'up' : 'down';
+        const goodDir = upIsGood ? 'up' : 'down';
+        const colorClass = (dir === goodDir) ? 'down' : 'up'; // .down=good-green, .up=bad-red
+        deltaHtml = `<div class="delta ${colorClass}">${diff>0?'+':''}${niceNum(diff)} vs prior</div>`;
+      }
+    } else {
+      deltaHtml = `<div class="delta flat">flat vs prior</div>`;
+    }
+  }
+  return { last, flag, deltaHtml };
+}
+
+function rangeLabel(metric){
+  const [lo,hi] = metric.range || [null,null];
+  if (lo!=null && hi!=null) return `Normal: ${niceNum(lo)}–${niceNum(hi)} ${metric.unit}`;
+  if (lo!=null) return `Normal: ≥${niceNum(lo)} ${metric.unit}`;
+  if (hi!=null) return `Normal: <${niceNum(hi)} ${metric.unit}`;
+  return metric.unit;
+}
+
+/* ---------- flag summary row (top of page) ---------- */
+function renderFlagRow(){
+  const el = document.getElementById('flagRow');
+  const highlights = [
+    {m:'vitd', label:'Vitamin D (latest)'},
+    {m:'calpro', label:'Stool Calprotectin (latest)'},
+    {m:'tchol', label:'Total Cholesterol (latest)'},
+    {m:'b12', label:'Vitamin B12 (latest)'},
+  ];
+  el.innerHTML = highlights.map(h=>{
+    const metric = METRICS.find(m=>m.key===h.m);
+    const last = metric.points[metric.points.length-1];
+    const flag = flagFor(last.value, metric.range);
+    const cls = flag==='good' ? 'good' : 'warn';
+    return `<div class="flag-tile">
+      <div class="label">${h.label}</div>
+      <div class="value ${cls}">${niceNum(last.value)} ${metric.unit}${flag!=='good' ? (flag==='high'?' (High)':' (Low)') : ''}</div>
+      <div class="note">${fmtDateFull(last.date)} · ${last.source}</div>
+    </div>`;
+  }).join('');
+}
+
+/* ---------- build sections ---------- */
+function renderSections(){
+  const root = document.getElementById('sections');
+  root.innerHTML = GROUPS.map(g=>{
+    const metrics = METRICS.filter(m=>m.group===g.key);
+    const singles = SINGLE_POINTS.filter(s=>s.group===g.key);
+    if (!metrics.length && !singles.length) return '';
+
+    const cards = metrics.map(m=>{
+      const {last, flag, deltaHtml} = latestDeltaInfo(m);
+      return `<div class="card">
+        <div class="card-head">
+          <div>
+            <div class="card-title">${m.title}</div>
+            <div class="card-range">${rangeLabel(m)}</div>
+          </div>
+          <div class="card-latest">
+            <div class="val ${flag!=='good'?('flag-'+flag):''}">${niceNum(last.value)}<span style="font-size:11px;font-weight:400;color:var(--text-muted)"> ${m.unit}</span></div>
+            ${deltaHtml}
+          </div>
+        </div>
+        ${renderChart(m)}
+      </div>`;
+    }).join('');
+
+    const singleTiles = singles.length ? `<div class="single-grid" style="margin-top:12px;">
+      ${singles.map(s=>{
+        const flag = flagFor(s.value, s.range);
+        const rangeTxt = s.range[0]!=null && s.range[1]!=null ? `${niceNum(s.range[0])}–${niceNum(s.range[1])}` : (s.range[0]!=null ? `≥${niceNum(s.range[0])}` : `<${niceNum(s.range[1])}`);
+        return `<div class="single-tile">
+          <div class="label">${s.title} <span style="opacity:.6">(single reading)</span></div>
+          <div class="val ${flag!=='good'?('flag-'+flag):''}">${niceNum(s.value)} <span style="font-size:12px;font-weight:400;color:var(--text-muted)">${s.unit}</span></div>
+          <div class="meta">Normal ${rangeTxt} ${s.unit} · ${fmtDateFull(s.date)} · ${s.source}</div>
+        </div>`;
+      }).join('')}
+    </div>` : '';
+
+    return `<section class="group">
+      <div class="group-head">
+        <h2>${g.title}</h2>
+        <span class="desc">${g.desc}</span>
+      </div>
+      <div class="grid">${cards}</div>
+      ${singleTiles}
+    </section>`;
+  }).join('');
+}
+
+/* ---------- data table (accessibility: table view) ---------- */
+function renderDataTable(){
+  const rows = [];
+  METRICS.forEach(m=>{
+    m.points.forEach(p=>{
+      rows.push({metric:m.title, date:p.date, value:p.value, unit:m.unit, source:p.source, flag: m.censored?'—':flagFor(p.value,m.range)});
+    });
+  });
+  SINGLE_POINTS.forEach(s=>{
+    rows.push({metric:s.title, date:s.date, value:s.value, unit:s.unit, source:s.source, flag:flagFor(s.value,s.range)});
+  });
+  rows.sort((a,b)=> a.metric.localeCompare(b.metric) || a.date.localeCompare(b.date));
+  const trs = rows.map(r=>`<tr>
+    <td>${r.metric}</td><td>${fmtDateFull(r.date)}</td>
+    <td class="num">${niceNum(r.value)} ${r.unit}</td>
+    <td>${r.source}</td>
+    <td>${r.flag==='good'||r.flag==='—' ? '' : (r.flag==='high'?'High':'Low')}</td>
+  </tr>`).join('');
+  return `<details class="table-toggle">
+    <summary>Show full data table (${rows.length} readings)</summary>
+    <table class="data-table">
+      <thead><tr><th>Test</th><th>Date</th><th>Value</th><th>Source</th><th>Flag</th></tr></thead>
+      <tbody>${trs}</tbody>
+    </table>
+  </details>`;
+}
+
+/* ---------- tooltip wiring ---------- */
+const tooltipEl = document.getElementById('tooltip');
+document.addEventListener('mousemove', (e)=>{
+  const target = e.target.closest('.hit');
+  if (target){
+    tooltipEl.innerHTML = target.getAttribute('data-tip');
+    tooltipEl.style.left = e.clientX + 'px';
+    tooltipEl.style.top = e.clientY + 'px';
+    tooltipEl.classList.add('show');
+  } else {
+    tooltipEl.classList.remove('show');
+  }
+});
+document.addEventListener('mouseleave', ()=> tooltipEl.classList.remove('show'));
+
+/* ---------- theme toggle ---------- */
+const themeBtn = document.getElementById('themeToggle');
+themeBtn.addEventListener('click', ()=>{
+  const root = document.documentElement;
+  const isDark = root.getAttribute('data-theme') === 'dark';
+  root.setAttribute('data-theme', isDark ? 'light' : 'dark');
+  themeBtn.textContent = isDark ? 'Switch to dark' : 'Switch to light';
+});
+
+/* ---------- init ---------- */
+renderFlagRow();
+renderSections();
+document.querySelector('footer.note').insertAdjacentHTML('beforebegin', renderDataTable());
+</script>
+</body>
+</html>
