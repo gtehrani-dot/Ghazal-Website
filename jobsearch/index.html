@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>Local Job Dashboard — 2026-07-28</title>
+<title>Job Search Dashboard — 2026-08-19</title>
 <style>
   body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif; background: #f5f6f8; color: #1d1f24; margin: 0; padding: 0 0 60px 0; }
   header { background: #1d2b3a; color: #fff; padding: 28px 40px; }
@@ -13,6 +13,10 @@
   .banner h2 { margin: 0 0 10px 0; font-size: 15px; color: #8a5a00; }
   .banner ul { margin: 0; padding-left: 20px; font-size: 13.5px; line-height: 1.6; }
   .banner li { margin-bottom: 8px; }
+  .drift-flag { background: #fdeaea; border: 1px solid #e5a3a3; border-radius: 8px; padding: 16px 22px; margin: 24px 0 0 0; }
+  .drift-flag h2 { margin: 0 0 8px 0; font-size: 14.5px; color: #9c2626; }
+  .drift-flag p { margin: 0 0 10px 0; font-size: 13.5px; line-height: 1.55; color: #6b2a2a; }
+  .drift-flag p:last-child { margin-bottom: 0; }
   section { margin: 32px 0; }
   section h2 { font-size: 17px; border-bottom: 2px solid #dfe3e8; padding-bottom: 8px; }
 
@@ -57,6 +61,7 @@
   a.filelink:hover { background: #dde3ea; }
   .filenote { display: inline-block; background: #f7f8fa; color: #767f89; font-style: italic; padding: 9px 16px; border-radius: 6px; font-size: 13px; border: 1px dashed #d5dae1; }
   .empty { color: #667; font-style: italic; font-size: 14px; }
+  .linknote { color: #767f89; font-style: italic; }
 
   .prev-list { background: #fff; border: 1px solid #e2e5ea; border-radius: 10px; padding: 4px 0; margin-top: 16px; }
   .prev-item { padding: 14px 20px; border-top: 1px solid #eceff2; font-size: 13.5px; line-height: 1.5; }
@@ -79,8 +84,8 @@
 <body>
 <header>
   <div class="wrap">
-    <h1>Ghazal's Local Job Dashboard</h1>
-    <p>Daily scan — Tuesday, July 28, 2026 &nbsp;·&nbsp; Overnight scheduled run &nbsp;·&nbsp; Private copy — not the public site</p>
+    <h1>Ghazal's Job Search Dashboard</h1>
+    <p>Daily scan — Wednesday, August 19, 2026 &nbsp;·&nbsp; Overnight scheduled run &nbsp;·&nbsp; Public copy — resume/cover letter files are only in the local copy</p>
   </div>
 </header>
 
@@ -92,6 +97,13 @@
   </div>
 
   <div class="tab-panel active" id="tab-matches">
+
+    <div class="drift-flag">
+      <h2>&#9888; Two master-resume phrase drifts remain unresolved — now flagged across three runs (8/11, 8/18, 8/19)</h2>
+      <p><b>1. "NRR" → "NRR/GRR" widening — unresolved since 7/22, still 4 occurrences.</b> Checked <code>resumes/Ghazal_Tehrani_Master_Resume.docx</code> directly today: it still reads plain "NRR" (not "NRR/GRR") in both the FranConnect and Decision Lens experience bullets — only the Core Competencies line already says "NRR/GRR." No change since 8/11. No posting today called for this specific term, so no new occurrences added.</p>
+      <p><b>2. "customer health programs" → "customer health scoring programs" — unresolved since 8/11, now 7 occurrences (jumped from 3 to 7 today).</b> Veeam (7/23), both Ping Identity bullets (8/11), and today both Dot Compliance bullets and both NiCE (Strategic Segment) bullets all needed this same swap. Checked the master resume directly today: both instances still read "customer health programs" verbatim in the base file — every one of these 7 occurrences has had to be patched into an individual application copy instead. This is now well past the 3+ threshold and still growing.</p>
+      <p><b>Recommendation, now on its third run:</b> update <code>resumes/Ghazal_Tehrani_Master_Resume.docx</code> directly — change both "NRR" instances to "NRR/GRR" and both "customer health programs" instances to "customer health scoring programs." The health-scoring swap in particular has now recurred in 4 of the last 5 applications customized — it reads as base-resume language that's simply behind current market phrasing, not a one-off tailoring choice.</p>
+    </div>
 
     <table class="summary" id="summary-table">
       <thead>
@@ -115,37 +127,56 @@
       <h2 style="margin-top:32px;">Match details — new or updated today</h2>
 
       <div class="card">
-        <span class="tier-badge secondary">Secondary</span>
-        <span class="tag saas">SaaS Account Management / Infrastructure</span>
-        <h3>VP, Global Account Management</h3>
-        <div class="company">Fastly (NASDAQ: FSLY) — edge cloud / CDN platform · new to today's dashboard</div>
+        <h3>Global Vice President of Customer Success</h3>
+        <div class="company">Dot Compliance</div>
+        <span class="tag saas">SaaS CS · Life Sciences Compliance</span>
         <div class="row">
-          <div class="item"><b>Location</b>Hybrid preferred (Denver, SF, or NYC); remote considered for exceptional candidates</div>
-          <div class="item"><b>Salary</b>$344,374–$430,467 — this is a Ladders <i>estimate</i>, not a company-stated figure. Treat as unconfirmed until a recruiter verifies.</div>
-          <div class="item"><b>Verified</b>Live — fetched directly via theladders.com, full description rendered</div>
+          <div class="item"><b>Fit</b>71%</div>
+          <div class="item"><b>Desirability</b>~58%</div>
+          <div class="item"><b>Salary</b>Not listed</div>
+          <div class="item"><b>Location</b>Remote (Eastern/Central time zone preferred)</div>
+          <div class="item"><b>Posted</b>~6 days ago (est. 2026-08-13)</div>
+          <div class="item"><b>Match</b><span class="tier-badge secondary">Secondary</span></div>
         </div>
-        <div class="fit"><b>Why she's a strong fit:</b> Note the listing is titled "VP, Global Customer Success" on Ladders, but the posting body itself is titled "VP, Global Account Management" — it's a renewals/retention/expansion leadership role for Fastly's largest enterprise accounts, not a classic post-sale CS org. That maps to her FranConnect work (110% NRR through customer health tracking, renewal and upsell management, and expansion motions) and her Decision Lens work building combined PS/CS/Training/Account Management functions from scratch, including direct executive relationships with regulated enterprise clients (Roche, J&J, Pfizer, BMS).</div>
-        <div class="fit"><b>Honest fit assessment:</b> Moderate — 60/100. The account-management mechanics (renewals, upsell, executive sponsorship, data-driven health tracking) are squarely in her wheelhouse. The real gap: Fastly explicitly requires "deep understanding of Internet infrastructure (CDN, Security, Cloud, and Edge computing)" and comfort discussing technical stack optimization — she has no CDN/edge/infrastructure domain background. She's picked up technical domains quickly before (pharma regulatory complexity, AI-native CX platforms), but this is a more specialized technical bar than those prior transitions. Fastly is also a public company currently posting net losses (-$95.9M per most recent figures), which cuts both ways — public-company experience addresses a named gap in her background, but a loss-making public company carries its own stability question.</div>
-        <div class="gap">Gaps to flag: (1) no CDN/edge/internet-infrastructure domain experience — a named, explicit requirement; (2) posted salary is a third-party estimate, not confirmed by Fastly — verify before treating this as the best-comp match; (3) hybrid location preference (Denver/SF/NYC) works against her remote/DC-metro preference, though remote candidates are stated as "considered."</div>
-        <div class="fit"><b>LinkedIn connections:</b> available on request — just ask (e.g. "check my connections at Fastly").</div>
+        <div class="fit"><b>Why she's a strong fit:</b> This is a global CS build/scale mandate — defining strategy across North America, EMEA, and APAC, building health-scoring and retention frameworks, and serving as executive sponsor for strategic accounts — which is squarely the kind of work she did at FranConnect (global delivery across US/India/Australia, proactive health-scoring programs, 110% NRR) and Decision Lens (built PS/CS/Training/Account Management from scratch, executive-team member).</div>
+        <div class="gap"><b>Honest fit assessment:</b> Good fit, not a slam dunk — 71/100. The posting names "background in life sciences, pharmaceuticals, or health quality standards" as a requirement. She has real depth here — at Decision Lens she served pharma/life-sciences clients directly (Roche, J&J, Pfizer, BMS) — but that was client-relationship exposure, not experience inside an eQMS/quality-management software vendor like Dot Compliance itself. An interviewer will likely probe that distinction. No salary is listed, which is a real gap in evaluating desirability, not just an omission to note in passing.</div>
         <div class="files">
-          <a class="filelink" href="file:///Users/ghazalmoore/Dropbox/PROFESSIONAL/Job%20Related/2026%20Job%20Search%20Resumes/Fastly-VP-Global-Account-Management-2026-07-28/Ghazal_Tehrani_Resume_Fastly.docx">Customized resume (changes highlighted)</a>
-          <a class="filelink" href="file:///Users/ghazalmoore/Dropbox/PROFESSIONAL/Job%20Related/2026%20Job%20Search%20Resumes/Fastly-VP-Global-Account-Management-2026-07-28/Cover_Letter.md">Cover letter</a>
-          <a class="apply" href="https://www.theladders.com/job/vp-global-customer-success-fastly-new-york-city-ny_86200403" target="_blank">View verified posting →</a>
+          <a class="apply" href="https://www.builtinnyc.com/job/global-vice-president-customer-success/10253254" target="_blank">View posting →</a>
+          <span class="filenote">Résumé &amp; cover letter — see local copy</span>
+        </div>
+      </div>
+
+      <div class="card">
+        <h3>VP, Customer Success (Strategic Segment)</h3>
+        <div class="company">NiCE</div>
+        <span class="tag saas">SaaS CS · Strategic Accounts</span>
+        <div class="row">
+          <div class="item"><b>Fit</b>66%</div>
+          <div class="item"><b>Desirability</b>~55%</div>
+          <div class="item"><b>Salary</b>Not listed</div>
+          <div class="item"><b>Location</b>Remote (USA)</div>
+          <div class="item"><b>Posted</b>Today</div>
+          <div class="item"><b>Match</b><span class="tier-badge secondary">Secondary</span></div>
+        </div>
+        <div class="fit"><b>Why she's a strong fit:</b> Fortune 500 client relationships, account-level P&L ownership, and 15+ years of customer-facing leadership map well to her FranConnect (Fortune 100 upsells, full P&L ownership) and Decision Lens (Fortune 500/pharma client relationships) experience. This is a brand-new requisition (Req ID 11610, posted today) — genuinely fresh, not a stale repost.</div>
+        <div class="gap"><b>Honest fit assessment:</b> Moderate fit — 66/100, a notch below the already-tracked NiCE Americas "VP, Customer Success & Services" role (68/100). Her P&L ownership to date has been at the functional level (running an entire PS or CS org's P&L), not at the individual strategic-account level this role calls for — a narrower scope than her track record. No contact-center or CCaaS domain experience, and no salary is listed. Worth noting: this is a second, parallel VP CS requisition at NiCE alongside the Americas role already on this dashboard — before applying to both, it's worth a quick check with a recruiter on whether these are being run as separate searches or will be consolidated, so as not to send duplicate/conflicting applications to the same company.</div>
+        <div class="files">
+          <a class="apply" href="https://builtin.com/job/vp-customer-success/10675390" target="_blank">View posting →</a>
+          <span class="filenote">Résumé &amp; cover letter — see local copy</span>
         </div>
       </div>
     </section>
 
     <section>
       <h2>Proactive outreach opportunities</h2>
-      <p class="empty">No new company-signal opportunities cleared the bar today. Checked for recent funding rounds and CCO/VP PS/CS leadership hires in her target space via web search (Aura company-intelligence connector still isn't connected) — nothing found today met the bar for a high-conviction flag.</p>
+      <p class="empty">No dedicated company-signal research (funding rounds, new CS/PS/GTM leadership hires) was run today — this cycle focused on link reverification and new-posting sourcing. No signals surfaced incidentally while researching today's matches. The Aura company-intelligence connector still isn't connected; this section will stay thin until either that connector is added or a future run allocates time specifically to it.</p>
     </section>
 
     <section>
       <h2>Previously surfaced, still open</h2>
       <div class="prev-list">
         <div class="prev-item">
-          <span class="ptitle">VP, Professional Services</span> — <span class="pco">Vanta</span> (fit 85, Primary) — reconfirmed live today, no material change.
+          <span class="ptitle">VP, Professional Services, Customer Success &amp; Support</span> — <span class="pco">Vanta</span> (fit 86, Primary) — reconfirmed live today, no material change.
           <a class="jdlink" href="https://jobs.ashbyhq.com/vanta/7e3cdfbc-9a72-49e4-8fb6-e8f59364af6d" target="_blank">View posting →</a>
         </div>
         <div class="prev-item">
@@ -153,44 +184,48 @@
           <a class="jdlink" href="https://careers.hcss.com/vice-president-of-professional-services_5075780/" target="_blank">View posting →</a>
         </div>
         <div class="prev-item">
-          <span class="ptitle">VP of Customer Success</span> — <span class="pco">Forerunner</span> (fit 80, Primary) — reconfirmed live today via Ashby meta-description, no material change.
+          <span class="ptitle">VP of Customer Success</span> — <span class="pco">Forerunner</span> (fit 80, Primary) — reconfirmed live today, though via indirect evidence: direct Ashby fetch returned a bare JS shell for a second time (also happened 8/11); WebSearch snippets showed matching comp across LinkedIn/JobLeads/Jobrapido mirrors, but none of those mirrors were independently fetchable. Watching closely.
           <a class="jdlink" href="https://jobs.ashbyhq.com/forerunner/5e009fb0-c7f6-4969-8e2b-ea6c50e1fb9b" target="_blank">View posting →</a>
         </div>
         <div class="prev-item">
-          <span class="ptitle">VP of Customer Success</span> — <span class="pco">First Due</span> (fit 78, Secondary) — reconfirmed live today, no material change. Comp ($200K–$225K base + unspecified bonus) remains below her floor.
+          <span class="ptitle">VP, Customer Success</span> — <span class="pco">Ping Identity</span> (fit 78, Primary) — reconfirmed live today, no material change. Comp still $240,000–$275,000 + bonus. (Note: a separate "SVP, Customer Success" listing at Ping Identity surfaced in search but was confirmed removed over a year ago — not a new opening.)
+          <a class="jdlink" href="https://builtin.com/job/vp-customer-success/3531822" target="_blank">View posting →</a>
+        </div>
+        <div class="prev-item">
+          <span class="ptitle">VP, Client Success</span> — <span class="pco">First Due</span> (fit 78, Secondary) — reconfirmed live today, no material change. Comp ($200K–$225K base + bonus) remains below her floor.
           <a class="jdlink" href="https://job-boards.greenhouse.io/localitymediallcdbafirstdue/jobs/4260158009" target="_blank">View posting →</a>
         </div>
         <div class="prev-item">
-          <span class="ptitle">VP of Customer Success, Axon 911</span> — <span class="pco">Axon</span> (fit 75, Primary) — reconfirmed live today, no material change. In-office Manhattan.
-          <a class="jdlink" href="https://www.builtinnyc.com/job/vp-customer-success-axon-911/9298186" target="_blank">View posting →</a>
-        </div>
-        <div class="prev-item">
-          <span class="ptitle">VP, Customer Success</span> — <span class="pco">Veeam</span> (fit 74, Primary) — reconfirmed live today, no material change. Posting still dated 11/17/2025 — nearly 8.5 months old; worth confirming this is a genuinely active search.
+          <span class="ptitle">VP, Customer Success</span> — <span class="pco">Veeam</span> (fit 74, Primary) — reconfirmed live today, no material change. Posting still dated 11/17/2025 — now ~9 months old.
           <a class="jdlink" href="https://careers.veeam.com/job/united-states/vp-customer-success/22681/88549994768" target="_blank">View posting →</a>
         </div>
         <div class="prev-item">
-          <span class="ptitle">VP, Customer Success</span> — <span class="pco">Fireblocks</span> (fit 73, Primary) — reconfirmed live today, no material change.
+          <span class="ptitle">VP, Customer Success</span> — <span class="pco">Fireblocks</span> (fit 73, Primary) — reconfirmed live today, no material change ($250K–$300K).
           <a class="jdlink" href="https://www.fireblocks.com/careers/position?gh_jid=4690576006" target="_blank">View posting →</a>
         </div>
         <div class="prev-item">
-          <span class="ptitle">VP, Customer Success</span> — <span class="pco">Nabla</span> (fit 72, Primary) — reconfirmed live today via its Built In NYC mirror again (direct Ashby fetch still returns a bare JS shell, consistent since 7/16).
-          <a class="jdlink" href="https://jobs.ashbyhq.com/nabla/fe971661-1a74-49a3-9709-e67bd5e7a63f" target="_blank">View posting →</a>
-        </div>
-        <div class="prev-item">
-          <span class="ptitle">VP, Customer Success &amp; Services (Americas)</span> — <span class="pco">NiCE</span> (fit 68, Secondary) — reconfirmed live today, no material change.
+          <span class="ptitle">VP, Customer Success &amp; Services (Americas)</span> — <span class="pco">NiCE</span> (fit 68, Secondary) — reconfirmed live today, no material change. (See today's new NiCE "Strategic Segment" match above — a separate, newer requisition at the same company.)
           <a class="jdlink" href="https://job-boards.greenhouse.io/nice/jobs/4706460101" target="_blank">View posting →</a>
         </div>
         <div class="prev-item">
-          <span class="ptitle">Chief Customer Success Officer</span> — <span class="pco">iboss</span> (fit 64, Secondary) — reconfirmed live today, no material change.
+          <span class="ptitle">Vice President, Customer Success</span> — <span class="pco">Arbital Health</span> (fit 65, Secondary) — reconfirmed live today, no material change.
+          <a class="jdlink" href="https://jobs.lever.co/arbitalhealth/a1dc40f9-5ed2-4060-a016-ab138b8f8cfe" target="_blank">View posting →</a>
+        </div>
+        <div class="prev-item">
+          <span class="ptitle">VP of Customer Success</span> — <span class="pco">iboss</span> (fit 64, Secondary) — reconfirmed live today, no material change.
           <a class="jdlink" href="https://jobs.jobvite.com/iboss/job/oTNXzfwW" target="_blank">View posting →</a>
         </div>
         <div class="prev-item">
-          <span class="ptitle">VP, Global Solutions Consulting &amp; Professional Services</span> — <span class="pco">Navan</span> (fit 58, Secondary) — reconfirmed live today, no material change.
+          <span class="ptitle">VP, Global Solutions Consulting &amp; Professional Services</span> — <span class="pco">Navan</span> (fit 58, Secondary) — reconfirmed live today. Built In shows "Reposted 6 Days Ago" — an identical label to yesterday's fetch, so Built In's relative-date counter for this posting appears stuck rather than genuinely reposting. Comp unchanged ($243,750–$325,000).
           <a class="jdlink" href="https://www.builtinnyc.com/job/vice-president-solutions-consulting/8415787" target="_blank">View posting →</a>
         </div>
         <div class="prev-item">
           <span class="ptitle">Global Head of GSI Alliances</span> — <span class="pco">Canonical</span> (fit 52, Secondary) — reconfirmed live today, no material change.
           <a class="jdlink" href="https://canonical.com/careers/4517179" target="_blank">View posting →</a>
+        </div>
+        <div class="prev-item">
+          <span class="ptitle">Global Alliance Director - GSIs (USA)</span> — <span class="pco">Pigment</span> (fit 50, Secondary) — reconfirmed live today, no material change.
+          <a class="jdlink" href="https://jobs.lever.co/pigment/7846bb0b-f843-4e64-9637-2994548062db" target="_blank">View posting →</a>
         </div>
       </div>
     </section>
@@ -198,14 +233,14 @@
     <div class="banner">
       <h2>⚠ Notes on today's run</h2>
       <ul>
-        <li><b>First run in 5 days</b> (last run was 2026-07-23) — this scan covered the gap by re-verifying all 12 previously-tracked open postings before sourcing new candidates.</li>
-        <li><b>One new match today: Fastly</b> (VP, Global Account Management — labeled "VP, Global Customer Success" on Ladders — Secondary, 60/100, $344K–$430K per a Ladders <i>estimate</i>, not company-confirmed). Verified directly via theladders.com, resume customized with a highlighted change, cover letter written. Real gap named honestly: no CDN/edge-infrastructure domain background, which the posting explicitly requires.</li>
-        <li><b>Sourcing was thin tonight.</b> Checked 5 other new candidates beyond Fastly: BlackLine "VP, Professional Services North America" confirmed removed (10/23/2025). GitLab "VP, Professional Services" redirected to GitLab's generic 186-job board with no matching requisition — treated as dead per the redirect-to-generic-root rule. WorkWave "VP of Customer Success" explicitly states it's no longer accepting applications. Casap "VP of Customer Success" (Ladders) returned empty content on fetch with no company-owned board to cross-check — dropped as unverifiable. Full detail in <code>history/source_health.json</code>.</li>
-        <li><b>All 12 previously-tracked open postings reconfirmed live</b> (HCSS, Vanta, Canonical, Axon 911, Nabla, Fireblocks, Forerunner, First Due, iboss, Navan, Veeam, NiCE) — no material changes to any of them today.</li>
-        <li><b>Master-resume drift flag from 7/22 remains open, no new occurrence today:</b> "NRR" widened to include GRR/NDR across three applications (Fireblocks, Forerunner, First Due) crossed the 3+ threshold on 7/22. The master resume's Core Competencies line already says "NRR/GRR," but the FranConnect and Decision Lens bullets themselves still say plain "NRR." Recommend updating those two bullets directly rather than continuing to patch it per-application. Not actioned yet — flagging again briefly since it's still pending.</li>
-        <li><b>LinkedIn connections remain on-request only</b> — no automatic check ran for any match tonight, per standing policy. Ask about a specific company (e.g. "check my connections at Fastly") any time.</li>
-        <li><b>Indeed not queried tonight</b> — prior runs consistently showed it low-yield and largely irrelevant for her target titles. Will re-check periodically rather than every night, per standing note.</li>
-        <li><b>⚠ Live site was NOT updated this run — same stale lock as 7/23, now 5 days old.</b> <code>site-repo/.git/index.lock</code> and <code>ORIG_HEAD.lock</code> are still present with the identical timestamp (09:11, 7/23) as when this first blocked the publish step five nights ago — meaning no git process has touched them since, which points to a stale crash artifact rather than a genuinely active writer. Per the skill's instructions, this run didn't force-delete the locks or touch anything outside <code>jobsearch/</code>. This has now blocked the live site for 5 consecutive days, so it likely needs a person to manually remove <code>site-repo/.git/index.lock</code> and <code>site-repo/.git/ORIG_HEAD.lock</code> (or investigate what crashed) rather than waiting for another automated run to clear it. The local copy of this dashboard is fully up to date regardless.</li>
+        <li><b>First run in 1 day</b> (last run was 2026-08-18) — this scan re-verified all 13 previously-tracked open postings before sourcing new candidates.</li>
+        <li><b>Two new matches today:</b> Dot Compliance "Global Vice President of Customer Success" (fit 71, Secondary — pharma/life-sciences client relevance from Decision Lens, but client-side not eQMS-vendor-side; no salary listed) and NiCE "VP, Customer Success (Strategic Segment)" (fit 66, Secondary — a brand-new requisition posted today, distinct from the already-tracked NiCE Americas role; no salary listed). Full detail cards above.</li>
+        <li><b>Nine other new candidates checked and excluded today:</b> Paytient VP of CS, Jumio Global VP CS, and Access Information Management VP CS all confirmed dead (removed between April and August 2026) despite surfacing fresh in search. A "SVP, Customer Success" listing at Ping Identity looked promising in a search snippet ("Posted 4 Days Ago," $275K–$350K) but direct fetch confirmed it was actually removed in February 2025 — over a year stale; another reminder that Built In's relative-date labels in search snippets can't be trusted without a direct fetch. Zus Health "VP, Customer Success" ($200K–$240K) verified live but excluded on comp (below floor), a Boston hybrid/travel requirement, early-stage scope, and a healthtech domain stretch. Full detail in <code>history/source_health.json</code>.</li>
+        <li><b>Forerunner's direct-fetch reliability is degrading</b> — this is the second time (after 8/11) that its Ashby posting returned a bare JS shell with no meta-description. Reconfirmed live only via indirect WebSearch-snippet evidence today. Not dropping yet, but watching closely in case this becomes a Nabla-style pattern.</li>
+        <li><b>Master-resume phrase drift — see the red callout above the summary table.</b> The "customer health scoring" swap has now recurred in 7 total occurrences (jumped from 3 to 7 today alone) across three flagged runs. This is a stronger signal than before that the master resume itself should be updated directly.</li>
+        <li><b>LinkedIn connections remain on-request only</b> — no automatic check ran for any match tonight, per standing policy. Ask about a specific company (e.g. "check my connections at Dot Compliance") any time.</li>
+        <li><b>Indeed not queried tonight</b> — prior runs consistently showed it low-yield and largely irrelevant for her target titles.</li>
+        <li><b>No Chrome browser access used or needed this run</b> — link verification relied entirely on <code>mcp__workspace__web_fetch</code> with priming WebSearch, consistent with the unattended-overnight-run pattern. No interactive browser tabs were opened or closed.</li>
       </ul>
     </div>
 
@@ -238,12 +273,12 @@
   const JOBS = [
     {
       id: "vanta-vp-ps-2026-07-09",
-      title: "VP, Professional Services",
+      title: "VP, Professional Services, Customer Success & Support",
       company: "Vanta",
-      category: "SaaS PS/CS",
+      category: "SaaS PS/CS/Support",
       tier: "primary",
-      fit: 85,
-      flag: "No direct compliance/security domain background",
+      fit: 86,
+      flag: "No compliance/security domain background; combined P&L scope grew",
       salary: "$260K–$306K + equity",
       postedDate: null,
       jdLink: "https://jobs.ashbyhq.com/vanta/7e3cdfbc-9a72-49e4-8fb6-e8f59364af6d"
@@ -273,8 +308,20 @@
       jdLink: "https://jobs.ashbyhq.com/forerunner/5e009fb0-c7f6-4969-8e2b-ea6c50e1fb9b"
     },
     {
+      id: "pingidentity-vp-cs-2026-08-11",
+      title: "VP, Customer Success",
+      company: "Ping Identity",
+      category: "SaaS CS / Cybersecurity",
+      tier: "primary",
+      fit: 78,
+      flag: "No identity/access-management or cybersecurity domain exp",
+      salary: "$240K–$275K + bonus",
+      postedDate: "2026-07-21",
+      jdLink: "https://builtin.com/job/vp-customer-success/3531822"
+    },
+    {
       id: "firstdue-vp-cs-2026-07-21",
-      title: "VP of Customer Success",
+      title: "VP, Client Success",
       company: "First Due",
       category: "SaaS CS / Public Safety",
       tier: "secondary",
@@ -285,25 +332,13 @@
       jdLink: "https://job-boards.greenhouse.io/localitymediallcdbafirstdue/jobs/4260158009"
     },
     {
-      id: "axon-vp-cs-2026-07-09",
-      title: "VP of Customer Success, Axon 911",
-      company: "Axon",
-      category: "SaaS PS/CS",
-      tier: "primary",
-      fit: 75,
-      flag: "In-office, Manhattan NY",
-      salary: "$191K–$255K",
-      postedDate: "2026-07-06",
-      jdLink: "https://www.builtinnyc.com/job/vp-customer-success-axon-911/9298186"
-    },
-    {
       id: "veeam-vp-cs-2026-07-23",
       title: "VP, Customer Success",
       company: "Veeam",
       category: "SaaS CS / Data Infrastructure",
       tier: "primary",
       fit: 74,
-      flag: "Larger scale than prior roles; posting dated 11/17/2025",
+      flag: "Larger scale than prior roles; posting now ~9 months old",
       salary: "$325,400–$464,800 OTE",
       postedDate: "2025-11-17",
       jdLink: "https://careers.veeam.com/job/united-states/vp-customer-success/22681/88549994768"
@@ -321,16 +356,16 @@
       jdLink: "https://www.fireblocks.com/careers/position?gh_jid=4690576006"
     },
     {
-      id: "nabla-vp-cs-2026-07-10",
-      title: "VP, Customer Success",
-      company: "Nabla",
-      category: "SaaS CS / Healthtech AI",
-      tier: "primary",
-      fit: 72,
-      flag: "Comp near-miss; no clinical/EHR background",
-      salary: "$225K–$240K",
-      postedDate: "2026-06-27",
-      jdLink: "https://jobs.ashbyhq.com/nabla/fe971661-1a74-49a3-9709-e67bd5e7a63f"
+      id: "dotcompliance-global-vp-cs-2026-08-19",
+      title: "Global Vice President of Customer Success",
+      company: "Dot Compliance",
+      category: "SaaS CS / Life Sciences Compliance",
+      tier: "secondary",
+      fit: 71,
+      flag: "Pharma/life-sciences exp is client-side, not eQMS-vendor-side; comp not listed",
+      salary: "Not listed",
+      postedDate: "2026-08-13",
+      jdLink: "https://www.builtinnyc.com/job/global-vice-president-customer-success/10253254"
     },
     {
       id: "nice-vp-cs-services-2026-07-23",
@@ -345,8 +380,32 @@
       jdLink: "https://job-boards.greenhouse.io/nice/jobs/4706460101"
     },
     {
-      id: "iboss-ccso-2026-07-21",
-      title: "Chief Customer Success Officer",
+      id: "nice-vp-cs-strategic-2026-08-19",
+      title: "VP, Customer Success (Strategic Segment)",
+      company: "NiCE",
+      category: "SaaS CS / Strategic Accounts",
+      tier: "secondary",
+      fit: 66,
+      flag: "Account-level P&L narrower than her exp; possibly parallel to the Americas req; comp not listed",
+      salary: "Not listed",
+      postedDate: "2026-08-19",
+      jdLink: "https://builtin.com/job/vp-customer-success/10675390"
+    },
+    {
+      id: "arbital-vp-cs-2026-07-16",
+      title: "Vice President, Customer Success",
+      company: "Arbital Health",
+      category: "SaaS CS / Healthtech (Value-Based Care)",
+      tier: "secondary",
+      fit: 65,
+      flag: "Comp near-miss; smaller team scope than prior roles",
+      salary: "$210K–$230K base",
+      postedDate: "2026-07-13",
+      jdLink: "https://jobs.lever.co/arbitalhealth/a1dc40f9-5ed2-4060-a016-ab138b8f8cfe"
+    },
+    {
+      id: "iboss-vp-cs-2026-07-21",
+      title: "VP of Customer Success",
       company: "iboss",
       category: "SaaS CS / Cybersecurity",
       tier: "secondary",
@@ -355,18 +414,6 @@
       salary: "Not listed",
       postedDate: null,
       jdLink: "https://jobs.jobvite.com/iboss/job/oTNXzfwW"
-    },
-    {
-      id: "fastly-vp-gam-2026-07-28",
-      title: "VP, Global Account Management",
-      company: "Fastly",
-      category: "SaaS Account Mgmt / Infrastructure",
-      tier: "secondary",
-      fit: 60,
-      flag: "No CDN/edge domain exp; salary is a Ladders estimate",
-      salary: "$344,374–$430,467 (Ladders estimate, unconfirmed)",
-      postedDate: "2026-05-29",
-      jdLink: "https://www.theladders.com/job/vp-global-customer-success-fastly-new-york-city-ny_86200403"
     },
     {
       id: "navan-vp-solutions-consulting-2026-07-12",
@@ -391,6 +438,18 @@
       salary: "Not listed",
       postedDate: null,
       jdLink: "https://canonical.com/careers/4517179"
+    },
+    {
+      id: "pigment-gsi-alliance-director-2026-08-05",
+      title: "Global Alliance Director - GSIs (USA)",
+      company: "Pigment",
+      category: "GSI / Alliance Leadership",
+      tier: "secondary",
+      fit: 50,
+      flag: "Needs quota-carrying GSI alliance sales exp",
+      salary: "Not listed",
+      postedDate: null,
+      jdLink: "https://jobs.lever.co/pigment/7846bb0b-f843-4e64-9637-2994548062db"
     }
   ];
 
@@ -505,7 +564,7 @@
         <td>${job.title}</td>
         <td>${job.company}</td>
         <td><a class="jdlink" href="${job.jdLink}" target="_blank">View JD →</a></td>
-        <td><input class="notes" type="text" value="${(js.notes || "").replace(/"/g, "&quot;")}" placeholder="e.g. applied 7/28, waiting to hear back" data-jobid="${job.id}" onchange="updateNotes(this.getAttribute('data-jobid'), this.value)"></td>
+        <td><input class="notes" type="text" value="${(js.notes || "").replace(/"/g, "&quot;")}" placeholder="e.g. applied 8/19, waiting to hear back" data-jobid="${job.id}" onchange="updateNotes(this.getAttribute('data-jobid'), this.value)"></td>
         <td><button class="unapply-btn" onclick="unapply('${job.id}')">Remove</button></td>
       `;
       tbody.appendChild(tr);
@@ -522,6 +581,5 @@
   renderSummaryTable();
   renderTrackingTable();
 </script>
-
 </body>
 </html>
