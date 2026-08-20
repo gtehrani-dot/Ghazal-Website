@@ -183,7 +183,6 @@ a { color: inherit; }
 <nav class="tab-nav">
   <button class="tab-btn active" onclick="switchTab('kids',this)">👧🏻 Kids</button>
   <button class="tab-btn" onclick="switchTab('recipes',this)">🍳 Recipes</button>
-  <button class="tab-btn" onclick="switchTab('news',this)">📰 News</button>
 </nav>
 
 <!-- ═══════════════════════════════════════════ -->
@@ -198,7 +197,7 @@ a { color: inherit; }
 
   <div class="card" style="margin-bottom:20px">
     <div class="section-heading">🏕️ Camp schedule — this week through school start</div>
-    <div id="camp-schedule"><table style="width:100%;border-collapse:collapse;font-size:13px"><thead><tr style="text-align:left;color:var(--muted);font-size:11px;text-transform:uppercase;letter-spacing:.03em"><th style="padding:6px 8px 6px 0">Week</th><th style="padding:6px 8px">Ella</th><th style="padding:6px 8px">Liam</th></tr></thead><tbody><tr style="background:#fff7ed"><td style="padding:8px;border-bottom:1px solid var(--border-light);vertical-align:top;white-space:nowrap;font-weight:600">Aug 17 – Aug 21 ⚠️</td><td style="padding:8px;border-bottom:1px solid var(--border-light);vertical-align:top"><span style="color:var(--faint);font-size:12px;font-style:italic">— no camp scheduled — family traveling to Syracuse wedding Aug 20–23 —</span></td><td style="padding:8px;border-bottom:1px solid var(--border-light);vertical-align:top"><span style="color:var(--faint);font-size:12px;font-style:italic">— no camp scheduled — family traveling to Syracuse wedding Aug 20–23 —</span></td></tr></tbody></table><p style="color:#b45309;font-size:13px;margin-top:10px">⚠️ Aug 17 – Aug 21: no camp booked — likely covered by family travel to Syracuse (Aug 20–23); confirm plan for Aug 18–19. School starts Mon, Aug 24.</p></div></div>
+    <div id="camp-schedule"><table style="width:100%;border-collapse:collapse;font-size:13px"><thead><tr style="text-align:left;color:var(--muted);font-size:11px;text-transform:uppercase;letter-spacing:.03em"><th style="padding:6px 8px 6px 0">Week</th><th style="padding:6px 8px">Ella</th><th style="padding:6px 8px">Liam</th></tr></thead><tbody><tr style="background:#fff7ed"><td style="padding:8px;border-bottom:1px solid var(--border-light);vertical-align:top;white-space:nowrap;font-weight:600">Aug 17 – Aug 21 ⚠️</td><td style="padding:8px;border-bottom:1px solid var(--border-light);vertical-align:top"><span style="color:var(--faint);font-size:12px;font-style:italic">— no camp scheduled — family traveling to Syracuse wedding Aug 20–23 —</span></td><td style="padding:8px;border-bottom:1px solid var(--border-light);vertical-align:top"><span style="color:var(--faint);font-size:12px;font-style:italic">— no camp scheduled — family traveling to Syracuse wedding Aug 20–23 —</span></td></tr></tbody></table></div></div>
   </div>
 <div class="kids-grid">
     <div class="card kid-card ella">
@@ -260,20 +259,6 @@ a { color: inherit; }
 </div>
 
 <!-- ═══════════════════════════════════════════ -->
-<!--  NEWS                                        -->
-<!-- ═══════════════════════════════════════════ -->
-<div id="tab-news" class="tab-pane">
-  <div class="card" style="margin-bottom:20px">
-    <div class="section-heading">📰 Top Headlines</div>
-    <div id="news-top" class="loading"><div class="spinner"></div> Loading headlines…</div>
-  </div>
-  <div class="card">
-    <div class="section-heading">📍 McLean / Fairfax Local News</div>
-    <div id="news-local" class="loading"><div class="spinner"></div> Loading local news…</div>
-  </div>
-</div>
-
-<!-- ═══════════════════════════════════════════ -->
 <!--  RECIPE MODAL / DRAWER                       -->
 <!-- ═══════════════════════════════════════════ -->
 <div id="recipe-modal" class="recipe-modal">
@@ -299,9 +284,11 @@ function fmtDate(ms) { if(!ms) return ''; return new Date(typeof ms==='number'?m
 
 // ── Tab switching ────────────────────────────────
 function switchTab(id, btn) {
-  document.querySelectorAll('.tab-pane').forEach(p => p.classList.remove('active'));
+  document.querySelectorAll('.tab-pane').forEach(p => { p.classList.remove('active'); p.style.display = 'none'; });
   document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
-  document.getElementById('tab-'+id).classList.add('active');
+  const targetPane = document.getElementById('tab-'+id);
+  targetPane.classList.add('active');
+  targetPane.style.display = 'block';
   btn.classList.add('active');
 }
 
@@ -1109,12 +1096,14 @@ function renderCampSchedule(weeks, campInfoList) {
     }
     return '<tr style="background:'+rowBg+'"><td style="'+tdStyle+';white-space:nowrap;font-weight:600">'+fmtWeekRange(w.weekStart,w.weekEnd)+(missing?' ⚠️':'')+'</td>'+body+'</tr>';
   }).join('');
+  // Only ONE indicator per state — the ⚠️ marker inline on the table row
+  // already flags a missing-camp week, so no separate summary paragraph is
+  // added for that case (Ghazal: "we don't need that second line, it's
+  // already obvious from the line above. Pick one, not both."). The all-clear
+  // message is kept since nothing else in the table communicates that state.
   const gaps = weeks.filter(w => !w.onVacation && (!w.ella || !w.liam));
   const gapNote = gaps.length
-    ? '<p style="color:#b45309;font-size:13px;margin-top:10px">⚠️ ' + gaps.map(w => {
-        const who = [!w.ella?'Ella':null, !w.liam?'Liam':null].filter(Boolean).join(' & ');
-        return esc(fmtWeekRange(w.weekStart,w.weekEnd)) + ': ' + who + ' need' + (who.indexOf('&')>-1?'':'s') + ' a camp booked';
-      }).join(' &nbsp;|&nbsp; ') + '</p>'
+    ? ''
     : '<p style="color:#166534;font-size:13px;margin-top:10px">✓ Every week through school start (Mon, Aug 24) has a camp scheduled for both kids.</p>';
   return '<table style="width:100%;border-collapse:collapse;font-size:13px"><thead><tr style="text-align:left;color:var(--muted);font-size:11px;text-transform:uppercase;letter-spacing:.03em"><th style="padding:6px 8px 6px 0">Week</th><th style="padding:6px 8px">Ella</th><th style="padding:6px 8px">Liam</th></tr></thead><tbody>' + rows + '</tbody></table>' + gapNote;
 }
@@ -1250,50 +1239,7 @@ loadKidsLive();
 renderCatBar();
 renderGrid();
 
-// ═══════════════════════════════════════════════
-//  NEWS TAB
-// ═══════════════════════════════════════════════
-async function fetchRSS(url) {
-  const proxies = [
-    'https://corsproxy.io/?url=' + encodeURIComponent(url),
-    'https://api.allorigins.win/raw?url=' + encodeURIComponent(url)
-  ];
-  let lastErr;
-  for (const proxy of proxies) {
-    try {
-      const r = await fetch(proxy, {signal: AbortSignal.timeout(12000)});
-      if (!r.ok) throw new Error('HTTP ' + r.status);
-      const text = await r.text();
-      const doc = new DOMParser().parseFromString(text, 'text/xml');
-      const items = Array.from(doc.querySelectorAll('item'));
-      if (!items.length) throw new Error('Empty feed');
-      return items.slice(0,7).map(i => ({
-        title: (i.querySelector('title')?.textContent||'').replace(/<!\[CDATA\[|\]\]>/g,'').trim(),
-        link: (i.querySelector('link')?.textContent||i.querySelector('guid')?.textContent||'').trim(),
-        pubDate: i.querySelector('pubDate')?.textContent||''
-      })).filter(x=>x.title);
-    } catch (e) { lastErr = e; }
-  }
-  throw lastErr || new Error('All proxies failed');
-}
-function renderNewsItems(containerId, items) {
-  const el = document.getElementById(containerId);
-  if (!el) return;
-  if (!items.length) { el.innerHTML = '<p class="empty">No stories found.</p>'; return; }
-  el.innerHTML = items.map(it => '<div class="news-item"><a href="'+esc(it.link)+'" target="_blank">'+esc(it.title)+'</a><div class="news-meta">'+(it.pubDate?fmtDate(it.pubDate):'')+'</div></div>').join('');
-}
-async function loadNews() {
-  try {
-    const top = await fetchRSS('https://news.google.com/rss?hl=en-US&gl=US&ceid=US:en');
-    renderNewsItems('news-top', top);
-  } catch(e) { const el=document.getElementById('news-top'); if(el) el.innerHTML = '<p class="empty">Couldn\'t load headlines right now.</p>'; }
-  try {
-    const local = await fetchRSS('https://news.google.com/rss/search?q=McLean+Virginia+OR+Fairfax+County&hl=en-US&gl=US&ceid=US:en');
-    renderNewsItems('news-local', local);
-  } catch(e) { const el=document.getElementById('news-local'); if(el) el.innerHTML = '<p class="empty">Couldn\'t load local news right now.</p>'; }
-}
-loadNews();
-
+// News tab was removed from Family Hub — it lives on the Morning Dashboard now.
 </script>
 </body>
 </html>
