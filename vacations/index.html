@@ -3,224 +3,472 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="color-scheme" content="light only">
-<meta name="theme-color" content="#f4fafd">
-<title>Vacations · ghazal-tehrani.me</title>
+<title>Vacations — Ghazal Tehrani</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@500;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
 <style>
-  :root{
-    --primary:#2f8fd1;
-    --primary-deep:#0d4d73;
-    --primary-pale:#dcf0fa;
-    --bg:#f4fafd;
-    --white:#ffffff;
-    --ink:#0f3a52;
-    --muted:#5c7280;
-    --accent-1:#2e7d5b;
-    --accent-2:#e0a53c;
-    --accent-3:#ef7d5c;
-    --line:rgba(15,58,82,0.12);
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --ink: #1a1a2e;
+    --ink-soft: #3d3d5c;
+    --gold: #b8922a;
+    --gold-text: #8a6a1a;
+    --cream: #faf8f4;
+    --warm-white: #ffffff;
+    --mist: #f0ede8;
+    --rule: #e2ddd6;
+    --serif: 'Cormorant Garamond', Georgia, serif;
+    --sans: 'DM Sans', system-ui, sans-serif;
   }
-  *{box-sizing:border-box; margin:0; padding:0;}
-  html{ background:var(--bg); color-scheme:light only; }
-  body{ background:var(--bg); color:var(--ink); font-family:'Inter', sans-serif; line-height:1.55; -webkit-font-smoothing:antialiased; min-height:100vh; }
-  h1,h2,h3,.display{ font-family:'Fraunces', serif; }
-  a{ color:var(--primary-deep); }
 
-  .topbar{ max-width:1180px; margin:0 auto; padding:36px 6vw 8px; }
-  .crumbs{ font-family:'JetBrains Mono', monospace; font-size:12px; color:var(--muted); margin-bottom:22px; }
-  .crumbs a{ color:var(--primary-deep); text-decoration:none; }
-  .crumbs a:hover{ text-decoration:underline; }
-  .crumbs span{ margin:0 6px; opacity:0.5; }
+  html { scroll-behavior: smooth; }
+  body { font-family: var(--sans); background: var(--cream); color: var(--ink); overflow-x: hidden; }
 
-  .hero-eyebrow{ font-family:'JetBrains Mono', monospace; font-size:11.5px; letter-spacing:0.28em; text-transform:uppercase; color:var(--primary-deep); margin-bottom:12px; }
-  .topbar h1{ font-size:clamp(36px, 6vw, 60px); font-weight:600; line-height:1.0; color:var(--ink); }
-  .topbar .lede{ margin-top:16px; color:var(--muted); font-size:16px; max-width:640px; }
+  a:focus-visible, .trip-card:focus-visible {
+    outline: 2px solid var(--gold-text);
+    outline-offset: 2px;
+    border-radius: 4px;
+  }
 
-  .page-wrap{ max-width:1180px; margin:0 auto; padding:20px 6vw 80px; }
+  /* NAV */
+  nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 100;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 20px 48px;
+    background: rgba(250,248,244,0.92);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--rule);
+  }
+  .nav-logo {
+    font-family: var(--serif);
+    font-size: 1.1rem;
+    font-weight: 600;
+    letter-spacing: 0.04em;
+    color: var(--ink);
+    text-decoration: none;
+  }
+  .nav-links { display: flex; gap: 32px; }
+  .nav-links a {
+    font-size: 0.8rem;
+    font-weight: 500;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--ink-soft);
+    text-decoration: none;
+    transition: color 0.2s;
+  }
+  .nav-links a:hover { color: var(--gold-text); }
 
-  .hub-section{ margin-top:56px; }
-  .hub-section:first-of-type{ margin-top:44px; }
-  .section-head{ display:flex; align-items:baseline; justify-content:space-between; flex-wrap:wrap; gap:8px; margin-bottom:22px; border-bottom:1px solid var(--line); padding-bottom:14px; }
-  .section-kicker{ font-family:'JetBrains Mono', monospace; font-size:11px; letter-spacing:0.14em; text-transform:uppercase; color:var(--primary-deep); }
-  .section-head h2{ font-size:26px; font-weight:600; color:var(--ink); width:100%; margin-top:4px; }
-  .section-note{ color:var(--muted); font-size:13.5px; }
+  /* HERO */
+  .hero {
+    padding: 140px 48px 32px;
+    max-width: 1100px;
+    margin: 0 auto;
+  }
+  .hero h1 {
+    font-family: var(--serif);
+    font-size: clamp(2.4rem, 5vw, 4rem);
+    font-weight: 300;
+    line-height: 1.1;
+    color: var(--ink);
+    margin-bottom: 16px;
+  }
+  .hero-sub {
+    font-size: 0.95rem;
+    color: var(--ink-soft);
+    max-width: 620px;
+    line-height: 1.7;
+  }
 
-  .trip-grid{ display:grid; grid-template-columns:repeat(auto-fill, minmax(240px,1fr)); gap:16px; }
-  .trip-card{ display:block; text-decoration:none; background:var(--white); border:1px solid var(--line); border-left:3px solid var(--primary); border-radius:0 10px 10px 0; padding:20px 22px; box-shadow:0 2px 12px rgba(15,58,82,0.05); transition:transform .15s ease, box-shadow .15s ease; }
-  .trip-card:hover{ transform:translateY(-2px); box-shadow:0 8px 20px rgba(15,58,82,0.1); }
-  .trip-card.accent1{ border-left-color:var(--accent-1); }
-  .trip-card.accent2{ border-left-color:var(--accent-2); }
-  .trip-card.accent3{ border-left-color:var(--accent-3); }
-  .trip-card.muted{ border-left-color:var(--muted); opacity:0.85; }
-  .trip-card-eyebrow{ font-family:'JetBrains Mono', monospace; font-size:10.5px; letter-spacing:0.08em; text-transform:uppercase; color:var(--muted); margin-bottom:8px; }
-  .trip-card h3{ font-size:19px; font-weight:600; color:var(--ink); margin-bottom:6px; }
-  .trip-card .trip-card-date{ font-family:'JetBrains Mono', monospace; font-size:12px; color:var(--primary-deep); }
-  .trip-card .trip-card-sub{ font-size:13px; color:var(--muted); margin-top:6px; }
+  /* SECTIONS */
+  .trip-section {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 40px 48px 8px;
+  }
+  .section-head {
+    display: flex;
+    align-items: baseline;
+    gap: 16px;
+    margin-bottom: 20px;
+    padding-bottom: 12px;
+    border-bottom: 1px solid var(--rule);
+  }
+  .section-head h2 {
+    font-family: var(--serif);
+    font-weight: 500;
+    font-size: 1.7rem;
+    color: var(--ink);
+  }
+  .section-note {
+    font-size: 0.8rem;
+    color: var(--ink-soft);
+    letter-spacing: 0.02em;
+  }
 
-  .empty-state{ border:1px dashed var(--line); border-radius:10px; padding:28px 26px; background:var(--white); color:var(--muted); font-size:14.5px; }
-  .empty-state strong{ color:var(--ink); }
+  /* TRIP GRID */
+  .trip-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 22px;
+    padding-bottom: 16px;
+  }
+  .trip-card {
+    display: block;
+    text-decoration: none;
+    color: var(--ink);
+    background: var(--warm-white);
+    border: 1px solid var(--rule);
+    border-radius: 14px;
+    overflow: hidden;
+    transition: border-color 0.2s, box-shadow 0.2s, transform 0.15s;
+  }
+  .trip-card:hover {
+    border-color: var(--gold-text);
+    box-shadow: 0 8px 28px rgba(184,146,42,0.14);
+    transform: translateY(-2px);
+  }
+  .trip-thumb {
+    width: 100%;
+    aspect-ratio: 4 / 3;
+    object-fit: cover;
+    display: block;
+    background: var(--mist);
+  }
+  .trip-thumb.grad {
+    display: flex;
+    align-items: flex-end;
+    padding: 14px;
+    font-family: var(--serif);
+    font-style: italic;
+    font-size: 0.85rem;
+    color: rgba(255,255,255,0.85);
+  }
+  .trip-body { padding: 16px 18px 18px; }
+  .trip-title {
+    font-family: var(--serif);
+    font-size: 1.15rem;
+    font-weight: 500;
+    margin-bottom: 4px;
+  }
+  .trip-dates {
+    font-size: 0.76rem;
+    color: var(--ink-soft);
+    letter-spacing: 0.02em;
+  }
 
-  .callout{ border:1px solid var(--line); border-left:3px solid var(--primary); background:var(--primary-pale); border-radius:0 8px 8px 0; padding:16px 20px; font-size:14px; color:var(--ink); margin-top:18px; }
-  .callout strong{ color:var(--primary-deep); }
+  /* UP NEXT — larger feature card */
+  .feature-card {
+    display: grid;
+    grid-template-columns: 1.1fr 1fr;
+    background: var(--warm-white);
+    border: 1px solid var(--rule);
+    border-radius: 16px;
+    overflow: hidden;
+    text-decoration: none;
+    color: var(--ink);
+    transition: box-shadow 0.2s, transform 0.15s;
+  }
+  .feature-card:hover { box-shadow: 0 10px 34px rgba(184,146,42,0.16); transform: translateY(-2px); }
+  .feature-thumb {
+    min-height: 220px;
+    background: linear-gradient(135deg, #2f4d3a 0%, #6b8f6f 55%, #cdd98a 100%);
+  }
+  .feature-body { padding: 28px 30px; display: flex; flex-direction: column; justify-content: center; }
+  .feature-eyebrow {
+    font-family: var(--sans);
+    font-size: 0.72rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--gold-text);
+    margin-bottom: 10px;
+  }
+  .feature-title { font-family: var(--serif); font-size: 1.7rem; font-weight: 500; margin-bottom: 8px; }
+  .feature-dates { font-size: 0.85rem; color: var(--ink-soft); }
+  @media (max-width: 640px) {
+    .feature-card { grid-template-columns: 1fr; }
+    .feature-thumb { min-height: 140px; }
+  }
 
-  .footer{ text-align:center; padding:40px 6vw 60px; color:var(--muted); font-size:12px; font-family:'JetBrains Mono',monospace; }
+  /* EMPTY / COMING SOON CARD */
+  .trip-card.placeholder {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 180px;
+    border-style: dashed;
+    color: var(--ink-soft);
+    font-size: 0.82rem;
+    cursor: default;
+  }
+  .trip-card.placeholder:hover {
+    border-color: var(--rule);
+    box-shadow: none;
+    transform: none;
+  }
 
-  @media (max-width:520px){ .trip-grid{ grid-template-columns:1fr; } }
+  footer {
+    text-align: center;
+    padding: 48px 48px 40px;
+    font-size: 0.75rem;
+    color: var(--ink-soft);
+  }
+  footer a { color: var(--gold-text); text-decoration: none; }
+
+  @media (max-width: 640px) {
+    nav { padding: 16px 20px; }
+    .hero, .trip-section { padding-left: 20px; padding-right: 20px; }
+    .hero { padding-top: 110px; }
+  }
+
+  .up-next-empty {
+    border: 1px dashed var(--rule);
+    border-radius: 14px;
+    padding: 28px 30px;
+    font-size: 0.9rem;
+    line-height: 1.7;
+    color: var(--ink-soft);
+    background: var(--warm-white);
+    max-width: 720px;
+  }
+  .up-next-empty strong { color: var(--ink); font-weight: 500; }
 </style>
 </head>
 <body>
 
-<div class="topbar">
-  <div class="crumbs"><a href="../index.html">Home</a><span>/</span><a href="../main/index.html">Back to Personal</a></div>
-  <div class="hero-eyebrow">Family &amp; Personal</div>
+<nav>
+  <a class="nav-logo" href="https://ghazal-tehrani.me/main">Home</a>
+  <div class="nav-links">
+    <a href="https://ghazal-tehrani.me/main#personal">Back to Personal</a>
+  </div>
+</nav>
+
+<div class="hero">
   <h1>Vacations</h1>
-  <div class="lede">What's coming up, the ones taking shape, and a running album of everywhere we've already been.</div>
+  <p class="hero-sub">The trip that's booked, the ones taking shape, and a running album of everywhere we've already been.</p>
 </div>
 
-<div class="page-wrap">
-
-  <!-- UP NEXT -->
-  <section class="hub-section">
-    <div class="section-head">
-      <div class="section-kicker">Up Next</div>
-      <div class="section-note">Booked and coming up</div>
-      <h2>Nothing booked right now</h2>
-    </div>
-    <div class="empty-state">
-      <strong>No trip is currently booked.</strong> Italy (Sardinia &amp; Lake Como) wrapped in mid-August — see it under Memories Created below. The next big trips, Lake Tahoe and Costa Rica, are both about a year out and still in the planning stage (see Ready to Go Trips). A shorter Iceland long weekend centered on the Blue Lagoon is possible for October 2026, but exact dates aren't locked yet.
-    </div>
-  </section>
-
-  <!-- READY TO GO -->
-  <section class="hub-section">
-    <div class="section-head">
-      <div class="section-kicker">Ready to Go Trips</div>
-      <div class="section-note">In the works — dates may still move</div>
-      <h2></h2>
-    </div>
-    <div class="trip-grid">
-      <a class="trip-card" href="tahoe/index.html">
-        <div class="trip-card-eyebrow">Next big trip</div>
-        <h3>Lake Tahoe</h3>
-        <div class="trip-card-date">August 2027</div>
-      </a>
-      <a class="trip-card" href="costarica2026/index.html">
-        <div class="trip-card-eyebrow">Next big trip</div>
-        <h3>Costa Rica Family Trip</h3>
-        <div class="trip-card-date">June 2027 · exact days TBD</div>
-      </a>
-      <a class="trip-card accent1" href="iceland/index.html">
-        <div class="trip-card-eyebrow">Iceland · full family trip</div>
-        <h3>Iceland — Ring Road &amp; Snæfellsnes</h3>
-        <div class="trip-card-date">Sep 5–16, 2026 <em style="font-style:normal; color:var(--muted);">(page not yet updated — see note below)</em></div>
-        <div class="trip-card-sub">Researched starting point, nothing booked</div>
-      </a>
-      <a class="trip-card accent2" href="iceland-blue-lagoon/index.html">
-        <div class="trip-card-eyebrow">Iceland · long weekend</div>
-        <h3>Iceland — Blue Lagoon Weekend</h3>
-        <div class="trip-card-date">October 2026 · exact dates TBD</div>
-        <div class="trip-card-sub">Just the two of us — not the full Ring Road</div>
-      </a>
-    </div>
-    <div class="callout"><strong>Two Icelands, on purpose:</strong> the plan is for the full Ring Road trip to move out to 2028+ (dates TBD), with the Blue Lagoon Weekend above taking the October 2026 long-weekend slot instead. The Ring Road card still shows the old Sep 5–16, 2026 dates because that page itself hasn't been relabeled yet — doing that safely needs direct file access to avoid losing the real map coordinates baked into that page, so it's queued for a session with local/git access rather than guessed at here.</div>
-  </section>
-
-  <!-- MEMORIES CREATED -->
-  <section class="hub-section">
-    <div class="section-head">
-      <div class="section-kicker">Memories Created</div>
-      <div class="section-note">Trips we've already taken</div>
-      <h2></h2>
-    </div>
-    <div class="trip-grid">
-      <a class="trip-card" href="italy2026/index.html">
-        <div class="trip-card-eyebrow">Italy</div>
-        <h3>Italy, Two Ways — Sardinia &amp; Como</h3>
-        <div class="trip-card-date">Aug 6–14, 2026</div>
-        <div class="trip-card-sub">Two legs · Sardinia then Lake Como</div>
-      </a>
-      <a class="trip-card" href="anguilla/index.html">
-        <h3>Anguilla</h3>
-        <div class="trip-card-date">March 2026</div>
-      </a>
-      <a class="trip-card" href="rehoboth-bethany/index.html">
-        <h3>Rehoboth &amp; Bethany Beach</h3>
-        <div class="trip-card-date">October 2025 · Mom's 70th</div>
-      </a>
-      <a class="trip-card" href="hawaii-maui-2025/index.html">
-        <h3>Maui, Hawaii</h3>
-        <div class="trip-card-date">August 2025</div>
-      </a>
-      <a class="trip-card" href="california-2025/index.html">
-        <h3>California</h3>
-        <div class="trip-card-date">August 2025</div>
-      </a>
-      <a class="trip-card" href="dominican-republic/index.html">
-        <div class="trip-card-eyebrow">Dominican Republic</div>
-        <h3>Dominican Republic</h3>
-        <div class="trip-card-date">Oct 2024 · Samaná</div>
-      </a>
-      <a class="trip-card" href="deer-valley/index.html">
-        <h3>Deer Valley, Utah</h3>
-        <div class="trip-card-date">Late January 2015</div>
-      </a>
-      <a class="trip-card" href="cancun/index.html">
-        <h3>Cancún / Puerto Morelos</h3>
-        <div class="trip-card-date">Aug 12–19, 2017</div>
-      </a>
-      <a class="trip-card" href="tuscany/index.html">
-        <h3>Tuscany, Italy</h3>
-        <div class="trip-card-date">Oct 31 – Nov 7, 2015</div>
-      </a>
-      <a class="trip-card" href="exuma-2010/index.html">
-        <h3>Exuma, Bahamas</h3>
-        <div class="trip-card-date">Jan 22–31, 2010</div>
-      </a>
-      <a class="trip-card" href="exuma-2014/index.html">
-        <h3>Exuma, Bahamas (again)</h3>
-        <div class="trip-card-date">May 6–13, 2014</div>
-      </a>
-      <a class="trip-card" href="bahamas-treasure-cay/index.html">
-        <h3>Treasure Cay, Bahamas</h3>
-        <div class="trip-card-date">2015</div>
-      </a>
-      <a class="trip-card" href="utah-arizona-roadtrip/index.html">
-        <h3>Utah &amp; Arizona Road Trip</h3>
-        <div class="trip-card-date">Aug 5–8, 2009</div>
-      </a>
-      <a class="trip-card" href="seattle/index.html">
-        <h3>Seattle &amp; Mt. Rainier</h3>
-        <div class="trip-card-date">Aug 17–23, 2019</div>
-      </a>
-      <a class="trip-card" href="outer-banks/index.html">
-        <div class="trip-card-eyebrow">Outer Banks</div>
-        <h3>Outer Banks, NC — Corolla</h3>
-        <div class="trip-card-date">Jul 13–20, 2013</div>
-      </a>
-      <a class="trip-card" href="bali-thailand/index.html">
-        <h3>Bali &amp; Thailand</h3>
-        <div class="trip-card-date">February 2012</div>
-      </a>
-      <a class="trip-card" href="switzerland-alps/index.html">
-        <h3>Switzerland &amp; Italy</h3>
-        <div class="trip-card-date">Nov 21–27, 2012</div>
-      </a>
-      <a class="trip-card" href="rio-de-janeiro/index.html">
-        <h3>Rio de Janeiro, Brazil</h3>
-        <div class="trip-card-date">May 2012</div>
-      </a>
-      <a class="trip-card" href="greece-turkey/index.html">
-        <h3>Greece &amp; Turkey</h3>
-        <div class="trip-card-date">Apr 30 – May 16, 2010</div>
-      </a>
-    </div>
-  </section>
-
+<!-- UP NEXT -->
+<div class="trip-section">
+  <div class="section-head">
+    <h2>Up Next</h2>
+    <span class="section-note">Booked and coming up</span>
+  </div>
+  <div class="up-next-empty">
+    <strong>Nothing is currently booked.</strong> Italy (Sardinia &amp; Lake Como) wrapped in mid-August — see it under Memories Created below. The next big trips, Lake Tahoe and Costa Rica, are both about a year out and still taking shape (see Ready to Go Trips). A shorter Iceland long weekend centered on the Blue Lagoon is possible for October 2026, but exact dates aren't locked in yet.
+  </div>
 </div>
 
-<div class="footer">ghazal-tehrani.me</div>
+<!-- READY TO GO -->
+<div class="trip-section">
+  <div class="section-head">
+    <h2>Ready to Go Trips</h2>
+    <span class="section-note">In the works — dates may still move</span>
+  </div>
+  <div class="trip-grid">
+    <a class="trip-card" href="https://ghazal-tehrani.me/vacations/tahoe" target="_blank">
+      <img class="trip-thumb" src="tahoe/secretcove.jpg" alt="Secret Cove, Lake Tahoe">
+      <div class="trip-body">
+        <div class="trip-title">Lake Tahoe</div>
+        <div class="trip-dates">August 2027</div>
+      </div>
+    </a>
+    <a class="trip-card" href="https://ghazal-tehrani.me/vacations/costarica2026" target="_blank">
+      <img class="trip-thumb" src="costarica2026/waterfall.jpg" alt="Waterfall in the Costa Rica cloud forest">
+      <div class="trip-body">
+        <div class="trip-title">Costa Rica Family Trip</div>
+        <div class="trip-dates">June 2027 · exact days TBD</div>
+      </div>
+    </a>
+    <a class="trip-card" href="https://ghazal-tehrani.me/vacations/iceland" target="_blank">
+      <div class="trip-thumb grad" style="background:linear-gradient(135deg,#0b3d4a 0%,#1f7a8c 55%,#c99c3a 100%);">Iceland</div>
+      <div class="trip-body">
+        <div class="trip-title">Iceland — Ring Road &amp; Snæfellsnes</div>
+        <div class="trip-dates">Sep 5–16, 2026 · researched starting point, nothing booked</div>
+      </div>
+    </a>
+    <a class="trip-card" href="https://ghazal-tehrani.me/vacations/iceland-blue-lagoon" target="_blank">
+      <div class="trip-thumb grad" style="background:linear-gradient(135deg,#0b3d4a 0%,#3a8fb7 55%,#dcf0f7 100%);">Blue Lagoon</div>
+      <div class="trip-body">
+        <div class="trip-title">Iceland — Blue Lagoon Weekend</div>
+        <div class="trip-dates">October 2026 · exact dates TBD · just the two of us</div>
+      </div>
+    </a>
+    <div class="trip-card placeholder" aria-hidden="true">More trips coming soon</div>
+  </div>
+</div>
+
+<!-- MEMORIES CREATED -->
+<div class="trip-section">
+  <div class="section-head">
+    <h2>Memories Created</h2>
+    <span class="section-note">Trips we've already taken</span>
+  </div>
+  <div class="trip-grid">
+
+    <a class="trip-card" href="https://ghazal-tehrani.me/vacations/italy2026" target="_blank">
+      <img class="trip-thumb" src="italy2026/como/bellagio_lakecomo.jpg" alt="Lake Como, Italy">
+      <div class="trip-body">
+        <div class="trip-title">Italy, Two Ways — Sardinia &amp; Como</div>
+        <div class="trip-dates">Aug 6–14, 2026</div>
+      </div>
+    </a>
+
+    <a class="trip-card" href="https://ghazal-tehrani.me/vacations/anguilla" target="_blank">
+      <img class="trip-thumb" src="anguilla/thumb.jpg" alt="Ghazal and Ella on the beach, Anguilla">
+      <div class="trip-body">
+        <div class="trip-title">Anguilla</div>
+        <div class="trip-dates">March 2026</div>
+      </div>
+    </a>
+
+    <a class="trip-card" href="https://ghazal-tehrani.me/vacations/rehoboth-bethany" target="_blank">
+      <img class="trip-thumb" src="rehoboth-bethany/thumb.jpg" alt="The family on the beach at golden hour, Rehoboth">
+      <div class="trip-body">
+        <div class="trip-title">Rehoboth &amp; Bethany Beach</div>
+        <div class="trip-dates">October 2025 · Mom's 70th</div>
+      </div>
+    </a>
+
+    <a class="trip-card" href="https://ghazal-tehrani.me/vacations/hawaii-maui-2025" target="_blank">
+      <img class="trip-thumb" src="hawaii-maui-2025/thumb.jpg" alt="The family at a Maui waterfall garden">
+      <div class="trip-body">
+        <div class="trip-title">Maui, Hawaii</div>
+        <div class="trip-dates">August 2025</div>
+      </div>
+    </a>
+
+    <a class="trip-card" href="https://ghazal-tehrani.me/vacations/california-2025" target="_blank">
+      <img class="trip-thumb" src="california-2025/thumb.jpg" alt="The kids in a Temecula sunflower field">
+      <div class="trip-body">
+        <div class="trip-title">California</div>
+        <div class="trip-dates">August 2025</div>
+      </div>
+    </a>
+
+    <a class="trip-card" href="https://ghazal-tehrani.me/vacations/dominican-republic" target="_blank">
+      <div class="trip-thumb grad" style="background:linear-gradient(135deg,#0f766e 0%,#84cc16 100%);">Dominican Republic</div>
+      <div class="trip-body">
+        <div class="trip-title">Dominican Republic</div>
+        <div class="trip-dates">Oct 2024 · Samaná</div>
+      </div>
+    </a>
+
+    <a class="trip-card" href="https://ghazal-tehrani.me/vacations/deer-valley" target="_blank">
+      <img class="trip-thumb" src="deer-valley/thumb.jpg" alt="St. Regis Deer Valley ski slope">
+      <div class="trip-body">
+        <div class="trip-title">Deer Valley, Utah</div>
+        <div class="trip-dates">Late January 2015</div>
+      </div>
+    </a>
+
+    <a class="trip-card" href="https://ghazal-tehrani.me/vacations/cancun" target="_blank">
+      <img class="trip-thumb" src="cancun/thumb.jpg" alt="Puerto Morelos beach">
+      <div class="trip-body">
+        <div class="trip-title">Cancún / Puerto Morelos</div>
+        <div class="trip-dates">Aug 12–19, 2017</div>
+      </div>
+    </a>
+
+    <a class="trip-card" href="https://ghazal-tehrani.me/vacations/tuscany" target="_blank">
+      <img class="trip-thumb" src="tuscany/thumb.jpg" alt="Locanda dell'Amorosa courtyard, Tuscany">
+      <div class="trip-body">
+        <div class="trip-title">Tuscany, Italy</div>
+        <div class="trip-dates">Oct 31 – Nov 7, 2015</div>
+      </div>
+    </a>
+
+    <a class="trip-card" href="https://ghazal-tehrani.me/vacations/exuma-2010" target="_blank">
+      <img class="trip-thumb" src="exuma-2010/thumb.jpg" alt="Exuma sandbar at low tide">
+      <div class="trip-body">
+        <div class="trip-title">Exuma, Bahamas</div>
+        <div class="trip-dates">Jan 22–31, 2010</div>
+      </div>
+    </a>
+
+    <a class="trip-card" href="https://ghazal-tehrani.me/vacations/exuma-2014" target="_blank">
+      <img class="trip-thumb" src="exuma-2014/thumb.jpg" alt="Tropic of Cancer Beach, Little Exuma">
+      <div class="trip-body">
+        <div class="trip-title">Exuma, Bahamas (again)</div>
+        <div class="trip-dates">May 6–13, 2014</div>
+      </div>
+    </a>
+
+    <a class="trip-card" href="https://ghazal-tehrani.me/vacations/bahamas-treasure-cay" target="_blank">
+      <img class="trip-thumb" src="bahamas-treasure-cay/thumb.jpg" alt="Treasure Cay's 3.5-mile beach">
+      <div class="trip-body">
+        <div class="trip-title">Treasure Cay, Bahamas</div>
+        <div class="trip-dates">2015</div>
+      </div>
+    </a>
+
+    <a class="trip-card" href="https://ghazal-tehrani.me/vacations/utah-arizona-roadtrip" target="_blank">
+      <img class="trip-thumb" src="utah-arizona-roadtrip/thumb.jpg" alt="Canyon overlook near Torrey, Utah">
+      <div class="trip-body">
+        <div class="trip-title">Utah &amp; Arizona Road Trip</div>
+        <div class="trip-dates">Aug 5–8, 2009</div>
+      </div>
+    </a>
+
+    <a class="trip-card" href="https://ghazal-tehrani.me/vacations/seattle" target="_blank">
+      <img class="trip-thumb" src="seattle/thumb.jpg" alt="The family at Lawton Park beach, Puget Sound">
+      <div class="trip-body">
+        <div class="trip-title">Seattle &amp; Mt. Rainier</div>
+        <div class="trip-dates">Aug 17–23, 2019</div>
+      </div>
+    </a>
+
+    <a class="trip-card" href="https://ghazal-tehrani.me/vacations/outer-banks" target="_blank">
+      <div class="trip-thumb grad" style="background:linear-gradient(135deg,#0c4a6e 0%,#7dd3fc 60%,#fef9c3 100%);">Outer Banks</div>
+      <div class="trip-body">
+        <div class="trip-title">Outer Banks, NC — Corolla</div>
+        <div class="trip-dates">Jul 13–20, 2013</div>
+      </div>
+    </a>
+
+    <a class="trip-card" href="https://ghazal-tehrani.me/vacations/bali-thailand" target="_blank">
+      <img class="trip-thumb" src="bali-thailand/thumb.jpg" alt="Phi Phi Don at sunset, Thailand">
+      <div class="trip-body">
+        <div class="trip-title">Bali &amp; Thailand</div>
+        <div class="trip-dates">February 2012</div>
+      </div>
+    </a>
+
+    <a class="trip-card" href="https://ghazal-tehrani.me/vacations/switzerland-alps" target="_blank">
+      <img class="trip-thumb" src="switzerland-alps/thumb.jpg" alt="Alps panorama above Lucerne">
+      <div class="trip-body">
+        <div class="trip-title">Switzerland &amp; Italy</div>
+        <div class="trip-dates">Nov 21–27, 2012</div>
+      </div>
+    </a>
+
+    <a class="trip-card" href="https://ghazal-tehrani.me/vacations/rio-de-janeiro" target="_blank">
+      <img class="trip-thumb" src="rio-de-janeiro/thumb.jpg" alt="Ipanema Beach, Rio de Janeiro">
+      <div class="trip-body">
+        <div class="trip-title">Rio de Janeiro, Brazil</div>
+        <div class="trip-dates">May 2012</div>
+      </div>
+    </a>
+
+    <a class="trip-card" href="https://ghazal-tehrani.me/vacations/greece-turkey" target="_blank">
+      <img class="trip-thumb" src="greece-turkey/thumb.jpg" alt="The Parthenon, Athens">
+      <div class="trip-body">
+        <div class="trip-title">Greece &amp; Turkey</div>
+        <div class="trip-dates">Apr 30 – May 16, 2010</div>
+      </div>
+    </a>
+
+  </div>
+</div>
+
+<footer>
+  <a href="https://ghazal-tehrani.me">ghazal-tehrani.me</a>
+</footer>
 
 </body>
 </html>
