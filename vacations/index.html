@@ -198,9 +198,13 @@
   /* EMPTY / COMING SOON CARD */
   .trip-card.placeholder {
     display: flex;
+    flex-direction: column;
     align-items: center;
     justify-content: center;
+    gap: 4px;
     min-height: 180px;
+    padding: 20px;
+    text-align: center;
     border-style: dashed;
     color: var(--ink-soft);
     font-size: 0.82rem;
@@ -210,6 +214,20 @@
     border-color: var(--rule);
     box-shadow: none;
     transform: none;
+  }
+  .placeholder .ph-title {
+    font-family: var(--serif);
+    font-size: 1.05rem;
+    font-weight: 500;
+    color: var(--ink);
+  }
+  .placeholder .ph-dates { font-size: 0.76rem; }
+  .placeholder .ph-status {
+    margin-top: 6px;
+    font-size: 0.68rem;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--gold-text);
   }
 
   footer {
@@ -307,7 +325,7 @@
 <div class="trip-section">
   <div class="section-head">
     <h2>Memories Created</h2>
-    <span class="section-note">Trips we've already taken</span>
+    <span class="section-note">Trips we've already taken, newest first</span>
   </div>
   <div class="trip-grid">
 
@@ -351,6 +369,14 @@
       </div>
     </a>
 
+    <a class="trip-card" href="https://ghazal-tehrani.me/vacations/turks-caicos-2025" target="_blank">
+      <div class="trip-thumb grad" style="background:linear-gradient(135deg,#0a5c68 0%,#0e93a3 55%,#bdeef0 100%);">Turks &amp; Caicos</div>
+      <div class="trip-body">
+        <div class="trip-title">Turks &amp; Caicos — Grace Bay</div>
+        <div class="trip-dates">Apr 14–21, 2025 · Coral Gardens</div>
+      </div>
+    </a>
+
     <a class="trip-card" href="https://ghazal-tehrani.me/vacations/dominican-republic" target="_blank">
       <div class="trip-thumb grad" style="background:linear-gradient(135deg,#0f766e 0%,#84cc16 100%);">Dominican Republic</div>
       <div class="trip-body">
@@ -359,11 +385,19 @@
       </div>
     </a>
 
-    <a class="trip-card" href="https://ghazal-tehrani.me/vacations/deer-valley" target="_blank">
-      <img class="trip-thumb" src="deer-valley/thumb.jpg" alt="St. Regis Deer Valley ski slope">
+    <a class="trip-card" href="https://ghazal-tehrani.me/vacations/turks-caicos-2021" target="_blank">
+      <div class="trip-thumb grad" style="background:linear-gradient(135deg,#0a5c68 0%,#0e93a3 55%,#bdeef0 100%);">Turks &amp; Caicos</div>
       <div class="trip-body">
-        <div class="trip-title">Deer Valley, Utah</div>
-        <div class="trip-dates">Late January 2015</div>
+        <div class="trip-title">Turks &amp; Caicos — 10th Anniversary</div>
+        <div class="trip-dates">Jun 24–28, 2021 · Grace Bay</div>
+      </div>
+    </a>
+
+    <a class="trip-card" href="https://ghazal-tehrani.me/vacations/seattle" target="_blank">
+      <img class="trip-thumb" src="seattle/thumb.jpg" alt="The family at Lawton Park beach, Puget Sound">
+      <div class="trip-body">
+        <div class="trip-title">Seattle &amp; Mt. Rainier</div>
+        <div class="trip-dates">Aug 17–23, 2019</div>
       </div>
     </a>
 
@@ -383,11 +417,19 @@
       </div>
     </a>
 
-    <a class="trip-card" href="https://ghazal-tehrani.me/vacations/exuma-2010" target="_blank">
-      <img class="trip-thumb" src="exuma-2010/thumb.jpg" alt="Exuma sandbar at low tide">
+    <a class="trip-card" href="https://ghazal-tehrani.me/vacations/bahamas-treasure-cay" target="_blank">
+      <img class="trip-thumb" src="bahamas-treasure-cay/thumb.jpg" alt="Treasure Cay's 3.5-mile beach">
       <div class="trip-body">
-        <div class="trip-title">Exuma, Bahamas</div>
-        <div class="trip-dates">Jan 22–31, 2010</div>
+        <div class="trip-title">Treasure Cay, Bahamas</div>
+        <div class="trip-dates">2015</div>
+      </div>
+    </a>
+
+    <a class="trip-card" href="https://ghazal-tehrani.me/vacations/deer-valley" target="_blank">
+      <img class="trip-thumb" src="deer-valley/thumb.jpg" alt="St. Regis Deer Valley ski slope">
+      <div class="trip-body">
+        <div class="trip-title">Deer Valley, Utah</div>
+        <div class="trip-dates">Late January 2015</div>
       </div>
     </a>
 
@@ -399,43 +441,11 @@
       </div>
     </a>
 
-    <a class="trip-card" href="https://ghazal-tehrani.me/vacations/bahamas-treasure-cay" target="_blank">
-      <img class="trip-thumb" src="bahamas-treasure-cay/thumb.jpg" alt="Treasure Cay's 3.5-mile beach">
-      <div class="trip-body">
-        <div class="trip-title">Treasure Cay, Bahamas</div>
-        <div class="trip-dates">2015</div>
-      </div>
-    </a>
-
-    <a class="trip-card" href="https://ghazal-tehrani.me/vacations/utah-arizona-roadtrip" target="_blank">
-      <img class="trip-thumb" src="utah-arizona-roadtrip/thumb.jpg" alt="Canyon overlook near Torrey, Utah">
-      <div class="trip-body">
-        <div class="trip-title">Utah &amp; Arizona Road Trip</div>
-        <div class="trip-dates">Aug 5–8, 2009</div>
-      </div>
-    </a>
-
-    <a class="trip-card" href="https://ghazal-tehrani.me/vacations/seattle" target="_blank">
-      <img class="trip-thumb" src="seattle/thumb.jpg" alt="The family at Lawton Park beach, Puget Sound">
-      <div class="trip-body">
-        <div class="trip-title">Seattle &amp; Mt. Rainier</div>
-        <div class="trip-dates">Aug 17–23, 2019</div>
-      </div>
-    </a>
-
     <a class="trip-card" href="https://ghazal-tehrani.me/vacations/outer-banks" target="_blank">
       <div class="trip-thumb grad" style="background:linear-gradient(135deg,#0c4a6e 0%,#7dd3fc 60%,#fef9c3 100%);">Outer Banks</div>
       <div class="trip-body">
         <div class="trip-title">Outer Banks, NC — Corolla</div>
         <div class="trip-dates">Jul 13–20, 2013</div>
-      </div>
-    </a>
-
-    <a class="trip-card" href="https://ghazal-tehrani.me/vacations/bali-thailand" target="_blank">
-      <img class="trip-thumb" src="bali-thailand/thumb.jpg" alt="Phi Phi Don at sunset, Thailand">
-      <div class="trip-body">
-        <div class="trip-title">Bali &amp; Thailand</div>
-        <div class="trip-dates">February 2012</div>
       </div>
     </a>
 
@@ -455,6 +465,14 @@
       </div>
     </a>
 
+    <a class="trip-card" href="https://ghazal-tehrani.me/vacations/bali-thailand" target="_blank">
+      <img class="trip-thumb" src="bali-thailand/thumb.jpg" alt="Phi Phi Don at sunset, Thailand">
+      <div class="trip-body">
+        <div class="trip-title">Bali &amp; Thailand</div>
+        <div class="trip-dates">February 2012</div>
+      </div>
+    </a>
+
     <a class="trip-card" href="https://ghazal-tehrani.me/vacations/greece-turkey" target="_blank">
       <img class="trip-thumb" src="greece-turkey/thumb.jpg" alt="The Parthenon, Athens">
       <div class="trip-body">
@@ -462,6 +480,99 @@
         <div class="trip-dates">Apr 30 – May 16, 2010</div>
       </div>
     </a>
+
+    <a class="trip-card" href="https://ghazal-tehrani.me/vacations/exuma-2010" target="_blank">
+      <img class="trip-thumb" src="exuma-2010/thumb.jpg" alt="Exuma sandbar at low tide">
+      <div class="trip-body">
+        <div class="trip-title">Exuma, Bahamas</div>
+        <div class="trip-dates">Jan 22–31, 2010</div>
+      </div>
+    </a>
+
+    <a class="trip-card" href="https://ghazal-tehrani.me/vacations/utah-arizona-roadtrip" target="_blank">
+      <img class="trip-thumb" src="utah-arizona-roadtrip/thumb.jpg" alt="Canyon overlook near Torrey, Utah">
+      <div class="trip-body">
+        <div class="trip-title">Utah &amp; Arizona Road Trip</div>
+        <div class="trip-dates">Aug 5–8, 2009</div>
+      </div>
+    </a>
+
+  </div>
+</div>
+
+<!-- STILL BEING FOUND -->
+<div class="trip-section">
+  <div class="section-head">
+    <h2>Still Being Found</h2>
+    <span class="section-note">Trips you've mentioned that don't have a page yet — placeholders so nothing gets lost</span>
+  </div>
+  <div class="trip-grid">
+
+    <div class="trip-card placeholder" aria-hidden="true">
+      <div class="ph-title">Cape Cod</div>
+      <div class="ph-dates">2023</div>
+      <div class="ph-status">Not yet researched</div>
+    </div>
+
+    <div class="trip-card placeholder" aria-hidden="true">
+      <div class="ph-title">Orlando — Universal</div>
+      <div class="ph-dates">2023</div>
+      <div class="ph-status">Not yet researched</div>
+    </div>
+
+    <div class="trip-card placeholder" aria-hidden="true">
+      <div class="ph-title">PCB / “PCP” Beach</div>
+      <div class="ph-dates">Spring break 2023 · with the kids</div>
+      <div class="ph-status">Needs name confirmed</div>
+    </div>
+
+    <div class="trip-card placeholder" aria-hidden="true">
+      <div class="ph-title">Beaver Creek, CO</div>
+      <div class="ph-dates">January 2023</div>
+      <div class="ph-status">Not yet researched</div>
+    </div>
+
+    <div class="trip-card placeholder" aria-hidden="true">
+      <div class="ph-title">Niagara Falls</div>
+      <div class="ph-dates">September 2022</div>
+      <div class="ph-status">Not yet researched</div>
+    </div>
+
+    <div class="trip-card placeholder" aria-hidden="true">
+      <div class="ph-title">Seaside / 30A, FL</div>
+      <div class="ph-dates">2021</div>
+      <div class="ph-status">Records found — queued after Turks</div>
+    </div>
+
+    <div class="trip-card placeholder" aria-hidden="true">
+      <div class="ph-title">Topsail, NC</div>
+      <div class="ph-dates">2020</div>
+      <div class="ph-status">Records found</div>
+    </div>
+
+    <div class="trip-card placeholder" aria-hidden="true">
+      <div class="ph-title">Mayakoba, Mexico</div>
+      <div class="ph-dates">2019 · 40th‑bday friends trip</div>
+      <div class="ph-status">Needs year confirmed</div>
+    </div>
+
+    <div class="trip-card placeholder" aria-hidden="true">
+      <div class="ph-title">Seaside / 30A, FL</div>
+      <div class="ph-dates">2017</div>
+      <div class="ph-status">Thin record found</div>
+    </div>
+
+    <div class="trip-card placeholder" aria-hidden="true">
+      <div class="ph-title">Bora Bora</div>
+      <div class="ph-dates">2011 · Honeymoon</div>
+      <div class="ph-status">Not yet researched</div>
+    </div>
+
+    <div class="trip-card placeholder" aria-hidden="true">
+      <div class="ph-title">Switzerland (2nd trip)</div>
+      <div class="ph-dates">Year unknown</div>
+      <div class="ph-status">Needs year</div>
+    </div>
 
   </div>
 </div>
