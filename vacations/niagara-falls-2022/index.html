@@ -61,7 +61,7 @@
 <div class="hero">
   <div class="hero-inner">
     <div class="hero-eyebrow">🍁 Labor Day Weekend · Sep 2–5, 2022</div>
-    <h1>Niagara Falls Area, NY<span>A Labor Day weekend on an island near Cassadaga, NY — the closest confirmed record to the "Niagara Falls" trip</span></h1>
+    <h1>Niagara Falls Area, NY<span>A Labor Day weekend based on an island near Cassadaga, NY, with a day trip to the Falls</span></h1>
     <div class="hero-meta">
       <div class="meta-chip">🏡 <strong>The Paddle Inn</strong> · Heron Hideaway Island</div>
       <div class="meta-chip">🗓 <strong>3 nights</strong> · Fri Sep 2 – Mon Sep 5, 2022</div>
@@ -83,14 +83,15 @@
 
   <div class="section active" id="tab-overview">
     <div class="section-title">Overview</div>
-    <div class="section-sub">A Labor Day weekend booking for the whole family, confirmed by an Airbnb reservation — but not, on the record, actually in Niagara Falls itself.</div>
+    <div class="section-sub">A Labor Day weekend for the whole family, based at an Airbnb near Cassadaga, NY, with one day spent at Niagara Falls and one spent canoeing at the house.</div>
     <table class="overview">
       <tr><th>Date</th><th>Focus</th></tr>
       <tr><td>Fri Sep 2</td><td>Check in to The Paddle Inn on Heron Hideaway Island, Cassadaga, NY</td></tr>
-      <tr><td>Sat Sep 3 – Sun Sep 4</td><td>No day-by-day record found</td></tr>
+      <tr><td>Sat Sep 3 or Sun Sep 4</td><td>Day trip to Niagara Falls, per Ghazal</td></tr>
+      <tr><td>Sat Sep 3 or Sun Sep 4</td><td>Stayed at the Airbnb, canoeing on the lake, per Ghazal</td></tr>
       <tr><td>Mon Sep 5</td><td>Check out (Labor Day)</td></tr>
     </table>
-    <div class="callout warn">Honest flag: the only confirmed lodging record for this weekend is an entire-home Airbnb in Cassadaga, NY — a lake town in western New York roughly 75 minutes' drive from Niagara Falls, not the Falls themselves. No ticket, park pass, or restaurant record naming Niagara Falls turned up anywhere in email or your calendar for this trip. It's very possible you made the drive up for a day trip to the Falls from here and that just never left a paper trail — but I'm not going to invent that stop without something to back it up. Let me know if you remember doing that (or a different lodging that was actually closer to the Falls) and I'll fix this up.</div>
+    <div class="callout">Confirmed by Ghazal: no ticket or reservation record for the Falls day ever turned up in email, but the lodging (an island Airbnb near Cassadaga) is confirmed, and the trip did include a day at Niagara Falls plus a day canoeing from the house. Which specific day was which isn't pinned down by any record, so it's left unassigned above rather than guessed.</div>
   </div>
 
   <div class="section" id="tab-hotel">
@@ -126,7 +127,7 @@
   L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {attribution:'© OpenStreetMap'}).addTo(map);
   var pts = [
     [42.3469,-79.3150,"The Paddle Inn on Heron Hideaway Island","37 Dale Dr, Cassadaga, NY 14718"],
-    [43.0828,-79.0742,"Niagara Falls","~75 min drive from Cassadaga — not confirmed as visited on this trip"]
+    [43.0828,-79.0742,"Niagara Falls","~75 min drive from Cassadaga — day trip, per Ghazal"]
   ];
   pts.forEach(function(p){
     L.marker([p[0],p[1]]).addTo(map).bindPopup("<strong>"+p[2]+"</strong><br>"+p[3]);

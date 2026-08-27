@@ -64,9 +64,9 @@
     <h1>Bora Bora, French Polynesia<span>The honeymoon, booked through a Tahiti specialist agency the week after your wedding</span></h1>
     <div class="hero-meta">
       <div class="meta-chip">💒 <strong>Wedding</strong> · Jun 18, 2011 · Veritas Vineyard</div>
-      <div class="meta-chip">🏝️ <strong>5 nights</strong> · "the Thalasso" resort</div>
+      <div class="meta-chip">🏝️ <strong>5 nights</strong> · InterContinental Bora Bora Resort &amp; Thalasso Spa</div>
+      <div class="meta-chip">🛖 <strong>Overwater bungalow</strong></div>
       <div class="meta-chip">✈️ <strong>Tahiti Legends</strong> · LAX → Papeete → Bora Bora</div>
-      <div class="meta-chip">💵 <strong>$8,500</strong> package for two</div>
     </div>
   </div>
 </div>
@@ -88,19 +88,20 @@
       <tr><th>Date</th><th>Focus</th></tr>
       <tr><td>Sat Jun 18, 2011</td><td>Wedding — Persian ceremony at Veritas Vineyard, Afton, VA</td></tr>
       <tr><td>~Mon Jun 20 (night)</td><td>Depart LAX on a red-eye toward Papeete, per the booked itinerary</td></tr>
-      <tr><td>~Tue Jun 21</td><td>Arrive Papeete early morning; connecting flight to Bora Bora, landing ~8:20am; check in to "the Thalasso"</td></tr>
+      <tr><td>~Tue Jun 21</td><td>Arrive Papeete early morning; connecting flight to Bora Bora, landing ~8:20am; check in to the InterContinental Bora Bora Resort &amp; Thalasso Spa, overwater bungalow</td></tr>
       <tr><td>~Jun 21 – 26</td><td>5 nights at the resort, breakfast &amp; dinner included</td></tr>
       <tr><td>~Mon Jun 27</td><td>Depart Bora Bora, evening flight home from Papeete; arrive home Tuesday evening</td></tr>
     </table>
-    <div class="callout warn">Important gap: I never found a final booking confirmation or itinerary email — only the January 2011 planning thread with Tahiti Legends (travel agent Lisa Corso) and a payment schedule. The dates above are reconstructed from that payment schedule (balance due "45 days in advance," which points to a trip starting around Jun 20) plus your wedding date and a June 25, 2011 email from Ben's dad that says "I hope you are not reading this in Bora Bora, but rather once you get home" — meaning you were traveling or just back around then. Treat these dates as a good estimate, not a confirmed itinerary. Also, the resort is referred to in the booking emails only as "the Thalasso" — the full property name was never spelled out, so I haven't guessed which hotel that was.</div>
+    <div class="callout warn">Timing is still an estimate: I never found a final booking confirmation or itinerary email — only the January 2011 planning thread with Tahiti Legends (travel agent Lisa Corso) and a payment schedule. The dates above are reconstructed from that payment schedule (balance due "45 days in advance," which points to a trip starting around Jun 20) plus your wedding date and a June 25, 2011 email from Ben's dad that says "I hope you are not reading this in Bora Bora, but rather once you get home." Treat them as a good estimate, not a confirmed itinerary. The resort name is per your own memory — you recalled "Omni Intercontinental," and while Omni doesn't operate in Bora Bora, InterContinental does, and its Bora Bora property is literally named "Resort & Thalasso Spa," which lines up with the booking emails' repeated nickname "the Thalasso." Going with that match over the "Omni" half of the memory.</div>
   </div>
 
   <div class="section" id="tab-hotel">
     <div class="section-title">Hotel &amp; Transportation</div>
     <div class="book-group-label">Lodging</div>
-    <div class="hotel-card tbd">
-      <h4>"the Thalasso" — exact property not confirmed</h4>
-      <div class="note">Booked as a package through Tahiti Legends. The planning emails only ever call it "the Thalasso," never the full hotel name — several Bora Bora resorts have Thalasso spas, so I'm not guessing which one. 5 nights, breakfast &amp; dinner included in the package price.</div>
+    <div class="hotel-card">
+      <h4>InterContinental Bora Bora Resort &amp; Thalasso Spa</h4>
+      <div class="meta">Overwater bungalow · 5 nights, breakfast &amp; dinner included</div>
+      <div class="note">Booked as a package through Tahiti Legends. The planning emails call it only "the Thalasso" and never spell out the full name, but that nickname plus Ghazal's own memory of "InterContinental" point to this property — its Bora Bora resort is the one literally named "Resort &amp; Thalasso Spa."</div>
     </div>
     <div class="book-group-label">Transportation</div>
     <div class="hotel-card">
@@ -117,7 +118,8 @@
     <div class="section-title">Book This Again</div>
     <div class="section-sub">What's on file if this trip gets a repeat.</div>
     <ul class="checklist">
-      <li><strong>Tahiti Legends</strong> — Lisa Corso, (866) 584-2337<span class="sub">tahitilegends.com — the agency that packaged flights + 5 nights at "the Thalasso"</span></li>
+      <li><strong>InterContinental Bora Bora Resort &amp; Thalasso Spa</strong><span class="sub">Overwater bungalow — the resort itself, if booking directly instead of through a package</span></li>
+      <li><strong>Tahiti Legends</strong> — Lisa Corso, (866) 584-2337<span class="sub">tahitilegends.com — the agency that packaged flights + 5 nights at the resort</span></li>
     </ul>
   </div>
 
@@ -127,10 +129,10 @@
 
 <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
 <script>
-  var map = L.map('map', {scrollWheelZoom:false}).setView([-16.50, -151.75], 11);
+  var map = L.map('map', {scrollWheelZoom:false}).setView([-16.50, -151.73], 12);
   L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {attribution:'© OpenStreetMap'}).addTo(map);
   var pts = [
-    [-16.500,-151.745,"Bora Bora","French Polynesia — exact resort not confirmed"]
+    [-16.5045,-151.7266,"InterContinental Bora Bora Resort & Thalasso Spa","Motu Piti Aau — overwater bungalow"]
   ];
   pts.forEach(function(p){
     L.marker([p[0],p[1]]).addTo(map).bindPopup("<strong>"+p[2]+"</strong><br>"+p[3]);
