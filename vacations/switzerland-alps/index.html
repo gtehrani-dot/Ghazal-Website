@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Switzerland &amp; Italy — Ghazal Tehrani</title>
+<title>Mürren &amp; Basel, Switzerland — Ghazal Tehrani</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300;9..144,500;9..144,600&family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
@@ -19,7 +19,7 @@
   a{color:inherit;}
   .back-link{ display:inline-block; margin:18px 0 0 32px; font-family:var(--mono); font-size:12.5px; color:var(--primary); text-decoration:none; }
   .back-link:hover{ text-decoration:underline; }
-  .hero{ background:linear-gradient(135deg,rgba(23,37,84,0.80) 0%, rgba(30,58,138,0.68) 55%, rgba(147,197,253,0.45) 100%), url('hero.jpg') center 55%/cover; color:#fff; padding:36px 32px 46px; position:relative; overflow:hidden;}
+  .hero{ background:linear-gradient(135deg,var(--primary-deep) 0%, var(--primary) 55%, #93c5fd 100%); color:#fff; padding:36px 32px 46px; position:relative; overflow:hidden;}
   .hero::before{ content:''; position:absolute; inset:0; background:radial-gradient(ellipse at 85% 15%, rgba(147,197,253,0.25) 0%, transparent 55%);}
   .hero-inner{ position:relative; max-width:980px; margin:0 auto;}
   .hero-eyebrow{ font-family:var(--mono); font-size:11px; letter-spacing:3px; text-transform:uppercase; color:#bfdbfe; margin-bottom:14px;}
@@ -28,7 +28,6 @@
   .hero-meta{ display:flex; flex-wrap:wrap; gap:10px; margin-top:26px;}
   .meta-chip{ font-family:var(--mono); font-size:12px; padding:8px 15px; border:1px solid rgba(255,255,255,0.25); border-radius:100px; background:rgba(255,255,255,0.12);}
   .meta-chip strong{ color:#fde68a; }
-  .hero-photo-cap{ position:relative; max-width:980px; margin:8px auto 0; font-family:var(--mono); font-size:11px; color:#e2e8f0; text-align:right; opacity:0.85; }
   #map{ height:320px; max-width:980px; margin:-30px auto 0; border-radius:16px; box-shadow:0 12px 34px rgba(23,37,84,0.25); position:relative; z-index:2; border:4px solid #fff;}
   .tabs{ max-width:980px; margin:34px auto 0; display:flex; flex-wrap:wrap; gap:6px; padding:0 32px;}
   .tab-btn{ font-family:var(--mono); font-size:12px; letter-spacing:0.4px; padding:9px 16px; border-radius:100px; background:var(--card); border:1px solid var(--line); cursor:pointer; color:var(--muted);}
@@ -46,10 +45,6 @@
   .hotel-card h4{ font-family:var(--serif); font-size:18px; font-weight:500; margin-bottom:4px;}
   .hotel-card .meta{ font-size:12.5px; color:var(--muted); margin-top:4px; }
   .hotel-card .note{ font-size:13px; margin-top:8px; color:var(--ink); }
-  .card-grid{ display:grid; grid-template-columns:repeat(auto-fill,minmax(220px,1fr)); gap:14px; }
-  .card{ background:var(--card); border:1px solid var(--line); border-radius:12px; padding:14px 16px; }
-  .card h4{ font-family:var(--serif); font-size:16px; font-weight:500; margin-bottom:4px; }
-  .card p{ font-size:12.8px; color:var(--muted); }
   .checklist{ list-style:none; }
   .checklist li{ background:var(--card); border:1px solid var(--line); border-radius:10px; padding:12px 16px; margin-bottom:8px; font-size:13.8px;}
   .checklist li .sub{ display:block; font-size:12px; color:var(--muted); margin-top:3px; font-weight:400;}
@@ -63,17 +58,16 @@
 
 <div class="hero">
   <div class="hero-inner">
-    <div class="hero-eyebrow">🏔️ Trip · Nov 2012</div>
-    <h1>Switzerland &amp; Italy<span>Lucerne, the Jungfrau region, the Matterhorn, and Lake Geneva</span></h1>
+    <div class="hero-eyebrow">🏔️ Work Trip + Weekend · Sep 21–27, 2012</div>
+    <h1>Mürren, Switzerland<span>A Roche work trip to Zurich, extended with a weekend in the Bernese Oberland Alps</span></h1>
     <div class="hero-meta">
-      <div class="meta-chip">🗓 <strong>~1 week</strong> · Late Nov 2012</div>
-      <div class="meta-chip">📍 Lucerne → Mürren (Bernese Oberland) → Zermatt (Matterhorn) → Geneva (CERN) → Montreux</div>
-      <div class="meta-chip">🚡 Jungfraujoch "Top of Europe" · Gornergrat</div>
-      <div class="meta-chip">🥾 North Face Trail, Mürren</div>
+      <div class="meta-chip">🏨 <strong>Eiger Swiss Q Hotel</strong> · Mürren</div>
+      <div class="meta-chip">🗓 <strong>Sep 21–27, 2012</strong></div>
+      <div class="meta-chip">📍 Mürren → Zurich (Roche business)</div>
+      <div class="meta-chip">🚡 Jungfraujoch · Schilthorn/Piz Gloria</div>
     </div>
   </div>
 </div>
-<div class="hero-photo-cap">📷 Panorama from the mountain train above Lucerne</div>
 
 <div id="map"></div>
 
@@ -88,43 +82,24 @@
 
   <div class="section active" id="tab-overview">
     <div class="section-title">Overview</div>
-    <div class="section-sub">Two Swiss trips, remembered together as one: Lucerne, the Jungfrau region, Zermatt, and Lake Geneva.</div>
-    <div class="callout">This page combines what were actually two separate trips, at Ghazal's request, so every stop lives in one place: a Mürren/Bernese Oberland trip and a separate Zermatt/Matterhorn trip, both anchored by Lucerne and Montreux. Dates for the Mürren leg are estimated from photo timestamps (Nov 21–27, 2012); the surviving planning document is a set of mountain-excursion notes rather than a booked day-by-day itinerary. No dated record survives for the Zermatt leg, so it's included without specific calendar days. The glacier train was the Mürren/Jungfraujoch route, confirmed — not connected to Como.</div>
+    <div class="section-sub">The first of two Switzerland trips in 2012 — a weekend in Mürren, then a Roche business trip based in Zurich, coordinated through Roche's Basel office.</div>
     <table class="overview">
-      <tr><th>Stop</th><th>Notes</th></tr>
-      <tr><td>Lucerne</td><td>Mountain train ride with sweeping panoramic Alps views</td></tr>
-      <tr><td>Wengen / Grindelwald</td><td>Base for Männlichen and Jungfraujoch excursions</td></tr>
-      <tr><td>Mürren</td><td>Base for the Schilthorn / Piz Gloria cable car and the North Face Trail hike</td></tr>
-      <tr><td>Lauterbrunnen</td><td>Waterfall valley, including Trümmelbach Falls; departure point for the Jungfraujoch glacier train</td></tr>
-      <tr><td>Zermatt</td><td>Car-free village at the foot of the Matterhorn; Gornergrat cogwheel railway</td></tr>
-      <tr><td>Geneva (CERN)</td><td>Stop at CERN on the way to Montreux</td></tr>
-      <tr><td>Montreux</td><td>Lake Geneva stop</td></tr>
+      <tr><th>Date</th><th>Focus</th></tr>
+      <tr><td>Fri Sep 21</td><td>Check in to the Eiger Swiss Q Hotel, Mürren (2 adults, 1 night)</td></tr>
+      <tr><td>Fri Sep 21 – Sat Sep 22</td><td>Jungfraujoch glacier train, the North Face Trail hike, and the Schilthorn/Piz Gloria cable car and revolving restaurant — per Ghazal</td></tr>
+      <tr><td>Sat Sep 22</td><td>Check out of Mürren</td></tr>
+      <tr><td>Tue Sep 25 – Thu Sep 27</td><td>Roche business trip: Ramada Zurich City hotel, 2 nights, arranged via Roche's Basel travel office</td></tr>
     </table>
+    <div class="callout">Confirmed by two separate records: a Hotels.com booking for the Eiger Swiss Q Hotel in Mürren (check-in Fri, Sep 21, check-out Sat, Sep 22, 2012, 2 adults), and a Roche-arranged itinerary for a Ramada Zurich City stay, Tue Sep 25 – Thu Sep 27, 2012, coordinated by Roche's Basel office. The Jungfraujoch train, the North Face Trail hike, and the Schilthorn/Piz Gloria restaurant (site of the James Bond Bar from "On Her Majesty's Secret Service") are all confirmed by Ghazal's own account of this trip — the cable car to the Schilthorn summit was fully operating that week, unlike on the second Switzerland trip two months later. This page originally had Lucerne, Zermatt, CERN/Geneva, Montreux, and Lake Como folded in too; Ghazal confirmed those all belong to the second trip in November 2012 instead, so they've moved to their own page.</div>
   </div>
 
   <div class="section" id="tab-itinerary">
     <div class="section-title">Itinerary</div>
-    <div class="section-sub">Reconstructed from photos and notes, not a confirmed day-by-day booking — but every stop is real.</div>
-
-    <div class="leg-head">🏙️ Lucerne</div>
-    <div class="leg-sub">Arrival</div>
-    <div class="tl-day"><div class="tl-title">Lucerne</div><ul class="tl-items">
-      <li>Old town and the covered Chapel Bridge (Kapellbrücke) over the Reuss</li>
-      <li>Mountain train ride out of Lucerne with sweeping panoramic Alps views</li>
-    </ul></div>
-
-    <div class="leg-head">🏔️ Mürren &amp; the Bernese Oberland</div>
-    <div class="leg-sub">Based in Wengen/Grindelwald/Mürren</div>
-
-    <div class="tl-day"><div class="tl-title">Männlichen</div><ul class="tl-items">
-      <li>Cable car from Wengen (Luftseilbahn Wengen-Männlichen) or gondola from Grindelwald (Gondelbahn Grindelwald-Männlichen), then a 15-minute walk to the 2,343m summit</li>
-      <li>Panoramic viewpoint over the Lauterbrunnen valley</li>
-    </ul></div>
+    <div class="section-sub">Reconstructed from hotel and travel records, plus Ghazal's own account — not a confirmed day-by-day booking, but every stop is real.</div>
 
     <div class="tl-day"><div class="tl-title">Jungfraujoch — "Top of Europe"</div><ul class="tl-items">
       <li>The glacier train: departs Lauterbrunnen on the Wengernalp Railway to Kleine Scheidegg (2,061m), then the Jungfrau Railway through Eigergletscher (2,320m) and Eigerwand, stopping at Eismeer (3,158m — a window cut into the rock over the ice) before reaching the Jungfraujoch itself (3,454m/11,000+ ft) — the highest railway station in Europe</li>
       <li>Views of the Great Aletsch Glacier (a 13.6-mile ice stream), the Ice Palace, and the Sphinx observation terrace</li>
-      <li>Voucher exchanged at Interlaken Ost, Grindelwald, or Wengen station</li>
     </ul></div>
 
     <div class="tl-day"><div class="tl-title">North Face Trail, Mürren</div><ul class="tl-items">
@@ -137,66 +112,25 @@
       <li>The revolving mountaintop restaurant turns slowly over 200+ peaks; site of the James Bond Bar from "On Her Majesty's Secret Service" — the "Martini, shaken not stirred" is the thing to order</li>
     </ul></div>
 
-    <div class="tl-day"><div class="tl-title">Trümmelbach Falls — Lauterbrunnen</div><ul class="tl-items">
-      <li>A mountain hollowed out by a series of waterfalls, reached by elevator, then walkable back down</li>
-      <li>Buses run there, or it's a short hike from the Lauterbrunnen train station</li>
-    </ul></div>
-
-    <div class="leg-head">⛰️ Zermatt &amp; the Matterhorn</div>
-    <div class="leg-sub">A separate trip, remembered here alongside the rest</div>
-
-    <div class="tl-day"><div class="tl-title">Zermatt</div><ul class="tl-items">
-      <li>Car-free alpine village at the base of the Matterhorn, reached by train (the Glacier Express connects Zermatt with St. Moritz; the standard rail route runs via Visp)</li>
-      <li>Village walk with Matterhorn views from town</li>
-    </ul></div>
-
-    <div class="tl-day"><div class="tl-title">Gornergrat</div><ul class="tl-items">
-      <li>Gornergrat cogwheel railway — one of Europe's highest, with views of the Matterhorn and the surrounding glaciers</li>
-    </ul></div>
-
-    <div class="leg-head">⚛️ CERN, Geneva</div>
-    <div class="leg-sub">A stop on the way to Montreux</div>
-    <div class="tl-day"><div class="tl-title">CERN</div><ul class="tl-items">
-      <li>European Organization for Nuclear Research, Meyrin — home of the Large Hadron Collider</li>
-      <li>Visitor site with exhibits on particle physics, including the Globe of Science and Innovation</li>
-    </ul></div>
-
-    <div class="leg-head">🚤 Montreux</div>
-    <div class="leg-sub">Lake Geneva, before departure</div>
-    <div class="tl-day"><div class="tl-title">Montreux</div><ul class="tl-items">
-      <li>Lake Geneva promenade and boat views back toward the mountains</li>
+    <div class="tl-day"><div class="tl-title">Zurich — Roche business</div><ul class="tl-items">
+      <li>Ramada Zurich City, 2 nights, Tue Sep 25 – Thu Sep 27, 2012</li>
+      <li>Coordinated through Roche's Basel travel office (HRG Switzerland / Roche Hotel Center Basel)</li>
     </ul></div>
   </div>
 
   <div class="section" id="tab-peaks">
     <div class="section-title">Peaks &amp; Excursions</div>
     <div class="hotel-card">
-      <h4>Männlichen (2,343m)</h4>
-      <div class="note">Reached from Wengen via the Luftseilbahn Wengen-Männlichen cable car, or from Grindelwald via the Gondelbahn Grindelwald-Männlichen gondola — then a 15-minute walk to the summit. A popular viewpoint over the Lauterbrunnen valley and a starting point for hikers and skiers.</div>
-    </div>
-    <div class="hotel-card">
       <h4>Jungfraujoch — "Top of Europe"</h4>
-      <div class="note">Departs from Interlaken, Grindelwald, or Wengen via cogwheel railway to Kleine Scheidegg (6,762 ft), then the Jungfrau railway to Eiger Glacier station, through the Eiger tunnel to the Jungfraujoch itself (over 11,000 ft — the highest railway station in Europe). Sightseeing includes the Great Aletsch Glacier (a 13.6-mile ice stream), the Ice Palace, and the Sphinx observation terrace. Booked via Rail Europe; exchange the voucher at the Interlaken Ost, Grindelwald, or Wengen station.</div>
+      <div class="note">Departs from Interlaken, Grindelwald, or Wengen via cogwheel railway to Kleine Scheidegg (6,762 ft), then the Jungfrau railway to Eiger Glacier station, through the Eiger tunnel to the Jungfraujoch itself (over 11,000 ft — the highest railway station in Europe). Sightseeing includes the Great Aletsch Glacier (a 13.6-mile ice stream), the Ice Palace, and the Sphinx observation terrace.</div>
     </div>
     <div class="hotel-card">
       <h4>Schilthorn / Piz Gloria — Mürren</h4>
       <div class="note">Round trip from Mürren by a four-segment cable car — the longest cable car system in the world. The revolving mountaintop restaurant at the top (site of the James Bond Bar, from filming "On Her Majesty's Secret Service") turns slowly over 200+ peaks; the "Martini, shaken not stirred" is the thing to order there.</div>
     </div>
     <div class="hotel-card">
-      <h4>Trümmelbach Falls — Lauterbrunnen</h4>
-      <div class="note">A mountain hollowed out by a series of waterfalls, accessible by elevator, then walkable back down. Buses run there, or it's a short hike from the Lauterbrunnen train station.</div>
-    </div>
-    <div class="hotel-card">
       <h4>North Face Trail — Mürren</h4>
       <div class="note">Cliff-edge terrace trail between Mürren and Gimmelwald, also called the Nordwand Trail or Nordwandweg. Continuous, unobstructed views of the north faces of the Eiger, Mönch, and Jungfrau across the valley.</div>
-    </div>
-    <div class="hotel-card">
-      <h4>Gornergrat — Zermatt</h4>
-      <div class="note">Cogwheel railway from Zermatt, one of the highest rack railways in Europe. Views of the Matterhorn and the surrounding glacier fields from the summit station.</div>
-    </div>
-    <div class="hotel-card">
-      <h4>CERN — Meyrin, Geneva</h4>
-      <div class="note">European Organization for Nuclear Research, home of the Large Hadron Collider. Visitor exhibits on particle physics, including the Globe of Science and Innovation. A stop on the way to Montreux.</div>
     </div>
   </div>
 
@@ -204,12 +138,10 @@
     <div class="section-title">Book This Again</div>
     <div class="section-sub">Notes for a repeat trip.</div>
     <ul class="checklist">
-      <li><strong>Jungfraujoch — Rail Europe voucher</strong><span class="sub">Exchange at Interlaken Ost, Grindelwald, or Wengen station; tickets valid 6 months from purchase</span></li>
-      <li><strong>Schilthorn cable car, Mürren</strong><span class="sub">Book the revolving restaurant for a meal with the Piz Gloria views</span></li>
-      <li><strong>Trümmelbach Falls</strong><span class="sub">Short hike or bus from Lauterbrunnen station</span></li>
-      <li><strong>North Face Trail, Mürren</strong><span class="sub">Cliff-edge hike toward Gimmelwald — the best-value views on the whole trip</span></li>
-      <li><strong>Gornergrat, Zermatt</strong><span class="sub">Cogwheel train straight up to Matterhorn views</span></li>
-      <li><strong>CERN, Meyrin</strong><span class="sub">Particle physics visitor site on the way to Montreux — check ahead for tour availability</span></li>
+      <li><strong>Eiger Swiss Q Hotel, Mürren</strong><span class="sub">Aegerten 1, Mürren, Lauterbrunnen 3825 · +41 33 856 5454 · 4.8/5 from 15 guest ratings</span></li>
+      <li><strong>Schilthorn cable car, Mürren</strong><span class="sub">Book the revolving restaurant for a meal with the Piz Gloria views — check the cable car isn't down for maintenance first</span></li>
+      <li><strong>North Face Trail, Mürren</strong><span class="sub">Cliff-edge hike toward Gimmelwald</span></li>
+      <li><strong>Ramada Zurich City</strong><span class="sub">Badenerstrasse 537, Zurich 8048</span></li>
     </ul>
   </div>
 
@@ -219,19 +151,13 @@
 
 <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
 <script>
-  var map = L.map('map', {scrollWheelZoom:false}).setView([46.35, 7.55], 8);
+  var map = L.map('map', {scrollWheelZoom:false}).setView([46.65, 7.95], 9);
   L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {attribution:'© OpenStreetMap'}).addTo(map);
   var pts = [
-    [47.0502,8.3093,"1. Lucerne","Old town, Chapel Bridge, mountain train views"],
-    [46.7712,7.9904,"2. Wengen","Base for Männlichen & Jungfraujoch"],
-    [46.6863,7.9904,"3. Jungfraujoch","Top of Europe, via the glacier train from Lauterbrunnen"],
-    [46.5589,7.8944,"4. Mürren","Base for the Schilthorn and the North Face Trail"],
-    [46.5934,7.9067,"5. Schilthorn / Piz Gloria","Revolving restaurant, James Bond Bar"],
-    [46.5936,7.9086,"6. Lauterbrunnen","Trümmelbach Falls"],
-    [46.0207,7.7491,"7. Zermatt","Car-free village at the base of the Matterhorn"],
-    [45.9828,7.7855,"8. Gornergrat","Cogwheel railway, Matterhorn views"],
-    [46.2331,6.0559,"9. CERN, Meyrin","Large Hadron Collider, Globe of Science and Innovation"],
-    [46.4312,6.9107,"10. Montreux","Lake Geneva"]
+    [46.5589,7.8944,"1. Mürren","Eiger Swiss Q Hotel · base for Jungfraujoch, North Face Trail, Schilthorn"],
+    [46.6863,7.9904,"2. Jungfraujoch","Top of Europe, via the glacier train from Lauterbrunnen"],
+    [46.5934,7.9067,"3. Schilthorn / Piz Gloria","Revolving restaurant, James Bond Bar"],
+    [47.3769,8.5417,"4. Zurich","Ramada Zurich City — Roche business, Sep 25–27"]
   ];
   pts.forEach(function(p){
     L.marker([p[0],p[1]]).addTo(map).bindPopup("<strong>"+p[2]+"</strong><br>"+p[3]+"<br><a href='https://www.google.com/maps/dir/?api=1&destination="+p[0]+","+p[1]+"' target='_blank'>Directions →</a>");
