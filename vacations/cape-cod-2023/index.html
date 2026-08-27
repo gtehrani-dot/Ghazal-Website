@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Cape Cod, MA — Ghazal Tehrani</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300;9..144,500;9..144,600&family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
+<style>
+  :root{
+    --primary:#1d6fa5; --primary-deep:#0b3a57;
+    --accent-1:#fde68a; --accent-2:#fca5a5; --accent-3:#7dd3c0;
+    --ink:#132420; --muted:#5c6f68; --cream:#f7faf9; --line:#dfe6d9; --card:#ffffff;
+    --serif:'Fraunces',Georgia,serif; --sans:'Inter',system-ui,sans-serif; --mono:'JetBrains Mono',monospace;
+  }
+  *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+  body{font-family:var(--sans); background:var(--cream); color:var(--ink); line-height:1.6;}
+  a{color:inherit;}
+  .back-link{ display:inline-block; margin:18px 0 0 32px; font-family:var(--mono); font-size:12.5px; color:var(--primary); text-decoration:none; }
+  .back-link:hover{ text-decoration:underline; }
+  .hero{ background:linear-gradient(135deg,var(--primary-deep) 0%, var(--primary) 55%, #7dd3c0 100%); color:#fff; padding:36px 32px 46px; position:relative; overflow:hidden;}
+  .hero::before{ content:''; position:absolute; inset:0; background:radial-gradient(ellipse at 85% 15%, rgba(253,230,138,0.2) 0%, transparent 55%);}
+  .hero-inner{ position:relative; max-width:980px; margin:0 auto;}
+  .hero-eyebrow{ font-family:var(--mono); font-size:11px; letter-spacing:3px; text-transform:uppercase; color:#c7f0e6; margin-bottom:14px;}
+  .hero h1{ font-family:var(--serif); font-weight:500; font-size:clamp(38px,6vw,64px); line-height:1.05;}
+  .hero h1 span{ display:block; font-size:0.4em; font-weight:300; font-style:italic; color:#eaf7f3; margin-top:8px;}
+  .hero-meta{ display:flex; flex-wrap:wrap; gap:10px; margin-top:26px;}
+  .meta-chip{ font-family:var(--mono); font-size:12px; padding:8px 15px; border:1px solid rgba(255,255,255,0.25); border-radius:100px; background:rgba(255,255,255,0.08);}
+  .meta-chip strong{ color:#fde68a; }
+  #map{ height:320px; max-width:980px; margin:-30px auto 0; border-radius:16px; box-shadow:0 12px 34px rgba(11,58,87,0.25); position:relative; z-index:2; border:4px solid #fff;}
+  .tabs{ max-width:980px; margin:34px auto 0; display:flex; flex-wrap:wrap; gap:6px; padding:0 32px;}
+  .tab-btn{ font-family:var(--mono); font-size:12px; letter-spacing:0.4px; padding:9px 16px; border-radius:100px; background:var(--card); border:1px solid var(--line); cursor:pointer; color:var(--muted);}
+  .tab-btn.active{ background:var(--primary); color:#fff; border-color:var(--primary);}
+  .wrap{ max-width:980px; margin:0 auto; padding:26px 32px 80px;}
+  .section{ display:none; } .section.active{ display:block; }
+  .section-title{ font-family:var(--serif); font-size:24px; font-weight:500; margin-bottom:6px;}
+  .section-sub{ font-size:13.5px; color:var(--muted); margin-bottom:22px;}
+  table.overview{ width:100%; border-collapse:collapse; font-size:13.5px;}
+  table.overview th{ text-align:left; font-family:var(--mono); font-size:11px; letter-spacing:1px; text-transform:uppercase; color:var(--muted); padding:8px 10px; border-bottom:2px solid var(--line);}
+  table.overview td{ padding:10px; border-bottom:1px solid var(--line); vertical-align:top;}
+  .book-group-label{ font-family:var(--mono); font-size:11px; letter-spacing:2px; text-transform:uppercase; color:var(--primary); margin:24px 0 10px; padding-bottom:6px; border-bottom:1px solid var(--line);}
+  .book-group-label:first-child{ margin-top:0; }
+  .hotel-card{ background:var(--card); border:1px solid var(--line); border-radius:12px; padding:18px 20px; margin-bottom:14px;}
+  .hotel-card h4{ font-family:var(--serif); font-size:18px; font-weight:500; margin-bottom:4px;}
+  .hotel-card .meta{ font-size:12.5px; color:var(--muted); margin-top:4px; }
+  .hotel-card .note{ font-size:13px; margin-top:8px; color:var(--ink); }
+  .hotel-card.tbd{ border-style:dashed; }
+  .checklist{ list-style:none; }
+  .checklist li{ background:var(--card); border:1px solid var(--line); border-radius:10px; padding:12px 16px; margin-bottom:8px; font-size:13.8px;}
+  .checklist li .sub{ display:block; font-size:12px; color:var(--muted); margin-top:3px; font-weight:400;}
+  .callout{ background:rgba(125,211,192,0.16); border:1px solid rgba(29,111,165,0.3); border-radius:10px; padding:14px 16px; font-size:13px; margin-bottom:18px; }
+  .callout.warn{ background:rgba(252,165,165,0.14); border-color:rgba(252,165,165,0.45); }
+  footer{ text-align:center; padding:30px; font-size:12px; color:var(--muted); }
+</style>
+</head>
+<body>
+
+<a class="back-link" href="../index.html">← Back to trips</a>
+
+<div class="hero">
+  <div class="hero-inner">
+    <div class="hero-eyebrow">👨‍👩‍👧‍👦 Family Reunion · Aug 5–11, 2023</div>
+    <h1>Cape Cod, MA<span>A week-long cousins' reunion spread across Eastham, Brewster &amp; Orleans — 33 cousins, one big house on the Bay</span></h1>
+    <div class="hero-meta">
+      <div class="meta-chip">🏠 <strong>124 Bay Rd</strong> · Eastham, MA</div>
+      <div class="meta-chip">🗓 <strong>6 nights</strong> · Sat Aug 5 – Fri Aug 11, 2023</div>
+      <div class="meta-chip">📍 Eastham / Brewster / Orleans, MA</div>
+      <div class="meta-chip">👨‍👩‍👧‍👦 Ghazal, Ben, Ella &amp; Liam</div>
+    </div>
+  </div>
+</div>
+
+<div id="map"></div>
+
+<div class="tabs">
+  <button class="tab-btn active" onclick="showTab('overview')">Overview</button>
+  <button class="tab-btn" onclick="showTab('hotel')">Hotel &amp; Transportation</button>
+  <button class="tab-btn" onclick="showTab('book')">Book This Again</button>
+</div>
+
+<div class="wrap">
+
+  <div class="section active" id="tab-overview">
+    <div class="section-title">Overview</div>
+    <div class="section-sub">Reconstructed from the family's shared "Cape Cod 2023" planning spreadsheet — a big multi-family cousins' reunion spread across three neighboring towns on the Cape, with 7 households (33 cousins, plus David) staying within a few streets of each other.</div>
+    <table class="overview">
+      <tr><th>Date</th><th>Focus</th></tr>
+      <tr><td>Sat Aug 5</td><td>Arrivals — Ghazal &amp; Ben's household checks in at 124 Bay Rd, Eastham</td></tr>
+      <tr><td>Sun Aug 6</td><td>Dinner at Arnold's Restaurant</td></tr>
+      <tr><td>Mon Aug 7</td><td>Lovenduski family pizza party</td></tr>
+      <tr><td>Tue Aug 8</td><td>"P-town night?" on the plan — likely the night of the Red Inn dinner reservation for 4 at 6:00pm (Red Inn is in Provincetown), though the sheet doesn't explicitly link the two</td></tr>
+      <tr><td>Wed Aug 9</td><td>No specific evening plan noted; the Karen/Brigg household's planned arrival</td></tr>
+      <tr><td>Thu Aug 10</td><td>Ben's ("Hammy's") 47th birthday</td></tr>
+      <tr><td>Fri Aug 11</td><td>Pack up and depart</td></tr>
+    </table>
+    <div class="callout">Also on the week's plan, not pinned to a specific date: beach mornings at Race Point Beach, Nauset Beach, and Marconi Beach; a lobster &amp; clam bar outing to David Quinn's Cape Shack; a sunset gathering at Paine's Point; a BBQ-takeout dinner from The Block and Tackle eaten back at Ghazal &amp; Ben's house on the Bay; and mini-golf and ice cream. The source is a shared family planning spreadsheet, not a confirmed itinerary — some entries carry question marks ("P-town night?") and several evenings are marked "Nothing planned," so this reflects the plan as drafted rather than a guaranteed record of what happened each day. No separate email or calendar record was found to confirm the day-by-day details.</div>
+  </div>
+
+  <div class="section" id="tab-hotel">
+    <div class="section-title">Hotel &amp; Transportation</div>
+    <div class="book-group-label">Lodging</div>
+    <div class="hotel-card tbd">
+      <h4>124 Bay Rd, Eastham, MA 02642</h4>
+      <div class="note">No formal rental or hotel booking confirmation was found in email or Drive — the address comes from the family planning spreadsheet's household list (Ghazal &amp; Ben, 4 people). It's likely a privately rented or family-arranged house rather than a hotel, but that isn't confirmed. Let me know the actual booking source if you'd like it added.</div>
+    </div>
+    <div class="book-group-label">The Wider Group</div>
+    <div class="hotel-card">
+      <h4>Seven households, all within a few streets</h4>
+      <div class="note">Scott (Collin &amp; Chase) — 10 Penny Lane, Eastham · YuYu/Jack/Ging/Reno — 8 or 12 Penny Lane, Eastham · Reno &amp; Rich — 30 Cape Circle, Eastham (arrived Sat, stayed through Wed) · Eric &amp; Nellie — 45 Jackson Rd, Brewster · Meg &amp; Natalie — 5 Smith Brothers Way, Orleans · Karen &amp; Brigg — arrival TBD, likely Wed PM, leaving Friday. 33 cousins in total, plus David.</div>
+    </div>
+    <div class="book-group-label">Transportation</div>
+    <div class="hotel-card tbd">
+      <h4>Not yet confirmed</h4>
+      <div class="note">No flight or drive record found for this trip.</div>
+    </div>
+  </div>
+
+  <div class="section" id="tab-book">
+    <div class="section-title">Book This Again</div>
+    <div class="section-sub">What's on file if this trip gets a repeat.</div>
+    <ul class="checklist">
+      <li><strong>Arnold's Restaurant</strong> — Eastham, MA<span class="sub">arnoldsrestaurant.com · lobster roll &amp; clam bar, plus mini-golf and ice cream on site</span></li>
+      <li><strong>Red Inn</strong> — Provincetown, MA<span class="sub">Dinner reservation for 4, 6:00pm — book early, no other early seating available last time</span></li>
+      <li><strong>The Block and Tackle</strong><span class="sub">theblockandtackle.com/eat — BBQ trays to go</span></li>
+      <li><strong>David Quinn's Cape Shack</strong><span class="sub">Lobster &amp; clam bar</span></li>
+    </ul>
+  </div>
+
+</div>
+
+<footer><a href="../index.html">← Back to Vacations</a></footer>
+
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+<script>
+  var map = L.map('map', {scrollWheelZoom:false}).setView([41.83, -69.98], 11);
+  L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {attribution:'© OpenStreetMap'}).addTo(map);
+  var pts = [
+    [41.8301,-69.9723,"124 Bay Rd, Eastham","Ghazal & Ben's household"],
+    [41.7962,-70.0311,"Arnold's Restaurant","Eastham, MA"],
+    [42.0512,-70.1862,"Red Inn","Provincetown, MA"],
+    [41.9271,-69.9977,"Race Point Beach","Cape Cod National Seashore"],
+    [41.8358,-69.9539,"Nauset Beach","Orleans, MA"],
+    [41.8712,-69.9962,"Marconi Beach","Wellfleet, MA"]
+  ];
+  pts.forEach(function(p){
+    L.marker([p[0],p[1]]).addTo(map).bindPopup("<strong>"+p[2]+"</strong><br>"+p[3]);
+  });
+  function showTab(id){
+    document.querySelectorAll('.section').forEach(function(s){ s.classList.remove('active'); });
+    document.querySelectorAll('.tab-btn').forEach(function(b){ b.classList.remove('active'); });
+    document.getElementById('tab-'+id).classList.add('active');
+    event.target.classList.add('active');
+  }
+</script>
+</body>
+</html>
