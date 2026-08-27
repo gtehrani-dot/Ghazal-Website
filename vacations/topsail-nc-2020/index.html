@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Topsail, NC — Ghazal Tehrani</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300;9..144,500;9..144,600&family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
+<style>
+  :root{
+    --primary:#0b6e91; --primary-deep:#073f52;
+    --accent-1:#a3c9a8; --accent-2:#f2c14e; --accent-3:#e8735f;
+    --ink:#16232a; --muted:#5c6c72; --cream:#f8faf7; --line:#dde4e0; --card:#ffffff;
+    --serif:'Fraunces',Georgia,serif; --sans:'Inter',system-ui,sans-serif; --mono:'JetBrains Mono',monospace;
+  }
+  *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+  body{font-family:var(--sans); background:var(--cream); color:var(--ink); line-height:1.6;}
+  a{color:inherit;}
+  .back-link{ display:inline-block; margin:18px 0 0 32px; font-family:var(--mono); font-size:12.5px; color:var(--primary); text-decoration:none; }
+  .back-link:hover{ text-decoration:underline; }
+  .hero{ background:linear-gradient(135deg,var(--primary-deep) 0%, var(--primary) 55%, #a3c9a8 100%); color:#fff; padding:36px 32px 46px; position:relative; overflow:hidden;}
+  .hero::before{ content:''; position:absolute; inset:0; background:radial-gradient(ellipse at 85% 15%, rgba(242,193,78,0.2) 0%, transparent 55%);}
+  .hero-inner{ position:relative; max-width:980px; margin:0 auto;}
+  .hero-eyebrow{ font-family:var(--mono); font-size:11px; letter-spacing:3px; text-transform:uppercase; color:#cfe8d2; margin-bottom:14px;}
+  .hero h1{ font-family:var(--serif); font-weight:500; font-size:clamp(38px,6vw,64px); line-height:1.05;}
+  .hero h1 span{ display:block; font-size:0.4em; font-weight:300; font-style:italic; color:#eaf5eb; margin-top:8px;}
+  .hero-meta{ display:flex; flex-wrap:wrap; gap:10px; margin-top:26px;}
+  .meta-chip{ font-family:var(--mono); font-size:12px; padding:8px 15px; border:1px solid rgba(255,255,255,0.25); border-radius:100px; background:rgba(255,255,255,0.08);}
+  .meta-chip strong{ color:#fde68a; }
+  #map{ height:320px; max-width:980px; margin:-30px auto 0; border-radius:16px; box-shadow:0 12px 34px rgba(7,63,82,0.25); position:relative; z-index:2; border:4px solid #fff;}
+  .tabs{ max-width:980px; margin:34px auto 0; display:flex; flex-wrap:wrap; gap:6px; padding:0 32px;}
+  .tab-btn{ font-family:var(--mono); font-size:12px; letter-spacing:0.4px; padding:9px 16px; border-radius:100px; background:var(--card); border:1px solid var(--line); cursor:pointer; color:var(--muted);}
+  .tab-btn.active{ background:var(--primary); color:#fff; border-color:var(--primary);}
+  .wrap{ max-width:980px; margin:0 auto; padding:26px 32px 80px;}
+  .section{ display:none; } .section.active{ display:block; }
+  .section-title{ font-family:var(--serif); font-size:24px; font-weight:500; margin-bottom:6px;}
+  .section-sub{ font-size:13.5px; color:var(--muted); margin-bottom:22px;}
+  table.overview{ width:100%; border-collapse:collapse; font-size:13.5px;}
+  table.overview th{ text-align:left; font-family:var(--mono); font-size:11px; letter-spacing:1px; text-transform:uppercase; color:var(--muted); padding:8px 10px; border-bottom:2px solid var(--line);}
+  table.overview td{ padding:10px; border-bottom:1px solid var(--line); vertical-align:top;}
+  .book-group-label{ font-family:var(--mono); font-size:11px; letter-spacing:2px; text-transform:uppercase; color:var(--primary); margin:24px 0 10px; padding-bottom:6px; border-bottom:1px solid var(--line);}
+  .book-group-label:first-child{ margin-top:0; }
+  .hotel-card{ background:var(--card); border:1px solid var(--line); border-radius:12px; padding:18px 20px; margin-bottom:14px;}
+  .hotel-card h4{ font-family:var(--serif); font-size:18px; font-weight:500; margin-bottom:4px;}
+  .hotel-card .meta{ font-size:12.5px; color:var(--muted); margin-top:4px; }
+  .hotel-card .note{ font-size:13px; margin-top:8px; color:var(--ink); }
+  .hotel-card.tbd{ border-style:dashed; }
+  .tl-day{ background:var(--card); border:1px solid var(--line); border-radius:12px; padding:18px 20px; margin-bottom:16px;}
+  .tl-title{ font-family:var(--serif); font-size:18px; font-weight:500; margin-bottom:2px;}
+  .tl-sub{ font-family:var(--mono); font-size:11.5px; color:var(--muted); text-transform:uppercase; letter-spacing:0.5px; margin-bottom:10px;}
+  ul.tl-items{ list-style:none; }
+  ul.tl-items li{ padding:5px 0 5px 18px; position:relative; font-size:13.8px;}
+  ul.tl-items li::before{ content:'–'; position:absolute; left:0; color:var(--muted);}
+  ul.tl-items li.meal{ background:rgba(163,201,168,0.18); border-radius:6px; padding:8px 12px; margin:6px 0; }
+  ul.tl-items li.meal::before{ content:''; }
+  .tl-note{ font-size:12.5px; color:var(--muted); margin-top:6px; font-style:italic; }
+  .card-grid{ display:grid; grid-template-columns:repeat(auto-fill,minmax(220px,1fr)); gap:14px; }
+  .card{ background:var(--card); border:1px solid var(--line); border-radius:12px; padding:14px 16px; }
+  .card h4{ font-family:var(--serif); font-size:16px; font-weight:500; margin-bottom:4px; }
+  .card p{ font-size:12.8px; color:var(--muted); }
+  .checklist{ list-style:none; }
+  .checklist li{ background:var(--card); border:1px solid var(--line); border-radius:10px; padding:12px 16px; margin-bottom:8px; font-size:13.8px;}
+  .checklist li .sub{ display:block; font-size:12px; color:var(--muted); margin-top:3px; font-weight:400;}
+  .callout{ background:rgba(163,201,168,0.15); border:1px solid rgba(163,201,168,0.5); border-radius:10px; padding:14px 16px; font-size:13px; margin-bottom:18px; }
+  .callout.warn{ background:rgba(232,115,95,0.09); border-color:rgba(232,115,95,0.35); }
+  footer{ text-align:center; padding:30px; font-size:12px; color:var(--muted); }
+</style>
+</head>
+<body>
+
+<a class="back-link" href="../index.html">← Back to trips</a>
+
+<div class="hero">
+  <div class="hero-inner">
+    <div class="hero-eyebrow">🏖️ Beach Week · Aug 15–22, 2020</div>
+    <h1>Topsail, NC<span>A week at the beach with the Higginbothams, meals split night by night between two households</span></h1>
+    <div class="hero-meta">
+      <div class="meta-chip">🗓 <strong>7 nights</strong> · Aug 15–22, 2020</div>
+      <div class="meta-chip">📍 Topsail Island, NC</div>
+      <div class="meta-chip">👨‍👩‍👧‍👦 <strong>With the Higginbothams</strong></div>
+      <div class="meta-chip">🏠 <strong>VRBO</strong> · Reservation #1852394vb</div>
+    </div>
+  </div>
+</div>
+
+<div id="map"></div>
+
+<div class="tabs">
+  <button class="tab-btn active" onclick="showTab('overview')">Overview</button>
+  <button class="tab-btn" onclick="showTab('hotel')">Hotel &amp; Transportation</button>
+  <button class="tab-btn" onclick="showTab('itinerary')">Itinerary</button>
+  <button class="tab-btn" onclick="showTab('book')">Book This Again</button>
+</div>
+
+<div class="wrap">
+
+  <div class="section active" id="tab-overview">
+    <div class="section-title">Overview</div>
+    <div class="section-sub">A full week at Topsail Island, shared with the Higginbotham family — confirmed by a VRBO reservation and a detailed shared meal-planning spreadsheet.</div>
+    <table class="overview">
+      <tr><th>Date</th><th>Focus</th></tr>
+      <tr><td>Sat Aug 15</td><td>Check in · Hig makes king crab legs, corn on the cob, coleslaw for dinner</td></tr>
+      <tr><td>Sun Aug 16</td><td>Moore family: tuna burgers &amp; roasted potatoes for breakfast; shrimp/fish tacos for dinner</td></tr>
+      <tr><td>Mon Aug 17</td><td>Persian breakfast; Moore nachos for lunch; Hig cedar plank salmon for dinner</td></tr>
+      <tr><td>Tue Aug 18</td><td>Hig ribs; Moore Chilean sea bass or Nobu-style fish for dinner</td></tr>
+      <tr><td>Wed Aug 19</td><td>Moore eggplant pitas; sweet potato shells with salad for dinner</td></tr>
+      <tr><td>Thu Aug 20</td><td>Moore falafel salad; crab cakes &amp; asparagus with aioli for dinner</td></tr>
+      <tr><td>Fri Aug 21</td><td>Pick-up lunch; going out for dinner</td></tr>
+      <tr><td>Sat Aug 22</td><td>Check out</td></tr>
+    </table>
+    <div class="callout" style="margin-top:22px;">This week's plan comes straight from your own "Topsail here we come" planning spreadsheet, which splits every meal between the Moore and Higginbotham households — no restaurant names, so I've kept the day-by-day to what you actually planned to cook.</div>
+  </div>
+
+  <div class="section" id="tab-hotel">
+    <div class="section-title">Hotel &amp; Transportation</div>
+    <div class="book-group-label">Lodging</div>
+    <div class="hotel-card tbd">
+      <h4>House on Topsail Island — name not on file</h4>
+      <div class="meta">Booked via VRBO / HomeAway</div>
+      <div class="note">Reservation #1852394vb, HomeAway reservation number HA-263F4J. The confirmation email was a forward with no property name or address in the snippet — I didn't find the full listing details in Drive or a separate confirmation. Let me know the house name if you remember it and I'll add it here.</div>
+    </div>
+    <div class="book-group-label">Transportation</div>
+    <div class="hotel-card">
+      <h4>Drive to Topsail Island, NC</h4>
+      <div class="note">No flight records found for this trip — likely a drive down from the DC area, consistent with a week-long beach-house share.</div>
+    </div>
+  </div>
+
+  <div class="section" id="tab-itinerary">
+    <div class="section-title">Itinerary</div>
+
+    <div class="tl-day">
+      <div class="tl-title">Day 1 · Sat, Aug 15 · Arrival</div>
+      <ul class="tl-items">
+        <li>Check in</li>
+        <li class="meal">🍽 Dinner (Hig): king crab legs, corn on the cob, coleslaw, drawn butter</li>
+      </ul>
+    </div>
+
+    <div class="tl-day">
+      <div class="tl-title">Day 2 · Sun, Aug 16</div>
+      <ul class="tl-items">
+        <li class="meal">🍳 Breakfast (Moore): tuna burgers &amp; roasted potatoes / fries</li>
+        <li class="meal">🍽 Dinner (Moore): shrimp / fish tacos, corn, guac, queso</li>
+      </ul>
+    </div>
+
+    <div class="tl-day">
+      <div class="tl-title">Day 3 · Mon, Aug 17</div>
+      <ul class="tl-items">
+        <li class="meal">🍳 Breakfast (Moore): Persian-style breakfast</li>
+        <li class="meal">🍽 Dinner (Hig): cedar plank salmon, asparagus, angel hair pasta</li>
+      </ul>
+    </div>
+
+    <div class="tl-day">
+      <div class="tl-title">Day 4 · Tue, Aug 18</div>
+      <ul class="tl-items">
+        <li class="meal">🍽 Lunch (Hig): ribs</li>
+        <li class="meal">🍽 Dinner (Moore): Chilean sea bass or Nobu-style fish</li>
+      </ul>
+    </div>
+
+    <div class="tl-day">
+      <div class="tl-title">Day 5 · Wed, Aug 19</div>
+      <ul class="tl-items">
+        <li class="meal">🍳 Breakfast (Moore): eggplant pitas</li>
+        <li class="meal">🍽 Lunch (Moore): sweet potato shells with salad</li>
+      </ul>
+    </div>
+
+    <div class="tl-day">
+      <div class="tl-title">Day 6 · Thu, Aug 20</div>
+      <ul class="tl-items">
+        <li class="meal">🍳 Breakfast (Moore): falafel salad</li>
+        <li class="meal">🍽 Lunch (Moore): crab cakes and asparagus with aioli</li>
+      </ul>
+    </div>
+
+    <div class="tl-day">
+      <div class="tl-title">Day 7 · Fri, Aug 21</div>
+      <ul class="tl-items">
+        <li>Lunch: pick-up</li>
+        <li>Dinner: going out — no restaurant name recorded</li>
+      </ul>
+    </div>
+
+    <div class="tl-day">
+      <div class="tl-title">Day 8 · Sat, Aug 22 · Departure</div>
+      <ul class="tl-items">
+        <li>Check out</li>
+      </ul>
+      <div class="tl-note">No activities (beach days, boat trips, etc.) were recorded anywhere I could find — only the meal plan. If you remember specific things you did that week, tell me and I'll add them.</div>
+    </div>
+
+  </div>
+
+  <div class="section" id="tab-book">
+    <div class="section-title">Book This Again</div>
+    <div class="section-sub">What's on file if this trip gets a repeat.</div>
+    <ul class="checklist">
+      <li><strong>VRBO #1852394vb</strong> — HomeAway reservation HA-263F4J<span class="sub">House name and address not on file — check your VRBO account history</span></li>
+      <li><strong>The Higginbotham family</strong><span class="sub">Split every meal 50/50 with the Moore household, king crab legs on arrival night</span></li>
+    </ul>
+  </div>
+
+</div>
+
+<footer><a href="../index.html">← Back to Vacations</a></footer>
+
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+<script>
+  var map = L.map('map', {scrollWheelZoom:false}).setView([34.37, -77.62], 11);
+  L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {attribution:'© OpenStreetMap'}).addTo(map);
+  var pts = [
+    [34.37,-77.62,"Topsail Island, NC","Approximate — exact house address not on file"]
+  ];
+  pts.forEach(function(p){
+    L.marker([p[0],p[1]]).addTo(map).bindPopup("<strong>"+p[2]+"</strong><br>"+p[3]);
+  });
+  function showTab(id){
+    document.querySelectorAll('.section').forEach(function(s){ s.classList.remove('active'); });
+    document.querySelectorAll('.tab-btn').forEach(function(b){ b.classList.remove('active'); });
+    document.getElementById('tab-'+id).classList.add('active');
+    event.target.classList.add('active');
+  }
+</script>
+</body>
+</html>

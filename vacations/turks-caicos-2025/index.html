@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Turks &amp; Caicos 2025 — Ghazal Tehrani</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300;9..144,500;9..144,600&family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
+<style>
+  :root{
+    --primary:#0e93a3; --primary-deep:#0a5c68;
+    --accent-1:#2e9e5b; --accent-2:#e3a63c; --accent-3:#e8785a;
+    --ink:#0e2a2e; --muted:#5d7478; --cream:#f6fbfb; --line:#dcebec; --card:#ffffff;
+    --serif:'Fraunces',Georgia,serif; --sans:'Inter',system-ui,sans-serif; --mono:'JetBrains Mono',monospace;
+  }
+  *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+  body{font-family:var(--sans); background:var(--cream); color:var(--ink); line-height:1.6;}
+  a{color:inherit;}
+  .back-link{ display:inline-block; margin:18px 0 0 32px; font-family:var(--mono); font-size:12.5px; color:var(--primary-deep); text-decoration:none; }
+  .back-link:hover{ text-decoration:underline; }
+  .hero{ background:linear-gradient(135deg,var(--primary-deep) 0%, var(--primary) 55%, #57c2c9 100%); color:#fff; padding:36px 32px 46px; position:relative; overflow:hidden;}
+  .hero::before{ content:''; position:absolute; inset:0; background:radial-gradient(ellipse at 85% 15%, rgba(227,166,60,0.22) 0%, transparent 55%);}
+  .hero-inner{ position:relative; max-width:980px; margin:0 auto;}
+  .hero-eyebrow{ font-family:var(--mono); font-size:11px; letter-spacing:3px; text-transform:uppercase; color:#bdeef0; margin-bottom:14px;}
+  .hero h1{ font-family:var(--serif); font-weight:500; font-size:clamp(38px,6vw,64px); line-height:1.05;}
+  .hero h1 span{ display:block; font-size:0.4em; font-weight:300; font-style:italic; color:#e2fbfa; margin-top:8px;}
+  .hero-meta{ display:flex; flex-wrap:wrap; gap:10px; margin-top:26px;}
+  .meta-chip{ font-family:var(--mono); font-size:12px; padding:8px 15px; border:1px solid rgba(255,255,255,0.28); border-radius:100px; background:rgba(255,255,255,0.08);}
+  .meta-chip strong{ color:#fde68a; }
+  #map{ height:320px; max-width:980px; margin:-30px auto 0; border-radius:16px; box-shadow:0 12px 34px rgba(10,92,104,0.25); position:relative; z-index:2; border:4px solid #fff;}
+  .tabs{ max-width:980px; margin:34px auto 0; display:flex; flex-wrap:wrap; gap:6px; padding:0 32px;}
+  .tab-btn{ font-family:var(--mono); font-size:12px; letter-spacing:0.4px; padding:9px 16px; border-radius:100px; background:var(--card); border:1px solid var(--line); cursor:pointer; color:var(--muted);}
+  .tab-btn.active{ background:var(--primary); color:#fff; border-color:var(--primary);}
+  .wrap{ max-width:980px; margin:0 auto; padding:26px 32px 80px;}
+  .section{ display:none; } .section.active{ display:block; }
+  .section-title{ font-family:var(--serif); font-size:24px; font-weight:500; margin-bottom:6px;}
+  .section-sub{ font-size:13.5px; color:var(--muted); margin-bottom:22px;}
+  table.overview{ width:100%; border-collapse:collapse; font-size:13.5px;}
+  table.overview th{ text-align:left; font-family:var(--mono); font-size:11px; letter-spacing:1px; text-transform:uppercase; color:var(--muted); padding:8px 10px; border-bottom:2px solid var(--line);}
+  table.overview td{ padding:10px; border-bottom:1px solid var(--line); vertical-align:top;}
+  .book-group-label{ font-family:var(--mono); font-size:11px; letter-spacing:2px; text-transform:uppercase; color:var(--primary-deep); margin:24px 0 10px; padding-bottom:6px; border-bottom:1px solid var(--line);}
+  .book-group-label:first-child{ margin-top:0; }
+  .hotel-card{ background:var(--card); border:1px solid var(--line); border-radius:12px; padding:18px 20px; margin-bottom:14px;}
+  .hotel-card h4{ font-family:var(--serif); font-size:18px; font-weight:500; margin-bottom:4px;}
+  .hotel-card .meta{ font-size:12.5px; color:var(--muted); margin-top:4px; }
+  .hotel-card .note{ font-size:13px; margin-top:8px; color:var(--ink); }
+  .tl-day{ background:var(--card); border:1px solid var(--line); border-radius:12px; padding:18px 20px; margin-bottom:16px;}
+  .tl-title{ font-family:var(--serif); font-size:18px; font-weight:500; margin-bottom:2px;}
+  .tl-sub{ font-family:var(--mono); font-size:11.5px; color:var(--muted); text-transform:uppercase; letter-spacing:0.5px; margin-bottom:10px;}
+  ul.tl-items{ list-style:none; }
+  ul.tl-items li{ padding:5px 0 5px 18px; position:relative; font-size:13.8px;}
+  ul.tl-items li::before{ content:'–'; position:absolute; left:0; color:var(--muted);}
+  ul.tl-items li.meal{ background:rgba(14,147,163,0.08); border-radius:6px; padding:8px 12px; margin:6px 0; }
+  ul.tl-items li.meal::before{ content:''; }
+  ul.tl-items li.meal.confirmed{ background:rgba(46,158,91,0.12); }
+  .tl-note{ font-size:12.5px; color:var(--muted); margin-top:6px; font-style:italic; }
+  .card-grid{ display:grid; grid-template-columns:repeat(auto-fill,minmax(230px,1fr)); gap:14px; }
+  .card{ background:var(--card); border:1px solid var(--line); border-radius:12px; padding:14px 16px; }
+  .card h4{ font-family:var(--serif); font-size:16px; font-weight:500; margin-bottom:4px; }
+  .card p{ font-size:12.8px; color:var(--muted); margin-bottom:6px;}
+  .card .addr{ font-size:11.5px; color:var(--primary-deep); font-family:var(--mono); }
+  .tag{ display:inline-block; font-family:var(--mono); font-size:10px; padding:2px 8px; border-radius:100px; background:rgba(14,147,163,0.12); color:var(--primary-deep); margin-top:6px; }
+  .checklist{ list-style:none; }
+  .checklist li{ background:var(--card); border:1px solid var(--line); border-radius:10px; padding:12px 16px; margin-bottom:8px; font-size:13.8px;}
+  .checklist li .sub{ display:block; font-size:12px; color:var(--muted); margin-top:3px; font-weight:400;}
+  .callout{ background:rgba(14,147,163,0.08); border:1px solid rgba(14,147,163,0.3); border-radius:10px; padding:14px 16px; font-size:13px; margin-bottom:18px; }
+  footer{ text-align:center; padding:30px; font-size:12px; color:var(--muted); }
+</style>
+</head>
+<body>
+
+<a class="back-link" href="../index.html">← Back to trips</a>
+
+<div class="hero">
+  <div class="hero-inner">
+    <div class="hero-eyebrow">🏝️ Family Trip · Apr 14–21, 2025</div>
+    <h1>Turks &amp; Caicos<span>A week at Coral Gardens on Grace Bay — boat days, beach days, and Da Conch Shack twice</span></h1>
+    <div class="hero-meta">
+      <div class="meta-chip">✈️ <strong>Providenciales (PLS)</strong></div>
+      <div class="meta-chip">🗓 <strong>7 nights</strong> · Apr 14–21, 2025</div>
+      <div class="meta-chip">📍 Grace Bay, Providenciales</div>
+      <div class="meta-chip">🏨 <strong>Coral Gardens 2B</strong> · VRBO villa</div>
+    </div>
+  </div>
+</div>
+
+<div id="map"></div>
+
+<div class="tabs">
+  <button class="tab-btn active" onclick="showTab('overview')">Overview</button>
+  <button class="tab-btn" onclick="showTab('hotel')">Hotel &amp; Transportation</button>
+  <button class="tab-btn" onclick="showTab('itinerary')">Itinerary</button>
+  <button class="tab-btn" onclick="showTab('restaurants')">Restaurants</button>
+  <button class="tab-btn" onclick="showTab('also')">Also Worth Seeing</button>
+  <button class="tab-btn" onclick="showTab('book')">Book This Again</button>
+</div>
+
+<div class="wrap">
+
+  <div class="section active" id="tab-overview">
+    <div class="section-title">Overview</div>
+    <div class="section-sub">One villa the whole week, built around a boat day mid-week and two Da Conch Shack nights.</div>
+    <table class="overview">
+      <tr><th>Date</th><th>Focus</th></tr>
+      <tr><td>Mon Apr 14</td><td>Fly into Providenciales, check into Coral Gardens 2B, grocery run, pizza at home</td></tr>
+      <tr><td>Tue Apr 15</td><td>Beach day, Somewhere Cafe dinner</td></tr>
+      <tr><td>Wed Apr 16</td><td>4-hour catamaran sail &amp; snorkel tour (AM), Blue Water Bistro dinner</td></tr>
+      <tr><td>Thu Apr 17</td><td>Self-guided island tour — Turtle Cove, Sapodilla Bay Beach, Taylor Bay Beach</td></tr>
+      <tr><td>Fri Apr 18</td><td>Grace Bay beach + paddleboarding, Da Conch Shack (Friday live music night)</td></tr>
+      <tr><td>Sat Apr 19</td><td>11:30am mangrove tour, Lua Restaurant dinner</td></tr>
+      <tr><td>Sun Apr 20</td><td>Beach day, pasta &amp; kale caesar at the villa</td></tr>
+      <tr><td>Mon Apr 21</td><td>Long beach walk + Somewhere Cafe brunch, fly home</td></tr>
+    </table>
+    <div class="callout" style="margin-top:22px;">Drawn from the trip-planning notes for this week — two dinner/activity slots (catamaran + Blue Water Bistro on Wed, mangrove tour + Lua on Sat) are confirmed against real bookings; the rest reflects the plan as drafted and may have shifted day-of.</div>
+  </div>
+
+  <div class="section" id="tab-hotel">
+    <div class="section-title">Hotel &amp; Transportation</div>
+    <div class="book-group-label">Lodging</div>
+    <div class="hotel-card">
+      <h4>Coral Gardens 2B</h4>
+      <div class="meta">Grace Bay, Providenciales · Booked via Vrbo, hosted by Linda Elrick · Vrbo Reservation ID HA-Q8WT3Q</div>
+      <div class="meta">Check-in Apr 14, 2025, 3:00 PM &nbsp;→&nbsp; Check-out Apr 21, 2025, 11:00 AM · 4 adults</div>
+      <div class="note">One-unit stay for the whole week at the Coral Gardens condo complex on Grace Bay.</div>
+    </div>
+    <div class="book-group-label">Transportation</div>
+    <div class="hotel-card">
+      <h4>Flights — Providenciales (PLS)</h4>
+      <div class="note">Flight numbers weren't found in the email confirmations pulled for this trip — worth checking a saved boarding-pass PDF or credit card statement if this matters for a future rebooking.</div>
+    </div>
+  </div>
+
+  <div class="section" id="tab-itinerary">
+    <div class="section-title">Itinerary</div>
+
+    <div class="tl-day">
+      <div class="tl-title">Day 1 · Mon, Apr 14 · Arrival</div>
+      <div class="tl-sub">Fly in, check in, settle</div>
+      <ul class="tl-items">
+        <li>Land at Providenciales, check into Coral Gardens 2B (3pm check-in)</li>
+        <li>Lunch: Somewhere Cafe</li>
+        <li>Grocery store run</li>
+        <li class="meal">🍽 Dinner: Pizza at the villa</li>
+      </ul>
+    </div>
+
+    <div class="tl-day">
+      <div class="tl-title">Day 2 · Tue, Apr 15</div>
+      <div class="tl-sub">Beach day</div>
+      <ul class="tl-items">
+        <li>Breakfast: eggs, bacon</li>
+        <li>Beach morning</li>
+        <li>Lunch: sandwiches, ~3pm</li>
+        <li>Walk on the beach</li>
+        <li class="meal">🍽 Dinner: Somewhere Cafe</li>
+      </ul>
+      <div class="tl-note">Note in the trip planning doc: "need to arrive at Kimonos early and wait."</div>
+    </div>
+
+    <div class="tl-day">
+      <div class="tl-title">Day 3 · Wed, Apr 16 · Boat day</div>
+      <div class="tl-sub">Catamaran &amp; snorkel</div>
+      <ul class="tl-items">
+        <li class="meal confirmed">⛵ 4-Hour Catamaran Sail &amp; Snorkel Tour from Grace Bay — 8:30am–12:30pm · 2 adults, 2 children · Viator conf #1627061121 <a href="https://www.google.com/maps/dir/?api=1&destination=Grace+Bay+Beach%2C+Providenciales" target="_blank" rel="noopener">Directions →</a></li>
+        <li>Lunch: covered on the boat</li>
+        <li>Beach / downtime</li>
+        <li class="meal confirmed">🍽 Dinner: Blue Water Bistro, 7:00pm · table for 4 · conf #22879 · Lower Bight Road, Providenciales · 📞 <a href="tel:+16499417555">(649) 941-7555</a> <a href="https://www.google.com/maps/dir/?api=1&destination=Blue+Water+Bistro%2C+Lower+Bight+Road%2C+Providenciales" target="_blank" rel="noopener">Directions →</a></li>
+      </ul>
+    </div>
+
+    <div class="tl-day">
+      <div class="tl-title">Day 4 · Thu, Apr 17</div>
+      <div class="tl-sub">Self-guided island tour</div>
+      <ul class="tl-items">
+        <li>Breakfast: hashbrowns, eggs, bacon</li>
+        <li>Self-guided island tour — Turtle Cove, Sapodilla Bay Beach, Taylor Bay Beach <a href="https://www.google.com/maps/dir/?api=1&destination=Sapodilla+Bay+Beach%2C+Providenciales" target="_blank" rel="noopener">Directions →</a></li>
+        <li>Lunch: Omar's Hut or Bugaloos</li>
+        <li>Beach / downtime</li>
+        <li class="meal">🍽 Dinner: steak (at the villa)</li>
+      </ul>
+    </div>
+
+    <div class="tl-day">
+      <div class="tl-title">Day 5 · Fri, Apr 18</div>
+      <div class="tl-sub">Grace Bay &amp; Da Conch Shack</div>
+      <ul class="tl-items">
+        <li>Breakfast: avocado toast</li>
+        <li>Grace Bay Beach, paddleboarding</li>
+        <li>Lunch: Banksi Bar and Restaurant or Somewhere Cafe</li>
+        <li>Puzzles / games</li>
+        <li class="meal">🍽 Dinner: Da Conch Shack — Friday night live music, 5pm–midnight, no reservation taken <a href="https://www.google.com/maps/dir/?api=1&destination=Da+Conch+Shack%2C+Blue+Hills%2C+Providenciales" target="_blank" rel="noopener">Directions →</a></li>
+      </ul>
+    </div>
+
+    <div class="tl-day">
+      <div class="tl-title">Day 6 · Sat, Apr 19</div>
+      <div class="tl-sub">Mangrove tour</div>
+      <ul class="tl-items">
+        <li>Breakfast: Somewhere Cafe</li>
+        <li>11:30am Mangrove Tour</li>
+        <li>Lunch: Mr. Grouper's</li>
+        <li>Beach / downtime</li>
+        <li class="meal confirmed">🍽 Dinner: Lua Restaurant, 7:00pm · outdoor deck seating for 4 · conf #8320 · 1 Long Bay Beach, Providenciales · 📞 <a href="tel:+16499418285">(649) 941-8285</a> <a href="https://www.google.com/maps/dir/?api=1&destination=Lua+Restaurant%2C+1+Long+Bay+Beach%2C+Providenciales" target="_blank" rel="noopener">Directions →</a></li>
+      </ul>
+    </div>
+
+    <div class="tl-day">
+      <div class="tl-title">Day 7 · Sun, Apr 20</div>
+      <div class="tl-sub">Beach day</div>
+      <ul class="tl-items">
+        <li>Breakfast at the villa</li>
+        <li>Beach</li>
+        <li>Lunch: burgers</li>
+        <li>Beach / downtime</li>
+        <li class="meal">🍽 Dinner: pasta and kale caesar at the villa</li>
+      </ul>
+      <div class="tl-note">Da Conch Shack also runs a mellower live-music set Sunday nights, per the planning notes — a second-visit option if Friday's crowd was too much.</div>
+    </div>
+
+    <div class="tl-day">
+      <div class="tl-title">Day 8 · Mon, Apr 21 · Departure</div>
+      <div class="tl-sub">Last beach morning</div>
+      <ul class="tl-items">
+        <li>Long beach walk</li>
+        <li>Brunch: Somewhere Cafe</li>
+        <li>Checkout 11:00am, fly home</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="section" id="tab-restaurants">
+    <div class="section-title">Restaurants</div>
+    <div class="section-sub">Everywhere eaten or planned, in the order of the trip.</div>
+    <div class="card-grid">
+      <div class="card"><h4>Somewhere Cafe &amp; Lounge</h4><p>Grace Bay Beach — the week's default, hit at least three times (lunch, dinner, and closing brunch)</p><span class="addr">Grace Bay Beach, Providenciales</span></div>
+      <div class="card"><h4>Blue Water Bistro</h4><p>Wed dinner, 7pm, table for 4 · conf #22879</p><span class="addr">Lower Bight Road, Providenciales · (649) 941-7555</span><div class="tag">confirmed</div></div>
+      <div class="card"><h4>Omar's Hut / Bugaloos</h4><p>Thursday lunch options after the self-guided island tour</p><span class="addr">Providenciales</span></div>
+      <div class="card"><h4>Banksi Bar and Restaurant</h4><p>Friday lunch option, alternate to Somewhere Cafe</p><span class="addr">Providenciales</span></div>
+      <div class="card"><h4>Da Conch Shack</h4><p>Friday dinner — beachfront conch shack with live music 5pm–midnight, no reservations taken; also runs a mellower Sunday set</p><span class="addr">Blue Hills, Providenciales</span></div>
+      <div class="card"><h4>Mr. Grouper's</h4><p>Saturday lunch, after the mangrove tour</p><span class="addr">Providenciales</span></div>
+      <div class="card"><h4>Lua Restaurant</h4><p>Saturday dinner, 7pm, outdoor deck seating for 4 · conf #8320</p><span class="addr">1 Long Bay Beach, Providenciales · (649) 941-8285</span><div class="tag">confirmed</div></div>
+    </div>
+  </div>
+
+  <div class="section" id="tab-also">
+    <div class="section-title">Also Worth Seeing</div>
+    <div class="section-sub">Named in the planning notes as options but not locked to a specific day.</div>
+    <div class="card-grid">
+      <div class="card"><h4>Just Tacos</h4><p>Alternate lunch spot from the earlier planning draft</p></div>
+      <div class="card"><h4>Cocovan</h4><p>Alternate dinner spot from the earlier planning draft</p></div>
+      <div class="card"><h4>Turtle Cove</h4><p>One stop on the self-guided island tour</p></div>
+    </div>
+  </div>
+
+  <div class="section" id="tab-book">
+    <div class="section-title">Book This Again</div>
+    <div class="section-sub">Who to call if this trip gets a repeat.</div>
+    <ul class="checklist">
+      <li><strong>Coral Gardens 2B, via Vrbo</strong> — hosted by Linda Elrick<span class="sub">One week, 4 adults, check-in 3pm / checkout 11am last time</span></li>
+      <li><strong>4-Hour Catamaran Sail &amp; Snorkel Tour</strong> — Viator, "best rated excursion" per trip notes<span class="sub">$475.58 for 2 adults + 2 children last time; ran 8:30am–12:30pm</span></li>
+      <li><strong>Blue Water Bistro</strong> — 📞 <a href="tel:+16499417555">(649) 941-7555</a><span class="sub">Lower Bight Road — book via OpenTable</span></li>
+      <li><strong>Lua Restaurant</strong> — 📞 <a href="tel:+16499418285">(649) 941-8285</a><span class="sub">1 Long Bay Beach — book via OpenTable, request the deck</span></li>
+      <li><strong>Da Conch Shack</strong><span class="sub">No reservations — Friday night has live music and a bigger crowd, Sunday is mellower</span></li>
+    </ul>
+  </div>
+
+</div>
+
+<footer><a href="../index.html">← Back to Vacations</a></footer>
+
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+<script>
+  var map = L.map('map', {scrollWheelZoom:false}).setView([21.792, -72.235], 12);
+  L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {attribution:'© OpenStreetMap'}).addTo(map);
+  var pts = [
+    [21.7736,-72.2657,"1. Providenciales Airport (PLS)","Arrival & departure"],
+    [21.7909,-72.2136,"2. Coral Gardens 2B","Villa — Grace Bay, hosted by Linda Elrick"],
+    [21.7930,-72.2168,"3. Somewhere Cafe & Lounge","Grace Bay Beach"],
+    [21.7857,-72.2394,"4. Blue Water Bistro","Lower Bight Road — dinner, Wed Apr 16"],
+    [21.7602,-72.1934,"5. Lua Restaurant","1 Long Bay Beach — dinner, Sat Apr 19"],
+    [21.8064,-72.2765,"6. Da Conch Shack","Blue Hills — dinner, Fri Apr 18"],
+    [21.7580,-72.1730,"7. Sapodilla Bay & Taylor Bay Beach","Self-guided island tour stop"]
+  ];
+  pts.forEach(function(p){
+    L.marker([p[0],p[1]]).addTo(map).bindPopup("<strong>"+p[2]+"</strong><br>"+p[3]+"<br><a href='https://www.google.com/maps/dir/?api=1&destination="+p[0]+","+p[1]+"' target='_blank'>Directions →</a>");
+  });
+  function showTab(id){
+    document.querySelectorAll('.section').forEach(function(s){ s.classList.remove('active'); });
+    document.querySelectorAll('.tab-btn').forEach(function(b){ b.classList.remove('active'); });
+    document.getElementById('tab-'+id).classList.add('active');
+    event.target.classList.add('active');
+  }
+</script>
+</body>
+</html>

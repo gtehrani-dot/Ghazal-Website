@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Turks &amp; Caicos 2021 — Ghazal Tehrani</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300;9..144,500;9..144,600&family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
+<style>
+  :root{
+    --primary:#0e93a3; --primary-deep:#0a5c68;
+    --accent-1:#2e9e5b; --accent-2:#e3a63c; --accent-3:#e8785a;
+    --ink:#0e2a2e; --muted:#5d7478; --cream:#f6fbfb; --line:#dcebec; --card:#ffffff;
+    --serif:'Fraunces',Georgia,serif; --sans:'Inter',system-ui,sans-serif; --mono:'JetBrains Mono',monospace;
+  }
+  *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+  body{font-family:var(--sans); background:var(--cream); color:var(--ink); line-height:1.6;}
+  a{color:inherit;}
+  .back-link{ display:inline-block; margin:18px 0 0 32px; font-family:var(--mono); font-size:12.5px; color:var(--primary-deep); text-decoration:none; }
+  .back-link:hover{ text-decoration:underline; }
+  .hero{ background:linear-gradient(135deg,var(--primary-deep) 0%, var(--primary) 55%, #57c2c9 100%); color:#fff; padding:36px 32px 46px; position:relative; overflow:hidden;}
+  .hero::before{ content:''; position:absolute; inset:0; background:radial-gradient(ellipse at 85% 15%, rgba(227,166,60,0.22) 0%, transparent 55%);}
+  .hero-inner{ position:relative; max-width:980px; margin:0 auto;}
+  .hero-eyebrow{ font-family:var(--mono); font-size:11px; letter-spacing:3px; text-transform:uppercase; color:#bdeef0; margin-bottom:14px;}
+  .hero h1{ font-family:var(--serif); font-weight:500; font-size:clamp(38px,6vw,64px); line-height:1.05;}
+  .hero h1 span{ display:block; font-size:0.4em; font-weight:300; font-style:italic; color:#e2fbfa; margin-top:8px;}
+  .hero-meta{ display:flex; flex-wrap:wrap; gap:10px; margin-top:26px;}
+  .meta-chip{ font-family:var(--mono); font-size:12px; padding:8px 15px; border:1px solid rgba(255,255,255,0.28); border-radius:100px; background:rgba(255,255,255,0.08);}
+  .meta-chip strong{ color:#fde68a; }
+  #map{ height:320px; max-width:980px; margin:-30px auto 0; border-radius:16px; box-shadow:0 12px 34px rgba(10,92,104,0.25); position:relative; z-index:2; border:4px solid #fff;}
+  .tabs{ max-width:980px; margin:34px auto 0; display:flex; flex-wrap:wrap; gap:6px; padding:0 32px;}
+  .tab-btn{ font-family:var(--mono); font-size:12px; letter-spacing:0.4px; padding:9px 16px; border-radius:100px; background:var(--card); border:1px solid var(--line); cursor:pointer; color:var(--muted);}
+  .tab-btn.active{ background:var(--primary); color:#fff; border-color:var(--primary);}
+  .wrap{ max-width:980px; margin:0 auto; padding:26px 32px 80px;}
+  .section{ display:none; } .section.active{ display:block; }
+  .section-title{ font-family:var(--serif); font-size:24px; font-weight:500; margin-bottom:6px;}
+  .section-sub{ font-size:13.5px; color:var(--muted); margin-bottom:22px;}
+  table.overview{ width:100%; border-collapse:collapse; font-size:13.5px;}
+  table.overview th{ text-align:left; font-family:var(--mono); font-size:11px; letter-spacing:1px; text-transform:uppercase; color:var(--muted); padding:8px 10px; border-bottom:2px solid var(--line);}
+  table.overview td{ padding:10px; border-bottom:1px solid var(--line); vertical-align:top;}
+  .book-group-label{ font-family:var(--mono); font-size:11px; letter-spacing:2px; text-transform:uppercase; color:var(--primary-deep); margin:24px 0 10px; padding-bottom:6px; border-bottom:1px solid var(--line);}
+  .book-group-label:first-child{ margin-top:0; }
+  .hotel-card{ background:var(--card); border:1px solid var(--line); border-radius:12px; padding:18px 20px; margin-bottom:14px;}
+  .hotel-card.tbd{ border-style:dashed; border-color:var(--accent-3); background:rgba(232,120,90,0.05); }
+  .hotel-card h4{ font-family:var(--serif); font-size:18px; font-weight:500; margin-bottom:4px;}
+  .hotel-card .meta{ font-size:12.5px; color:var(--muted); margin-top:4px; }
+  .hotel-card .note{ font-size:13px; margin-top:8px; color:var(--ink); }
+  .tl-day{ background:var(--card); border:1px solid var(--line); border-radius:12px; padding:18px 20px; margin-bottom:16px;}
+  .tl-title{ font-family:var(--serif); font-size:18px; font-weight:500; margin-bottom:2px;}
+  .tl-sub{ font-family:var(--mono); font-size:11.5px; color:var(--muted); text-transform:uppercase; letter-spacing:0.5px; margin-bottom:10px;}
+  ul.tl-items{ list-style:none; }
+  ul.tl-items li{ padding:5px 0 5px 18px; position:relative; font-size:13.8px;}
+  ul.tl-items li::before{ content:'–'; position:absolute; left:0; color:var(--muted);}
+  .tl-note{ font-size:12.5px; color:var(--muted); margin-top:6px; font-style:italic; }
+  .checklist{ list-style:none; }
+  .checklist li{ background:var(--card); border:1px solid var(--line); border-radius:10px; padding:12px 16px; margin-bottom:8px; font-size:13.8px;}
+  .checklist li .sub{ display:block; font-size:12px; color:var(--muted); margin-top:3px; font-weight:400;}
+  .callout{ background:rgba(14,147,163,0.08); border:1px solid rgba(14,147,163,0.3); border-radius:10px; padding:14px 16px; font-size:13px; margin-bottom:18px; }
+  .callout.warn{ background:rgba(232,120,90,0.08); border-color:rgba(232,120,90,0.35); }
+  footer{ text-align:center; padding:30px; font-size:12px; color:var(--muted); }
+</style>
+</head>
+<body>
+
+<a class="back-link" href="../index.html">← Back to trips</a>
+
+<div class="hero">
+  <div class="hero-inner">
+    <div class="hero-eyebrow">🏝️ Trip · Jun 24–28, 2021</div>
+    <h1>Turks &amp; Caicos<span>A four-night trip to Providenciales, first back after lockdown-era travel</span></h1>
+    <div class="hero-meta">
+      <div class="meta-chip">✈️ <strong>UA 1817</strong> · IAD → PLS</div>
+      <div class="meta-chip">🗓 <strong>4 nights</strong> · Jun 24–28, 2021</div>
+      <div class="meta-chip">📍 Providenciales</div>
+      <div class="meta-chip">🏨 <strong>Lodging TBD</strong> · see note</div>
+    </div>
+  </div>
+</div>
+
+<div id="map"></div>
+
+<div class="tabs">
+  <button class="tab-btn active" onclick="showTab('overview')">Overview</button>
+  <button class="tab-btn" onclick="showTab('hotel')">Hotel &amp; Transportation</button>
+  <button class="tab-btn" onclick="showTab('itinerary')">Itinerary</button>
+  <button class="tab-btn" onclick="showTab('book')">Book This Again</button>
+</div>
+
+<div class="wrap">
+
+  <div class="section active" id="tab-overview">
+    <div class="section-title">Overview</div>
+    <div class="section-sub">A shorter, earlier trip to Providenciales — flights and the Turks &amp; Caicos entry paperwork are confirmed by email; the lodging and day-to-day plan aren't.</div>
+    <table class="overview">
+      <tr><th>Date</th><th>Focus</th></tr>
+      <tr><td>Thu Jun 24</td><td>Fly IAD → Providenciales (UA 1817, departs 10:35am ET); TCI travel authorisation filed same day</td></tr>
+      <tr><td>Fri Jun 25 – Sun Jun 27</td><td>No day-by-day record found in email/Drive — see note below</td></tr>
+      <tr><td>Mon Jun 28</td><td>Fly Providenciales → Miami (AA 975, departs 5:25pm ET)</td></tr>
+    </table>
+    <div class="callout warn"><strong>Gaps on this one:</strong> I could confirm the flights and the entry-authorisation filing from email, but found no hotel/villa confirmation, no restaurant reservations, and no day-by-day plan anywhere in Gmail, Drive, or Calendar for this trip. You mentioned staying somewhere with "Sisters" in the name, right on Grace Bay — I wasn't able to match that to a real property by search, so it's left blank below rather than guessed. Fill in the lodging name and I'll add it in.</div>
+  </div>
+
+  <div class="section" id="tab-hotel">
+    <div class="section-title">Hotel &amp; Transportation</div>
+    <div class="book-group-label">Lodging</div>
+    <div class="hotel-card tbd">
+      <h4>Not yet confirmed</h4>
+      <div class="note">Recalled as a property with "Sisters" in the name, right on Grace Bay — no matching email confirmation or web listing found yet. Let me know the actual name and I'll fill this card in (and drop a map pin for it).</div>
+    </div>
+    <div class="book-group-label">Transportation</div>
+    <div class="hotel-card">
+      <h4>Flight — United UA 1817, Washington Dulles (IAD) → Providenciales (PLS)</h4>
+      <div class="note">Departed 10:35am ET, Thursday June 24, 2021. eTicket confirmation E9Q867.</div>
+    </div>
+    <div class="hotel-card">
+      <h4>Flight — American Airlines AA 975, Providenciales (PLS) → Miami (MIA)</h4>
+      <div class="note">Departed 5:25pm ET, Monday June 28, 2021, connecting on to Washington (DCA).</div>
+    </div>
+    <div class="hotel-card">
+      <h4>Turks &amp; Caicos Travel Authorisation</h4>
+      <div class="note">Filed June 24, 2021 (day of arrival) — application reference LIPI4W49C1ER.</div>
+    </div>
+  </div>
+
+  <div class="section" id="tab-itinerary">
+    <div class="section-title">Itinerary</div>
+    <div class="tl-day">
+      <div class="tl-title">Day 1 · Thu, Jun 24 · Arrival</div>
+      <ul class="tl-items">
+        <li>Fly IAD → PLS, UA 1817, departing 10:35am</li>
+        <li>Travel authorisation filed on arrival day</li>
+      </ul>
+    </div>
+    <div class="tl-day">
+      <div class="tl-title">Days 2–4 · Fri Jun 25 – Sun Jun 27</div>
+      <ul class="tl-items">
+        <li>No record found — nothing in email, Drive, or Calendar names a hotel, restaurant, or activity for these days</li>
+      </ul>
+      <div class="tl-note">If you remember specifics (restaurants, tours, beaches), tell me and I'll add real day cards here instead of leaving this blank.</div>
+    </div>
+    <div class="tl-day">
+      <div class="tl-title">Day 5 · Mon, Jun 28 · Departure</div>
+      <ul class="tl-items">
+        <li>Fly PLS → Miami, AA 975, departing 5:25pm, connecting home</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="section" id="tab-book">
+    <div class="section-title">Book This Again</div>
+    <div class="section-sub">What's on file if this trip gets a repeat.</div>
+    <ul class="checklist">
+      <li><strong>United UA 1817</strong> — IAD → PLS<span class="sub">Departed 10:35am last time</span></li>
+      <li><strong>American AA 975</strong> — PLS → MIA<span class="sub">Departed 5:25pm last time, connecting to DCA</span></li>
+      <li><strong>Lodging</strong> — not on file<span class="sub">Recalled as "Sisters," right on Grace Bay — confirm the name to add contact details here</span></li>
+    </ul>
+  </div>
+
+</div>
+
+<footer><a href="../index.html">← Back to Vacations</a></footer>
+
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+<script>
+  var map = L.map('map', {scrollWheelZoom:false}).setView([21.792, -72.235], 12);
+  L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {attribution:'© OpenStreetMap'}).addTo(map);
+  var pts = [
+    [21.7736,-72.2657,"1. Providenciales Airport (PLS)","Arrival & departure"],
+    [21.7947,-72.2194,"2. Grace Bay Beach","General area — exact lodging not yet confirmed"]
+  ];
+  pts.forEach(function(p){
+    L.marker([p[0],p[1]]).addTo(map).bindPopup("<strong>"+p[2]+"</strong><br>"+p[3]+"<br><a href='https://www.google.com/maps/dir/?api=1&destination="+p[0]+","+p[1]+"' target='_blank'>Directions →</a>");
+  });
+  function showTab(id){
+    document.querySelectorAll('.section').forEach(function(s){ s.classList.remove('active'); });
+    document.querySelectorAll('.tab-btn').forEach(function(b){ b.classList.remove('active'); });
+    document.getElementById('tab-'+id).classList.add('active');
+    event.target.classList.add('active');
+  }
+</script>
+</body>
+</html>
