@@ -9,9 +9,9 @@
 <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
 <style>
   :root{
-    --primary:#7c3aed; --primary-deep:#4c1d95;
-    --accent-1:#c4b5fd; --accent-2:#f8fafc; --accent-3:#fb7185;
-    --ink:#211a38; --muted:#6b6480; --cream:#faf9fc; --line:#e6e2ee; --card:#ffffff;
+    --primary:#0e7490; --primary-deep:#134e4a;
+    --accent-1:#fbbf24; --accent-2:#f8fafc; --accent-3:#fb7185;
+    --ink:#17262b; --muted:#5c6f75; --cream:#f7fafa; --line:#dfe8e8; --card:#ffffff;
     --serif:'Fraunces',Georgia,serif; --sans:'Inter',system-ui,sans-serif; --mono:'JetBrains Mono',monospace;
   }
   *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
@@ -19,17 +19,17 @@
   a{color:inherit;}
   .back-link{ display:inline-block; margin:18px 0 0 32px; font-family:var(--mono); font-size:12.5px; color:var(--primary); text-decoration:none; }
   .back-link:hover{ text-decoration:underline; }
-  .hero{ background:linear-gradient(135deg,rgba(76,29,149,0.82) 0%, rgba(124,58,237,0.68) 55%, rgba(196,181,253,0.45) 100%), url('hero.jpg') center 55%/cover; color:#fff; padding:36px 32px 46px; position:relative; overflow:hidden;}
-  .hero::before{ content:''; position:absolute; inset:0; background:radial-gradient(ellipse at 85% 15%, rgba(196,181,253,0.25) 0%, transparent 55%);}
+  .hero{ background:linear-gradient(135deg,rgba(19,78,74,0.82) 0%, rgba(14,116,144,0.68) 55%, rgba(251,191,36,0.35) 100%), url('hero.jpg') center 55%/cover; color:#fff; padding:36px 32px 46px; position:relative; overflow:hidden;}
+  .hero::before{ content:''; position:absolute; inset:0; background:radial-gradient(ellipse at 85% 15%, rgba(251,191,36,0.20) 0%, transparent 55%);}
   .hero-inner{ position:relative; max-width:980px; margin:0 auto;}
-  .hero-eyebrow{ font-family:var(--mono); font-size:11px; letter-spacing:3px; text-transform:uppercase; color:#ddd6fe; margin-bottom:14px;}
+  .hero-eyebrow{ font-family:var(--mono); font-size:11px; letter-spacing:3px; text-transform:uppercase; color:#a5e8e0; margin-bottom:14px;}
   .hero h1{ font-family:var(--serif); font-weight:500; font-size:clamp(38px,6vw,64px); line-height:1.05;}
-  .hero h1 span{ display:block; font-size:0.4em; font-weight:300; font-style:italic; color:#f3f0fa; margin-top:8px;}
+  .hero h1 span{ display:block; font-size:0.4em; font-weight:300; font-style:italic; color:#f0faf8; margin-top:8px;}
   .hero-meta{ display:flex; flex-wrap:wrap; gap:10px; margin-top:26px;}
   .meta-chip{ font-family:var(--mono); font-size:12px; padding:8px 15px; border:1px solid rgba(255,255,255,0.25); border-radius:100px; background:rgba(255,255,255,0.12);}
   .meta-chip strong{ color:#fde68a; }
   .hero-photo-cap{ position:relative; max-width:980px; margin:8px auto 0; font-family:var(--mono); font-size:11px; color:#e2e8f0; text-align:right; opacity:0.85; }
-  #map{ height:320px; max-width:980px; margin:-30px auto 0; border-radius:16px; box-shadow:0 12px 34px rgba(76,29,149,0.25); position:relative; z-index:2; border:4px solid #fff;}
+  #map{ height:320px; max-width:980px; margin:-30px auto 0; border-radius:16px; box-shadow:0 12px 34px rgba(19,78,74,0.25); position:relative; z-index:2; border:4px solid #fff;}
   .tabs{ max-width:980px; margin:34px auto 0; display:flex; flex-wrap:wrap; gap:6px; padding:0 32px;}
   .tab-btn{ font-family:var(--mono); font-size:12px; letter-spacing:0.4px; padding:9px 16px; border-radius:100px; background:var(--card); border:1px solid var(--line); cursor:pointer; color:var(--muted);}
   .tab-btn.active{ background:var(--primary); color:#fff; border-color:var(--primary);}
@@ -50,7 +50,7 @@
   .checklist{ list-style:none; }
   .checklist li{ background:var(--card); border:1px solid var(--line); border-radius:10px; padding:12px 16px; margin-bottom:8px; font-size:13.8px;}
   .checklist li .sub{ display:block; font-size:12px; color:var(--muted); margin-top:3px; font-weight:400;}
-  .callout{ background:rgba(196,181,253,0.16); border:1px solid rgba(124,58,237,0.3); border-radius:10px; padding:14px 16px; font-size:13px; margin-bottom:18px; }
+  .callout{ background:rgba(251,191,36,0.12); border:1px solid rgba(14,116,144,0.3); border-radius:10px; padding:14px 16px; font-size:13px; margin-bottom:18px; }
   footer{ text-align:center; padding:30px; font-size:12px; color:var(--muted); }
 </style>
 </head>
@@ -70,7 +70,7 @@
     </div>
   </div>
 </div>
-<div class="hero-photo-cap">📷 Panorama from the mountain train above Lucerne</div>
+<div class="hero-photo-cap">📷 <a href="hero.jpg" target="_blank" style="color:inherit;">View full photo</a> — panorama from the mountain train above Lucerne</div>
 
 <div id="map"></div>
 
