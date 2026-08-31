@@ -320,6 +320,8 @@
   .page { page-break-after: always; break-after: page; }
   .page:last-of-type { page-break-after: auto; break-after: auto; }
 
+  @page { size: 1520px 1940px; margin: 0; }
+
   @media print {
     #pdf-download-btn { display: none !important; }
     body { background: #ffffff; }
@@ -678,7 +680,7 @@
 </style>
 </head>
 <body>
-<button id="pdf-download-btn" onclick="downloadTimelinePdf()">&darr; Download PDF</button>
+<button id="pdf-download-btn" onclick="window.print()">&darr; Download PDF</button>
 <div class="page">
 
   <p class="eyebrow">Executive summary</p>
@@ -1073,33 +1075,19 @@
 </div>
 
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
 <script>
-function downloadTimelinePdf() {
-  var btn = document.getElementById('pdf-download-btn');
-  var originalText = btn.innerHTML;
-  btn.disabled = true;
-  btn.innerHTML = 'Generating…';
-
-  var opt = {
-    margin: [10, 10, 10, 10],
-    filename: 'Ghazal-Moore-Retirement-Timeline.pdf',
-    image: { type: 'jpeg', quality: 0.98 },
-    html2canvas: { scale: 2, useCORS: true, windowWidth: 1100, ignoreElements: function (el) { return el.id === 'pdf-download-btn'; } },
-    jsPDF: { unit: 'pt', format: 'letter', orientation: 'portrait' },
-    pagebreak: { mode: ['css', 'legacy'] }
-  };
-
-  html2pdf().set(opt).from(document.body).save().then(function () {
-    btn.disabled = false;
-    btn.innerHTML = originalText;
-  }).catch(function (err) {
-    console.error('PDF generation failed:', err);
-    btn.disabled = false;
-    btn.innerHTML = originalText;
-    alert('PDF generation failed — please try again, or use your browser\'s Print > Save as PDF as a fallback.');
+// Uses the browser's native print-to-PDF (via the button's window.print() call and the
+// @page rule above) instead of a canvas-based library — this renders the page exactly as
+// laid out, so nothing gets clipped regardless of the viewer's window size.
+(function () {
+  var originalTitle = document.title;
+  window.addEventListener('beforeprint', function () {
+    document.title = 'Ghazal-Moore-Retirement-Timeline';
   });
-}
+  window.addEventListener('afterprint', function () {
+    document.title = originalTitle;
+  });
+})();
 </script>
 
 </body>
