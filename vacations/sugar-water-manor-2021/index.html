@@ -1,0 +1,437 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="color-scheme" content="light only">
+<meta name="theme-color" content="#faf7f0">
+<title>Sugar Water Manor Farm Stay · Jun 10–13, 2021</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+<style>
+  :root{
+    --primary:#7a8b4f;
+    --primary-deep:#4d5c2e;
+    --primary-pale:#eef2e2;
+    --bg:#faf7f0;
+    --white:#ffffff;
+    --ink:#3a3226;
+    --muted:#7c7364;
+    --accent-1:#c17f3e;
+    --accent-2:#d4a13d;
+    --accent-3:#b5533f;
+    --line:rgba(58,50,38,0.12);
+  }
+  *{box-sizing:border-box; margin:0; padding:0;}
+  html{ background:var(--bg); color-scheme:light only; }
+  body{ background:var(--bg); color:var(--ink); font-family:'Inter', sans-serif; line-height:1.55; -webkit-font-smoothing:antialiased; min-height:100vh; }
+  h1,h2,h3,.display{ font-family:'Fraunces', serif; }
+  .mono{ font-family:'JetBrains Mono', monospace; }
+  a{ color:var(--primary-deep); }
+  img{ max-width:100%; display:block; }
+
+  .back-link{ max-width:1180px; margin:0 auto; padding:22px 6vw 0; }
+  .back-link a{ font-family:'JetBrains Mono',monospace; font-size:12.5px; color:var(--muted); text-decoration:none; }
+  .back-link a:hover{ color:var(--primary-deep); }
+
+  .topbar{ max-width:1180px; margin:0 auto; padding:20px 6vw 24px; }
+  .hero-eyebrow{ font-family:'JetBrains Mono', monospace; font-size:11.5px; letter-spacing:0.28em; text-transform:uppercase; color:var(--primary-deep); margin-bottom:12px; }
+  .topbar h1{ font-size:clamp(36px, 6vw, 64px); font-weight:600; line-height:1.0; color:var(--ink); }
+  .topbar h1 span{ display:block; font-style:italic; font-weight:400; color:var(--primary); font-size:0.4em; margin-top:10px; }
+
+  .hero-meta{ display:flex; flex-wrap:wrap; gap:10px; margin-top:24px; }
+  .meta-chip{ font-family:'JetBrains Mono', monospace; font-size:12px; padding:9px 16px; border:1px solid var(--line); border-radius:100px; background:var(--white); color:var(--ink); box-shadow:0 2px 8px rgba(58,50,38,0.05); }
+  .meta-chip strong{ color:var(--primary-deep); }
+
+  .banner{ max-width:1180px; margin:0 auto; padding:28px 6vw 40px; display:grid; grid-template-columns:1fr 1fr; gap:20px; }
+  .banner-panel{ position:relative; height:420px; border-radius:18px; overflow:hidden; box-shadow:0 16px 40px rgba(58,50,38,0.12); border:1px solid var(--line); background:var(--white); }
+  .banner-photo{ width:100%; height:100%; background:linear-gradient(160deg, #d4a13d 0%, #c17f3e 38%, #7a8b4f 72%, #4d5c2e 100%); position:relative; }
+  .banner-photo::after{ content:'🌾'; position:absolute; font-size:64px; right:28px; bottom:22px; opacity:0.55; filter:drop-shadow(0 4px 10px rgba(0,0,0,0.25)); }
+  .banner-photo-cap{ position:absolute; left:16px; bottom:14px; font-family:'JetBrains Mono', monospace; font-size:11px; color:#fff; text-shadow:0 1px 5px rgba(0,0,0,0.5); }
+  #map{ background:#e6e2d3; }
+  .leaflet-popup-content{ font-family:'Inter', sans-serif; }
+  .leaflet-popup-content b{ font-family:'Fraunces', serif; }
+
+  .tab-nav{ position:sticky; top:0; z-index:50; display:flex; overflow-x:auto; gap:2px; background:var(--white); border-bottom:1px solid var(--line); }
+  .tab-nav-inner{ display:flex; max-width:1180px; margin:0 auto; padding:0 6vw; overflow-x:auto; }
+  .tab-btn{ font-family:'JetBrains Mono', monospace; font-size:12.5px; white-space:nowrap; background:none; border:none; color:var(--muted); padding:18px 16px; cursor:pointer; border-bottom:2px solid transparent; transition:all .2s; }
+  .tab-btn:hover{ color:var(--primary-deep); }
+  .tab-btn.active{ color:var(--primary-deep); border-bottom-color:var(--primary); }
+
+  .wrap{ max-width:980px; margin:0 auto; padding:56px 6vw 64px; }
+  .section{ display:none; }
+  .section.active{ display:block; animation:fadeIn .4s ease; }
+  @keyframes fadeIn{ from{opacity:0; transform:translateY(8px);} to{opacity:1; transform:translateY(0);} }
+  .section-title{ font-size:clamp(28px,4vw,40px); font-weight:600; margin-bottom:8px; color:var(--ink);}
+  .section-sub{ color:var(--muted); font-size:15px; margin-bottom:40px; max-width:640px; }
+
+  .callout{ border:1px solid var(--line); border-left:3px solid var(--accent-2); background:#faf1de; border-radius:0 8px 8px 0; padding:16px 20px; font-size:14.5px; color:var(--ink); margin-bottom:36px; }
+  .callout.warn{ border-left-color:var(--accent-3); background:#f9e9e4; }
+  .callout.muted{ border-left-color:var(--muted); background:#f1efe7; }
+  .callout strong{ color:#8a5a1f; }
+  .callout.warn strong{ color:#8f3f2f; }
+  .callout.muted strong{ color:var(--ink); }
+
+  .at-a-glance{ width:100%; border-collapse:collapse; margin-top:8px; }
+  .at-a-glance th{ text-align:left; font-family:'JetBrains Mono',monospace; font-size:10.5px; text-transform:uppercase; letter-spacing:0.06em; color:var(--muted); padding:10px 14px; border-bottom:1px solid var(--line); }
+  .at-a-glance td{ padding:12px 14px; border-bottom:1px solid var(--line); font-size:14px; color:var(--ink); }
+  .at-a-glance tr:last-child td{ border-bottom:none; }
+
+  .book-group-label{ font-family:'JetBrains Mono',monospace; font-size:11.5px; letter-spacing:0.1em; text-transform:uppercase; color:var(--primary-deep); margin:34px 0 12px; padding-bottom:6px; border-bottom:1px solid var(--line); }
+  .book-group-label:first-child{ margin-top:0; }
+
+  .hotels-grid{ display:grid; gap:16px; }
+  .hotel-card{ background:var(--white); border:1px solid var(--line); border-radius:12px; padding:24px 28px; }
+  .hotel-header{ display:flex; justify-content:space-between; align-items:flex-start; gap:16px; flex-wrap:wrap; margin-bottom:8px; }
+  .hotel-name{ font-family:'Fraunces', serif; font-size:22px; font-weight:600; }
+  .hotel-name a{ color:var(--ink); text-decoration:none; }
+  .hotel-name a:hover{ color:var(--primary-deep); }
+  .hotel-dates{ font-family:'JetBrains Mono',monospace; font-size:11.5px; color:var(--primary-deep); text-align:right; }
+  .hotel-meta-row{ display:flex; flex-wrap:wrap; gap:16px; margin:10px 0; font-size:13.5px; color:var(--muted); }
+  .hotel-meta-row strong{ color:var(--ink); }
+  .hotel-note{ font-size:13.5px; color:#444; border-top:1px solid var(--line); padding-top:12px; margin-top:12px; }
+
+  .timeline{ position:relative; padding-left:52px; }
+  .timeline::before{ content:''; position:absolute; left:19px; top:6px; bottom:6px; width:2px; background:linear-gradient(180deg, var(--primary), var(--accent-1), var(--accent-2)); }
+  .tl-day{ position:relative; margin-bottom:38px; }
+  .tl-dot{ position:absolute; left:-52px; top:2px; width:38px; height:38px; border-radius:50%; background:var(--white); border:2px solid var(--primary); display:flex; align-items:center; justify-content:center; font-family:'JetBrains Mono', monospace; font-size:13px; font-weight:600; color:var(--primary-deep); box-shadow:0 2px 8px rgba(58,50,38,0.08); }
+  .tl-card{ background:var(--white); border:1px solid var(--line); border-radius:10px; padding:22px 24px; box-shadow:0 2px 12px rgba(58,50,38,0.05); }
+  .tl-date{ font-family:'JetBrains Mono', monospace; font-size:11.5px; letter-spacing:0.1em; text-transform:uppercase; color:var(--primary-deep); margin-bottom:6px; }
+  .tl-title{ font-family:'Fraunces', serif; font-size:22px; font-weight:600; margin-bottom:14px; color:var(--ink); }
+  .tl-gmaps-btn{ display:inline-flex; align-items:center; gap:5px; font-family:'JetBrains Mono',monospace; font-size:11px; font-weight:600; text-decoration:none; padding:4px 12px; border-radius:100px; background:var(--primary); color:#fff; margin-bottom:14px; }
+  .tl-items{ list-style:none; }
+  .tl-items li{ position:relative; padding-left:20px; margin-bottom:9px; font-size:14.5px; color:var(--muted); }
+  .tl-items li::before{ content:'—'; position:absolute; left:0; color:var(--primary); }
+  .tl-items li strong{ color:var(--ink); }
+  .tl-items li.meal{ background:var(--primary-pale); border-radius:8px; padding:9px 12px 9px 14px; list-style:none; }
+  .tl-items li.meal::before{ content:''; }
+  .title-lnk{ color:inherit; text-decoration:underline; text-decoration-color:var(--primary); text-underline-offset:3px; }
+  .title-lnk:hover{ color:var(--primary-deep); }
+
+  .card-grid{ display:grid; grid-template-columns:repeat(auto-fit, minmax(260px,1fr)); gap:18px; margin-bottom:16px; }
+  .card{ background:var(--white); border:1px solid var(--line); border-left:3px solid var(--primary); border-radius:0 10px 10px 0; padding:20px 22px; box-shadow:0 2px 12px rgba(58,50,38,0.05); }
+  .card.accent1{ border-left-color:var(--accent-1); }
+  .card.accent2{ border-left-color:var(--accent-2); }
+  .card.accent3{ border-left-color:var(--accent-3); }
+  .card.muted{ border-left-color:var(--muted); opacity:0.8; }
+  .card-eyebrow{ font-family:'JetBrains Mono', monospace; font-size:10.5px; letter-spacing:0.1em; text-transform:uppercase; color:var(--muted); margin-bottom:6px; }
+  .card h3{ font-size:19px; font-weight:600; margin-bottom:10px; color:var(--ink); }
+  .card p{ font-size:14px; color:var(--muted); margin-bottom:8px; }
+  .poi-actions{ display:flex; gap:8px; flex-wrap:wrap; margin-top:10px; }
+  .poi-actions a{ display:inline-flex; align-items:center; gap:5px; font-family:'JetBrains Mono',monospace; font-size:11px; font-weight:600; text-decoration:none; padding:5px 12px; border-radius:100px; white-space:nowrap; }
+  .poi-actions a.site{ background:var(--primary-pale); color:var(--primary-deep); }
+  .poi-actions a.dir{ background:var(--primary); color:#fff; }
+  .poi-actions a.dir:hover{ background:var(--primary-deep); }
+
+  .checklist{ list-style:none; }
+  .checklist li{ display:flex; gap:14px; align-items:flex-start; padding:16px 0; border-bottom:1px solid var(--line); font-size:14.5px; color:var(--muted); }
+  .checklist li:last-child{ border-bottom:none; }
+  .checkbox{ width:20px; height:20px; border:2px solid var(--primary); border-radius:5px; flex-shrink:0; margin-top:1px; cursor:pointer; }
+  .checklist .lbl{ color:var(--primary-deep); font-family:'JetBrains Mono',monospace; font-size:10.5px; letter-spacing:0.06em; text-transform:uppercase; display:block; margin-bottom:3px; }
+  .checklist .lbl a{ color:inherit; }
+  .checklist .contact{ display:block; font-family:'JetBrains Mono',monospace; font-size:11.5px; color:var(--muted); margin-top:4px; }
+  .checklist .contact a{ color:var(--primary-deep); }
+  .checklist li.done{ opacity:0.6; }
+  .checklist li.done .lbl{ color:var(--muted); }
+  .checklist li.done::before{ content:'✅'; margin-right:2px; }
+
+  .footer{ text-align:center; padding:40px 6vw 60px; color:var(--muted); font-size:12px; font-family:'JetBrains Mono',monospace; }
+  .footer span{ color:var(--primary-deep); }
+
+  @media (max-width:820px){ .banner{ grid-template-columns:1fr; } .banner-panel{ height:340px; } }
+  @media (max-width:640px){ .timeline{ padding-left:40px; } .tl-dot{ left:-40px; width:32px; height:32px; font-size:11px; } }
+
+  @media print{
+    .tab-nav, .banner, .back-link{ display:none !important; }
+    .section{ display:none !important; }
+    #tab-print{ display:block !important; }
+    body{ background:#fff; }
+    .wrap{ padding:0; max-width:100%; }
+    a{ color:#000; text-decoration:none; }
+  }
+</style>
+</head>
+<body>
+
+<div class="back-link"><a href="../index.html">← Back to trips</a></div>
+
+<div class="topbar">
+  <div class="hero-eyebrow">Memories Created · Jun 10–13, 2021</div>
+  <h1>Sugar Water Manor<span>A long weekend on a working farm, Maryland's Eastern Shore</span></h1>
+  <div class="hero-meta">
+    <div class="meta-chip">🚗 <strong>~2.5 hr drive</strong> from DC/McLean</div>
+    <div class="meta-chip">🗓 <strong>3 nights</strong> · Jun 10–13, 2021</div>
+    <div class="meta-chip">📍 Westover, MD · Somerset County</div>
+    <div class="meta-chip">🐴 <strong>Farm stay</strong> · The Homestead</div>
+  </div>
+</div>
+
+<div class="banner">
+  <div class="banner-panel">
+    <div class="banner-photo"></div>
+    <div class="banner-photo-cap">Sugar Water Manor, Westover, MD</div>
+  </div>
+  <div>
+    <div class="banner-panel"><div id="map" style="width:100%; height:100%;"></div></div>
+    <div class="legend" style="display:flex; flex-wrap:wrap; gap:8px 16px; padding:10px 2px 0; font-family:'JetBrains Mono',monospace; font-size:11px; color:var(--muted); align-items:center;">
+      <span><strong style="color:var(--primary)">●</strong> Lodging</span>
+      <span><strong style="color:var(--accent-1)">●</strong> Food</span>
+      <span><strong style="color:var(--accent-2)">●</strong> Also worth seeing</span>
+    </div>
+  </div>
+</div>
+
+<nav class="tab-nav">
+  <div class="tab-nav-inner">
+  <button class="tab-btn active" onclick="showTab('overview')">📋 Overview</button>
+  <button class="tab-btn" onclick="showTab('hotels')">🏨 Hotel &amp; Transportation</button>
+  <button class="tab-btn" onclick="showTab('itinerary')">📅 Itinerary</button>
+  <button class="tab-btn" onclick="showTab('farm')">🐓 The Farm</button>
+  <button class="tab-btn" onclick="showTab('more')">⭐ Also Worth Seeing</button>
+  <button class="tab-btn" onclick="showTab('book')">✅ Book Now</button>
+  <button class="tab-btn" onclick="showTab('print')">🖨 Print</button>
+  </div>
+</nav>
+
+<div class="wrap">
+
+  <!-- OVERVIEW -->
+  <div id="tab-overview" class="section active">
+    <div class="section-title">Trip Overview</div>
+    <div class="section-sub">A short "Chesapeake weekend" (Ben's words) on a real working farm on Maryland's Eastern Shore — reconstructed from the Airbnb booking confirmation and host welcome message.</div>
+
+    <div class="callout muted"><strong>How this page was built:</strong> This trip wasn't on the Vacations hub even though it clearly happened. It's pieced together from the Airbnb reservation and the host's pre-arrival welcome email, which is unusually detailed and covers most of what there was to do on-site.</div>
+
+    <table class="at-a-glance">
+      <thead><tr><th>Day</th><th>Date</th><th>Focus</th></tr></thead>
+      <tbody>
+        <tr><td>1</td><td>Thu Jun 10</td><td>Drive down, check in to The Homestead after 2 PM, evening at the farm</td></tr>
+        <tr><td>2</td><td>Fri Jun 11</td><td>Farm chores/animal visits, pool &amp; kayaks, fire pit + s'mores at sunset</td></tr>
+        <tr><td>3</td><td>Sat Jun 12</td><td>Farm chores/animal visits, pool &amp; kayaks, fire pit + s'mores at sunset</td></tr>
+        <tr><td>4</td><td>Sun Jun 13</td><td>Checkout, drive home</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- HOTEL & TRANSPORTATION -->
+  <div id="tab-hotels" class="section">
+    <div class="section-title">Hotel &amp; Transportation</div>
+    <div class="section-sub">One property, no flights — a drive-to weekend.</div>
+
+    <div class="book-group-label">Lodging</div>
+    <div class="hotels-grid">
+      <div class="hotel-card">
+        <div class="hotel-header">
+          <div class="hotel-name"><a href="https://www.airbnb.com/rooms/47385241" target="_blank" rel="noopener">The Homestead at Sugar Water Manor Farm Stay</a></div>
+          <div class="hotel-dates">Jun 10 (after 2:00 PM) → Jun 13</div>
+        </div>
+        <div class="hotel-meta-row">
+          <span>📍 Revells Neck Road, Westover, MD (Somerset County)</span>
+          <span>💬 Contact via Airbnb messaging — host Dana</span>
+        </div>
+        <div class="hotel-note">Entire home/apt farm stay on a working farm on Maryland's Eastern Shore, booked via Airbnb. 3 nights, 4 guests, $1,094.78 total. Contactless check-in — key left on the welcome table inside the front door of The Homestead. Directions: on Revells Neck Road, go one mile past the small white church; The Homestead is the first house on the right down the lane.</div>
+      </div>
+    </div>
+
+    <div class="book-group-label">Transportation</div>
+    <div class="callout muted"><strong>Drive-to weekend:</strong> No flight or rental car confirmations — Westover, MD is roughly a 2.5-hour drive from the DC/McLean area via the Bay Bridge and Route 13.</div>
+  </div>
+
+  <!-- ITINERARY -->
+  <div id="tab-itinerary" class="section">
+    <div class="section-title">Itinerary — What Actually Happened</div>
+    <div class="section-sub">Rebuilt from the Airbnb booking and the host's welcome email — not an original plan.</div>
+
+    <div class="timeline">
+
+      <div class="tl-day">
+        <div class="tl-dot">1</div>
+        <div class="tl-card">
+          <div class="tl-date">Thu · Jun 10 · Arrival</div>
+          <div class="tl-title">Drive down, check in to The Homestead</div>
+          <ul class="tl-items">
+            <li><strong>Check-in</strong> at <a href="https://www.airbnb.com/rooms/47385241" target="_blank" rel="noopener" class="title-lnk">The Homestead at Sugar Water Manor</a> — anytime after 2:00 PM, contactless (key on the welcome table) · <a class="title-lnk" href="https://www.google.com/maps/dir/?api=1&destination=Sugar+Water+Manor%2C+Revells+Neck+Road%2C+Westover%2C+MD" target="_blank" rel="noopener">directions</a></li>
+            <li>4 guests on this trip.</li>
+            <li>If arriving before 4 PM, welcome to visit the farm animals during chore time.</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="tl-day">
+        <div class="tl-dot">2</div>
+        <div class="tl-card">
+          <div class="tl-date">Fri · Jun 11</div>
+          <div class="tl-title">Farm day</div>
+          <ul class="tl-items">
+            <li>Morning and/or afternoon animal visits during chore times (by arrangement with the host).</li>
+            <li>Pool and kayaks available on-site, year-round.</li>
+            <li class="meal">🍽 <strong>Breakfast:</strong> delivered daily by the host as part of the stay.</li>
+            <li class="meal">🍽 <strong>Dinner option:</strong> fire pit lit before sunset on Friday nights, with a s'mores kit provided — grill kit and seasoning also available in the kitchen. Takeout delivery available via Squeaky's (Mon–Fri, order by 3 PM for after-6-PM delivery).</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="tl-day">
+        <div class="tl-dot">3</div>
+        <div class="tl-card">
+          <div class="tl-date">Sat · Jun 12</div>
+          <div class="tl-title">Farm day</div>
+          <ul class="tl-items">
+            <li>Same routine as Friday — animal visits, pool, kayaks.</li>
+            <li class="meal">🍽 <strong>Breakfast:</strong> delivered daily by the host.</li>
+            <li class="meal">🍽 <strong>Dinner option:</strong> fire pit lit before sunset on Saturday nights too, s'mores kit provided.</li>
+            <li>Games and puzzles available in The Homestead for a rainy-day or evening option.</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="tl-day">
+        <div class="tl-dot">4</div>
+        <div class="tl-card">
+          <div class="tl-date">Sun · Jun 13 · Departure</div>
+          <div class="tl-title">Checkout, drive home</div>
+          <ul class="tl-items">
+            <li>No specific checkout time on record — check the Airbnb listing/confirmation if you need it for a repeat stay.</li>
+          </ul>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- THE FARM -->
+  <div id="tab-farm" class="section">
+    <div class="section-title">The Farm</div>
+    <div class="section-sub">What's actually on-site at Sugar Water Manor, per the host's own welcome message.</div>
+    <div class="card-grid">
+      <div class="card accent1">
+        <div class="card-eyebrow">On-site</div>
+        <h3>Animal chore-time visits</h3>
+        <p>The host arranges morning and/or afternoon animal visits during daily chore times — a working farm, not a petting zoo, but hands-on for guests who want it.</p>
+      </div>
+      <div class="card accent1">
+        <div class="card-eyebrow">Fri &amp; Sat nights (other nights by request)</div>
+        <h3>Fire pit &amp; s'mores</h3>
+        <p>Lit before sunset, with a s'mores kit left at check-in. Good for cooking dinner over, too.</p>
+      </div>
+      <div class="card accent1">
+        <div class="card-eyebrow">Year-round</div>
+        <h3>Pool &amp; kayaks</h3>
+        <p>Both available on-site for guest use throughout the stay.</p>
+      </div>
+      <div class="card accent1">
+        <div class="card-eyebrow">In The Homestead</div>
+        <h3>Games &amp; puzzles</h3>
+        <p>On hand for a slow evening or a rainy stretch.</p>
+      </div>
+      <div class="card accent1">
+        <div class="card-eyebrow">Mon–Fri, order by 3 PM</div>
+        <h3>Squeaky's takeout delivery</h3>
+        <p>The Homestead has a standing delivery arrangement with a local restaurant called Squeaky's for evenings after 6 PM.</p>
+      </div>
+      <div class="card accent1">
+        <div class="card-eyebrow">Daily</div>
+        <h3>Breakfast treat delivery</h3>
+        <p>The host delivers a breakfast treat to the door each morning of the stay.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- ALSO WORTH SEEING -->
+  <div id="tab-more" class="section">
+    <div class="section-title">Also Worth Seeing</div>
+    <div class="section-sub">Somerset County spots within a short drive — not confirmed as visited on this trip.</div>
+    <div class="card-grid">
+      <div class="card accent2">
+        <div class="card-eyebrow">~20 min drive</div>
+        <h3>Crisfield, MD</h3>
+        <p>The self-proclaimed "Crab Capital of the World" — working waterfront, seafood restaurants, and the dock where the Smith Island ferry departs.</p>
+        <div class="poi-actions"><a class="dir" href="https://www.google.com/maps/dir/?api=1&destination=Crisfield%2C+MD" target="_blank" rel="noopener">🧭 Directions</a></div>
+      </div>
+      <div class="card accent2">
+        <div class="card-eyebrow">~20 min drive, near Crisfield</div>
+        <h3>Janes Island State Park</h3>
+        <p>Water trails through salt marsh, a boat-access beach, and kayak/canoe rentals — no roads reach the island side, it's paddle-in only.</p>
+        <div class="poi-actions"><a class="dir" href="https://www.google.com/maps/dir/?api=1&destination=Janes+Island+State+Park%2C+Crisfield%2C+MD" target="_blank" rel="noopener">🧭 Directions</a></div>
+      </div>
+      <div class="card accent2">
+        <div class="card-eyebrow">Passenger ferry from Crisfield</div>
+        <h3>Smith Island</h3>
+        <p>Chesapeake Bay's last inhabited offshore island reachable only by boat — famous for the many-layered Smith Island cake, Maryland's official state dessert.</p>
+        <div class="poi-actions"><a class="dir" href="https://www.google.com/maps/dir/?api=1&destination=Smith+Island%2C+MD" target="_blank" rel="noopener">🧭 Directions</a></div>
+      </div>
+      <div class="card accent2">
+        <div class="card-eyebrow">~20 min drive</div>
+        <h3>Princess Anne, MD</h3>
+        <p>Somerset County's historic seat — a walkable colonial-era downtown along the Manokin River.</p>
+        <div class="poi-actions"><a class="dir" href="https://www.google.com/maps/dir/?api=1&destination=Princess+Anne%2C+MD" target="_blank" rel="noopener">🧭 Directions</a></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- BOOK NOW -->
+  <div id="tab-book" class="section">
+    <div class="section-title">Book Now</div>
+    <div class="section-sub">This trip already happened — booked and completed.</div>
+
+    <div class="book-group-label">Accommodations</div>
+    <ul class="checklist">
+      <li class="done"><span class="checkbox"></span><div>
+        <span class="lbl"><a href="https://www.airbnb.com/rooms/47385241" target="_blank" rel="noopener">The Homestead at Sugar Water Manor Farm Stay</a></span>Jun 10–13, 4 guests · booked via Airbnb, $1,094.78 total
+        <span class="contact">💬 Host contact via Airbnb messaging</span>
+      </div></li>
+    </ul>
+  </div>
+
+  <!-- PRINT -->
+  <div id="tab-print" class="section">
+    <div class="section-title">Print</div>
+    <div class="section-sub">A no-internet-needed PDF isn't hosted yet for this page — use your browser's print function in the meantime, or check back once a future session with file access generates one.</div>
+  </div>
+
+</div>
+
+<div class="footer">Built for the Moore family · <span>Sugar Water Manor, Jun 10–13, 2021</span></div>
+
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+<script>
+  function showTab(id){
+    document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+    document.getElementById('tab-' + id).classList.add('active');
+    document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+    event.target.closest('.tab-btn').classList.add('active');
+  }
+
+  var pins = [
+    {n:1, name:'The Homestead at Sugar Water Manor Farm Stay', cat:'lodge', note:'Home base — booked via Airbnb, 3 nights', lat:38.0373, lng:-75.6738, site:'https://www.airbnb.com/rooms/47385241'},
+    {n:2, name:'Crisfield, MD', cat:'more', note:"The Crab Capital of the World — Smith Island ferry dock", lat:37.9788, lng:-75.8574, site:''},
+    {n:3, name:'Janes Island State Park', cat:'more', note:'Salt-marsh water trails, paddle-in beach', lat:37.9880, lng:-75.8650, site:''},
+    {n:4, name:'Princess Anne, MD', cat:'more', note:'Somerset County historic seat', lat:38.2009, lng:-75.6941, site:''},
+  ];
+  var colors = { lodge:'#7a8b4f', food:'#c17f3e', more:'#d4a13d' };
+
+  var map = L.map('map', { scrollWheelZoom:false }).setView([38.06, -75.75], 10);
+  L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+    attribution:'&copy; OpenStreetMap contributors', maxZoom:17
+  }).addTo(map);
+
+  pins.forEach(function(p){
+    var icon = L.divIcon({
+      className:'',
+      html:'<div style="background:'+colors[p.cat]+';width:24px;height:24px;border-radius:50%;border:2.5px solid #fff;box-shadow:0 2px 6px rgba(0,0,0,0.3);display:flex;align-items:center;justify-content:center;color:#fff;font-family:JetBrains Mono,monospace;font-weight:600;font-size:11px;">'+p.n+'</div>',
+      iconSize:[24,24], iconAnchor:[12,12]
+    });
+    var siteHtml = p.site ? '<br><a href="'+p.site+'" target="_blank" rel="noopener" style="font-size:11px;">Website →</a>' : '';
+    var noteHtml = p.note ? '<br><span style="color:#888;font-size:12px;">'+p.note+'</span>' : '';
+    var gmapsUrl = 'https://www.google.com/maps/dir/?api=1&destination=' + p.lat + ',' + p.lng;
+    var linkHtml = '<br><a href="'+gmapsUrl+'" target="_blank" rel="noopener" style="font-size:11px;">Open in Google Maps →</a>';
+    L.marker([p.lat, p.lng], {icon:icon}).addTo(map)
+      .bindPopup('<b>'+p.name+'</b>' + noteHtml + siteHtml + linkHtml, {maxWidth:220});
+  });
+
+  setTimeout(function(){ map.invalidateSize(); }, 150);
+</script>
+
+</body>
+</html>
