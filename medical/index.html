@@ -719,7 +719,7 @@ const CONDITIONS = [
   { tag:'Infection', kind:'active', title:'H. pylori (stomach)',
     body:'Positive on the Aug 26, 2024 GI-MAP stool panel (4.94e3, High; ref <1.00e3). Not documented as treated anywhere in the chart yet. Important: this strain carries fluoroquinolone-resistance genes, so a fluoroquinolone-based regimen (e.g. levofloxacin triple therapy) would likely fail — worth flagging before any eradication attempt.' },
   { tag:'Eyes', kind:'active', title:'Chronic Dry Eye',
-    body:'Diagnosed at your most recent vision appointment, August 2026. Doctor recommended Systane or Ivizia lubricating eye drops. Full details in the Vision tab.' },
+    body:'Diagnosed by Dr. Vincent Vu, O.D., Aug 28, 2026. Doctor recommended Systane or Ivizia lubricating eye drops. Multifocal glasses Rx updated same visit — full details in the Vision tab.' },
   { tag:'Hormonal', kind:'treatment', title:'Perimenopause — on bioidentical HRT (bHRT)',
     body:'Prescribed by Dr. Afrouz Demeri. Current regimen: <b>Estradiol 0.75mg</b> and <b>Progesterone 200mg</b> (two 100mg capsules). Not yet reflected in any portal record. The Feb 2025 DUTCH hormone panel (via Rupa Health, same prescriber) — showing low-normal progesterone metabolites and low-normal cortisol/cortisone — likely informed this dosing.' },
   { tag:'Resolved', kind:'stable', title:'Prior gynecologic findings',
@@ -828,20 +828,39 @@ function renderLabResults(){
 }
 
 /* ================= VISION TAB ================= */
+const GLASSES_RX = {
+  prescriber: 'Vincent Vu, O.D.', signedDate: 'Aug 28, 2026', start: 'Aug 28, 2026', exp: 'Aug 28, 2027',
+  usage: 'Multifocal', active: true,
+  eyes: [
+    { eye:'OD (right)', sphere:'+0.25', cylinder:'-0.25', axis:'139', add:'+1.50' },
+    { eye:'OS (left)', sphere:'-0.25', cylinder:'-0.25', axis:'083', add:'+1.50' },
+  ],
+};
+
 function renderVision(){
   const el = document.getElementById('tab-vision');
   el.innerHTML = `
     <div class="sum-section">
       <h2>Current Prescription</h2>
-      <div class="rx-box placeholder">Not yet added — bring your latest Rx card or portal printout and I\'ll drop it in here.</div>
+      <div class="rx-box">
+        <table class="data-table">
+          <thead><tr><th></th><th>Sphere</th><th>Cylinder</th><th>Axis</th><th>Add</th></tr></thead>
+          <tbody>
+            ${GLASSES_RX.eyes.map(e=>`<tr><td>${e.eye}</td><td class="num">${e.sphere}</td><td class="num">${e.cylinder}</td><td class="num">${e.axis}</td><td class="num">${e.add}</td></tr>`).join('')}
+          </tbody>
+        </table>
+        <p style="font-size:12px;color:var(--text-muted);margin:12px 0 0;">
+          Usage: <b>${GLASSES_RX.usage}</b> &middot; Prescribed by <b>Dr. ${GLASSES_RX.prescriber}</b> &middot; Start ${GLASSES_RX.start} &middot; Expires ${GLASSES_RX.exp}
+        </p>
+      </div>
     </div>
     <div class="sum-section">
       <h2>Diagnoses &amp; Treatment</h2>
       <div class="cond-grid">
         <div class="cond-card active">
-          <div class="tag">Diagnosed Aug 2026</div>
+          <div class="tag">Diagnosed Aug 28, 2026</div>
           <div class="title">Chronic Dry Eye</div>
-          <div class="body">Diagnosed at your most recent vision appointment. Recommended treatment: <b>Systane</b> or <b>Ivizia</b> lubricating eye drops.</div>
+          <div class="body">Diagnosed by Dr. Vincent Vu, O.D. at your Aug 28, 2026 vision appointment (same visit as the glasses Rx above). Recommended treatment: <b>Systane</b> or <b>Ivizia</b> lubricating eye drops.</div>
         </div>
       </div>
     </div>
