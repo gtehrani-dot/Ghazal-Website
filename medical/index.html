@@ -194,6 +194,18 @@
   .tab-btn.active { color: var(--text-primary); border-bottom-color: var(--series-1); }
   .tab-panel[hidden] { display: none; }
 
+  /* ---------- jump nav ---------- */
+  .jump-nav {
+    display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 20px;
+  }
+  .jump-nav a {
+    font-size: 12px; color: var(--text-secondary); text-decoration: none;
+    border: 1px solid var(--border); border-radius: 999px; padding: 5px 12px;
+    background: var(--surface-1);
+  }
+  .jump-nav a:hover { color: var(--text-primary); border-color: var(--series-1); }
+  section.group { scroll-margin-top: 16px; }
+
   /* ---------- summary tab ---------- */
   .sum-section { margin-bottom: 28px; }
   .sum-section h2 { font-size: 16px; margin: 0 0 4px; }
@@ -218,6 +230,10 @@
   .source-block { margin-bottom: 26px; }
   .source-block h2 { font-size: 15px; margin: 0 0 2px; }
   .source-block .loc-note { font-size: 12px; color: var(--text-muted); margin: 0 0 10px; }
+  .src-link { color: inherit; text-decoration: none; }
+  .src-link:hover { color: var(--series-1); }
+  .src-icon { font-size: 12px; color: var(--series-1); }
+  table.data-table td:last-child { width: 24px; text-align: center; }
 
   /* ---------- vision tab ---------- */
   .rx-box {
@@ -255,6 +271,8 @@
     <div class="callout">
       <b>What this covers.</b> Every analyte with two or more time points across your chart history — grouped into Crohn's / inflammation markers, the GI-MAP stool microbiome panel, vitamins &amp; minerals, cholesterol &amp; cardiometabolic, liver &amp; kidney (relevant to medication monitoring), and thyroid. The shaded band on each chart is the normal reference range; points outside it are marked in red with an H/L flag. Single-reading analytes are listed as tiles at the end of their section instead of a line chart. Hover any point for the exact value, date, and source. Every underlying report this is built from is indexed, with its portal/location, in the <b>Lab Results</b> tab.
     </div>
+
+    <nav class="jump-nav" id="jumpNav"></nav>
 
     <div class="flag-row" id="flagRow"></div>
 
@@ -465,6 +483,11 @@ const GROUPS = [
   { key:'thyroid', title:'Thyroid', desc:'Spans three different providers across ten years — the longest single trend in your chart history.' },
 ];
 
+function renderJumpNav(){
+  const el = document.getElementById('jumpNav');
+  el.innerHTML = GROUPS.map(g=>`<a href="#grp-${g.key}">${g.title}</a>`).join('');
+}
+
 /* ---------- helpers ---------- */
 function parseDate(d){ return new Date(d+'T00:00:00'); }
 function fmtDateShort(d){
@@ -651,7 +674,7 @@ function renderSections(){
       }).join('')}
     </div>` : '';
 
-    return `<section class="group">
+    return `<section class="group" id="grp-${g.key}">
       <div class="group-head">
         <h2>${g.title}</h2>
         <span class="desc">${g.desc}</span>
@@ -691,50 +714,63 @@ function renderDataTable(){
 
 /* ================= SUMMARY TAB ================= */
 const CONDITIONS = [
-  { tag:'Active — GI', kind:'active', title:'Ileitis / IBD-spectrum inflammation (terminal ileum)',
+  { tag:'GI', kind:'active', title:'Ileitis / IBD-spectrum inflammation (terminal ileum)',
     body:'Found on colonoscopy May 13, 2025 (Dr. Charabaty, Johns Hopkins/Sibley): several aphthous ulcers and one deeper ulcer in the terminal ileum, biopsy showed acute ileitis. On budesonide initially; currently on ongoing infusion therapy through Johns Hopkins Sibley Gastro Infusion (roughly every 6–8 weeks). Calprotectin — the main marker being tracked — was 281 mcg/g (High) in Aug 2024 and has come down to 39 and then 10 by 2026 (normal), suggesting the inflammation has improved.' },
-  { tag:'Active — Infection', kind:'active', title:'H. pylori (stomach)',
+  { tag:'Infection', kind:'active', title:'H. pylori (stomach)',
     body:'Positive on the Aug 26, 2024 GI-MAP stool panel (4.94e3, High; ref <1.00e3). Not documented as treated anywhere in the chart yet. Important: this strain carries fluoroquinolone-resistance genes, so a fluoroquinolone-based regimen (e.g. levofloxacin triple therapy) would likely fail — worth flagging before any eradication attempt.' },
-  { tag:'Active — Eyes', kind:'active', title:'Chronic Dry Eye',
+  { tag:'Eyes', kind:'active', title:'Chronic Dry Eye',
     body:'Diagnosed at your most recent vision appointment, August 2026. Doctor recommended Systane or Ivizia lubricating eye drops. Full details in the Vision tab.' },
-  { tag:'Treatment', kind:'treatment', title:'Perimenopause — on bioidentical HRT (bHRT)',
+  { tag:'Hormonal', kind:'treatment', title:'Perimenopause — on bioidentical HRT (bHRT)',
     body:'Prescribed by Dr. Afrouz Demeri. Current regimen: <b>Estradiol 0.75mg</b> and <b>Progesterone 200mg</b> (two 100mg capsules). Not yet reflected in any portal record. The Feb 2025 DUTCH hormone panel (via Rupa Health, same prescriber) — showing low-normal progesterone metabolites and low-normal cortisol/cortisone — likely informed this dosing.' },
-  { tag:'Watch', kind:'watch', title:'Vitamin D insufficiency',
-    body:'Low at the last two Johns Hopkins draws: 21 ng/mL (Feb 2026) and 29 ng/mL (Jul 2026), against a normal range of 30–100. Trending in the right direction but still below range.' },
-  { tag:'Watch', kind:'watch', title:'Cholesterol, trending up',
-    body:'Total cholesterol 223→250 mg/dL and LDL 126→128 mg/dL across the two Speer Primary Care annual checks (Jul 2024 → Apr 2026), both above the <200/<100 targets — despite HDL improving (80→107) and triglycerides dropping (76→55). Janice\'s guidance both times was diet/exercise rather than medication; Apolipoprotein B and Lipoprotein(a) were both reassuring in 2024.' },
-  { tag:'Watch — Gut', kind:'watch', title:'Low Akkermansia muciniphila',
-    body:'Undetectable (below the lab\'s detection limit) on the Aug 2024 GI-MAP, against a reference range of 1.0e1–8.2e6. This is a beneficial, mucin-degrading species tied to gut-barrier health.' },
-  { tag:'Watch — Gut', kind:'watch', title:'Eosinophil Activation Protein (EDN/EPX), elevated',
-    body:'2.96 ug/g (High; ref <2.34) on the Aug 2024 GI-MAP — can point to an allergic or eosinophilic component in the gut alongside the ileitis; anti-gliadin IgA and secretory IgA were both normal same draw.' },
-  { tag:'Watch — Gut', kind:'watch', title:'Low-grade food sensitivities (17 foods, all mild)',
-    body:'96-food IgG panel via Dr. Demeri, Jun 2025 (Alletess Medical Lab): 17 foods flagged Class 1 (Low Sensitivity only — none reached Moderate or High), including gluten, wheat, egg white, coconut, sesame, and ginger. An elimination/rotation Wellness Plan was provided.' },
-  { tag:'Stable / Resolved', kind:'stable', title:'Prior gynecologic findings',
+  { tag:'Resolved', kind:'stable', title:'Prior gynecologic findings',
     body:'Benign breast biopsy (May 2021, Inova). Vulvar/labial eczematous dermatitis (biopsied Dec 2020, treated). ASC-US Pap (Feb 2017) resolved — HPV negative, subsequent Paps (2020, 2023) normal. No celiac disease serologically or genetically (Johns Hopkins, 2014 and 2025 testing both negative).' },
-  { tag:'Other active care', kind:'active', title:'Orthopedic / sports medicine (Inova, Dr. Sagar Shah)',
+  { tag:'Orthopedic', kind:'active', title:'Ongoing care (Inova, Dr. Sagar Shah)',
     body:'Ongoing visits in 2026 (office visits, PT, telephone follow-ups) — specific diagnosis not yet pulled into this chart. Let me know if you\'d like that added.' },
 ];
 
-function renderSummary(){
-  const el = document.getElementById('tab-summary');
-  el.innerHTML = `
-    <div class="sum-section">
-      <h2>Conditions, treatments &amp; what to watch</h2>
-      <p class="desc">A working list, not a diagnosis — pulled from what\'s documented across your portals plus what you\'ve told me directly. Flag anything wrong or missing.</p>
+const DEFICIENCIES = [
+  { tag:'Vitamins', kind:'watch', title:'Vitamin D insufficiency',
+    body:'Low at the last two Johns Hopkins draws: 21 ng/mL (Feb 2026) and 29 ng/mL (Jul 2026), against a normal range of 30–100. Trending in the right direction but still below range.' },
+  { tag:'Gut microbiome', kind:'watch', title:'Low Akkermansia muciniphila',
+    body:'Undetectable (below the lab\'s detection limit) on the Aug 2024 GI-MAP, against a reference range of 1.0e1–8.2e6. This is a beneficial, mucin-degrading species tied to gut-barrier health.' },
+];
+
+const WATCHLIST = [
+  { tag:'Cardiometabolic', kind:'watch', title:'Cholesterol, trending up',
+    body:'Total cholesterol 223→250 mg/dL and LDL 126→128 mg/dL across the two Speer Primary Care annual checks (Jul 2024 → Apr 2026), both above the <200/<100 targets — despite HDL improving (80→107) and triglycerides dropping (76→55). Janice\'s guidance both times was diet/exercise rather than medication; Apolipoprotein B and Lipoprotein(a) were both reassuring in 2024.' },
+  { tag:'Gut', kind:'watch', title:'Eosinophil Activation Protein (EDN/EPX), elevated',
+    body:'2.96 ug/g (High; ref <2.34) on the Aug 2024 GI-MAP — can point to an allergic or eosinophilic component in the gut alongside the ileitis; anti-gliadin IgA and secretory IgA were both normal same draw.' },
+  { tag:'Gut', kind:'watch', title:'Low-grade food sensitivities (17 foods, all mild)',
+    body:'96-food IgG panel via Dr. Demeri, Jun 2025 (Alletess Medical Lab): 17 foods flagged Class 1 (Low Sensitivity only — none reached Moderate or High), including gluten, wheat, egg white, coconut, sesame, and ginger. An elimination/rotation Wellness Plan was provided.' },
+];
+
+function summaryGroup(title, desc, items){
+  return `<div class="sum-section">
+      <h2>${title}</h2>
+      <p class="desc">${desc}</p>
       <div class="cond-grid">
-        ${CONDITIONS.map(c=>`<div class="cond-card ${c.kind}">
+        ${items.map(c=>`<div class="cond-card ${c.kind}">
           <div class="tag">${c.tag}</div>
           <div class="title">${c.title}</div>
           <div class="body">${c.body}</div>
         </div>`).join('')}
       </div>
-    </div>
+    </div>`;
+}
+
+function renderSummary(){
+  const el = document.getElementById('tab-summary');
+  el.innerHTML = `
+    <p class="desc" style="margin-bottom:20px;">A working list, not a diagnosis — pulled from what\'s documented across your portals plus what you\'ve told me directly. Flag anything wrong or missing.</p>
+    ${summaryGroup('Conditions', 'Active diagnoses and ongoing care relationships.', CONDITIONS)}
+    ${summaryGroup('Deficiencies', 'Things measured as low against a reference range.', DEFICIENCIES)}
+    ${summaryGroup('Watch', 'Abnormal findings worth monitoring — not a diagnosis or deficiency, but not normal either.', WATCHLIST)}
   `;
 }
 
 /* ================= LAB RESULTS TAB ================= */
 const RESULT_SOURCES = [
-  { name:'Johns Hopkins MyChart', note:'Ongoing GI/infusion care, Dr. Aline Charabaty Pishvaian and team.', rows:[
+  { name:'Johns Hopkins MyChart', url:'https://mychart.hopkinsmedicine.org/mychart/authentication/login', note:'Ongoing GI/infusion care, Dr. Aline Charabaty Pishvaian and team.', rows:[
     ['2026_07_Reddick_ComprehensiveBloodPanel','Jul 7, 2026','CBC, CMP, Iron/TIBC/Sat, Ferritin, CRP, Vit D, B12, Zinc, Mg, Vit C'],
     ['2026_07_Reddick_CalprotectinStool','Jul 31, 2026','Calprotectin'],
     ['2026_03_Reddick_CalprotectinStool','Mar 6, 2026','Calprotectin'],
@@ -744,7 +780,7 @@ const RESULT_SOURCES = [
     ['2025_05_Charabaty_Colonoscopy','May 13, 2025','Procedure + Surgical Pathology + POCT HCG'],
     ['2014_03_Unknown_CeliacGenetics','Mar 10, 2014','Prometheus #6260 Celiac Genetics'],
   ]},
-  { name:'Inova MyChart', note:'Mostly OB/GYN (Dr. Dipa Joshi through 2021, Dr. Presti since). 25 imaging-only studies (mammograms, X-rays, ultrasounds, CT) also on file but carry no lab values, not listed here.', rows:[
+  { name:'Inova MyChart', url:'https://mychart.inova.org/mychart/Authentication/Login', note:'Mostly OB/GYN (Dr. Dipa Joshi through 2021, Dr. Presti since). 25 imaging-only studies (mammograms, X-rays, ultrasounds, CT) also on file but carry no lab values, not listed here.', rows:[
     ['2023_08_Joshi_PapHPV','Aug 21, 2023','Pap + HPV'],
     ['2021_05_Joshi_BreastBiopsyPathology','May 19, 2021','Tissue exam'],
     ['2020_12_Joshi_VulvarBiopsyPathology','Dec 7, 2020','Tissue exam'],
@@ -757,12 +793,12 @@ const RESULT_SOURCES = [
     ['2016_07_Joshi_CBC-TypeScreen','Jul 14, 2016','CBC, Type & Screen'],
     ['2016_07_Kinder_UrineDipstick','Jul 11, 2016','Urine dipstick'],
   ]},
-  { name:'Speer Primary Care (via Hushmail)', note:'Drawn at Quest Diagnostics. Primary care since Jul 2024.', rows:[
+  { name:'Speer Primary Care (via Hushmail)', url:'https://secure.hushmail.com/mail/', note:'Drawn at Quest Diagnostics. Primary care since Jul 2024.', rows:[
     ['2026_04_Speer_AnnualWellnessLabs','Apr 8, 2026','Lipids, A1c, TSH, B12, CMP, CBC, Iron panel'],
     ['2024_09_Speer_CologuardColonCancerScreen','Sep 3, 2024','Cologuard'],
     ['2024_07_Speer_AnnualWellnessLabs','Jul 10, 2024','Lipids, A1c, TSH, ApoB, Lp(a), CMP, CBC'],
   ]},
-  { name:'Dr. Afrouz Demeri (Rupa Health)', note:'Naturopathic/functional medicine testing.', rows:[
+  { name:'Dr. Afrouz Demeri (Rupa Health)', url:'https://labs.rupahealth.com/login', note:'Naturopathic/functional medicine testing.', rows:[
     ['2025_06_Demeri_IgGFoodSensitivityPanel','Jun 4, 2025','96-food IgG panel + Wellness Plan'],
     ['2025_02_Demeri_DUTCHHormonePanel','Feb 28, 2025','DUTCH Complete hormones'],
     ['2024_08_Demeri_GI-MAP-ZonulinStoolPanel','Aug 26, 2024','GI-MAP stool DNA + Zonulin'],
@@ -773,16 +809,16 @@ function renderLabResults(){
   const el = document.getElementById('tab-labresults');
   el.innerHTML = `
     <div class="callout">
-      <b>What this is.</b> Every distinct lab order/report on file, one row per result, titled <code>Year_Month_Doctor_Type</code> so you can match it back to the source portal. This is the index the Lab Trends charts are built from.
+      <b>What this is.</b> Every distinct lab order/report on file, one row per result, titled <code>Year_Month_Doctor_Type</code> so you can match it back to the source portal. This is the index the Lab Trends charts are built from. The <span class="src-icon">↗</span> icon opens that source's login page (Johns Hopkins MyChart, Inova MyChart, Hushmail, or Rupa Health) — none of these portals support a direct link to one specific historical result, so it takes you to the portal itself rather than the exact record.
     </div>
     ${RESULT_SOURCES.map(s=>`
       <div class="source-block">
-        <h2>${s.name}</h2>
+        <h2><a class="src-link" href="${s.url}" target="_blank" rel="noopener">${s.name} <span class="src-icon">↗</span></a></h2>
         <p class="loc-note">${s.note}</p>
         <table class="data-table">
-          <thead><tr><th>Title</th><th>Date</th><th>Contents</th></tr></thead>
+          <thead><tr><th>Title</th><th>Date</th><th>Contents</th><th></th></tr></thead>
           <tbody>
-            ${s.rows.map(r=>`<tr><td>${r[0]}</td><td>${r[1]}</td><td>${r[2]}</td></tr>`).join('')}
+            ${s.rows.map(r=>`<tr><td>${r[0]}</td><td>${r[1]}</td><td>${r[2]}</td><td><a class="src-link" href="${s.url}" target="_blank" rel="noopener" title="Open ${s.name}"><span class="src-icon">↗</span></a></td></tr>`).join('')}
           </tbody>
         </table>
       </div>
@@ -850,6 +886,7 @@ themeBtn.addEventListener('click', ()=>{
 });
 
 /* ---------- init ---------- */
+renderJumpNav();
 renderFlagRow();
 renderSections();
 document.getElementById('tab-labtrends').insertAdjacentHTML('beforeend', renderDataTable());
