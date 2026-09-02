@@ -46,8 +46,7 @@
 
   .banner{ max-width:1180px; margin:0 auto; padding:28px 6vw 40px; display:grid; grid-template-columns:1fr 1fr; gap:20px; }
   .banner-panel{ position:relative; height:420px; border-radius:18px; overflow:hidden; box-shadow:0 16px 40px rgba(58,50,38,0.12); border:1px solid var(--line); background:var(--white); }
-  .banner-photo{ width:100%; height:100%; background:linear-gradient(160deg, #d4a13d 0%, #c17f3e 38%, #7a8b4f 72%, #4d5c2e 100%); position:relative; }
-  .banner-photo::after{ content:'🌾'; position:absolute; font-size:64px; right:28px; bottom:22px; opacity:0.55; filter:drop-shadow(0 4px 10px rgba(0,0,0,0.25)); }
+  .banner-photo{ width:100%; height:100%; background-size:cover; background-position:center; }
   .banner-photo-cap{ position:absolute; left:16px; bottom:14px; font-family:'JetBrains Mono', monospace; font-size:11px; color:#fff; text-shadow:0 1px 5px rgba(0,0,0,0.5); }
   #map{ background:#e6e2d3; }
   .leaflet-popup-content{ font-family:'Inter', sans-serif; }
@@ -169,8 +168,8 @@
 
 <div class="banner">
   <div class="banner-panel">
-    <div class="banner-photo"></div>
-    <div class="banner-photo-cap">Sugar Water Manor, Westover, MD</div>
+    <div class="banner-photo" style="background-image:url('hero.jpg');"></div>
+    <div class="banner-photo-cap">The screened porch, looking out over the farm and the water</div>
   </div>
   <div>
     <div class="banner-panel"><div id="map" style="width:100%; height:100%;"></div></div>
