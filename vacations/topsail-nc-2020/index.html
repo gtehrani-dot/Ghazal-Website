@@ -19,8 +19,9 @@
   a{color:inherit;}
   .back-link{ display:inline-block; margin:18px 0 0 32px; font-family:var(--mono); font-size:12.5px; color:var(--primary); text-decoration:none; }
   .back-link:hover{ text-decoration:underline; }
-  .hero{ background:linear-gradient(135deg,var(--primary-deep) 0%, var(--primary) 55%, #a3c9a8 100%); color:#fff; padding:36px 32px 46px; position:relative; overflow:hidden;}
+  .hero{ background:linear-gradient(135deg,rgba(7,63,82,0.80) 0%, rgba(11,110,145,0.60) 55%, rgba(163,201,168,0.38) 100%), url('hero.jpg') center 60%/cover; color:#fff; padding:36px 32px 46px; position:relative; overflow:hidden;}
   .hero::before{ content:''; position:absolute; inset:0; background:radial-gradient(ellipse at 85% 15%, rgba(242,193,78,0.2) 0%, transparent 55%);}
+  .hero-photo-cap{ position:relative; max-width:980px; margin:8px auto 0; font-family:var(--mono); font-size:11px; color:var(--muted); text-align:right; opacity:0.85; }
   .hero-inner{ position:relative; max-width:980px; margin:0 auto;}
   .hero-eyebrow{ font-family:var(--mono); font-size:11px; letter-spacing:3px; text-transform:uppercase; color:#cfe8d2; margin-bottom:14px;}
   .hero h1{ font-family:var(--serif); font-weight:500; font-size:clamp(38px,6vw,64px); line-height:1.05;}
@@ -83,6 +84,7 @@
     </div>
   </div>
 </div>
+<div class="hero-photo-cap">📷 <a href="hero.jpg" target="_blank" style="color:inherit;">View full photo</a> — flying a kite on the beach, houses in the distance</div>
 
 <div id="map"></div>
 
