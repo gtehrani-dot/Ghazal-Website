@@ -269,6 +269,7 @@
     <button class="tab-btn" data-tab="labresults">Lab Results</button>
     <button class="tab-btn" data-tab="labtrends">Lab Trends</button>
     <button class="tab-btn" data-tab="vision">Vision</button>
+    <button class="tab-btn" data-tab="actions">Actions</button>
   </nav>
 
   <section class="tab-panel" id="tab-summary"></section>
@@ -288,6 +289,8 @@
   </section>
 
   <section class="tab-panel" id="tab-vision" hidden></section>
+
+  <section class="tab-panel" id="tab-actions" hidden></section>
 
   <footer class="note">
     Reference ranges shown are the lab-reported ranges from each source at the time of the draw and may vary slightly between labs (e.g. Quest vs. hospital lab). Values pulled from Johns Hopkins MyChart, Inova MyChart, Speer Primary Care (via Hushmail/Quest Diagnostics), and Rupa Health (Dr. Afrouz Demeri). This is a personal tracking view, not a diagnostic tool — bring trends you want to discuss to your next visit with Dr. Charabaty or Dr. Speer.
@@ -870,6 +873,10 @@ const CONDITIONS = [
     body:'Benign breast biopsy (May 2021, Inova). Vulvar/labial eczematous dermatitis (biopsied Dec 2020, treated). ASC-US Pap (Feb 2017) resolved — HPV negative, subsequent Paps (2020, 2023) normal. No celiac disease serologically or genetically (Johns Hopkins, 2014 and 2025 testing both negative).' },
   { tag:'Orthopedic', kind:'active', title:'Ongoing care (Inova, Dr. Stephen Pournaras)',
     body:'Ongoing visits in 2026 (office visits, PT, telephone follow-ups) — specific diagnosis not yet pulled into this chart. Let me know if you\'d like that added. Note: the Apr 2026 Inova visit records pulled from MyChart list the provider as "Sagar Shah, MD" — per Ghazal, the correct current provider is Dr. Stephen Pournaras.' },
+  { tag:'Neurodevelopmental', kind:'active', title:'ADHD (self-diagnosed, self-medicated)',
+    body:'Per Ghazal, Sep 2026 — not clinically diagnosed or prescribed through any provider in this chart. Primary symptoms: impulsivity and working memory difficulties. Not yet corroborated by any portal record.' },
+  { tag:'Hormonal', kind:'treatment', title:'Hormonal Acne',
+    body:'Treated with Spironolactone 150mg (see Actions tab). Not yet documented in any portal record — per Ghazal.' },
 ];
 
 const DEFICIENCIES = [
@@ -1013,6 +1020,47 @@ function renderVision(){
   `;
 }
 
+/* ================= ACTIONS TAB ================= */
+const ACTIONS = [
+  { tag:'Infusion', title:'Entyvio infusions', detail:'Ongoing through Johns Hopkins Sibley Gastro Infusion, roughly every 6–8 weeks, for the ileitis/IBD-spectrum inflammation found May 2025.' },
+  { tag:'Hormonal', title:'bHRT — Estradiol 0.75mg + Progesterone 200mg', detail:'Two 100mg progesterone capsules daily. Prescribed by Dr. Afrouz Demeri for perimenopause.' },
+  { tag:'Supplement', title:'Iron pills', detail:'For low-normal Iron & Ferritin (see Deficiencies) — the terminal ileum, where iron absorbs, is the same segment affected by the ileitis.' },
+  { tag:'Supplement', title:'Vitamin D, weekly high-dose', detail:'For the Vitamin D insufficiency flagged at the last two Johns Hopkins draws (21 and 29 ng/mL, normal 30–100).' },
+  { tag:'Eyes', title:'Eye drops (Ivizia)', detail:'Lubricating drops for Chronic Dry Eye, recommended by Dr. Vincent Vu, O.D. (Systane is the alternative option).' },
+  { tag:'Hormonal', title:'Spironolactone 150mg', detail:'Treats Hormonal Acne.' },
+];
+
+const ACTION_LINKS = [
+  { title:'Lowering LDL', url:'https://www.umassmed.edu/nutrition/Cardiovascular/handouts/lowering-ldl/' },
+  { title:'Cholesterol overview (American Heart Association)', url:'https://www.heart.org/en/health-topics/cholesterol' },
+  { title:'Raising HDL', url:'https://www.umassmed.edu/nutrition/Cardiovascular/handouts/raising-hdl/' },
+];
+
+function renderActions(){
+  const el = document.getElementById('tab-actions');
+  el.innerHTML = `
+    <p class="desc" style="margin-bottom:20px;">Current treatments and things to take, per Ghazal — not all of these are documented in a portal record yet.</p>
+    <div class="sum-section">
+      <div class="cond-grid">
+        ${ACTIONS.map(a=>`<div class="cond-card treatment">
+          <div class="tag">${a.tag}</div>
+          <div class="title">${a.title}</div>
+          <div class="body">${a.detail}</div>
+        </div>`).join('')}
+      </div>
+    </div>
+    <div class="sum-section">
+      <h2>Heart-Healthy Resources</h2>
+      <p class="desc">Sent by Dr. Janice Speer (Hushmail) alongside the cholesterol findings on the Lab Trends tab.</p>
+      <div class="cond-grid">
+        ${ACTION_LINKS.map(l=>`<div class="cond-card">
+          <div class="title"><a href="${l.url}" target="_blank" rel="noopener">${l.title} ↗</a></div>
+        </div>`).join('')}
+      </div>
+    </div>
+  `;
+}
+
 /* ================= TAB SWITCHING ================= */
 function initTabs(){
   const btns = Array.from(document.querySelectorAll('.tab-btn'));
@@ -1058,6 +1106,7 @@ document.getElementById('tab-labtrends').insertAdjacentHTML('beforeend', renderD
 renderSummary();
 renderLabResults();
 renderVision();
+renderActions();
 initTabs();
 </script>
 </body>
