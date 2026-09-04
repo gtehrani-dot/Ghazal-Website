@@ -177,6 +177,14 @@
   table.data-table th { color: var(--text-secondary); font-weight: 600; }
   table.data-table td.num { font-variant-numeric: tabular-nums; }
   details.table-toggle { margin-top: 8px; }
+  details.gimap-detail { margin-top: 14px; border: 1px solid var(--border); border-radius: 10px; padding: 10px 14px; }
+  details.gimap-detail summary { cursor: pointer; font-size: 13px; font-weight: 600; color: var(--text-secondary); }
+  details.gimap-detail summary:hover { color: var(--text-primary); }
+  .subtbl { margin-top: 14px; }
+  .subtbl h4 { font-size: 12.5px; margin: 0 0 4px; color: var(--text-secondary); }
+  .flagtag { font-size: 10.5px; font-weight: 700; }
+  .flagtag.high, .flagtag.low { color: var(--status-critical); }
+  .flagtag.normal { color: var(--text-muted); font-weight: 400; }
   details.table-toggle summary { cursor: pointer; font-size: 12.5px; color: var(--text-secondary); }
 
   /* ---------- tabs ---------- */
@@ -472,16 +480,149 @@ const SINGLE_POINTS = [
   { title:'Zonulin (gut permeability)', unit:'ng/g', group:'gimap', value:58.0, range:[null,175], date:'2024-08-26', source:'Rupa Health / GI-MAP' },
   { title:'Streptococcus spp.', unit:'genome eq/g', group:'gimap', value:9240, range:[null,1000], date:'2024-08-26', source:'Rupa Health / GI-MAP' },
   { title:'Eosinophil Activation Protein (EDN/EPX)', unit:'ug/g', group:'gimap', value:2.96, range:[null,2.34], date:'2024-08-26', source:'Rupa Health / GI-MAP' },
+  { title:'Anti-gliadin IgA', unit:'U/L', group:'celiac', value:53, range:[null,175], date:'2024-08-26', source:'Rupa Health / GI-MAP (Dr. Afrouz Demeri)' },
+  { title:'tTG IgA', unit:'U/mL', group:'celiac', value:1.0, range:[null,15], date:'2025-09-12', source:'Johns Hopkins (Celiac Antibody Panel)' },
+  { title:'Total IgA', unit:'mg/dL', group:'celiac', value:180, range:[47,310], date:'2025-09-12', source:'Johns Hopkins (Celiac Antibody Panel)' },
 ];
 
 const GROUPS = [
   { key:'crohns', title:"Crohn's / Inflammation Markers", desc:'Calprotectin is the most Crohn’s-specific marker here; CBC/albumin track anemia and nutritional status, both common in active IBD.' },
-  { key:'gimap', title:'GI-MAP Stool Microbiome Panel (Sep 2024)', desc:'One-time comprehensive DNA stool panel via Dr. Afrouz Demeri (Rupa Health) — collected Aug 26, 2024, around when the calprotectin elevation was first caught. H. pylori and Streptococcus were both flagged high; note H. pylori also carries fluoroquinolone-resistance genes (see chart notes doc) which matters if antibiotic treatment is considered.' },
+  { key:'gimap', title:'GI-MAP Stool Microbiome Panel (Aug 2024)', desc:'One-time comprehensive DNA stool panel via Dr. Afrouz Demeri (Rupa Health) — collected Aug 26, 2024, around when the calprotectin elevation was first caught. H. pylori and Streptococcus were both flagged high, and the beneficial species Akkermansia muciniphila was undetectable; note H. pylori also carries fluoroquinolone-resistance genes which matters if antibiotic treatment is ever considered. This is a one-time panel — it has never been repeated, so none of these ~80 markers below have a second data point yet. Full breakdown of every marker on the report is in the expandable table below.' },
+  { key:'celiac', title:'Celiac Disease Screening', desc:'Three separate tests, three different methods, three different providers — all negative. Genetic risk testing (2014, Johns Hopkins), antibody testing via stool (2024, GI-MAP/Demeri), and antibody testing via blood (2025, Johns Hopkins) all agree there\'s no evidence of celiac disease. Grouped together here since they\'re answering the same clinical question from different angles.' },
   { key:'vitamins', title:'Vitamins & Minerals', desc:'B12 and iron absorption both happen in the terminal ileum — the exact segment affected by the ileitis found in May 2025, so these are worth watching closely.' },
   { key:'chol', title:'Cholesterol & Cardiometabolic', desc:'From Speer Primary Care’s annual wellness labs.' },
   { key:'liver', title:'Liver & Kidney (medication monitoring)', desc:'Routinely checked alongside IBD treatment (budesonide / infusion therapy) to make sure the meds aren’t stressing the liver or kidneys.' },
   { key:'thyroid', title:'Thyroid', desc:'Spans three different providers across ten years — the longest single trend in your chart history.' },
 ];
+
+/* ---------- GI-MAP full panel detail (every marker on the Aug 2024 report      ----------
+   not already shown as a highlighted tile above). Source: claude/lab-values-detail.md,
+   transcribed from the Diagnostic Solutions Laboratory report, accession 20240829-0937. */
+const GIMAP_SECTIONS = [
+  { heading: 'Pathogens — bacterial, parasitic & viral (15 tested, all negative)', rows: [
+    ['Campylobacter','below detection limit','not detected','normal'],
+    ['C. difficile Toxin A/B','below detection limit','not detected','normal'],
+    ['EHEC (enterohemorrhagic E. coli)','below detection limit','not detected','normal'],
+    ['E. coli O157','below detection limit','not detected','normal'],
+    ['EIEC/Shigella','below detection limit','not detected','normal'],
+    ['ETEC LT/ST','below detection limit','not detected','normal'],
+    ['Shiga-like Toxin (stx1/stx2)','below detection limit','not detected','normal'],
+    ['Salmonella','below detection limit','not detected','normal'],
+    ['Vibrio cholerae','below detection limit','not detected','normal'],
+    ['Yersinia enterocolitica','below detection limit','not detected','normal'],
+    ['Cryptosporidium','below detection limit','not detected','normal'],
+    ['Entamoeba histolytica','below detection limit','not detected','normal'],
+    ['Giardia','below detection limit','not detected','normal'],
+    ['Adenovirus 40/41','below detection limit','not detected','normal'],
+    ['Norovirus GI/II','below detection limit','not detected','normal'],
+  ]},
+  { heading: 'Keystone & commensal bacteria', rows: [
+    ['Bacteroides fragilis','2.91e10 genome eq/g','1.6e9–2.5e11','normal'],
+    ['Bifidobacterium spp.','2.38e10 genome eq/g','>6.7e7','normal'],
+    ['Enterococcus spp.','1.56e7 genome eq/g','1.9e5–2.0e8','normal'],
+    ['Escherichia spp.','1.41e9 genome eq/g','3.7e6–3.8e9','normal'],
+    ['Lactobacillus spp.','6.04e6 genome eq/g','8.6e5–6.2e8','normal'],
+    ['Enterobacter spp.','6.71e6 genome eq/g','1.0e6–5.0e7','normal'],
+    ['Akkermansia muciniphila','below detection limit','1.0e1–8.2e6','low'],
+    ['Faecalibacterium prausnitzii','4.59e5 genome eq/g','1.0e3–5.0e8','normal'],
+    ['Roseburia spp.','2.16e9 genome eq/g','5.0e7–2.0e10','normal'],
+  ]},
+  { heading: 'Bacterial phyla', rows: [
+    ['Bacteroidetes','3.45e12 genome eq/g','8.6e11–3.3e12','high'],
+    ['Firmicutes','2.55e11 genome eq/g','5.7e10–3.0e11','normal'],
+    ['Firmicutes:Bacteroidetes Ratio','0.07','<1.0','normal'],
+  ]},
+  { heading: 'Opportunistic & overgrowth microbes', rows: [
+    ['Bacillus spp.','1.01e6 genome eq/g','<1.76e6','normal'],
+    ['Enterococcus faecalis/faecium','below detection limit','not detected','normal'],
+    ['Morganella spp.','below detection limit','not detected','normal'],
+    ['Pseudomonas spp./aeruginosa','below detection limit','not detected','normal'],
+    ['Staphylococcus spp.','below detection limit','not detected','normal'],
+    ['Staphylococcus aureus','4.15e2 genome eq/g','<5.00e2','normal'],
+    ['Desulfovibrio spp.','1.98e7 genome eq/g','<7.98e8','normal'],
+    ['Methanobacteriaceae','7.31e7 genome eq/g','<3.38e8','normal'],
+    ['Citrobacter spp./freundii','—','within normal range','normal'],
+    ['Klebsiella spp./pneumoniae','—','within normal range','normal'],
+    ['M. avium subsp. paratuberculosis','—','within normal range','normal'],
+    ['Proteus spp./mirabilis','—','within normal range','normal'],
+    ['Fusobacterium spp.','—','within normal range','normal'],
+    ['Prevotella spp.','—','within normal range','normal'],
+  ]},
+  { heading: 'Fungi, yeast & viruses', rows: [
+    ['Candida spp. / C. albicans','below detection limit','not detected','normal'],
+    ['Geotrichum spp.','below detection limit','not detected','normal'],
+    ['Microsporidium spp.','below detection limit','not detected','normal'],
+    ['Rhodotorula spp.','below detection limit','not detected','normal'],
+    ['Cytomegalovirus','below detection limit','not detected','normal'],
+    ['Epstein-Barr Virus','below detection limit','not detected','normal'],
+  ]},
+  { heading: 'Parasites — protozoa & worms (12 tested, all negative)', rows: [
+    ['Blastocystis hominis','negative','not detected','normal'],
+    ['Chilomastix mesnili','negative','not detected','normal'],
+    ['Cyclospora spp.','negative','not detected','normal'],
+    ['Dientamoeba fragilis','negative','not detected','normal'],
+    ['Endolimax nana','negative','not detected','normal'],
+    ['Entamoeba coli (normal commensal ameba, not a pathogen)','1.40e3 genome eq/g','<5.00e6','normal'],
+    ['Pentatrichomonas hominis','negative','not detected','normal'],
+    ['Ancylostoma duodenale','negative','not detected','normal'],
+    ['Ascaris lumbricoides','negative','not detected','normal'],
+    ['Necator americanus','negative','not detected','normal'],
+    ['Trichuris trichiura','negative','not detected','normal'],
+    ['Taenia spp.','negative','not detected','normal'],
+  ]},
+  { heading: 'Digestive function & gut immune markers', rows: [
+    ['Steatocrit','below detection limit','< 15%','normal'],
+    ['Elastase-1','387 ug/g','> 200','normal'],
+    ['β-Glucuronidase','812 U/mL','< 2486','normal'],
+    ['Occult Blood (FIT)','below detection limit','< 10 ug/g','normal'],
+    ['Secretory IgA','1726 ug/g','510–2010','normal'],
+    ['Anti-gliadin IgA (see Celiac Screening section)','53 U/L','< 175','normal'],
+  ]},
+  { heading: 'H. pylori virulence factor genes (8 tested, all negative)', rows: [
+    ['babA gene','negative','—','normal'],
+    ['cagA gene','negative','—','normal'],
+    ['dupA gene','negative','—','normal'],
+    ['iceA gene','negative','—','normal'],
+    ['oipA gene','negative','—','normal'],
+    ['vacA gene','negative','—','normal'],
+    ['virB gene','negative','—','normal'],
+    ['virD gene','negative','—','normal'],
+  ]},
+  { heading: 'H. pylori antibiotic resistance genes', rows: [
+    ['Amoxicillin resistance','negative','no resistance genes','normal'],
+    ['Clarithromycin resistance','negative','no resistance genes','normal'],
+    ['Tetracycline resistance','negative','no resistance genes','normal'],
+    ['Fluoroquinolone resistance','POSITIVE','gyrA D91N, gyrA D91G, gyrB R484K present','high'],
+  ]},
+];
+
+function flagTag(flag){
+  if (flag==='high') return '<span class="flagtag high">High</span>';
+  if (flag==='low') return '<span class="flagtag low">Low</span>';
+  return '<span class="flagtag normal">normal</span>';
+}
+
+function renderGimapDetail(){
+  const totalRows = GIMAP_SECTIONS.reduce((n,s)=>n+s.rows.length,0);
+  const tables = GIMAP_SECTIONS.map(s=>`<div class="subtbl">
+    <h4>${s.heading}</h4>
+    <table class="data-table">
+      <thead><tr><th>Marker</th><th>Result</th><th>Reference</th><th>Flag</th></tr></thead>
+      <tbody>${s.rows.map(r=>`<tr><td>${r[0]}</td><td class="num">${r[1]}</td><td>${r[2]}</td><td>${flagTag(r[3])}</td></tr>`).join('')}</tbody>
+    </table>
+  </div>`).join('');
+  return `<details class="gimap-detail">
+    <summary>Show every marker on the full GI-MAP report (${totalRows} more, beyond the 4 tiles above)</summary>
+    ${tables}
+  </details>`;
+}
+
+const GROUP_EXTRA = {
+  gimap: renderGimapDetail,
+  celiac: () => `<div class="subtbl" style="font-size:12.5px;color:var(--text-secondary);">
+    <strong>Also on file:</strong> Celiac genetics (Mar 10, 2014, Johns Hopkins — Prometheus #6260): one allele of HLA DQA1*05 detected, HLA DQB1*02 not detected — the celiac risk haplotype was <em>not</em> detected, indicating low genetic risk. No numeric value to chart, so it's noted here rather than as a tile.
+  </div>`,
+};
 
 function renderJumpNav(){
   const el = document.getElementById('jumpNav');
@@ -674,6 +815,8 @@ function renderSections(){
       }).join('')}
     </div>` : '';
 
+    const extra = GROUP_EXTRA[g.key] ? GROUP_EXTRA[g.key]() : '';
+
     return `<section class="group" id="grp-${g.key}">
       <div class="group-head">
         <h2>${g.title}</h2>
@@ -681,6 +824,7 @@ function renderSections(){
       </div>
       <div class="grid">${cards}</div>
       ${singleTiles}
+      ${extra}
     </section>`;
   }).join('');
 }
