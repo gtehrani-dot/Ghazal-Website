@@ -82,6 +82,17 @@
   .gem-strip h3{font-size:18px;color:var(--ink);}
   .gem-strip p{font-size:13.5px;color:var(--muted);max-width:820px;}
 
+  .hike-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:16px;}
+  .hike-card{background:#fff;border:1px solid var(--line);border-radius:14px;padding:16px 18px;box-shadow:0 3px 14px rgba(26,26,46,.05);}
+  .hike-card.flagged{border-color:rgba(168,85,47,.35);background:linear-gradient(180deg,rgba(168,85,47,.04),#fff 60px);}
+  .hike-top{display:flex;align-items:flex-start;justify-content:space-between;gap:10px;flex-wrap:wrap;margin-bottom:4px;}
+  .hike-top h3{font-size:18.5px;margin:0;}
+  .hike-top h3 a{color:var(--ink);text-decoration:none;}
+  .hike-top h3 a:hover{text-decoration:underline;}
+  .hike-meta{font-size:11.5px;color:var(--muted);font-family:'JetBrains Mono',monospace;margin-bottom:8px;}
+  .hike-payoff{font-size:13.5px;color:#3a3a4a;margin:0;}
+  .hike-flag{display:block;margin-top:7px;font-size:11.5px;color:#8a4526;font-style:italic;}
+
   footer{max-width:1240px;margin:0 auto;padding:20px 20px 60px;color:var(--muted);font-size:11.5px;border-top:1px solid var(--line);}
 
 </style>
@@ -102,6 +113,7 @@
   <button data-season="winter">❄️ Winter</button>
   <button data-season="spring">🌱 Spring</button>
   <button data-season="summer">☀️ Summer</button>
+  <button data-season="daytrips">🥾 Day Hikes</button>
 </div>
 
 <main>
@@ -496,6 +508,83 @@
           <div class="stay-card"><a href="https://www.google.com/search?q=Small+lake-view+cottages%2C+Lake+Anna+Virginia+West+Virginia+Maryland+rental" target="_blank"><span class="stay-name">Small lake-view cottages, Lake Anna</span></a><br><span class="stay-note">Easy short-weekend option — search "Lake Anna view" directly, inventory turns over fast.</span></div>
         </div>
       </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ============ DAY TRIP HIKES ============ -->
+<section class="season-panel" id="season-daytrips">
+  <p class="season-intro">No lodging needed — everything here is within about an hour of McLean (a couple push to ~70 min for a standout), sourced from <a href="https://gohikevirginia.com/fall-foliage-virginia-hikes/" target="_blank">gohikevirginia.com</a> plus AllTrails, Tripadvisor, and Google reviews, and cross-checked so the payoff is real. Ratings are cited from whichever source actually had a verifiable number — labeled per card. Anything under ~4.4★ or thin on reviews is flagged honestly rather than dropped silently.</p>
+  <div class="hike-grid">
+
+    <div class="hike-card">
+      <div class="hike-top"><h3><a href="https://www.alltrails.com/trail/us/virginia/bears-den-park-trail" target="_blank">Bear's Den Overlook</a></h3><span class="badge rated">4.8★ · 641 (Google)</span></div>
+      <div class="hike-meta">Bluemont, VA &middot; ~55–65 min &middot; 0.9–1.4 mi RT &middot; Easy–Moderate</div>
+      <p class="hike-payoff">The best effort-to-view ratio on this list — a short walk on the Appalachian Trail to a big west-facing overlook across the Shenandoah Valley. Best at sunset or peak fall color.</p>
+    </div>
+
+    <div class="hike-card">
+      <div class="hike-top"><h3><a href="https://www.alltrails.com/trail/us/virginia/raven-rocks-via-appalachian-trail" target="_blank">Raven Rocks</a></h3><span class="badge rated">4.7★ · 500 (Google)</span></div>
+      <div class="hike-meta">Bluemont, VA &middot; ~55–65 min &middot; ~5 mi RT &middot; Strenuous</div>
+      <p class="hike-payoff">The best rock-scramble summit payoff in the radius — a 180° view over the Shenandoah Valley from exposed outcrops. gohikevirginia.com calls it their top pick for the whole region.</p>
+    </div>
+
+    <div class="hike-card">
+      <div class="hike-top"><h3><a href="https://www.nps.gov/grfa/index.htm" target="_blank">Great Falls Park, VA</a></h3><span class="badge rated">4.7★ · 1,387 (Tripadvisor)</span></div>
+      <div class="hike-meta">McLean/Great Falls, VA &middot; ~15–20 min &middot; 1.4–4.7 mi &middot; Easy–Moderate</div>
+      <p class="hike-payoff">The dramatic Potomac gorge and cascading falls, minutes away — the best big-payoff-for-minimal-drive option here. River Trail for the overlooks, or combine with Difficult Run for a longer loop.</p>
+    </div>
+
+    <div class="hike-card">
+      <div class="hike-top"><h3><a href="https://www.dcr.virginia.gov/state-parks/sky-meadows" target="_blank">Sky Meadows State Park</a></h3><span class="badge rated">4.6★ · 114 (Tripadvisor)</span></div>
+      <div class="hike-meta">Delaplane, VA &middot; ~60–70 min &middot; 3.5–4.4 mi &middot; Moderate</div>
+      <p class="hike-payoff">Rolling open meadow climbing to an AT-adjacent Piedmont overlook — one of the most scenic "big sky" hikes in range, especially good near sunset.</p>
+    </div>
+
+    <div class="hike-card">
+      <div class="hike-top"><h3><a href="https://www.nps.gov/mana/planyourvisit/hiking.htm" target="_blank">Manassas National Battlefield Park</a></h3><span class="badge rated">4.6★ · 1,163 (Tripadvisor)</span></div>
+      <div class="hike-meta">Manassas, VA &middot; ~40–45 min &middot; ~5.4 mi loop &middot; Easy</div>
+      <p class="hike-payoff">The best historic-walking option in range — First &amp; Second Manassas battlefield across open, well-interpreted rolling terrain. Flat and easy if you want history over elevation.</p>
+    </div>
+
+    <div class="hike-card">
+      <div class="hike-top"><h3><a href="https://dwr.virginia.gov/wma/thompson/" target="_blank">G. Richard Thompson WMA</a></h3><span class="badge rated">4.4★ · 127 (Google)</span></div>
+      <div class="hike-meta">Hume, VA &middot; ~65–70 min &middot; ~4.5 mi loop &middot; Moderate</div>
+      <p class="hike-payoff">A genuine seasonal standout: one of the largest Virginia bluebell displays in the country, peaking mid-April. Worth timing a spring trip around; less notable outside bloom season.</p>
+    </div>
+
+    <div class="hike-card">
+      <div class="hike-top"><h3><a href="https://www.tripadvisor.com/Attraction_Review-g60996-d1774751-Reviews-Meadowlark_Botanical_Garden-Vienna_Fairfax_County_Virginia.html" target="_blank">Meadowlark Botanical Gardens</a></h3><span class="badge rated">4.5★ · 338 (Tripadvisor)</span></div>
+      <div class="hike-meta">Vienna, VA &middot; ~15 min &middot; ~3 mi of paved loops &middot; Easy</div>
+      <p class="hike-payoff">Not wilderness, but the most polished, closest "walk" option — ponds, native-plant collections, seasonal blooms and winter lights. The easy-day pick.</p>
+    </div>
+
+    <div class="hike-card">
+      <div class="hike-top"><h3><a href="https://www.nps.gov/nace/planyourvisit/algonkian.htm" target="_blank">Algonkian Regional Park</a></h3><span class="badge rated">4.5★ · 181 (Tripadvisor)</span></div>
+      <div class="hike-meta">Sterling, VA &middot; ~35–40 min &middot; 2–3 mi &middot; Easy</div>
+      <p class="hike-payoff">Best pure family-easy pick — flat riverside paths along the Potomac, with a playground and water park nearby for a kid break.</p>
+    </div>
+
+    <div class="hike-card flagged">
+      <div class="hike-top"><h3><a href="https://www.tripadvisor.com/Attraction_Review-g60726-d3137370-Reviews-Scott_s_Run_Nature_Preserve-McLean_Fairfax_County_Virginia.html" target="_blank">Scott's Run Nature Preserve</a></h3><span class="badge rated">4.3★ · 91 (Tripadvisor)</span></div>
+      <div class="hike-meta">McLean, VA &middot; ~10–15 min &middot; ~2.5 mi loop &middot; Easy–Moderate</div>
+      <p class="hike-payoff">The closest true nature escape to McLean — a small waterfall scramble and Potomac riverside views.</p>
+      <span class="hike-flag">Rating is good-not-great (4.3, Tripadvisor) — included for proximity and convenience, not as a best-in-class pick.</span>
+    </div>
+
+    <div class="hike-card flagged">
+      <div class="hike-top"><h3><a href="https://www.tripadvisor.com/Attraction_Review-g57894-d1987601-Reviews-Ball_s_Bluff_Battlefield_Regional_Park-Leesburg_Loudoun_County_Virginia.html" target="_blank">Ball's Bluff Battlefield Regional Park</a></h3><span class="badge rated">4.3★ · 50 (Tripadvisor)</span></div>
+      <div class="hike-meta">Leesburg, VA &middot; ~40–45 min &middot; 1.5–2.5 mi loop &middot; Easy</div>
+      <p class="hike-payoff">A small, atmospheric Civil War battlefield on a wooded Potomac bluff with a historic national cemetery — a shorter, easier history walk than Manassas.</p>
+      <span class="hike-flag">Rating is good-not-great (4.3) on a small review sample — a real and well-loved spot, just not a top-tier standout.</span>
+    </div>
+
+    <div class="hike-card flagged">
+      <div class="hike-top"><h3><a href="https://www.tripadvisor.com/Attraction_Review-g57542-d4411612-Reviews-Bull_Run_Mountains_Natural_Area_Preserve-Broad_Run_Virginia.html" target="_blank">Bull Run Mountains NAP</a></h3><span class="badge rated">4.2★ · 22 (Tripadvisor)</span></div>
+      <div class="hike-meta">Broad Run, VA &middot; ~50–55 min &middot; ~3.7 mi loop &middot; Easy</div>
+      <p class="hike-payoff">A quiet, uncrowded wooded ridge with historic mill ruins (Chapman's Mill) — good for solitude, not a standout scenic payoff.</p>
+      <span class="hike-flag">Weakest rating and thinnest review sample on this list (4.2, 22 reviews) — go for solitude, not the view.</span>
     </div>
 
   </div>
