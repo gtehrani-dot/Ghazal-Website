@@ -4,74 +4,88 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Local Vacations — Nature Getaways Near Home</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400&family=DM+Sans:wght@300;400;500;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
   :root{
-    --primary:#3b5d42; --primary-deep:#24382a; --accent-1:#c98a2c; --accent-2:#b1512f; --accent-3:#3d7a8c;
-    --ink:#151c15; --panel:#1c2a1e; --card:#20301f; --cream:#f6efe0; --muted:rgba(246,239,224,0.66); --line:rgba(246,239,224,0.12);
+    --primary:#5a7a52; --primary-deep:#3d5936; --accent-1:#b8922a; --accent-2:#a8552f; --accent-3:#3d7a8c;
+    --ink:#1a1a2e; --cream:#faf8f4; --mist:#f0ede8; --muted:#6b6b7d; --line:#e2ddd6;
   }
   *{box-sizing:border-box;}
-  body{margin:0;background:var(--ink);color:var(--cream);font-family:'Avenir Next',-apple-system,'Segoe UI',sans-serif;line-height:1.5;}
-  h1,h2,h3,h4{font-family:'Fraunces',Georgia,serif;font-weight:600;margin:0 0 6px;}
-  a{color:var(--accent-1);}
+  body{margin:0;background:var(--cream);color:var(--ink);font-family:'DM Sans',-apple-system,'Segoe UI',sans-serif;line-height:1.5;transition:background 0.6s ease;}
+  body[data-season="fall"]{background:linear-gradient(180deg,#fbf1e2 0%,#faf8f4 340px);}
+  body[data-season="winter"]{background:linear-gradient(180deg,#eef3f6 0%,#faf8f4 340px);}
+  body[data-season="spring"]{background:linear-gradient(180deg,#f1f6ec 0%,#faf8f4 340px);}
+  body[data-season="summer"]{background:linear-gradient(180deg,#eaf3f5 0%,#faf8f4 340px);}
+  h1,h2,h3,h4{font-family:'Cormorant Garamond',Georgia,serif;font-weight:600;margin:0 0 6px;}
+  a{color:var(--accent-2);}
   .eyebrow,.mono{font-family:'JetBrains Mono',Consolas,monospace;letter-spacing:.06em;text-transform:uppercase;font-size:11px;color:var(--muted);}
   .back-link{display:block;padding:14px 24px;font-size:13px;color:var(--muted);text-decoration:none;}
-  .back-link:hover{color:var(--cream);}
-  .hero{position:relative;padding:56px 24px 40px;text-align:center;background:
-    linear-gradient(180deg,rgba(20,30,20,.55),rgba(20,30,20,.85)),
+  .back-link:hover{color:var(--ink);}
+  .hero{position:relative;padding:60px 24px 44px;text-align:center;background:
+    linear-gradient(180deg,rgba(250,248,244,.55),rgba(250,248,244,.90)),
     url('https://commons.wikimedia.org/wiki/Special:FilePath/2016-10-24%2012%2022%2033%20View%20west%20from%20the%20Rockytop%20Overlook%20along%20Shenandoah%20National%20Park%27s%20Skyline%20Drive%20in%20Rockingham%20County%2C%20Virginia.jpg?width=1600') center 60%/cover;
     border-bottom:1px solid var(--line);}
-  .hero .eyebrow{color:var(--accent-1);}
-  .hero h1{font-size:clamp(32px,5vw,52px);margin:6px 0 10px;}
-  .hero p.tag{max-width:640px;margin:0 auto;color:var(--muted);font-size:15px;}
+  .hero .eyebrow{color:var(--accent-2);}
+  .hero h1{font-size:clamp(34px,5vw,54px);margin:6px 0 10px;color:var(--ink);}
+  .hero p.tag{max-width:640px;margin:0 auto;color:var(--muted);font-size:15.5px;}
   .meta-row{display:flex;flex-wrap:wrap;gap:10px;justify-content:center;margin-top:22px;}
-  .meta-chip{background:rgba(0,0,0,.28);border:1px solid var(--line);border-radius:100px;padding:7px 16px;font-size:12.5px;color:var(--cream);}
+  .meta-chip{background:rgba(255,255,255,.78);border:1px solid var(--line);border-radius:100px;padding:7px 16px;font-size:12.5px;color:var(--ink);}
+  .budget-note{max-width:640px;margin:16px auto 0;font-size:12.5px;color:var(--muted);background:rgba(255,255,255,.6);border:1px solid var(--line);border-radius:10px;padding:8px 14px;}
 
-  .season-nav{position:sticky;top:0;z-index:20;display:flex;gap:0;justify-content:center;flex-wrap:wrap;background:var(--panel);border-bottom:1px solid var(--line);padding:0 12px;}
-  .season-nav button{background:none;border:none;color:var(--muted);font-family:'Fraunces',serif;font-size:16px;padding:16px 22px;cursor:pointer;border-bottom:3px solid transparent;}
-  .season-nav button.active{color:var(--cream);border-bottom-color:var(--accent-1);}
-  .season-nav button:hover{color:var(--cream);}
+  .season-nav{position:sticky;top:0;z-index:20;display:flex;gap:0;justify-content:center;flex-wrap:wrap;background:rgba(250,248,244,0.94);backdrop-filter:blur(8px);border-bottom:1px solid var(--line);padding:0 12px;}
+  .season-nav button{background:none;border:none;color:var(--muted);font-family:'Cormorant Garamond',serif;font-size:18px;font-weight:600;padding:16px 22px;cursor:pointer;border-bottom:3px solid transparent;}
+  .season-nav button.active{color:var(--ink);border-bottom-color:var(--accent-1);}
+  .season-nav button:hover{color:var(--ink);}
 
   main{max-width:1240px;margin:0 auto;padding:34px 20px 80px;}
   .season-panel{display:none;}
   .season-panel.active{display:block;}
-  .season-intro{max-width:760px;margin:0 0 22px;color:var(--muted);font-size:14.5px;}
-  .foliage-box{background:linear-gradient(135deg,rgba(201,138,44,.14),rgba(177,81,47,.10));border:1px solid rgba(201,138,44,.35);border-radius:14px;padding:20px 22px;margin-bottom:28px;}
-  .foliage-box h3{color:var(--accent-1);font-size:18px;}
+  .season-intro{max-width:780px;margin:0 0 22px;color:var(--muted);font-size:14.5px;}
+  .foliage-box{background:linear-gradient(135deg,rgba(184,146,42,.10),rgba(168,85,47,.07));border:1px solid rgba(184,146,42,.35);border-radius:14px;padding:20px 22px;margin-bottom:28px;}
+  .foliage-box h3{color:var(--accent-2);font-size:20px;}
   .foliage-box .updated{font-size:11.5px;color:var(--muted);margin-top:10px;}
   .foliage-bands{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:14px;margin-top:12px;}
-  .foliage-band{background:rgba(0,0,0,.2);border-radius:10px;padding:12px 14px;}
-  .foliage-band .win{font-family:'JetBrains Mono',monospace;color:var(--accent-1);font-size:15px;}
+  .foliage-band{background:rgba(255,255,255,.65);border:1px solid var(--line);border-radius:10px;padding:12px 14px;}
+  .foliage-band .win{font-family:'JetBrains Mono',monospace;color:var(--accent-2);font-size:15px;}
   .foliage-band .lbl{font-size:12.5px;color:var(--muted);margin-top:2px;}
 
   .region-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(340px,1fr));gap:22px;}
-  .region-card{background:var(--card);border:1px solid var(--line);border-radius:16px;overflow:hidden;display:flex;flex-direction:column;}
-  .region-thumb{height:190px;width:100%;object-fit:cover;display:block;background:linear-gradient(135deg,var(--primary),var(--primary-deep));}
+  .region-card{background:#fff;border:1px solid var(--line);border-radius:16px;overflow:hidden;display:flex;flex-direction:column;box-shadow:0 3px 14px rgba(26,26,46,.06);}
+  .region-thumb{height:200px;width:100%;object-fit:cover;display:block;}
+  .region-thumb-fallback{height:200px;width:100%;display:flex;align-items:flex-end;padding:14px;position:relative;overflow:hidden;}
+  .region-thumb-fallback::before{content:'';position:absolute;inset:0;background-image:radial-gradient(circle at 20% 30%, rgba(255,255,255,.18) 0, transparent 45%),radial-gradient(circle at 80% 70%, rgba(255,255,255,.12) 0, transparent 40%);}
+  .region-thumb-fallback .icon{font-size:34px;filter:drop-shadow(0 2px 4px rgba(0,0,0,.25));z-index:1;}
   .region-body{padding:18px 20px 20px;flex:1;display:flex;flex-direction:column;}
-  .region-body h3{font-size:20px;}
+  .region-body h3{font-size:22px;color:var(--ink);}
   .region-drive{font-size:11.5px;color:var(--muted);margin-bottom:8px;}
   .region-why{font-size:13.5px;color:var(--muted);margin-bottom:12px;}
   .badge-row{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:12px;}
-  .badge{font-size:10.5px;font-family:'JetBrains Mono',monospace;padding:4px 9px;border-radius:100px;border:1px solid var(--line);color:var(--cream);}
-  .badge.nordic{background:rgba(61,122,140,.25);border-color:rgba(61,122,140,.5);}
-  .badge.rated{background:rgba(201,138,44,.22);border-color:rgba(201,138,44,.45);}
-  .badge.glamp{background:rgba(177,81,47,.22);border-color:rgba(177,81,47,.45);}
-  .badge.peak{background:rgba(177,81,47,.3);border-color:var(--accent-2);}
+  .badge{font-size:10.5px;font-family:'JetBrains Mono',monospace;padding:4px 9px;border-radius:100px;border:1px solid var(--line);color:var(--ink);background:var(--mist);}
+  .badge.nordic{background:rgba(61,122,140,.12);border-color:rgba(61,122,140,.4);color:#2c5a68;}
+  .badge.rated{background:rgba(184,146,42,.14);border-color:rgba(184,146,42,.4);color:#8a6a1f;}
+  .badge.glamp{background:rgba(168,85,47,.14);border-color:rgba(168,85,47,.4);color:#8a4526;}
+  .badge.peak{background:rgba(168,85,47,.16);border-color:var(--accent-2);color:#8a4526;}
+  .badge.resort{background:rgba(90,122,82,.14);border-color:rgba(90,122,82,.4);color:#3d5936;}
+  .badge.view{background:rgba(61,122,140,.12);border-color:rgba(61,122,140,.4);color:#2c5a68;}
   .region-sec{margin-top:12px;}
-  .region-sec h4{font-size:11.5px;text-transform:uppercase;letter-spacing:.05em;color:var(--accent-1);font-family:'JetBrains Mono',monospace;margin-bottom:6px;}
-  .region-sec ul{margin:0;padding-left:18px;font-size:13.5px;color:rgba(246,239,224,.9);}
+  .region-sec h4{font-size:11.5px;text-transform:uppercase;letter-spacing:.05em;color:var(--accent-2);font-family:'JetBrains Mono',monospace;margin-bottom:6px;}
+  .region-sec ul{margin:0;padding-left:18px;font-size:13.5px;color:#3a3a4a;}
   .region-sec li{margin-bottom:4px;}
-  .stay-card{background:rgba(0,0,0,.18);border-radius:9px;padding:8px 11px;margin-bottom:6px;font-size:13px;}
-  .stay-card .stay-name{font-weight:600;color:var(--cream);}
+  .stay-card{background:var(--mist);border:1px solid var(--line);border-radius:9px;padding:8px 11px;margin-bottom:6px;font-size:13px;}
+  .stay-card .stay-name{font-weight:700;color:var(--ink);}
   .stay-card .stay-note{color:var(--muted);font-size:12px;}
+  .stay-card a{text-decoration:none;}
+  .stay-card a:hover{text-decoration:underline;}
 
   .gem-strip{margin-top:34px;padding-top:24px;border-top:1px dashed var(--line);}
-  .gem-strip h3{font-size:16px;color:var(--muted);}
+  .gem-strip h3{font-size:18px;color:var(--ink);}
   .gem-strip p{font-size:13.5px;color:var(--muted);max-width:820px;}
 
   footer{max-width:1240px;margin:0 auto;padding:20px 20px 60px;color:var(--muted);font-size:11.5px;border-top:1px solid var(--line);}
 </style>
 </head>
-<body>
+<body data-season="fall">
 
 <a class="back-link" href="../index.html">&larr; Personal</a>
 
@@ -85,6 +99,7 @@
     <div class="meta-chip">🌱 Spring &middot; wildflowers &amp; waterfalls</div>
     <div class="meta-chip">☀️ Summer &middot; lakes &amp; bay towns</div>
   </div>
+  <div class="budget-note">Typical local-getaway budget: $600–700/night for lodging. Worth stretching further for the right view or a genuinely special resort — flagged case by case below.</div>
 </div>
 
 <div class="season-nav">
@@ -98,85 +113,99 @@
 
 <!-- ============ FALL ============ -->
 <section class="season-panel active" id="season-fall">
-  <p class="season-intro">Ranked for foliage drama and forest solitude, closest first. Peak week shifts by elevation — the estimate below updates every August with the coming season's outlook, then tightens against live state foliage reports as October gets close.</p>
+  <p class="season-intro">Ranked for foliage drama and forest solitude. Peak week shifts by elevation — the estimate below updates every August with the coming season's outlook, then tightens against live state foliage reports as October gets close.</p>
 
   <div class="foliage-box">
     <h3>🍂 2026 Peak Foliage Estimate — Elevation Bands</h3>
     <div class="foliage-bands">
       <div class="foliage-band"><div class="win">Oct 5 – Oct 15</div><div class="lbl">High elevation (3,000–4,400 ft): Canaan Valley, Dolly Sods, GW Forest ridgelines</div></div>
-      <div class="foliage-band"><div class="win">Oct 15 – Oct 25</div><div class="lbl">Mid elevation (1,500–3,000 ft): Skyline Drive, Shenandoah South District, Blue Ridge</div></div>
+      <div class="foliage-band"><div class="win">Oct 15 – Oct 25</div><div class="lbl">Mid elevation (1,500–3,000 ft): Skyline Drive (both districts), Blue Ridge</div></div>
       <div class="foliage-band"><div class="win">Oct 25 – Nov 4</div><div class="lbl">Valley floor (under 1,500 ft): Warm Springs / Bath County valley, lower foothills</div></div>
     </div>
-    <div class="updated">Estimate built Sept 10, 2026 from multi-year VA Dept. of Forestry &amp; WV Explorer patterns. Sharpens against live weekly reports (VA DCR foliage report, NPS Shenandoah updates, smokymountains.com map) starting the first week of October — check back then for the confirmed window. Full re-forecast runs every mid-August for the coming fall.</div>
+    <div class="updated">Estimate built Sept 10, 2026 from multi-year VA Dept. of Forestry &amp; WV Explorer patterns. Sharpens against live weekly reports (VA DCR foliage report, NPS Shenandoah updates, smokymountains.com map) starting the first week of October. Full re-forecast runs every mid-August for the coming fall.</div>
   </div>
 
   <div class="region-grid">
 
     <div class="region-card">
-      <img class="region-thumb" src="https://commons.wikimedia.org/wiki/Special:FilePath/2016-10-24%2012%2022%2033%20View%20west%20from%20the%20Rockytop%20Overlook%20along%20Shenandoah%20National%20Park%27s%20Skyline%20Drive%20in%20Rockingham%20County%2C%20Virginia.jpg?width=800" onerror="this.style.background='linear-gradient(135deg,#3b5d42,#c98a2c)';this.removeAttribute('src');">
+      <img class="region-thumb" src="https://commons.wikimedia.org/wiki/Special:FilePath/2016-10-24%2012%2022%2033%20View%20west%20from%20the%20Rockytop%20Overlook%20along%20Shenandoah%20National%20Park%27s%20Skyline%20Drive%20in%20Rockingham%20County%2C%20Virginia.jpg?width=800" onerror="this.outerHTML='&lt;div class=&quot;region-thumb-fallback&quot; style=&quot;background:linear-gradient(135deg,#8a6a1f,#5a7a52)&quot;&gt;&lt;span class=&quot;icon&quot;&gt;🍂&lt;/span&gt;&lt;/div&gt;';">
       <div class="region-body">
-        <h3>Shenandoah — North District</h3>
-        <div class="region-drive">Front Royal / Skyline Drive &middot; ~75 min</div>
+        <h3>Upper Shenandoah</h3>
+        <div class="region-drive">North + Central Districts &middot; Front Royal / Luray gateway &middot; 75 min–2 hrs</div>
         <div class="badge-row"><span class="badge peak">Peak: Oct 15–25</span></div>
-        <p class="region-why">Closest Shenandoah entrance and the ridge-top drive at its most dramatic — quieter than the central Big Meadows crush.</p>
-        <div class="region-sec"><h4>Hikes</h4><ul>
-          <li><b>Overall Run Falls</b> — 8.8 mi, Shenandoah's tallest (93 ft), rocky overlook</li>
-          <li><b>Little Devils Stairs</b> — 6.0 mi, scrambles, cascades, gorge</li>
-          <li><b>Compton Peak</b> — 1.6 mi RT via the AT, columnar basalt views</li>
+        <p class="region-why">The park's headline stretch — Skyline Drive miles 0–65, Luray as the main gateway via US-211 at Thornton Gap. Every one of the park's true must-do hikes sits in this half, not the South District.</p>
+        <div class="region-sec"><h4>Can't-Miss Hikes</h4><ul>
+          <li><b>Old Rag Mountain</b> — 9.4 mi loop, real rock scramble, the signature Shenandoah hike. Requires a $2 day-use ticket via Recreation.gov (released 30 &amp; 5 days out) plus a park pass — book ahead.</li>
+          <li><b>Whiteoak Canyon Falls</b> — six-waterfall series, mile ~42.6; the Upper Falls alone is one of the tallest in the park</li>
+          <li><b>Dark Hollow Falls</b> — mile 50.7, 1.4 mi RT, 70-ft cascade (check nps.gov/shen for closure status)</li>
+          <li><b>South River Falls</b> — mile 62.8, 4.4 mi RT, third-highest falls in the park</li>
+          <li><b>Hawksbill Summit</b> — mile 45.5, the park's highest point, short steep climb to a 360° view</li>
+          <li><b>Stony Man</b> — mile 41.7, easy 1.6 mi RT, best view-to-effort ratio in the park</li>
+          <li><b>Bearfence Mountain</b> — mile 56.4, 1.2 mi hands-on rock scramble, widely called the most fun short hike here</li>
         </ul></div>
         <div class="region-sec"><h4>Can't-Miss Food</h4><ul>
           <li><a href="https://www.fieldandmainrestaurant.com/" target="_blank">Field &amp; Main</a>, Marshall — 2026 James Beard finalist, farm-driven. Book ahead.</li>
-        </ul></div>
-        <div class="region-sec"><h4>Where to Stay</h4>
-          <div class="stay-card"><span class="stay-name">Small hot-tub cabins, Front Royal/Bentonville corridor</span><br><span class="stay-note">Dense cluster on Airbnb/VRBO; filter for sauna where available — confirm 4.5★+ at booking.</span></div>
-        </div>
-      </div>
-    </div>
-
-    <div class="region-card">
-      <img class="region-thumb" src="https://commons.wikimedia.org/wiki/Special:FilePath/South_River_Falls_Shenandoah_NP_2007.jpg?width=800" onerror="this.style.background='linear-gradient(135deg,#3b5d42,#b1512f)';this.removeAttribute('src');">
-      <div class="region-body">
-        <h3>Shenandoah — South District</h3>
-        <div class="region-drive">Luray / Waynesboro &middot; ~2.5–3 hrs</div>
-        <div class="badge-row"><span class="badge peak">Peak: Oct 15–25</span></div>
-        <p class="region-why">Home turf of the two benchmark falls — Dark Hollow and South River — plus the best multi-waterfall loop in the park.</p>
-        <div class="region-sec"><h4>Hikes</h4><ul>
-          <li><b>Dark Hollow Falls Trail</b> — 1.4 mi RT, 70-ft cascade (check nps.gov/shen for repair-closure status)</li>
-          <li><b>South River Falls</b> — via South River Falls Trailhead, 4.4 mi RT, 3rd-highest falls in the park</li>
-          <li><b>Doyles River + Jones Run Falls loop</b> — 6–7 mi, Upper &amp; Lower Doyles plus Jones Run — best flow in early fall/spring</li>
-        </ul></div>
-        <div class="region-sec"><h4>Can't-Miss Food</h4><ul>
           <li><a href="https://www.threeblacksmiths.com/" target="_blank">Three Blacksmiths</a>, Sperryville — 20-seat, fixed tasting menu, reservation-only, Wed–Sat.</li>
           <li><a href="https://www.bluerockva.com/" target="_blank">Blue Rock</a>, Washington VA — inn + farm restaurant + wine bar, book via Resy.</li>
+          <li>Element, Front Royal — 4.4★ (Tripadvisor), chef-owned New American, locally called the best table in Warren County.</li>
+          <li>West Main Market, Luray — 4.6★, casual local hangout with live music.</li>
         </ul></div>
-        <div class="region-sec"><h4>Where to Stay</h4>
-          <div class="stay-card"><span class="stay-name">Luray-area cabins</span><br><span class="stay-note">Highest concentration of small hot-tub cabins in the region — sauna-specific units rarer here than at dedicated resorts.</span></div>
+        <div class="region-sec"><h4>Where to Stay <span style="font-weight:400;color:var(--muted);font-size:11.5px;">— 3 options</span></h4>
+          <div class="stay-card"><a href="https://www.vrbo.com/4662444" target="_blank"><span class="stay-name">Shenandoah Escape Cabin</span></a> <span class="badge nordic" style="margin-left:2px;">🧖 Sauna + Hot Tub</span><br><span class="stay-note">Bentonville, VA · 10/10, 38 reviews. Barrel sauna, 6-person hot tub, fire pit, 5 private acres, 3BR sleeps 6.</span></div>
+          <div class="stay-card"><a href="https://www.airbnb.com/rooms/49208300" target="_blank"><span class="stay-name">Shenandoah Gem ~ Sauna</span></a> <span class="badge nordic" style="margin-left:2px;">🧖 Sauna</span><br><span class="stay-note">Luray, VA · 4.91★, 494 reviews. Private indoor sauna, walk to South River outfitters, king bed.</span></div>
+          <div class="stay-card"><span class="stay-name">Massanutten Resort</span> <span class="badge resort" style="margin-left:2px;">🏨 Resort</span><br><span class="stay-note">McGaheysville, VA. Water park, arcade, mini-golf — the pick when resort amenities beat a quiet cabin, especially in summer with older kids.</span></div>
         </div>
       </div>
     </div>
 
     <div class="region-card">
-      <div class="region-thumb" style="background:linear-gradient(135deg,#3b5d42,#24382a);"></div>
+      <img class="region-thumb" src="https://commons.wikimedia.org/wiki/Special:FilePath/South_River_Falls_Shenandoah_NP_2007.jpg?width=800" onerror="this.outerHTML='&lt;div class=&quot;region-thumb-fallback&quot; style=&quot;background:linear-gradient(135deg,#a8552f,#5a7a52)&quot;&gt;&lt;span class=&quot;icon&quot;&gt;💧&lt;/span&gt;&lt;/div&gt;';">
+      <div class="region-body">
+        <h3>Lower Shenandoah</h3>
+        <div class="region-drive">South District &middot; Waynesboro / Stanardsville / Elkton gateway &middot; ~2.5–3 hrs</div>
+        <div class="badge-row"><span class="badge peak">Peak: Oct 15–25</span></div>
+        <p class="region-why">Skyline Drive miles 65–105 — quieter than the North/Central corridor, its own distinct set of waterfall and scramble hikes.</p>
+        <div class="region-sec"><h4>Can't-Miss Hikes</h4><ul>
+          <li><b>Doyles River + Jones Run Falls Loop</b> — mile 81–84, two waterfall systems (28-ft &amp; 63-ft Doyles, 42-ft Jones Run) in one 6–7 mi loop</li>
+          <li><b>Riprap–Chimney Rock Loop</b> — mile 90, 9.8 mi, overlooks, a swimming hole, exposed rock scrambling — this district's answer to Old Rag/Bearfence</li>
+          <li><b>Blackrock Summit</b> — mile 84.4, easy 1.8 mi boulder-field loop, the South District's best view-for-effort hike</li>
+        </ul></div>
+        <div class="region-sec"><h4>Can't-Miss Food</h4><ul>
+          <li>Chop House Tavern, Staunton — 4.8★ (OpenTable), modern-rustic gastropub, creative cocktails.</li>
+          <li>Rocktown Kitchen, Harrisonburg — 4.6★, elevated seasonal farm-to-table.</li>
+          <li><a href="https://www.patowmackfarm.com/" target="_blank">foraged. at Patowmack Farm</a>, Lovettsville — glass-walled working-farm tasting menu (a farther detour, worth it for a splurge night).</li>
+        </ul></div>
+        <div class="region-sec"><h4>Where to Stay <span style="font-weight:400;color:var(--muted);font-size:11.5px;">— 3 options</span></h4>
+          <div class="stay-card"><a href="https://www.vrbo.com/2025384" target="_blank"><span class="stay-name">Mountain Cabin on Hawksbill Creek</span></a> <span class="badge nordic" style="margin-left:2px;">🧖 Hot Tub</span><br><span class="stay-note">Elkton, VA · 10/10, 111 reviews. Creekside, 6 private acres, 4BR — larger than ideal but exceptionally rated.</span></div>
+          <div class="stay-card"><a href="https://www.vrbo.com/9127798ha" target="_blank"><span class="stay-name">Secluded Stanardsville Cabin</span></a> <span class="badge nordic" style="margin-left:2px;">🧖 Hot Tub</span><br><span class="stay-note">Stanardsville, VA · 10/10, 114 reviews. 10 private acres, 2BR/1BA — genuinely small and cozy.</span></div>
+          <div class="stay-card"><span class="stay-name">Postcard Cabins (Getaway) Shenandoah</span> <span class="badge glamp" style="margin-left:2px;">🏕 Glamping</span><br><span class="stay-note">Stanardsville, VA. Small A-frame tiny cabins, part of the Outdoor Collection by Marriott Bonvoy — confirm current sauna/hot-tub availability directly.</span></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="region-card">
+      <div class="region-thumb-fallback" style="background:linear-gradient(135deg,#5a7a52,#3d5936);"><span class="icon">🌲</span></div>
       <div class="region-body">
         <h3>George Washington National Forest</h3>
         <div class="region-drive">Nelson County / Crabtree Falls &middot; ~2.5 hrs</div>
         <div class="badge-row"><span class="badge peak">Peak: Oct 15–25</span></div>
         <p class="region-why">The wilder, less-regulated counterpart to Shenandoah — bigger backcountry feel, same radius, home of Crabtree Falls itself.</p>
         <div class="region-sec"><h4>Hikes</h4><ul>
-          <li><b>Crabtree Falls Trail</b> — Virginia's tallest cascading waterfall chain, ~1,200 ft total drop over five major cascades; strenuous full climb, moderate to the main overlook</li>
-          <li>GW &amp; Jefferson NF waterfall network near Montebello/Vesuvius — worth a dedicated pass per trip</li>
+          <li><b>Crabtree Falls Trail</b> — Virginia's tallest cascading waterfall chain, ~1,200 ft total drop over five major cascades; strenuous full climb, moderate to the main overlook. Genuinely popular (3,200+ AllTrails reviews), not a hidden gem — go on a weekday if possible.</li>
         </ul></div>
         <div class="region-sec"><h4>Can't-Miss Food</h4><ul>
-          <li>Same Rappahannock cluster (Field &amp; Main / Three Blacksmiths / Blue Rock) depending on approach; <a href="https://www.patowmackfarm.com/" target="_blank">foraged. at Patowmack Farm</a>, Lovettsville, for a glass-walled working-farm tasting menu.</li>
+          <li>Same Rappahannock/Upper Shenandoah cluster depending on approach; <a href="https://www.patowmackfarm.com/" target="_blank">foraged. at Patowmack Farm</a> for a glass-walled working-farm tasting menu.</li>
         </ul></div>
-        <div class="region-sec"><h4>Where to Stay</h4>
-          <div class="stay-card"><span class="stay-name">Rustic cabin clusters, Montebello/Vesuvius</span><br><span class="stay-note">Smaller and more solitary than the Shenandoah tourist corridor — fewer verified nordic-amenity listings, check each one individually.</span></div>
+        <div class="region-sec"><h4>Where to Stay <span style="font-weight:400;color:var(--muted);font-size:11.5px;">— 3 options</span></h4>
+          <div class="stay-card"><span class="stay-name">Rustic cabin clusters, Montebello/Vesuvius</span><br><span class="stay-note">Smaller and more solitary than the Shenandoah tourist corridor — check nordic-amenity availability listing by listing.</span></div>
+          <div class="stay-card"><span class="stay-name">Wintergreen-adjacent cabins, Nelson County</span><br><span class="stay-note">Short drive from the Crabtree Falls trailhead — mix of rental and boutique.</span></div>
+          <div class="stay-card"><span class="stay-name">Wintergreen Resort</span> <span class="badge resort" style="margin-left:2px;">🏨 Resort</span><br><span class="stay-note">On-mountain condos with ridge views — easiest all-in-one option in this pocket.</span></div>
         </div>
       </div>
     </div>
 
     <div class="region-card">
-      <img class="region-thumb" src="https://commons.wikimedia.org/wiki/Special:FilePath/Jefferson_Pools_Gentlemen.JPG?width=800" onerror="this.style.background='linear-gradient(135deg,#3d7a8c,#3b5d42)';this.removeAttribute('src');">
+      <img class="region-thumb" src="https://commons.wikimedia.org/wiki/Special:FilePath/Jefferson_Pools_Gentlemen.JPG?width=800" onerror="this.outerHTML='&lt;div class=&quot;region-thumb-fallback&quot; style=&quot;background:linear-gradient(135deg,#3d7a8c,#5a7a52)&quot;&gt;&lt;span class=&quot;icon&quot;&gt;♨️&lt;/span&gt;&lt;/div&gt;';">
       <div class="region-body">
         <h3>Warm Springs, VA — Bath County</h3>
         <div class="region-drive">~3 hrs</div>
@@ -184,20 +213,22 @@
         <p class="region-why">The most remote, least-crowded fall stop on the list — a real mountain town, not a tourist strip, with mineral-spring soaking baked into the itinerary.</p>
         <div class="region-sec"><h4>Activities</h4><ul>
           <li>Warm Springs Mountain Preserve — Nature Conservancy ridge trails with valley overlooks</li>
-          <li>Jefferson Pools — 1761 octagonal bathhouse, soak after a hike (the closest thing here to the nordic-cycle idea, minus the cold plunge)</li>
+          <li>Jefferson Pools — 1761 octagonal bathhouse, soak after a hike</li>
           <li>Douthat State Park — short drive south, more trail mileage (see Spring below)</li>
         </ul></div>
         <div class="region-sec"><h4>Can't-Miss Food</h4><ul>
-          <li>Thin restaurant scene here — pack a picnic, splurge on the soak, or dine at the Omni Homestead. Route a real farm-to-table night through Rappahannock instead.</li>
+          <li>Thin restaurant scene here — pack a picnic, splurge on the soak, or dine at the Omni Homestead. Route a real farm-to-table night through the Shenandoah/Rappahannock cluster instead.</li>
         </ul></div>
-        <div class="region-sec"><h4>Where to Stay</h4>
-          <div class="stay-card"><span class="stay-name">Independent cabins, Warm Springs/Hot Springs/Millboro</span><br><span class="stay-note">Genuinely remote; verify sauna/plunge inventory directly, it's thin here.</span></div>
+        <div class="region-sec"><h4>Where to Stay <span style="font-weight:400;color:var(--muted);font-size:11.5px;">— 3 options</span></h4>
+          <div class="stay-card"><span class="stay-name">Small guest cottages, Bath County</span><br><span class="stay-note">A handful of cozy independent rentals near the historic district — quieter and more private than the resort below.</span></div>
+          <div class="stay-card"><span class="stay-name">Ridge-view cabins, Millboro</span><br><span class="stay-note">Elevated over the valley rather than tucked in it — worth the extra search for the view.</span></div>
+          <div class="stay-card"><span class="stay-name">The Omni Homestead Resort</span> <span class="badge resort" style="margin-left:2px;">🏨 Resort</span><br><span class="stay-note">The area's big-name stay — golf, spa, the Jefferson Pools on-property. Above the usual budget range, worth it for the soak.</span></div>
         </div>
       </div>
     </div>
 
     <div class="region-card">
-      <div class="region-thumb" style="background:linear-gradient(135deg,#c98a2c,#3b5d42);"></div>
+      <div class="region-thumb-fallback" style="background:linear-gradient(135deg,#b8922a,#5a7a52);"><span class="icon">🍁</span></div>
       <div class="region-body">
         <h3>Canaan Valley, WV <span style="font-weight:400;color:var(--muted);font-size:13px;">— Fall</span></h3>
         <div class="region-drive">~3.5 hrs</div>
@@ -208,8 +239,10 @@
           <li>Canaan Valley State Park trail network</li>
           <li>Dolly Sods (see Hidden Gems) — high-elevation heath barrens, unlike anywhere else on this list</li>
         </ul></div>
-        <div class="region-sec"><h4>Where to Stay</h4>
-          <div class="stay-card"><span class="stay-name">Independent cabins via local rental agencies</span><br><span class="stay-note">Also: Canaan Valley Resort State Park lodge. See Winter entry below — same base works both seasons.</span></div>
+        <div class="region-sec"><h4>Where to Stay <span style="font-weight:400;color:var(--muted);font-size:11.5px;">— 3 options</span></h4>
+          <div class="stay-card"><span class="stay-name">Independent cabins via local rental agencies</span><br><span class="stay-note">bestofcanaan.com-style local agencies list small, cozy, view-forward cabins — good fall base.</span></div>
+          <div class="stay-card"><span class="stay-name">Blackwater Falls State Park cabins</span><br><span class="stay-note">Rustic, small, right at the falls — book early for peak foliage weekends.</span></div>
+          <div class="stay-card"><span class="stay-name">Canaan Valley Resort State Park Lodge</span> <span class="badge resort" style="margin-left:2px;">🏨 Resort</span><br><span class="stay-note">Same base works for Winter (see below) — golf-course lodge with valley views.</span></div>
         </div>
       </div>
     </div>
@@ -224,44 +257,61 @@
 
 <!-- ============ WINTER ============ -->
 <section class="season-panel" id="season-winter">
-  <p class="season-intro">Real downhill skiing is rare within four hours of home — these two deliver it, plus an actual nordic (cross-country) skiing option at White Grass.</p>
+  <p class="season-intro">Curated, not exhaustive — the genuinely best ski terrain within reach, plus the one true nordic (cross-country) skiing option in the region.</p>
   <div class="region-grid">
 
     <div class="region-card">
-      <div class="region-thumb" style="background:linear-gradient(135deg,#3d7a8c,#24382a);"></div>
+      <div class="region-thumb-fallback" style="background:linear-gradient(135deg,#3d7a8c,#3d5936);"><span class="icon">🎿</span></div>
       <div class="region-body">
-        <h3>Canaan Valley, WV <span style="font-weight:400;color:var(--muted);font-size:13px;">— Ski &amp; Nordic</span></h3>
-        <div class="region-drive">~4 hrs</div>
+        <h3>Canaan Valley &amp; Timberline, WV</h3>
+        <div class="region-drive">~3.5–4 hrs</div>
         <div class="badge-row"><span class="badge nordic">🎿 Real Nordic Skiing</span></div>
-        <p class="region-why">Downhill at Canaan Valley Resort, plus <a href="#" onclick="return false;">White Grass Ski Touring Center</a> — genuine cross-country/nordic skiing, the closest thing on this whole page to the literal nordic-cycle spirit.</p>
+        <p class="region-why">Two favorites in one base — Canaan Valley Resort and Timberline (a 6-person high-speed lift, 20+ trails, re-opened for 2025–26), plus White Grass Ski Touring Center for genuine cross-country/nordic skiing right next door.</p>
         <div class="region-sec"><h4>Activities</h4><ul>
+          <li>Timberline — 20+ trails, high-speed six-person chair, the local favorite</li>
           <li>Canaan Valley Resort — downhill, snowboarding, tubing</li>
           <li>White Grass Ski Touring Center — beloved local nordic/backcountry skiing</li>
-          <li>Timberline &amp; Snowshoe within range for a bigger ski day</li>
         </ul></div>
-        <div class="region-sec"><h4>Where to Stay</h4>
-          <div class="stay-card"><span class="stay-name">Same Canaan Valley cabin base as fall</span><br><span class="stay-note">Look for wood-stove + hot-tub combos, common in this market.</span></div>
+        <div class="region-sec"><h4>Where to Stay <span style="font-weight:400;color:var(--muted);font-size:11.5px;">— 3 options</span></h4>
+          <div class="stay-card"><span class="stay-name">Same Canaan Valley cabin base as fall</span><br><span class="stay-note">Look for wood-stove + hot-tub combos with a valley or slope view.</span></div>
+          <div class="stay-card"><span class="stay-name">Canaan Valley Resort State Park Lodge</span> <span class="badge resort" style="margin-left:2px;">🏨 Resort</span><br><span class="stay-note">Ski-in convenience, on-site dining.</span></div>
+          <div class="stay-card"><span class="stay-name">Small cabins near White Grass</span><br><span class="stay-note">Closest to the nordic-skiing trailhead itself.</span></div>
         </div>
       </div>
     </div>
 
     <div class="region-card">
-      <img class="region-thumb" src="https://commons.wikimedia.org/wiki/Special:FilePath/Deep_Creek_Lake_Maryland_Panoramic_View.jpg?width=800" onerror="this.style.background='linear-gradient(135deg,#3d7a8c,#3b5d42)';this.removeAttribute('src');">
+      <div class="region-thumb-fallback" style="background:linear-gradient(135deg,#a8552f,#3d7a8c);"><span class="icon">⛷️</span></div>
       <div class="region-body">
-        <h3>Deep Creek Lake, MD <span style="font-weight:400;color:var(--muted);font-size:13px;">— Ski</span></h3>
-        <div class="region-drive">~3–3.5 hrs</div>
-        <p class="region-why">Maryland's only real ski resort, on the shore of its largest lake — a solid alternate-year swap with Canaan Valley.</p>
-        <div class="region-sec"><h4>Activities</h4><ul>
-          <li>Wisp Resort — downhill skiing, snowboarding, tubing</li>
-          <li>Snowshoeing and cross-country trails nearby</li>
-        </ul></div>
-        <div class="region-sec"><h4>Where to Stay</h4>
-          <div class="stay-card"><span class="stay-name">Savage River Lodge, Frostburg</span> (near, not on, the lake)<br><span class="stay-note">Secluded state-forest cabins, on-site restaurant — closest true glamping-caliber nordic-adjacent retreat found near Deep Creek. Re-verify current rating before booking.</span></div>
-          <div class="stay-card"><span class="stay-name">Lakefront cabins via Railey / Red Barn Vacations</span><br><span class="stay-note">Search "sauna" as an Airbnb amenity filter directly — inventory turns over fast.</span></div>
+        <h3>Massanutten Resort, VA</h3>
+        <div class="region-drive">Harrisonburg/McGaheysville &middot; ~2 hrs</div>
+        <p class="region-why">The closest real ski terrain to McLean — 23 trails, 82 acres, night skiing, and family-friendly base amenities. Best pick for a quick weekend without the full drive to WV.</p>
+        <div class="region-sec"><h4>Where to Stay <span style="font-weight:400;color:var(--muted);font-size:11.5px;">— 3 options</span></h4>
+          <div class="stay-card"><span class="stay-name">Massanutten Resort</span> <span class="badge resort" style="margin-left:2px;">🏨 Resort</span><br><span class="stay-note">Ski-in/ski-out condos, indoor water park — the practical, amenity-rich pick.</span></div>
+          <div class="stay-card"><span class="stay-name">Small view cabins, McGaheysville</span><br><span class="stay-note">Off-resort, quieter, mountain-view options a short drive from the slopes.</span></div>
+          <div class="stay-card"><span class="stay-name">Upper Shenandoah cabin cluster</span><br><span class="stay-note">Reuse the Luray/Bentonville sauna cabins from Fall — same drive radius.</span></div>
         </div>
       </div>
     </div>
 
+    <div class="region-card">
+      <img class="region-thumb" src="https://commons.wikimedia.org/wiki/Special:FilePath/Deep_Creek_Lake_Maryland_Panoramic_View.jpg?width=800" onerror="this.outerHTML='&lt;div class=&quot;region-thumb-fallback&quot; style=&quot;background:linear-gradient(135deg,#3d7a8c,#5a7a52)&quot;&gt;&lt;span class=&quot;icon&quot;&gt;🏔️&lt;/span&gt;&lt;/div&gt;';">
+      <div class="region-body">
+        <h3>Deep Creek Lake, MD <span style="font-weight:400;color:var(--muted);font-size:13px;">— Ski</span></h3>
+        <div class="region-drive">~3–3.5 hrs</div>
+        <p class="region-why">Maryland's only real ski resort, on the shore of its largest lake.</p>
+        <div class="region-sec"><h4>Where to Stay <span style="font-weight:400;color:var(--muted);font-size:11.5px;">— 3 options</span></h4>
+          <div class="stay-card"><span class="stay-name">Savage River Lodge, Frostburg</span> <span class="badge glamp" style="margin-left:2px;">🏕 Glamping-caliber</span><br><span class="stay-note">Secluded state-forest cabins, on-site restaurant — near, not on, the lake. Re-verify current rating before booking.</span></div>
+          <div class="stay-card"><span class="stay-name">Hillside lake-view cabins, Railey / Red Barn Vacations</span><br><span class="stay-note">Search for elevated lake-view listings over flat lakefront — filter for hot tub/sauna directly.</span></div>
+          <div class="stay-card"><span class="stay-name">Wisp Resort</span> <span class="badge resort" style="margin-left:2px;">🏨 Resort</span><br><span class="stay-note">Ski-in/ski-out rooms right on the slope — simplest option, no rental logistics.</span></div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+  <div class="gem-strip">
+    <h3>Worth the extra drive</h3>
+    <p><b>Snowshoe Mountain, WV</b> — the best terrain in the region by a wide margin (61 trails, 257 acres, 1,500 ft vertical), but realistically ~4.5 hrs from McLean. Worth it as a dedicated ski weekend rather than a quick trip.</p>
   </div>
 </section>
 
@@ -271,17 +321,17 @@
   <div class="region-grid">
 
     <div class="region-card">
-      <div class="region-thumb" style="background:linear-gradient(135deg,#6b9b5e,#3b5d42);"></div>
+      <div class="region-thumb-fallback" style="background:linear-gradient(135deg,#8fb377,#5a7a52);"><span class="icon">🌸</span></div>
       <div class="region-body">
-        <h3>Shenandoah — Both Districts <span style="font-weight:400;color:var(--muted);font-size:13px;">— Spring</span></h3>
+        <h3>Upper &amp; Lower Shenandoah <span style="font-weight:400;color:var(--muted);font-size:13px;">— Spring</span></h3>
         <div class="region-drive">75 min – 3 hrs</div>
-        <p class="region-why">Same North/South trail infrastructure as fall, but wildflowers and peak waterfall flow instead of leaf color — Doyles River/Jones Run run best in early spring.</p>
+        <p class="region-why">Same North/Central and South District trail infrastructure as fall, but wildflowers and peak waterfall flow instead of leaf color — Doyles River/Jones Run and Rose River Falls run best in early spring.</p>
         <div class="region-sec"><h4>Highlight</h4><ul><li>Crabtree Falls full climb — less summer heat, maximum water volume</li></ul></div>
       </div>
     </div>
 
     <div class="region-card">
-      <img class="region-thumb" src="https://commons.wikimedia.org/wiki/Special:FilePath/Wintergreen%2C_VA.JPG?width=800" onerror="this.style.background='linear-gradient(135deg,#6b9b5e,#24382a);this.removeAttribute(\'src\')'">
+      <img class="region-thumb" src="https://commons.wikimedia.org/wiki/Special:FilePath/Wintergreen%2C_VA.JPG?width=800" onerror="this.outerHTML='&lt;div class=&quot;region-thumb-fallback&quot; style=&quot;background:linear-gradient(135deg,#8fb377,#3d5936)&quot;&gt;&lt;span class=&quot;icon&quot;&gt;⛰️&lt;/span&gt;&lt;/div&gt;';">
       <div class="region-body">
         <h3>Wintergreen, VA</h3>
         <div class="region-drive">~3 hrs</div>
@@ -289,20 +339,24 @@
         <div class="region-sec"><h4>Hikes</h4><ul>
           <li>Multiple named falls trails maintained by the Wintergreen Property Owners Association — comparable in scale to Jones Run</li>
         </ul></div>
-        <div class="region-sec"><h4>Where to Stay</h4>
-          <div class="stay-card"><span class="stay-name">Mountain condos on-mountain</span><br><span class="stay-note">Less "small cozy cabin" and more condo — a gap against the usual preference; better suited to a ski-focused stay than a nordic-cycle retreat.</span></div>
+        <div class="region-sec"><h4>Where to Stay <span style="font-weight:400;color:var(--muted);font-size:11.5px;">— 3 options</span></h4>
+          <div class="stay-card"><span class="stay-name">Ridge-view condos on-mountain</span><br><span class="stay-note">Prioritize a unit with a real escarpment view, not a parking-lot-facing one.</span></div>
+          <div class="stay-card"><span class="stay-name">Wintergreen Resort</span> <span class="badge resort" style="margin-left:2px;">🏨 Resort</span><br><span class="stay-note">Pools, tennis, mini-golf — a strong summer pick for older-kid amenities.</span></div>
+          <div class="stay-card"><span class="stay-name">Small cabins, Nellysford/Afton</span><br><span class="stay-note">Cozier, off-mountain, a short drive from the trailheads.</span></div>
         </div>
       </div>
     </div>
 
     <div class="region-card">
-      <img class="region-thumb" src="https://commons.wikimedia.org/wiki/Special:FilePath/Douthat_Lake_Douthat_State_Park_Virginia_USA.jpg?width=800" onerror="this.style.background='linear-gradient(135deg,#3d7a8c,#3b5d42)';this.removeAttribute('src');">
+      <img class="region-thumb" src="https://commons.wikimedia.org/wiki/Special:FilePath/Douthat_Lake_Douthat_State_Park_Virginia_USA.jpg?width=800" onerror="this.outerHTML='&lt;div class=&quot;region-thumb-fallback&quot; style=&quot;background:linear-gradient(135deg,#3d7a8c,#5a7a52)&quot;&gt;&lt;span class=&quot;icon&quot;&gt;🏞️&lt;/span&gt;&lt;/div&gt;';">
       <div class="region-body">
-        <h3>Douthat State Park</h3>
-        <div class="region-drive">Bath County, near Warm Springs &middot; ~3 hrs</div>
-        <p class="region-why">Pairs naturally with a Warm Springs trip — 40+ miles of trails and a mountain lake, a standout spring hiking base.</p>
-        <div class="region-sec"><h4>Where to Stay</h4>
-          <div class="stay-card"><span class="stay-name">Historic CCC-era cabins, booked via Virginia State Parks</span><br><span class="stay-note">Genuinely small and cozy, rustic rather than nordic-cycle luxury — good budget-friendly complement to a splurge night at the Omni Homestead.</span></div>
+        <h3>Douthat State Park &amp; Lake Moomaw</h3>
+        <div class="region-drive">Bath/Alleghany County, near Warm Springs &middot; ~3–3.5 hrs</div>
+        <p class="region-why">Pairs naturally with a Warm Springs trip — 40+ miles of trails and a mountain lake, a standout spring hiking base. Lake Moomaw nearby is a genuine hidden gem for clear-water swimming (Tripadvisor reviewers call it out by name as underrated).</p>
+        <div class="region-sec"><h4>Where to Stay <span style="font-weight:400;color:var(--muted);font-size:11.5px;">— 3 options</span></h4>
+          <div class="stay-card"><span class="stay-name">Historic CCC-era cabins, Virginia State Parks</span><br><span class="stay-note">Genuinely small and cozy, rustic rather than nordic-cycle luxury.</span></div>
+          <div class="stay-card"><span class="stay-name">Lake Moomaw view cabins, Covington area</span><br><span class="stay-note">Elevated-view rentals over the reservoir — search directly, inventory is small.</span></div>
+          <div class="stay-card"><span class="stay-name">The Omni Homestead Resort</span> <span class="badge resort" style="margin-left:2px;">🏨 Resort</span><br><span class="stay-note">Same property as the Warm Springs fall entry — pairs a Douthat hiking day with resort comfort.</span></div>
         </div>
       </div>
     </div>
@@ -312,27 +366,29 @@
 
 <!-- ============ SUMMER ============ -->
 <section class="season-panel" id="season-summer">
-  <p class="season-intro">Water season — a real mountain lake, two under-the-radar Virginia lakes, and the Chesapeake's quieter towns (deliberately not Ocean City), plus the single best crab house near Annapolis.</p>
+  <p class="season-intro">Water season — a real mountain lake, two under-the-radar Virginia lakes, and the Chesapeake's quieter towns (deliberately not Ocean City), plus the single best crab house near Annapolis. For any lake stay, a real view beats flat lakefront access — worth the extra search.</p>
   <div class="region-grid">
 
     <div class="region-card">
-      <img class="region-thumb" src="https://commons.wikimedia.org/wiki/Special:FilePath/Deep_Creek_Lake_Maryland_Panoramic_View.jpg?width=800" onerror="this.style.background='linear-gradient(135deg,#3d7a8c,#3b5d42)';this.removeAttribute('src');">
+      <img class="region-thumb" src="https://commons.wikimedia.org/wiki/Special:FilePath/Deep_Creek_Lake_Maryland_Panoramic_View.jpg?width=800" onerror="this.outerHTML='&lt;div class=&quot;region-thumb-fallback&quot; style=&quot;background:linear-gradient(135deg,#3d7a8c,#5a7a52)&quot;&gt;&lt;span class=&quot;icon&quot;&gt;🚣&lt;/span&gt;&lt;/div&gt;';">
       <div class="region-body">
         <h3>Deep Creek Lake, MD <span style="font-weight:400;color:var(--muted);font-size:13px;">— Summer</span></h3>
         <div class="region-drive">~3–3.5 hrs</div>
         <p class="region-why">Maryland's largest freshwater lake with real beaches and forested shoreline — the closest thing to a mountain-lake resort town in range.</p>
         <div class="region-sec"><h4>Activities</h4><ul>
-          <li>Swimming beaches; boat/paddleboard/kayak rentals (Railey Vacations, marina operators)</li>
+          <li>Swimming beaches; boat/paddleboard/kayak rentals</li>
           <li><b>Swallow Falls State Park</b> — Muddy Creek Falls, Maryland's tallest waterfall (53 ft), a strong hike pairing</li>
         </ul></div>
-        <div class="region-sec"><h4>Where to Stay</h4>
-          <div class="stay-card"><span class="stay-name">Lakefront cabins, Railey / Red Barn Vacations</span><br><span class="stay-note">Search hot-tub + dock combos; sauna rarer lakeside than at Savage River Lodge nearby.</span></div>
+        <div class="region-sec"><h4>Where to Stay <span style="font-weight:400;color:var(--muted);font-size:11.5px;">— 3 options, view-first</span></h4>
+          <div class="stay-card"><span class="stay-name">Hillside lake-view cabins, Railey / Red Barn Vacations</span> <span class="badge view" style="margin-left:2px;">👁 View</span><br><span class="stay-note">Ask specifically for an elevated lake-view listing, not flat lakefront — a better payoff for the price.</span></div>
+          <div class="stay-card"><span class="stay-name">Savage River Lodge, Frostburg</span> <span class="badge glamp" style="margin-left:2px;">🏕 Glamping-caliber</span><br><span class="stay-note">Forest, not lake, view — the nordic-adjacent splurge pick.</span></div>
+          <div class="stay-card"><span class="stay-name">Wisp Resort</span> <span class="badge resort" style="margin-left:2px;">🏨 Resort</span><br><span class="stay-note">Mountain-coaster, ropes course, disc golf in summer — good older-kid amenity fit.</span></div>
         </div>
       </div>
     </div>
 
     <div class="region-card">
-      <img class="region-thumb" src="https://commons.wikimedia.org/wiki/Special:FilePath/Chesapeake_Bay_Maritime_Museum.JPG?width=800" onerror="this.style.background='linear-gradient(135deg,#3d7a8c,#c98a2c)';this.removeAttribute('src');">
+      <img class="region-thumb" src="https://commons.wikimedia.org/wiki/Special:FilePath/Chesapeake_Bay_Maritime_Museum.JPG?width=800" onerror="this.outerHTML='&lt;div class=&quot;region-thumb-fallback&quot; style=&quot;background:linear-gradient(135deg,#3d7a8c,#b8922a)&quot;&gt;&lt;span class=&quot;icon&quot;&gt;⛵&lt;/span&gt;&lt;/div&gt;';">
       <div class="region-body">
         <h3>Chesapeake Hidden Gems</h3>
         <div class="region-drive">St. Michaels / Tilghman Island / Chestertown &middot; ~2.5–3 hrs</div>
@@ -342,20 +398,30 @@
           <li><b>Chestertown, MD</b> — Georgian river town, real historic downtown, not resort-built</li>
           <li><b>St. Michaels, MD</b> — the best-known of the three but still charming: maritime museum, walkable Main Street</li>
         </ul></div>
+        <div class="region-sec"><h4>Where to Stay <span style="font-weight:400;color:var(--muted);font-size:11.5px;">— 3 options, view-first</span></h4>
+          <div class="stay-card"><span class="stay-name">Water-view cottages, Tilghman Island</span> <span class="badge view" style="margin-left:2px;">👁 View</span><br><span class="stay-note">Small waterman's-cottage-style rentals with a creek or bay view — the least-crowded of the group.</span></div>
+          <div class="stay-card"><span class="stay-name">Boutique inns, St. Michaels harbor</span><br><span class="stay-note">Walkable to the Maritime Museum, harbor views from the porch.</span></div>
+          <div class="stay-card"><span class="stay-name">Historic B&amp;Bs, downtown Chestertown</span><br><span class="stay-note">River-view rooms in a Georgian-era house — quietest option of the three towns.</span></div>
+        </div>
       </div>
     </div>
 
     <div class="region-card">
-      <img class="region-thumb" src="https://commons.wikimedia.org/wiki/Special:FilePath/Cape_Charles_Light_and_towers_VA1.jpg?width=800" onerror="this.style.background='linear-gradient(135deg,#3d7a8c,#24382a)';this.removeAttribute('src');">
+      <img class="region-thumb" src="https://commons.wikimedia.org/wiki/Special:FilePath/Cape_Charles_Light_and_towers_VA1.jpg?width=800" onerror="this.outerHTML='&lt;div class=&quot;region-thumb-fallback&quot; style=&quot;background:linear-gradient(135deg,#3d7a8c,#5a7a52)&quot;&gt;&lt;span class=&quot;icon&quot;&gt;🏖️&lt;/span&gt;&lt;/div&gt;';">
       <div class="region-body">
         <h3>Eastern Shore VA Hidden Gems</h3>
         <div class="region-drive">Onancock / Cape Charles &middot; ~3.5–4 hrs</div>
         <p class="region-why">The Virginia side of the Shore, further and quieter still — Onancock is small and artsy on a tidal creek; Cape Charles has an actual bay-side sand beach and a restored Main Street.</p>
+        <div class="region-sec"><h4>Where to Stay <span style="font-weight:400;color:var(--muted);font-size:11.5px;">— 3 options, view-first</span></h4>
+          <div class="stay-card"><span class="stay-name">Bay-view cottages, Cape Charles</span> <span class="badge view" style="margin-left:2px;">👁 View</span><br><span class="stay-note">Small beach cottages on or near the bay-side sand beach.</span></div>
+          <div class="stay-card"><span class="stay-name">Creekside cottages, Onancock</span><br><span class="stay-note">Tidal-creek views, walkable to the town's small arts scene.</span></div>
+          <div class="stay-card"><span class="stay-name">Historic inns, Cape Charles Main Street</span><br><span class="stay-note">Restored Victorian-era small inns, a few blocks from the water.</span></div>
+        </div>
       </div>
     </div>
 
     <div class="region-card">
-      <img class="region-thumb" src="https://commons.wikimedia.org/wiki/Special:FilePath/Dock_Street_Annapolis.JPG?width=800" onerror="this.style.background='linear-gradient(135deg,#b1512f,#3d7a8c)';this.removeAttribute('src');">
+      <img class="region-thumb" src="https://commons.wikimedia.org/wiki/Special:FilePath/Dock_Street_Annapolis.JPG?width=800" onerror="this.outerHTML='&lt;div class=&quot;region-thumb-fallback&quot; style=&quot;background:linear-gradient(135deg,#a8552f,#3d7a8c)&quot;&gt;&lt;span class=&quot;icon&quot;&gt;🦀&lt;/span&gt;&lt;/div&gt;';">
       <div class="region-body">
         <h3>Annapolis — Best Maryland Crabs</h3>
         <div class="region-drive">~1 hr</div>
@@ -369,11 +435,16 @@
     </div>
 
     <div class="region-card">
-      <img class="region-thumb" src="https://commons.wikimedia.org/wiki/Special:FilePath/SmithMtnLake_VA.JPG?width=800" onerror="this.style.background='linear-gradient(135deg,#3d7a8c,#6b9b5e)';this.removeAttribute('src');">
+      <img class="region-thumb" src="https://commons.wikimedia.org/wiki/Special:FilePath/SmithMtnLake_VA.JPG?width=800" onerror="this.outerHTML='&lt;div class=&quot;region-thumb-fallback&quot; style=&quot;background:linear-gradient(135deg,#3d7a8c,#8fb377)&quot;&gt;&lt;span class=&quot;icon&quot;&gt;🛶&lt;/span&gt;&lt;/div&gt;';">
       <div class="region-body">
         <h3>Smith Mountain Lake &amp; Lake Anna, VA</h3>
         <div class="region-drive">SML ~3.5–4 hrs &middot; Lake Anna ~1.5–2 hrs</div>
         <p class="region-why">Virginia's own hidden-gem lakes. Smith Mountain sits in the Blue Ridge foothills — a mountain-lake setting, genuinely less known than Deep Creek. Lake Anna is the easy short-weekend option when four hours is too far.</p>
+        <div class="region-sec"><h4>Where to Stay <span style="font-weight:400;color:var(--muted);font-size:11.5px;">— 3 options, view-first</span></h4>
+          <div class="stay-card"><span class="stay-name">Hillside view homes, Smith Mountain Lake</span> <span class="badge view" style="margin-left:2px;">👁 View</span><br><span class="stay-note">Blue Ridge foothill setting gives real elevated-view options, not just flat shoreline.</span></div>
+          <div class="stay-card"><span class="stay-name">The Bridgewater Plaza-area resort condos</span> <span class="badge resort" style="margin-left:2px;">🏨 Resort-style</span><br><span class="stay-note">Marina, pools, and dining within walking distance.</span></div>
+          <div class="stay-card"><span class="stay-name">Small lake-view cottages, Lake Anna</span><br><span class="stay-note">Easy short-weekend option — search "Lake Anna view" directly, inventory turns over fast.</span></div>
+        </div>
       </div>
     </div>
 
@@ -383,7 +454,7 @@
 </main>
 
 <footer>
-  Content last fully reviewed: Sept 10, 2026. Fall foliage estimate refreshes every mid-August; lodging picks are re-scanned roughly two months before each season starts — see the <a href="#" style="color:var(--muted);">Local Vacations skill</a> for the schedule. Nordic-cycle amenity availability (sauna / cold plunge / hot tub) turns over on short-term rental platforms — always confirm at booking.
+  Content last fully reviewed: Sept 10, 2026. Fall foliage estimate refreshes every mid-August; lodging picks are re-scanned roughly two months before each season starts — see the Local Vacations skill for the schedule. Nordic-cycle amenity availability (sauna / cold plunge / hot tub) turns over on short-term rental platforms — always confirm at booking. Typical budget $600–700/night; stretch further for a real view or a genuinely special resort.
 </footer>
 
 <script>
@@ -393,6 +464,7 @@ document.querySelectorAll('.season-nav button').forEach(function(btn){
     document.querySelectorAll('.season-panel').forEach(function(p){p.classList.remove('active');});
     btn.classList.add('active');
     document.getElementById('season-' + btn.dataset.season).classList.add('active');
+    document.body.setAttribute('data-season', btn.dataset.season);
   });
 });
 </script>
