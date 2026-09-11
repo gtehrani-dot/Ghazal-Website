@@ -69,6 +69,11 @@
   .badge.resort{background:rgba(90,122,82,.14);border-color:rgba(90,122,82,.4);color:#3d5936;}
   .badge.view{background:rgba(61,122,140,.12);border-color:rgba(61,122,140,.4);color:#2c5a68;}
   .badge.stretch{background:rgba(168,85,47,.16);border-color:var(--accent-2);color:#8a4526;}
+  .region-more{position:relative;}
+  .region-more.clipped{overflow:hidden;}
+  .region-more.clipped::after{content:'';position:absolute;left:0;right:0;bottom:0;height:56px;background:linear-gradient(to bottom, rgba(255,255,255,0), #fff 85%);pointer-events:none;}
+  .show-more-btn{margin-top:12px;align-self:flex-start;background:#fff;border:1px solid var(--line);color:var(--accent-2);font-family:'JetBrains Mono',monospace;font-size:11.5px;letter-spacing:.03em;padding:7px 16px;border-radius:20px;cursor:pointer;transition:background .15s,border-color .15s;}
+  .show-more-btn:hover{background:var(--mist);border-color:var(--accent-2);}
   .region-sec{margin-top:12px;}
   .region-sec h4{font-size:11.5px;text-transform:uppercase;letter-spacing:.05em;color:var(--accent-2);font-family:'JetBrains Mono',monospace;margin-bottom:6px;}
   .region-sec ul{margin:0;padding-left:18px;font-size:13.5px;color:#3a3a4a;}
@@ -844,6 +849,56 @@ document.querySelectorAll('.season-nav button').forEach(function(btn){
     document.body.setAttribute('data-season', btn.dataset.season);
   });
 });
+
+// Truncate long region cards (e.g. multi-hike Shenandoah cards) with a Show more / Show less toggle.
+function truncateCard(card){
+  if(card.dataset.truncInit) return;
+  card.dataset.truncInit='1';
+  var body=card.querySelector('.region-body');
+  if(!body) return;
+  var why=body.querySelector('.region-why');
+  var badgeRow=body.querySelector('.badge-row');
+  var startEl=why ? why.nextElementSibling : (badgeRow ? badgeRow.nextElementSibling : null);
+  if(!startEl) return;
+  var toMove=[];
+  var el=startEl;
+  while(el){ toMove.push(el); el=el.nextElementSibling; }
+  if(toMove.length===0) return;
+  var wrap=document.createElement('div');
+  wrap.className='region-more';
+  toMove.forEach(function(e){ wrap.appendChild(e); });
+  body.appendChild(wrap);
+  if(wrap.scrollHeight>640){
+    wrap.style.maxHeight='640px';
+    wrap.classList.add('clipped');
+    var btn=document.createElement('button');
+    btn.type='button';
+    btn.className='show-more-btn';
+    btn.textContent='Show more ▾';
+    btn.addEventListener('click', function(){
+      if(wrap.classList.contains('clipped')){
+        wrap.style.maxHeight=wrap.scrollHeight+'px';
+        wrap.classList.remove('clipped');
+        btn.textContent='Show less ▴';
+      } else {
+        wrap.style.maxHeight='640px';
+        wrap.classList.add('clipped');
+        btn.textContent='Show more ▾';
+        card.scrollIntoView({behavior:'smooth', block:'nearest'});
+      }
+    });
+    body.appendChild(btn);
+  }
+}
+function initCardTruncation(){
+  document.querySelectorAll('.season-panel').forEach(function(panel){
+    var wasActive=panel.classList.contains('active');
+    if(!wasActive){ panel.style.display='block'; panel.style.visibility='hidden'; }
+    panel.querySelectorAll('.region-card').forEach(truncateCard);
+    if(!wasActive){ panel.style.display=''; panel.style.visibility=''; }
+  });
+}
+initCardTruncation();
 </script>
 
 </body>
