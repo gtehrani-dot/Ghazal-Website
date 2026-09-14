@@ -81,6 +81,10 @@
   .rt{display:inline-block;font-family:'JetBrains Mono',monospace;font-size:11px;color:#8a6a1f;background:rgba(184,146,42,.12);border:1px solid rgba(184,146,42,.35);border-radius:6px;padding:1px 6px;margin-left:5px;white-space:nowrap;}
   .rt.norate{color:var(--muted);background:var(--mist);border-color:var(--line);font-style:italic;}
   .stay-card{background:var(--mist);border:1px solid var(--line);border-radius:9px;padding:8px 11px;margin-bottom:6px;font-size:13px;}
+  .stay-card[data-img]{cursor:pointer;}
+  .stay-card[data-img] .stay-name{border-bottom:1px dotted var(--accent-2);}
+  #stay-tooltip{position:fixed;z-index:1000;display:none;pointer-events:none;border-radius:10px;overflow:hidden;box-shadow:0 10px 28px rgba(26,26,46,.3);border:3px solid #fff;background:#fff;}
+  #stay-tooltip img{display:block;width:220px;height:150px;object-fit:cover;}
   .stay-card .stay-name{font-weight:700;color:var(--ink);}
   .stay-card .stay-note{color:var(--muted);font-size:12px;}
   .stay-card a{text-decoration:none;}
@@ -170,16 +174,17 @@
           <li><a href="https://www.google.com/search?q=Element+restaurant+Front+Royal+VA" target="_blank">Element, Front Royal</a> — 4.4★ (Tripadvisor), chef-owned New American, locally called the best table in Warren County.</li>
           <li><a href="https://www.google.com/search?q=West+Main+Market+Luray+VA" target="_blank">West Main Market, Luray</a> — 4.6★, casual local hangout with live music.</li>
         </ul></div>
-        <div class="region-sec"><h4>Where to Stay <span style="font-weight:400;color:var(--muted);font-size:11.5px;">— 4 options</span></h4>
+        <div class="region-sec"><h4>Where to Stay <span style="font-weight:400;color:var(--muted);font-size:11.5px;">— 5 options</span></h4>
           <div class="stay-card"><a href="https://www.vrbo.com/4662444" target="_blank"><span class="stay-name">Shenandoah Escape Cabin</span></a> <span class="badge nordic" style="margin-left:2px;">🧖 Sauna + Hot Tub</span><br><span class="stay-note">Bentonville, VA · 10/10, 38 reviews. Barrel sauna, 6-person hot tub, fire pit, 5 private acres, 3BR sleeps 6.</span></div>
           <div class="stay-card"><a href="https://www.airbnb.com/rooms/49208300" target="_blank"><span class="stay-name">Shenandoah Gem ~ Sauna</span></a> <span class="badge nordic" style="margin-left:2px;">🧖 Sauna</span><br><span class="stay-note">Luray, VA · 4.91★, 494 reviews. Private indoor sauna, walk to South River outfitters, king bed.</span></div>
           <div class="stay-card"><a href="https://www.airbnb.com/rooms/796440212030201837" target="_blank"><span class="stay-name">Luxe Log Cabin, Mountain Views</span></a> <span class="badge nordic" style="margin-left:2px;">🛁 Hot Tub</span><br><span class="stay-note">Rileyville, VA · 4.96★, 182 reviews. Secluded log cabin with breathtaking mountain vistas, hot tub, fire pit, screened porch — 4BR sleeps up to 9, good for a bigger group.</span></div>
+          <div class="stay-card"><a href="https://www.tripadvisor.com/Hotel_Review-g57489-d33000354-Reviews-Postcard_Cabins_Shenandoah_North_Outdoor_Collection_by_Marriott_Bonvoy-Basye_Virginia.html" target="_blank"><span class="stay-name">Postcard Cabins Shenandoah North</span></a> <span class="badge glamp" style="margin-left:2px;">🏕 Glamping</span><br><span class="stay-note">Basye, VA · 4.5★ (Tripadvisor). North-District counterpart to the Lower Shenandoah location below — same small, modern A-frame glamping cabins, part of the Outdoor Collection by Marriott Bonvoy.</span></div>
           <div class="stay-card"><a href="https://www.google.com/search?q=Massanutten+Resort+Virginia+West+Virginia+Maryland+rental" target="_blank"><span class="stay-name">Massanutten Resort</span></a> <span class="badge resort" style="margin-left:2px;">🏨 Resort</span><br><span class="stay-note">McGaheysville, VA. Water park, arcade, mini-golf — the pick when resort amenities beat a quiet cabin, especially in summer with older kids.</span></div>
         </div>
       </div>
     </div>
 
-    <div class="region-card" style="order:5">
+    <div class="region-card" style="order:6">
       <img class="region-thumb" src="https://npgallery.nps.gov/GetAsset/f72839ad-57d4-44a7-88ca-fbbf997cf7cf/proxymdres.jpg" onerror="this.outerHTML='&lt;div class=&quot;region-thumb-fallback&quot; style=&quot;background:linear-gradient(135deg,#a8552f,#5a7a52)&quot;&gt;&lt;span class=&quot;icon&quot;&gt;💧&lt;/span&gt;&lt;/div&gt;';">
       <div class="region-body">
         <h3>Lower Shenandoah</h3>
@@ -205,7 +210,7 @@
       </div>
     </div>
 
-    <div class="region-card" style="order:6">
+    <div class="region-card" style="order:7">
       <img class="region-thumb" src="https://www.nps.gov/common/uploads/cropped_image/primary/99B95D66-04CD-FE13-879373E65AA9F878.jpg?width=1600&quality=90&mode=crop" onerror="this.outerHTML='&lt;div class=&quot;region-thumb-fallback&quot; style=&quot;background:linear-gradient(135deg,#5a7a52,#3d5936)&quot;&gt;&lt;span class=&quot;icon&quot;&gt;🌲&lt;/span&gt;&lt;/div&gt;';">
       <div class="region-body">
         <h3>George Washington National Forest</h3>
@@ -226,7 +231,7 @@
       </div>
     </div>
 
-    <div class="region-card" style="order:7">
+    <div class="region-card" style="order:8">
       <img class="region-thumb" src="https://natureconservancy-h.assetsadobe.com/is/image/content/dam/tnc/nature/en/photos/w/a/Warm-Springs-Mtn-East.jpg" onerror="this.outerHTML='&lt;div class=&quot;region-thumb-fallback&quot; style=&quot;background:linear-gradient(135deg,#3d7a8c,#5a7a52)&quot;&gt;&lt;span class=&quot;icon&quot;&gt;♨️&lt;/span&gt;&lt;/div&gt;';">
       <div class="region-body">
         <h3>Warm Springs, VA — Bath County</h3>
@@ -249,7 +254,7 @@
       </div>
     </div>
 
-    <div class="region-card" style="order:8">
+    <div class="region-card" style="order:9">
       <img class="region-thumb" src="https://wvstateparks.com/wp-content/uploads/2026/07/025StateParksJuly_28_2015-2-700x467.avif" onerror="this.outerHTML='&lt;div class=&quot;region-thumb-fallback&quot; style=&quot;background:linear-gradient(135deg,#b8922a,#5a7a52)&quot;&gt;&lt;span class=&quot;icon&quot;&gt;🍁&lt;/span&gt;&lt;/div&gt;';">
       <div class="region-body">
         <h3>Canaan Valley, WV <span style="font-weight:400;color:var(--muted);font-size:13px;">— Fall</span></h3>
@@ -262,7 +267,8 @@
           <li><a href="https://www.google.com/search?q=Dolly+Sods+Wilderness+WV" target="_blank">Dolly Sods (see Hidden Gems)</a> — high-elevation heath barrens, unlike anywhere else on this list</li>
           <li><a href="https://www.google.com/search?q=Seneca+Rocks+West+Virginia+hiking" target="_blank">Seneca Rocks</a> — 900-ft sandstone fin with a maintained non-technical summit trail and sweeping Allegheny views, ~45 min away</li>
         </ul></div>
-        <div class="region-sec"><h4>Where to Stay <span style="font-weight:400;color:var(--muted);font-size:11.5px;">— 3 options</span></h4>
+        <div class="region-sec"><h4>Where to Stay <span style="font-weight:400;color:var(--muted);font-size:11.5px;">— 4 options</span></h4>
+          <div class="stay-card"><a href="https://www.valleyviewcabinresort.com/" target="_blank"><span class="stay-name">Valley View Cabin Resort</span></a> <span class="rt norate">no aggregate rating found yet</span><br><span class="stay-note">Davis, WV. Small modern 1–2BR cabins with private Jacuzzi hot tub cabana, gas fireplace, floor-to-ceiling windows on the valley — steps from the Canaan Valley Spa. The closest fit here to the Postcard Cabins/glamping style.</span></div>
           <div class="stay-card"><a href="https://www.google.com/search?q=Independent+cabins+via+local+rental+agencies+Virginia+West+Virginia+Maryland+rental" target="_blank"><span class="stay-name">Independent cabins via local rental agencies</span></a><br><span class="stay-note">bestofcanaan.com-style local agencies list small, cozy, view-forward cabins — good fall base.</span></div>
           <div class="stay-card"><a href="https://www.google.com/search?q=Blackwater+Falls+State+Park+cabins+Virginia+West+Virginia+Maryland+rental" target="_blank"><span class="stay-name">Blackwater Falls State Park cabins</span></a><br><span class="stay-note">Rustic, small, right at the falls — book early for peak foliage weekends.</span></div>
           <div class="stay-card"><a href="https://www.google.com/search?q=Canaan+Valley+Resort+State+Park+Lodge+Virginia+West+Virginia+Maryland+rental" target="_blank"><span class="stay-name">Canaan Valley Resort State Park Lodge</span></a> <span class="badge resort" style="margin-left:2px;">🏨 Resort</span><br><span class="stay-note">Same base works for Winter (see below) — golf-course lodge with valley views.</span></div>
@@ -271,7 +277,7 @@
     </div>
 
 
-    <div class="region-card" style="order:9">
+    <div class="region-card" style="order:10">
       <img class="region-thumb" src="https://commons.wikimedia.org/wiki/Special:FilePath/View_From_Dolly_Sods.JPG?width=800" onerror="this.outerHTML='&lt;div class=&quot;region-thumb-fallback&quot; style=&quot;background:linear-gradient(135deg,#a8552f,#3d5936)&quot;&gt;&lt;span class=&quot;icon&quot;&gt;🍁&lt;/span&gt;&lt;/div&gt;';">
       <div class="region-body">
         <h3>Dolly Sods Wilderness, WV</h3>
@@ -305,7 +311,7 @@
       </div>
     </div>
 
-    <div class="region-card" style="order:10">
+    <div class="region-card" style="order:11">
       <img class="region-thumb" src="https://assets.simpleviewinc.com/simpleview/image/upload/c_limit,h_1200,q_75,w_1200/v1/clients/virginia/BR20110203V_046_30157322-841a-45c8-9dc3-d618c4f23b24.jpg" onerror="this.outerHTML='&lt;div class=&quot;region-thumb-fallback&quot; style=&quot;background:linear-gradient(135deg,#a8552f,#5a7a52)&quot;&gt;&lt;span class=&quot;icon&quot;&gt;🐴&lt;/span&gt;&lt;/div&gt;';">
       <div class="region-body">
         <h3>Mount Rogers NRA &amp; Grayson Highlands <span style="font-weight:400;color:var(--muted);font-size:13px;">— Long Weekend</span></h3>
@@ -331,7 +337,7 @@
       </div>
     </div>
 
-    <div class="region-card" style="order:11">
+    <div class="region-card" style="order:12">
       <img class="region-thumb" src="https://www.dcr.virginia.gov/natural-heritage/image/20090722-channels031.jpg" onerror="this.outerHTML='&lt;div class=&quot;region-thumb-fallback&quot; style=&quot;background:linear-gradient(135deg,#8a6a1f,#3d5936)&quot;&gt;&lt;span class=&quot;icon&quot;&gt;🪨&lt;/span&gt;&lt;/div&gt;';">
       <div class="region-body">
         <h3>The Great Channels, Channels State Forest</h3>
@@ -371,9 +377,12 @@
           <li><a href="https://www.tripadvisor.com/Restaurant_Review-g60722-d15756303-Reviews-Kelley_Farm_Kitchen-Harpers_Ferry_West_Virginia.html" target="_blank">Kelley Farm Kitchen</a>, Harpers Ferry — 4.9★, 61 reviews, farm-to-table.</li>
           <li><a href="https://www.tripadvisor.com/Restaurants-g60722-Harpers_Ferry_West_Virginia.html" target="_blank">Battle Grounds Bakery &amp; Coffee</a>, Harpers Ferry — 4.6★, 87 reviews.</li>
         </ul></div>
-        <div class="region-sec"><h4>Where to Stay</h4><ul>
-          <li>Same Harpers Ferry lodging as the Summer card — <a href="https://www.tripadvisor.com/Hotel_Review-g60722-d118390-Reviews-The_Angler_s_Inn_Bed_and_Breakfast-Harpers_Ferry_West_Virginia.html" target="_blank">The Angler's Inn B&amp;B</a> (4.8★, 259 reviews, #1 B&amp;B in town) is the standing pick; see the Summer card for the other 2 options.</li>
-        </ul></div>
+        <div class="region-sec"><h4>Where to Stay <span style="font-weight:400;color:var(--muted);font-size:11.5px;">— 4 options</span></h4>
+          <div class="stay-card"><a href="https://www.airbnb.com/rooms/1262341904010175131" target="_blank"><span class="stay-name">Camp Patowmack</span></a> <span class="badge nordic" style="margin-left:2px;">🧖 Sauna + Hot Tub</span><br><span class="stay-note">Harpers Ferry, WV (Mountain Mama Vacation Homes) · 4.84★, 43 reviews, Superhost. Newly renovated riverfront chalet on the Potomac, hot tub + sauna, 4BR sleeps 8, ~15 min to downtown.</span></div>
+          <div class="stay-card"><a href="https://www.airbnb.com/rooms/897033611113678764" target="_blank"><span class="stay-name">Rocky Ridge</span></a> <span class="badge nordic" style="margin-left:2px;">🛁 Hot Tub</span><br><span class="stay-note">Harpers Ferry, WV (Mountain Mama) · 4.88★, 80 reviews. Secluded Blue Ridge mountaintop with sweeping Shenandoah Valley + Lake Shannondale views, hot tub, fire pit, 4BR sleeps 8 — the pick for a fall-foliage view.</span></div>
+          <div class="stay-card"><a href="https://www.vrbo.com/9975432ha" target="_blank"><span class="stay-name">Aslan's How</span></a> <span class="badge nordic" style="margin-left:2px;">🛁 Hot Tub</span><br><span class="stay-note">Harpers Ferry, WV (Mountain Mama) · 9.8/10, 12 reviews. Cozy knotty-pine 2BR with valley-view hot tub, sleeps 6 — the smaller, quieter option of the three.</span></div>
+          <div class="stay-card"><a href="https://www.tripadvisor.com/Hotel_Review-g60722-d118390-Reviews-The_Angler_s_Inn_Bed_and_Breakfast-Harpers_Ferry_West_Virginia.html" target="_blank"><span class="stay-name">The Angler's Inn B&amp;B</span></a><br><span class="stay-note">Harpers Ferry, WV · 4.8★, 259 reviews, #1 B&amp;B in town. 1870s Victorian, private sitting rooms/baths per suite — same standing pick as the Summer card if a B&amp;B fits better than a cabin.</span></div>
+        </div>
       </div>
     </div>
 
@@ -494,7 +503,7 @@
   <p class="season-intro">Same trail network as fall, with wildflower blooms, dogwood/redbud color, and waterfalls running at peak flow — best time for the full Crabtree Falls climb.</p>
   <div class="region-grid">
 
-    <div class="region-card">
+    <div class="region-card" style="order:1">
       <img class="region-thumb" src="https://www.nps.gov/shen/planyourvisit/images/20230414_SkylineDrive_Spring_Mile2_NDL9590_nl.jpg" onerror="this.outerHTML='&lt;div class=&quot;region-thumb-fallback&quot; style=&quot;background:linear-gradient(135deg,#8fb377,#5a7a52)&quot;&gt;&lt;span class=&quot;icon&quot;&gt;🌸&lt;/span&gt;&lt;/div&gt;';">
       <div class="region-body">
         <h3>Upper &amp; Lower Shenandoah <span style="font-weight:400;color:var(--muted);font-size:13px;">— Spring</span></h3>
@@ -512,7 +521,7 @@
       </div>
     </div>
 
-    <div class="region-card">
+    <div class="region-card" style="order:2">
       <img class="region-thumb" src="https://commons.wikimedia.org/wiki/Special:FilePath/Wintergreen%2C_VA.JPG?width=800" onerror="this.outerHTML='&lt;div class=&quot;region-thumb-fallback&quot; style=&quot;background:linear-gradient(135deg,#8fb377,#3d5936)&quot;&gt;&lt;span class=&quot;icon&quot;&gt;⛰️&lt;/span&gt;&lt;/div&gt;';">
       <div class="region-body">
         <h3>Wintergreen, VA</h3>
@@ -529,7 +538,7 @@
       </div>
     </div>
 
-    <div class="region-card">
+    <div class="region-card" style="order:3">
       <img class="region-thumb" src="https://commons.wikimedia.org/wiki/Special:FilePath/Douthat_Lake_Douthat_State_Park_Virginia_USA.jpg?width=800" onerror="this.outerHTML='&lt;div class=&quot;region-thumb-fallback&quot; style=&quot;background:linear-gradient(135deg,#3d7a8c,#5a7a52)&quot;&gt;&lt;span class=&quot;icon&quot;&gt;🏞️&lt;/span&gt;&lt;/div&gt;';">
       <div class="region-body">
         <h3>Douthat State Park &amp; Lake Moomaw</h3>
@@ -677,7 +686,7 @@
           <div class="badge-row"><span class="badge glamp">🌾 Destination Stay</span></div>
           <p class="region-why">A 115-acre working farm on the Manokin River — three separate rentable buildings (The Loft, The Homestead, The Farmhouse), a seasonal pool, riverside fire pit with s'mores kits, kayaks/SUP, daily farm-fresh breakfast delivery, and farm animals guests can interact with (fainting goats, a donkey, guinea fowl, a livestock guardian dog). Westover itself isn't a draw — this is a pure "the property is the destination" pick, a Ghazal favorite worth repeating. Best for Summer when the pool is open; Spring works too but the pool isn't usable yet and mayflies can be a nuisance near the river.</p>
           <div class="region-sec"><h4>Where to Stay</h4>
-            <div class="stay-card"><a href="https://www.airbnb.com/rooms/47385241" target="_blank"><span class="stay-name">The Homestead at Sugar Water Manor</span></a><br><span class="stay-note">5.0★, 64 reviews (Airbnb). 2BR/1BA, sleeps 4, from $275/night. Also on the same farm: The Loft (1BR, from $175/night) and The Farmhouse (3BR, from $350/night) — <a href="https://www.sugarwatermanor.com/stay-at-sugar-water-manor" target="_blank">book directly</a> for all three.</span></div>
+            <div class="stay-card" data-img="https://a0.muscache.com/im/pictures/b56fe2e6-05af-4067-95f1-985794b52505.jpg?im_w=720"><a href="https://www.airbnb.com/rooms/47385241" target="_blank"><span class="stay-name">The Homestead at Sugar Water Manor</span></a><br><span class="stay-note">5.0★, 64 reviews (Airbnb). 2BR/1BA, sleeps 4, from $275/night. Also on the same farm: The Loft (1BR, from $175/night) and The Farmhouse (3BR, from $350/night) — <a href="https://www.sugarwatermanor.com/stay-at-sugar-water-manor" target="_blank">book directly</a> for all three.</span></div>
           </div>
         </div>
       </div>
@@ -868,37 +877,82 @@ function truncateCard(card){
   wrap.className='region-more';
   toMove.forEach(function(e){ wrap.appendChild(e); });
   body.appendChild(wrap);
-  if(wrap.scrollHeight>640){
-    wrap.style.maxHeight='640px';
-    wrap.classList.add('clipped');
-    var btn=document.createElement('button');
-    btn.type='button';
-    btn.className='show-more-btn';
-    btn.textContent='Show more ▾';
-    btn.addEventListener('click', function(){
-      if(wrap.classList.contains('clipped')){
-        wrap.style.maxHeight=wrap.scrollHeight+'px';
-        wrap.classList.remove('clipped');
-        btn.textContent='Show less ▴';
-      } else {
-        wrap.style.maxHeight='640px';
-        wrap.classList.add('clipped');
-        btn.textContent='Show more ▾';
-        card.scrollIntoView({behavior:'smooth', block:'nearest'});
-      }
-    });
-    body.appendChild(btn);
-  }
+  return wrap;
+}
+var CARD_CAP=250;
+function applyCap(wrap){
+  wrap.style.minHeight=CARD_CAP+'px';
+  wrap.style.maxHeight=CARD_CAP+'px';
+  wrap.classList.add('clipped');
+}
+function releaseCap(wrap){
+  wrap.style.minHeight='';
+  wrap.style.maxHeight=wrap.scrollHeight+'px';
+  wrap.classList.remove('clipped');
 }
 function initCardTruncation(){
   document.querySelectorAll('.season-panel').forEach(function(panel){
     var wasActive=panel.classList.contains('active');
     if(!wasActive){ panel.style.display='block'; panel.style.visibility='hidden'; }
-    panel.querySelectorAll('.region-card').forEach(truncateCard);
+    var wraps=[];
+    panel.querySelectorAll('.region-card').forEach(function(card){
+      var wrap=truncateCard(card);
+      if(wrap) wraps.push({card:card, wrap:wrap});
+    });
+    // Give every card in this panel the same fixed-height box, so the grid reads as uniform —
+    // cards under the cap just show all their content with a bit of blank space below;
+    // cards over the cap clip with a fade + Show more toggle.
+    wraps.forEach(function(item){
+      var wrap=item.wrap, card=item.card, body=card.querySelector('.region-body');
+      var natural=wrap.scrollHeight;
+      applyCap(wrap);
+      if(natural>CARD_CAP){
+        var btn=document.createElement('button');
+        btn.type='button';
+        btn.className='show-more-btn';
+        btn.textContent='Show more ▾';
+        btn.addEventListener('click', function(){
+          if(wrap.classList.contains('clipped')){
+            releaseCap(wrap);
+            btn.textContent='Show less ▴';
+          } else {
+            applyCap(wrap);
+            btn.textContent='Show more ▾';
+            card.scrollIntoView({behavior:'smooth', block:'nearest'});
+          }
+        });
+        body.appendChild(btn);
+      }
+    });
     if(!wasActive){ panel.style.display=''; panel.style.visibility=''; }
   });
 }
 initCardTruncation();
+
+// Hover preview: shows a property photo when hovering a stay-card that has a data-img URL.
+(function(){
+  var tip=document.createElement('div');
+  tip.id='stay-tooltip';
+  var tipImg=document.createElement('img');
+  tip.appendChild(tipImg);
+  document.body.appendChild(tip);
+  document.querySelectorAll('.stay-card[data-img]').forEach(function(card){
+    card.addEventListener('mouseenter', function(){
+      tipImg.src=card.getAttribute('data-img');
+      tip.style.display='block';
+    });
+    card.addEventListener('mousemove', function(e){
+      var x=e.clientX+16, y=e.clientY+16;
+      if(x+220>window.innerWidth) x=e.clientX-236;
+      if(y+150>window.innerHeight) y=e.clientY-166;
+      tip.style.left=x+'px';
+      tip.style.top=y+'px';
+    });
+    card.addEventListener('mouseleave', function(){
+      tip.style.display='none';
+    });
+  });
+})();
 </script>
 
 </body>
