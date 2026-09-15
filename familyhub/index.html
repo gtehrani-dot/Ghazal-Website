@@ -880,18 +880,24 @@ async function fetchBodyFromThreadFH(threadId, isInTrash) {
   } catch(e){}
   return full || {};
 }
-// Ella's grades table is sourced from the FCPS ParentVUE Grade Book Summary
-// email (PARENTVUE_QUERY below) — the one authoritative, always-current list
-// of her real classes/teachers/scores each quarter. Corrected Sep 15 2026:
-// this used to be a hardcoded 5-class roster (ELLA_CLASSES) built from
-// memory, which went stale (3 of the 5 subjects were last year's) and
-// doesn't even work for teachers who never send individual emails — only
-// Donohue and Parker do. ELLA_KNOWN_TEACHERS below is now just an optional
-// enrichment lookup for a specific teacher's own comments, not the roster.
-const ELLA_KNOWN_TEACHERS = {
-  donohue: {full:'Meghan Donohue', from:'mbdonohue@fcps.edu'},
-  parker:  {full:'Marin Parker',   from:'meparker1@fcps.edu'}
-};
+// Ella's grades table combines TWO sources every run, not one-or-the-other
+// (Ghazal, Sep 15 2026: "sometimes the individual teacher notes on grades
+// have more info than the ParentVUE ones... I need both to inform the hub
+// as they surface. It's not one or the other. They have differing level of
+// detail."):
+//   1. PARENTVUE_QUERY — the FCPS Grade Book Summary email, sent once per
+//      quarter, listing ALL of Ella's current classes/teachers/grades. This
+//      is the baseline roster — always current, never hardcoded.
+//   2. PROGRESS_REPORT_QUERY — FCPS's per-teacher "Progress Report for Ella
+//      Moore" emails use one standard subject line regardless of WHICH
+//      teacher sends it, so one combined query finds all of them without
+//      hardcoding any teacher's name or email address. These often carry
+//      much more detail than ParentVUE (assignment-level breakdown, a
+//      specific missing assignment, the teacher's own note on what to do)
+//      even when the letter grade agrees with ParentVUE.
+const PARENTVUE_QUERY = 'in:anywhere from:noreply@fcps.edu subject:"Grade Book Summary"';
+const PROGRESS_REPORT_QUERY = 'in:anywhere subject:"Progress Report for Ella Moore" newer_than:45d';
+
 function parseEllaParentVueGrades(bodyHtml) {
   if (!bodyHtml) return [];
   const idx = bodyHtml.search(/<strong>\s*Ella\s*<\/strong>\s*has received/i);
@@ -910,49 +916,82 @@ function parseEllaParentVueGrades(bodyHtml) {
   }
   return rows;
 }
-async function ellaParentVueRowHtml(r, pvLink, pvDate) {
-  // Ghazal, Sep 15 2026: "both teacher individual emails come with grades,
-  // as well as the ParentVUE. It seems that we first get the ParentVUE
-  // summary and then the individual teacher ones." So ParentVUE sets the
-  // baseline roster/grade for every class, but for a teacher we have a
-  // direct email for, a LATER individual email can carry an updated grade
-  // (not just a comment) — check date, not just presence, before overriding.
-  const td = 'padding:8px;border-bottom:1px solid var(--border-light);vertical-align:top';
-  const key = (r.lastName||'').toLowerCase();
-  const known = ELLA_KNOWN_TEACHERS[key];
-  const teacherDisplay = known ? known.full : (r.initial && r.lastName ? r.initial+'. '+r.lastName : (r.lastName||'\u2014'));
-  let notes = '';
-  let mark = r.mark || '\u2014';
-  let source = 'First quarter progress report (ParentVUE)';
-  if (known) {
-    try {
-      const nd = await callMcp(GMAIL, {query:'in:anywhere from:'+known.from, pageSize:1, includeTrash:true});
-      const nt = (nd.threads||[])[0];
-      const nm = nt && nt.messages && nt.messages[nt.messages.length-1];
-      if (nm) {
-        const nfull = await fetchBodyFromThreadFH(nt.id, !!(nm.labelIds||[]).includes('TRASH')).catch(()=>({}));
-        const nmsgs = (nfull && nfull.messages)||[];
-        const nbodyMsg = nmsgs[nmsgs.length-1];
-        const nText = nbodyMsg ? stripHtmlFH(nbodyMsg.htmlBody||'') : (nm.snippet||'');
-        notes = extractTeacherNotesFH(nText);
-        const nDate = nm.date ? new Date(nm.date) : null;
-        const isNewer = !pvDate || !nDate || nDate.getTime() >= pvDate.getTime();
-        const nLetter = computeLetterGradeFH(nText) || computeLetterGradeFH(nm.snippet||'');
-        if (isNewer && nLetter) {
-          mark = nLetter;
-          source = known.full + "'s email" + (nDate ? ' ('+nDate.toLocaleDateString()+')' : '') + ' \u2014 more recent than the ParentVUE summary';
-        }
-      }
-    } catch(e){}
+// Parses one "Progress Report for Ella Moore" email's plaintext body. FCPS's
+// format is consistent regardless of teacher: a "Class Name: (YR) Lastname,
+// I  Course Name(Period) SEC:..." line, an "Overall Class Grade | pts | Mark
+// | Comment |" table row, and an "Assignments" section listing each graded
+// item — tested against a real Sep 2026 Civics report before shipping.
+function parseIndividualProgressReport(bodyText) {
+  if (!bodyText) return {};
+  const result = {};
+  const classM = bodyText.match(/Class Name:\s*\([^)]*\)\s*([\w'-]+),\s*([A-Za-z])\s+(.+?)\((\d+)\)\s*SEC/i);
+  if (classM) {
+    result.lastName = classM[1];
+    result.initial = classM[2];
+    result.course = classM[3].trim();
+    result.period = classM[4];
   }
+  const gradeM = bodyText.match(/Overall Class Grade\s*\|\s*[\d.]+\s*\/\s*[\d.]+\s*\|\s*([A-F][+-]?)\s*\|\s*([^|]*)\|/i);
+  if (gradeM) {
+    result.mark = gradeM[1].trim();
+    result.comment = gradeM[2].trim();
+  }
+  const missM = bodyText.match(/([A-Za-z][^|()\n]*?)\s*\((?:Formative|Summative)\)\s*\|\s*(\d{1,2}\/\d{1,2}\/\d{4})[\s\S]{0,60}?\|\s*([\d.]+)\s*\/\s*([\d.]+)\s*\|\s*\d*\s*\|\s*(Not Handed In|Missing|Late)/i);
+  if (missM) {
+    result.missingAssignment = { name: missM[1].replace(/^[A-Za-z]:\s*/,'').trim(), due: missM[2], score: missM[3], total: missM[4], status: missM[5] };
+  }
+  return result;
+}
+// Fetches ALL of Ella's individual progress-report emails in ONE combined
+// call (PROGRESS_REPORT_QUERY matches any teacher), parses each, and
+// returns a lookup keyed by lowercased teacher lastname so a ParentVUE row
+// can find its matching detail without knowing in advance who might have
+// emailed.
+async function fetchEllaProgressReports() {
+  const reports = {};
+  try {
+    const data = await callMcp(GMAIL, {query: PROGRESS_REPORT_QUERY, pageSize:10, includeTrash:true});
+    const threads = data.threads || [];
+    for (const t of threads) {
+      const m = t.messages && t.messages[t.messages.length-1];
+      if (!m) continue;
+      const full = await fetchBodyFromThreadFH(t.id, !!(m.labelIds||[]).includes('TRASH')).catch(()=>({}));
+      const msgs = (full && full.messages) || [];
+      const bodyMsg = msgs[msgs.length-1];
+      const plain = bodyMsg ? stripHtmlFH(bodyMsg.htmlBody||'') : (m.snippet||'');
+      const parsed = parseIndividualProgressReport(plain);
+      if (parsed.lastName) {
+        parsed.threadId = t.id;
+        parsed.date = m.date ? new Date(m.date) : null;
+        reports[parsed.lastName.toLowerCase()] = parsed;
+      }
+    }
+  } catch(e){}
+  return reports;
+}
+function ellaGradeRowHtml(r, pvLink, reports) {
+  const td = 'padding:8px;border-bottom:1px solid var(--border-light);vertical-align:top';
+  const teacherDisplay = r.initial && r.lastName ? r.initial+'. '+r.lastName : (r.lastName||'\u2014');
   const course = r.course ? (r.course + (r.period ? ' (Period '+r.period+')' : '')) : (r.raw || 'Class');
-  const detail = (r.score && source.indexOf('ParentVUE') >= 0 ? r.score+'% \u00b7 ' : '') + source + (notes ? ' \u2014 '+notes : '');
+  const report = reports[(r.lastName||'').toLowerCase()];
+  // ParentVUE's grade is the display value (it's the census figure covering
+  // every class); an individual progress report's specific detail is always
+  // layered in as additional context when one exists — never one OR the
+  // other. If ParentVUE has no grade yet for a class, fall back to the
+  // individual report's own mark.
+  const mark = r.mark || (report && report.mark) || '\u2014';
+  let detail = (r.score ? r.score+' \u00b7 ' : '') + 'First quarter progress report (ParentVUE)';
+  if (report && report.missingAssignment) {
+    const a = report.missingAssignment;
+    detail += ' \u2014 missing "'+a.name+'" (due '+a.due+', '+a.score+'/'+a.total+'), per '+teacherDisplay+"'s individual progress report";
+  } else if (report && report.comment && !/^none$/i.test(report.comment)) {
+    detail += ' \u2014 '+report.comment+', per '+teacherDisplay+"'s individual progress report";
+  }
   return '<tr><td style="'+td+'"><a href="'+pvLink+'" target="_blank" style="color:inherit;text-decoration:none">'+esc(course)+'</a></td>'+
     '<td style="'+td+'">'+esc(teacherDisplay)+'</td>'+
     '<td style="'+td+';font-weight:600">'+esc(mark)+'</td>'+
     '<td style="'+td+';color:var(--muted)">'+esc(detail)+'</td></tr>';
 }
-const PARENTVUE_QUERY = 'in:anywhere from:noreply@fcps.edu subject:"Grade Book Summary"';
 // Excludes e-Notify@fcps.edu — that's the district-wide mass-blast sender
 // (heat-advisory outdoor-activity closures, boundary studies, end-of-year
 // farewells) which floods this box with duplicative "closure" reminders
@@ -960,29 +999,7 @@ const PARENTVUE_QUERY = 'in:anywhere from:noreply@fcps.edu subject:"Grade Book S
 // (non-FCPS) summer camps. Also excludes Longfellow (Ella's school).
 const LIAM_SCHOOL_QUERY = 'in:anywhere from:fcps.edu newer_than:30d -from:e-Notify@fcps.edu -from:smaldonado1@fcps.edu -from:kmdawson@fcps.edu -from:klshapiro@fcps.edu -from:jhlayton@fcps.edu -from:elschinstock@fcps.edu -from:mbdonohue@fcps.edu -from:meparker1@fcps.edu -from:noreply@fcps.edu -from:LongfellowMiddle.Attendance@fcps.edu';
 
-// Only surfaces a genuine teacher-written comment (a real sentence found
-// after a "Teacher Comment(s)" label) — never falls back to the generic
-// email snippet/boilerplate ("Message sent from Fairfax County Public
-// Schools... Student Name... Class Name...") since that's not a note,
-// it's the general email summary the table should NOT show.
-function extractTeacherNotesFH(msgText) {
-  if (!msgText) return '';
-  const m = msgText.match(/teacher\s*comments?\s*:?\s*([A-Za-z][^.]{10,220}?\.)/i);
-  return m ? m[1].trim() : '';
-}
-function gradeTableRowFH(cfg, m, body) {
-  const td = 'padding:8px;border-bottom:1px solid var(--border-light);vertical-align:top';
-  if (!m) return '<tr><td style="'+td+'">'+esc(cfg.cls)+'</td><td style="'+td+';color:var(--muted)">'+esc(cfg.teacher)+'</td><td style="'+td+';color:var(--muted)">—</td><td style="'+td+';color:var(--muted);font-style:italic">No email found</td></tr>';
-  const msgText = body ? stripHtmlFH(body) : '';
-  const letter = computeLetterGradeFH(msgText) || computeLetterGradeFH(m.snippet||'') || '—';
-  const notes = extractTeacherNotesFH(msgText);
-  return '<tr>' +
-    '<td style="'+td+'"><a href="'+mailShortcutLink(cfg.from, m.subject)+'" target="_blank" style="color:inherit;text-decoration:none">'+esc(cfg.cls)+'</a></td>' +
-    '<td style="'+td+'">'+esc(cfg.teacher)+'</td>' +
-    '<td style="'+td+'"><b style="color:var(--ella)">'+esc(letter)+'</b></td>' +
-    '<td style="'+td+';color:var(--muted)'+(notes?'':';font-style:italic')+'">'+esc(notes || 'No specific teacher comments on file')+'</td>' +
-  '</tr>';
-}
+
 // ── Robust date parsing for Google Calendar all-day events ──
 // All-day `start.date` sometimes comes back as a plain "YYYY-MM-DD" and
 // sometimes as a full ISO string like "2026-07-06T00:00:00Z" — naively
@@ -1288,16 +1305,17 @@ function otherEventRowHtml(entry, dotClass) {
 async function loadKidsLive() {
   if (!(window.cowork && window.cowork.callMcpTool)) return; // leave static fallback in place
   try {
-    const [parentvueData, calData, liamMailData] = await Promise.all([
+    const [parentvueData, progressReports, calData, liamMailData] = await Promise.all([
       callMcp(GMAIL, {query: PARENTVUE_QUERY, pageSize:1, includeTrash:true}).catch(()=>({threads:[]})),
+      fetchEllaProgressReports(),
       callMcp(CAL_LIST, {calendarId: FAMILY_CAL_ID, startTime: new Date().toISOString(), endTime: new Date(Date.now()+KIDS_LOOKAHEAD_DAYS*86400000).toISOString(), pageSize:250, orderBy:'startTime'}).catch(()=>({events:[]})),
       callMcp(GMAIL, {query: LIAM_SCHOOL_QUERY, pageSize:5}).catch(()=>({threads:[]}))
     ]);
 
-    // Ella — grades sourced from the FCPS ParentVUE Grade Book Summary email,
-    // the single authoritative list of her real current classes/teachers/
-    // scores each quarter (corrected Sep 15 2026 — see ELLA_KNOWN_TEACHERS
-    // comment above for why the old hardcoded roster was wrong).
+    // Ella — grades combine the ParentVUE summary (baseline roster/grade for
+    // every class) with any individual "Progress Report for Ella Moore"
+    // emails (richer per-assignment detail, whichever teacher sent them) —
+    // see the comment above PARENTVUE_QUERY for why both are used together.
     let gradeRows = '';
     const pvThread = (parentvueData.threads||[])[0];
     if (pvThread) {
@@ -1308,9 +1326,7 @@ async function loadKidsLive() {
       const pvBodyMsg = pvMsgs[pvMsgs.length-1];
       const parsed = pvBodyMsg ? parseEllaParentVueGrades(pvBodyMsg.htmlBody||'') : [];
       const pvLink = mailShortcutLink('noreply@fcps.edu', 'Grade Book Summary');
-      const pvDate = pvMsg && pvMsg.date ? new Date(pvMsg.date) : null;
-      const rowsHtml = await Promise.all(parsed.map(r => ellaParentVueRowHtml(r, pvLink, pvDate)));
-      gradeRows = rowsHtml.join('');
+      gradeRows = parsed.map(r => ellaGradeRowHtml(r, pvLink, progressReports)).join('');
     }
     const gradeTdHead = 'padding:6px 8px 6px 0;';
     document.getElementById('ella-grades').innerHTML = gradeRows
