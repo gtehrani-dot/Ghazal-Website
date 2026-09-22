@@ -79,6 +79,9 @@
   .tracking-scroll { overflow-x: auto; }
   .unapply-btn { background: none; border: 1px solid #d5dae1; border-radius: 6px; padding: 5px 10px; font-size: 12px; cursor: pointer; color: #8a5a00; }
   .unapply-btn:hover { background: #fff4e5; }
+  th.sortable { cursor: pointer; user-select: none; }
+  th.sortable:hover { color: #1d2b3a; }
+  .sort-arrow { font-size: 9px; margin-left: 3px; display: inline-block; width: 8px; }
 
   footer { text-align: center; color: #99a3ad; font-size: 12px; margin-top: 40px; }
 </style>
@@ -87,7 +90,7 @@
 <header>
   <div class="wrap">
     <h1>Ghazal's Job Search Dashboard</h1>
-    <p>Tuesday, September 22, 2026 &nbsp;·&nbsp; Applied status synced (Navan, Anthropic, Range) &nbsp;·&nbsp; Private copy — not the public site</p>
+    <p>Tuesday, September 22, 2026 &nbsp;·&nbsp; Working On tab added · sortable headers · Range's link fixed</p>
   </div>
 </header>
 
@@ -95,6 +98,7 @@
 
   <div class="tabs">
     <button class="tab-btn active" onclick="showTab('matches')" id="tab-btn-matches">Today's Matches</button>
+    <button class="tab-btn" onclick="showTab('workingon')" id="tab-btn-workingon">Working On</button>
     <button class="tab-btn" onclick="showTab('tracking')" id="tab-btn-tracking">Job Tracking</button>
   </div>
 
@@ -103,14 +107,14 @@
     <table class="summary" id="summary-table">
       <thead>
         <tr>
-          <th>Title / Role</th>
-          <th>Company</th>
-          <th>Match</th>
-          <th>Category</th>
-          <th>Fit %</th>
+          <th class="sortable" onclick="toggleSort('summary','title')">Title / Role<span class="sort-arrow" id="arrow-summary-title"></span></th>
+          <th class="sortable" onclick="toggleSort('summary','company')">Company<span class="sort-arrow" id="arrow-summary-company"></span></th>
+          <th class="sortable" onclick="toggleSort('summary','tier')">Match<span class="sort-arrow" id="arrow-summary-tier"></span></th>
+          <th class="sortable" onclick="toggleSort('summary','category')">Category<span class="sort-arrow" id="arrow-summary-category"></span></th>
+          <th class="sortable" onclick="toggleSort('summary','fit')">Fit %<span class="sort-arrow" id="arrow-summary-fit"></span></th>
           <th>Notes</th>
-          <th>Days Active</th>
-          <th>Salary</th>
+          <th class="sortable" onclick="toggleSort('summary','days')">Days Active<span class="sort-arrow" id="arrow-summary-days"></span></th>
+          <th class="sortable" onclick="toggleSort('summary','salary')">Salary<span class="sort-arrow" id="arrow-summary-salary"></span></th>
           <th>Apply</th>
           <th>Applied</th>
         </tr>
@@ -243,26 +247,6 @@
 
       <div class="card">
         <span class="tier-badge primary">Primary</span>
-        <span class="tag saas">Hyperscaler PS / Delivery Leadership</span>
-        <h3>ProServe Area Delivery Leader - Engagement Management, AWS Industries</h3>
-        <div class="company">Amazon Web Services (AWS)</div>
-        <div class="row">
-          <div class="item"><b>Fit</b>76%</div>
-          <div class="item"><b>Salary</b>$201,000–$272,000 base</div>
-          <div class="item"><b>Location</b>Arlington, VA or Herndon, VA (DC metro — home market)</div>
-          <div class="item"><b>Match</b><span class="tier-badge primary">Primary</span></div>
-        </div>
-        <div class="fit"><b>Why she's a strong fit:</b> A leader-of-leaders delivery role managing Engagement-Management Delivery Practice Managers and their teams, reporting to the Geo Delivery Leader — close to her FranConnect/Decision Lens delivery-leadership scope, with real Fortune 100 client experience to draw on. Unlike the previously-excluded AWS ProServe "Security, NAMER" req, this one has no hard hands-on-security-technical gate.</div>
-        <div class="gap"><b>Honest fit assessment:</b> Strong — 76/100. Base salary is below her $230K floor, though the posting explicitly includes sign-on payments and RSUs which plausibly close the gap (not quantifiable from the JD). Real gap: no direct hands-on AWS/cloud technical background — but that's listed as Preferred, not a Basic Qualification, so not disqualifying. Found directly by Ghazal via her LinkedIn saved-jobs list, not the scan — see today's notes.</div>
-        <div class="fit"><b>LinkedIn connections:</b> available on request — just ask.</div>
-        <div class="files">
-          <a class="apply" href="https://www.amazon.jobs/en/jobs/3205552/proserve-area-delivery-leader-engagement-management-aws-industries" target="_blank">View posting →</a>
-          <button class="filelink" onclick="requestMaterials(this,'AWS','ProServe Area Delivery Leader - Engagement Management, AWS Industries','https://www.amazon.jobs/en/jobs/3205552/proserve-area-delivery-leader-engagement-management-aws-industries')">Create Resume &amp; Cover Letter</button>
-        </div>
-      </div>
-
-      <div class="card">
-        <span class="tier-badge primary">Primary</span>
         <span class="tag saas">SaaS CS / Data Infrastructure</span>
         <h3>VP, Customer Success</h3>
         <div class="company">Veeam</div>
@@ -305,7 +289,7 @@
         <div class="prev-item">
           <span class="ptitle">VP, Customer Success (Strategic Segment)</span> — <span class="pco">NiCE</span> (fit 66, Secondary) — resume &amp; cover letter already on file.
           <a class="jdlink" href="https://job-boards.greenhouse.io/nice/jobs/4952634101" target="_blank">View posting →</a>
-          </div>
+        </div>
         <div class="prev-item">
           <span class="ptitle">Vice President, Customer Success</span> — <span class="pco">Arbital Health</span> (fit 65, Secondary) — comp near-miss; smaller team scope than prior roles.
           <a class="jdlink" href="https://jobs.lever.co/arbitalhealth/a1dc40f9-5ed2-4060-a016-ab138b8f8cfe" target="_blank">View posting →</a>
@@ -335,16 +319,8 @@
           <a class="jdlink" href="https://canonical.com/careers/4517179" target="_blank">View posting →</a>
         </div>
         <div class="prev-item">
-          <span class="ptitle">Vice President, Customer Experience + Innovation</span> — <span class="pco">Marriott International</span> (fit 63, Secondary) — found by Ghazal, not the scan. Strong comp ($182K–$325K), hybrid Bethesda. Real gap: this is a formal experience-design/design-research/innovation-lab mandate (journey mapping, service design), not PS/CS operations — a different skill profile than "Customer Experience" usually means on this board.
-          <a class="jdlink" href="https://careers.marriott.com/vice-president-customer-experience-innovation/job/AE3AA615A6EFD56F53C399DA9C2A93EC" target="_blank">View posting →</a>
-        </div>
-        <div class="prev-item">
           <span class="ptitle">Vice President, Strategy and Execution - Government Solutions</span> — <span class="pco">Equifax</span> (fit 59, Secondary) — found by Ghazal, not the scan. Reston, hybrid 4 days/wk onsite. Strong structural analog to her FranConnect KPI/Salesforce dashboard work and cross-functional pattern, plus public-sector ties to Booz Allen/Decision Lens — but Sales/RevOps-strategy flavored, not PS/CS, and comp ($160K–$200K base) is below her floor.
           <a class="jdlink" href="https://careers.equifax.com/en/jobs/j00178900/vice-president-strategy-and-execution-government-solutions" target="_blank">View posting →</a>
-        </div>
-        <div class="prev-item">
-          <span class="ptitle">Strategy and Operations Lead, Cloud Security</span> — <span class="pco">Google</span> (fit 50, Secondary) — found by Ghazal, not the scan. Reston VA is one of several locations. $150K–$217K, below her floor even at the top end; Google runs this same title family at very different levels ($139K–$302K depending on req) and this one likely sits on the more IC/mid-level end.
-          <a class="jdlink" href="https://www.google.com/about/careers/applications/jobs/results/143242315232617158-product-strategy-and-operations-lead-cloud-security" target="_blank">View posting →</a>
         </div>
         <div class="prev-item">
           <span class="ptitle">Technology Strategy Innovation and Delivery Transformation Manager</span> — <span class="pco">Deloitte</span> (fit 48, Secondary) — found by Ghazal, not the scan. Listed across 36 locations incl. McLean, VA (home market), $155,600–$306,800. Real gap: "Manager" is a mid-career level on Deloitte's own ladder (only 6+ years experience required), not VP-equivalent scope — a title-vs-seniority mismatch, not a fit match. Page also states recruiting ended 7/31/2026, already past as of this posting's discovery — flagged, not confidently live.
@@ -356,15 +332,42 @@
     <div class="banner">
       <h2>⚠ Notes on this update</h2>
       <ul>
-        <li><b>Applied-status sync fix (today, 9/22) — this was the point of today's rebuild.</b> Navan, Anthropic (Strategy &amp; Operations, Applied AI - AMER), and Range were marked applied in <code>seen_postings.json</code> on 9/21 but that never made it into this dashboard or the live site — caught by Ghazal, not by a process check. All three are now correctly reflected: applied status, date, and — going forward — <b>applied postings no longer appear anywhere on the "Today's Matches" tab</b> (summary table, match-detail cards, or the previously-surfaced list). They only live in the Job Tracking tab now. Vanta, OpenAI, and Booz Allen Hamilton (already-applied from before) were moved off the main page the same way. Total applied on file: 6 (Vanta, OpenAI, Booz Allen Hamilton, Navan, Anthropic, Range).</li>
-        <li><b>Range's link is missing.</b> Range's "Head of Business Operations" was logged unverifiable on 9/17 (no live posting could be independently confirmed), but Ghazal found and applied to it herself — no application URL or LinkedIn link is on file for it. It's in the Job Tracking tab now with an empty link field; paste the link when you have a moment so the tracking record is complete.</li>
-        <li><b>Job Tracking tab's link column now always shows a link</b> when one exists — LinkedIn URL preferred, application URL as fallback — rather than only the application URL as before.</li>
-        <li><b>6 new candidates found via a Gmail scan of LinkedIn's own job-alert digest emails</b> (Cvent, Salesforce SVP GM TMT/CBS, AlixPartners, Chartis, Visa, AWS Sr. Leader SWAT/CSM) are logged in <code>seen_postings.json</code> as <code>unverified_linkedin_only</code> but not yet added to this page — say the word and they'll go through full scoring/verification and get added next.</li>
+        <li><b>New "Working On" tab (today, 9/22).</b> Postings with a resume/cover letter actively being drafted — but not yet applied to — now live in their own tab instead of on this page or buried in a card. Moved there today: Google (Strategy and Operations Lead, Cloud Security), Marriott (VP, Customer Experience + Innovation), and AWS (ProServe Area Delivery Leader - Engagement Management, AWS Industries). <b>Mutual exclusivity rule:</b> every posting lives in exactly one of the three tabs — Today's Matches, Working On, or Job Tracking — never more than one at a time. Checking "Applied" on a Working On posting moves it straight to Job Tracking, same as from Today's Matches.</li>
+        <li><b>Sortable headers.</b> Any column header with an arrow indicator (Title, Company, Match, Category, Fit %, Days Active, Salary on Today's Matches/Working On; Title, Company, Date Applied, Responded, VEC, Connection, Through Who, Notes on Job Tracking) can be clicked to sort — click again to reverse direction.</li>
+        <li><b>Range's link is fixed.</b> Ghazal supplied the actual posting link she applied through (<code>linkedin.com/jobs/view/4429817496/</code>) — LinkedIn blocks unauthenticated viewing so the JD itself couldn't be independently re-verified, but the link is hers directly, not a scan guess, so it's now live in the Job Tracking tab's title link.</li>
+        <li><b>Applied-but-never-surfaced postings now feed back into sourcing.</b> Range never appeared as a scan match before she applied to it herself — starting now, any job Ghazal reports applying to that wasn't surfaced gets treated as a coverage-gap signal for future scans, the same way LinkedIn and the Gmail digest are sources.</li>
+        <li><b>6 new candidates found via a Gmail scan of LinkedIn's own job-alert digest emails</b> (Cvent, Salesforce SVP GM TMT/CBS, AlixPartners, Chartis, Visa, AWS Sr. Leader SWAT/CSM) are logged in <code>seen_postings.json</code> as <code>unverified_linkedin_only</code> but not yet fully scored/added to this page — say the word and they'll go through full verification next.</li>
         <li><b>Resume/cover letter generation is on-demand only</b> — click "Create Resume &amp; Cover Letter" on any card above, or ask directly, to generate materials for a specific posting.</li>
         <li><b>LinkedIn connections remain on-request only</b> — ask about a specific company (e.g. "check my connections at Deltek") any time.</li>
       </ul>
     </div>
 
+  </div>
+
+  <div class="tab-panel" id="tab-workingon">
+    <section>
+      <h2 style="border:none; margin-top:20px;">Materials in progress — not yet applied</h2>
+      <p class="empty" id="workingon-empty">Nothing in progress right now.</p>
+      <div class="tracking-scroll">
+      <table class="summary" id="workingon-table" style="display:none;">
+        <thead>
+          <tr>
+            <th class="sortable" onclick="toggleSort('workingon','title')">Title / Role<span class="sort-arrow" id="arrow-workingon-title"></span></th>
+            <th class="sortable" onclick="toggleSort('workingon','company')">Company<span class="sort-arrow" id="arrow-workingon-company"></span></th>
+            <th class="sortable" onclick="toggleSort('workingon','tier')">Match<span class="sort-arrow" id="arrow-workingon-tier"></span></th>
+            <th class="sortable" onclick="toggleSort('workingon','category')">Category<span class="sort-arrow" id="arrow-workingon-category"></span></th>
+            <th class="sortable" onclick="toggleSort('workingon','fit')">Fit %<span class="sort-arrow" id="arrow-workingon-fit"></span></th>
+            <th>Notes</th>
+            <th class="sortable" onclick="toggleSort('workingon','days')">Days Active<span class="sort-arrow" id="arrow-workingon-days"></span></th>
+            <th class="sortable" onclick="toggleSort('workingon','salary')">Salary<span class="sort-arrow" id="arrow-workingon-salary"></span></th>
+            <th>Apply</th>
+            <th>Applied</th>
+          </tr>
+        </thead>
+        <tbody id="workingon-tbody"></tbody>
+      </table>
+      </div>
+    </section>
   </div>
 
   <div class="tab-panel" id="tab-tracking">
@@ -375,14 +378,14 @@
       <table class="tracking" id="tracking-table" style="display:none;">
         <thead>
           <tr>
-            <th>Title / Role</th>
-            <th>Company</th>
-            <th>Date Applied</th>
-            <th>Responded</th>
-            <th>Reported to VEC</th>
-            <th>Personal Connection Reach Out</th>
-            <th>Through Who?</th>
-            <th>Notes</th>
+            <th class="sortable" onclick="toggleSort('tracking','title')">Title / Role<span class="sort-arrow" id="arrow-tracking-title"></span></th>
+            <th class="sortable" onclick="toggleSort('tracking','company')">Company<span class="sort-arrow" id="arrow-tracking-company"></span></th>
+            <th class="sortable" onclick="toggleSort('tracking','dateApplied')">Date Applied<span class="sort-arrow" id="arrow-tracking-dateApplied"></span></th>
+            <th class="sortable" onclick="toggleSort('tracking','responded')">Responded<span class="sort-arrow" id="arrow-tracking-responded"></span></th>
+            <th class="sortable" onclick="toggleSort('tracking','vec')">Reported to VEC<span class="sort-arrow" id="arrow-tracking-vec"></span></th>
+            <th class="sortable" onclick="toggleSort('tracking','connection')">Personal Connection Reach Out<span class="sort-arrow" id="arrow-tracking-connection"></span></th>
+            <th class="sortable" onclick="toggleSort('tracking','throughWho')">Through Who?<span class="sort-arrow" id="arrow-tracking-throughWho"></span></th>
+            <th class="sortable" onclick="toggleSort('tracking','notes')">Notes<span class="sort-arrow" id="arrow-tracking-notes"></span></th>
             <th></th>
           </tr>
         </thead>
@@ -394,7 +397,7 @@
 
 </div>
 
-<footer>Generated by the job-search-scan skill · Next run will dedupe against today's postings automatically · The whole Job Tracking tab (applied status, date, responded, VEC, connections, notes) is tracked durably in seen_postings.json — report details in chat to log them there. Typing directly into the fields below only saves in this browser and won't survive the next rebuild. Title links to the original JD posting — documentation for unemployment purposes.</footer>
+<footer>Generated by the job-search-scan skill · Next run will dedupe against today's postings automatically · The whole Job Tracking tab (applied status, date, responded, VEC, connections, notes) is tracked durably in seen_postings.json — report details in chat to log them there. Typing directly into the fields below only saves in this browser and won't survive the next rebuild. Title links to the original JD posting — documentation for unemployment purposes. Every posting lives in exactly one tab: Today's Matches, Working On, or Job Tracking. Click any arrow-marked column header to sort.</footer>
 
 <script>
   const JOBS = [
@@ -436,7 +439,8 @@
       flag: "Formal experience-design/design-research mandate, not PS/CS operations — real skill-profile gap",
       salary: "$182,100–$325,300 + bonus",
       postedDate: null,
-      jdLink: "https://careers.marriott.com/vice-president-customer-experience-innovation/job/AE3AA615A6EFD56F53C399DA9C2A93EC"
+      jdLink: "https://careers.marriott.com/vice-president-customer-experience-innovation/job/AE3AA615A6EFD56F53C399DA9C2A93EC",
+      workingOn: true
     },
     {
       id: "equifax-vp-strategy-execution-gov-solutions-2026-09-17",
@@ -460,7 +464,8 @@
       flag: "Comp below floor ($150K–$217K); likely IC/mid-level given Google's title-family comp spread",
       salary: "$150K–$217K",
       postedDate: null,
-      jdLink: "https://www.google.com/about/careers/applications/jobs/results/143242315232617158-product-strategy-and-operations-lead-cloud-security"
+      jdLink: "https://www.google.com/about/careers/applications/jobs/results/143242315232617158-product-strategy-and-operations-lead-cloud-security",
+      workingOn: true
     },
     {
       id: "deloitte-tech-strategy-innovation-delivery-transformation-mgr-2026-09-17",
@@ -680,7 +685,8 @@
       flag: "Base below $230K floor but RSUs/sign-on likely close the gap; no hard AWS-technical requirement",
       salary: "$201,000–$272,000 base",
       postedDate: null,
-      jdLink: "https://www.amazon.jobs/en/jobs/3205552/proserve-area-delivery-leader-engagement-management-aws-industries"
+      jdLink: "https://www.amazon.jobs/en/jobs/3205552/proserve-area-delivery-leader-engagement-management-aws-industries",
+      workingOn: true
     },
     {
       id: "kinaxis-vp-ps-strategy-ops-2026-09-16",
@@ -769,11 +775,11 @@
       category: "Fintech / Wealth-Management BizOps",
       tier: "secondary",
       fit: null,
-      flag: "Applied 9/21. Never independently verified live by the scan (logged unverifiable 9/17) — Ghazal found and applied to it herself; no link on file yet",
+      flag: "Applied 9/21. Never independently verified live by the scan (logged unverifiable 9/17) — Ghazal found and applied to it herself. Link supplied directly by her 9/22 (LinkedIn blocks unauthenticated viewing, so the JD itself couldn't be independently re-checked, but the link is hers, not a scan guess)",
       salary: "Not listed",
       postedDate: null,
-      jdLink: null,
-      linkedinLink: null,
+      jdLink: "https://www.linkedin.com/jobs/view/4429817496/",
+      linkedinLink: "https://www.linkedin.com/jobs/view/4429817496/",
       appliedDefault: true,
       appliedDate: "2026-09-21",
       tracking: { dateApplied: "2026-09-21" }
@@ -835,13 +841,70 @@
     setTimeout(() => { btn.textContent = original; }, 2000);
   }
 
+  // --- Sortable headers ---
+  // Every table (summary, workingon, tracking) tracks its own current sort key/direction.
+  // Default directions mirror the previous hardcoded sorts (fit desc for matches/working-on,
+  // most-recent-applied-first for tracking) so first load looks the same as before.
+  const sortState = {
+    summary: { key: "fit", dir: -1 },
+    workingon: { key: "fit", dir: -1 },
+    tracking: { key: "dateApplied", dir: -1 }
+  };
+
+  function sortKeyVal(job, js, key) {
+    switch (key) {
+      case "title": return job.title || "";
+      case "company": return job.company || "";
+      case "tier": return job.tier || "";
+      case "category": return job.category || "";
+      case "fit": return job.fit || 0;
+      case "salary": return job.salary || "";
+      case "days": return job.postedDate || "";
+      case "dateApplied": return js.dateApplied || "";
+      case "responded": return js.responded || "";
+      case "vec": return js.reportedToVEC || "";
+      case "connection": return js.connectionReachOut || "";
+      case "throughWho": return js.throughWho || "";
+      case "notes": return js.notes || "";
+      default: return "";
+    }
+  }
+
+  function applySort(jobs, state, tableKey) {
+    const s = sortState[tableKey];
+    const arr = jobs.slice();
+    arr.sort((a, b) => {
+      const ja = getJobState(state, a.id), jb = getJobState(state, b.id);
+      const av = sortKeyVal(a, ja, s.key), bv = sortKeyVal(b, jb, s.key);
+      if (typeof av === "number" && typeof bv === "number") return (av - bv) * s.dir;
+      return String(av).localeCompare(String(bv)) * s.dir;
+    });
+    return arr;
+  }
+
+  function toggleSort(tableKey, key) {
+    const s = sortState[tableKey];
+    if (s.key === key) { s.dir *= -1; } else { s.key = key; s.dir = key === "fit" ? -1 : 1; }
+    if (tableKey === "summary") renderSummaryTable();
+    else if (tableKey === "workingon") renderWorkingOnTable();
+    else renderTrackingTable();
+  }
+
+  function updateArrows(tableKey) {
+    const s = sortState[tableKey];
+    document.querySelectorAll(`[id^="arrow-${tableKey}-"]`).forEach(el => { el.textContent = ""; });
+    const el = document.getElementById(`arrow-${tableKey}-${s.key}`);
+    if (el) el.textContent = s.dir === 1 ? "▲" : "▼";
+  }
+
   function renderSummaryTable() {
     const state = loadState();
     const tbody = document.getElementById("summary-tbody");
     tbody.innerHTML = "";
-    // Applied postings move to the Job Tracking tab only — never shown on Today's Matches.
-    const visibleJobs = JOBS.filter(job => !getJobState(state, job.id).applied);
-    const sortedJobs = visibleJobs.sort((a, b) => (b.fit || 0) - (a.fit || 0));
+    // Applied postings move to Job Tracking; Working-On postings move to the Working On tab.
+    // Every posting lives in exactly one of the three tabs.
+    const visibleJobs = JOBS.filter(job => !getJobState(state, job.id).applied && !job.workingOn);
+    const sortedJobs = applySort(visibleJobs, state, "summary");
     sortedJobs.forEach(job => {
       const js = getJobState(state, job.id);
       const fitClass = job.fit >= 70 ? "high" : "mid";
@@ -870,6 +933,55 @@
       `;
       tbody.appendChild(tr);
     });
+    updateArrows("summary");
+  }
+
+  function renderWorkingOnTable() {
+    const state = loadState();
+    const tbody = document.getElementById("workingon-tbody");
+    const table = document.getElementById("workingon-table");
+    const emptyMsg = document.getElementById("workingon-empty");
+    tbody.innerHTML = "";
+    // Postings with materials in progress but not yet applied. Once "Applied" is checked here,
+    // toggleApplied() moves the posting straight to Job Tracking — same one-tab-only rule.
+    const jobs = JOBS.filter(job => job.workingOn && !getJobState(state, job.id).applied);
+    if (jobs.length === 0) {
+      table.style.display = "none";
+      emptyMsg.style.display = "block";
+      return;
+    }
+    table.style.display = "table";
+    emptyMsg.style.display = "none";
+    const sortedJobs = applySort(jobs, state, "workingon");
+    sortedJobs.forEach(job => {
+      const js = getJobState(state, job.id);
+      const fitClass = (job.fit || 0) >= 70 ? "high" : "mid";
+      const tierLabel = job.tier === "secondary" ? "Secondary" : "Primary";
+      const daysActive = daysActiveLabel(job.postedDate);
+      const tr = document.createElement("tr");
+      const titleCell = job.linkedinLink
+        ? `<a class="jdlink" href="${job.linkedinLink}" target="_blank">${job.title}</a>`
+        : (job.jdLink ? `<a class="jdlink" href="${job.jdLink}" target="_blank">${job.title}</a>` : `${job.title} <span class="linknote">(link not on file)</span>`);
+      tr.innerHTML = `
+        <td>${titleCell}</td>
+        <td>${job.company}</td>
+        <td><span class="tier-badge ${job.tier}">${tierLabel}</span></td>
+        <td>${job.category}</td>
+        <td class="fitscore ${fitClass}">${job.fit != null ? job.fit + "%" : "—"}</td>
+        <td class="notecell">${job.flag ? job.flag : "<span class='empty'>—</span>"}</td>
+        <td>${daysActive}</td>
+        <td>${job.salary}</td>
+        <td><a class="jdlink" href="${job.jdLink || job.linkedinLink}" target="_blank">Apply</a></td>
+        <td>
+          <label class="applied-check">
+            <input type="checkbox" data-jobid="${job.id}" ${js.applied ? "checked" : ""} onchange="toggleApplied(this)">
+            Applied
+          </label>
+        </td>
+      `;
+      tbody.appendChild(tr);
+    });
+    updateArrows("workingon");
   }
 
   function toggleApplied(checkbox) {
@@ -884,6 +996,7 @@
     state[id] = js;
     saveState(state);
     renderSummaryTable();
+    renderWorkingOnTable();
     renderTrackingTable();
   }
 
@@ -902,12 +1015,14 @@
     state[id] = js;
     saveState(state);
     renderSummaryTable();
+    renderWorkingOnTable();
     renderTrackingTable();
   }
 
   function renderTrackingTable() {
     const state = loadState();
-    const applied = JOBS.filter(job => getJobState(state, job.id).applied);
+    const appliedJobs = JOBS.filter(job => getJobState(state, job.id).applied);
+    const applied = applySort(appliedJobs, state, "tracking");
     const table = document.getElementById("tracking-table");
     const emptyMsg = document.getElementById("tracking-empty");
     const tbody = document.getElementById("tracking-tbody");
@@ -950,6 +1065,7 @@
       `;
       tbody.appendChild(tr);
     });
+    updateArrows("tracking");
   }
 
   function showTab(name) {
@@ -960,6 +1076,7 @@
   }
 
   renderSummaryTable();
+  renderWorkingOnTable();
   renderTrackingTable();
 </script>
 </body>
