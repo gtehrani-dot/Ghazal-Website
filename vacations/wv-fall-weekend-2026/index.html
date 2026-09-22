@@ -23,12 +23,12 @@
   *{box-sizing:border-box;}
   body{
     margin:0; background:var(--cream); color:var(--ink);
-    font-family:'Work Sans', sans-serif; font-size:15.5px; line-height:1.55;
+    font-family:'Work Sans', sans-serif; font-size:17px; line-height:1.6;
   }
   .page{max-width:980px; margin:0 auto; padding:0 20px 60px;}
   h1,h2,h3,h4{font-family:'Fraunces', serif; font-weight:700; margin:0 0 6px;}
   a{color:var(--primary-deep);}
-  .back-link{display:inline-block; margin:16px 0 0 20px; font-family:'IBM Plex Mono', monospace; font-size:12.5px; color:var(--primary-deep); text-decoration:none;}
+  .back-link{display:inline-block; margin:16px 0 0 20px; font-family:'IBM Plex Mono', monospace; font-size:13.5px; color:var(--primary-deep); text-decoration:none;}
   .back-link:hover{text-decoration:underline;}
 
   /* HERO — full-bleed photo banner, map floats up into it below */
@@ -40,23 +40,23 @@
   }
   .hero-inner{position:relative; max-width:980px; margin:0 auto;}
   .hero-eyebrow{
-    font-family:'IBM Plex Mono', monospace; font-size:12px; letter-spacing:.08em;
+    font-family:'IBM Plex Mono', monospace; font-size:13px; letter-spacing:.08em;
     text-transform:uppercase; color:#f4dfae; margin-bottom:12px;
   }
   .hero h1{font-size:clamp(32px,5.5vw,46px); color:#fff; letter-spacing:-.01em; line-height:1.08;}
-  .hero-sub{color:#f1e6d8; font-size:15.5px; margin:8px 0 22px; max-width:640px;}
+  .hero-sub{color:#f1e6d8; font-size:16.5px; margin:8px 0 22px; max-width:640px;}
   .hero-meta{display:flex; flex-wrap:wrap; gap:10px;}
   .meta-chip{
-    font-family:'IBM Plex Mono', monospace; font-size:12.5px; background:rgba(255,255,255,0.12);
+    font-family:'IBM Plex Mono', monospace; font-size:13.5px; background:rgba(255,255,255,0.12);
     border:1px solid rgba(255,255,255,0.3); border-radius:100px; padding:7px 14px; color:#fff;
   }
   .meta-chip b{color:#f4dfae;}
   .hero-photo-cap{
     max-width:980px; margin:8px auto 0; padding:0 20px; font-family:'IBM Plex Mono', monospace;
-    font-size:11px; color:var(--muted); text-align:right;
+    font-size:12px; color:var(--muted); text-align:right;
   }
   #map{height:340px; max-width:940px; margin:-34px auto 0; border-radius:14px; border:4px solid #fff; box-shadow:0 12px 28px rgba(43,33,27,0.28); position:relative; z-index:2;}
-  .map-legend{display:flex; gap:16px; flex-wrap:wrap; font-size:12px; color:var(--muted); margin:16px 0 20px; font-family:'IBM Plex Mono', monospace;}
+  .map-legend{display:flex; gap:16px; flex-wrap:wrap; font-size:13px; color:var(--muted); margin:16px 0 20px; font-family:'IBM Plex Mono', monospace;}
   .map-legend span{display:inline-flex; align-items:center; gap:6px;}
   .dot{width:10px; height:10px; border-radius:50%; display:inline-block;}
 
@@ -64,77 +64,80 @@
     display:flex; gap:6px; border-bottom:1px solid var(--line); margin-bottom:26px; position:sticky; top:0; background:var(--cream); z-index:5; padding-top:4px;
   }
   .tab-btn{
-    font-family:'IBM Plex Mono', monospace; font-size:13px; letter-spacing:.03em; text-transform:uppercase;
+    font-family:'IBM Plex Mono', monospace; font-size:14px; letter-spacing:.03em; text-transform:uppercase;
     background:none; border:none; padding:12px 18px; cursor:pointer; color:var(--muted); border-bottom:3px solid transparent;
   }
   .tab-btn.active{color:var(--primary-deep); border-bottom-color:var(--primary);}
   .section{display:none;}
   .section.active{display:block;}
-  .section-title{font-size:22px; margin-bottom:4px;}
-  .section-sub{color:var(--muted); font-size:14px; margin-bottom:22px;}
+  .section-title{font-size:24px; margin-bottom:4px;}
+  .section-sub{color:var(--muted); font-size:15px; margin-bottom:22px;}
   .day-card{
     border:1px solid var(--line); border-radius:16px; padding:22px 24px; margin-bottom:18px; background:var(--pale);
   }
   .day-card .day-label{
-    font-family:'IBM Plex Mono', monospace; font-size:12px; text-transform:uppercase; letter-spacing:.06em; color:var(--accent-2);
+    font-family:'IBM Plex Mono', monospace; font-size:13px; text-transform:uppercase; letter-spacing:.06em; color:var(--accent-2);
   }
-  .day-card h3{font-size:21px; margin:2px 0 10px; color:var(--primary-deep);}
+  .day-card h3{font-size:22px; margin:2px 0 10px; color:var(--primary-deep);}
   .day-group{
-    border:1px solid var(--line); border-radius:16px; padding:22px 24px 18px; margin-bottom:18px; background:var(--pale);
+    border:1px solid var(--line); border-radius:16px; padding:22px 24px 22px; margin-bottom:18px; background:var(--pale);
   }
   .day-group .day-label{
-    font-family:'IBM Plex Mono', monospace; font-size:12px; text-transform:uppercase; letter-spacing:.06em; color:var(--accent-2);
+    font-family:'IBM Plex Mono', monospace; font-size:13px; text-transform:uppercase; letter-spacing:.06em; color:var(--accent-2);
   }
-  .day-group h3{font-size:21px; margin:2px 0 10px; color:var(--primary-deep);}
-  .sub-card{background:var(--cream); border:1px solid var(--line); border-radius:12px; padding:16px 18px 14px; margin:0 0 14px;}
+  .day-group h3{font-size:22px; margin:2px 0 10px; color:var(--primary-deep);}
+  .sub-card{
+    background:var(--cream); border:1px solid var(--line); border-left:4px solid var(--accent-2); border-radius:12px;
+    padding:18px 20px 16px; margin:0 0 20px; box-shadow:0 2px 6px rgba(43,33,27,0.10);
+  }
   .sub-card:last-of-type{margin-bottom:2px;}
   .sub-card .tl-subhead:first-child{margin-top:0;}
   .sub-card-title{
-    display:flex; align-items:center; gap:8px; font-family:'IBM Plex Mono', monospace; font-weight:700; font-size:13.5px;
+    display:flex; align-items:center; gap:8px; font-family:'IBM Plex Mono', monospace; font-weight:700; font-size:14.5px;
     text-transform:uppercase; letter-spacing:.04em; color:var(--primary-deep); margin-bottom:10px;
   }
   .sub-card-title .num{
-    display:inline-flex; align-items:center; justify-content:center; width:20px; height:20px; min-width:20px;
-    border-radius:50%; background:var(--accent-2); color:#fff; font-size:11px; font-family:'IBM Plex Mono', monospace;
+    display:inline-flex; align-items:center; justify-content:center; width:22px; height:22px; min-width:22px;
+    border-radius:50%; background:var(--accent-2); color:#fff; font-size:12px; font-family:'IBM Plex Mono', monospace;
   }
   .day-weather{
-    display:inline-flex; gap:10px; align-items:center; font-size:13px; color:var(--muted);
+    display:inline-flex; gap:10px; align-items:center; font-size:14px; color:var(--muted);
     background:var(--cream); border:1px solid var(--line); border-radius:100px; padding:5px 13px; margin-bottom:12px;
   }
   .meal-row{display:flex; gap:8px; flex-wrap:wrap; margin:2px 0 16px;}
-  .meal-chip{font-family:'IBM Plex Mono', monospace; font-size:11px; padding:5px 12px; border-radius:100px;}
+  .meal-chip{font-family:'IBM Plex Mono', monospace; font-size:12.5px; padding:6px 13px; border-radius:100px;}
   .meal-chip.filled{background:rgba(217,154,61,0.22); color:var(--primary-deep);}
   .meal-chip.empty{background:transparent; color:var(--muted); border:1px dashed var(--line);}
-  .tl-subhead{font-family:'IBM Plex Mono', monospace; font-weight:700; font-size:15px; text-transform:uppercase; letter-spacing:.04em; color:var(--accent-2); margin:18px 0 8px;}
-  .trail-meta{display:block; font-family:'IBM Plex Mono', monospace; font-size:12px; color:var(--muted); margin-top:3px;}
+  .tl-subhead{font-family:'IBM Plex Mono', monospace; font-weight:700; font-size:16px; text-transform:uppercase; letter-spacing:.04em; color:var(--accent-2); margin:18px 0 8px;}
+  .trail-meta{display:block; font-family:'IBM Plex Mono', monospace; font-size:13px; color:var(--muted); margin-top:3px;}
   ul.tl-items{list-style:none; margin:0; padding:0;}
   ul.tl-items li{padding:8px 0 8px 22px; position:relative; border-bottom:1px dashed var(--line);}
   ul.tl-items li:last-child{border-bottom:none;}
   ul.tl-items li::before{content:'—'; position:absolute; left:0; color:var(--accent-1);}
   ul.tl-items li.meal{background:rgba(139,58,58,0.05); border-radius:8px; padding:10px 12px 10px 12px; border-bottom:none; margin:4px 0;}
   ul.tl-items li.meal::before{content:'';}
-  ul.tl-items li.alt{color:var(--muted); font-size:14px;}
-  .badge{font-family:'IBM Plex Mono', monospace; font-size:11.5px; background:var(--cream); border:1px solid var(--line); padding:1px 7px; border-radius:6px; margin-left:4px;}
+  ul.tl-items li.alt{color:var(--muted); font-size:15px;}
+  .badge{font-family:'IBM Plex Mono', monospace; font-size:12.5px; background:var(--cream); border:1px solid var(--line); padding:1px 7px; border-radius:6px; margin-left:4px;}
   .poi-actions{display:inline-flex; gap:10px; margin-left:6px; flex-wrap:wrap;}
-  .poi-actions a{font-size:12px; font-family:'IBM Plex Mono', monospace; text-decoration:none; border-bottom:1px solid var(--primary-deep);}
+  .poi-actions a{font-size:13px; font-family:'IBM Plex Mono', monospace; text-decoration:none; border-bottom:1px solid var(--primary-deep);}
   .poi-actions a.search{color:var(--accent-2); border-bottom-color:var(--accent-1);}
   .gmaps-btn{
-    display:inline-block; margin-top:12px; font-family:'IBM Plex Mono', monospace; font-size:12px;
+    display:inline-block; margin-top:12px; font-family:'IBM Plex Mono', monospace; font-size:13px;
     background:var(--primary-deep); color:#fff !important; padding:7px 14px; border-radius:8px; text-decoration:none;
   }
   .extra-box{border:1px dashed var(--line); border-radius:14px; padding:20px 24px; margin-top:8px; margin-bottom:22px; background:var(--cream);}
-  .extra-box h3{font-size:17px; color:var(--accent-2);}
+  .extra-box h3{font-size:18px; color:var(--accent-2);}
   .extra-box ul{margin:10px 0 0; padding-left:20px;}
-  .extra-box li{margin-bottom:10px; font-size:14.5px;}
+  .extra-box li{margin-bottom:10px; font-size:15.5px;}
   .prop-card{border:1px solid var(--line); border-radius:16px; padding:22px 24px; margin-bottom:18px; background:var(--pale);}
-  .prop-card h3{font-size:18px; color:var(--primary-deep); margin-bottom:10px;}
+  .prop-card h3{font-size:19px; color:var(--primary-deep); margin-bottom:10px;}
   .prop-card p{margin:6px 0;}
-  .kv{display:grid; grid-template-columns:150px 1fr; gap:6px 14px; font-size:14.5px;}
-  .kv div:nth-child(odd){color:var(--muted); font-family:'IBM Plex Mono', monospace; font-size:12.5px; text-transform:uppercase; letter-spacing:.03em; padding-top:2px;}
+  .kv{display:grid; grid-template-columns:150px 1fr; gap:6px 14px; font-size:15.5px;}
+  .kv div:nth-child(odd){color:var(--muted); font-family:'IBM Plex Mono', monospace; font-size:13.5px; text-transform:uppercase; letter-spacing:.03em; padding-top:2px;}
   .steps{margin:0; padding-left:20px;}
   .steps li{margin-bottom:8px;}
-  code{background:var(--cream); border:1px solid var(--line); padding:1px 6px; border-radius:5px; font-family:'IBM Plex Mono', monospace; font-size:13px;}
-  footer{margin-top:30px; font-size:12.5px; color:var(--muted); text-align:center;}
+  code{background:var(--cream); border:1px solid var(--line); padding:1px 6px; border-radius:5px; font-family:'IBM Plex Mono', monospace; font-size:14px;}
+  footer{margin-top:30px; font-size:13.5px; color:var(--muted); text-align:center;}
 </style>
 </head>
 <body>
@@ -191,7 +194,7 @@
           <div class="sub-card-title"><span class="num">1</span>Depart &amp; drive to WV</div>
           <div class="tl-subhead">Sunday night</div>
           <ul class="tl-items">
-            <li><b>Capo Deli</b>, 8359-B Leesburg Pike, Tysons — swing by Sunday evening (open till 8pm) to pick up sandwiches for Monday's hike. <a href="tel:+17039426000">(703) 942-6000</a>
+            <li><b><a href="https://www.capodelitysons.com/menu" target="_blank" rel="noopener">Capo Deli</a></b>, 8359-B Leesburg Pike, Tysons — swing by Sunday evening (open till 8pm) to pick up sandwiches for Monday's hike. <a href="tel:+17039426000">(703) 942-6000</a>
               <span class="poi-actions"><a href="https://www.capodelitysons.com/menu" target="_blank" rel="noopener">Menu →</a><a class="dir" href="https://www.google.com/maps/dir/?api=1&amp;destination=Capo+Deli%2C+8359-B+Leesburg+Pike%2C+Tysons%2C+VA" target="_blank" rel="noopener">Directions →</a></span>
             </li>
           </ul>
@@ -199,7 +202,7 @@
           <div class="tl-subhead">On the way</div>
           <ul class="tl-items">
             <li>Leave McLean by <b>~7:00 AM</b> — figure 3.5–4 hrs total to the Blackwater Falls area via Rt 55 / US-48 Corridor H.</li>
-            <li><b>Breakfast — Drifters Cafe</b>, 50 W Main St, Wardensville, WV — open Mon 7am–4pm, fresh-ground coffee and a well-reviewed breakfast burrito. About 1.5 hrs into the drive, right on Rt 55. <a href="tel:+13044909797">(304) 490-9797</a>
+            <li><b>Breakfast — <a class="dir" href="https://www.google.com/maps/dir/?api=1&amp;destination=Drifters+Cafe%2C+50+W+Main+St%2C+Wardensville%2C+WV" target="_blank" rel="noopener">Drifters Cafe</a></b>, 50 W Main St, Wardensville, WV — open Mon 7am–4pm, fresh-ground coffee and a well-reviewed breakfast burrito. About 1.5 hrs into the drive, right on Rt 55. <a href="tel:+13044909797">(304) 490-9797</a>
               <span class="poi-actions"><a class="dir" href="https://www.google.com/maps/dir/?api=1&amp;destination=Drifters+Cafe%2C+50+W+Main+St%2C+Wardensville%2C+WV" target="_blank" rel="noopener">Directions →</a></span>
             </li>
             <li><b>Lunch's already sorted</b> — sandwiches from Capo Deli are already in the cooler from last night. Handy either way: Davis's own picks (Big Belly Deli, Hellbender Burritos) are both closed Mondays.</li>
@@ -209,19 +212,19 @@
         <div class="sub-card">
           <div class="sub-card-title"><span class="num">2</span>Hikes &amp; falls — Blackwater Falls State Park</div>
           <ul class="tl-items">
-            <li><b>Blackwater Falls Boardwalk / Gentle Trail</b> — paved path + 200+ step boardwalk down to the main falls overlook; starts at the Trading Post parking area.
+            <li><b><a class="dir" href="https://www.google.com/maps/dir/?api=1&amp;destination=Blackwater+Falls+State+Park%2C+Davis%2C+WV" target="_blank" rel="noopener">Blackwater Falls Boardwalk / Gentle Trail</a></b> — paved path + 200+ step boardwalk down to the main falls overlook; starts at the Trading Post parking area.
               <span class="trail-meta">0.25 mi round trip · easy · ~15–20 min · ★4.7 (1,115 Tripadvisor reviews, park-wide)</span>
               <span class="poi-actions"><a class="dir" href="https://www.google.com/maps/dir/?api=1&amp;destination=Blackwater+Falls+State+Park%2C+Davis%2C+WV" target="_blank" rel="noopener">Directions →</a><a class="search" href="https://www.google.com/search?q=Blackwater+Falls+Boardwalk+Trail+Davis+WV" target="_blank" rel="noopener">Search →</a></span>
             </li>
-            <li><b>Lindy Point Trail</b> — one of the park's best views: the Blackwater Canyon from 3,000 ft. On your saved map.
+            <li><b><a class="dir" href="https://www.google.com/maps/dir/?api=1&amp;destination=Lindy+Point+Observation+Deck%2C+Davis%2C+WV" target="_blank" rel="noopener">Lindy Point Trail</a></b> — one of the park's best views: the Blackwater Canyon from 3,000 ft. On your saved map.
               <span class="trail-meta">0.6 mi round trip · easy-moderate · ~20–30 min · ★4.7 (1,115, park-wide — no separate trail listing)</span>
               <span class="poi-actions"><a class="dir" href="https://www.google.com/maps/dir/?api=1&amp;destination=Lindy+Point+Observation+Deck%2C+Davis%2C+WV" target="_blank" rel="noopener">Directions →</a><a class="search" href="https://www.google.com/search?q=Lindy+Point+Observation+Deck+Davis+WV" target="_blank" rel="noopener">Search →</a></span>
             </li>
-            <li><b>If there's time/energy — Elakala Falls + Balanced Rock Loop</b> — right from the Blackwater Lodge parking lot. Worth flagging: Tuesday's now a full checkout-and-travel day with no window to come back for this, so today's really the only shot at it this trip. Totally fine to skip and save for next time if Lindy Point already did you in.
+            <li>If there's time/energy — <b><a class="dir" href="https://www.google.com/maps/dir/?api=1&amp;destination=Blackwater+Falls+Lodge%2C+Davis%2C+WV" target="_blank" rel="noopener">Elakala Falls + Balanced Rock Loop</a></b> — right from the Blackwater Lodge parking lot. Worth flagging: Tuesday's now a full checkout-and-travel day with no window to come back for this, so today's really the only shot at it this trip. Totally fine to skip and save for next time if Lindy Point already did you in.
               <span class="trail-meta">2.8 mi loop · moderate · 375 ft gain · ~1.5–2 hrs · ★4.7 (park-wide)</span>
               <span class="poi-actions"><a class="dir" href="https://www.google.com/maps/dir/?api=1&amp;destination=Blackwater+Falls+Lodge%2C+Davis%2C+WV" target="_blank" rel="noopener">Directions →</a><a class="search" href="https://www.google.com/search?q=Elakala+Falls+Balanced+Rock+Loop+Blackwater+Falls+WV" target="_blank" rel="noopener">Search →</a></span>
             </li>
-            <li><b>Bonus if energy allows — Pendleton Point Overlook</b> (easy, family-friendly, right by the Nature Center) and <b>Pace Point Overlook</b> (along the Canyon Rim Trail from Pendleton Lake) — both on your saved map and in this same corner of the park.
+            <li>Bonus if energy allows — <b><a class="dir" href="https://www.google.com/maps/dir/?api=1&amp;destination=Pendleton+Point+Overlook%2C+Blackwater+Falls+State+Park%2C+WV" target="_blank" rel="noopener">Pendleton Point Overlook</a></b> (easy, family-friendly, right by the Nature Center) and <b><a class="dir" href="https://www.google.com/maps/dir/?api=1&amp;destination=Pace+Point+Overlook%2C+Blackwater+Falls+State+Park%2C+WV" target="_blank" rel="noopener">Pace Point Overlook</a></b> (along the Canyon Rim Trail from Pendleton Lake) — both on your saved map and in this same corner of the park.
               <span class="trail-meta">Pendleton: &lt;0.2 mi, easy, ~10 min · Pace Point: ~3 mi round trip, moderate, ~1.25–1.5 hrs · ★4.7 (park-wide)</span>
               <span class="poi-actions"><a class="dir" href="https://www.google.com/maps/dir/?api=1&amp;destination=Pendleton+Point+Overlook%2C+Blackwater+Falls+State+Park%2C+WV" target="_blank" rel="noopener">Pendleton →</a><a class="search" href="https://www.google.com/search?q=Pendleton+Point+Overlook+Blackwater+Falls+State+Park+WV" target="_blank" rel="noopener">Search →</a><a class="dir" href="https://www.google.com/maps/dir/?api=1&amp;destination=Pace+Point+Overlook%2C+Blackwater+Falls+State+Park%2C+WV" target="_blank" rel="noopener">Pace Point →</a><a class="search" href="https://www.google.com/search?q=Pace+Point+Overlook+Blackwater+Falls+State+Park+WV" target="_blank" rel="noopener">Search →</a></span>
             </li>
@@ -243,18 +246,18 @@
       <div class="extra-box">
         <h3>Also on your map — worth a look if you have extra energy</h3>
         <ul>
-          <li><b>Rohrbaugh Plains Trail</b> (from Fisher Spring Run Trailhead) — the hosts' own personal favorite, to a quiet overlook. About 20 min from the cabin, deeper into the Dolly Sods Wilderness.
+          <li><b><a class="dir" href="https://www.google.com/maps/dir/?api=1&amp;destination=Fisher+Spring+Run+Trailhead%2C+WV" target="_blank" rel="noopener">Rohrbaugh Plains Trail</a></b> (from Fisher Spring Run Trailhead) — the hosts' own personal favorite, to a quiet overlook. About 20 min from the cabin, deeper into the Dolly Sods Wilderness.
             <span class="trail-meta">~5 mi round trip · moderate-strenuous · ~2.5–3 hrs · no independently verified rating found, but trail guides consistently describe it as quiet/uncrowded</span>
             <span class="poi-actions"><a class="dir" href="https://www.google.com/maps/dir/?api=1&amp;destination=Fisher+Spring+Run+Trailhead%2C+WV" target="_blank" rel="noopener">Directions →</a><a class="search" href="https://www.google.com/search?q=Rohrbaugh+Plains+Trail+Dolly+Sods+WV" target="_blank" rel="noopener">Search →</a></span></li>
-          <li><b>Spruce Knob</b> — West Virginia's highest point (4,863 ft), 360° views from the observation tower. Genuinely great, but 45 min–1 hr from the cabin — really a "next trip" stop given how tight this one is.
+          <li><b><a class="dir" href="https://www.google.com/maps/dir/?api=1&amp;destination=Spruce+Knob+Observation+Tower%2C+WV" target="_blank" rel="noopener">Spruce Knob</a></b> — West Virginia's highest point (4,863 ft), 360° views from the observation tower. Genuinely great, but 45 min–1 hr from the cabin — really a "next trip" stop given how tight this one is.
             <span class="trail-meta">~0.5 mi paved loop to the tower · easy · ~15–20 min · no independently verified rating found</span>
-            <span class="poi-actions"><a class="search" href="https://www.google.com/search?q=Spruce+Knob+West+Virginia" target="_blank" rel="noopener">Search →</a></span>
+            <span class="poi-actions"><a class="dir" href="https://www.google.com/maps/dir/?api=1&amp;destination=Spruce+Knob+Observation+Tower%2C+WV" target="_blank" rel="noopener">Directions →</a><a class="search" href="https://www.google.com/search?q=Spruce+Knob+West+Virginia" target="_blank" rel="noopener">Search →</a></span>
           </li>
-          <li><b>Stack Rock</b> — on your saved map near this same area, but I couldn't independently pin down trail specifics (distance/difficulty) with confidence. Worth asking locally rather than planning around it sight-unseen.
+          <li><b><a class="search" href="https://www.google.com/search?q=Stack+Rock+Dolly+Sods+WV" target="_blank" rel="noopener">Stack Rock</a></b> — on your saved map near this same area, but I couldn't independently pin down trail specifics (distance/difficulty) with confidence. Worth asking locally rather than planning around it sight-unseen.
             <span class="poi-actions"><a class="search" href="https://www.google.com/search?q=Stack+Rock+Dolly+Sods+WV" target="_blank" rel="noopener">Search →</a></span>
           </li>
-          <li><b>Canaan Loop Trail / Canaan Loop Rd</b> — more of a scenic backcountry gravel loop road (popular with mountain bikers and OHVs) than a hike. Nice if you have a spare hour, not a stop to build a day around.
-            <span class="poi-actions"><a class="search" href="https://www.google.com/search?q=Canaan+Loop+Road+WV" target="_blank" rel="noopener">Search →</a></span>
+          <li><b><a class="dir" href="https://www.google.com/maps/dir/?api=1&amp;destination=Canaan+Loop+Road%2C+Davis%2C+WV" target="_blank" rel="noopener">Canaan Loop Trail / Canaan Loop Rd</a></b> — more of a scenic backcountry gravel loop road (popular with mountain bikers and OHVs) than a hike. Nice if you have a spare hour, not a stop to build a day around.
+            <span class="poi-actions"><a class="dir" href="https://www.google.com/maps/dir/?api=1&amp;destination=Canaan+Loop+Road%2C+Davis%2C+WV" target="_blank" rel="noopener">Directions →</a><a class="search" href="https://www.google.com/search?q=Canaan+Loop+Road+WV" target="_blank" rel="noopener">Search →</a></span>
           </li>
         </ul>
       </div>
@@ -272,7 +275,7 @@
 
         <div class="tl-subhead">Sunrise — Bear Rocks Preserve</div>
         <ul class="tl-items">
-          <li><b>Leave the cabin ~7:00 AM</b> for Bear Rocks Preserve, 2 mi / ~5 min away — the hosts' #1 "don't miss," and worth the early start. Sunrise Tuesday, Oct 13 is ~7:23 AM (nearest reference point, Petersburg — treat as close, not exact, for the preserve itself).
+          <li><b>Leave the cabin ~7:00 AM</b> for <b><a class="dir" href="https://www.google.com/maps/dir/?api=1&amp;destination=Bear+Rocks+Preserve%2C+Davis%2C+WV" target="_blank" rel="noopener">Bear Rocks Preserve</a></b>, 2 mi / ~5 min away — the hosts' #1 "don't miss," and worth the early start. Sunrise Tuesday, Oct 13 is ~7:23 AM (nearest reference point, Petersburg — treat as close, not exact, for the preserve itself).
             <span class="trail-meta">~1 mi easy walking loop among the rock outcrops · ~30–45 min · ★5.0 (5 Tripadvisor reviews — small sample, but it's the hosts' most-repeated pick)</span>
             <span class="poi-actions"><a class="dir" href="https://www.google.com/maps/dir/?api=1&amp;destination=Bear+Rocks+Preserve%2C+Davis%2C+WV" target="_blank" rel="noopener">Directions →</a><a class="search" href="https://www.google.com/search?q=Bear+Rocks+Preserve+Davis+WV" target="_blank" rel="noopener">Search →</a></span>
           </li>
@@ -282,28 +285,28 @@
 
         <div class="tl-subhead">The drive to Stanardsville</div>
         <ul class="tl-items">
-          <li><b>Drive toward Stanardsville, VA</b> (2010 Madison Rd) via US-33 E through Franklin and Harrisonburg, crossing Skyline Drive directly at the Swift Run Gap entrance station (mile 65.5). <b>Target arrival at the trailhead: 2:30 PM.</b> The cabin-to-Harrisonburg leg alone typically runs ~2 hrs 50 min–3 hrs, so with the lunch stop below this is a realistic pace, not a rushed one.
+          <li><b>Drive toward <a class="dir" href="https://www.google.com/maps/dir/?api=1&amp;destination=2010+Madison+Rd%2C+Stanardsville%2C+VA+22973" target="_blank" rel="noopener">Stanardsville, VA</a></b> (2010 Madison Rd) via US-33 E through Franklin and Harrisonburg, crossing Skyline Drive directly at the Swift Run Gap entrance station (mile 65.5). <b>Target arrival at the trailhead: 2:00–2:30 PM.</b> The cabin-to-Harrisonburg leg alone typically runs ~2 hrs 50 min–3 hrs, so with the lunch stop below this is a realistic pace, not a rushed one.
             <span class="poi-actions"><a class="dir" href="https://www.google.com/maps/dir/?api=1&amp;destination=2010+Madison+Rd%2C+Stanardsville%2C+VA+22973" target="_blank" rel="noopener">Directions →</a></span>
           </li>
-          <li class="meal">🥪 <b>Lunch pickup — Mr J's Bagels &amp; Deli</b>, 1635 E Market St, Harrisonburg — right on US-33 as you pass through, sandwiches made to order (never pre-made). Grab them here to go; you'll picnic at the falls, not eat in the car. About 2.5–2.75 hrs into the drive. Their posted hours suggest an early-afternoon close (roughly 2–3 PM), so call ahead to confirm they'll still be open when you roll through. <a href="tel:+15405640416">(540) 564-0416</a>
+          <li class="meal">🥪 <b>Lunch pickup — <a href="https://mrjsbagels.com/" target="_blank" rel="noopener">Mr J's Bagels &amp; Deli</a></b>, 1635 E Market St, Harrisonburg — right on US-33 as you pass through, sandwiches made to order (never pre-made). Grab them here to go; you'll picnic at the falls, not eat in the car. About 2.5–2.75 hrs into the drive. Their posted hours suggest an early-afternoon close (roughly 2–3 PM), so call ahead to confirm they'll still be open when you roll through. <a href="tel:+15405640416">(540) 564-0416</a>
             <span class="poi-actions"><a href="https://mrjsbagels.com/" target="_blank" rel="noopener">Website →</a><a class="dir" href="https://www.google.com/maps/dir/?api=1&amp;destination=Mr+J%27s+Bagels+%26+Deli%2C+1635+E+Market+St%2C+Harrisonburg%2C+VA" target="_blank" rel="noopener">Directions →</a></span>
           </li>
         </ul>
 
         <div class="tl-subhead">Skyline Drive stop — Dark Hollow Falls</div>
         <ul class="tl-items">
-          <li><b>Dark Hollow Falls</b> (Skyline Drive mile 50.7, ~15 mi south of Swift Run Gap) — a real 70-ft waterfall payoff, steep on the return climb. Picnic with the Mr J's sandwiches at the trailhead or the Big Meadows overlook nearby before or after hiking.
+          <li><b><a class="dir" href="https://www.google.com/maps/dir/?api=1&amp;destination=Dark+Hollow+Falls+Trailhead%2C+Skyline+Drive%2C+Shenandoah+National+Park%2C+VA" target="_blank" rel="noopener">Dark Hollow Falls</a></b> (Skyline Drive mile 50.7, ~15 mi south of Swift Run Gap) — a real 70-ft waterfall payoff, steep on the return climb. Picnic with the Mr J's sandwiches at the trailhead or the Big Meadows overlook nearby before or after hiking.
             <span class="trail-meta">1.4 mi loop · moderate · 440 ft gain · ~1 hr 15 · ★4.5 (576 Tripadvisor reviews)</span>
             <span class="poi-actions"><a class="dir" href="https://www.google.com/maps/dir/?api=1&amp;destination=Dark+Hollow+Falls+Trailhead%2C+Skyline+Drive%2C+Shenandoah+National+Park%2C+VA" target="_blank" rel="noopener">Directions →</a><a class="search" href="https://www.google.com/search?q=Dark+Hollow+Falls+Skyline+Drive+Shenandoah+National+Park" target="_blank" rel="noopener">Search →</a></span>
           </li>
-          <li class="alt"><b>Backup picnic option</b> — if Mr J's timing doesn't work out, Big Meadows Wayside (mile 51, right by the falls) runs a "Grab 'n Go" counter with sandwiches, salads and pastries. It's a seasonal concession, typically open through fall foliage season, but worth a quick call ahead given how remote this stretch is.
+          <li class="alt">Backup picnic option — if Mr J's timing doesn't work out, <b><a class="dir" href="https://www.google.com/maps/dir/?api=1&amp;destination=Big+Meadows+Wayside%2C+Skyline+Drive%2C+Shenandoah+National+Park%2C+VA" target="_blank" rel="noopener">Big Meadows Wayside</a></b> (mile 51, right by the falls) runs a "Grab 'n Go" counter with sandwiches, salads and pastries. It's a seasonal concession, typically open through fall foliage season, but worth a quick call ahead given how remote this stretch is.
             <span class="poi-actions"><a class="dir" href="https://www.google.com/maps/dir/?api=1&amp;destination=Big+Meadows+Wayside%2C+Skyline+Drive%2C+Shenandoah+National+Park%2C+VA" target="_blank" rel="noopener">Directions →</a></span>
           </li>
         </ul>
 
         <div class="tl-subhead">Check in &amp; evening</div>
         <ul class="tl-items">
-          <li><b>4:00 PM — check in</b> to <b>Postcard Cabins Shenandoah</b>, 2010 Madison Rd, Stanardsville, VA 22973. Book via the link below or call <a href="tel:+18882362427">(888) 236-2427</a>.
+          <li><b>4:00 PM — check in</b> to <b><a href="https://www.marriott.com/en-us/hotels/chosh-postcard-cabins-shenandoah-outdoor-collection-bonvoy/overview/" target="_blank" rel="noopener">Postcard Cabins Shenandoah</a></b>, 2010 Madison Rd, Stanardsville, VA 22973. Book via the link below or call <a href="tel:+18882362427">(888) 236-2427</a>.
             <span class="poi-actions"><a href="https://www.marriott.com/en-us/hotels/chosh-postcard-cabins-shenandoah-outdoor-collection-bonvoy/overview/" target="_blank" rel="noopener">Website / book →</a></span>
           </li>
           <li class="meal">🔥 <b>Dinner — grill out.</b> Each cabin has a fire pit on the deck; if you want an actual grill rather than just the fire pit, worth confirming with the property ahead of time or bringing a small portable one.</li>
