@@ -30,18 +30,18 @@
   --star-off: #D1D5DB;
 }
 * { box-sizing: border-box; margin: 0; padding: 0; }
-body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif; background: var(--cream); color: var(--text); font-size: 16px; line-height: 1.5; }
+body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif; background: var(--cream); color: var(--text); font-size: 18px; line-height: 1.55; }
 
 /* ── Header ── */
 .site-header { background: linear-gradient(135deg, #1A1A2E 0%, #16213E 60%, #0F3460 100%); color: white; padding: 22px 32px; display: flex; align-items: center; justify-content: space-between; }
-.greeting { font-size: 24px; font-weight: 700; letter-spacing: -.5px; }
-.greeting-date { font-size: 15px; opacity: .65; margin-top: 2px; }
-.refresh-btn { background: rgba(255,255,255,.12); border: 1px solid rgba(255,255,255,.2); color: rgba(255,255,255,.85); border-radius: 20px; padding: 7px 16px; font-size: 14px; cursor: pointer; }
+.greeting { font-size: 26px; font-weight: 700; letter-spacing: -.5px; }
+.greeting-date { font-size: 17px; opacity: .65; margin-top: 2px; }
+.refresh-btn { background: rgba(255,255,255,.12); border: 1px solid rgba(255,255,255,.2); color: rgba(255,255,255,.85); border-radius: 20px; padding: 7px 16px; font-size: 16px; cursor: pointer; }
 .refresh-btn:hover { background: rgba(255,255,255,.2); }
 
 /* ── Tab nav ── */
 .tab-nav { background: var(--white); border-bottom: 1px solid var(--border); padding: 0 28px; display: flex; gap: 2px; }
-.tab-btn { background: none; border: none; border-bottom: 3px solid transparent; color: var(--muted); cursor: pointer; font-size: 15.5px; font-weight: 500; padding: 14px 18px 11px; transition: color .15s; }
+.tab-btn { background: none; border: none; border-bottom: 3px solid transparent; color: var(--muted); cursor: pointer; font-size: 17.5px; font-weight: 500; padding: 14px 18px 11px; transition: color .15s; }
 .tab-btn:hover { color: var(--subtle); }
 .tab-btn.active { color: var(--text); border-bottom-color: var(--text); font-weight: 600; }
 .tab-pane { display: none; padding: 28px 32px 40px; }
@@ -49,10 +49,10 @@ body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sa
 
 /* ── Cards ── */
 .card { background: var(--white); border-radius: var(--radius); padding: 22px 24px; box-shadow: var(--shadow); border: 1px solid var(--border-light); }
-.loading { display: flex; align-items: center; gap: 9px; color: var(--faint); font-size: 15px; padding: 6px 0; }
+.loading { display: flex; align-items: center; gap: 9px; color: var(--faint); font-size: 17px; padding: 6px 0; }
 .spinner { width: 13px; height: 13px; border: 2px solid var(--border); border-top-color: var(--muted); border-radius: 50%; animation: spin .75s linear infinite; flex-shrink: 0; }
 @keyframes spin { to { transform: rotate(360deg); } }
-.empty { color: var(--faint); font-size: 15px; padding: 4px 0; }
+.empty { color: var(--faint); font-size: 17px; padding: 4px 0; }
 
 /* ══════════════════════════════════════════════ */
 /*  KIDS TAB                                      */
@@ -62,13 +62,13 @@ body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sa
 .kid-banner { padding: 20px 24px; display: flex; align-items: center; gap: 14px; }
 .ella .kid-banner { background: linear-gradient(135deg, var(--ella-light), #F8CBE3); }
 .liam .kid-banner { background: linear-gradient(135deg, var(--liam-light), #CDDDF5); }
-.kid-avatar { width: 46px; height: 46px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 22px; font-weight: 800; color: white; flex-shrink: 0; }
+.kid-avatar { width: 46px; height: 46px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 24px; font-weight: 800; color: white; flex-shrink: 0; }
 .ella .kid-avatar { background: var(--ella); }
 .liam .kid-avatar { background: var(--liam); }
-.kid-name { font-size: 20px; font-weight: 700; }
-.kid-school { font-size: 14px; color: var(--muted); margin-top: 2px; }
+.kid-name { font-size: 22px; font-weight: 700; }
+.kid-school { font-size: 16px; color: var(--muted); margin-top: 2px; }
 .kid-body { padding: 20px 24px; }
-.section-heading { font-size: 12.5px; font-weight: 700; text-transform: uppercase; letter-spacing: .08em; margin-bottom: 10px; margin-top: 18px; padding-bottom: 6px; border-bottom: 1.5px solid var(--border-light); }
+.section-heading { font-size: 14.5px; font-weight: 700; text-transform: uppercase; letter-spacing: .08em; margin-bottom: 10px; margin-top: 18px; padding-bottom: 6px; border-bottom: 1.5px solid var(--border-light); }
 .section-heading:first-child { margin-top: 0; }
 .ella .section-heading { color: var(--ella); }
 .liam .section-heading { color: var(--liam); }
@@ -77,27 +77,27 @@ body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sa
 .event-dot { width: 7px; height: 7px; border-radius: 50%; margin-top: 5px; flex-shrink: 0; }
 .ella .event-dot { background: var(--ella); }
 .liam .event-dot { background: var(--liam); }
-.event-title { font-size: 15.5px; font-weight: 500; }
-.event-meta { font-size: 13.5px; color: var(--muted); margin-top: 1px; }
+.event-title { font-size: 17.5px; font-weight: 500; }
+.event-meta { font-size: 15.5px; color: var(--muted); margin-top: 1px; }
 .grade-row { display: flex; align-items: flex-start; gap: 10px; padding: 7px 0; border-bottom: 1px solid var(--border-light); }
 .grade-row:last-child { border-bottom: none; }
-.grade-row a { text-decoration: none; color: var(--text); font-size: 15.5px; font-weight: 500; }
+.grade-row a { text-decoration: none; color: var(--text); font-size: 17.5px; font-weight: 500; }
 .grade-row a:hover { text-decoration: underline; }
-.grade-sender { font-size: 13.5px; color: var(--muted); margin-top: 1px; }
+.grade-sender { font-size: 15.5px; color: var(--muted); margin-top: 1px; }
 
 /* ══════════════════════════════════════════════ */
 /*  RECIPES TAB                                   */
 /* ══════════════════════════════════════════════ */
 .recipe-controls { display: flex; align-items: center; gap: 12px; margin-bottom: 16px; flex-wrap: wrap; }
-.recipe-search { flex: 1; min-width: 180px; border: 1px solid var(--border); border-radius: 8px; padding: 8px 12px; font-size: 15px; font-family: inherit; color: var(--text); background: var(--white); outline: none; }
+.recipe-search { flex: 1; min-width: 180px; border: 1px solid var(--border); border-radius: 8px; padding: 8px 12px; font-size: 17px; font-family: inherit; color: var(--text); background: var(--white); outline: none; }
 .recipe-search:focus { border-color: var(--recipe); }
-.starred-toggle { display: flex; align-items: center; gap: 6px; cursor: pointer; font-size: 15px; color: var(--muted); white-space: nowrap; }
+.starred-toggle { display: flex; align-items: center; gap: 6px; cursor: pointer; font-size: 17px; color: var(--muted); white-space: nowrap; }
 .starred-toggle input { accent-color: var(--star-on); }
 
 .cat-bar { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 20px; }
 .cat-pill {
   border: 1.5px solid var(--border); border-radius: 20px; padding: 5px 14px;
-  font-size: 14.5px; font-weight: 500; cursor: pointer; background: var(--white); color: var(--muted);
+  font-size: 16.5px; font-weight: 500; cursor: pointer; background: var(--white); color: var(--muted);
   transition: all .15s; white-space: nowrap;
 }
 .cat-pill:hover { border-color: var(--recipe); color: var(--recipe); }
@@ -117,16 +117,16 @@ body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sa
 .modal-thumb { width: 100%; max-height: 320px; object-fit: cover; border-radius: var(--radius-sm); display: block; }
 .recipe-cat-badge {
   display: inline-flex; align-items: center; gap: 4px;
-  font-size: 12.5px; font-weight: 700; text-transform: uppercase; letter-spacing: .06em;
+  font-size: 14.5px; font-weight: 700; text-transform: uppercase; letter-spacing: .06em;
   color: var(--recipe); background: var(--recipe-light); border-radius: 5px; padding: 2px 7px;
   width: fit-content;
 }
-.recipe-name { font-size: 16px; font-weight: 600; color: var(--text); line-height: 1.35; flex: 1; }
-.recipe-note-preview { font-size: 14px; color: var(--muted); line-height: 1.4; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
+.recipe-name { font-size: 18px; font-weight: 600; color: var(--text); line-height: 1.35; flex: 1; }
+.recipe-note-preview { font-size: 16px; color: var(--muted); line-height: 1.4; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
 .recipe-footer { display: flex; align-items: center; justify-content: space-between; margin-top: 4px; }
-.recipe-src-tag { font-size: 12px; color: var(--faint); }
+.recipe-src-tag { font-size: 14px; color: var(--faint); }
 .recipe-stars-sm { display: flex; gap: 1px; }
-.recipe-stars-sm span { font-size: 16px; cursor: pointer; line-height: 1; }
+.recipe-stars-sm span { font-size: 18px; cursor: pointer; line-height: 1; }
 .gmail-starred-dot { width: 7px; height: 7px; border-radius: 50%; background: var(--star-on); display: inline-block; margin-left: 4px; }
 
 .recipe-modal { position: fixed; inset: 0; z-index: 1000; display: flex; pointer-events: none; }
@@ -144,29 +144,29 @@ body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sa
   padding: 24px 28px 20px; border-bottom: 1px solid var(--border-light);
   display: flex; flex-direction: column; gap: 10px; flex-shrink: 0; position: relative;
 }
-.modal-close { position: absolute; top: 18px; right: 20px; border: none; background: var(--border-light); border-radius: 50%; width: 30px; height: 30px; font-size: 18px; cursor: pointer; display: flex; align-items: center; justify-content: center; color: var(--muted); }
+.modal-close { position: absolute; top: 18px; right: 20px; border: none; background: var(--border-light); border-radius: 50%; width: 30px; height: 30px; font-size: 20px; cursor: pointer; display: flex; align-items: center; justify-content: center; color: var(--muted); }
 .modal-close:hover { background: var(--border); }
-.modal-cat-badge { font-size: 13px; font-weight: 700; text-transform: uppercase; letter-spacing: .07em; color: var(--recipe); }
-.modal-title { font-size: 22px; font-weight: 700; line-height: 1.3; padding-right: 36px; }
-.modal-meta { font-size: 14px; color: var(--muted); display: flex; align-items: center; gap: 10px; }
+.modal-cat-badge { font-size: 15px; font-weight: 700; text-transform: uppercase; letter-spacing: .07em; color: var(--recipe); }
+.modal-title { font-size: 24px; font-weight: 700; line-height: 1.3; padding-right: 36px; }
+.modal-meta { font-size: 16px; color: var(--muted); display: flex; align-items: center; gap: 10px; }
 .modal-stars { display: flex; gap: 3px; }
-.modal-stars span { font-size: 24px; cursor: pointer; transition: transform .1s; }
+.modal-stars span { font-size: 26px; cursor: pointer; transition: transform .1s; }
 .modal-stars span:hover { transform: scale(1.2); }
 .modal-body { padding: 24px 28px; overflow-y: auto; flex: 1; }
-.modal-recipe-text { font-size: 16px; line-height: 1.75; color: var(--subtle); white-space: pre-wrap; }
+.modal-recipe-text { font-size: 18px; line-height: 1.75; color: var(--subtle); white-space: pre-wrap; }
 .modal-link-row { margin-top: 20px; padding-top: 16px; border-top: 1px solid var(--border-light); }
-.modal-link-row a { font-size: 15px; color: var(--recipe); text-decoration: none; font-weight: 500; }
+.modal-link-row a { font-size: 17px; color: var(--recipe); text-decoration: none; font-weight: 500; }
 .modal-link-row a:hover { text-decoration: underline; }
-.modal-gmail-star { display: inline-block; background: #FEF3C7; border-radius: 5px; padding: 3px 8px; font-size: 13.5px; color: #92400E; font-weight: 600; margin-left: 6px; }
+.modal-gmail-star { display: inline-block; background: #FEF3C7; border-radius: 5px; padding: 3px 8px; font-size: 15.5px; color: #92400E; font-weight: 600; margin-left: 6px; }
 
 /* ══════════════════════════════════════════════ */
 /*  NEWS TAB                                      */
 /* ══════════════════════════════════════════════ */
 .news-item { padding: 9px 0; border-bottom: 1px solid var(--border-light); }
 .news-item:last-child { border-bottom: none; }
-.news-item a { font-size: 15.5px; font-weight: 500; text-decoration: none; color: var(--text); }
+.news-item a { font-size: 17.5px; font-weight: 500; text-decoration: none; color: var(--text); }
 .news-item a:hover { text-decoration: underline; }
-.news-meta { font-size: 13.5px; color: var(--muted); margin-top: 2px; }
+.news-meta { font-size: 15.5px; color: var(--muted); margin-top: 2px; }
 a { color: inherit; }
 </style>
 </head>
@@ -191,17 +191,17 @@ a { color: inherit; }
 <div id="tab-kids" class="tab-pane active">
 
 <div style="display:flex;justify-content:flex-end;flex-wrap:wrap;gap:8px;margin-bottom:10px;">
-    <a href="https://sis.fcps.edu/SIS/PXP2_Login_Parent.aspx" target="_blank" style="font-size:16px;font-weight:600;color:#fff;background:#3B6EA5;padding:6px 14px;border-radius:8px;text-decoration:none;">🔗 Open ParentVUE</a>
-    <a href="https://fcps.schoology.com" target="_blank" style="font-size:16px;font-weight:600;color:#fff;background:#4a5568;padding:6px 14px;border-radius:8px;text-decoration:none;">📘 Schoology</a>
-    <a href="https://my.sportngin.com/user/schedule" target="_blank" style="font-size:16px;font-weight:600;color:#fff;background:#1d4e89;padding:6px 14px;border-radius:8px;text-decoration:none;">🏈 SportsEngine</a>
-    <a href="https://app.playmetrics.com/dashboard" target="_blank" style="font-size:16px;font-weight:600;color:#fff;background:#2f855a;padding:6px 14px;border-radius:8px;text-decoration:none;">⚽ PlayMetrics</a>
-    <a href="https://families.talkingpts.org/home" target="_blank" style="font-size:16px;font-weight:600;color:#fff;background:#2b6cb0;padding:6px 14px;border-radius:8px;text-decoration:none;">💬 TalkingPoints</a>
-    <a href="https://www.myschoolbucks.com/" target="_blank" style="font-size:16px;font-weight:600;color:#fff;background:#b7791f;padding:6px 14px;border-radius:8px;text-decoration:none;">🍎 MySchoolBucks</a>
+    <a href="https://sis.fcps.edu/SIS/PXP2_Login_Parent.aspx" target="_blank" style="font-size:18px;font-weight:600;color:#fff;background:#3B6EA5;padding:6px 14px;border-radius:8px;text-decoration:none;">🔗 Open ParentVUE</a>
+    <a href="https://fcps.schoology.com" target="_blank" style="font-size:18px;font-weight:600;color:#fff;background:#4a5568;padding:6px 14px;border-radius:8px;text-decoration:none;">📘 Schoology</a>
+    <a href="https://my.sportngin.com/user/schedule" target="_blank" style="font-size:18px;font-weight:600;color:#fff;background:#1d4e89;padding:6px 14px;border-radius:8px;text-decoration:none;">🏈 SportsEngine</a>
+    <a href="https://app.playmetrics.com/dashboard" target="_blank" style="font-size:18px;font-weight:600;color:#fff;background:#2f855a;padding:6px 14px;border-radius:8px;text-decoration:none;">⚽ PlayMetrics</a>
+    <a href="https://families.talkingpts.org/home" target="_blank" style="font-size:18px;font-weight:600;color:#fff;background:#2b6cb0;padding:6px 14px;border-radius:8px;text-decoration:none;">💬 TalkingPoints</a>
+    <a href="https://www.myschoolbucks.com/" target="_blank" style="font-size:18px;font-weight:600;color:#fff;background:#b7791f;padding:6px 14px;border-radius:8px;text-decoration:none;">🍎 MySchoolBucks</a>
   </div>
 
   <div class="card" style="margin-bottom:20px;border-left:4px solid #1E3A8A;background:#EFF6FF;">
-    <div style="font-weight:700;color:#1E3A8A;font-size:15px;margin-bottom:8px;">📅 This week — dates &amp; deadlines</div>
-    <ul style="margin:0;padding-left:18px;font-size:15px;color:#1E3A8A;line-height:1.6;">
+    <div style="font-weight:700;color:#1E3A8A;font-size:17px;margin-bottom:8px;">📅 This week — dates &amp; deadlines</div>
+    <ul style="margin:0;padding-left:18px;font-size:17px;color:#1E3A8A;line-height:1.6;">
       <li>⚠️ <strong>Ella's Civics grade: still F (25%)</strong> — missing "Evaluating an Actual News Story" (due Sep 3, 0/15). Confirmed again in today's new ParentVUE Grade Book Summary (Sep 20) — unchanged from Sep 13. Ms. Parker asked that Ghazal email her ASAP to request a reassessment; checked the thread directly today — still no reply sent, now 18 days since the missed assignment.</li>
       <li>📬 <strong>Miss McCombs (Liam's 4th grade homeroom) still needs a room parent</strong> — asked via TalkingPoints (Sep 15) and by a second PTA parent via email; re-checked both TalkingPoints Messages and Announcements today (loaded fine, no login issue) — still no volunteer. Let her know if you want to take it on, alone or with someone.</li>
       <li>🏀 <a href="https://mail.google.com/mail/u/0/#all/1a0c6c9aa1249375" target="_blank" style="color:inherit;text-decoration:underline"><strong>McLean Youth Basketball registration is open</strong></a> (since Sept 8, forwarded by Ben late tonight) — Liam's "Select B-Ball Tryout" is already on the calendar Thu Oct 1, 7:30 PM at Longfellow MS, so register before then if he's trying out; Ella has no tryout on the calendar yet, worth deciding either way. Distinct from Liam's existing before-school basketball.</li>
@@ -210,12 +210,12 @@ a { color: inherit; }
   </div>
 
   <div id="today-schedule"><div class="card" style="border-left:4px solid #9CA3AF;background:#F3F4F6;margin-bottom:20px;">
-    <div style="font-weight:700;color:#374151;font-size:15px;margin-bottom:8px;">📋 Today — Tuesday, Sep 22</div>
+    <div style="font-weight:700;color:#374151;font-size:17px;margin-bottom:8px;">📋 Today — Tuesday, Sep 22</div>
     <div class="event-row"><div class="event-dot liam"></div><div><div class="event-title">🧠 Dr. Ellie (Liam's therapist)</div><div class="event-meta">4:45 PM · <span style="color:var(--faint)">(exact calendar event link not captured this run — see Family calendar)</span></div></div></div>
   </div></div>
 
-  <div class="section-heading" style="font-size:15px;text-transform:none;letter-spacing:normal;border-bottom:none;margin:4px 0 10px;">📆 Upcoming — activities &amp; appointments</div>
-  <div style="font-size:13px;color:var(--muted);margin:-4px 0 10px;font-style:italic;">TalkingPoints, PlayMetrics, and SportsEngine all loaded straight through today (session restored) — game/practice detail below is cross-checked against those apps. MySchoolBucks hit a full login form (not just a 2FA prompt) — the session has expired and needs a manual re-login; no cafeteria purchase data could be pulled this run (see note in each kid's Grades &amp; School card).</div>
+  <div class="section-heading" style="font-size:17px;text-transform:none;letter-spacing:normal;border-bottom:none;margin:4px 0 10px;">📆 Upcoming — activities &amp; appointments</div>
+  <div style="font-size:15px;color:var(--muted);margin:-4px 0 10px;font-style:italic;">TalkingPoints, PlayMetrics, and SportsEngine all loaded straight through today (session restored) — game/practice detail below is cross-checked against those apps. MySchoolBucks hit a full login form (not just a 2FA prompt) — the session has expired and needs a manual re-login; no cafeteria purchase data could be pulled this run (see note in each kid's Grades &amp; School card).</div>
   <div class="kids-grid">
     <div class="card kid-card ella">
       <div class="kid-banner">
@@ -226,8 +226,8 @@ a { color: inherit; }
         </div>
       </div>
       <div class="kid-body">
-        <div id="ella-medical"><div class="event-row"><div class="event-dot ella"></div><div><div class="event-title">Flow Psychotherapy <span style="color:var(--muted);font-size:13px;font-weight:400">(recurring biweekly)</span></div><div class="event-meta">Thu, Oct 1 · 3:45 PM · 6723 Whittier Ave, Mc Lean, VA 22101-4522</div></div></div></div>
-        <div id="ella-activities"><div class="event-row"><div class="event-dot ella"></div><div><div class="event-title">🩰 Ella Moore - Teen Jazz Advanced @ Dance Academy of Virginia <span style="color:var(--muted);font-size:13px;font-weight:400">(recurring weekly)</span></div><div class="event-meta">Wed, Sep 23 · 7:30 PM · Dance Academy of Virginia, McLean</div></div></div><div class="event-row"><div class="event-dot ella"></div><div><div class="event-title">🩰 Ella Moore - Teen Contemporary Advanced @ Dance Academy of Virginia <span style="color:var(--muted);font-size:13px;font-weight:400">(recurring weekly)</span></div><div class="event-meta">Thu, Sep 24 · 7:30 PM · Dance Academy of Virginia, McLean</div></div></div><div class="event-row"><div class="event-dot ella"></div><div><div class="event-title">⚽ Ella Soccer (game) — Fire Girls vs GFR-R01 U14G Englund</div><div class="event-meta">Sat, Sep 26 · Arrive 11:15 AM per calendar (kickoff 12:00 PM per PlayMetrics) · Spring Hill Recreation Center #3</div></div></div><div class="event-row"><div class="event-dot ella"></div><div><div class="event-title">Ella at Meowtown Café</div><div class="event-meta">Sat, Sep 26 · 4:00–5:00 PM</div></div></div><div class="event-row"><div class="event-dot ella"></div><div><div class="event-title">Audrey Chan's Birthday (nails + Pinstack bowling)</div><div class="event-meta">Sat, Sep 26 · Drop-off 5:00 PM Wisteria Beauty, McLean &middot; Pick-up 9:00 PM at home</div></div></div><div class="event-row"><div class="event-dot ella"></div><div><div class="event-title">⚽ Ella Soccer — Practice</div><div class="event-meta">Mon, Sep 28 · 6:00–7:15 PM (daylight-adjusted; confirm exact end time on PlayMetrics closer to date) · Spring Hill Rec Center</div></div></div><div class="event-row"><div class="event-dot ella"></div><div><div class="event-title"><a href="https://www.google.com/calendar/event?eid=XzhvcTM2ZTI2NzExMzRiYTQ4bDI0Y2I5azcwcGo4YjlvNzUyamliYTE4OG80MmhpMTYwcjQ2YzFtNjQgZmFtaWx5MTAxMjgyMjU5MTAxODIwMzgwMTRAZw" target="_blank" style="color:inherit;text-decoration:none">🦷 Dentist — Dr. Island (Ella &amp; Liam)</a></div><div class="event-meta">Tue, Sep 29 &middot; 4:15–5:15 PM</div></div></div><div class="event-row"><div class="event-dot ella"></div><div><div class="event-title">🩰 Ella Moore - Teen Jazz Advanced @ Dance Academy of Virginia <span style="color:var(--muted);font-size:13px;font-weight:400">(recurring weekly)</span></div><div class="event-meta">Wed, Sep 30 · 7:30 PM · Dance Academy of Virginia, McLean</div></div></div><div class="event-row"><div class="event-dot ella"></div><div><div class="event-title">⚽ Ella Soccer (game)</div><div class="event-meta">Sat, Oct 3 · Arrive 11:15 AM per calendar · George Hellwig Memorial Park, Field #2, Manassas</div></div></div></div>
+        <div id="ella-medical"><div class="event-row"><div class="event-dot ella"></div><div><div class="event-title">Flow Psychotherapy <span style="color:var(--muted);font-size:15px;font-weight:400">(recurring biweekly)</span></div><div class="event-meta">Thu, Oct 1 · 3:45 PM · 6723 Whittier Ave, Mc Lean, VA 22101-4522</div></div></div></div>
+        <div id="ella-activities"><div class="event-row"><div class="event-dot ella"></div><div><div class="event-title">🩰 Ella Moore - Teen Jazz Advanced @ Dance Academy of Virginia <span style="color:var(--muted);font-size:15px;font-weight:400">(recurring weekly)</span></div><div class="event-meta">Wed, Sep 23 · 7:30 PM · Dance Academy of Virginia, McLean</div></div></div><div class="event-row"><div class="event-dot ella"></div><div><div class="event-title">🩰 Ella Moore - Teen Contemporary Advanced @ Dance Academy of Virginia <span style="color:var(--muted);font-size:15px;font-weight:400">(recurring weekly)</span></div><div class="event-meta">Thu, Sep 24 · 7:30 PM · Dance Academy of Virginia, McLean</div></div></div><div class="event-row"><div class="event-dot ella"></div><div><div class="event-title">⚽ Ella Soccer (game) — Fire Girls vs GFR-R01 U14G Englund</div><div class="event-meta">Sat, Sep 26 · Arrive 11:15 AM per calendar (kickoff 12:00 PM per PlayMetrics) · Spring Hill Recreation Center #3</div></div></div><div class="event-row"><div class="event-dot ella"></div><div><div class="event-title">Ella at Meowtown Café</div><div class="event-meta">Sat, Sep 26 · 4:00–5:00 PM</div></div></div><div class="event-row"><div class="event-dot ella"></div><div><div class="event-title">Audrey Chan's Birthday (nails + Pinstack bowling)</div><div class="event-meta">Sat, Sep 26 · Drop-off 5:00 PM Wisteria Beauty, McLean &middot; Pick-up 9:00 PM at home</div></div></div><div class="event-row"><div class="event-dot ella"></div><div><div class="event-title">⚽ Ella Soccer — Practice</div><div class="event-meta">Mon, Sep 28 · 6:00–7:15 PM (daylight-adjusted; confirm exact end time on PlayMetrics closer to date) · Spring Hill Rec Center</div></div></div><div class="event-row"><div class="event-dot ella"></div><div><div class="event-title"><a href="https://www.google.com/calendar/event?eid=XzhvcTM2ZTI2NzExMzRiYTQ4bDI0Y2I5azcwcGo4YjlvNzUyamliYTE4OG80MmhpMTYwcjQ2YzFtNjQgZmFtaWx5MTAxMjgyMjU5MTAxODIwMzgwMTRAZw" target="_blank" style="color:inherit;text-decoration:none">🦷 Dentist — Dr. Island (Ella &amp; Liam)</a></div><div class="event-meta">Tue, Sep 29 &middot; 4:15–5:15 PM</div></div></div><div class="event-row"><div class="event-dot ella"></div><div><div class="event-title">🩰 Ella Moore - Teen Jazz Advanced @ Dance Academy of Virginia <span style="color:var(--muted);font-size:15px;font-weight:400">(recurring weekly)</span></div><div class="event-meta">Wed, Sep 30 · 7:30 PM · Dance Academy of Virginia, McLean</div></div></div><div class="event-row"><div class="event-dot ella"></div><div><div class="event-title">⚽ Ella Soccer (game)</div><div class="event-meta">Sat, Oct 3 · Arrive 11:15 AM per calendar · George Hellwig Memorial Park, Field #2, Manassas</div></div></div></div>
       </div>
     </div>
     <div class="card kid-card liam">
@@ -239,13 +239,13 @@ a { color: inherit; }
         </div>
       </div>
       <div class="kid-body">
-        <div id="liam-medical"><div class="event-row"><div class="event-dot liam"></div><div><div class="event-title">Dr. Ellie (Liam's therapist) <span style="color:var(--muted);font-size:13px;font-weight:400">(recurring weekly)</span></div><div class="event-meta">Tue, Sep 22 · 4:45 PM</div></div></div></div>
-        <div id="liam-activities"><div class="event-row"><div class="event-dot liam"></div><div><div class="event-title">♟️ Chess Club <span style="color:var(--muted);font-size:13px;font-weight:400">(recurring weekly)</span></div><div class="event-meta">Wed, Sep 23 · 8:10 AM</div></div></div><div class="event-row"><div class="event-dot liam"></div><div><div class="event-title">🥅 Liam Soccer (game) — King Cobras</div><div class="event-meta">Sat, Sep 26 · Arrive 1:00 PM per calendar · Linway Terrace Park, Field A</div></div></div><div class="event-row"><div class="event-dot liam"></div><div><div class="event-title">🏈 Liam Flag Football (Cowboys, 5th) vs Colts (away)</div><div class="event-meta">Sun, Sep 27 · 5:00–6:30 PM · Langley Fork Park, Field 2 <span style="color:var(--faint)">(per SportsEngine — calendar's generic "Langley High School" location superseded)</span></div></div></div><div class="event-row"><div class="event-dot liam"></div><div><div class="event-title">🥅 Liam Soccer — Practice</div><div class="event-meta">Mon, Sep 28 · 5:00–6:00 PM per PlayMetrics (calendar shows 4:45–6:00 PM) · Spring Hill Recreation Center #2</div></div></div><div class="event-row"><div class="event-dot liam"></div><div><div class="event-title"><a href="https://www.google.com/calendar/event?eid=XzhvcTM2ZTI2NzExMzRiYTQ4bDI0Y2I5azcwcGo4YjlvNzUyamliYTE4OG80MmhpMTYwcjQ2YzFtNjQgZmFtaWx5MTAxMjgyMjU5MTAxODIwMzgwMTRAZw" target="_blank" style="color:inherit;text-decoration:none">🦷 Dentist — Dr. Island (Ella &amp; Liam)</a></div><div class="event-meta">Tue, Sep 29 &middot; 4:15–5:15 PM</div></div></div><div class="event-row"><div class="event-dot liam"></div><div><div class="event-title">🎨 Pam Art (FSES Art Club) <span style="color:var(--muted);font-size:13px;font-weight:400">(recurring weekly, 11-week fall session)</span></div><div class="event-meta">Thu, Oct 1 · 4:00–5:00 PM · Franklin Sherman Elementary School</div></div></div><div class="event-row"><div class="event-dot liam"></div><div><div class="event-title">Liam Select B-Ball Tryout</div><div class="event-meta">Thu, Oct 1 · 7:30 PM · Longfellow Middle School</div></div></div><div class="event-row"><div class="event-dot liam"></div><div><div class="event-title">🏈 Liam Flag Football (Cowboys, 5th) vs Bills</div><div class="event-meta">Sun, Oct 4 · 5:00–6:30 PM · Spring Hill Recreation Center, Field 3-2 <span style="color:var(--faint)">(per SportsEngine)</span></div></div></div><div class="event-row"><div class="event-dot liam"></div><div><div class="event-title"><a href="https://www.google.com/calendar/event?eid=NmI3ajNnYm5qdGFoNmkyOHBkN3M0ZTBna3MgZmFtaWx5MTAxMjgyMjU5MTAxODIwMzgwMTRAZw" target="_blank" style="color:inherit;text-decoration:none">📚 Franklin Sherman Book Fair</a></div><div class="event-meta">Mon Oct 19 – Fri Oct 23 · Library · Family Night Thu Oct 22, 6–7 PM</div><div style="font-size:14px;color:var(--muted);margin-top:4px">Bookworm Central Fall Book Fair. Contact Mrs. Essimi (librarian), rmessimimen@fcps.edu, with questions; volunteer sign-up was in the Panda Press newsletter. On the family calendar (added Sep 18).</div></div></div></div>
+        <div id="liam-medical"><div class="event-row"><div class="event-dot liam"></div><div><div class="event-title">Dr. Ellie (Liam's therapist) <span style="color:var(--muted);font-size:15px;font-weight:400">(recurring weekly)</span></div><div class="event-meta">Tue, Sep 22 · 4:45 PM</div></div></div></div>
+        <div id="liam-activities"><div class="event-row"><div class="event-dot liam"></div><div><div class="event-title">♟️ Chess Club <span style="color:var(--muted);font-size:15px;font-weight:400">(recurring weekly)</span></div><div class="event-meta">Wed, Sep 23 · 8:10 AM</div></div></div><div class="event-row"><div class="event-dot liam"></div><div><div class="event-title">🥅 Liam Soccer (game) — King Cobras</div><div class="event-meta">Sat, Sep 26 · Arrive 1:00 PM per calendar · Linway Terrace Park, Field A</div></div></div><div class="event-row"><div class="event-dot liam"></div><div><div class="event-title">🏈 Liam Flag Football (Cowboys, 5th) vs Colts (away)</div><div class="event-meta">Sun, Sep 27 · 5:00–6:30 PM · Langley Fork Park, Field 2 <span style="color:var(--faint)">(per SportsEngine — calendar's generic "Langley High School" location superseded)</span></div></div></div><div class="event-row"><div class="event-dot liam"></div><div><div class="event-title">🥅 Liam Soccer — Practice</div><div class="event-meta">Mon, Sep 28 · 5:00–6:00 PM per PlayMetrics (calendar shows 4:45–6:00 PM) · Spring Hill Recreation Center #2</div></div></div><div class="event-row"><div class="event-dot liam"></div><div><div class="event-title"><a href="https://www.google.com/calendar/event?eid=XzhvcTM2ZTI2NzExMzRiYTQ4bDI0Y2I5azcwcGo4YjlvNzUyamliYTE4OG80MmhpMTYwcjQ2YzFtNjQgZmFtaWx5MTAxMjgyMjU5MTAxODIwMzgwMTRAZw" target="_blank" style="color:inherit;text-decoration:none">🦷 Dentist — Dr. Island (Ella &amp; Liam)</a></div><div class="event-meta">Tue, Sep 29 &middot; 4:15–5:15 PM</div></div></div><div class="event-row"><div class="event-dot liam"></div><div><div class="event-title">🎨 Pam Art (FSES Art Club) <span style="color:var(--muted);font-size:15px;font-weight:400">(recurring weekly, 11-week fall session)</span></div><div class="event-meta">Thu, Oct 1 · 4:00–5:00 PM · Franklin Sherman Elementary School</div></div></div><div class="event-row"><div class="event-dot liam"></div><div><div class="event-title">Liam Select B-Ball Tryout</div><div class="event-meta">Thu, Oct 1 · 7:30 PM · Longfellow Middle School</div></div></div><div class="event-row"><div class="event-dot liam"></div><div><div class="event-title">🏈 Liam Flag Football (Cowboys, 5th) vs Bills</div><div class="event-meta">Sun, Oct 4 · 5:00–6:30 PM · Spring Hill Recreation Center, Field 3-2 <span style="color:var(--faint)">(per SportsEngine)</span></div></div></div><div class="event-row"><div class="event-dot liam"></div><div><div class="event-title"><a href="https://www.google.com/calendar/event?eid=NmI3ajNnYm5qdGFoNmkyOHBkN3M0ZTBna3MgZmFtaWx5MTAxMjgyMjU5MTAxODIwMzgwMTRAZw" target="_blank" style="color:inherit;text-decoration:none">📚 Franklin Sherman Book Fair</a></div><div class="event-meta">Mon Oct 19 – Fri Oct 23 · Library · Family Night Thu Oct 22, 6–7 PM</div><div style="font-size:16px;color:var(--muted);margin-top:4px">Bookworm Central Fall Book Fair. Contact Mrs. Essimi (librarian), rmessimimen@fcps.edu, with questions; volunteer sign-up was in the Panda Press newsletter. On the family calendar (added Sep 18).</div></div></div></div>
       </div>
     </div>
   </div>
 
-  <div class="section-heading" style="font-size:15px;text-transform:none;letter-spacing:normal;border-bottom:none;margin:24px 0 10px;">🎓 Grades &amp; school</div>
+  <div class="section-heading" style="font-size:17px;text-transform:none;letter-spacing:normal;border-bottom:none;margin:24px 0 10px;">🎓 Grades &amp; school</div>
   <div class="kids-grid" style="margin-top:0">
     <div class="card kid-card ella">
       <div class="kid-banner">
@@ -259,9 +259,9 @@ a { color: inherit; }
         <div class="section-heading">School reminders</div>
         <div id="ella-school"></div>
         <div class="section-heading">Recent grade emails</div>
-        <div id="ella-grades"><table style="width:100%;border-collapse:collapse;font-size:15px"><thead><tr style="text-align:left;color:var(--muted);font-size:13px;text-transform:uppercase;letter-spacing:.03em"><th style="padding:6px 8px 6px 0;">Class</th><th style="padding:6px 8px">Teacher</th><th style="padding:6px 8px">Grade</th><th style="padding:6px 8px">Notes</th></tr></thead><tbody><tr><td style="padding:8px;border-bottom:1px solid var(--border-light);vertical-align:top"><a href="https://mail.google.com/mail/u/0/#search/from%3Anoreply%40fcps.edu%20subject%3A%22Grade%20Book%20Summary%22" target="_blank" style="color:inherit;text-decoration:none">English 8 HN (Period 5)</a></td><td style="padding:8px;border-bottom:1px solid var(--border-light);vertical-align:top">Meghan Donohue</td><td style="padding:8px;border-bottom:1px solid var(--border-light);vertical-align:top;font-weight:600">A</td><td style="padding:8px;border-bottom:1px solid var(--border-light);vertical-align:top;color:var(--muted)">98.3% &middot; up from 96.5% in the Sep 13 summary</td></tr><tr><td style="padding:8px;border-bottom:1px solid var(--border-light);vertical-align:top"><a href="https://mail.google.com/mail/u/0/#search/from%3Anoreply%40fcps.edu%20subject%3A%22Grade%20Book%20Summary%22" target="_blank" style="color:inherit;text-decoration:none">Health &amp; PE 8 (Period 1)</a></td><td style="padding:8px;border-bottom:1px solid var(--border-light);vertical-align:top">S. Stokes</td><td style="padding:8px;border-bottom:1px solid var(--border-light);vertical-align:top;font-weight:600">A</td><td style="padding:8px;border-bottom:1px solid var(--border-light);vertical-align:top;color:var(--muted)">100% &middot; unchanged</td></tr><tr><td style="padding:8px;border-bottom:1px solid var(--border-light);vertical-align:top"><a href="https://mail.google.com/mail/u/0/#search/from%3Anoreply%40fcps.edu%20subject%3A%22Grade%20Book%20Summary%22" target="_blank" style="color:inherit;text-decoration:none">Physical Science HN (Period 3)</a></td><td style="padding:8px;border-bottom:1px solid var(--border-light);vertical-align:top">T. Weidus</td><td style="padding:8px;border-bottom:1px solid var(--border-light);vertical-align:top;font-weight:600">B-</td><td style="padding:8px;border-bottom:1px solid var(--border-light);vertical-align:top;color:var(--muted)">80.5% &middot; unchanged</td></tr><tr><td style="padding:8px;border-bottom:1px solid var(--border-light);vertical-align:top"><a href="https://mail.google.com/mail/u/0/#search/from%3Anoreply%40fcps.edu%20subject%3A%22Grade%20Book%20Summary%22" target="_blank" style="color:inherit;text-decoration:none">Civics 8 HN/AA + AVID (Period 7)</a></td><td style="padding:8px;border-bottom:1px solid var(--border-light);vertical-align:top">Marin Parker</td><td style="padding:8px;border-bottom:1px solid var(--border-light);vertical-align:top;font-weight:600">F</td><td style="padding:8px;border-bottom:1px solid var(--border-light);vertical-align:top;color:var(--muted)">25% &middot; unchanged &middot; still missing <strong>&quot;Evaluating an Actual News Story&quot;</strong> (due Sep 3, 0/15). Ms. Parker says email her ASAP to request a reassessment — see red box.</td></tr><tr><td style="padding:8px;vertical-align:top"><a href="https://mail.google.com/mail/u/0/#search/from%3Anoreply%40fcps.edu%20subject%3A%22Grade%20Book%20Summary%22" target="_blank" style="color:inherit;text-decoration:none">Algebra 1 HN (Period 8)</a></td><td style="padding:8px;vertical-align:top">K. Barbacci</td><td style="padding:8px;vertical-align:top;font-weight:600">B</td><td style="padding:8px;vertical-align:top;color:var(--muted)">84.6% &middot; <strong>down from 93.3% (A)</strong> in the Sep 13 summary — no individual progress report has come in for this class explaining why; worth a check-in with Mr. Barbacci if it keeps sliding</td></tr></tbody></table><p style="color:var(--muted);font-size:13px;margin-top:8px">Grades above combine Ella's newest FCPS ParentVUE Grade Book Summary email (Sep 20, 2026) with the individual Progress Report search — her real current schedule is English 8 HN, Health &amp; PE 8, Physical Science HN, Civics 8 HN, and Algebra 1 HN. Check <a href="https://sis.fcps.edu/SIS/PXP2_Login_Parent.aspx" target="_blank" style="color:inherit;text-decoration:underline">ParentVUE</a> directly for her full current schedule.</p></div>
+        <div id="ella-grades"><table style="width:100%;border-collapse:collapse;font-size:17px"><thead><tr style="text-align:left;color:var(--muted);font-size:15px;text-transform:uppercase;letter-spacing:.03em"><th style="padding:6px 8px 6px 0;">Class</th><th style="padding:6px 8px">Teacher</th><th style="padding:6px 8px">Grade</th><th style="padding:6px 8px">Notes</th></tr></thead><tbody><tr><td style="padding:8px;border-bottom:1px solid var(--border-light);vertical-align:top"><a href="https://mail.google.com/mail/u/0/#search/from%3Anoreply%40fcps.edu%20subject%3A%22Grade%20Book%20Summary%22" target="_blank" style="color:inherit;text-decoration:none">English 8 HN (Period 5)</a></td><td style="padding:8px;border-bottom:1px solid var(--border-light);vertical-align:top">Meghan Donohue</td><td style="padding:8px;border-bottom:1px solid var(--border-light);vertical-align:top;font-weight:600">A</td><td style="padding:8px;border-bottom:1px solid var(--border-light);vertical-align:top;color:var(--muted)">98.3% &middot; up from 96.5% in the Sep 13 summary</td></tr><tr><td style="padding:8px;border-bottom:1px solid var(--border-light);vertical-align:top"><a href="https://mail.google.com/mail/u/0/#search/from%3Anoreply%40fcps.edu%20subject%3A%22Grade%20Book%20Summary%22" target="_blank" style="color:inherit;text-decoration:none">Health &amp; PE 8 (Period 1)</a></td><td style="padding:8px;border-bottom:1px solid var(--border-light);vertical-align:top">S. Stokes</td><td style="padding:8px;border-bottom:1px solid var(--border-light);vertical-align:top;font-weight:600">A</td><td style="padding:8px;border-bottom:1px solid var(--border-light);vertical-align:top;color:var(--muted)">100% &middot; unchanged</td></tr><tr><td style="padding:8px;border-bottom:1px solid var(--border-light);vertical-align:top"><a href="https://mail.google.com/mail/u/0/#search/from%3Anoreply%40fcps.edu%20subject%3A%22Grade%20Book%20Summary%22" target="_blank" style="color:inherit;text-decoration:none">Physical Science HN (Period 3)</a></td><td style="padding:8px;border-bottom:1px solid var(--border-light);vertical-align:top">T. Weidus</td><td style="padding:8px;border-bottom:1px solid var(--border-light);vertical-align:top;font-weight:600">B-</td><td style="padding:8px;border-bottom:1px solid var(--border-light);vertical-align:top;color:var(--muted)">80.5% &middot; unchanged</td></tr><tr><td style="padding:8px;border-bottom:1px solid var(--border-light);vertical-align:top"><a href="https://mail.google.com/mail/u/0/#search/from%3Anoreply%40fcps.edu%20subject%3A%22Grade%20Book%20Summary%22" target="_blank" style="color:inherit;text-decoration:none">Civics 8 HN/AA + AVID (Period 7)</a></td><td style="padding:8px;border-bottom:1px solid var(--border-light);vertical-align:top">Marin Parker</td><td style="padding:8px;border-bottom:1px solid var(--border-light);vertical-align:top;font-weight:600">F</td><td style="padding:8px;border-bottom:1px solid var(--border-light);vertical-align:top;color:var(--muted)">25% &middot; unchanged &middot; still missing <strong>&quot;Evaluating an Actual News Story&quot;</strong> (due Sep 3, 0/15). Ms. Parker says email her ASAP to request a reassessment — see red box.</td></tr><tr><td style="padding:8px;vertical-align:top"><a href="https://mail.google.com/mail/u/0/#search/from%3Anoreply%40fcps.edu%20subject%3A%22Grade%20Book%20Summary%22" target="_blank" style="color:inherit;text-decoration:none">Algebra 1 HN (Period 8)</a></td><td style="padding:8px;vertical-align:top">K. Barbacci</td><td style="padding:8px;vertical-align:top;font-weight:600">B</td><td style="padding:8px;vertical-align:top;color:var(--muted)">84.6% &middot; <strong>down from 93.3% (A)</strong> in the Sep 13 summary — no individual progress report has come in for this class explaining why; worth a check-in with Mr. Barbacci if it keeps sliding</td></tr></tbody></table><p style="color:var(--muted);font-size:15px;margin-top:8px">Grades above combine Ella's newest FCPS ParentVUE Grade Book Summary email (Sep 20, 2026) with the individual Progress Report search — her real current schedule is English 8 HN, Health &amp; PE 8, Physical Science HN, Civics 8 HN, and Algebra 1 HN. Check <a href="https://sis.fcps.edu/SIS/PXP2_Login_Parent.aspx" target="_blank" style="color:inherit;text-decoration:underline">ParentVUE</a> directly for her full current schedule.</p></div>
         <div class="section-heading">🍽 Cafeteria — recent lunches</div>
-        <div id="ella-cafeteria"><div class="event-row"><div class="event-dot ella"></div><div><div class="event-title">09/18 · Cookie, Fruit Snacks</div><div class="event-meta">Lunch · $2.50 · <a href="https://www.myschoolbucks.com/" target="_blank" style="color:inherit;text-decoration:underline">MySchoolBucks</a></div></div></div><div class="event-row"><div class="event-dot ella"></div><div><div class="event-title">09/17 · 16 oz. Water</div><div class="event-meta">Lunch · $1.00 · <a href="https://www.myschoolbucks.com/" target="_blank" style="color:inherit;text-decoration:underline">MySchoolBucks</a></div></div></div><div class="event-row"><div class="event-dot ella"></div><div><div class="event-title">09/16 · Cookie, PBJ Power Pack</div><div class="event-meta">Lunch · $4.00 · <a href="https://www.myschoolbucks.com/" target="_blank" style="color:inherit;text-decoration:underline">MySchoolBucks</a></div></div></div><div style="font-size:13px;color:var(--muted);margin-top:6px">MySchoolBucks login confirmed working again tonight — school last updated Sep 18 (a few days' normal lag, not stale).</div></div>
+        <div id="ella-cafeteria"><div class="event-row"><div class="event-dot ella"></div><div><div class="event-title">09/18 · Cookie, Fruit Snacks</div><div class="event-meta">Lunch · $2.50 · <a href="https://www.myschoolbucks.com/" target="_blank" style="color:inherit;text-decoration:underline">MySchoolBucks</a></div></div></div><div class="event-row"><div class="event-dot ella"></div><div><div class="event-title">09/17 · 16 oz. Water</div><div class="event-meta">Lunch · $1.00 · <a href="https://www.myschoolbucks.com/" target="_blank" style="color:inherit;text-decoration:underline">MySchoolBucks</a></div></div></div><div class="event-row"><div class="event-dot ella"></div><div><div class="event-title">09/16 · Cookie, PBJ Power Pack</div><div class="event-meta">Lunch · $4.00 · <a href="https://www.myschoolbucks.com/" target="_blank" style="color:inherit;text-decoration:underline">MySchoolBucks</a></div></div></div><div style="font-size:15px;color:var(--muted);margin-top:6px">MySchoolBucks login confirmed working again tonight — school last updated Sep 18 (a few days' normal lag, not stale).</div></div>
       </div>
     </div>
     <div class="card kid-card liam">
@@ -274,9 +274,9 @@ a { color: inherit; }
       </div>
       <div class="kid-body">
         <div class="section-heading">School reminders</div>
-        <div id="liam-school"><div class="event-row"><div class="event-dot liam"></div><div><div class="event-title"><a href="https://mail.google.com/mail/u/0/#search/from%3ASLCrummett1%40fcps.edu%20subject%3A%22504%20Check%20in%22" target="_blank" style="color:inherit;text-decoration:none">504 Check-in — Liam started ADHD medication Aug 26</a></div><div class="event-meta">Aug 25-26, 2026 · Sara Crummett, school counselor (SLCrummett1@fcps.edu)</div><div style="font-size:14px;color:var(--muted);margin-top:4px">Sara Crummett (new 504 contact, replacing Mr. Neilson) checked in Aug 25 since Liam is starting ADHD medication, noting some meds need a build-up period before changing accommodations. Ben replied Aug 26: prescription filled Aug 25, first dose that day — a generic of Concerta, extended-release with no build-up needed. No 504 meeting scheduled yet — re-checked today, nothing further.</div></div></div><div class="event-row"><div class="event-dot liam"></div><div><div class="event-title">MAP testing placement question — resolved</div><div class="event-meta">Sep 14-15, 2026 · Ms. McCombs (cmccombs@fcps.edu) &amp; Ms. Stoermann (AAP)</div><div style="font-size:14px;color:var(--muted);margin-top:4px">Ghazal asked how iReady/MAP testing factors into advanced-math placement; Ms. McCombs and the AAP resource teacher explained SOL scores, MAP, and in-class performance all factor in. Ghazal confirmed she had what she needed — no further action.</div></div></div><div style="font-size:14px;color:var(--muted);margin-top:10px;font-style:italic">Resolved and informational school emails are not shown — only items still needing action appear here. (The room-parent request is still open — see red box above.)</div></div>
+        <div id="liam-school"><div class="event-row"><div class="event-dot liam"></div><div><div class="event-title"><a href="https://mail.google.com/mail/u/0/#search/from%3ASLCrummett1%40fcps.edu%20subject%3A%22504%20Check%20in%22" target="_blank" style="color:inherit;text-decoration:none">504 Check-in — Liam started ADHD medication Aug 26</a></div><div class="event-meta">Aug 25-26, 2026 · Sara Crummett, school counselor (SLCrummett1@fcps.edu)</div><div style="font-size:16px;color:var(--muted);margin-top:4px">Sara Crummett (new 504 contact, replacing Mr. Neilson) checked in Aug 25 since Liam is starting ADHD medication, noting some meds need a build-up period before changing accommodations. Ben replied Aug 26: prescription filled Aug 25, first dose that day — a generic of Concerta, extended-release with no build-up needed. No 504 meeting scheduled yet — re-checked today, nothing further.</div></div></div><div class="event-row"><div class="event-dot liam"></div><div><div class="event-title">MAP testing placement question — resolved</div><div class="event-meta">Sep 14-15, 2026 · Ms. McCombs (cmccombs@fcps.edu) &amp; Ms. Stoermann (AAP)</div><div style="font-size:16px;color:var(--muted);margin-top:4px">Ghazal asked how iReady/MAP testing factors into advanced-math placement; Ms. McCombs and the AAP resource teacher explained SOL scores, MAP, and in-class performance all factor in. Ghazal confirmed she had what she needed — no further action.</div></div></div><div style="font-size:16px;color:var(--muted);margin-top:10px;font-style:italic">Resolved and informational school emails are not shown — only items still needing action appear here. (The room-parent request is still open — see red box above.)</div></div>
         <div class="section-heading">🍽 Cafeteria — recent lunches</div>
-        <div id="liam-cafeteria"><div class="event-row"><div class="event-dot liam"></div><div><div class="event-title">09/10 · Reimbursable Lunch Meal, Cookie, Nachos with Cheese Sauce, Cucumber Slices, Milk</div><div class="event-meta">Lunch · $3.75 charged (cucumber/milk/nachos logged as cash, no balance impact) · <a href="https://www.myschoolbucks.com/" target="_blank" style="color:inherit;text-decoration:underline">MySchoolBucks</a></div></div></div><div style="font-size:13px;color:#1E3A8A;margin-top:6px;font-weight:600">Stale — school hasn't posted a new purchase for Liam since Sep 10 (11+ days). Login itself is confirmed working tonight; this is FCPS not updating, not an access problem.</div></div>
+        <div id="liam-cafeteria"><div class="event-row"><div class="event-dot liam"></div><div><div class="event-title">09/10 · Reimbursable Lunch Meal, Cookie, Nachos with Cheese Sauce, Cucumber Slices, Milk</div><div class="event-meta">Lunch · $3.75 charged (cucumber/milk/nachos logged as cash, no balance impact) · <a href="https://www.myschoolbucks.com/" target="_blank" style="color:inherit;text-decoration:underline">MySchoolBucks</a></div></div></div><div style="font-size:15px;color:#1E3A8A;margin-top:6px;font-weight:600">Stale — school hasn't posted a new purchase for Liam since Sep 10 (11+ days). Login itself is confirmed working tonight; this is FCPS not updating, not an access problem.</div></div>
       </div>
     </div>
   </div>
@@ -290,7 +290,7 @@ a { color: inherit; }
         <div class="event-row"><div class="event-dot liam"></div><div><div class="event-title"><a href="https://mail.google.com/mail/u/0/#all/1a0abf9f038074b9" target="_blank" style="color:inherit;text-decoration:none">Science Olympiad (spring) — enrolled, dates pending</a></div><div class="event-meta">Watching for meeting schedule</div></div></div>
         <div class="event-row"><div class="event-dot liam"></div><div><div class="event-title"><a href="https://mail.google.com/mail/u/0/#all/1a0c6c9aa1249375" target="_blank" style="color:inherit;text-decoration:none">⚠️ McLean Youth Basketball (club) — registration OPEN since Sept 8</a></div><div class="event-meta">Not the same as Liam's existing before-school basketball. His "Select B-Ball Tryout" is already on the calendar Thu Oct 1, 7:30 PM, Longfellow MS</div></div></div>
         <div class="event-row"><div class="event-dot liam"></div><div><div class="event-title">Chess tournaments (Silver Knights, NoVA/MD) — nothing found yet</div><div class="event-meta">Not the same as Liam's existing morning chess sessions</div></div></div>
-        <div class="event-row"><div class="event-dot liam"></div><div><div class="event-title"><a href="https://mail.google.com/mail/u/0/#all/1a0a0f7cfd6aa481" target="_blank" style="color:inherit;text-decoration:none">🎃 Monster Mash Dash (FSES PTA 5K/1-Mile Fun Run) — Sun Oct 25</a></div><div class="event-meta">5K at 8:00 AM · 1-Mile Fun Run at 9:00 AM · sign-up link in the newsletter · no calendar entry yet</div><div style="margin-top:6px"><a href="https://calendar.google.com/calendar/render?action=TEMPLATE&text=Monster%20Mash%20Dash%20%28FSES%20PTA%29&dates=20261025T120000Z/20261025T140000Z&details=5K%20at%208%3A00%20AM%2C%201-Mile%20Fun%20Run%20at%209%3A00%20AM.%20Sign-up%20link%20in%20the%20FSES%20PTA%20newsletter.&location=Franklin%20Sherman%20Elementary" target="_blank" style="font-size:13px;color:inherit;text-decoration:underline">📅 Add to Calendar</a></div></div></div>
+        <div class="event-row"><div class="event-dot liam"></div><div><div class="event-title"><a href="https://mail.google.com/mail/u/0/#all/1a0a0f7cfd6aa481" target="_blank" style="color:inherit;text-decoration:none">🎃 Monster Mash Dash (FSES PTA 5K/1-Mile Fun Run) — Sun Oct 25</a></div><div class="event-meta">5K at 8:00 AM · 1-Mile Fun Run at 9:00 AM · sign-up link in the newsletter · no calendar entry yet</div><div style="margin-top:6px"><a href="https://calendar.google.com/calendar/render?action=TEMPLATE&text=Monster%20Mash%20Dash%20%28FSES%20PTA%29&dates=20261025T120000Z/20261025T140000Z&details=5K%20at%208%3A00%20AM%2C%201-Mile%20Fun%20Run%20at%209%3A00%20AM.%20Sign-up%20link%20in%20the%20FSES%20PTA%20newsletter.&location=Franklin%20Sherman%20Elementary" target="_blank" style="font-size:15px;color:inherit;text-decoration:underline">📅 Add to Calendar</a></div></div></div>
       </div>
       <div>
         <div style="font-weight:700;color:var(--ella);margin-bottom:6px;">Ella</div>
@@ -395,13 +395,13 @@ function rateRecipe(id, n) {
 function starsHtmlSm(id) {
   const s = getStars(id);
   return [1,2,3,4,5].map(i =>
-    `<span class="rstar" data-rid="${id}" data-n="${i}" style="font-size:15px;cursor:pointer;color:${i<=s?'var(--star-on)':'var(--star-off)'}" onclick="event.stopPropagation();rateRecipe('${id}',${i})">★</span>`
+    `<span class="rstar" data-rid="${id}" data-n="${i}" style="font-size:17px;cursor:pointer;color:${i<=s?'var(--star-on)':'var(--star-off)'}" onclick="event.stopPropagation();rateRecipe('${id}',${i})">★</span>`
   ).join('');
 }
 function starsHtmlLg(id) {
   const s = getStars(id);
   return [1,2,3,4,5].map(i =>
-    `<span class="mstar" data-rid="${id}" data-n="${i}" style="font-size:24px;cursor:pointer;color:${i<=s?'var(--star-on)':'var(--star-off)'}" onclick="rateRecipe('${id}',${i})">★</span>`
+    `<span class="mstar" data-rid="${id}" data-n="${i}" style="font-size:26px;cursor:pointer;color:${i<=s?'var(--star-on)':'var(--star-off)'}" onclick="rateRecipe('${id}',${i})">★</span>`
   ).join('');
 }
 
@@ -818,7 +818,7 @@ function openRecipe(id) {
   let html = r.thumb ? `<div class="modal-thumb-wrap"><img class="modal-thumb" src="${esc(r.thumb)}" alt=""${r.thumbPos ? ' style="object-position:'+esc(r.thumbPos)+'"' : ''}></div>` : '';
   html += r.notes
     ? `<div class="modal-recipe-text">${esc(r.notes)}</div>`
-    : '<p style="color:var(--faint);font-size:15px">Recipe details not yet added. Tap the stars to save your rating!</p>';
+    : '<p style="color:var(--faint);font-size:17px">Recipe details not yet added. Tap the stars to save your rating!</p>';
 
   if (r.gmailThreadId) {
     html += `<div class="modal-link-row"><a href="${mailShortcutLink(r.gmailSender, r.name)}" target="_blank">→ Open in Mail</a></div>`;
@@ -1189,7 +1189,7 @@ async function buildCampInfoNotes() {
   }));
 }
 function campCellHtml(e, campInfoList) {
-  if (!e) return '<span style="color:var(--faint);font-size:14px;font-style:italic">— no camp scheduled —</span>';
+  if (!e) return '<span style="color:var(--faint);font-size:16px;font-style:italic">— no camp scheduled —</span>';
   const name = esc(campNameFromSummary(e.summary));
   const times = parseDropoffPickup(e.description);
   const loc = (e.location||'').split('\n')[0];
@@ -1198,14 +1198,14 @@ function campCellHtml(e, campInfoList) {
   const info = (campInfoList||[]).find(ci => ci.matchCamp.test(e.summary||''));
   let extra = '';
   if (info && info.titleHint) extra += '<div class="event-meta"><b>'+esc(info.titleHint)+'</b></div>';
-  if (times) extra += '<div class="event-meta" style="font-size:13px;color:var(--faint)">(per calendar invite'+(info && info.timeUpdate ? ' — now outdated, see below' : '')+')</div>';
+  if (times) extra += '<div class="event-meta" style="font-size:15px;color:var(--faint)">(per calendar invite'+(info && info.timeUpdate ? ' — now outdated, see below' : '')+')</div>';
   if (info && info.timeUpdate) extra += '<div class="event-meta" style="color:#b45309;font-weight:600">📧 Current per '+esc(info.timeUpdateDateStr)+' email: '+esc(info.timeUpdate)+' — supersedes the calendar invite</div>';
   if (info && info.overnightNote) {
     extra += '<div class="event-meta" style="color:#b45309;font-weight:600;margin-top:4px">🏕️ Overnight/campout note (per '+esc(info.overnightDateStr)+' email): '+esc(info.overnightNote)+'</div>';
     if (info.needsListUrl) extra += '<div class="event-meta"><a href="'+esc(info.needsListUrl)+'" target="_blank">→ Camp Needs List</a></div>';
   }
   if (info && info.latestThreadId) {
-    extra += '<div class="event-meta" style="font-size:13px"><a href="'+mailShortcutLink(info.latestSender, info.latestSubject)+'" target="_blank">📧 Latest camp email ('+esc(info.latestThreadDateStr)+') →</a></div>';
+    extra += '<div class="event-meta" style="font-size:15px"><a href="'+mailShortcutLink(info.latestSender, info.latestSubject)+'" target="_blank">📧 Latest camp email ('+esc(info.latestThreadDateStr)+') →</a></div>';
   }
   return '<div><b>'+name+'</b>' +
     (timeStr ? '<div class="event-meta">'+timeStr+'</div>' : '<div class="event-meta" style="font-style:italic;color:var(--faint)">No drop-off/pickup time on the calendar invite</div>') +
@@ -1261,8 +1261,8 @@ function renderCampSchedule(weeks, campInfoList) {
   const gaps = weeks.filter(w => !w.onVacation && (!w.ella || !w.liam));
   const gapNote = gaps.length
     ? ''
-    : '<p style="color:#166534;font-size:15px;margin-top:10px">✓ Every week through school start (Mon, Aug 24) has a camp scheduled for both kids.</p>';
-  return '<table style="width:100%;border-collapse:collapse;font-size:15px"><thead><tr style="text-align:left;color:var(--muted);font-size:13px;text-transform:uppercase;letter-spacing:.03em"><th style="padding:6px 8px 6px 0">Week</th><th style="padding:6px 8px">Ella</th><th style="padding:6px 8px">Liam</th></tr></thead><tbody>' + rows + '</tbody></table>' + gapNote;
+    : '<p style="color:#166534;font-size:17px;margin-top:10px">✓ Every week through school start (Mon, Aug 24) has a camp scheduled for both kids.</p>';
+  return '<table style="width:100%;border-collapse:collapse;font-size:17px"><thead><tr style="text-align:left;color:var(--muted);font-size:15px;text-transform:uppercase;letter-spacing:.03em"><th style="padding:6px 8px 6px 0">Week</th><th style="padding:6px 8px">Ella</th><th style="padding:6px 8px">Liam</th></tr></thead><tbody>' + rows + '</tbody></table>' + gapNote;
 }
 
 // ── Medical vs Activities (non-camp) — recurring series collapse to ONE entry ──
@@ -1321,7 +1321,7 @@ function otherEventRowHtml(entry, dotClass) {
   const dt = parseEventDate(e.start);
   const dateStr = dt ? dt.toLocaleDateString('en-US',{weekday:'short',month:'short',day:'numeric'}) : '';
   const time = e.start.dateTime ? ' · '+dt.toLocaleTimeString('en-US',{hour:'numeric',minute:'2-digit'}) : '';
-  const recurTag = entry.type==='recurring' ? ' <span style="color:var(--muted);font-size:13px;font-weight:400">(recurring weekly — next of '+entry.count+')</span>' : '';
+  const recurTag = entry.type==='recurring' ? ' <span style="color:var(--muted);font-size:15px;font-weight:400">(recurring weekly — next of '+entry.count+')</span>' : '';
   const titleHtml = e.htmlLink ? '<a href="'+e.htmlLink+'" target="_blank" style="color:inherit;text-decoration:none">'+esc(e.summary||'(untitled)')+'</a>' : esc(e.summary||'(untitled)');
   const loc = e.location ? ' · '+esc(e.location.split('\n')[0]) : '';
   return '<div class="event-row"><div class="event-dot '+dotClass+'"></div><div><div class="event-title">'+titleHtml+recurTag+'</div><div class="event-meta">'+dateStr+time+loc+'</div></div></div>';
@@ -1355,7 +1355,7 @@ async function loadKidsLive() {
     }
     const gradeTdHead = 'padding:6px 8px 6px 0;';
     document.getElementById('ella-grades').innerHTML = gradeRows
-      ? '<table style="width:100%;border-collapse:collapse;font-size:15px"><thead><tr style="text-align:left;color:var(--muted);font-size:13px;text-transform:uppercase;letter-spacing:.03em">' +
+      ? '<table style="width:100%;border-collapse:collapse;font-size:17px"><thead><tr style="text-align:left;color:var(--muted);font-size:15px;text-transform:uppercase;letter-spacing:.03em">' +
           '<th style="'+gradeTdHead+'">Class</th><th style="padding:6px 8px">Teacher</th><th style="padding:6px 8px">Grade</th><th style="padding:6px 8px">Notes</th></tr></thead><tbody>'+gradeRows+'</tbody></table>'
       : '<p class="empty">No ParentVUE Grade Book Summary email found this quarter.</p>';
 
