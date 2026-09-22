@@ -1,0 +1,417 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>West Virginia Fall Weekend — Oct 2026</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600;9..144,700&amp;family=Work+Sans:wght@400;500;600;700&amp;family=IBM+Plex+Mono:wght@400;500&amp;display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin=""/>
+<style>
+  :root{
+    --primary:#b5502e;
+    --primary-deep:#7c3a1d;
+    --accent-1:#d99a3d;
+    --accent-2:#4a6741;
+    --accent-3:#8b3a3a;
+    --ink:#2b211b;
+    --muted:#77685c;
+    --line:#e7dcce;
+    --pale:#faf5ee;
+    --cream:#fffdf9;
+  }
+  *{box-sizing:border-box;}
+  body{
+    margin:0; background:var(--cream); color:var(--ink);
+    font-family:'Work Sans', sans-serif; font-size:15.5px; line-height:1.55;
+  }
+  .page{max-width:980px; margin:0 auto; padding:0 20px 60px;}
+  h1,h2,h3,h4{font-family:'Fraunces', serif; font-weight:700; margin:0 0 6px;}
+  a{color:var(--primary-deep);}
+  .hero{
+    padding:38px 0 22px; border-bottom:1px solid var(--line);
+  }
+  .hero-eyebrow{
+    font-family:'IBM Plex Mono', monospace; font-size:12px; letter-spacing:.08em;
+    text-transform:uppercase; color:var(--accent-2); margin-bottom:10px;
+  }
+  .hero h1{font-size:38px; color:var(--primary-deep); letter-spacing:-.01em;}
+  .hero-sub{color:var(--muted); font-size:15.5px; margin:6px 0 20px; max-width:640px;}
+  .hero-meta{display:flex; flex-wrap:wrap; gap:10px;}
+  .meta-chip{
+    font-family:'IBM Plex Mono', monospace; font-size:12.5px; background:var(--pale);
+    border:1px solid var(--line); border-radius:100px; padding:7px 14px; color:var(--ink);
+  }
+  .meta-chip b{color:var(--primary-deep);}
+  .callout{
+    margin:18px 0 0; padding:13px 16px; border-radius:10px; font-size:13.8px;
+    background:rgba(74,103,65,0.08); border:1px solid rgba(74,103,65,0.25); color:var(--ink);
+  }
+  .callout.warn{background:rgba(181,80,46,0.08); border-color:rgba(181,80,46,0.3);}
+  #map{height:340px; border-radius:14px; margin:22px 0 6px; border:1px solid var(--line);}
+  .map-legend{display:flex; gap:16px; flex-wrap:wrap; font-size:12px; color:var(--muted); margin:0 0 20px; font-family:'IBM Plex Mono', monospace;}
+  .map-legend span{display:inline-flex; align-items:center; gap:6px;}
+  .dot{width:10px; height:10px; border-radius:50%; display:inline-block;}
+  .tabs{
+    display:flex; gap:6px; border-bottom:1px solid var(--line); margin-bottom:26px; position:sticky; top:0; background:var(--cream); z-index:5; padding-top:4px;
+  }
+  .tab-btn{
+    font-family:'IBM Plex Mono', monospace; font-size:13px; letter-spacing:.03em; text-transform:uppercase;
+    background:none; border:none; padding:12px 18px; cursor:pointer; color:var(--muted); border-bottom:3px solid transparent;
+  }
+  .tab-btn.active{color:var(--primary-deep); border-bottom-color:var(--primary);}
+  .section{display:none;}
+  .section.active{display:block;}
+  .section-title{font-size:22px; margin-bottom:4px;}
+  .section-sub{color:var(--muted); font-size:14px; margin-bottom:22px;}
+  .day-card{
+    border:1px solid var(--line); border-radius:16px; padding:22px 24px; margin-bottom:22px; background:var(--pale);
+  }
+  .day-card .day-label{
+    font-family:'IBM Plex Mono', monospace; font-size:12px; text-transform:uppercase; letter-spacing:.06em; color:var(--accent-2);
+  }
+  .day-card h3{font-size:21px; margin:2px 0 10px; color:var(--primary-deep);}
+  .day-weather{
+    display:inline-flex; gap:10px; align-items:center; font-size:13px; color:var(--muted);
+    background:var(--cream); border:1px solid var(--line); border-radius:100px; padding:5px 13px; margin-bottom:12px;
+  }
+  .meal-row{display:flex; gap:8px; flex-wrap:wrap; margin:2px 0 16px;}
+  .meal-chip{font-family:'IBM Plex Mono', monospace; font-size:11px; padding:5px 12px; border-radius:100px;}
+  .meal-chip.filled{background:rgba(217,154,61,0.22); color:var(--primary-deep);}
+  .meal-chip.empty{background:transparent; color:var(--muted); border:1px dashed var(--line);}
+  .tl-subhead{font-family:'IBM Plex Mono', monospace; font-size:11.5px; text-transform:uppercase; letter-spacing:.06em; color:var(--accent-2); margin:14px 0 6px;}
+  ul.tl-items{list-style:none; margin:0; padding:0;}
+  ul.tl-items li{padding:8px 0 8px 22px; position:relative; border-bottom:1px dashed var(--line);}
+  ul.tl-items li:last-child{border-bottom:none;}
+  ul.tl-items li::before{content:'—'; position:absolute; left:0; color:var(--accent-1);}
+  ul.tl-items li.meal{background:rgba(139,58,58,0.05); border-radius:8px; padding:10px 12px 10px 12px; border-bottom:none; margin:4px 0;}
+  ul.tl-items li.meal::before{content:'';}
+  ul.tl-items li.alt{color:var(--muted); font-size:14px;}
+  .badge{font-family:'IBM Plex Mono', monospace; font-size:11.5px; background:var(--cream); border:1px solid var(--line); padding:1px 7px; border-radius:6px; margin-left:4px;}
+  .poi-actions{display:inline-flex; gap:10px; margin-left:6px;}
+  .poi-actions a{font-size:12px; font-family:'IBM Plex Mono', monospace; text-decoration:none; border-bottom:1px solid var(--primary-deep);}
+  .gmaps-btn{
+    display:inline-block; margin-top:12px; font-family:'IBM Plex Mono', monospace; font-size:12px;
+    background:var(--primary-deep); color:#fff !important; padding:7px 14px; border-radius:8px; text-decoration:none;
+  }
+  .extra-box{border:1px dashed var(--line); border-radius:14px; padding:20px 24px; margin-top:8px; background:var(--cream);}
+  .extra-box h3{font-size:17px; color:var(--accent-2);}
+  .extra-box ul{margin:10px 0 0; padding-left:20px;}
+  .extra-box li{margin-bottom:10px; font-size:14.5px;}
+  .prop-card{border:1px solid var(--line); border-radius:16px; padding:22px 24px; margin-bottom:18px; background:var(--pale);}
+  .prop-card h3{font-size:18px; color:var(--primary-deep); margin-bottom:10px;}
+  .prop-card p{margin:6px 0;}
+  .kv{display:grid; grid-template-columns:150px 1fr; gap:6px 14px; font-size:14.5px;}
+  .kv div:nth-child(odd){color:var(--muted); font-family:'IBM Plex Mono', monospace; font-size:12.5px; text-transform:uppercase; letter-spacing:.03em; padding-top:2px;}
+  .steps{margin:0; padding-left:20px;}
+  .steps li{margin-bottom:8px;}
+  code{background:var(--cream); border:1px solid var(--line); padding:1px 6px; border-radius:5px; font-family:'IBM Plex Mono', monospace; font-size:13px;}
+  footer{margin-top:30px; font-size:12.5px; color:var(--muted); text-align:center;}
+</style>
+</head>
+<body>
+<div class="page">
+
+  <header class="hero">
+    <div class="hero-eyebrow">Fall Foliage Weekend</div>
+    <h1>West Virginia Fall Weekend</h1>
+    <p class="hero-sub">Blackwater Falls &amp; Dolly Sods, WV → Skyline Drive → Postcard Cabins Shenandoah North, VA</p>
+    <div class="hero-meta">
+      <span class="meta-chip"><b>Oct 12–15, 2026</b> · 3 nights</span>
+      <span class="meta-chip">McLean → Maysville, WV → Basye, VA → McLean</span>
+      <span class="meta-chip">2 nights Dolly Sods cabin + 1 night Postcard Cabins</span>
+      <span class="meta-chip">~150 mi / 2.5–3 hrs each way to WV</span>
+    </div>
+    <div class="callout">
+      <b>One assumption baked into this page:</b> your note said "leave early on the 14th and head back to DC," but also described checking in to Postcard Cabins Shenandoah North around 4pm on the 14th — those can't both be true. This page assumes the Postcard Cabins night happens and you head home <b>Thursday Oct 15</b> instead. Say the word if you actually meant to do Wednesday as a same-day stop-and-continue instead of an overnight, and I'll restructure Day 3–4.
+    </div>
+  </header>
+
+  <div id="map"></div>
+  <div class="map-legend">
+    <span><i class="dot" style="background:#7c3a1d"></i>Lodging</span>
+    <span><i class="dot" style="background:#4a6741"></i>Hikes &amp; viewpoints</span>
+    <span><i class="dot" style="background:#d99a3d"></i>Food</span>
+  </div>
+
+  <nav class="tabs">
+    <button class="tab-btn active" onclick="showTab('itinerary', event)">Itinerary</button>
+    <button class="tab-btn" onclick="showTab('property', event)">Property Details</button>
+  </nav>
+
+  <main>
+    <!-- ITINERARY -->
+    <section id="tab-itinerary" class="section active">
+      <div class="section-title">Itinerary</div>
+      <div class="section-sub">Built from your own Google Maps pins + Devon &amp; Jenna's host guidebook, plus an independent pass for anything worth adding.</div>
+
+      <!-- DAY 1 -->
+      <div class="day-card">
+        <div class="day-label">Day 1 · Monday, October 12</div>
+        <h3>Depart McLean → Blackwater Falls → Check in</h3>
+        <div class="day-weather">🍂 Mid-Oct in the WV highlands: low-mid 50s°F by day, high 30s at night <span class="badge">Historical</span></div>
+        <div class="meal-row">
+          <span class="meal-chip empty">🥪 Lunch — pack a cooler (see note below)</span>
+          <span class="meal-chip filled">🍲 Dinner — cook in at the cabin</span>
+        </div>
+
+        <div class="tl-subhead">On the way</div>
+        <ul class="tl-items">
+          <li>Leave McLean by <b>~7:00 AM</b> — figure 3.5–4 hrs to the Blackwater Falls area via US-48/Corridor H or Rt 55.</li>
+          <li>If your route passes through <b>Capon Bridge, WV</b> (common on the Rt 50/259 corridor): <b>Farmer's Daughter Market &amp; Butcher</b>, 2908 Northwestern Pike — the hosts' own tip for DC-bound guests. Whole-animal butcher + grocery, award-winning cheeseburger, deli sandwiches &amp; soup. <b>Closed Sun &amp; Mon</b>, lunch service Tue–Sat 11am–3pm — on a Monday this is a snack/provisions stop only, not your sandwich stop (see note below). <a href="tel:+13048562550">(304) 856-2550</a>
+            <span class="poi-actions"><a href="https://www.farmersdaughterwv.com/" target="_blank" rel="noopener">Website →</a><a class="dir" href="https://www.google.com/maps/dir/?api=1&amp;destination=Farmer%27s+Daughter+Market+%26+Butcher%2C+2908+Northwestern+Pike%2C+Capon+Bridge%2C+WV" target="_blank" rel="noopener">Directions →</a></span>
+          </li>
+          <li><b>Lunch note:</b> your two best picnic-sandwich stops (Farmer's Daughter and Big Belly Deli in Davis) are both <b>closed on Mondays</b>. Easiest fix: pack a cooler lunch before you leave McLean and eat it at one of Monday's overlooks — Big Belly Deli becomes your sandwich stop on Day 2 instead, when it's open.</li>
+        </ul>
+
+        <div class="tl-subhead">Blackwater Falls State Park (late morning)</div>
+        <ul class="tl-items">
+          <li><b>Blackwater Falls Boardwalk / Gentle Trail</b> — 0.25 mi, easy. Paved path + 200+ step boardwalk down to the main falls overlook; starts at the Trading Post parking area.
+            <span class="poi-actions"><a class="dir" href="https://www.google.com/maps/dir/?api=1&amp;destination=Blackwater+Falls+State+Park%2C+Davis%2C+WV" target="_blank" rel="noopener">Directions →</a></span>
+          </li>
+          <li><b>Lindy Point Trail</b> — 0.3 mi, moderate. One of the park's best views: the Blackwater Canyon from 3,000 ft. On your saved map.
+            <span class="poi-actions"><a class="dir" href="https://www.google.com/maps/dir/?api=1&amp;destination=Lindy+Point+Observation+Deck%2C+Davis%2C+WV" target="_blank" rel="noopener">Directions →</a></span>
+          </li>
+          <li><b>Bonus if energy allows — Pendleton Point Overlook</b> (easy, family-friendly, right by the Nature Center) and <b>Pace Point Overlook</b> (~1.5 mi each way along the Canyon Rim Trail from Pendleton Lake) — both on your saved map and in this same corner of the park, so easy to fold in.
+            <span class="poi-actions"><a class="dir" href="https://www.google.com/maps/dir/?api=1&amp;destination=Pendleton+Point+Overlook%2C+Blackwater+Falls+State+Park%2C+WV" target="_blank" rel="noopener">Pendleton →</a><a class="dir" href="https://www.google.com/maps/dir/?api=1&amp;destination=Pace+Point+Overlook%2C+Blackwater+Falls+State+Park%2C+WV" target="_blank" rel="noopener">Pace Point →</a></span>
+          </li>
+        </ul>
+
+        <div class="tl-subhead">Check in &amp; evening</div>
+        <ul class="tl-items">
+          <li><b>4:00 PM — check in</b> at the cabin, 239 Shamrock Dr, Maysville. Full directions, gate code, and the navigation warning are on the <b>Property Details</b> tab — read it before you leave signal range.</li>
+          <li class="meal">🍲 <b>Dinner — cook in.</b> Kitchen's fully stocked, Weber grill on the back deck.</li>
+          <li>Evening: the private Finnish sauna, accessible right off the deck.</li>
+        </ul>
+        <a class="gmaps-btn" href="https://www.google.com/maps/dir/?api=1&amp;origin=McLean%2C+VA&amp;destination=Blackwater+Falls+State+Park%2C+Davis%2C+WV&amp;waypoints=Lindy+Point+Observation+Deck%2C+Davis%2C+WV" target="_blank" rel="noopener">Send Day 1 route to Google Maps →</a>
+      </div>
+
+      <!-- DAY 2 -->
+      <div class="day-card">
+        <div class="day-label">Day 2 · Tuesday, October 13</div>
+        <h3>Dolly Sods full day — Bear Rocks, Elakala Falls, Thomas</h3>
+        <div class="day-weather">🍂 Sunny, mid-50s°F, light wind — good visibility for the overlooks <span class="badge">Historical</span></div>
+        <div class="meal-row">
+          <span class="meal-chip filled">🍳 Breakfast — at the cabin (French press + Mountaineer Roasting beans, provided)</span>
+          <span class="meal-chip filled">🥪 Lunch — Big Belly Deli, Davis</span>
+          <span class="meal-chip filled">🍲 Dinner — cook in at the cabin</span>
+        </div>
+
+        <div class="tl-subhead">Morning</div>
+        <ul class="tl-items">
+          <li><b>Bear Rocks Preserve</b> — 2 mi / ~5 min from the cabin. The hosts' #1 "don't miss," and it's the reason you're this close to Dolly Sods at all — phenomenal at sunrise, still great in soft morning light if sunrise isn't happening. Easy walking among the rock outcrops and heath barrens.
+            <span class="poi-actions"><a class="dir" href="https://www.google.com/maps/dir/?api=1&amp;destination=Bear+Rocks+Preserve%2C+Davis%2C+WV" target="_blank" rel="noopener">Directions →</a></span>
+          </li>
+        </ul>
+
+        <div class="tl-subhead">Late morning — the Elakala Falls question</div>
+        <ul class="tl-items">
+          <li><b>Elakala Falls + Balanced Rock Loop</b> — 2.8 mi, moderate, 375 ft gain, ~30–35 min drive from the cabin. This is the one you didn't get to Monday — worth going back for rather than swapping in something else: it's short, starts right from the west side of the Blackwater Lodge parking lot, and loops you past both the 35-ft falls <i>and</i> Balanced Rock, which is already on your saved map. Best views of the falls mean stepping just off the main path at the footbridge.
+            <span class="poi-actions"><a class="dir" href="https://www.google.com/maps/dir/?api=1&amp;destination=Blackwater+Falls+Lodge%2C+Davis%2C+WV" target="_blank" rel="noopener">Directions →</a></span>
+          </li>
+        </ul>
+
+        <div class="tl-subhead">Lunch &amp; afternoon</div>
+        <ul class="tl-items">
+          <li class="meal">🥪 <b>Big Belly Deli</b>, 438 William Ave, Davis — made-to-order sandwiches, deli salads, soup, baked goods. Open Tue–Sun 10am–4pm (closed Mondays, which is why this is today's stop, not Monday's). <a href="tel:+13042592222">(304) 259-2222</a>
+            <span class="poi-actions"><a href="https://bigbellydeliwv.com/" target="_blank" rel="noopener">Website →</a><a class="dir" href="https://www.google.com/maps/dir/?api=1&amp;destination=Big+Belly+Deli%2C+438+William+Ave%2C+Davis%2C+WV" target="_blank" rel="noopener">Directions →</a></span>
+            — grab sandwiches to go and picnic at the falls or back on the cabin deck.
+          </li>
+          <li><b>Thomas, WV</b> — <b>TipTop</b>, 130 East Ave, for coffee (open daily 8am–5pm Mon–Thu). The hosts' picks: lavender oat-milk latte, or the pepperoni roll if you want the local classic. <a href="tel:+13044634455">(304) 463-4455</a>
+            <span class="poi-actions"><a class="dir" href="https://www.google.com/maps/dir/?api=1&amp;destination=TipTop%2C+130+East+Ave%2C+Thomas%2C+WV" target="_blank" rel="noopener">Directions →</a></span>
+            Then browse the <b>Bloom</b>, <b>Creature</b>, and <b>Invisible</b> art galleries and the shops along Front Street — all guidebook picks.
+          </li>
+        </ul>
+
+        <div class="tl-subhead">Evening</div>
+        <ul class="tl-items">
+          <li class="meal">🍲 <b>Dinner — cook in.</b></li>
+          <li>Sauna + campfire — firewood's provided in the woodshed (bring your own fire starters).</li>
+        </ul>
+        <a class="gmaps-btn" href="https://www.google.com/maps/dir/?api=1&amp;origin=239+Shamrock+Dr%2C+Maysville%2C+WV&amp;destination=TipTop%2C+130+East+Ave%2C+Thomas%2C+WV&amp;waypoints=Bear+Rocks+Preserve%2C+Davis%2C+WV|Blackwater+Falls+Lodge%2C+Davis%2C+WV|Big+Belly+Deli%2C+438+William+Ave%2C+Davis%2C+WV" target="_blank" rel="noopener">Send Day 2 route to Google Maps →</a>
+      </div>
+
+      <!-- ALSO ON YOUR MAP -->
+      <div class="extra-box">
+        <h3>Also on your map — worth a look if you have extra energy</h3>
+        <ul>
+          <li><b>Rohrbaugh Plains Trail</b> (from Fisher Spring Run Trailhead) — the hosts' own personal favorite, ~5 mi round trip to a quiet overlook that's usually uncrowded and good for a trailside snack. About 20 min from the cabin, deeper into the Dolly Sods Wilderness. <a class="dir" href="https://www.google.com/maps/dir/?api=1&amp;destination=Fisher+Spring+Run+Trailhead%2C+WV" target="_blank" rel="noopener">Directions →</a></li>
+          <li><b>Spruce Knob</b> — West Virginia's highest point (4,863 ft), 360° views from the observation tower. It's genuinely great, but it's 45 min–1 hr from the cabin, so it really only fits if the rest of Day 2 stays light.</li>
+          <li><b>Stack Rock</b> — on your saved map near this same area, but I couldn't independently pin down trail specifics for it (distance/difficulty) with confidence. Worth asking locally or checking a trail app once you're closer rather than planning around it sight-unseen.</li>
+          <li><b>Canaan Loop Trail / Canaan Loop Rd</b> — this is more of a scenic backcountry gravel loop road (popular with mountain bikers and OHVs) than a hike. Nice as a scenic drive if you have a spare hour and don't mind gravel, but not a stop I'd build a day around.</li>
+        </ul>
+      </div>
+
+      <!-- DAY 3 -->
+      <div class="day-card">
+        <div class="day-label">Day 3 · Wednesday, October 14</div>
+        <h3>Check out → Skyline Drive stop → Postcard Cabins Shenandoah North</h3>
+        <div class="day-weather">🍂 Skyline Drive at elevation: expect several degrees cooler than the valley, and check for fog before the overlook <span class="badge">Historical</span></div>
+        <div class="meal-row">
+          <span class="meal-chip filled">🍳 Breakfast — at the cabin before checkout</span>
+          <span class="meal-chip empty">🥪 Lunch — pack from the cabin, or grab something in Davis before you leave</span>
+          <span class="meal-chip empty">🍲 Dinner — no on-site restaurant at Postcard Cabins (see note below)</span>
+        </div>
+
+        <ul class="tl-items">
+          <li><b>Before 11:00 AM</b> — check out. Full before-you-leave checklist (stove/heat off, lock up, dishes) is on the Property Details tab.</li>
+          <li><b>Drive to Basye, VA</b> (655 Alum Springs Rd) — direct route via US-33 E through Harrisonburg runs about 3–3.25 hrs.
+            <span class="poi-actions"><a class="dir" href="https://www.google.com/maps/dir/?api=1&amp;destination=655+Alum+Springs+Rd%2C+Basye%2C+VA+22810" target="_blank" rel="noopener">Directions →</a></span>
+          </li>
+        </ul>
+
+        <div class="tl-subhead">The Skyline Drive stop — a routing heads-up</div>
+        <ul class="tl-items">
+          <li>Basye sits on the <b>west</b> side of the mountains in the Shenandoah Valley — the direct route to it never touches Skyline Drive. Stopping at Little Stony Man or Dark Hollow Falls means a real detour: east into Shenandoah National Park at <b>Thornton Gap</b> (US-211, near Luray), then back out the same way to continue toward Basye. Budget it as an actual add-on, not a free stop "on the way."</li>
+          <li><b>Recommended: Little Stony Man</b> (Skyline Drive mile 39.1, ~8 mi north of the Thornton Gap entrance) — 0.9 mi one-way to the cliffs (~1.8 mi out-and-back), easy-to-moderate, sweeping views of the Shenandoah Valley and Massanutten Mountain without the climb up Stony Man itself. Given the detour, this keeps the add-on to roughly <b>45 min–1 hr</b> total including the walk.
+            <span class="poi-actions"><a class="dir" href="https://www.google.com/maps/dir/?api=1&amp;destination=Little+Stony+Man+Trailhead%2C+Skyline+Drive%2C+Shenandoah+National+Park%2C+VA" target="_blank" rel="noopener">Directions →</a></span>
+          </li>
+          <li class="alt"><b>Alternate: Dark Hollow Falls</b> (mile 50.7, ~19 mi further south on Skyline Drive) — 1.4 mi loop, 440 ft gain, moderate (steep on the return climb), a real 70-ft waterfall payoff. Pick this instead if you'd rather see a waterfall than a view — but it adds roughly 30–40 more minutes of driving on top of Little Stony Man's detour, since you're going further into the park before backtracking west.
+            <span class="poi-actions"><a class="dir" href="https://www.google.com/maps/dir/?api=1&amp;destination=Dark+Hollow+Falls+Trailhead%2C+Skyline+Drive%2C+Shenandoah+National+Park%2C+VA" target="_blank" rel="noopener">Directions →</a></span>
+          </li>
+        </ul>
+
+        <div class="tl-subhead">Check in &amp; evening</div>
+        <ul class="tl-items">
+          <li><b>4:00 PM — check in</b> to <b>Postcard Cabins Shenandoah North</b>, 655 Alum Springs Rd, Basye, VA 22810. <b>Not yet booked</b> — book via the link below or call <a href="tel:+18882362427">(888) 236-2427</a>.
+            <span class="poi-actions"><a href="https://www.marriott.com/en-us/hotels/shdsn-postcard-cabins-shenandoah-north-outdoor-collection-bonvoy/overview/" target="_blank" rel="noopener">Website / book →</a></span>
+          </li>
+          <li><b>Dinner note:</b> Postcard Cabins has no on-site restaurant, front desk, or daily housekeeping — plan to bring food or pick something up in New Market/Mount Jackson on the way in, since there's nothing to grab once you're at the cabin.</li>
+        </ul>
+        <a class="gmaps-btn" href="https://www.google.com/maps/dir/?api=1&amp;origin=239+Shamrock+Dr%2C+Maysville%2C+WV&amp;destination=655+Alum+Springs+Rd%2C+Basye%2C+VA+22810&amp;waypoints=Little+Stony+Man+Trailhead%2C+Skyline+Drive%2C+Shenandoah+National+Park%2C+VA" target="_blank" rel="noopener">Send Day 3 route to Google Maps →</a>
+      </div>
+
+      <!-- DAY 4 -->
+      <div class="day-card">
+        <div class="day-label">Day 4 · Thursday, October 15</div>
+        <h3>Head home</h3>
+        <div class="meal-row">
+          <span class="meal-chip empty">🍳 Breakfast — bring your own (no on-site food service)</span>
+        </div>
+        <ul class="tl-items">
+          <li><b>Check out by 11:00 AM</b> (Postcard Cabins standard checkout).</li>
+          <li>Drive back to McLean via I-81 N / Rt 66 E — roughly 2.5–3 hrs direct.</li>
+        </ul>
+      </div>
+
+    </section>
+
+    <!-- PROPERTY DETAILS -->
+    <section id="tab-property" class="section">
+      <div class="section-title">Property Details — the Dolly Sods cabin</div>
+      <div class="section-sub">Everything for the Airbnb stay: Oct 12–14, 2 nights.</div>
+
+      <div class="prop-card">
+        <h3>Modern cabin in Dolly Sods w/ sauna &amp; EV charger</h3>
+        <div class="kv">
+          <div>Hosts</div><div>Devon &amp; Jenna · Superhost · 5.0★ (284 reviews) · usually respond within an hour</div>
+          <div>Confirmation</div><div>HMBPMJNA8Y</div>
+          <div>Check-in</div><div>4:00 PM (self check-in, keypad)</div>
+          <div>Check-out</div><div>11:00 AM</div>
+          <div>Guests</div><div>4 max · pets allowed</div>
+          <div>Listing</div><div><a href="https://www.airbnb.com/rooms/631678984781419347" target="_blank" rel="noopener">Airbnb listing →</a></div>
+          <div>Guidebook</div><div><a href="https://www.airbnb.com/s/guidebooks?refinement_paths[]=/guidebooks/3709565" target="_blank" rel="noopener">Devon &amp; Jenna's Guide to Dolly Sods →</a></div>
+        </div>
+      </div>
+
+      <div class="prop-card">
+        <h3>⚠️ Address vs. navigation pin — use the pin</h3>
+        <p><b>Mailing address:</b> 239 Shamrock Dr, Maysville, WV 26833 — but the hosts specifically warn that typing this address into some map apps can route you to a different location <b>~30 minutes away.</b></p>
+        <p><b>Use this pin instead:</b> <a href="https://www.google.com/maps/place/39%C2%B003'14.3%22N+79%C2%B017'20.4%22W/@39.0539833,-79.2912007,17z" target="_blank" rel="noopener">39°03'14.3"N 79°17'20.4"W →</a> (39.053972, -79.289000) — already saved on your WV backwater falls map, labeled "Airbnb – USE THIS ADDRESS."</p>
+        <p><b>Load your directions before you leave signal</b> — there's no cell service for roughly the last 20 minutes of the drive up.</p>
+      </div>
+
+      <div class="prop-card">
+        <h3>Getting to the gate</h3>
+        <ol class="steps">
+          <li>Off paved Jordan Run Rd, turn onto <b>FR 75 (Brushy Ridge Rd)</b> — you'll see signs for Dolly Sods at the turn.</li>
+          <li>FR 75 turns to gravel after about half a mile. Follow it roughly 2.5 miles to a road on the left: <b>Shamrock Dr.</b></li>
+          <li>There's a <b>yellow gate</b> — padlock code <code>9726</code>. Always lock it behind you, even for a short trip back out.</li>
+          <li>Take your first right past the gate, head uphill, and the cabin is on the left in about a quarter mile.</li>
+        </ol>
+      </div>
+
+      <div class="prop-card">
+        <h3>Cancellation policy</h3>
+        <p>Cancel before <b>4:00 PM on October 5</b> for a partial refund. After that, the reservation is <b>non-refundable.</b></p>
+      </div>
+
+      <div class="prop-card">
+        <h3>Before you leave (checkout)</h3>
+        <div class="kv">
+          <div>Turn off</div><div>Stove, heating/AC unit</div>
+          <div>Lock up</div><div>Front door — press the lock button at the top. Deadbolt the back door.</div>
+          <div>Dishes</div><div>Please do all dishes</div>
+          <div>Fires</div><div>No fires the morning of checkout</div>
+          <div>Trash</div><div>No need to take it out</div>
+        </div>
+      </div>
+
+      <div class="prop-card">
+        <h3>Good to know while you're there</h3>
+        <div class="kv">
+          <div>Wifi</div><div>Starlink satellite — fine for browsing/streaming, varies with weather and tree cover</div>
+          <div>Cell service</div><div>Google Fi, AT&amp;T, T-Mobile: OK signal. Other carriers spotty at best</div>
+          <div>Water</div><div>Off-grid, 100% rainwater-supplied — be mindful of usage</div>
+          <div>Firewood</div><div>Provided in the woodshed — bring your own fire starters</div>
+          <div>House rules</div><div>No smoking. Community rule: stay off neighboring properties (many have cameras), keep pets leashed within the community.</div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>Built for the Oct 12–15, 2026 WV fall foliage weekend · sourced from your Google Maps pins, Devon &amp; Jenna's host guidebook, and independent research</footer>
+</div>
+
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
+<script>
+  function showTab(id, evt){
+    document.querySelectorAll('.section').forEach(function(s){s.classList.remove('active');});
+    document.querySelectorAll('.tab-btn').forEach(function(b){b.classList.remove('active');});
+    document.getElementById('tab-'+id).classList.add('active');
+    if (evt && evt.currentTarget) evt.currentTarget.classList.add('active');
+  }
+
+  var map = L.map('map', {scrollWheelZoom:false}).setView([38.95, -78.95], 8);
+  L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+    attribution: '&copy; OpenStreetMap contributors',
+    maxZoom: 17
+  }).addTo(map);
+
+  function pin(color, num){
+    return L.divIcon({
+      className: '',
+      html: '<div style="background:'+color+';color:#fff;width:24px;height:24px;border-radius:50% 50% 50% 0;transform:rotate(-45deg);display:flex;align-items:center;justify-content:center;box-shadow:0 1px 4px rgba(0,0,0,0.4);"><span style="transform:rotate(45deg);font-family:IBM Plex Mono,monospace;font-size:11px;font-weight:600;">'+num+'</span></div>',
+      iconSize:[24,24], iconAnchor:[12,24], popupAnchor:[0,-22]
+    });
+  }
+  var LODGE='#7c3a1d', HIKE='#4a6741', FOOD='#d99a3d';
+
+  var places = [
+    {n:1, lat:39.053972, lng:-79.289000, color:LODGE, name:"Dolly Sods Cabin (Airbnb)", note:"239 Shamrock Dr, Maysville, WV — use this pin, not the street address.", dir:"https://www.google.com/maps/dir/?api=1&destination=39.053972,-79.289000"},
+    {n:2, lat:39.1128, lng:-79.4900, color:HIKE, name:"Blackwater Falls State Park", note:"Main falls boardwalk / Gentle Trail.", dir:"https://www.google.com/maps/dir/?api=1&destination=Blackwater+Falls+State+Park%2C+Davis%2C+WV"},
+    {n:3, lat:39.1155, lng:-79.4975, color:HIKE, name:"Lindy Point Observation Deck", note:"0.3 mi, moderate — panoramic canyon view.", dir:"https://www.google.com/maps/dir/?api=1&destination=Lindy+Point+Observation+Deck%2C+Davis%2C+WV"},
+    {n:4, lat:39.1145, lng:-79.4840, color:HIKE, name:"Pendleton Point Overlook", note:"Easy, family-friendly, near the Nature Center.", dir:"https://www.google.com/maps/dir/?api=1&destination=Pendleton+Point+Overlook%2C+Blackwater+Falls+State+Park%2C+WV"},
+    {n:5, lat:39.1080, lng:-79.4790, color:HIKE, name:"Pace Point Overlook", note:"~1.5 mi from Pendleton Lake along the Canyon Rim Trail.", dir:"https://www.google.com/maps/dir/?api=1&destination=Pace+Point+Overlook%2C+Blackwater+Falls+State+Park%2C+WV"},
+    {n:6, lat:39.1122, lng:-79.4905, color:HIKE, name:"Elakala Falls + Balanced Rock Loop", note:"2.8 mi loop from Blackwater Lodge parking lot.", dir:"https://www.google.com/maps/dir/?api=1&destination=Blackwater+Falls+Lodge%2C+Davis%2C+WV"},
+    {n:7, lat:39.0820, lng:-79.3210, color:HIKE, name:"Bear Rocks Preserve", note:"Host's #1 pick — sunrise or soft morning light.", dir:"https://www.google.com/maps/dir/?api=1&destination=Bear+Rocks+Preserve%2C+Davis%2C+WV"},
+    {n:8, lat:39.1286, lng:-79.4636, color:FOOD, name:"Big Belly Deli", note:"438 William Ave, Davis — picnic sandwiches (closed Mondays).", dir:"https://www.google.com/maps/dir/?api=1&destination=Big+Belly+Deli%2C+438+William+Ave%2C+Davis%2C+WV"},
+    {n:9, lat:39.1489, lng:-79.5063, color:FOOD, name:"TipTop", note:"130 East Ave, Thomas — coffee &amp; pastries.", dir:"https://www.google.com/maps/dir/?api=1&destination=TipTop%2C+130+East+Ave%2C+Thomas%2C+WV"},
+    {n:10, lat:39.3098, lng:-78.4695, color:FOOD, name:"Farmer's Daughter Market & Butcher", note:"2908 Northwestern Pike, Capon Bridge — closed Sun/Mon.", dir:"https://www.google.com/maps/dir/?api=1&destination=Farmer%27s+Daughter+Market+%26+Butcher%2C+2908+Northwestern+Pike%2C+Capon+Bridge%2C+WV"},
+    {n:11, lat:38.720, lng:-78.361, color:HIKE, name:"Little Stony Man Trailhead", note:"Skyline Drive mile 39.1 — recommended Day 3 stop.", dir:"https://www.google.com/maps/dir/?api=1&destination=Little+Stony+Man+Trailhead%2C+Skyline+Drive%2C+Shenandoah+National+Park%2C+VA"},
+    {n:12, lat:38.527, lng:-78.434, color:HIKE, name:"Dark Hollow Falls Trailhead", note:"Skyline Drive mile 50.7 — alternate Day 3 stop.", dir:"https://www.google.com/maps/dir/?api=1&destination=Dark+Hollow+Falls+Trailhead%2C+Skyline+Drive%2C+Shenandoah+National+Park%2C+VA"},
+    {n:13, lat:38.834, lng:-78.760, color:LODGE, name:"Postcard Cabins Shenandoah North", note:"655 Alum Springs Rd, Basye, VA — not yet booked.", dir:"https://www.google.com/maps/dir/?api=1&destination=655+Alum+Springs+Rd%2C+Basye%2C+VA+22810"}
+  ];
+
+  var markers = [];
+  places.forEach(function(p){
+    var m = L.marker([p.lat, p.lng], {icon: pin(p.color, p.n)}).addTo(map)
+      .bindPopup('<b>'+p.name+'</b><br>'+p.note+'<br><a href="'+p.dir+'" target="_blank" rel="noopener">Directions →</a>');
+    markers.push(m);
+  });
+  if (markers.length){
+    map.fitBounds(L.featureGroup(markers).getBounds().pad(0.15));
+  }
+</script>
+</body>
+</html>
