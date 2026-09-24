@@ -22,7 +22,7 @@
   }
   *{box-sizing:border-box;}
   body{margin:0;background:var(--bg);color:var(--text);font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;font-size:18px;line-height:1.5;}
-  .wrap{max-width:1400px;margin:0 auto;padding:20px 24px 60px;}
+  .wrap{max-width:1000px;margin:0 auto;padding:20px 16px 60px;}
   header.top{display:flex;align-items:center;justify-content:space-between;margin-bottom:16px;flex-wrap:wrap;gap:10px;}
   header.top h1{font-size:22px;margin:0;}
   .refresh-btn{background:var(--card);border:1px solid var(--border-light);border-radius:8px;padding:8px 14px;font-size:14.5px;color:var(--text);cursor:pointer;}
@@ -38,10 +38,10 @@
   .priority-box{background:var(--blue-bg);border:1px solid var(--blue-border);border-radius:14px;padding:18px 20px;margin-bottom:18px;}
   .priority-box h2{margin:0 0 12px;font-size:19px;color:var(--blue-text);}
   .priority-box ul{margin:0;padding-left:20px;}
-  .priority-box li{margin-bottom:10px;font-size:15.5px;line-height:1.5;}
+  .priority-box li{margin-bottom:10px;font-size:16.5px;line-height:1.5;}
   .priority-box li a{color:var(--blue-accent);text-decoration:underline;font-weight:600;}
   .priority-box .empty{font-style:italic;color:var(--muted);}
-  .today-date{color:var(--muted);font-size:14.5px;margin-bottom:10px;}
+  .today-date{color:var(--muted);font-size:16px;margin-bottom:10px;}
   .event-row{display:flex;gap:10px;padding:10px 0;border-bottom:1px solid var(--border-light);}
   .event-row:last-child{border-bottom:none;}
   .event-dot{width:9px;height:9px;border-radius:50%;margin-top:7px;flex-shrink:0;}
@@ -50,8 +50,8 @@
   .event-title{font-weight:600;font-size:16.5px;}
   .event-title a{color:inherit;text-decoration:none;}
   .event-title a:hover{text-decoration:underline;}
-  .event-meta{color:var(--muted);font-size:14.5px;margin-top:2px;}
-  .event-extra{font-size:14.5px;margin-top:3px;color:var(--text);}
+  .event-meta{color:var(--muted);font-size:16px;margin-top:2px;}
+  .event-extra{font-size:16px;margin-top:3px;color:var(--text);}
   .kids-grid{display:grid;grid-template-columns:1fr 1fr;gap:18px;}
   @media (max-width:700px){.kids-grid{grid-template-columns:1fr;}}
   .kid-col{background:var(--card);border:1px solid var(--border-light);border-radius:14px;padding:16px 18px;box-shadow:var(--shadow);}
@@ -62,35 +62,36 @@
   .ella-col .kid-avatar{background:var(--ella);}
   .liam-col .kid-avatar{background:var(--liam);}
   .kid-name{font-weight:700;font-size:17px;}
-  .kid-school{color:var(--muted);font-size:13.5px;}
-  .subhead{font-size:13px;text-transform:uppercase;letter-spacing:.04em;color:var(--muted);margin:14px 0 6px;font-weight:600;}
+  .kid-school{color:var(--muted);font-size:16px;}
+  .subhead{font-size:13.5px;text-transform:uppercase;letter-spacing:.04em;color:var(--muted);margin:14px 0 6px;font-weight:600;}
   .subhead:first-of-type{margin-top:2px;}
-  table.grades{width:100%;border-collapse:collapse;font-size:15.5px;}
-  table.grades th{text-align:left;color:var(--muted);font-size:12px;text-transform:uppercase;letter-spacing:.03em;padding:6px 8px 6px 0;}
+  table.grades{width:100%;border-collapse:collapse;font-size:16.5px;}
+  table.grades th{text-align:left;color:var(--muted);font-size:12.5px;text-transform:uppercase;letter-spacing:.03em;padding:6px 8px 6px 0;}
   table.grades td{padding:8px 8px 8px 0;border-bottom:1px solid var(--border-light);vertical-align:top;}
   table.grades tr:last-child td{border-bottom:none;}
   .grade-mark{font-weight:700;}
   .grade-mark.low{color:#c0392b;}
-  .cafeteria-item{font-size:14.5px;margin-bottom:6px;}
-  .cafeteria-note{font-size:13px;color:var(--muted);font-style:italic;margin-top:6px;}
+  .cafeteria-item{font-size:16px;margin-bottom:6px;}
+  .cafeteria-note{font-size:15px;color:var(--muted);font-style:italic;margin-top:6px;}
   .watchlist-row{padding:10px 0;border-bottom:1px solid var(--border-light);}
   .watchlist-row:last-child{border-bottom:none;}
-  .watchlist-title{font-weight:600;font-size:16px;}
-  .watchlist-state{font-size:14px;color:var(--muted);margin-top:2px;}
-  .add-cal-btn{display:inline-block;margin-top:6px;font-size:13.5px;background:var(--blue-accent);color:#fff;padding:5px 10px;border-radius:6px;text-decoration:none;}
-  .newsletter-link{font-size:14.5px;margin-top:4px;}
+  .watchlist-title{font-weight:600;font-size:16.5px;}
+  .watchlist-state{font-size:16px;color:var(--muted);margin-top:2px;}
+  .add-cal-btn{display:inline-block;margin-top:6px;font-size:14.5px;font-weight:600;background:var(--blue-accent);padding:5px 10px;border-radius:6px;}
+  .priority-box .add-cal-btn, a.add-cal-btn, .priority-box li a.add-cal-btn{color:#ffffff !important;text-decoration:none !important;}
+  .newsletter-link{font-size:16px;margin-top:4px;}
   .newsletter-link a{color:inherit;}
-  .prep-task{font-size:14.5px;margin-top:8px;padding:8px 10px;background:var(--blue-bg);border-radius:8px;color:var(--blue-text);}
+  .prep-task{font-size:16px;margin-top:8px;padding:8px 10px;background:var(--blue-bg);border-radius:8px;color:var(--blue-text);}
   .recipe-cat-title{font-size:19px;margin:26px 0 10px;}
   .recipe-cat:first-child .recipe-cat-title{margin-top:4px;}
-  .recipe-count{color:var(--muted);font-size:14px;font-weight:400;}
+  .recipe-count{color:var(--muted);font-size:15px;font-weight:400;}
   .recipe-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:12px;}
   .recipe-card{background:var(--card);border:1px solid var(--border-light);border-radius:10px;padding:12px 14px;box-shadow:var(--shadow);}
-  .recipe-title{font-weight:600;font-size:15.5px;margin-bottom:3px;}
+  .recipe-title{font-weight:600;font-size:16.5px;margin-bottom:3px;}
   .recipe-title-link{color:inherit;text-decoration:none;}
   .recipe-title-link:hover{text-decoration:underline;}
-  .recipe-src{font-size:12.5px;color:var(--muted);margin-bottom:6px;}
-  .recipe-notes{font-size:13.5px;color:var(--text);white-space:pre-line;max-height:140px;overflow:auto;}
+  .recipe-src{font-size:14.5px;color:var(--muted);margin-bottom:6px;}
+  .recipe-notes{font-size:16px;color:var(--text);white-space:pre-line;max-height:140px;overflow:auto;}
   footer.buildnote{text-align:center;color:var(--muted);font-size:12.5px;margin-top:24px;}
 </style>
 </head>
@@ -122,12 +123,15 @@
 <div class="priority-box">
   <h2>🔴 This week — dates &amp; deadlines</h2>
   <ul>
+    <li>📸 <strong><a href="https://mail.google.com/mail/u/0/#all/1a0cad05caa28ccb" target="_blank">Ella's School Picture Day is THIS WEEK</a></strong> — Thu Sep 24 &amp; Fri Sep 25, during her PE class. Pre-order online at shop.imagequix.com/g1001416974; questions to underclass@vosphoto.com. No calendar entry found yet. <a class="add-cal-btn" href="https://calendar.google.com/calendar/render?action=TEMPLATE&text=Ella+-+Picture+Day+(during+PE)&dates=20260924/20260926&details=Pre-order+at+shop.imagequix.com/g1001416974" target="_blank">📅 Add to Calendar</a></li>
     <li><strong>Ella's Civics grade is still F (25%)</strong> — <a href="https://mail.google.com/mail/u/0/#all/1a0a101c71010a43" target="_blank">missing "Evaluating an Actual News Story"</a> (due Sep 3, 0/15). Confirmed unchanged again in the Sep 20 ParentVUE Grade Book Summary — 22 days since the missed assignment. Ms. Parker asked that Ghazal email her ASAP to request a reassessment; no reply to her found in Sent mail yet.</li>
     <li><strong><a href="https://mail.google.com/mail/u/0/#all/1a0a582f3bac7080" target="_blank">Room parent still needed</a></strong> for Ms. McCombs's 4th grade class (Liam) — asked Sep 15, still no volunteer 9 days later.</li>
     <li>🏀 <strong><a href="https://mail.google.com/mail/u/0/#all/1a0c6eea48c3a2d0" target="_blank">McLean Youth Basketball registration confirmed &amp; paid</a></strong> Sep 21 ($238.60 total) — Ella in House League (Girls 7-8/Middle School), Liam in Select League (Grade 5 Boys), Ben signed up to coach.</li>
     <li>📋 New Watchlist finding — <strong><a href="https://mail.google.com/mail/u/0/#all/1a0d34278da26b22" target="_blank">Ella's House League Evaluations announced</a></strong>: Sat Oct 17 &amp; Sun Oct 25 (exact times not yet posted — check mcleanbasketball.com later this month). <a class="add-cal-btn" href="https://calendar.google.com/calendar/render?action=TEMPLATE&text=Ella+-+McLean+Basketball+House+League+Evaluation&dates=20261017/20261018&details=Time+TBD+-+check+mcleanbasketball.com" target="_blank">📅 Add Oct 17</a> <a class="add-cal-btn" href="https://calendar.google.com/calendar/render?action=TEMPLATE&text=Ella+-+McLean+Basketball+House+League+Evaluation&dates=20261025/20261026&details=Time+TBD+-+check+mcleanbasketball.com" target="_blank">📅 Add Oct 25</a></li>
-    <li>🏫 <strong><a href="https://families.talkingpts.org" target="_blank">AAP orientation</a></strong> — Fri Sep 25, 9:30 AM, Cafeteria (Liam) — reminder from Ms. Feghali on TalkingPoints, no calendar entry found yet. <a class="add-cal-btn" href="https://calendar.google.com/calendar/render?action=TEMPLATE&text=AAP+Orientation+(Liam)&dates=20260925T133000Z/20260925T143000Z&location=Franklin+Sherman+Elementary+Cafeteria" target="_blank">📅 Add to Calendar</a></li>
+    <li>🗓️ <strong><a href="https://mail.google.com/mail/u/0/#all/1a0cad05caa28ccb" target="_blank">Longfellow PTA meeting</a></strong> — Mon Sep 28, 5:30–6:15 PM, Lecture Hall — first PTA meeting of the year, Principal Butzer attending. <a class="add-cal-btn" href="https://calendar.google.com/calendar/render?action=TEMPLATE&text=Longfellow+PTA+Meeting&dates=20260928T213000Z/20260928T221500Z&location=Longfellow+MS+Lecture+Hall" target="_blank">📅 Add to Calendar</a></li>
+    <li>🏫 <strong><a href="https://families.talkingpts.org" target="_blank">AAP Parent Coffee</a></strong> — Fri Sep 25, 9:30–10:30 AM, Cafeteria (Liam) — reminder from Ms. Feghali on TalkingPoints, no calendar entry found yet. <a class="add-cal-btn" href="https://calendar.google.com/calendar/render?action=TEMPLATE&text=AAP+Parent+Coffee&dates=20260925T133000Z/20260925T143000Z&location=Franklin+Sherman+Elementary+Cafeteria" target="_blank">📅 Add to Calendar</a></li>
     <li>🏫 <strong>3-hour early release Wed Sep 30</strong> — Liam has <a href="https://mail.google.com/mail/u/0/#all/1a0ca0b38a7080f6" target="_blank">no dismissal-plan response on file</a>, so he'll default to 1:05 PM dismissal; reinforced again in <a href="https://families.talkingpts.org" target="_blank">Ms. Feghali's TalkingPoints reminder</a> ("don't forget to record your kid's dismissal option"). Reply if you want him to stay for SACC coverage instead.</li>
+    <li>📝 <strong><a href="https://mail.google.com/mail/u/0/#all/1a0cad05caa28ccb" target="_blank">Sign Ella's SR&amp;R acknowledgement</a></strong> by Wed Sep 30 — via SIS ParentVUE or the paper Signature Sheet sent home.</li>
     <li>🚗 <strong>Coordinate:</strong> Ghazal is traveling Fri 2:30 PM – Sat 3:30 PM — who's covering Ella's soccer game (Sat 12:00 PM, Spring Hill) and Liam's soccer game (Sat 1:30 PM, Linway Terrace), plus Ella's drop-off for Audrey Chan's birthday (Sat 5:00 PM)?</li>
     <li>⚠️ <strong>Conflict:</strong> Liam's dentist appointment (Tue Sep 29, 4:15–5:15 PM) overlaps his therapy session with Dr. Ellie (4:45–5:30 PM) — one of these needs to move.</li>
     <li>📨 <strong><a href="https://mail.google.com/mail/u/0/#all/1a09fca244b0e429" target="_blank">Message from Neha Patel</a></strong> (Ella's therapist) — personal update thread, Sep 14–18.</li>
@@ -190,6 +194,11 @@
       </div></div>
 
       <div class="event-row"><div class="event-dot ella"></div><div>
+        <div class="event-title">🗓️ Longfellow PTA Meeting</div>
+        <div class="event-meta">Mon, Sep 28 · 5:30–6:15 PM · Lecture Hall</div>
+      </div></div>
+
+      <div class="event-row"><div class="event-dot ella"></div><div>
         <div class="event-title"><a href="https://www.google.com/calendar/event?eid=XzhvcTM2ZTI2NzExMzRiYTQ4bDI0Y2I5azcwcGo4YjlvNzUyamliYTE4OG80MmhpMTYwcjQ2YzFtNjQgZmFtaWx5MTAxMjgyMjU5MTAxODIwMzgwMTRAZw" target="_blank">🦷 Dentist — Dr. Island (Ella &amp; Liam)</a></div>
         <div class="event-meta">Tue, Sep 29 · 4:15–5:15 PM</div>
       </div></div>
@@ -235,8 +244,8 @@
       </div></div>
 
       <div class="event-row"><div class="event-dot liam"></div><div>
-        <div class="event-title"><a href="https://families.talkingpts.org" target="_blank">🏫 AAP Orientation</a></div>
-        <div class="event-meta">Fri, Sep 25 · 9:30 AM · Cafeteria</div>
+        <div class="event-title"><a href="https://families.talkingpts.org" target="_blank">🏫 AAP Parent Coffee</a></div>
+        <div class="event-meta">Fri, Sep 25 · 9:30–10:30 AM · Cafeteria</div>
       </div></div>
 
       <div class="event-row"><div class="event-dot liam"></div><div>
@@ -282,6 +291,11 @@
       </div></div>
 
       <div class="event-row"><div class="event-dot liam"></div><div>
+        <div class="event-title">📷 Family Photos for FSES (Peter Kiesel)</div>
+        <div class="event-meta">Sat, Oct 3 &amp; Sat Oct 17 · McLean Central Park — sign up via the newsletter</div>
+      </div></div>
+
+      <div class="event-row"><div class="event-dot liam"></div><div>
         <div class="event-title"><a href="https://my.sportngin.com/user/schedule" target="_blank">🏈 Flag Football (Cowboys, 5th) — Away @ Bills</a></div>
         <div class="event-meta">Sun, Oct 4 · 5:00–6:30 PM · 1239 Spring Hill Rd, McLean, Field 3-2</div>
       </div></div>
@@ -292,8 +306,18 @@
       </div></div>
 
       <div class="event-row"><div class="event-dot liam"></div><div>
+        <div class="event-title">📸 Picture Day</div>
+        <div class="event-meta">Thu, Oct 22 · Franklin Sherman — Add to Calendar link in School Reminders above</div>
+      </div></div>
+
+      <div class="event-row"><div class="event-dot liam"></div><div>
         <div class="event-title"><a href="https://www.google.com/calendar/event?eid=MHVrdXZnZGNkampzNGk3cjdhanMwZzlwc2QgdGVocmFuaS5naGF6YWxAbQ" target="_blank">🎃 Monster Mash Dash (FSES PTA)</a></div>
         <div class="event-meta">Sun, Oct 25 · 5K at 8:00 AM · 1-Mile Fun Run at 9:00 AM · Franklin Sherman Elementary</div>
+      </div></div>
+
+      <div class="event-row"><div class="event-dot liam"></div><div>
+        <div class="event-title">🎭 School Play Auditions — "Seussical Kids!"</div>
+        <div class="event-meta">Wed, Oct 28 · 4:00–7:00 PM · performances April 8 &amp; 9</div>
       </div></div>
     </div>
   </div>
@@ -318,23 +342,39 @@
       </table>
 
       <div class="subhead">School reminders</div>
-      <div class="event-extra">Room parent still needed for Ms. McCombs's 4th grade class — see red box above. No other open school-correspondence items this run.</div>
-      <div class="prep-task">📚 Prep task: pick out <a href="https://www.google.com/calendar/event?eid=NmI3ajNnYm5qdGFoNmkyOHBkN3M0ZTBna3MgZmFtaWx5MTAxMjgyMjU5MTAxODIwMzgwMTRAZw" target="_blank">Book Fair</a> books to look for the week of Oct 19–23 (Family Night Thu Oct 22, 6–7 PM, Franklin Sherman Library — contact Mrs. Essimi, rmessimimen@fcps.edu)</div>
+      <div class="event-extra">📸 <strong>Picture Day is this week</strong> (Thu Sep 24 &amp; Fri Sep 25, during PE) — see red box for pre-order link.</div>
+      <div class="event-extra">Room parent still needed for Ms. McCombs's 4th grade class (Liam) — see red box above.</div>
+      <div class="event-extra">📝 Sign the SR&amp;R (Student Rights &amp; Responsibilities) acknowledgement by Wed Sep 30, via ParentVUE or the paper Signature Sheet — see red box.</div>
+      <div class="event-extra">🗓️ Longfellow's first PTA meeting is Mon Sep 28, 5:30–6:15 PM, Lecture Hall — see red box.</div>
+      <div class="event-extra">📚 Longfellow also has a Book Fair <a href="https://mail.google.com/mail/u/0/#all/1a0cad05caa28ccb" target="_blank">Oct 19–23</a> (separate from Franklin Sherman's — see Liam's card for that one's details).</div>
+      <div class="event-extra">🏫 Calendar notes from the newsletter: Oct 12 no school (student holiday), Oct 30 is a 2-hour early release (end of Q2).</div>
+      <div class="event-extra">📐 Optional: AMC 10/12 math competition (McLean HS, Nov 5 &amp; 13) — register in MySchoolBucks by Sep 25, $8, contact crhennon@fcps.edu.</div>
+      <div class="event-extra">🎓 FYI: Thomas Jefferson HS (TJHSST) applications for the Class of 2031 open Mon Oct 5 — start by Oct 28, submit by Oct 30 (Ella is 8th grade, eligible if interested).</div>
+      <div class="event-extra">Also in this week's newsletter: Debate Team tryouts (Sep 24), Model UN info meeting (Sep 28), Cross Country meets, a new D&amp;D Club (starts Sep 28), Policy Debate info session, and a new After-School Testing Center (Wednesdays starting Sep 30) — none currently on Ella's plate, noted in case of interest.</div>
       <div class="newsletter-link">📰 <a href="https://mail.google.com/mail/u/0/#all/1a0cad05caa28ccb" target="_blank">Longfellow Lancer Times — Sep 22</a></div>
 
       <div class="subhead">🍽 Cafeteria — recent lunches</div>
       <div class="cafeteria-item">Balance: $20.30 (AutoPay On, as of 09/23) — no low-balance issue.</div>
-      <div class="cafeteria-note">Couldn't verify itemized purchases this run — MySchoolBucks stopped responding to navigation mid-session after Liam's tab loaded. Carrying forward nothing further; will re-check next run.</div>
+      <div class="cafeteria-item">09/23 11:56 AM · Reimbursable Lunch Meal, Cookie, PBJ Power Pack, Banana — $5.00 charged (PBJ/banana logged as cash, no balance impact)</div>
+      <div class="cafeteria-item">09/22 11:24 AM · Spicy Chicken Sandwich, Cookie — $4.00 charged</div>
+      <div class="cafeteria-note">Current — school last updated Sep 23.</div>
     </div>
 
     <div class="kid-col liam-col">
       <div class="kid-banner"><div class="kid-avatar">L</div><div><div class="kid-name">Liam</div><div class="kid-school">Franklin Sherman Elementary · 4th Grade</div></div></div>
 
       <div class="subhead">School reminders</div>
+      <div class="event-extra">🎭 <strong><a href="https://mail.google.com/mail/u/0/#all/1a0ca9f377add5b4" target="_blank">26-27 School Play: "Seussical Kids!"</a></strong> — auditions Wed Oct 28, 4–7 PM. Performances April 8 &amp; 9. More info to come. <a class="add-cal-btn" href="https://calendar.google.com/calendar/render?action=TEMPLATE&text=FSES+School+Play+Auditions+-+Seussical+Kids&dates=20261028T200000Z/20261028T230000Z&location=Franklin+Sherman+Elementary" target="_blank">📅 Add to Calendar</a></div>
+      <div class="prep-task">📚 Prep task: pick out <a href="https://www.google.com/calendar/event?eid=NmI3ajNnYm5qdGFoNmkyOHBkN3M0ZTBna3MgZmFtaWx5MTAxMjgyMjU5MTAxODIwMzgwMTRAZw" target="_blank">Book Fair</a> books to look for the week of Oct 19–23 (Family Night Thu Oct 22, 6–7 PM, Franklin Sherman Library — contact Mrs. Essimi, rmessimimen@fcps.edu; volunteer signup was in Panda Press)</div>
+      <div class="event-extra">📸 Picture Day — Thu Oct 22 (per Panda Press "Important Dates"; same day as Book Fair Family Night). No calendar entry found yet. <a class="add-cal-btn" href="https://calendar.google.com/calendar/render?action=TEMPLATE&text=Liam+-+Picture+Day&dates=20261022/20261023&location=Franklin+Sherman+Elementary" target="_blank">📅 Add to Calendar</a></div>
+      <div class="event-extra">📷 Family Photos for FSES (Peter Kiesel, McLean Central Park) — Oct 3 &amp; 17, supports the school; sign up via the newsletter link.</div>
+      <div class="event-extra">🐾 Panda Fund: ~70% to goal, donations doubled if made by Sep 30 ($10,000 match).</div>
+      <div class="event-extra">🧥 SHARE coat drive — bin in the front lobby, drop-off deadline Fri Oct 2.</div>
+      <div class="event-extra">🎖️ Blue Star Military Welcome Week — Sep 26–Oct 4.</div>
+      <div class="event-extra">🎬 Movie Night Under the Stars — Thu Oct 16 (class t-shirts also sold there and after the Oct 22 PTA meeting).</div>
       <div class="event-extra">No open school-correspondence items this run (resolved/informational threads — SOL/MAP placement question, 504 check-in — are not shown).</div>
-      <div class="prep-task">🎭 FSES school play has been announced per the Sep 22 PTA newsletter — no cast/date details yet, check the newsletter for signup info.</div>
       <div class="newsletter-link">📰 <a href="https://mail.google.com/mail/u/0/#all/1a0cac819a19c0ab" target="_blank">Panda Press — Sep 22</a></div>
-      <div class="newsletter-link">📰 <a href="https://mail.google.com/mail/u/0/#all/1a0ca9f377add5b4" target="_blank">FSES PTA Newsletter — Sep 22</a> (Panda Fund 2 weeks left, school play announced, Monster Mash Dash signup)</div>
+      <div class="newsletter-link">📰 <a href="https://mail.google.com/mail/u/0/#all/1a0ca9f377add5b4" target="_blank">FSES PTA Newsletter — Sep 22</a> (Panda Fund, school play announced, Monster Mash Dash signup)</div>
       <div class="newsletter-link">📰 <a href="https://mail.google.com/mail/u/0/#all/1a0abf9f038074b9" target="_blank">FSES PTA Special Edition — Sep 16</a> (Math &amp; Science Olympiad program details)</div>
       <div class="newsletter-link">📰 <a href="https://mail.google.com/mail/u/0/#all/1a0a0f7cfd6aa481" target="_blank">FSES PTA Newsletter — Sep 14</a> (SHARE coat drive, Movie Night save-the-date)</div>
 
