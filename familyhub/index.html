@@ -22,7 +22,10 @@
   }
   *{box-sizing:border-box;}
   body{margin:0;background:var(--bg);color:var(--text);font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;font-size:18px;line-height:1.5;}
-  .wrap{max-width:1000px;margin:0 auto;padding:20px 16px 60px;}
+  .wrap{max-width:1400px;margin:0 auto;padding:20px 16px 60px;}
+  .live-check-status{font-size:14px;color:var(--muted);text-align:center;padding:4px 0;}
+  .live-update-banner{display:none;color:#c0392b;font-weight:600;font-size:15.5px;text-align:center;padding:8px 12px;background:#fdecea;border-radius:8px;margin-bottom:10px;}
+  .live-update-banner:not(:empty){display:block;}
   header.top{display:flex;align-items:center;justify-content:space-between;margin-bottom:16px;flex-wrap:wrap;gap:10px;}
   header.top h1{font-size:22px;margin:0;}
   .refresh-btn{background:var(--card);border:1px solid var(--border-light);border-radius:8px;padding:8px 14px;font-size:14.5px;color:var(--text);cursor:pointer;}
@@ -97,6 +100,9 @@
 </head>
 <body>
 <div class="wrap">
+
+<div id="live-update-banner" class="live-update-banner"></div>
+<div id="live-check-status" class="live-check-status"></div>
 
 <header class="top">
   <h1>Family Hub</h1>
