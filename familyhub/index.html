@@ -1289,7 +1289,7 @@ document.querySelectorAll('.tab-btn').forEach(btn=>{
 <script>
 (function(){
   /* Shared state: paste the Apps Script web-app URL here (see FamilyHub setup). Empty = this browser only. */
-  var FH_STATE_URL='';
+  var FH_STATE_URL='https://script.google.com/macros/s/AKfycbz-CtLsebkAgwHTStV9S1X3fhgpGqfw7MQcADgo9ROtBds7WeO_HCfjEkDoMOAB_w/exec';
   var KEY='fh-dismissed-v1',store={};
   try{store=JSON.parse(localStorage.getItem(KEY)||'{}')}catch(e){store={}}
   function saveLocal(){try{localStorage.setItem(KEY,JSON.stringify(store))}catch(e){}}
