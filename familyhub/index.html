@@ -1288,19 +1288,22 @@ document.querySelectorAll('.tab-btn').forEach(btn=>{
 </script>
 <script>
 (function(){
+  /* Shared state: paste the Apps Script web-app URL here (see FamilyHub setup). Empty = this browser only. */
+  var FH_STATE_URL='';
   var KEY='fh-dismissed-v1',store={};
   try{store=JSON.parse(localStorage.getItem(KEY)||'{}')}catch(e){store={}}
-  function save(){try{localStorage.setItem(KEY,JSON.stringify(store))}catch(e){}}
-  function keyOf(el){
+  function saveLocal(){try{localStorage.setItem(KEY,JSON.stringify(store))}catch(e){}}
+  function lead(el){
     var c=el.cloneNode(true);var x=c.querySelector('.fh-ctl');if(x)x.remove();
     var st=c.querySelector('strong,.watchlist-title');
-    var t=(st?st.textContent:c.textContent).toLowerCase().replace(/[^a-z]+/g,' ').trim().split(' ').slice(0,6).join('-');
-    return t;
+    return (st?st.textContent:c.textContent).replace(/\s+/g,' ').trim();
   }
+  function keyOf(el){return lead(el).toLowerCase().replace(/[^a-z]+/g,' ').trim().split(' ').slice(0,6).join('-');}
   var items=[].slice.call(document.querySelectorAll('.dismissable'));
   var bar=document.createElement('div');bar.id='fh-bar';
   var first=document.querySelector('#kids .priority-box');
   if(first&&first.parentNode)first.parentNode.insertBefore(bar,first);
+  var status='';
   function refresh(){
     var n=0;
     items.forEach(function(el){
@@ -1311,22 +1314,34 @@ document.querySelectorAll('.tab-btn').forEach(btn=>{
       var b=el.querySelector('.fh-ctl');
       if(b)b.innerHTML=hid?'<button data-a="restore">↩ Restore</button>':'<button data-a="done" title="Resolved">✓ Done</button><button data-a="hide" title="Not relevant - hide">✕ Hide</button>';
     });
-    bar.style.display=n?'block':'none';
-    bar.innerHTML=n+' hidden item'+(n==1?'':'s')+' <button id="fh-toggle">'+(document.body.classList.contains('fh-show')?'Hide them again':'Show')+'</button>';
+    bar.style.display=(n||status)?'block':'none';
+    bar.innerHTML=(n?n+' hidden item'+(n==1?'':'s')+' <button id="fh-toggle">'+(document.body.classList.contains('fh-show')?'Hide them again':'Show')+'</button> ':'')+(status?'<span>'+status+'</span>':'');
     var t=document.getElementById('fh-toggle');
     if(t)t.onclick=function(){document.body.classList.toggle('fh-show');refresh();};
   }
+  function post(d){
+    if(!FH_STATE_URL)return;
+    fetch(FH_STATE_URL,{method:'POST',headers:{'Content-Type':'text/plain;charset=utf-8'},body:JSON.stringify(d)})
+      .then(function(r){return r.json();})
+      .then(function(all){store=all||{};saveLocal();status='';refresh();})
+      .catch(function(){status='⚠ Saved on this device only — could not reach shared list';refresh();});
+  }
   items.forEach(function(el){
-    var k=keyOf(el);el.setAttribute('data-fhkey',k);
+    var k=keyOf(el);el.setAttribute('data-fhkey',k);el.setAttribute('data-fhlabel',lead(el).slice(0,90));
     var c=document.createElement('span');c.className='fh-ctl';
     c.addEventListener('click',function(ev){
       var a=ev.target&&ev.target.getAttribute('data-a');if(!a)return;
       if(a==='restore')delete store[k];else store[k]={a:a,t:Date.now()};
-      save();refresh();
+      saveLocal();refresh();
+      post({key:k,action:a,label:el.getAttribute('data-fhlabel')});
     });
     el.appendChild(c);
   });
   refresh();
+  if(FH_STATE_URL){
+    fetch(FH_STATE_URL).then(function(r){return r.json();}).then(function(all){store=all||{};saveLocal();refresh();})
+      .catch(function(){status='⚠ Shared list unreachable — showing this device\'s choices';refresh();});
+  }
 })();
 </script>
 </body>
