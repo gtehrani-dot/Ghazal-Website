@@ -106,6 +106,12 @@ body.fh-show .fh-hidden{display:block;opacity:.45;}
 body.fh-show li.fh-hidden{display:list-item;}
 #fh-bar{font-size:14px;color:var(--muted);margin:0 0 10px;display:none;}
 #fh-bar button{font:inherit;font-size:14px;border:none;background:none;color:var(--blue-accent);cursor:pointer;text-decoration:underline;padding:0 0 0 6px;}
+
+  .fh-collap{position:relative;overflow:hidden;max-height:480px}
+  .fh-collap::after{content:"";position:absolute;left:0;right:0;bottom:48px;height:70px;background:linear-gradient(to bottom,rgba(255,255,255,0),var(--card));pointer-events:none}
+  .fh-more{position:absolute;left:0;right:0;bottom:0;height:48px;display:flex;align-items:center;justify-content:center;background:var(--card);border-top:1px solid var(--border-light)}
+  .fh-more button,.fh-less button{font:inherit;font-weight:600;font-size:15px;padding:8px 18px;border-radius:20px;border:1px solid var(--border-light);background:#fff;cursor:pointer}
+  .fh-less{text-align:center;padding-top:12px}
 </style>
 </head>
 <body>
@@ -1344,5 +1350,27 @@ document.querySelectorAll('.tab-btn').forEach(btn=>{
   }
 })();
 </script>
+<script>
+(function(){
+  /* Long cards collapse to a preview with Show more / Show less. Choice remembered per device. */
+  var KEY='fh-expanded-v1',open={};
+  try{open=JSON.parse(localStorage.getItem(KEY)||'{}')}catch(e){}
+  function save(){try{localStorage.setItem(KEY,JSON.stringify(open))}catch(e){}}
+  document.querySelectorAll('#kids .card').forEach(function(card,i){
+    var h=card.querySelector('h2');var id=h?h.textContent.replace(/[^a-z]+/gi,'-').toLowerCase().slice(0,30):'c'+i;
+    if(card.scrollHeight<=760)return;
+    var more=document.createElement('div');more.className='fh-more';
+    var mb=document.createElement('button');mb.textContent='Show more ▾';more.appendChild(mb);
+    var less=document.createElement('div');less.className='fh-less';
+    var lb=document.createElement('button');lb.textContent='Show less ▴';less.appendChild(lb);
+    card.appendChild(more);card.appendChild(less);
+    function apply(){var o=!!open[id];card.classList.toggle('fh-collap',!o);more.style.display=o?'none':'flex';less.style.display=o?'block':'none';}
+    mb.onclick=function(){open[id]=1;save();apply();};
+    lb.onclick=function(){delete open[id];save();apply();card.scrollIntoView({block:'start',behavior:'smooth'});};
+    apply();
+  });
+})();
+</script>
+
 </body>
 </html>
