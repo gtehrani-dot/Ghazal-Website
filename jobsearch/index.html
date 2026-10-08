@@ -1,1383 +1,377 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<title>Job Search Dashboard — 2026-09-29</title>
+<meta charset="utf-8">
+<title>Job Search Dashboard</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
 <style>
-  body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif; background: #f5f6f8; color: #1d1f24; margin: 0; padding: 0 0 60px 0; }
-  header { background: #1d2b3a; color: #fff; padding: 28px 40px; }
-  header h1 { margin: 0 0 4px 0; font-size: 22px; }
-  header p { margin: 0; color: #b9c4d0; font-size: 14px; }
-  .wrap { max-width: 980px; margin: 0 auto; padding: 0 24px; }
-  .banner { background: #fff4e5; border: 1px solid #f0c36d; border-radius: 8px; padding: 18px 22px; margin: 24px 0; }
-  .banner h2 { margin: 0 0 10px 0; font-size: 15px; color: #8a5a00; }
-  .banner ul { margin: 0; padding-left: 20px; font-size: 13.5px; line-height: 1.6; }
-  .banner li { margin-bottom: 8px; }
-  .drift-flag { background: #fdeaea; border: 1px solid #e5a3a3; border-radius: 8px; padding: 16px 22px; margin: 24px 0 0 0; }
-  .drift-flag h2 { margin: 0 0 8px 0; font-size: 14.5px; color: #9c2626; }
-  .drift-flag p { margin: 0 0 10px 0; font-size: 13.5px; line-height: 1.55; color: #6b2a2a; }
-  .drift-flag p:last-child { margin-bottom: 0; }
-  section { margin: 32px 0; }
-  section h2 { font-size: 17px; border-bottom: 2px solid #dfe3e8; padding-bottom: 8px; }
-
-  .tabs { display: flex; gap: 4px; margin: 24px 0 0 0; border-bottom: 2px solid #dfe3e8; }
-  .tab-btn { background: none; border: none; font-size: 14.5px; font-weight: 600; padding: 10px 18px; cursor: pointer; color: #667; border-bottom: 3px solid transparent; margin-bottom: -2px; }
-  .tab-btn.active { color: #1d2b3a; border-bottom: 3px solid #1d2b3a; }
-  .tab-panel { display: none; }
-  .tab-panel.active { display: block; }
-
-  table.summary { width: 100%; border-collapse: collapse; background: #fff; border: 1px solid #e2e5ea; border-radius: 10px; overflow: hidden; margin-top: 20px; font-size: 13.5px; }
-  table.summary th { text-align: left; background: #eef2f6; padding: 10px 12px; font-size: 11.5px; text-transform: uppercase; letter-spacing: .03em; color: #55606b; }
-  table.summary td { padding: 10px 12px; border-top: 1px solid #eceff2; vertical-align: middle; }
-  table.summary tr:hover td { background: #fafbfc; }
-  .fitscore { font-weight: 700; }
-  .fitscore.high { color: #1a7f37; }
-  .fitscore.mid { color: #b5820a; }
-  td.notecell { font-size: 12.5px; color: #6b5015; max-width: 220px; }
-  .tier-badge { display: inline-block; font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: .03em; padding: 3px 9px; border-radius: 20px; white-space: nowrap; }
-  .tier-badge.primary { background: #e3f6ea; color: #1a7f37; }
-  .tier-badge.secondary { background: #f3eefc; color: #7126c9; }
-  .new-badge { display: inline-block; font-size: 10.5px; font-weight: 700; text-transform: uppercase; letter-spacing: .03em; padding: 2px 8px; border-radius: 20px; background: #e5edff; color: #2952cc; margin-left: 6px; }
-  a.jdlink { color: #2952cc; text-decoration: none; font-weight: 600; }
-  a.jdlink:hover { text-decoration: underline; }
-  .applied-check { display: flex; align-items: center; gap: 6px; cursor: pointer; }
-  .applied-check input { width: 16px; height: 16px; cursor: pointer; }
-
-  .card { background: #fff; border: 1px solid #e2e5ea; border-radius: 10px; padding: 20px 24px; margin-bottom: 18px; }
-  .card h3 { margin: 0 0 2px 0; font-size: 17px; }
-  .card .company { color: #55606b; font-size: 14px; margin-bottom: 10px; }
-  .tag { display: inline-block; font-size: 11px; font-weight: 600; text-transform: uppercase; letter-spacing: .03em; padding: 3px 9px; border-radius: 20px; margin-right: 6px; }
-  .tag.saas { background: #e5edff; color: #2952cc; }
-  .tag.gsi { background: #f1e6ff; color: #7126c9; }
-  .row { display: flex; gap: 20px; flex-wrap: wrap; margin: 12px 0; font-size: 13.5px; }
-  .row .item { background: #f7f8fa; border-radius: 6px; padding: 8px 12px; }
-  .row .item b { display: block; font-size: 11px; color: #767f89; text-transform: uppercase; letter-spacing: .03em; margin-bottom: 2px; }
-  .fit { margin: 14px 0; font-size: 14px; line-height: 1.55; }
-  .fit b { color: #1d2b3a; }
-  .gap { background: #fff8f0; border-left: 3px solid #e0952f; padding: 8px 12px; font-size: 13.5px; margin: 10px 0; border-radius: 4px; }
-  .files { margin-top: 14px; display: flex; gap: 10px; flex-wrap: wrap; }
-  a.apply { display: inline-block; background: #1d2b3a; color: #fff; text-decoration: none; padding: 9px 16px; border-radius: 6px; font-size: 13.5px; font-weight: 600; }
-  a.apply:hover { background: #33465c; }
-  a.filelink { display: inline-block; background: #eef2f6; color: #1d2b3a; text-decoration: none; padding: 9px 16px; border-radius: 6px; font-size: 13.5px; font-weight: 600; border: 1px solid #d5dae1; }
-  a.filelink:hover { background: #dde3ea; }
-  .filenote { display: inline-block; background: #f7f8fa; color: #767f89; font-style: italic; padding: 9px 16px; border-radius: 6px; font-size: 13px; border: 1px dashed #d5dae1; }
-  .empty { color: #667; font-style: italic; font-size: 14px; }
-  .linknote { color: #767f89; font-style: italic; }
-
-  .prev-list { background: #fff; border: 1px solid #e2e5ea; border-radius: 10px; padding: 4px 0; margin-top: 16px; }
-  .prev-item { padding: 14px 20px; border-top: 1px solid #eceff2; font-size: 13.5px; line-height: 1.5; }
-  .prev-item:first-child { border-top: none; }
-  .prev-item .ptitle { font-weight: 700; color: #1d2b3a; }
-  .prev-item .pco { color: #55606b; }
-  .prev-item .pnote { color: #6b5015; margin-top: 4px; }
-  .prev-item a.jdlink { margin-left: 4px; }
-
-  table.tracking { width: 100%; border-collapse: collapse; background: #fff; border: 1px solid #e2e5ea; border-radius: 10px; overflow: hidden; margin-top: 20px; font-size: 13.5px; }
-  table.tracking th { text-align: left; background: #eef2f6; padding: 10px 12px; font-size: 11.5px; text-transform: uppercase; letter-spacing: .03em; color: #55606b; }
-  table.tracking td { padding: 10px 12px; border-top: 1px solid #eceff2; vertical-align: top; }
-  table.tracking input.notes, table.tracking select.notes { width: 100%; box-sizing: border-box; border: 1px solid #d5dae1; border-radius: 6px; padding: 7px 9px; font-size: 13px; font-family: inherit; }
-  .tracking-scroll { overflow-x: auto; }
-  .unapply-btn { background: none; border: 1px solid #d5dae1; border-radius: 6px; padding: 5px 10px; font-size: 12px; cursor: pointer; color: #8a5a00; }
-  .unapply-btn:hover { background: #fff4e5; }
-  th.sortable { cursor: pointer; user-select: none; }
-  th.sortable:hover { color: #1d2b3a; }
-  .sort-arrow { font-size: 9px; margin-left: 3px; display: inline-block; width: 8px; }
-
-  footer { text-align: center; color: #99a3ad; font-size: 12px; margin-top: 40px; }
+  :root{
+    --bg:#f7f7f5; --panel:#ffffff; --ink:#1f2328; --muted:#6b7280; --line:#e5e7eb;
+    --primary:#2563eb; --primary-ink:#ffffff; --accent:#7c3aed;
+    --pill-primary-bg:#eef2ff; --pill-primary-ink:#3730a3;
+    --pill-secondary-bg:#fef3c7; --pill-secondary-ink:#92400e;
+    --good:#059669; --warn:#d97706; --bad:#dc2626;
+    --new-bg:#dcfce7; --new-ink:#065f46;
+  }
+  @media (prefers-color-scheme: dark){
+    :root:not([data-theme="light"]){
+      --bg:#14161a; --panel:#1c1f26; --ink:#e8eaed; --muted:#9aa1ac; --line:#2b2f38;
+      --pill-primary-bg:#1e2a5e; --pill-primary-ink:#c7d2fe;
+      --pill-secondary-bg:#4a3a12; --pill-secondary-ink:#fde68a;
+      --new-bg:#0f3d2b; --new-ink:#86efac;
+    }
+  }
+  :root[data-theme="dark"]{
+    --bg:#14161a; --panel:#1c1f26; --ink:#e8eaed; --muted:#9aa1ac; --line:#2b2f38;
+    --pill-primary-bg:#1e2a5e; --pill-primary-ink:#c7d2fe;
+    --pill-secondary-bg:#4a3a12; --pill-secondary-ink:#fde68a;
+    --new-bg:#0f3d2b; --new-ink:#86efac;
+  }
+  *{box-sizing:border-box}
+  body{background:var(--bg);color:var(--ink);font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;margin:0;padding:0 16px 48px;font-size:16px;line-height:1.5}
+  .wrap{max-width:1100px;margin:0 auto}
+  header{padding:24px 0 12px}
+  h1{font-size:22px;margin:0 0 4px}
+  .meta{color:var(--muted);font-size:14px}
+  .tabs{display:flex;gap:4px;margin:20px 0 0;border-bottom:1px solid var(--line);flex-wrap:wrap}
+  .tab{padding:10px 16px;cursor:pointer;border-radius:8px 8px 0 0;color:var(--muted);font-weight:600;font-size:14px;background:transparent;border:none}
+  .tab.active{color:var(--ink);background:var(--panel);border:1px solid var(--line);border-bottom:1px solid var(--panel);margin-bottom:-1px}
+  .panel{display:none;padding-top:20px}
+  .panel.active{display:block}
+  table{width:100%;border-collapse:collapse;background:var(--panel);border:1px solid var(--line);border-radius:10px;overflow:hidden;font-size:14px;margin-bottom:24px}
+  th,td{padding:10px 12px;text-align:left;border-bottom:1px solid var(--line);vertical-align:top}
+  th{cursor:pointer;user-select:none;font-weight:600;color:var(--muted);background:var(--bg);white-space:nowrap}
+  th.sortable:hover{color:var(--ink)}
+  th .arrow{font-size:11px;margin-left:4px;opacity:.6}
+  tr:last-child td{border-bottom:none}
+  a{color:var(--primary);text-decoration:none}
+  a:hover{text-decoration:underline}
+  .pill{display:inline-block;padding:2px 9px;border-radius:999px;font-size:12px;font-weight:700}
+  .pill-primary{background:var(--pill-primary-bg);color:var(--pill-primary-ink)}
+  .pill-secondary{background:var(--pill-secondary-bg);color:var(--pill-secondary-ink)}
+  .badge-new{display:inline-block;padding:1px 7px;border-radius:999px;font-size:11px;font-weight:700;background:var(--new-bg);color:var(--new-ink);margin-left:6px}
+  .badge-dead{display:inline-block;padding:1px 7px;border-radius:999px;font-size:11px;font-weight:700;background:#fee2e2;color:#991b1b;margin-left:6px}
+  h2.section{font-size:16px;margin:28px 0 12px}
+  .card{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:18px 20px;margin-bottom:16px}
+  .card-head{display:flex;justify-content:space-between;align-items:baseline;flex-wrap:wrap;gap:8px}
+  .card-title{font-size:17px;font-weight:700}
+  .card-company{color:var(--muted);font-size:14px;margin-top:2px}
+  .stats{display:flex;gap:18px;flex-wrap:wrap;margin:12px 0;font-size:13px;color:var(--muted)}
+  .stats b{color:var(--ink)}
+  .why,.honest{font-size:14px;margin-top:10px}
+  .why b,.honest b{font-weight:700}
+  .card-actions{margin-top:14px;display:flex;gap:10px;flex-wrap:wrap}
+  .btn{display:inline-block;padding:8px 14px;border-radius:8px;font-size:13px;font-weight:600;border:1px solid var(--line);background:var(--bg);color:var(--ink);cursor:pointer}
+  .btn-primary{background:var(--primary);color:var(--primary-ink);border:none}
+  .prevlist{background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:6px 0;margin-bottom:20px}
+  .prevlist .row{padding:10px 16px;border-bottom:1px solid var(--line);font-size:14px}
+  .prevlist .row:last-child{border-bottom:none}
+  .notes-box{background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:16px 20px;font-size:14px;color:var(--muted)}
+  .notes-box ul{margin:8px 0 0 18px;padding:0}
+  .notes-box li{margin-bottom:8px}
+  input[type=text]{width:100%;padding:5px 7px;border:1px solid var(--line);border-radius:6px;background:var(--bg);color:var(--ink);font-size:13px}
+  select{padding:5px 7px;border:1px solid var(--line);border-radius:6px;background:var(--bg);color:var(--ink);font-size:13px}
+  footer{color:var(--muted);font-size:12px;margin-top:32px;padding-top:16px;border-top:1px solid var(--line)}
+  .linklike{color:var(--ink);font-weight:600}
+  .nolink{color:var(--muted);font-style:italic;font-size:13px}
 </style>
 </head>
 <body>
+<div class="wrap">
 <header>
-  <div class="wrap">
-    <h1>Ghazal's Job Search Dashboard</h1>
-    <p>Tuesday, September 29, 2026 &nbsp;·&nbsp; Weekly scheduled scan · 7 new matches added (3 Primary) · 1 posting went dead</p>
-  </div>
+  <h1>Ghazal's Job Search Dashboard</h1>
+  <div class="meta">Tuesday, September 29, 2026 &middot; Weekly scan &middot; 9 new matches added &middot; 2 postings went dead &middot; Private copy — not the public site</div>
 </header>
 
-<div class="wrap">
-
-  <div class="tabs">
-    <button class="tab-btn active" onclick="showTab('matches')" id="tab-btn-matches">Today's Matches</button>
-    <button class="tab-btn" onclick="showTab('workingon')" id="tab-btn-workingon">Working On</button>
-    <button class="tab-btn" onclick="showTab('tracking')" id="tab-btn-tracking">Job Tracking</button>
-  </div>
-
-  <div class="tab-panel active" id="tab-matches">
-
-    <table class="summary" id="summary-table">
-      <thead>
-        <tr>
-          <th class="sortable" onclick="toggleSort('summary','title')">Title / Role<span class="sort-arrow" id="arrow-summary-title"></span></th>
-          <th class="sortable" onclick="toggleSort('summary','company')">Company<span class="sort-arrow" id="arrow-summary-company"></span></th>
-          <th class="sortable" onclick="toggleSort('summary','tier')">Match<span class="sort-arrow" id="arrow-summary-tier"></span></th>
-          <th class="sortable" onclick="toggleSort('summary','category')">Category<span class="sort-arrow" id="arrow-summary-category"></span></th>
-          <th class="sortable" onclick="toggleSort('summary','fit')">Fit %<span class="sort-arrow" id="arrow-summary-fit"></span></th>
-          <th>Notes</th>
-          <th class="sortable" onclick="toggleSort('summary','days')">Days Active<span class="sort-arrow" id="arrow-summary-days"></span></th>
-          <th class="sortable" onclick="toggleSort('summary','salary')">Salary<span class="sort-arrow" id="arrow-summary-salary"></span></th>
-          <th>Apply</th>
-          <th>Applied</th>
-        </tr>
-      </thead>
-      <tbody id="summary-tbody"><!-- filled by JS --></tbody>
-    </table>
-
-    <section>
-      <h2 style="margin-top:32px;">Match details — highest fit first</h2>
-
-      <div class="card">
-        <span class="tier-badge primary">Primary</span>
-        <span class="tag saas">SaaS CS / Professional-Services Vertical</span>
-        <h3>VP Customer Success (Professional Services)</h3>
-        <div class="company">Deltek — project-based ERP/software for PS &amp; government-contracting firms</div>
-        <div class="row">
-          <div class="item"><b>Fit</b>85%</div>
-          <div class="item"><b>Salary</b>$246,679–$431,679 OTE</div>
-          <div class="item"><b>Location</b>Remote (HQ Herndon, VA — DC metro)</div>
-          <div class="item"><b>Match</b><span class="tier-badge primary">Primary</span></div>
-        </div>
-        <div class="fit"><b>Why she's a strong fit:</b> Owns the full financial commitment for Deltek's Professional-Services customer segment against explicit NRR/GRR targets, with direct authority over CS org design, headcount, and renewal/forecast sign-off — nearly a direct match to her FranConnect VP PS scope. Deltek's project-based, government-contracting-adjacent customer base overlaps with her Booz Allen federal background and Decision Lens's public-sector work, and the role's AI-first framing plays to her current ada CX experience.</div>
-        <div class="gap"><b>Honest fit assessment:</b> Very strong — 85/100, one of the best comp packages on today's board. Real gap: the posting names "scaling organizations of 100+ people" and "$250M+ in annual retention bookings" as a track record requirement — her largest team was ~50 (FranConnect) at a smaller revenue scale. Gainsight-specific experience isn't confirmed (listed as preferred, not required). Also newly noted tonight: the posting asks for travel up to 30% — double her ~15% max, worth raising early. Posting date on the page is 8/24/2026. Reconfirmed live 9/29 on Deltek's own careers page, comp and travel unchanged.</div>
-        <div class="fit"><b>LinkedIn connections:</b> available on request — just ask.</div>
-        <div class="files">
-          <a class="apply" href="https://careers.deltek.com/job/23749666/vp-customer-success-professional-services-remote/" target="_blank">View posting →</a>
-          <button class="filelink" onclick="requestMaterials(this,'Deltek','VP Customer Success (Professional Services)','https://careers.deltek.com/job/23749666/vp-customer-success-professional-services-remote/')">Create Resume &amp; Cover Letter</button>
-        </div>
-
-      <div class="card">
-        <span class="tier-badge primary">Primary</span>
-        <span class="tag saas">SaaS PS / Restaurant Tech</span>
-        <h3><a href="https://www.linkedin.com/jobs/view/vp-professional-services-at-restaurant365-4197152069" target="_blank" style="color:inherit;">VP, Professional Services</a> <span class="new-badge">New</span></h3>
-        <div class="company">Restaurant365 — cloud accounting &amp; back-office platform for restaurant groups</div>
-        <div class="row">
-          <div class="item"><b>Fit</b>85%</div>
-          <div class="item"><b>Salary</b>Not listed</div>
-          <div class="item"><b>Location</b>Remote</div>
-          <div class="item"><b>Match</b><span class="tier-badge primary">Primary</span></div>
-        </div>
-        <div class="fit"><b>Why she's a strong fit:</b> Owns a multi-function services org (onboarding, implementation, professional services, education services) plus the service-delivery partner program, reporting to the Chief Customer Officer, with bookings/revenue forecasting and full P&amp;L. That is her FranConnect VP PS scope almost exactly (P&amp;L, utilization 35%→60%, time-to-value −75%), and restaurant groups are close cousins of the multi-unit franchise brands she served at FranConnect. The partner-program piece maps to her ada CX work renegotiating partner delivery agreements, and "develop, launch and deliver services products" matches the enterprise service packages she built at ada. The JD also names AI in process optimization, where her hands-on PSA/CPQ tool-building is a real differentiator.</div>
-        <div class="gap"><b>Honest fit assessment:</b> Strong — 85/100, one of the cleanest functional matches on the board. Gaps are modest: no comp listed (ask early), and the JD names restaurant, HR or financial-technology experience as a plus. Her franchise-SaaS background covers the spirit of that but not the letter. The listing was verified live on a job-board mirror (The Muse); no Restaurant365-owned application page came up in search, so the Apply link goes to that mirror. Posting date isn't stated.</div>
-        <div class="fit"><b>LinkedIn connections:</b> available on request — just ask.</div>
-        <div class="files">
-          <a class="apply" href="https://www.themuse.com/jobs/restaurant365/vp-professional-services" target="_blank">Apply →</a>
-          <button class="filelink" onclick="requestMaterials(this,'Restaurant365','VP, Professional Services','https://www.themuse.com/jobs/restaurant365/vp-professional-services')">Create Resume &amp; Cover Letter</button>
-        </div>
-      </div>
-      </div>
-
-      <div class="card">
-        <span class="tier-badge primary">Primary</span>
-        <span class="tag saas">SaaS PS / Global Delivery (CCaaS + AI)</span>
-        <h3>Vice President, Customer Delivery <span class="new-badge">New</span></h3>
-        <div class="company">Talkdesk — AI-first contact-center (CCaaS) / Customer Experience Automation platform</div>
-        <div class="row">
-          <div class="item"><b>Fit</b>84%</div>
-          <div class="item"><b>Salary</b>$262K–$477K OTE + equity</div>
-          <div class="item"><b>Location</b>United States (remote/location not specified — confirm)</div>
-          <div class="item"><b>Match</b><span class="tier-badge primary">Primary</span></div>
-        </div>
-        <div class="fit"><b>Why she's a strong fit:</b> Owns Talkdesk's entire global customer delivery organization — Global Professional Services, Agentic Delivery, and Forward Deployed teams — with multi-million-dollar budget, revenue and gross-margin accountability. That is her FranConnect global PS P&amp;L (US/India/Australia, 114% revenue growth, utilization 35%→60%, time-to-value −75%) almost line for line, and her current ada CX role puts her inside an AI-native customer-service automation platform — the same market Talkdesk is pushing into with agentic CX. The posting's "catalyst for organizational change" and "evolve our delivery capabilities" framing is a real innovation/transformation signal.</div>
-        <div class="gap"><b>Honest fit assessment:</b> Strong — 84/100, and one of the best comp bands on the board. Real gaps: the JD wants 15+ years of PS leadership with 5+ as VP/SVP, which she meets only by counting Decision Lens + FranConnect + ada together; it describes a "large, distributed, multi-tiered global delivery organization" — likely well beyond her ~50-person FranConnect team at a ~1,300-person company; and it asks for credible depth on agentic/LLM delivery and Forward Deployed engineering models, which she knows as an operator, not as a hands-on technologist. Reports to the Chief Product, Technology &amp; Customer Officer. Posted 8/31. Reconfirmed live 9/29 via a job-board mirror that links to this Greenhouse req (the Greenhouse page itself couldn't be fetched this run).</div>
-        <div class="fit"><b>LinkedIn connections:</b> available on request — just ask.</div>
-        <div class="files">
-          <a class="apply" href="https://job-boards.greenhouse.io/talkdesk2/jobs/8103819" target="_blank">Apply →</a>
-          <button class="filelink" onclick="requestMaterials(this,'Talkdesk','Vice President, Customer Delivery','https://job-boards.greenhouse.io/talkdesk2/jobs/8103819')">Create Resume &amp; Cover Letter</button>
-        </div>
-
-      <div class="card">
-        <span class="tier-badge primary">Primary</span>
-        <span class="tag saas">SaaS PS / PE-backed Roll-up</span>
-        <h3>Vice President, Professional Services <span class="new-badge">New</span></h3>
-        <div class="company">ST6 — PE-backed enterprise software company being built through acquisitions</div>
-        <div class="row">
-          <div class="item"><b>Fit</b>84%</div>
-          <div class="item"><b>Salary</b>Not listed</div>
-          <div class="item"><b>Location</b>Remote, US</div>
-          <div class="item"><b>Match</b><span class="tier-badge primary">Primary</span></div>
-        </div>
-        <div class="fit"><b>Why she's a strong fit:</b> The mandate reads like her FranConnect record: PE environment, a >50-person global PS team, $10–15M in PS revenue, utilization and margin targets (70% / 40%), forecasting and capacity planning, and "pivotal role in the integration of acquired companies." She has run 3 post-merger integrations, a 50-person US/India/Australia team, and a PE-backed PS P&amp;L. The posting calls this a "new company," so there is a real build signal: standing up one PS organization, PMO and delivery method out of acquired pieces.</div>
-        <div class="gap"><b>Honest fit assessment:</b> Strong — 84/100. The JD wants 70% billable utilization; her best documented figure is 60% (FranConnect), so expect a probe on how she'd get the rest of the way. It also asks for large multi-department ERP/HCM/CRM-style implementation experience and "innovative, scalable training (virtual labs)". She has the training-org build from Decision Lens but should have a concrete example ready. No comp listed, no posting date, and ST6's product line isn't named in the JD, so a quick company check is worth doing before applying.</div>
-        <div class="fit"><b>LinkedIn connections:</b> available on request — just ask.</div>
-        <div class="files">
-          <a class="apply" href="https://job-boards.greenhouse.io/st6/jobs/6613184" target="_blank">Apply →</a>
-          <button class="filelink" onclick="requestMaterials(this,'ST6','Vice President, Professional Services','https://job-boards.greenhouse.io/st6/jobs/6613184')">Create Resume &amp; Cover Letter</button>
-        </div>
-      </div>
-      </div>
-      <div class="card">
-        <span class="tier-badge primary">Primary</span>
-        <span class="tag saas">SaaS PS/CS</span>
-        <h3>Vice President of Professional Services</h3>
-        <div class="company">HCSS — construction-management SaaS</div>
-        <div class="row">
-          <div class="item"><b>Fit</b>82%</div>
-          <div class="item"><b>Salary</b>Not listed</div>
-          <div class="item"><b>Location</b>Remote status unconfirmed (TX HQ)</div>
-          <div class="item"><b>Match</b><span class="tier-badge primary">Primary</span></div>
-        </div>
-        <div class="fit"><b>Why she's a strong fit:</b> Full P&L ownership of a ~40-person PS team, reporting to the COO, closely mirrors her FranConnect scope (loss-leader to break-even, 114% revenue growth, utilization 35%→60%).</div>
-        <div class="gap"><b>Honest fit assessment:</b> Strong — 82/100. Her PS leadership has been in B2B SaaS broadly, not construction specifically — a bridgeable but real domain gap worth naming. Remote eligibility isn't stated and HCSS is Texas-HQ'd, worth clarifying early against her DC-area/remote preference. The JD also says "ability to travel regularly." Reconfirmed live 9/29, content unchanged.</div>
-        <div class="fit"><b>LinkedIn connections:</b> available on request — just ask.</div>
-        <div class="files">
-          <a class="apply" href="https://careers.hcss.com/vice-president-of-professional-services_5075780/" target="_blank">View posting →</a>
-          <button class="filelink" onclick="requestMaterials(this,'HCSS','Vice President of Professional Services','https://careers.hcss.com/vice-president-of-professional-services_5075780/')">Create Resume &amp; Cover Letter</button>
-        </div>
-      </div>
-
-      <div class="card">
-        <span class="tier-badge primary">Primary</span>
-        <span class="tag saas">SaaS CS / Restaurant &amp; Franchise Ops</span>
-        <h3>Vice President, Customer Success <span class="new-badge">New</span></h3>
-        <div class="company">Crunchtime (listed as Zenput) — operations platform for multi-unit restaurant brands</div>
-        <div class="row">
-          <div class="item"><b>Fit</b>82%</div>
-          <div class="item"><b>Salary</b>$190K–$225K base / $228K–$270K OTE</div>
-          <div class="item"><b>Location</b>Remote, US — must be Eastern time zone (VA qualifies)</div>
-          <div class="item"><b>Match</b><span class="tier-badge primary">Primary</span></div>
-        </div>
-        <div class="fit"><b>Why she's a strong fit:</b> Crunchtime's customers are multi-unit franchise brands (Jersey Mike's, Five Guys, Wingstop, Smoothie King) — the same franchise-operator world FranConnect serves, so her four years running PS for franchise-management SaaS is direct domain credibility most CS candidates won't have. The mandate — build and scale a CS organization, lifecycle programs, segmentation, playbooks, and KPI frameworks through the next growth stage — matches her Decision Lens build and FranConnect 110% NRR/GRR record. Reports to the Chief Customer Officer.</div>
-        <div class="gap"><b>Honest fit assessment:</b> Strong — 82/100. Comp is the real question: base ($190K–$225K) is below her $230K floor, and OTE ($228K–$270K) clears $250K only in the upper half — the same near-miss shape as Forerunner. This is a pure CS/retention role (GRR/NRR, renewals, expansion) rather than PS delivery; she has run CS at Decision Lens but her recent P&amp;L has been PS-led, so expect questions on renewal-forecasting depth. Posted ~9/17. <b>Not reconfirmed this run</b>: the Built In link didn't come up in any search, though LinkedIn and other boards still list the role. Check the link before investing time.</div>
-        <div class="fit"><b>LinkedIn connections:</b> available on request — just ask.</div>
-        <div class="files">
-          <a class="apply" href="https://www.builtinnyc.com/job/vice-president-customer-success/11054615" target="_blank">Apply →</a>
-          <button class="filelink" onclick="requestMaterials(this,'Crunchtime (Zenput)','Vice President, Customer Success','https://www.builtinnyc.com/job/vice-president-customer-success/11054615')">Create Resume &amp; Cover Letter</button>
-        </div>
-      </div>
-      <div class="card">
-        <span class="tier-badge primary">Primary</span>
-        <span class="tag saas">SaaS CX / PS+CS+Support Combined</span>
-        <h3>Vice President of Customer Experience</h3>
-        <div class="company">Antithesis — deterministic-simulation testing platform for software systems</div>
-        <div class="row">
-          <div class="item"><b>Fit</b>80%</div>
-          <div class="item"><b>Salary</b>Not listed</div>
-          <div class="item"><b>Location</b>Vienna, VA (on-site — DC metro, close to McLean)</div>
-          <div class="item"><b>Match</b><span class="tier-badge primary">Primary</span></div>
-        </div>
-        <div class="fit"><b>Why she's a strong fit:</b> Owns the operational foundation behind the entire customer experience org — systems, process, analytics, and cross-functional programs across pre-sales, onboarding, customer success, support, renewals, and account management. A combined PS/CS/Support lifecycle-ownership mandate structurally very close to the Vanta role she already applied to, at an emerging, well-funded dev-tools company she wouldn't have surfaced from a known-company-name search.</div>
-        <div class="gap"><b>Honest fit assessment:</b> Strong — 80/100. Found directly by Ghazal via her LinkedIn saved-jobs list, not the scan — see today's notes for the coverage-gap fix this prompted. No salary disclosed. On-site (not hybrid/remote), though Vienna, VA is a genuine local commute from McLean rather than a relocation. Reconfirmed live 9/29.</div>
-        <div class="fit"><b>LinkedIn connections:</b> available on request — just ask.</div>
-        <div class="files">
-          <a class="apply" href="https://jobs.ashbyhq.com/antithesis/12cee240-67dc-489d-87b4-28df314e518f" target="_blank">View posting →</a>
-          <button class="filelink" onclick="requestMaterials(this,'Antithesis','Vice President of Customer Experience','https://jobs.ashbyhq.com/antithesis/12cee240-67dc-489d-87b4-28df314e518f')">Create Resume &amp; Cover Letter</button>
-        </div>
-
-      <div class="card">
-        <span class="tier-badge primary">Primary</span>
-        <span class="tag saas">SaaS PS / DevSecOps Platform</span>
-        <h3>Vice President, Professional Services <span class="new-badge">New</span></h3>
-        <div class="company">GitLab — AI-powered DevSecOps platform (public company)</div>
-        <div class="row">
-          <div class="item"><b>Fit</b>80%</div>
-          <div class="item"><b>Salary</b>$250,880–$432,768 (high-cost-location band)</div>
-          <div class="item"><b>Location</b>Remote, US</div>
-          <div class="item"><b>Match</b><span class="tier-badge primary">Primary</span></div>
-        </div>
-        <div class="fit"><b>Why she's a strong fit:</b> Full PS P&amp;L, a global 70+ person team of engagement managers, architects and engineers, service-attach growth across segments, and building out the delivery-partner / SI ecosystem, reporting to the VP of Customer Success. Her FranConnect global PS P&amp;L (114% revenue growth, US/India/Australia delivery) and ada CX partner-delivery work line up directly. GitLab also expects everyone to use AI daily as a productivity multiplier, which plays straight to her hands-on AI tool-building at ada.</div>
-        <div class="gap"><b>Honest fit assessment:</b> Good-to-strong — 80/100. Real gaps: the JD asks for deep SDLC / DevOps / Kubernetes / cloud-platform expertise. She knows agile and cloud migrations as an operator (Decision Lens desktop→AWS, FranConnect offshore Agile/QA) but not as a DevSecOps practitioner. The team (70+) is also larger than her ~50 at FranConnect. The top of the pay band is for high-cost locations; Virginia may use a different band. Posting date isn't stated.</div>
-        <div class="fit"><b>LinkedIn connections:</b> available on request — just ask.</div>
-        <div class="files">
-          <a class="apply" href="https://job-boards.greenhouse.io/gitlab/jobs/8122512002" target="_blank">Apply →</a>
-          <button class="filelink" onclick="requestMaterials(this,'GitLab','Vice President, Professional Services','https://job-boards.greenhouse.io/gitlab/jobs/8122512002')">Create Resume &amp; Cover Letter</button>
-        </div>
-      </div>
-      </div>
-
-      <div class="card">
-        <span class="tier-badge primary">Primary</span>
-        <span class="tag saas">SaaS CS / Cybersecurity</span>
-        <h3><a href="https://www.linkedin.com/jobs/view/vp-customer-success-at-ping-identity-4064058835" target="_blank" style="color:inherit;">VP, Customer Success</a></h3>
-        <div class="company">Ping Identity</div>
-        <div class="row">
-          <div class="item"><b>Fit</b>78%</div>
-          <div class="item"><b>Salary</b>$240K–$275K + bonus</div>
-          <div class="item"><b>Location</b>Not specified in posting</div>
-          <div class="item"><b>Match</b><span class="tier-badge primary">Primary</span></div>
-        </div>
-        <div class="fit"><b>Why she's a strong fit:</b> Comp clears her floor comfortably, and the CS leadership scope matches her track record of scaling customer organizations at PE/VC-backed SaaS companies.</div>
-        <div class="gap"><b>Honest fit assessment:</b> Strong — 78/100. No identity/access-management or cybersecurity domain experience — a real gap to name, though the CS leadership fundamentals transfer directly. Reconfirmed live 9/29 (Built In shows it as reposted ~3 weeks ago), comp unchanged. Ping has also just posted a separate <b>SVP</b>, Customer Success role (see Secondary list below).</div>
-        <div class="fit"><b>LinkedIn connections:</b> available on request — just ask.</div>
-        <div class="files">
-          <a class="apply" href="https://builtin.com/job/vp-customer-success/3531822" target="_blank">View posting →</a>
-          <button class="filelink" onclick="requestMaterials(this,'Ping Identity','VP, Customer Success','https://builtin.com/job/vp-customer-success/3531822')">Create Resume &amp; Cover Letter</button>
-        </div>
-      </div>
-
-      <div class="card">
-        <span class="tier-badge primary">Primary</span>
-        <span class="tag saas">Fintech / Payments CS+PS Combined</span>
-        <h3><a href="https://www.linkedin.com/jobs/view/4468318255" target="_blank" style="color:inherit;">Vice President, Client Success</a> <span class="new-badge">New</span></h3>
-        <div class="company">Visa</div>
-        <div class="row">
-          <div class="item"><b>Fit</b>78%</div>
-          <div class="item"><b>Salary</b>Not listed</div>
-          <div class="item"><b>Location</b>Ashburn, VA (DC metro — home market)</div>
-          <div class="item"><b>Match</b><span class="tier-badge primary">Primary</span></div>
-        </div>
-        <div class="fit"><b>Why she's a strong fit:</b> Owns client success outcomes, operational performance, solution adoption, and value realization for a portfolio of Super Regional/Regional Financial Institutions, Sponsor Banks, and DPS clients across North America — end-to-end post-sale ownership (onboarding, implementation, service delivery, optimization, retention) that's a close structural match to her combined PS/CS lifecycle leadership pattern.</div>
-        <div class="gap"><b>Honest fit assessment:</b> Strong — 78/100. Found via a LinkedIn job-alert digest 9/18. Reconfirmed live 9/29 via a job-board mirror with a direct Workday application link. No comp listed — a real open question, not a confirmed floor-clearer. Real gap: no direct fintech/payments-domain experience, though her Navan work already explored positioning fintech-adjacency credibly.</div>
-        <div class="fit"><b>LinkedIn connections:</b> available on request — just ask.</div>
-        <div class="files">
-          <a class="apply" href="https://visa.wd5.myworkdayjobs.com/Visa/job/US---Ashburn-VA/Vice-President--Client-Success_REF088476W" target="_blank">View posting →</a>
-          <button class="filelink" onclick="requestMaterials(this,'Visa','Vice President, Client Success','https://visa.wd5.myworkdayjobs.com/Visa/job/US---Ashburn-VA/Vice-President--Client-Success_REF088476W')">Create Resume &amp; Cover Letter</button>
-        </div>
-      </div>
-
-
-      <div class="card">
-        <span class="tier-badge primary">Primary</span>
-        <span class="tag saas">SaaS CS / Data Infrastructure</span>
-        <h3>VP, Customer Success</h3>
-        <div class="company">Veeam</div>
-        <div class="row">
-          <div class="item"><b>Fit</b>74%</div>
-          <div class="item"><b>Salary</b>$325,400–$464,800 OTE</div>
-          <div class="item"><b>Location</b>Not specified in posting</div>
-          <div class="item"><b>Match</b><span class="tier-badge primary">Primary</span></div>
-        </div>
-        <div class="fit"><b>Why she's a strong fit:</b> Comp is well above her floor, and CS leadership at scale matches her FranConnect/Decision Lens experience.</div>
-        <div class="gap"><b>Honest fit assessment:</b> Good fit — 74/100. This is a larger-scale organization than her prior roles, worth being ready to speak to. Posting is now roughly 10 months old (dated 11/17/2025) — worth confirming with a recruiter whether this is a genuinely active search or a long-running evergreen requisition. Reconfirmed live 9/29, content and comp unchanged.</div>
-        <div class="fit"><b>LinkedIn connections:</b> available on request — just ask.</div>
-        <div class="files">
-          <a class="apply" href="https://careers.veeam.com/job/united-states/vp-customer-success/22681/88549994768" target="_blank">View posting →</a>
-          <button class="filelink" onclick="requestMaterials(this,'Veeam','VP, Customer Success','https://careers.veeam.com/job/united-states/vp-customer-success/22681/88549994768')">Create Resume &amp; Cover Letter</button>
-        </div>
-      </div>
-    </section>
-
-    <section>
-      <h2>Proactive outreach opportunities</h2>
-      <p class="empty">No company-level signal cleared the bar this week. The Aura company-intelligence connector still isn\'t connected, and general searches for funding rounds and new customer-leadership hires only turned up broad trend articles, not a named company with a clear build-out and a contact to approach.</p>
-    </section>
-
-    <section>
-      <h2>Previously surfaced, still open (Secondary tier)</h2>
-      <div class="prev-list">
-        <div class="prev-item">
-          <span class="ptitle">Vice President, Professional Services - Americas</span> — <span class="pco">Qlik</span> (fit 76, Secondary) <span class="new-badge">New</span> — data-analytics SaaS; leads the Americas consulting org with P&amp;L, AI-driven delivery modernization and sales targets; $200K–$300K; <b>Washington, DC is one of the listed locations</b> (also NYC, Boston, King of Prussia), listed as in-person. <b>Not independently rendered:</b> found on the Ladders listing page (posted ~1 week ago), but neither the individual Ladders page nor a Qlik careers page could be opened this run. Confirm the link works before applying. Gap: analytics/BI domain is new to her.
-          <a class="jdlink" href="https://www.theladders.com/job/vice-president-professional-services-americas-qlik-washington-dc_88929730" target="_blank">Apply →</a>
-        </div>
-        <div class="prev-item">
-          <span class="ptitle">Vice President, Professional Services</span> — <span class="pco">Wavelo (Tucows)</span> (fit 64, Secondary) <span class="new-badge">New</span> — telecom SaaS (OSS/BSS, billing); remote; $222,700–$247,400 base, which clears her floor. Product-aligned PS build with margin/utilization discipline and a partner-delivery model. Real gap: the JD requires 10–15 years of PS leadership inside telecom or telecom-adjacent SaaS, which she doesn't have.
-          <a class="jdlink" href="https://job-boards.greenhouse.io/wavelo/jobs/7590397003" target="_blank">Apply →</a>
-        </div>
-        <div class="prev-item">
-          <span class="ptitle">SVP, Customer Success (Global CS &amp; Renewals)</span> — <span class="pco">Ping Identity</span> (fit 58, Secondary) <span class="new-badge">New</span> — USA remote; $275K–$350K + bonus; reports to the CCO. Big step up in scale: wants 15 years of quota-carrying CS/GTM leadership and ownership of a $600M+ ARR book, plus identity/access-management experience. Surfaced mainly for the SVP-level visibility and pay; the VP-level Ping role above is the more realistic fit.
-          <a class="jdlink" href="https://job-boards.greenhouse.io/pingidentity/jobs/7788253002" target="_blank">Apply →</a>
-        </div>
-        <div class="prev-item">
-          <span class="ptitle">VP, Delivery Assurance &amp; Global PMO - Professional Services</span> — <span class="pco">Guidewire</span> (fit 55, Secondary) <span class="new-badge">New</span> — P&amp;C-insurance core-systems SaaS; remote US; $232K–$377K base + bonus. Owns global program assurance, PMO method, SI-partner program quality and AI-enabled delivery tooling. Real gap: requires having run a program-assurance function inside a 1,000+ person services org. Verified live via a job-board mirror (posted ~1 week ago); Apply goes to Guidewire's Workday page.
-          <a class="jdlink" href="https://guidewire.wd5.myworkdayjobs.com/external/job/United-States---Remote/VP--Delivery-Assurance---Global-PMO---Professional-Services_JR_15184-1" target="_blank">Apply →</a>
-        </div>
-        <div class="prev-item">
-          <span class="ptitle">VP, Client Success</span> — <span class="pco">First Due</span> (fit 78, Secondary) — moved from a full card to this list (it's Secondary, and full cards now go to the 11 Primary matches). Remote US; $200K–$225K base + bonus, below her floor; posted May 27, 2026 (~4 months). Reconfirmed live 9/29 via a job-board mirror.
-          <a class="jdlink" href="https://job-boards.greenhouse.io/localitymediallcdbafirstdue/jobs/4260158009" target="_blank">View posting →</a>
-        </div>
-        <div class="prev-item">
-          <span class="ptitle">VP, Customer Success</span> — <span class="pco">Tapcheck</span> (fit 72, Secondary) — earned-wage-access fintech; executive owner of the whole post-sale org (Support, Onboarding, CS, Account Management, Payment Ops), reporting to the COO. Remote with VA/DC explicitly listed. Real build signal — "stand up the Account Management function from near-scratch" and "built these functions before and wants to build them again." Gaps: requires running high-volume support (tens of thousands of tickets/month) with BPO/offshore scale, plus payments ops; no comp listed.
-          <a class="jdlink" href="https://www.builtinnyc.com/job/vp-customer-success/10945199" target="_blank">View posting →</a>
-        </div>
-        <div class="prev-item">
-          <span class="ptitle">VP of Customer Success and Support</span> — <span class="pco">Prophecy</span> (fit 68, Secondary) — <b>Not reconfirmed 9/29</b> (at risk). AI-native data-prep platform; remote US; owns GRR/NDR, renewals, global technical support, and enablement, with a mandate to design an operating model for a post-sales org "several times our current size." Gaps: wants 5+ years leading both CS and technical support, and a data/cloud/AI platform background with working knowledge of data-engineering roles; no comp listed.
-          <a class="jdlink" href="https://www.builtinnyc.com/job/vp-customer-success-and-support/11186584" target="_blank">View posting →</a>
-        </div>
-        <div class="prev-item">
-          <span class="ptitle">Head of Technical Success, Government</span> — <span class="pco">OpenAI</span> (fit 64, Secondary) — OpenAI for Government, based in Washington, DC (home market); $374K–$450K + equity. Builds and leads the technical org across the whole government customer lifecycle (pre-sales → prototype-to-production → adoption). Strong public-sector ties (Booz Allen, Decision Lens federal) and a build mandate, and it's the same team as the Enablement Lead role she already applied to. Real gaps: the posting asks for "deeply technical" AI/platform credibility (APIs, agentic systems, eval patterns), international government experience, and prefers an active clearance.
-          <a class="jdlink" href="https://openai.com/careers/head-of-technical-success-government-washington-dc/" target="_blank">View posting →</a>
-        </div>
-        <div class="prev-item">
-          <span class="ptitle">VP of Customer Success</span> — <span class="pco">Forerunner</span> (fit 80, Secondary) — <b>Not re-opened 9/29</b>, though it still appears in search. <b>moved down from Primary tonight:</b> the live Greenhouse posting now lists New York / Portland ME / San Francisco and asks candidates whether they can work hybrid from one of the offices (NY, Berkeley, Portland ME) — it's no longer the remote role it was tracked as. Base $190K–$230K (below floor), OTE $235K–$290K. Early-stage GovTech CS build is still a strong functional fit.
-          <a class="jdlink" href="https://job-boards.greenhouse.io/forerunner/jobs/5069179007" target="_blank">View posting →</a>
-        </div>
-        <div class="prev-item">
-          <span class="ptitle"><a href="https://www.linkedin.com/jobs/view/vice-president-customer-success-at-miro-4445582207" target="_blank" style="color:inherit;">Vice President Customer Success</a></span> — <span class="pco">Miro</span> (fit 68, Secondary) — solid functional match leading Director-level CS leaders for Americas + Japan/APAC, but no salary listed on Miro's own page (a third-party board estimates $285K–$385K — unconfirmed) and NYC/SF-based (not remote/DC). Apply link points to Miro's own careers page, reconfirmed live 9/29.
-          <a class="jdlink" href="https://miro.com/careers/vacancy/8654691002/" target="_blank">View posting →</a>
-        </div>
-        <div class="prev-item">
-          <span class="ptitle"><a href="https://www.linkedin.com/jobs/view/vp-professional-services-at-starburst-4449773145" target="_blank" style="color:inherit;">VP, Professional Services</a></span> — <span class="pco">Starburst</span> (fit 68, Secondary) — data-infrastructure SaaS (Trino/query-engine platform), $240K–$300K, Boston preferred/remote-open. Functional postsales-leadership fit is solid, but the posting names real technical-domain fluency (data federation, query engines, Iceberg/data-lakehouse) she doesn't have — a gap likely to surface early in screening.
-          <a class="jdlink" href="https://job-boards.greenhouse.io/starburst/jobs/5375098008" target="_blank">View posting →</a>
-        </div>
-        <div class="prev-item">
-          <span class="ptitle">VP, Customer Success (Strategic Segment)</span> — <span class="pco">NiCE</span> (fit 66, Secondary) — resume &amp; cover letter already on file.
-          <a class="jdlink" href="https://job-boards.greenhouse.io/nice/jobs/4952634101" target="_blank">View posting →</a>
-        </div>
-        <div class="prev-item">
-          <span class="ptitle"><a href="https://www.linkedin.com/jobs/view/vice-president-of-customer-success-at-iboss-4437496437" target="_blank" style="color:inherit;">VP of Customer Success</a></span> — <span class="pco">iboss</span> (fit 64, Secondary) — cybersecurity domain + degree-field gap.
-          <a class="jdlink" href="https://jobs.jobvite.com/iboss/job/oTNXzfwW" target="_blank">View posting →</a>
-        </div>
-        <div class="prev-item">
-          <span class="ptitle"><a href="https://www.linkedin.com/jobs/view/vp-professional-services-strategy-operations-at-kinaxis-4435188531" target="_blank" style="color:inherit;">VP, Professional Services Strategy &amp; Operations</a></span> — <span class="pco">Kinaxis</span> (fit 55, Secondary) — found by Ghazal, not the scan. Requires a proven $100M+ global PS portfolio track record — larger scale than she's run; role is BizOps/systems-architect flavored (PSA/ERP roadmap, resource modeling) rather than direct delivery leadership. Remote, NA.
-          <a class="jdlink" href="https://careers-kinaxis.icims.com/jobs/34994/vp,-professional-services-strategy-&-operations/job" target="_blank">View posting →</a>
-        </div>
-        <div class="prev-item">
-          <span class="ptitle">VP / Senior Director, Professional Services Consulting</span> — <span class="pco">Brightspot</span> (fit 62, Secondary) — <b>Not reconfirmed 9/29</b>; search results now show the title as Senior Director only. found by Ghazal, not the scan. $200K + bonus (below floor); smaller company than her recent roles, but Reston, VA is her home market.
-          <a class="jdlink" href="https://jobs.lever.co/brightspot/9ac4170b-2442-44df-94a3-1deaf6ea75e9" target="_blank">View posting →</a>
-        </div>
-        <div class="prev-item">
-          <span class="ptitle"><a href="https://www.linkedin.com/jobs/view/salesforce-education-cloud-capability-leader-at-slalom-4446922613" target="_blank" style="color:inherit;">Salesforce Education Cloud Capability Leader</a></span> — <span class="pco">Slalom</span> (fit unconfirmed, Secondary) — found by Ghazal via LinkedIn only; no independently-fetchable posting found, so not scored with full confidence. Salesforce-ecosystem fit against her background is a real open question — flagged rather than assumed.
-          <a class="jdlink" href="https://www.linkedin.com/jobs/view/salesforce-education-cloud-capability-leader-at-slalom-4446922613" target="_blank">View posting →</a>
-        </div>
-        <div class="prev-item">
-          <span class="ptitle">Vice President/Senior Director, Customer Strategy &amp; Transformation</span> — <span class="pco">Cvent</span> (fit 74, Secondary) — Tysons Corner, VA (home market), verified live today. Dual-level title (VP or Sr. Director) — some seniority ambiguity. Comp not officially listed; Glassdoor estimates $174K–$257K, uncertain whether it clears her floor.
-          <a class="jdlink" href="https://careers.cvent.com/careers-home/jobs/8130?lang=en-us" target="_blank">View posting →</a>
-        </div>
-        <div class="prev-item">
-          <span class="ptitle"><a href="https://www.linkedin.com/jobs/view/4423024120" target="_blank" style="color:inherit;">Partner, AI-Enabled Performance Transformation</a></span> — <span class="pco">Chartis</span> (fit unconfirmed, Secondary) — found via LinkedIn only; re-checked today, still no independently-fetchable posting for this exact req (a sibling "AI-Enabled CDI/Care Management" Partner req is confirmed real, so the title family is genuine). Real gap: her healthcare depth is buyer-side (pharma/life-sciences), not provider/payer operator experience.
-          <a class="jdlink" href="https://www.linkedin.com/jobs/view/4423024120" target="_blank">View posting →</a>
-        </div>
-        <div class="prev-item">
-          <span class="ptitle"><a href="https://www.linkedin.com/jobs/view/4455928153" target="_blank" style="color:inherit;">Sr. Leader, Customer Solutions, SWAT, CSM</a></span> — <span class="pco">Amazon Web Services (AWS)</span> (fit unconfirmed, Secondary) — found via LinkedIn only; a closely-titled sibling req (Principal CSM, SWAT) confirms this is a real leader-of-leaders CS-leadership role, plausible fit for her CS-at-scale pattern, but scope/level/comp remain unconfirmed.
-          <a class="jdlink" href="https://www.linkedin.com/jobs/view/4455928153" target="_blank">View posting →</a>
-        </div>
-        <div class="prev-item">
-          <span class="ptitle"><a href="https://www.linkedin.com/jobs/view/partner-enablement-lead-system-integrators-at-anthropic-4401156016" target="_blank" style="color:inherit;">Partner Enablement Lead, System Integrators</a></span> — <span class="pco">Anthropic</span> (fit 58, Secondary) — strong innovation/transformation-affinity match (explicit "0 to 1 building" language) and real partner-program-building experience (ada CX alliances from inception), but the posting wants 7–10+ years specifically inside large GSIs, which she doesn't have, and requires relocation/hub commitment to SF or NYC (25% onsite minimum, 25–35% travel) — not remote or DC-metro.
-          <a class="jdlink" href="https://job-boards.greenhouse.io/anthropic/jobs/5188391008" target="_blank">View posting →</a>
-        </div>
-        <div class="prev-item">
-          <span class="ptitle"><a href="https://www.linkedin.com/jobs/view/global-head-of-gsi-alliances-at-canonical-4433868677" target="_blank" style="color:inherit;">Global Head of GSI Alliances</a></span> — <span class="pco">Canonical</span> (fit 52, Secondary) — needs quota-carrying alliance sales exp.
-          <a class="jdlink" href="https://canonical.com/careers/4517179" target="_blank">View posting →</a>
-        </div>
-        <div class="prev-item">
-          <span class="ptitle">Vice President, Strategy and Execution - Government Solutions</span> — <span class="pco">Equifax</span> (fit 59, Secondary) — <b>Not reconfirmed 9/29</b> (page came back empty). found by Ghazal, not the scan. Reston, hybrid 4 days/wk onsite. Strong structural analog to her FranConnect KPI/Salesforce dashboard work and cross-functional pattern, plus public-sector ties to Booz Allen/Decision Lens — but Sales/RevOps-strategy flavored, not PS/CS, and comp ($160K–$200K base) is below her floor.
-          <a class="jdlink" href="https://careers.equifax.com/en/jobs/j00178900/vice-president-strategy-and-execution-government-solutions" target="_blank">View posting →</a>
-        </div>
-        <div class="prev-item">
-          <span class="ptitle">Technology Strategy Innovation and Delivery Transformation Manager</span> — <span class="pco">Deloitte</span> (fit 48, Secondary) — <b>Not reconfirmed 9/29.</b> found by Ghazal, not the scan. Listed across 36 locations incl. McLean, VA (home market), $155,600–$306,800. Real gap: "Manager" is a mid-career level on Deloitte's own ladder (only 6+ years experience required), not VP-equivalent scope — a title-vs-seniority mismatch, not a fit match. Page also states recruiting ended 7/31/2026, already past as of this posting's discovery — flagged, not confidently live.
-          <a class="jdlink" href="https://apply.deloitte.com/en_US/careers/JobDetail/Technology-Strategy-Innovation-and-Delivery-Transformation-Manager/355545" target="_blank">View posting →</a>
-        </div>
-      </div>
-    </section>
-
-    <div class="banner">
-      <h2>⚠ Notes on this update</h2>
-      <ul>
-        <li><b>Weekly scheduled scan, Tuesday 9/29</b> (first run in 7 days). Re-checked every tracked open posting, then ran new searches across VP, SVP, EVP, COO and CCO titles, plus the extra title patterns (hyperscaler delivery leader, strategy &amp; operations, forward-deployed) and "build / newly created" phrasing.
-          <ul>
-            <li><b>New this run (7):</b> three Primary matches get full cards: <b>Restaurant365</b> VP Professional Services (85), <b>ST6</b> VP Professional Services (84, PE-backed roll-up with acquisition integration) and <b>GitLab</b> VP Professional Services (80). Four more are Secondary: Qlik VP PS Americas (76; DC is a listed location, but the link isn't confirmed), Wavelo VP PS (64), Ping Identity SVP Customer Success (58) and Guidewire VP Delivery Assurance &amp; Global PMO (55).</li>
-            <li><b>Went dead (1):</b> Videa VP Customer Success. The job page is closed, and VideaHealth has announced a new VP of Customer Success. Removed from the page.</li>
-            <li><b>Couldn't reconfirm this run (kept, not dropped):</b> Crunchtime, Prophecy, Brightspot, Equifax, Deloitte, the Forerunner Greenhouse page, and AWS ProServe PADL-EM in Working On. Their pages either came back empty or never appeared in search results. Crunchtime and Prophecy are the most at risk, so check them before spending time.</li>
-            <li><b>Verified through job-board mirrors, not the company page:</b> Talkdesk, Visa, First Due, Kinaxis, Guidewire and Restaurant365. Each mirror links to the same job and showed it as active. This run the fetch tool could only open links that came up in a search, so several company pages couldn't be opened directly.</li>
-            <li><b>Excluded, with reasons logged:</b> Altera Digital Health VP PS ($140K–$155K, 25%+ travel), Backbase SVP CS (Amsterdam), Semperis Associate VP CS (below level; identity-security domain), Ylopo VP Customer Ops ($100K), Guidewire VP Global Practices (requires a CTO / Chief Architect background), Smartsheet VP PS (25–50% travel, 250-person org), Salesforce VP AMER Practices (posted June 2025). Dead or unreadable: Elastic, Wheel, SimSpace, Pendo, Varicent, Amperity.</li>
-            <li><b>New candidates found this run, by level:</b> VP: 15 (GitLab, Restaurant365, ST6, Wavelo, Qlik, Guidewire ×2, Altera, Smartsheet, Elastic, Wheel, SimSpace, Varicent, Pendo, Ylopo). SVP: 3 (Ping, Backbase, Amperity). Associate VP: 1 (Semperis). EVP: 0. COO: 0 real openings; searches returned only job-board summary pages. CCO: 0. Other titles: Salesforce VP AMER Practices (stale); AWS Delivery Practice Manager roles (below her level, not surfaced).</li>
-            <li><b>Not done this run, because no one was there to approve it:</b> (1) The <b>Gmail scan of LinkedIn job-alert emails</b> was declined automatically. If you want it in future unattended runs, approve Gmail access for scheduled tasks. (2) <b>Chrome</b> page loads were blocked, so LinkedIn links still can't be checked. One empty Chrome tab was opened and closed straight away; none are left open.</li>
-            <li><b>Sources:</b> Indeed, ZipRecruiter and Dice were not used. A few search results pointed to those sites, and nothing from them was used.</li>
-          </ul>
-        </li>
-        <li><b>Working On tab:</b> no change. Google's Strategy and Operations Lead, Cloud Security posting is still gone (taken down 9/22). Marriott was reconfirmed live 9/29. Its page says HQ roles are hybrid for people within commuting distance of Bethesda, which includes you. AWS PADL-EM couldn't be reconfirmed.</li>
-        <li><b>Resume/cover letter generation is on-demand only.</b> Click "Create Resume &amp; Cover Letter" on any card, or ask directly.</li>
-        <li><b>LinkedIn connection checks are on request only.</b> Ask about a specific company, for example "check my connections at Restaurant365".</li>
-      </ul>
-    </div>
-
-  </div>
-
-  <div class="tab-panel" id="tab-workingon">
-    <section>
-      <h2 style="border:none; margin-top:20px;">Materials in progress — not yet applied</h2>
-      <p class="empty" id="workingon-empty">Nothing in progress right now.</p>
-      <div class="tracking-scroll">
-      <table class="summary" id="workingon-table" style="display:none;">
-        <thead>
-          <tr>
-            <th class="sortable" onclick="toggleSort('workingon','title')">Title / Role<span class="sort-arrow" id="arrow-workingon-title"></span></th>
-            <th class="sortable" onclick="toggleSort('workingon','company')">Company<span class="sort-arrow" id="arrow-workingon-company"></span></th>
-            <th class="sortable" onclick="toggleSort('workingon','tier')">Match<span class="sort-arrow" id="arrow-workingon-tier"></span></th>
-            <th class="sortable" onclick="toggleSort('workingon','category')">Category<span class="sort-arrow" id="arrow-workingon-category"></span></th>
-            <th class="sortable" onclick="toggleSort('workingon','fit')">Fit %<span class="sort-arrow" id="arrow-workingon-fit"></span></th>
-            <th>Notes</th>
-            <th class="sortable" onclick="toggleSort('workingon','days')">Days Active<span class="sort-arrow" id="arrow-workingon-days"></span></th>
-            <th class="sortable" onclick="toggleSort('workingon','salary')">Salary<span class="sort-arrow" id="arrow-workingon-salary"></span></th>
-            <th>Apply</th>
-            <th>Applied</th>
-          </tr>
-        </thead>
-        <tbody id="workingon-tbody"></tbody>
-      </table>
-      </div>
-    </section>
-  </div>
-
-  <div class="tab-panel" id="tab-tracking">
-    <section>
-      <h2 style="border:none; margin-top:20px;">Applied jobs</h2>
-      <p class="empty" id="tracking-empty">Nothing marked "Applied" yet — check the box in the Today's Matches summary table to add a job here.</p>
-      <div class="tracking-scroll">
-      <table class="tracking" id="tracking-table" style="display:none;">
-        <thead>
-          <tr>
-            <th class="sortable" onclick="toggleSort('tracking','title')">Title / Role<span class="sort-arrow" id="arrow-tracking-title"></span></th>
-            <th class="sortable" onclick="toggleSort('tracking','company')">Company<span class="sort-arrow" id="arrow-tracking-company"></span></th>
-            <th class="sortable" onclick="toggleSort('tracking','dateApplied')">Date Applied<span class="sort-arrow" id="arrow-tracking-dateApplied"></span></th>
-            <th class="sortable" onclick="toggleSort('tracking','responded')">Responded<span class="sort-arrow" id="arrow-tracking-responded"></span></th>
-            <th class="sortable" onclick="toggleSort('tracking','vec')">Reported to VEC<span class="sort-arrow" id="arrow-tracking-vec"></span></th>
-            <th class="sortable" onclick="toggleSort('tracking','connection')">Personal Connection Reach Out<span class="sort-arrow" id="arrow-tracking-connection"></span></th>
-            <th class="sortable" onclick="toggleSort('tracking','throughWho')">Through Who?<span class="sort-arrow" id="arrow-tracking-throughWho"></span></th>
-            <th class="sortable" onclick="toggleSort('tracking','notes')">Notes<span class="sort-arrow" id="arrow-tracking-notes"></span></th>
-            <th></th>
-          </tr>
-        </thead>
-        <tbody id="tracking-tbody"></tbody>
-      </table>
-      </div>
-    </section>
-  </div>
-
+<div class="tabs">
+  <button class="tab active" data-tab="matches">Today's Matches</button>
+  <button class="tab" data-tab="workingon">Working On</button>
+  <button class="tab" data-tab="tracking">Job Tracking</button>
 </div>
 
-<footer>Generated by the job-search-scan skill · Next run will dedupe against today's postings automatically · The whole Job Tracking tab (applied status, date, responded, VEC, connections, notes) is tracked durably in seen_postings.json — report details in chat to log them there. Typing directly into the fields below only saves in this browser and won't survive the next rebuild. Title links to the original JD posting — documentation for unemployment purposes. Every posting lives in exactly one tab: Today's Matches, Working On, or Job Tracking. Click any arrow-marked column header to sort.</footer>
+<div class="panel active" id="panel-matches">
+  <table id="table-matches"><thead><tr></tr></thead><tbody></tbody></table>
+  <h2 class="section">Match details — highest fit first</h2>
+  <div id="cards-matches"></div>
+  <h2 class="section">Proactive outreach opportunities</h2>
+  <div class="notes-box">No specific company-level build-out signal cleared the bar for a real flag this run (funding round, new CS/PS/GTM leadership hire, rapid customer-facing headcount growth). The Aura company-intelligence connector still isn't connected; this section stays thin until either that connector is added or a specific signal surfaces.</div>
+  <h2 class="section">Previously surfaced, still open (Secondary tier)</h2>
+  <div class="prevlist" id="prevlist"></div>
+  <h2 class="section">⚠ Notes on this update</h2>
+  <div class="notes-box" id="setup-notes"></div>
+</div>
+
+<div class="panel" id="panel-workingon">
+  <table id="table-workingon"><thead><tr></tr></thead><tbody></tbody></table>
+  <div id="cards-workingon"></div>
+</div>
+
+<div class="panel" id="panel-tracking">
+  <table id="table-tracking"><thead><tr></tr></thead><tbody></tbody></table>
+</div>
+
+<footer>
+  Generated by the job-search-scan skill · Next run will dedupe against today's postings automatically · The whole Job Tracking tab (applied status, date, responded, VEC, connections, notes) is tracked durably in seen_postings.json — report details in chat to log them there. Typing directly into the fields below only saves in this browser and won't survive the next rebuild. Title links to the original JD posting — documentation for unemployment purposes. Every posting lives in exactly one tab: Today's Matches, Working On, or Job Tracking. Click any column header to sort.
+</footer>
+</div>
 
 <script>
-  const JOBS = [
-    {
-      id: "restaurant365-vp-ps-2026-09-29",
-      title: "VP, Professional Services",
-      company: "Restaurant365",
-      category: "SaaS PS / Restaurant Tech",
-      tier: "primary",
-      fit: 85,
-      flag: "No comp listed; restaurant/HR/fintech experience named as a plus; verified via job-board mirror",
-      salary: "Not listed",
-      postedDate: null,
-      jdLink: "https://www.themuse.com/jobs/restaurant365/vp-professional-services",
-      linkedinLink: "https://www.linkedin.com/jobs/view/vp-professional-services-at-restaurant365-4197152069"
-    },
-    {
-      id: "st6-vp-ps-2026-09-29",
-      title: "Vice President, Professional Services",
-      company: "ST6",
-      category: "SaaS PS / PE-backed Roll-up",
-      tier: "primary",
-      fit: 84,
-      flag: "Wants 70% utilization (her best: 60%); no comp listed; product line not named in JD",
-      salary: "Not listed",
-      postedDate: null,
-      jdLink: "https://job-boards.greenhouse.io/st6/jobs/6613184"
-    },
-    {
-      id: "gitlab-vp-ps-2026-09-29",
-      title: "Vice President, Professional Services",
-      company: "GitLab",
-      category: "SaaS PS / DevSecOps Platform",
-      tier: "primary",
-      fit: 80,
-      flag: "Wants deep DevSecOps/Kubernetes/cloud expertise; 70+ team is larger than her ~50",
-      salary: "$250,880–$432,768",
-      postedDate: null,
-      jdLink: "https://job-boards.greenhouse.io/gitlab/jobs/8122512002"
-    },
-    {
-      id: "qlik-vp-ps-americas-2026-09-29",
-      title: "Vice President, Professional Services - Americas",
-      company: "Qlik",
-      category: "SaaS PS / Data Analytics",
-      tier: "secondary",
-      fit: 76,
-      flag: "Not independently rendered (Ladders listing only) — confirm link; in-person, DC among listed locations",
-      salary: "$200K–$300K",
-      postedDate: "2026-09-22",
-      jdLink: "https://www.theladders.com/job/vice-president-professional-services-americas-qlik-washington-dc_88929730"
-    },
-    {
-      id: "wavelo-vp-ps-2026-09-29",
-      title: "Vice President, Professional Services",
-      company: "Wavelo (Tucows)",
-      category: "SaaS PS / Telecom",
-      tier: "secondary",
-      fit: 64,
-      flag: "Requires 10–15 yrs PS leadership in telecom SaaS (OSS/BSS, billing)",
-      salary: "$222,700–$247,400 base",
-      postedDate: null,
-      jdLink: "https://job-boards.greenhouse.io/wavelo/jobs/7590397003"
-    },
-    {
-      id: "pingidentity-svp-cs-2026-09-29",
-      title: "SVP, Customer Success (Global CS & Renewals)",
-      company: "Ping Identity",
-      category: "SaaS CS / Cybersecurity (SVP)",
-      tier: "secondary",
-      fit: 58,
-      flag: "Wants $600M+ ARR book, quota history, and IAM experience — big scale gap",
-      salary: "$275K–$350K + bonus",
-      postedDate: null,
-      jdLink: "https://job-boards.greenhouse.io/pingidentity/jobs/7788253002"
-    },
-    {
-      id: "guidewire-vp-delivery-assurance-pmo-2026-09-29",
-      title: "VP, Delivery Assurance & Global PMO - Professional Services",
-      company: "Guidewire",
-      category: "SaaS PS / Delivery Assurance (Insurance)",
-      tier: "secondary",
-      fit: 55,
-      flag: "Requires running program assurance in a 1,000+ person services org; verified via mirror",
-      salary: "$232K–$377K base + bonus",
-      postedDate: "2026-09-22",
-      jdLink: "https://guidewire.wd5.myworkdayjobs.com/external/job/United-States---Remote/VP--Delivery-Assurance---Global-PMO---Professional-Services_JR_15184-1"
-    },
-    {
-      id: "talkdesk-vp-customer-delivery-2026-09-22",
-      title: "Vice President, Customer Delivery",
-      company: "Talkdesk",
-      category: "SaaS PS / Global Delivery (CCaaS + AI)",
-      tier: "primary",
-      fit: 84,
-      flag: "Global delivery org larger than her 50-person team; wants deep agentic/forward-deployed technical credibility",
-      salary: "$262K–$477K OTE + equity",
-      postedDate: "2026-08-31",
-      jdLink: "https://job-boards.greenhouse.io/talkdesk2/jobs/8103819"
-    },
-    {
-      id: "crunchtime-vp-cs-2026-09-22",
-      title: "Vice President, Customer Success",
-      company: "Crunchtime (Zenput)",
-      category: "SaaS CS / Restaurant & Franchise Ops",
-      tier: "primary",
-      fit: 82,
-      flag: "Not reconfirmed 9/29 — check link. Base $190K–$225K below floor (OTE $228K–$270K); Eastern time zone",
-      salary: "$190K–$225K base / $228K–$270K OTE",
-      postedDate: "2026-09-17",
-      jdLink: "https://www.builtinnyc.com/job/vice-president-customer-success/11054615"
-    },
-    {
-      id: "tapcheck-vp-cs-2026-09-22",
-      title: "VP, Customer Success",
-      company: "Tapcheck",
-      category: "Fintech CS+Support+Onboarding Combined",
-      tier: "secondary",
-      fit: 72,
-      flag: "Wants high-volume support (tens of thousands of tickets/mo) + BPO experience; no comp listed",
-      salary: "Not listed",
-      postedDate: "2026-08-31",
-      jdLink: "https://www.builtinnyc.com/job/vp-customer-success/10945199"
-    },
-    {
-      id: "prophecy-vp-cs-support-2026-09-22",
-      title: "VP of Customer Success and Support",
-      company: "Prophecy",
-      category: "SaaS CS+Support / AI Data Platform",
-      tier: "secondary",
-      fit: 68,
-      flag: "Not reconfirmed 9/29 — at risk. Needs data-engineering platform background + 5 yrs leading technical support",
-      salary: "Not listed",
-      postedDate: "2026-09-15",
-      jdLink: "https://www.builtinnyc.com/job/vp-customer-success-and-support/11186584"
-    },
-    {
-      id: "openai-head-technical-success-gov-2026-09-22",
-      title: "Head of Technical Success, Government",
-      company: "OpenAI",
-      category: "AI Lab / Public Sector Technical Success",
-      tier: "secondary",
-      fit: 64,
-      flag: "Wants deep hands-on AI/platform technical credibility + international gov experience; clearance preferred",
-      salary: "$374K–$450K + equity",
-      postedDate: null,
-      jdLink: "https://openai.com/careers/head-of-technical-success-government-washington-dc/"
-    },
-    {
-      id: "vanta-vp-ps-2026-07-09",
-      title: "VP, Success & Services (Professional Services, Customer Success & Support)",
-      company: "Vanta",
-      category: "SaaS PS/CS/Support",
-      tier: "primary",
-      fit: 86,
-      flag: "Applied 9/17. No compliance/security domain background; combined P&L scope is large",
-      salary: "$260K–$306K + equity",
-      postedDate: null,
-      jdLink: "https://jobs.ashbyhq.com/vanta/7e3cdfbc-9a72-49e4-8fb6-e8f59364af6d",
-      linkedinLink: "https://www.linkedin.com/jobs/view/vp-services-success-at-vanta-4415924720",
-      appliedDefault: true,
-      appliedDate: "2026-09-17",
-      tracking: { dateApplied: "2026-09-17" }
-    },
-    {
-      id: "antithesis-vp-cx-2026-09-17",
-      title: "Vice President of Customer Experience",
-      company: "Antithesis",
-      category: "SaaS CX / PS+CS+Support Combined",
-      tier: "primary",
-      fit: 80,
-      flag: "No salary listed; on-site (Vienna, VA — local commute, not remote)",
-      salary: "Not listed",
-      postedDate: "2026-07-18",
-      jdLink: "https://jobs.ashbyhq.com/antithesis/12cee240-67dc-489d-87b4-28df314e518f"
-    },
-    {
-      id: "marriott-vp-cx-innovation-2026-09-17",
-      title: "Vice President, Customer Experience + Innovation",
-      company: "Marriott International",
-      category: "Customer Experience Design / Innovation",
-      tier: "secondary",
-      fit: 63,
-      flag: "Formal experience-design/design-research mandate, not PS/CS operations — real skill-profile gap",
-      salary: "$182,100–$325,300 + bonus",
-      postedDate: null,
-      jdLink: "https://careers.marriott.com/vice-president-customer-experience-innovation/job/AE3AA615A6EFD56F53C399DA9C2A93EC",
-      workingOn: true
-    },
-    {
-      id: "equifax-vp-strategy-execution-gov-solutions-2026-09-17",
-      title: "Vice President, Strategy and Execution - Government Solutions",
-      company: "Equifax",
-      category: "Sales/RevOps Strategy (Gov Solutions)",
-      tier: "secondary",
-      fit: 59,
-      flag: "Comp below floor ($160K–$200K base); Sales/RevOps-flavored, not PS/CS",
-      salary: "$160K–$200K base",
-      postedDate: "2026-09-02",
-      jdLink: "https://careers.equifax.com/en/jobs/j00178900/vice-president-strategy-and-execution-government-solutions"
-    },
-    {
-      id: "google-strategy-ops-lead-cloud-security-2026-09-17",
-      title: "Strategy and Operations Lead, Cloud Security",
-      company: "Google",
-      category: "Hyperscaler BizOps / Strategy & Operations",
-      tier: "secondary",
-      fit: 50,
-      flag: "⚠ POSTING TAKEN DOWN — Google Careers returned 'Job not found' on the 9/22 evening re-check. Materials in progress may not be usable for this req.",
-      salary: "$150K–$217K",
-      postedDate: null,
-      jdLink: "https://www.google.com/about/careers/applications/jobs/results/143242315232617158-product-strategy-and-operations-lead-cloud-security",
-      workingOn: true
-    },
-    {
-      id: "deloitte-tech-strategy-innovation-delivery-transformation-mgr-2026-09-17",
-      title: "Technology Strategy Innovation and Delivery Transformation Manager",
-      company: "Deloitte",
-      category: "GSI / Consulting (Title-Level Mismatch)",
-      tier: "secondary",
-      fit: 48,
-      flag: "'Manager' is mid-career on Deloitte's ladder, not VP-equivalent; recruiting end date already passed",
-      salary: "$155,600–$306,800",
-      postedDate: null,
-      jdLink: "https://apply.deloitte.com/en_US/careers/JobDetail/Technology-Strategy-Innovation-and-Delivery-Transformation-Manager/355545"
-    },
-    {
-      id: "deltek-vp-cs-ps-2026-09-12",
-      title: "VP Customer Success (Professional Services)",
-      company: "Deltek",
-      category: "SaaS CS / Professional-Services Vertical",
-      tier: "primary",
-      fit: 85,
-      flag: "Scaling to 100+ team / $250M+ bookings scope beyond her largest role; travel up to 30% (above her 15% max)",
-      salary: "$246,679–$431,679 OTE",
-      postedDate: "2026-08-24",
-      jdLink: "https://careers.deltek.com/job/23749666/vp-customer-success-professional-services-remote/"
-    },
-    {
-      id: "hcss-vp-ps-2026-07-09",
-      title: "Vice President of Professional Services",
-      company: "HCSS",
-      category: "SaaS PS/CS",
-      tier: "primary",
-      fit: 82,
-      flag: "Remote status unconfirmed; comp not listed",
-      salary: "Not listed",
-      postedDate: null,
-      jdLink: "https://careers.hcss.com/vice-president-of-professional-services_5075780/"
-    },
-    {
-      id: "forerunner-vp-cs-2026-07-21",
-      title: "VP of Customer Success",
-      company: "Forerunner",
-      category: "SaaS CS / GovTech",
-      tier: "secondary",
-      fit: 80,
-      flag: "Now hybrid from NY / Portland ME / Berkeley offices (no longer remote); base below floor",
-      salary: "$190K–$230K base / $235K–$290K OTE",
-      postedDate: null,
-      jdLink: "https://job-boards.greenhouse.io/forerunner/jobs/5069179007",
-      linkedinLink: "https://www.linkedin.com/jobs/view/vp-of-customer-success-at-forerunner-4381118743"
-    },
-    {
-      id: "pingidentity-vp-cs-2026-08-11",
-      title: "VP, Customer Success",
-      company: "Ping Identity",
-      category: "SaaS CS / Cybersecurity",
-      tier: "primary",
-      fit: 78,
-      flag: "No identity/access-management or cybersecurity domain exp",
-      salary: "$240K–$275K + bonus",
-      postedDate: "2026-07-21",
-      jdLink: "https://builtin.com/job/vp-customer-success/3531822",
-      linkedinLink: "https://www.linkedin.com/jobs/view/vp-customer-success-at-ping-identity-4064058835"
-    },
-    {
-      id: "visa-vp-client-success-2026-09-21",
-      title: "Vice President, Client Success",
-      company: "Visa",
-      category: "Fintech / Payments CS+PS Combined",
-      tier: "primary",
-      fit: 78,
-      flag: "No comp listed; no direct fintech/payments domain exp",
-      salary: "Not listed",
-      postedDate: "2026-09-16",
-      jdLink: "https://visa.wd5.myworkdayjobs.com/Visa/job/US---Ashburn-VA/Vice-President--Client-Success_REF088476W",
-      linkedinLink: "https://www.linkedin.com/jobs/view/4468318255"
-    },
-    {
-      id: "cvent-vp-sr-director-customer-strategy-transformation-2026-09-21",
-      title: "Vice President/Senior Director, Customer Strategy & Transformation",
-      company: "Cvent",
-      category: "Strategy & Operations (Customer Org)",
-      tier: "secondary",
-      fit: 74,
-      flag: "Comp not officially listed (Glassdoor est. $174K-$257K); dual-level title, some seniority ambiguity",
-      salary: "Not listed (est. $174K–$257K)",
-      postedDate: null,
-      jdLink: "https://careers.cvent.com/careers-home/jobs/8130?lang=en-us",
-      linkedinLink: "https://www.linkedin.com/jobs/view/4434693125"
-    },
-    {
-      id: "firstdue-vp-cs-2026-07-21",
-      title: "VP, Client Success",
-      company: "First Due",
-      category: "SaaS CS / Public Safety",
-      tier: "secondary",
-      fit: 78,
-      flag: "Comp below floor; bonus amount unspecified",
-      salary: "$200K–$225K base + bonus",
-      postedDate: "2026-05-27",
-      jdLink: "https://job-boards.greenhouse.io/localitymediallcdbafirstdue/jobs/4260158009"
-    },
-    {
-      id: "veeam-vp-cs-2026-07-23",
-      title: "VP, Customer Success",
-      company: "Veeam",
-      category: "SaaS CS / Data Infrastructure",
-      tier: "primary",
-      fit: 74,
-      flag: "Larger scale than prior roles; posting now ~10 months old",
-      salary: "$325,400–$464,800 OTE",
-      postedDate: "2025-11-17",
-      jdLink: "https://careers.veeam.com/job/united-states/vp-customer-success/22681/88549994768"
-    },
-    {
-      id: "miro-vp-cs-2026-09-11",
-      title: "Vice President Customer Success",
-      company: "Miro",
-      category: "SaaS CS / Collaboration Software",
-      tier: "secondary",
-      fit: 68,
-      flag: "No salary listed; Hybrid NYC/SF (not remote/DC)",
-      salary: "Not listed",
-      postedDate: "2026-08-23",
-      jdLink: "https://miro.com/careers/vacancy/8654691002/",
-      linkedinLink: "https://www.linkedin.com/jobs/view/vice-president-customer-success-at-miro-4445582207"
-    },
-    {
-      id: "starburst-vp-ps-2026-09-12",
-      title: "VP, Professional Services",
-      company: "Starburst",
-      category: "SaaS PS / Data Infrastructure",
-      tier: "secondary",
-      fit: 68,
-      flag: "Real technical-domain gap (data federation/query engines/Iceberg); Boston preferred",
-      salary: "$240,000–$300,000",
-      postedDate: null,
-      jdLink: "https://job-boards.greenhouse.io/starburst/jobs/5375098008",
-      linkedinLink: "https://www.linkedin.com/jobs/view/vp-professional-services-at-starburst-4449773145"
-    },
-    {
-      id: "nice-vp-cs-strategic-2026-08-19",
-      title: "VP, Customer Success (Strategic Segment)",
-      company: "NiCE",
-      category: "SaaS CS / Strategic Accounts",
-      tier: "secondary",
-      fit: 66,
-      flag: "Account-level P&L narrower than her exp; possibly parallel to the Americas req; comp not listed",
-      salary: "Not listed",
-      postedDate: "2026-08-19",
-      jdLink: "https://job-boards.greenhouse.io/nice/jobs/4952634101"
-    },
-    {
-      id: "iboss-vp-cs-2026-07-21",
-      title: "VP of Customer Success",
-      company: "iboss",
-      category: "SaaS CS / Cybersecurity",
-      tier: "secondary",
-      fit: 64,
-      flag: "Cybersecurity domain + degree-field gap",
-      salary: "Not listed",
-      postedDate: null,
-      jdLink: "https://jobs.jobvite.com/iboss/job/oTNXzfwW",
-      linkedinLink: "https://www.linkedin.com/jobs/view/vice-president-of-customer-success-at-iboss-4437496437"
-    },
-    {
-      id: "boozallen-vp-strategic-partnerships-2026-09-13",
-      title: "Strategic Partnerships, Vice President",
-      company: "Booz Allen Hamilton",
-      category: "GSI / Consulting (Alliances)",
-      tier: "secondary",
-      fit: 60,
-      flag: "Applied 9/16. Needs 15-yr dedicated partnerships track; hybrid/onsite not remote",
-      salary: "$261,000–$432,000",
-      postedDate: "2026-06-26",
-      jdLink: "https://careers.boozallen.com/jobs/JobDetail/McLean-Strategic-Partnerships-Vice-President-R0243447/126497",
-      appliedDefault: true,
-      appliedDate: "2026-09-16",
-      tracking: { dateApplied: "2026-09-16" }
-    },
-    {
-      id: "openai-enablement-lead-government-2026-09-16",
-      title: "Enablement Lead, Government",
-      company: "OpenAI",
-      category: "AI Lab / Enablement (Government)",
-      tier: "secondary",
-      fit: 70,
-      flag: "Applied 9/16. 'Enablement Lead' reads as practitioner-level, narrower than her recent P&L-owning VP/Head titles",
-      salary: "$207,000–$295,000 base",
-      postedDate: null,
-      jdLink: "https://www.linkedin.com/jobs/view/4457112828/",
-      linkedinLink: "https://www.linkedin.com/jobs/view/4457112828/",
-      appliedDefault: true,
-      appliedDate: "2026-09-16",
-      tracking: { dateApplied: "2026-09-16" }
-    },
-    {
-      id: "anthropic-strategy-ops-applied-ai-amer-2026-09-11",
-      title: "Strategy & Operations, Applied AI - AMER",
-      company: "Anthropic",
-      category: "AI Lab / Strategy & Operations",
-      tier: "secondary",
-      fit: 72,
-      flag: "Applied 9/21. Resume + cover letter on file from 9/11, revised 9/17",
-      salary: "$270,000 OTE",
-      postedDate: null,
-      jdLink: "https://job-boards.greenhouse.io/anthropic/jobs/5284500008",
-      linkedinLink: "https://www.linkedin.com/jobs/view/strategy-operations-applied-ai-amer-at-anthropic-4437304129",
-      appliedDefault: true,
-      appliedDate: "2026-09-21",
-      tracking: { dateApplied: "2026-09-21" }
-    },
-    {
-      id: "aws-proserve-engagement-mgmt-2026-09-16",
-      title: "ProServe Area Delivery Leader - Engagement Management, AWS Industries",
-      company: "Amazon Web Services (AWS)",
-      category: "Hyperscaler PS / Delivery Leadership",
-      tier: "primary",
-      fit: 76,
-      flag: "Base below $230K floor but RSUs/sign-on likely close the gap; no hard AWS-technical requirement",
-      salary: "$201,000–$272,000 base",
-      postedDate: null,
-      jdLink: "https://www.amazon.jobs/en/jobs/3205552/proserve-area-delivery-leader-engagement-management-aws-industries",
-      workingOn: true
-    },
-    {
-      id: "kinaxis-vp-ps-strategy-ops-2026-09-16",
-      title: "VP, Professional Services Strategy & Operations",
-      company: "Kinaxis",
-      category: "SaaS PS / BizOps",
-      tier: "secondary",
-      fit: 55,
-      flag: "Requires proven $100M+ global PS portfolio scale — larger than her track record; role is BizOps/systems-architect flavored, not direct delivery leadership",
-      salary: "Not listed",
-      postedDate: null,
-      jdLink: "https://careers-kinaxis.icims.com/jobs/34994/vp,-professional-services-strategy-&-operations/job",
-      linkedinLink: "https://www.linkedin.com/jobs/view/vp-professional-services-strategy-operations-at-kinaxis-4435188531"
-    },
-    {
-      id: "brightspot-vp-sr-dir-ps-consulting-2026-09-16",
-      title: "VP / Senior Director, Professional Services Consulting",
-      company: "Brightspot",
-      category: "SaaS PS Consulting",
-      tier: "secondary",
-      fit: 62,
-      flag: "Comp below floor ($200K + bonus); smaller company, possibly narrower scope — but Reston VA is her home market",
-      salary: "$200,000 + bonus",
-      postedDate: null,
-      jdLink: "https://jobs.lever.co/brightspot/9ac4170b-2442-44df-94a3-1deaf6ea75e9"
-    },
-    {
-      id: "slalom-salesforce-education-cloud-capability-leader-2026-09-16",
-      title: "Salesforce Education Cloud Capability Leader",
-      company: "Slalom",
-      category: "GSI / Consulting (Salesforce Practice)",
-      tier: "secondary",
-      fit: 50,
-      flag: "Found via LinkedIn only, not independently verified — Salesforce ecosystem fit unconfirmed, flagged rather than scored with confidence",
-      salary: "Not listed",
-      postedDate: "2026-07-30",
-      jdLink: "https://www.linkedin.com/jobs/view/salesforce-education-cloud-capability-leader-at-slalom-4446922613",
-      linkedinLink: "https://www.linkedin.com/jobs/view/salesforce-education-cloud-capability-leader-at-slalom-4446922613"
-    },
-    {
-      id: "navan-vp-solutions-consulting-2026-07-12",
-      title: "VP, Global Solutions Consulting & Professional Services",
-      company: "Navan",
-      category: "SaaS PS / Consulting (Fintech-adjacent)",
-      tier: "primary",
-      fit: 76,
-      flag: "Applied 9/21. Resume + cover letter refreshed 9/17, further revision 9/18",
-      salary: "$243,750–$325,000",
-      postedDate: "2026-07-13",
-      jdLink: "https://www.builtinnyc.com/job/vice-president-solutions-consulting/8415787",
-      linkedinLink: "https://www.linkedin.com/jobs/view/vice-president-global-solutions-consulting-professional-services-at-navan-4434773437",
-      appliedDefault: true,
-      appliedDate: "2026-09-21",
-      tracking: { dateApplied: "2026-09-21" }
-    },
-    {
-      id: "anthropic-partner-enablement-si-2026-09-13",
-      title: "Partner Enablement Lead, System Integrators",
-      company: "Anthropic",
-      category: "AI Lab / Partner Enablement (Innovation-affinity)",
-      tier: "secondary",
-      fit: 58,
-      flag: "Needs 7-10yr inside large GSIs; SF/NYC hub required, not remote/DC",
-      salary: "$270,000 OTE",
-      postedDate: null,
-      jdLink: "https://job-boards.greenhouse.io/anthropic/jobs/5188391008",
-      linkedinLink: "https://www.linkedin.com/jobs/view/partner-enablement-lead-system-integrators-at-anthropic-4401156016"
-    },
-    {
-      id: "chartis-partner-ai-enabled-performance-transformation-2026-09-21",
-      title: "Partner, AI-Enabled Performance Transformation",
-      company: "Chartis",
-      category: "GSI / Consulting (Healthcare, AI-affinity)",
-      tier: "secondary",
-      fit: 55,
-      flag: "Found via LinkedIn only, re-checked — no independently-fetchable posting for this exact req; healthcare depth is buyer-side, not provider/payer operator",
-      salary: "Not listed",
-      postedDate: null,
-      jdLink: "https://www.linkedin.com/jobs/view/4423024120",
-      linkedinLink: "https://www.linkedin.com/jobs/view/4423024120"
-    },
-    {
-      id: "aws-sr-leader-customer-solutions-swat-csm-2026-09-21",
-      title: "Sr. Leader, Customer Solutions, SWAT, CSM",
-      company: "Amazon Web Services (AWS)",
-      category: "Hyperscaler PS/CS Leadership",
-      tier: "secondary",
-      fit: 65,
-      flag: "Found via LinkedIn only; sibling req confirms a real leader-of-leaders CS role, but scope/level/comp unconfirmed",
-      salary: "Not listed",
-      postedDate: null,
-      jdLink: "https://www.linkedin.com/jobs/view/4455928153",
-      linkedinLink: "https://www.linkedin.com/jobs/view/4455928153"
-    },
-    {
-      id: "canonical-gsi-2026-07-09",
-      title: "Global Head of GSI Alliances",
-      company: "Canonical",
-      category: "GSI / Consulting",
-      tier: "secondary",
-      fit: 52,
-      flag: "Needs quota-carrying alliance sales exp",
-      salary: "Not listed",
-      postedDate: null,
-      jdLink: "https://canonical.com/careers/4517179",
-      linkedinLink: "https://www.linkedin.com/jobs/view/global-head-of-gsi-alliances-at-canonical-4433868677"
-    },
-    {
-      id: "range-head-of-business-operations-2026-09-17",
-      title: "Head of Business Operations",
-      company: "Range",
-      category: "Fintech / Wealth-Management BizOps",
-      tier: "secondary",
-      fit: null,
-      flag: "Applied 9/21. Never independently verified live by the scan (logged unverifiable 9/17) — Ghazal found and applied to it herself. Link supplied directly by her 9/22 (LinkedIn blocks unauthenticated viewing, so the JD itself couldn't be independently re-checked, but the link is hers, not a scan guess)",
-      salary: "Not listed",
-      postedDate: null,
-      jdLink: "https://www.linkedin.com/jobs/view/4429817496/",
-      linkedinLink: "https://www.linkedin.com/jobs/view/4429817496/",
-      appliedDefault: true,
-      appliedDate: "2026-09-21",
-      tracking: { dateApplied: "2026-09-21" }
-    }
+const DATA = {"jobs": [{"id": "deltek", "title": "VP Customer Success (Professional Services)", "company": "Deltek — project-based ERP/software for PS & government-contracting firms", "tier": "Primary", "category": "SaaS CS / Professional-Services Vertical", "fit": 85, "notes": "Team-scale gap (100+ required vs her ~50); travel up to 30% (above her 15% max).", "postedDate": "2026-08-24", "salary": "$246,679–$431,679 OTE", "location": "Remote (HQ Herndon, VA — DC metro)", "applyUrl": "https://careers.deltek.com/job/23749666/vp-customer-success-professional-services-remote/", "linkedinUrl": null, "why": "Owns the full financial commitment for Deltek's Professional-Services customer segment against explicit NRR/GRR targets, with direct authority over CS org design, headcount, and renewal/forecast sign-off — nearly a direct match to her FranConnect VP PS scope. Deltek's project-based, government-contracting-adjacent customer base overlaps with her Booz Allen federal background and Decision Lens's public-sector work, and the role's AI-first framing plays to her current ada CX experience.", "honest": "Very strong — 85/100. Real gap: the posting names \"scaling organizations of 100+ people\" and \"$250M+ in annual retention bookings\" — her largest team was ~50 (FranConnect) at a smaller revenue scale. Gainsight-specific experience isn't confirmed (preferred, not required). Travel up to 30% is double her ~15% max — worth raising early. Reconfirmed live 9/29, content and comp unchanged. Not reconfirmed 10/7 — fetch returned no status info (no closure language seen); treat as still open but confirm before applying.", "newBadge": false, "hasMaterials": false}, {"id": "gitlab", "title": "Vice President, Professional Services", "company": "GitLab — DevOps platform SaaS", "tier": "Primary", "category": "SaaS PS / Direct P&L Leadership", "fit": 85, "notes": "New this run. Larger org (~2,000 employees) than she's run PS for; DevOps domain is new.", "postedDate": null, "salary": "$250,880–$432,768", "location": "Remote, US", "applyUrl": "https://job-boards.greenhouse.io/gitlab/jobs/8122512002", "linkedinUrl": null, "why": "Owns global Professional Services P&L — budgeting, forecasting, resource optimization — for a 70+ person team of engagement managers, architects, engineers and delivery partners. Reports to the VP of Customer Success. Near-direct match to her FranConnect global PS P&L scope (114% revenue growth, utilization 35%→60%) at a larger, more recognizable SaaS company. Drives service attach rates and GTM alignment with Sales/Product/Marketing/CS — her cross-functional connective-tissue pattern.", "honest": "Strong — 85/100, one of the best comp bands on the board. Real gaps: DevOps/dev-tools is a new domain for her, and GitLab (~2,000 employees) is meaningfully larger than any org she's run PS for. Verified directly on GitLab's own Greenhouse board — full JD, no closure language. Reconfirmed live 10/7.", "newBadge": false, "hasMaterials": false}, {"id": "talkdesk", "title": "Vice President, Customer Delivery", "company": "Talkdesk — AI-first contact-center (CCaaS) / Customer Experience Automation platform", "tier": "Primary", "category": "SaaS PS / Global Delivery (CCaaS + AI)", "fit": 84, "notes": "15+ yrs PS leadership (5+ as VP/SVP) counted only by combining three roles; org likely larger than her ~50-person FranConnect team.", "postedDate": "2026-08-31", "salary": "$262K–$477K OTE + equity", "location": "United States (remote/location not specified — confirm)", "applyUrl": "https://job-boards.greenhouse.io/talkdesk2/jobs/8103819", "linkedinUrl": null, "why": "Owns Talkdesk's entire global customer delivery organization — Global Professional Services, Agentic Delivery, and Forward Deployed teams — with multi-million-dollar budget, revenue and gross-margin accountability. That is her FranConnect global PS P&L (US/India/Australia, 114% revenue growth, utilization 35%→60%, time-to-value −75%) almost line for line, and her current ada CX role puts her inside an AI-native customer-service automation platform. \"Catalyst for organizational change\" framing is a real innovation/transformation signal.", "honest": "Strong — 84/100, one of the best comp bands on the board. Real gaps: 15+ years of PS leadership with 5+ as VP/SVP is met only by counting Decision Lens + FranConnect + ada together; \"large, distributed, multi-tiered global delivery organization\" is likely well beyond her ~50-person FranConnect team; agentic/LLM delivery and Forward Deployed engineering depth is operator-level, not hands-on technologist. Reports to the Chief Product, Technology & Customer Officer. Reconfirmed live 9/29, content unchanged. Reconfirmed live 10/7.", "newBadge": false, "hasMaterials": false}, {"id": "hcss", "title": "Vice President of Professional Services", "company": "HCSS — construction-management SaaS", "tier": "Primary", "category": "SaaS PS/CS", "fit": 82, "notes": "PS leadership has been in B2B SaaS broadly, not construction specifically; remote eligibility unconfirmed (TX HQ).", "postedDate": null, "salary": "Not listed", "location": "Remote status unconfirmed (TX HQ)", "applyUrl": "https://careers.hcss.com/vice-president-of-professional-services_5075780/", "linkedinUrl": null, "why": "Full P&L ownership of a ~40-person PS team, reporting to the COO, closely mirrors her FranConnect scope (loss-leader to break-even, 114% revenue growth, utilization 35%→60%).", "honest": "Strong — 82/100. Her PS leadership has been in B2B SaaS broadly, not construction specifically — a bridgeable but real domain gap worth naming. Remote eligibility isn't stated and HCSS is Texas-HQ'd, worth clarifying early against her DC-area/remote preference. Reconfirmed live 9/29, content unchanged. Reconfirmed live 10/7.", "newBadge": false, "hasMaterials": false}, {"id": "crunchtime", "title": "Vice President, Customer Success", "company": "Crunchtime (listed as Zenput) — operations platform for multi-unit restaurant brands", "tier": "Primary", "category": "SaaS CS / Restaurant & Franchise Ops", "fit": 82, "notes": "Pure CS/retention role, not PS delivery; base below her floor, OTE only clears near the top.", "postedDate": "2026-09-17", "salary": "$190K–$225K base / $228K–$270K OTE", "location": "Remote, US — must be Eastern time zone (VA qualifies)", "applyUrl": "https://www.builtinnyc.com/job/vice-president-customer-success/11054615", "linkedinUrl": null, "why": "Crunchtime's customers are multi-unit franchise brands (Jersey Mike's, Five Guys, Wingstop, Smoothie King) — the same franchise-operator world FranConnect serves, so her four years running PS for franchise-management SaaS is direct domain credibility most CS candidates won't have. The mandate — build and scale a CS organization, lifecycle programs, segmentation, playbooks, and KPI frameworks through the next growth stage — matches her Decision Lens build and FranConnect 110% NRR/GRR record. Reports to the Chief Customer Officer.", "honest": "Strong — 82/100. Comp is the real question: base is below her $230K floor, and OTE clears $250K only in the upper half. This is a pure CS/retention role (GRR/NRR, renewals, expansion) rather than PS delivery; expect questions on renewal-forecasting depth. Reconfirmed live 9/29 via Built In. Reconfirmed live 10/7.", "newBadge": false, "hasMaterials": false}, {"id": "antithesis", "title": "Vice President of Customer Experience", "company": "Antithesis — deterministic-simulation testing platform for software systems", "tier": "Primary", "category": "SaaS CX / PS+CS+Support Combined", "fit": 80, "notes": "On-site (not hybrid/remote), though a genuine local commute from McLean.", "postedDate": "2026-07-18", "salary": "Not listed", "location": "Vienna, VA (on-site — DC metro, close to McLean)", "applyUrl": "https://jobs.ashbyhq.com/antithesis/12cee240-67dc-489d-87b4-28df314e518f", "linkedinUrl": null, "why": "Owns the operational foundation behind the entire customer experience org — systems, process, analytics, and cross-functional programs across pre-sales, onboarding, customer success, support, renewals, and account management. A combined PS/CS/Support lifecycle-ownership mandate structurally very close to the Vanta role she already applied to, at an emerging, well-funded dev-tools company she wouldn't have surfaced from a known-company-name search.", "honest": "Strong — 80/100. Found directly by Ghazal via her LinkedIn saved-jobs list, not the scan. No salary disclosed. On-site (not hybrid/remote), though Vienna, VA is a genuine local commute from McLean rather than a relocation. Reconfirmed live 9/29 via Ashby meta-description. Not reconfirmed 10/7 — fetch returned no status info (no closure language seen); treat as still open but confirm before applying.", "newBadge": false, "hasMaterials": false}, {"id": "pingidentity", "title": "VP, Customer Success", "company": "Ping Identity", "tier": "Primary", "category": "SaaS CS / Cybersecurity", "fit": 78, "notes": "No identity/access-management or cybersecurity domain experience.", "postedDate": "2026-07-21", "salary": "$240K–$275K + bonus", "location": "Not specified in posting", "applyUrl": "https://builtin.com/job/vp-customer-success/3531822", "linkedinUrl": null, "why": "Comp clears her floor comfortably, and the CS leadership scope matches her track record of scaling customer organizations at PE/VC-backed SaaS companies.", "honest": "Strong — 78/100. No identity/access-management or cybersecurity domain experience — a real gap to name, though the CS leadership fundamentals transfer directly. Reconfirmed live 9/29, content and comp unchanged. Reconfirmed live 10/7.", "newBadge": false, "hasMaterials": false}, {"id": "visa", "title": "Vice President, Client Success", "company": "Visa", "tier": "Primary", "category": "Fintech / Payments CS+PS Combined", "fit": 78, "notes": "No comp listed at the time this was first tracked (now confirmed: $229K–$338K); no direct fintech/payments-domain experience.", "postedDate": "2026-09-16", "salary": "$229,100–$338,050 + bonus + equity", "location": "Ashburn, VA (DC metro — home market)", "applyUrl": "https://visa.wd5.myworkdayjobs.com/Visa/job/US---Ashburn-VA/Vice-President--Client-Success_REF088476W", "linkedinUrl": "https://www.linkedin.com/jobs/view/4468318255", "why": "Owns client success outcomes, operational performance, solution adoption, and value realization for a portfolio of Super Regional/Regional Financial Institutions, Sponsor Banks, and DPS clients across North America — end-to-end post-sale ownership (onboarding, implementation, service delivery, optimization, retention) that's a close structural match to her combined PS/CS lifecycle leadership pattern.", "honest": "Strong — 78/100. Comp now confirmed live on the page: $229,100–$338,050 + bonus + equity, clears her floor. Real gap: no direct fintech/payments-domain experience, though her Navan work already explored positioning fintech-adjacency credibly. Reconfirmed live 9/29 directly on Visa's own Workday board. Reconfirmed live 10/7.", "newBadge": false, "hasMaterials": false}, {"id": "veeam", "title": "VP, Customer Success", "company": "Veeam", "tier": "Primary", "category": "SaaS CS / Data Infrastructure", "fit": 74, "notes": "Larger-scale org than her prior roles; posting is ~10 months old, worth confirming it's a genuinely active search.", "postedDate": "2025-11-17", "salary": "$325,400–$464,800 OTE", "location": "Not specified in posting", "applyUrl": "https://careers.veeam.com/job/united-states/vp-customer-success/22681/88549994768", "linkedinUrl": null, "why": "Comp is well above her floor, and CS leadership at scale matches her FranConnect/Decision Lens experience.", "honest": "Good fit — 74/100. Larger-scale organization than her prior roles, worth being ready to speak to. Posting is now ~10 months old (dated 11/17/2025) — worth confirming with a recruiter whether this is a genuinely active search. Reconfirmed live 9/29, content and comp unchanged. Reconfirmed live 10/7.", "newBadge": false, "hasMaterials": false}, {"id": "forerunner", "title": "VP of Customer Success", "company": "Forerunner — early-stage GovTech CS build", "tier": "Secondary", "category": "SaaS CS", "fit": 80, "notes": "Now hybrid (NY/Portland ME/SF offices), no longer remote — demoted from Primary. Base below floor, OTE clears near the top. Reconfirmed live 10/7.", "postedDate": null, "salary": "$190K–$230K base / $235K–$290K OTE", "location": "Hybrid — NY, Portland ME, or SF office", "applyUrl": "https://job-boards.greenhouse.io/forerunner/jobs/5069179007", "linkedinUrl": "https://www.linkedin.com/jobs/view/vp-of-customer-success-at-forerunner-4381118743", "why": "", "honest": "", "newBadge": false, "hasMaterials": false}, {"id": "firstdue", "title": "VP, Client Success", "company": "First Due — public-safety SaaS", "tier": "Secondary", "category": "SaaS CS / Public Safety", "fit": 78, "notes": "Comp below floor even with bonus (bonus target unspecified). Reconfirmed live 10/7.", "postedDate": null, "salary": "$200K–$225K base + bonus", "location": "Remote — US Only", "applyUrl": "https://job-boards.greenhouse.io/localitymediallcdbafirstdue/jobs/4260158009", "linkedinUrl": null, "why": "", "honest": "", "newBadge": false, "hasMaterials": false}, {"id": "cvent", "title": "Vice President/Senior Director, Customer Strategy & Transformation", "company": "Cvent — Tysons Corner, VA (home market)", "tier": "Secondary", "category": "SaaS Strategy & Ops", "fit": 74, "notes": "Dual-level title (VP or Sr. Director); comp not officially listed (Glassdoor est. $174K–$257K). Not reconfirmed 10/7 — fetch returned no status info (no closure language seen); treat as still open but confirm before applying.", "postedDate": null, "salary": "Not listed (est. $174K–$257K)", "location": "Tysons Corner, VA", "applyUrl": "https://careers.cvent.com/careers-home/jobs/8130?lang=en-us", "linkedinUrl": "https://www.linkedin.com/jobs/view/4434693125", "why": "", "honest": "", "newBadge": false, "hasMaterials": false}, {"id": "tapcheck", "title": "VP, Customer Success", "company": "Tapcheck — earned-wage-access fintech", "tier": "Secondary", "category": "Fintech CS", "fit": 72, "notes": "Requires running high-volume BPO/offshore support at scale, plus payments ops; no comp listed. Reconfirmed live 10/7.", "postedDate": "2026-08-31", "salary": "Not listed", "location": "Remote (VA/DC listed)", "applyUrl": "https://www.builtinnyc.com/job/vp-customer-success/10945199", "linkedinUrl": null, "why": "", "honest": "", "newBadge": false, "hasMaterials": false}, {"id": "miro", "title": "Vice President Customer Success", "company": "Miro", "tier": "Secondary", "category": "SaaS CS", "fit": 68, "notes": "No salary on Miro's own page (third-party estimate $285K–$385K, unconfirmed); NYC/SF-based, not remote/DC. Reconfirmed live 10/7.", "postedDate": "2026-08-23", "salary": "Unconfirmed est. $285K–$385K", "location": "NYC/SF", "applyUrl": "https://miro.com/careers/vacancy/8654691002/", "linkedinUrl": "https://www.linkedin.com/jobs/view/vice-president-customer-success-at-miro-4445582207", "why": "", "honest": "", "newBadge": false, "hasMaterials": false}, {"id": "starburst", "title": "VP, Professional Services", "company": "Starburst — data-infrastructure SaaS (Trino/query engine)", "tier": "Secondary", "category": "SaaS PS", "fit": 68, "notes": "Real technical-domain fluency gap (data federation, query engines, Iceberg/lakehouse). Reconfirmed live 10/7.", "postedDate": null, "salary": "$240K–$300K", "location": "Boston preferred / remote-open", "applyUrl": "https://job-boards.greenhouse.io/starburst/jobs/5375098008", "linkedinUrl": "https://www.linkedin.com/jobs/view/vp-professional-services-at-starburst-4449773145", "why": "", "honest": "", "newBadge": false, "hasMaterials": false}, {"id": "prophecy", "title": "VP of Customer Success and Support", "company": "Prophecy — AI-native data-prep platform", "tier": "Secondary", "category": "SaaS CS+Support", "fit": 68, "notes": "Wants 5+ yrs leading both CS and technical support, plus data/cloud/AI platform background; no comp listed. Reconfirmed live 10/7.", "postedDate": "2026-09-15", "salary": "Not listed", "location": "Remote, US", "applyUrl": "https://www.builtinnyc.com/job/vp-customer-success-and-support/11186584", "linkedinUrl": null, "why": "", "honest": "", "newBadge": false, "hasMaterials": false}, {"id": "nice", "title": "VP, Customer Success (Strategic Segment)", "company": "NiCE", "tier": "Secondary", "category": "SaaS CS", "fit": 66, "notes": "Resume & cover letter already on file (from prior req). Reconfirmed live 10/7.", "postedDate": "2026-08-19", "salary": "Not listed", "location": "Not specified", "applyUrl": "https://job-boards.greenhouse.io/nice/jobs/4952634101", "linkedinUrl": null, "why": "", "honest": "", "newBadge": false, "hasMaterials": true}, {"id": "videa", "title": "VP, Customer Success", "company": "Videa (VideaHealth) — dental-AI healthtech", "tier": "Secondary", "category": "Healthtech CS", "fit": 66, "notes": "Provider-side dental domain gap; only the top of the comp range clears her floor. Reconfirmed live 10/7.", "postedDate": "2026-09-15", "salary": "$220K–$260K", "location": "Remote or Hybrid (NYC)", "applyUrl": "https://www.builtinnyc.com/job/vp-customer-success/11162793", "linkedinUrl": null, "why": "", "honest": "", "newBadge": false, "hasMaterials": false}, {"id": "iboss", "title": "VP of Customer Success", "company": "iboss", "tier": "Secondary", "category": "Cybersecurity CS", "fit": 64, "notes": "Cybersecurity domain + Zero Trust SASE fluency gap. Reconfirmed live 10/7.", "postedDate": null, "salary": "Not listed", "location": "Not specified", "applyUrl": "https://jobs.jobvite.com/iboss/job/oTNXzfwW", "linkedinUrl": "https://www.linkedin.com/jobs/view/vice-president-of-customer-success-at-iboss-4437496437", "why": "", "honest": "", "newBadge": false, "hasMaterials": false}, {"id": "openai-govtech", "title": "Head of Technical Success, Government", "company": "OpenAI for Government — Washington, DC", "tier": "Secondary", "category": "AI Lab / Public Sector", "fit": 64, "notes": "Wants deeply technical AI/platform credibility (APIs, agentic systems), international gov't experience, prefers active clearance. Reconfirmed live 10/7.", "postedDate": null, "salary": "$374K–$450K + equity", "location": "Washington, DC", "applyUrl": "https://openai.com/careers/head-of-technical-success-government-washington-dc/", "linkedinUrl": null, "why": "", "honest": "", "newBadge": false, "hasMaterials": false}, {"id": "riministreet", "title": "GVP & Global GM, Oracle Services", "company": "Rimini Street — third-party Oracle enterprise-software support", "tier": "Secondary", "category": "GSI/Consulting-Adjacent — Quota-Carrying GM", "fit": 63, "notes": "New this run. Real gap: this is a quota-carrying revenue/GM role, not delivery-operations leadership; new domain (third-party Oracle support ecosystem).", "postedDate": null, "salary": "OTE $350K–$500K", "location": "Remote, US", "applyUrl": "https://riministreet.wd1.myworkdayjobs.com/en-US/RiminiStreet/job/GVP---Global-GM--Oracle-Services_R-102342", "linkedinUrl": "https://www.linkedin.com/comm/jobs/view/4444734161/", "why": "Global revenue leadership for the Oracle Services portfolio (Oracle Support L4, Application Management Services, Oracle Consulting) across NAMER/LATAM/EMEA/APAC, reporting to the CRO — one of the best comp packages on the board.", "honest": "Passes narrowly on desirability — 63 fit / 88 desirability. Real functional-flavor gap: this is a quota-carrying sales/GM role, not the delivery-operations leadership pattern she's built her career on, plus the third-party Oracle-support ecosystem is new to her. Not reconfirmed 10/7 — fetch returned no status info (no closure language seen); treat as still open but confirm before applying.", "newBadge": false, "hasMaterials": false}, {"id": "kinaxis", "title": "VP, Professional Services Strategy & Operations", "company": "Kinaxis", "tier": "Secondary", "category": "BizOps/Systems-Architect", "fit": 55, "notes": "Requires a proven $100M+ global PS portfolio track record — larger than she's run; role is BizOps-flavored, not direct delivery leadership. Not reconfirmed 10/7 — fetch returned no status info (no closure language seen); treat as still open but confirm before applying.", "postedDate": null, "salary": "Not listed", "location": "Remote, NA", "applyUrl": "https://careers-kinaxis.icims.com/jobs/34994/vp,-professional-services-strategy-&-operations/job", "linkedinUrl": "https://www.linkedin.com/jobs/view/vp-professional-services-strategy-operations-at-kinaxis-4435188531", "why": "", "honest": "", "newBadge": false, "hasMaterials": false}, {"id": "anthropic-partner", "title": "Partner Enablement Lead, System Integrators", "company": "Anthropic", "tier": "Secondary", "category": "AI Lab — GTM/Partner Enablement", "fit": 58, "notes": "Strong innovation/transformation-affinity match, but wants 7–10+ yrs inside large GSIs specifically; SF/NYC hub required. Reconfirmed live 10/7.", "postedDate": null, "salary": "$270,000 OTE", "location": "SF or NYC (hybrid, 25% onsite min)", "applyUrl": "https://job-boards.greenhouse.io/anthropic/jobs/5188391008", "linkedinUrl": "https://www.linkedin.com/jobs/view/partner-enablement-lead-system-integrators-at-anthropic-4401156016", "why": "", "honest": "", "newBadge": false, "hasMaterials": false}, {"id": "anthropic-marketing-sop", "title": "Strategy & Operations Lead, Enterprise Marketing", "company": "Anthropic", "tier": "Secondary", "category": "AI Lab — Strategy & Operations (marketing-flavored)", "fit": 58, "notes": "New this run. Real gap: Marketing-ops specifically, not PS/CS; SF/NYC hybrid (min 2 days/wk office) against her remote preference.", "postedDate": null, "salary": "$320,000", "location": "SF or NYC (hybrid, 2 days/wk min)", "applyUrl": "https://job-boards.greenhouse.io/anthropic/jobs/5389945008", "linkedinUrl": null, "why": "Builds operational infrastructure (business reviews, planning cycles, spend-efficiency frameworks) for Anthropic's Enterprise Marketing function — a real structural analog to her Strategy & Operations / cross-functional pattern (FranConnect repositioning, ada CX PS transformation).", "honest": "Borderline — 58 fit / 65 desirability. Marketing-ops specifically, not PS/CS, is a genuine functional mismatch even though the cross-functional operating pattern transfers. Hybrid office requirement is a real trade-off against her remote preference. Reconfirmed live 10/7.", "newBadge": false, "hasMaterials": false}, {"id": "equifax", "title": "Vice President, Strategy and Execution - Government Solutions", "company": "Equifax", "tier": "Secondary", "category": "Sales/RevOps-Strategy, Public-Sector-Adjacent", "fit": 59, "notes": "Sales/RevOps-strategy scope, not PS/CS; comp below floor. Not re-verified this run (see setup notes).", "postedDate": "2026-09-02", "salary": "$160K–$200K base (below floor)", "location": "Reston, VA (hybrid 4 days/wk)", "applyUrl": null, "linkedinUrl": null, "why": "", "honest": "", "newBadge": false, "hasMaterials": false}, {"id": "canonical", "title": "Global Head of GSI Alliances", "company": "Canonical", "tier": "Secondary", "category": "GSI Alliances", "fit": 52, "notes": "Needs quota-carrying alliance-sales experience. Reconfirmed live 10/7.", "postedDate": null, "salary": "Not listed", "location": "Home-based, Americas or EMEA", "applyUrl": "https://canonical.com/careers/4517179", "linkedinUrl": "https://www.linkedin.com/jobs/view/global-head-of-gsi-alliances-at-canonical-4433868677", "why": "", "honest": "", "newBadge": false, "hasMaterials": false}, {"id": "deloitte", "title": "Technology Strategy Innovation and Delivery Transformation Manager", "company": "Deloitte", "tier": "Secondary", "category": "GSI — Title/Level Mismatch", "fit": 48, "notes": "\"Manager\" is mid-career on Deloitte's own ladder (only 6+ yrs required), not VP-equivalent. Not re-verified this run (see setup notes).", "postedDate": null, "salary": "$155,600–$306,800", "location": "36 locations incl. McLean, VA", "applyUrl": null, "linkedinUrl": null, "why": "", "honest": "", "newBadge": false, "hasMaterials": false}, {"id": "slalom", "title": "Salesforce Education Cloud Capability Leader", "company": "Slalom", "tier": "Secondary", "category": "GSI — Salesforce Practice (unconfirmed)", "fit": null, "notes": "Found via LinkedIn only; no independently-fetchable posting — confirm the link works before applying.", "postedDate": "2026-07-30", "salary": "Not listed", "location": "Baltimore, MD", "applyUrl": "https://www.linkedin.com/jobs/view/salesforce-education-cloud-capability-leader-at-slalom-4446922613", "linkedinUrl": "https://www.linkedin.com/jobs/view/salesforce-education-cloud-capability-leader-at-slalom-4446922613", "why": "", "honest": "", "newBadge": false, "hasMaterials": false}, {"id": "chartis", "title": "Partner, AI-Enabled Performance Transformation", "company": "Chartis", "tier": "Secondary", "category": "GSI — Healthcare Consulting (unconfirmed)", "fit": null, "notes": "Found via LinkedIn only; healthcare depth is buyer-side (pharma), not provider/payer operator.", "postedDate": null, "salary": "Not listed", "location": "Not stated", "applyUrl": "https://www.linkedin.com/jobs/view/4423024120", "linkedinUrl": "https://www.linkedin.com/jobs/view/4423024120", "why": "", "honest": "", "newBadge": false, "hasMaterials": false}, {"id": "aws-swat", "title": "Sr. Leader, Customer Solutions, SWAT, CSM", "company": "Amazon Web Services (AWS)", "tier": "Secondary", "category": "Hyperscaler CS (unconfirmed)", "fit": null, "notes": "Found via LinkedIn only; sibling req confirms the title family is real, scope/level/comp unconfirmed.", "postedDate": null, "salary": "Not listed", "location": "Not stated", "applyUrl": "https://www.linkedin.com/jobs/view/4455928153", "linkedinUrl": "https://www.linkedin.com/jobs/view/4455928153", "why": "", "honest": "", "newBadge": false, "hasMaterials": false}, {"id": "ladders-vpgp", "title": "VP, Global Practices - Professional Services", "company": "Employer not named in LinkedIn/Ladders digest", "tier": "Secondary", "category": "SaaS PS (unconfirmed)", "fit": null, "notes": "New this run. LinkedIn-only; subject line stated $232K–$377K/yr. Confirm link and identify employer before pursuing.", "postedDate": null, "salary": "$232K–$377K (per digest subject)", "location": "United States", "applyUrl": "https://www.linkedin.com/comm/jobs/view/4471447381/", "linkedinUrl": "https://www.linkedin.com/comm/jobs/view/4471447381/", "why": "", "honest": "", "newBadge": false, "hasMaterials": false}, {"id": "icertis", "title": "Vice President, Industry Advisory", "company": "Icertis", "tier": "Secondary", "category": "SaaS — Advisory/Thought-Leadership (unconfirmed)", "fit": null, "notes": "New this run. LinkedIn-only; reads as market-facing advisory, not operational PS/CS — confirm scope.", "postedDate": null, "salary": "Not listed", "location": "United States", "applyUrl": "https://www.linkedin.com/comm/jobs/view/4469235805/", "linkedinUrl": "https://www.linkedin.com/comm/jobs/view/4469235805/", "why": "", "honest": "", "newBadge": false, "hasMaterials": false}, {"id": "exl-cx", "title": "CX/CCaaS GTM & Solutioning Lead, VP - Cross Industry", "company": "EXL", "tier": "Secondary", "category": "GSI/BPO — CX Consulting GTM (unconfirmed)", "fit": null, "notes": "New this run. LinkedIn-only; decent functional overlap (GTM + solutioning for CX/CCaaS engagements).", "postedDate": null, "salary": "Not listed", "location": "United States", "applyUrl": "https://www.linkedin.com/comm/jobs/view/4469479892/", "linkedinUrl": "https://www.linkedin.com/comm/jobs/view/4469479892/", "why": "", "honest": "", "newBadge": false, "hasMaterials": false}, {"id": "foundever", "title": "VP Global Operations", "company": "Foundever — BPO/CX outsourcing", "tier": "Secondary", "category": "BPO Global Ops (unconfirmed)", "fit": null, "notes": "New this run. LinkedIn-only; BPO/call-center industry is a real gap from her SaaS background.", "postedDate": null, "salary": "Not listed", "location": "United States", "applyUrl": "https://www.linkedin.com/comm/jobs/view/4469228148/", "linkedinUrl": "https://www.linkedin.com/comm/jobs/view/4469228148/", "why": "", "honest": "", "newBadge": false, "hasMaterials": false}, {"id": "roboyo", "title": "Global Head of Agentic Automation Capability", "company": "Roboyo — agentic-AI/intelligent-automation consulting", "tier": "Secondary", "category": "Innovation/Transformation Signal (unconfirmed)", "fit": null, "notes": "New this run. LinkedIn-only; genuinely exciting build-a-new-capability mandate, but seniority/scope/comp unconfirmed.", "postedDate": null, "salary": "Not listed", "location": "United States", "applyUrl": "https://www.linkedin.com/comm/jobs/view/4470135616/", "linkedinUrl": "https://www.linkedin.com/comm/jobs/view/4470135616/", "why": "", "honest": "", "newBadge": false, "hasMaterials": false}, {"id": "missionsquare", "title": "Customer Success Regional Leader", "company": "MissionSquare — DC-metro public-sector retirement/financial services", "tier": "Secondary", "category": "Public-Sector CS — Scope Unconfirmed", "fit": null, "notes": "New this run. LinkedIn-only; \"Regional Leader\" reads sub-VP — confirm real scope before pursuing despite the strong industry fit.", "postedDate": null, "salary": "Not listed", "location": "Washington, DC", "applyUrl": "https://www.linkedin.com/comm/jobs/view/4473036217/", "linkedinUrl": "https://www.linkedin.com/comm/jobs/view/4473036217/", "why": "", "honest": "", "newBadge": false, "hasMaterials": false}, {"id": "wavelo", "title": "Vice President, Professional Services", "company": "Wavelo — telecom SaaS", "tier": "Primary", "category": "SaaS PS / Direct P&L Leadership", "fit": 88, "notes": "New this run. Base tops out ~$247K (low end of target); telecom-SaaS vertical is new to her.", "postedDate": null, "salary": "$222.7K–$247.4K base", "location": "Remote, US", "applyUrl": "https://job-boards.greenhouse.io/wavelo/jobs/7590397003", "linkedinUrl": null, "why": "Build and scale a PS organization on SaaS subscription economics with P&L, margin and capacity-planning ownership — maps directly to her FranConnect PS P&L and 50-person team. The \"standardization over custom\" mandate is a real transformation/build signal.", "honest": "Strong — fit 88 / desirability 80 (agent estimates). Gaps: telecom-SaaS vertical is new; base range only reaches the low end of her $230K+ target. Verified live on Wavelo's own Greenhouse board 10/7; flagged \"New,\" no post date shown.", "newBadge": true, "hasMaterials": false}, {"id": "aws-dgd", "title": "Director, Global Delivery, ProServe", "company": "Amazon Web Services (AWS)", "tier": "Primary", "category": "Hyperscaler PS", "fit": 78, "notes": "New this run. 500+ person global delivery org — ~10x her largest team; 15+ yrs enterprise IT consulting bar. Confirm US-based option.", "postedDate": null, "salary": "$241,200–$350,000 base", "location": "Global (US-based options unconfirmed)", "applyUrl": "https://amazon.jobs/jobs/2819502", "linkedinUrl": null, "why": "Runs a 500+ person global delivery organization with SI/ISV/MSP partners, delivery excellence and competency models — strong scope match to her PS leadership and P&L experience, at a hyperscaler with top-tier comp.", "honest": "Fit 78 / desirability 85 (agent estimates). Real gaps: scale is ~10x her largest team; asks 15+ years enterprise IT consulting and prefers a CS degree; Booz Allen consulting is real but long-ago (light ding). Innovation signal moderate (scaling/quality systems, not 0-to-1). Live on amazon.jobs (\"posted until filled\") 10/7.", "newBadge": true, "hasMaterials": false}, {"id": "symplr", "title": "Vice President, Professional Services", "company": "Symplr — healthcare IT SaaS", "tier": "Primary", "category": "SaaS PS", "fit": 78, "notes": "New this run. Healthcare-IT vertical; posting date unknown.", "postedDate": null, "salary": "$210K–$260K", "location": "Not stated", "applyUrl": "https://careers-symplr.icims.com/jobs/2210/vice-president%2c-professional-services/job", "linkedinUrl": null, "why": "Oversees implementation delivery, staffing and escalations for a PS org — her delivery-at-scale background matches directly.", "honest": "Fit 78 / desirability 65 (agent estimates). Gaps: healthcare-IT domain; only the upper half of the band clears $230K; location and post date not stated. Live 10/7.", "newBadge": true, "hasMaterials": false}, {"id": "decisionlens-svpcx", "title": "Senior Vice President, Customer Experience", "company": "Decision Lens (former employer)", "tier": "Secondary", "category": "SaaS CX / Boomerang", "fit": 85, "notes": "New this run. Boomerang move; small team (~10); comp not listed. Apply via careers@decisionlens.com.", "postedDate": null, "salary": "Not listed", "location": "Remote (DC area preferred)", "applyUrl": "https://www.decisionlens.com/svpcx", "linkedinUrl": null, "why": "Leads a ~10-person CS team serving 40–50 public-sector clients and launches new consulting services — a build signal, and she knows the product and buyers from her VP Customer Operations tenure.", "honest": "Fit 85 / desirability 55 (agent estimates). Gaps: small team and unknown comp; returning to a prior employer is a positioning call. Company page live 10/7. Worth a relationship-based reach-out.", "newBadge": true, "hasMaterials": false}, {"id": "st6", "title": "Vice President, Professional Services", "company": "ST6", "tier": "Secondary", "category": "SaaS PS", "fit": 80, "notes": "New this run. Scope vague, salary not listed; Greenhouse ID suggests a long-open req.", "postedDate": null, "salary": "Not listed", "location": "Remote, US", "applyUrl": "https://job-boards.greenhouse.io/st6/jobs/6613184", "linkedinUrl": null, "why": "PS strategy, financial performance and aggressive revenue targets — fits her PS strategy/P&L background.", "honest": "Fit 80 / desirability 60 (agent estimates). Scope unclear; possibly a long-open requisition. Live 10/7.", "newBadge": true, "hasMaterials": false}, {"id": "convergeone", "title": "VP, Professional Services", "company": "ConvergeOne", "tier": "Secondary", "category": "IT Services PS", "fit": 82, "notes": "New this run. Comp below target; IT-services/reseller (not SaaS); req ID suggests 2025.", "postedDate": null, "salary": "$200K–$225K", "location": "US virtual", "applyUrl": "https://careers-c1.icims.com/jobs/6638/vp%2c-professional-services/job", "linkedinUrl": null, "why": "$50M+ P&L and 50+ person PS org — nearly her FranConnect profile.", "honest": "Fit 82 / desirability 45 (agent estimates). Passes on fit alone; comp below floor and likely a stale requisition. Live 10/7.", "newBadge": true, "hasMaterials": false}, {"id": "slalom-md-cx", "title": "Managing Director, Go-To-Market, Customer Experience (North America)", "company": "Slalom", "tier": "Secondary", "category": "GSI — GTM/Origination", "fit": 62, "notes": "New this run. Sales/origination role (quota-style); wants 15+ yrs consulting with enterprise sales success.", "postedDate": "2026-09-23", "salary": "$250K–$330K base + bonus", "location": "Washington, DC (one of 12 US cities)", "applyUrl": "https://jobs.slalom.com/en_US/careersmarketplace/JobDetail?jobId=3632", "linkedinUrl": null, "why": "Owns national CX go-to-market and manages 3 regional leaders; seniority and comp match, DC location option.", "honest": "Fit 62 / desirability 68 (agent estimates). Gap: sales/pursuit origination rather than delivery; Booz Allen recency is a light caveat. Live 10/7.", "newBadge": true, "hasMaterials": false}, {"id": "hitachi-vpec", "title": "VP, Enterprise Client Engagement", "company": "Hitachi Solutions America", "tier": "Secondary", "category": "SaaS/Microsoft-partner Delivery GTM (aggregator only)", "fit": 80, "notes": "New this run. Open per Built In only (\"posted 13 hrs ago\") — company ATS page not found; confirm on Hitachi Solutions' careers site before applying.", "postedDate": null, "salary": "$190K–$320K", "location": "Remote (Chicago-based)", "applyUrl": "https://builtin.com/job/vp-enterprise-client-engagement/3617832", "linkedinUrl": null, "why": "Owns the Enterprise Delivery GTM P&L and customer journey; 15+ yrs delivery management bar is met.", "honest": "Fit 80 / desirability 70 (agent estimates). Gaps: Microsoft-partner ecosystem experience; wide band so base may fall under $230K. Sibling req \"VP, Americas Incubation Solutions\" (0-to-1 flavored, https://builtin.com/job/vp-americas-incubation-solutions/3617831) est. fit 60 — also aggregator-only.", "newBadge": true, "hasMaterials": false}], "workingOn": [{"id": "marriott", "title": "Vice President, Customer Experience + Innovation", "company": "Marriott International", "tier": "Secondary", "category": "Experience-Design/Innovation-Lab (adjacent)", "fit": null, "notes": "Real, honest gap: formal experience-design/design-research/innovation-lab mandate, not her PS/CS operational background — though the innovation/0-to-1 affinity is real. Not re-verified since 9/22 (see setup notes).", "postedDate": null, "salary": "$182,100–$325,300 + bonus + stock", "location": "Hybrid, Bethesda MD commuting distance", "applyUrl": null, "linkedinUrl": null}, {"id": "google-sop-cloudsec", "title": "Strategy and Operations Lead, Cloud Security", "company": "Google", "tier": "—", "category": "Hyperscaler BizOps", "fit": null, "notes": "DEAD — Google Careers now shows \"Job not found.\" Left here with a warning rather than silently dropped, since materials may exist in progress.", "postedDate": null, "salary": "$150K–$217K (below floor)", "location": "Reston VA / multiple", "applyUrl": null, "linkedinUrl": null, "dead": true}, {"id": "aws-padl-em", "title": "ProServe Area Delivery Leader - Engagement Management, AWS Industries", "company": "Amazon Web Services (AWS)", "tier": "—", "category": "Hyperscaler PS", "fit": null, "notes": "DEAD — direct amazon.jobs fetch returned HTTP 404 (confirmed twice) 2026-09-29. Left here with a warning rather than silently dropped.", "postedDate": null, "salary": "$201,000–$272,000 base (Arlington/Herndon VA)", "location": "Arlington/Herndon VA + 8 other US locations", "applyUrl": null, "linkedinUrl": null, "dead": true}, {"id": "bah-cos-r0250449", "title": "Civil Cyber Chief of Staff", "company": "Booz Allen Hamilton", "tier": "Primary", "category": "Strategy & Operations (Chief of Staff)", "fit": 74, "notes": "Resume drafted 10/8. Reports to Director of Civil Cyber. No cyber domain exp, no formal CoS title; Senior-level title below recent VP/Head roles.", "postedDate": "2026-10-05", "salary": "$112,800–$257,000", "location": "McLean, VA", "applyUrl": "https://bah.wd1.myworkdayjobs.com/BAH_Jobs/job/McLean-VA/Civil-Cyber-Chief-of-Staff_R0250449", "linkedinUrl": null}, {"id": "bah-gtm-r0250855", "title": "Go-to-Market Strategy & Activation Senior Manager", "company": "Booz Allen Hamilton", "tier": "Secondary", "category": "GTM Strategy (build GTM function)", "fit": 58, "notes": "Resume drafted 10/8. No quota carrying required (JD: in or alongside quota-driven environments). Gap: 8+ yrs sales/channel/marketing/commercial roles asked.", "postedDate": "2026-10-02", "salary": "$142,900–$266,000", "location": "McLean, VA", "applyUrl": "https://bah.wd1.myworkdayjobs.com/BAH_Jobs/job/McLean-VA/Go-to-Market-Strategy---Activation-Senior-Manager_R0250855", "linkedinUrl": null}], "tracking": [{"id": "vanta", "title": "VP, Services & Success (Professional Services, Customer Success & Support)", "company": "Vanta", "dateApplied": "2026-09-17", "responded": "", "reportedToVEC": "", "connectionReachOut": "", "throughWho": "", "notes": "", "jdLink": "https://jobs.ashbyhq.com/vanta/7e3cdfbc-9a72-49e4-8fb6-e8f59364af6d", "linkedinLink": "https://www.linkedin.com/jobs/view/vp-services-success-at-vanta-4415924720"}, {"id": "navan", "title": "VP, Global Solutions Consulting & Professional Services", "company": "Navan", "dateApplied": "2026-09-21", "responded": "", "reportedToVEC": "", "connectionReachOut": "", "throughWho": "", "notes": "", "jdLink": "https://www.builtinnyc.com/job/vice-president-solutions-consulting/8415787", "linkedinLink": "https://www.linkedin.com/jobs/view/vice-president-global-solutions-consulting-professional-services-at-navan-4434773437"}, {"id": "boozallen", "title": "Strategic Partnerships, Vice President", "company": "Booz Allen Hamilton", "dateApplied": "2026-09-16", "responded": "", "reportedToVEC": "", "connectionReachOut": "", "throughWho": "", "notes": "", "jdLink": "https://careers.boozallen.com/jobs/JobDetail/McLean-Strategic-Partnerships-Vice-President-R0243447/126497", "linkedinLink": null}, {"id": "openai-enablement", "title": "Enablement Lead, Government", "company": "OpenAI", "dateApplied": "2026-09-16", "responded": "", "reportedToVEC": "", "connectionReachOut": "", "throughWho": "", "notes": "", "jdLink": "https://www.linkedin.com/jobs/view/4457112828/", "linkedinLink": "https://www.linkedin.com/jobs/view/4457112828/"}, {"id": "anthropic-sop-appliedai", "title": "Strategy & Operations, Applied AI - AMER", "company": "Anthropic", "dateApplied": "2026-09-21", "responded": "", "reportedToVEC": "", "connectionReachOut": "", "throughWho": "", "notes": "", "jdLink": "https://job-boards.greenhouse.io/anthropic/jobs/5284500008", "linkedinLink": "https://www.linkedin.com/jobs/view/strategy-operations-applied-ai-amer-at-anthropic-4437304129"}, {"id": "range", "title": "Head of Business Operations", "company": "Range", "dateApplied": "2026-09-21", "responded": "", "reportedToVEC": "", "connectionReachOut": "", "throughWho": "", "notes": "Link supplied directly by Ghazal — LinkedIn blocks unauthenticated viewing, JD not independently re-verified.", "jdLink": "https://www.linkedin.com/jobs/view/4429817496/", "linkedinLink": "https://www.linkedin.com/jobs/view/4429817496/"}], "today": "2026-10-07", "todayHuman": "Wednesday, October 7, 2026"};
+const JOBS = DATA.jobs;
+const WORKINGON = DATA.workingOn;
+const TRACKING = DATA.tracking;
+
+function daysActive(postedDate){
+  if(!postedDate) return "Not stated";
+  const d = new Date(postedDate+"T00:00:00Z");
+  const now = new Date();
+  const diff = Math.floor((now - d) / 86400000);
+  return diff >= 0 ? diff + "d" : "Not stated";
+}
+function fitStr(f){ return (f===null || f===undefined) ? "Unconfirmed" : f + "%"; }
+function esc(s){ return (s===null||s===undefined) ? "" : String(s); }
+
+function applyLinkHtml(job){
+  if(job.applyUrl){ return `<a href="${job.applyUrl}" target="_blank" rel="noopener">Apply →</a>`; }
+  return `<span class="nolink">no link on file</span>`;
+}
+function titleLinkHtml(job){
+  const title = esc(job.title);
+  if(job.linkedinUrl){ return `<a href="${job.linkedinUrl}" target="_blank" rel="noopener" class="linklike">${title}</a>`; }
+  return `<span class="linklike">${title}</span>`;
+}
+
+function renderTableHeader(tableId, cols){
+  const table = document.getElementById(tableId);
+  const tr = table.querySelector('thead tr');
+  tr.innerHTML = cols.map(c => c.sortable
+    ? `<th class="sortable" data-key="${c.key}">${c.label}<span class="arrow"></span></th>`
+    : `<th>${c.label}</th>`).join('');
+}
+
+let sortState = {matches:{key:'fit',dir:-1}, workingon:{key:null,dir:1}, tracking:{key:null,dir:1}};
+
+function cmp(a,b){
+  if(a===null||a===undefined) return 1;
+  if(b===null||b===undefined) return -1;
+  if(typeof a === 'string') return a.localeCompare(b);
+  return a - b;
+}
+
+function renderMatchesTable(){
+  const cols = [
+    {key:'title', label:'Title / Role', sortable:true},
+    {key:'company', label:'Company', sortable:true},
+    {key:'tier', label:'Match', sortable:true},
+    {key:'category', label:'Category', sortable:true},
+    {key:'fit', label:'Fit %', sortable:true},
+    {key:'notes', label:'Notes', sortable:false},
+    {key:'days', label:'Days Active', sortable:true},
+    {key:'salary', label:'Salary', sortable:false},
+    {key:'apply', label:'Apply', sortable:false},
   ];
-
-  const STORAGE_KEY = "jobTrackingV1";
-
-  function loadState() {
-    try {
-      return JSON.parse(localStorage.getItem(STORAGE_KEY)) || {};
-    } catch (e) {
-      return {};
-    }
-  }
-
-  function saveState(state) {
-    localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
-  }
-
-  function blankJobState(job) {
-    const t = (job && job.tracking) || {};
-    return {
-      applied: !!(job && job.appliedDefault),
-      dateApplied: t.dateApplied || (job && job.appliedDefault ? (job.appliedDate || "") : ""),
-      responded: t.responded || "",
-      reportedToVEC: t.reportedToVEC || "",
-      connectionReachOut: t.connectionReachOut || "",
-      throughWho: t.throughWho || "",
-      notes: t.notes || ""
-    };
-  }
-
-  function getJobState(state, id) {
-    const job = JOBS.find(j => j.id === id);
-    if (state[id]) {
-      // Merge onto blank defaults so older saved entries (pre-detail-tracking) still have every field
-      return Object.assign(blankJobState(job), state[id]);
-    }
-    return blankJobState(job);
-  }
-
-  function daysActiveLabel(postedDate) {
-    if (!postedDate) return "Not stated";
-    const posted = new Date(postedDate + "T00:00:00");
-    const today = new Date();
-    today.setHours(0, 0, 0, 0);
-    const days = Math.round((today - posted) / 86400000);
-    if (days <= 0) return "Today";
-    if (days === 1) return "1 day";
-    return days + " days";
-  }
-
-  function requestMaterials(btn, company, title, url) {
-    const text = `Generate resume and cover letter for ${company} — ${title} (${url})`;
-    navigator.clipboard.writeText(text);
-    const original = btn.textContent;
-    btn.textContent = "Copied! Paste into a chat with Claude";
-    setTimeout(() => { btn.textContent = original; }, 2000);
-  }
-
-  // --- Sortable headers ---
-  // Every table (summary, workingon, tracking) tracks its own current sort key/direction.
-  // Default directions mirror the previous hardcoded sorts (fit desc for matches/working-on,
-  // most-recent-applied-first for tracking) so first load looks the same as before.
-  const sortState = {
-    summary: { key: "fit", dir: -1 },
-    workingon: { key: "fit", dir: -1 },
-    tracking: { key: "dateApplied", dir: -1 }
-  };
-
-  function sortKeyVal(job, js, key) {
-    switch (key) {
-      case "title": return job.title || "";
-      case "company": return job.company || "";
-      case "tier": return job.tier || "";
-      case "category": return job.category || "";
-      case "fit": return job.fit || 0;
-      case "salary": return job.salary || "";
-      case "days": return job.postedDate || "";
-      case "dateApplied": return js.dateApplied || "";
-      case "responded": return js.responded || "";
-      case "vec": return js.reportedToVEC || "";
-      case "connection": return js.connectionReachOut || "";
-      case "throughWho": return js.throughWho || "";
-      case "notes": return js.notes || "";
-      default: return "";
-    }
-  }
-
-  function applySort(jobs, state, tableKey) {
-    const s = sortState[tableKey];
-    const arr = jobs.slice();
-    arr.sort((a, b) => {
-      const ja = getJobState(state, a.id), jb = getJobState(state, b.id);
-      const av = sortKeyVal(a, ja, s.key), bv = sortKeyVal(b, jb, s.key);
-      if (typeof av === "number" && typeof bv === "number") return (av - bv) * s.dir;
-      return String(av).localeCompare(String(bv)) * s.dir;
+  renderTableHeader('table-matches', cols);
+  let rows = JOBS.slice();
+  const st = sortState.matches;
+  if(st.key){
+    rows.sort((a,b)=>{
+      let av, bv;
+      if(st.key==='days'){ av = a.postedDate ? new Date(a.postedDate) : new Date(0); bv = b.postedDate ? new Date(b.postedDate) : new Date(0); }
+      else { av = a[st.key]; bv = b[st.key]; }
+      return cmp(av,bv) * st.dir;
     });
-    return arr;
   }
+  const tbody = document.querySelector('#table-matches tbody');
+  tbody.innerHTML = rows.map(j => `
+    <tr>
+      <td>${titleLinkHtml(j)}${j.newBadge?'<span class="badge-new">New</span>':''}</td>
+      <td>${esc(j.company).split(' — ')[0]}</td>
+      <td><span class="pill pill-${j.tier==='Primary'?'primary':'secondary'}">${j.tier}</span></td>
+      <td>${esc(j.category)}</td>
+      <td>${fitStr(j.fit)}</td>
+      <td>${esc(j.notes)}</td>
+      <td>${daysActive(j.postedDate)}</td>
+      <td>${esc(j.salary)}</td>
+      <td>${applyLinkHtml(j)}</td>
+    </tr>`).join('');
+}
 
-  function toggleSort(tableKey, key) {
-    const s = sortState[tableKey];
-    if (s.key === key) { s.dir *= -1; } else { s.key = key; s.dir = key === "fit" ? -1 : 1; }
-    if (tableKey === "summary") renderSummaryTable();
-    else if (tableKey === "workingon") renderWorkingOnTable();
-    else renderTrackingTable();
+function copyResumeRequest(company, title, url){
+  const text = `Generate resume and cover letter for ${company} — ${title} (${url||'link not on file'})`;
+  navigator.clipboard && navigator.clipboard.writeText(text).catch(()=>{});
+  return text;
+}
+
+function cardActionsHtml(j){
+  if(j.hasMaterials){
+    return `<span class="nolink">Résumé & cover letter already on file for this posting</span>`;
   }
+  return `<button class="btn btn-primary" onclick="handleCreateClick(this, ${JSON.stringify(j.company).replace(/"/g,'&quot;')}, ${JSON.stringify(j.title).replace(/"/g,'&quot;')}, ${JSON.stringify(j.applyUrl||'').replace(/"/g,'&quot;')})">Create Resume &amp; Cover Letter</button>`;
+}
 
-  function updateArrows(tableKey) {
-    const s = sortState[tableKey];
-    document.querySelectorAll(`[id^="arrow-${tableKey}-"]`).forEach(el => { el.textContent = ""; });
-    const el = document.getElementById(`arrow-${tableKey}-${s.key}`);
-    if (el) el.textContent = s.dir === 1 ? "▲" : "▼";
+function handleCreateClick(btn, company, title, url){
+  const text = `Generate resume and cover letter for ${company} — ${title} (${url||'link not on file'})`;
+  try{ navigator.clipboard.writeText(text); }catch(e){}
+  const orig = btn.textContent;
+  btn.textContent = 'Copied! Paste into a chat with Claude';
+  setTimeout(()=>{ btn.textContent = orig; }, 2000);
+}
+
+function renderCards(){
+  const primaryOrTop = JOBS.filter(j => j.tier === 'Primary');
+  const container = document.getElementById('cards-matches');
+  container.innerHTML = primaryOrTop.map(j => `
+    <div class="card">
+      <div class="card-head">
+        <div>
+          <div class="card-title">${titleLinkHtml(j)}${j.newBadge?'<span class="badge-new">New</span>':''}</div>
+          <div class="card-company">${esc(j.company)}</div>
+        </div>
+        <span class="pill pill-primary">${j.tier}</span>
+      </div>
+      <div class="stats">
+        <span>Fit <b>${fitStr(j.fit)}</b></span>
+        <span>Salary <b>${esc(j.salary)}</b></span>
+        <span>Location <b>${esc(j.location)}</b></span>
+        <span>Days Active <b>${daysActive(j.postedDate)}</b></span>
+      </div>
+      <div class="why"><b>Why she's a strong fit:</b> ${esc(j.why)}</div>
+      <div class="honest"><b>Honest fit assessment:</b> ${esc(j.honest)}</div>
+      <div class="honest"><b>LinkedIn connections:</b> available on request — just ask.</div>
+      <div class="card-actions">
+        ${applyLinkHtml(j)}
+        ${cardActionsHtml(j)}
+      </div>
+    </div>`).join('');
+
+  const prev = JOBS.filter(j => j.tier === 'Secondary');
+  const prevContainer = document.getElementById('prevlist');
+  prevContainer.innerHTML = prev.map(j => `
+    <div class="row">
+      <b>${titleLinkHtml(j)}</b> — ${esc(j.company)} (fit ${fitStr(j.fit)}, Secondary)${j.newBadge?'<span class="badge-new">New</span>':''}<br>
+      <span style="color:var(--muted)">${esc(j.notes)}</span>
+      ${j.applyUrl ? ` &nbsp; <a href="${j.applyUrl}" target="_blank" rel="noopener">View posting →</a>` : ' &nbsp; <span class="nolink">no link on file</span>'}
+    </div>`).join('');
+}
+
+function renderSetupNotes(){
+  const items = [
+"Run date Wed 10/7/2026 (scheduled slot was Tue 10/6 7pm ET; fired ~13:35 UTC Wed). Seniority counts this run: VP ~25 surfaced / 8 verified-live US-eligible (plus 4 more from the hyperscaler/GSI pass); SVP 5 surfaced / 1 live (Decision Lens); EVP 1 surfaced / 0 live; COO ~6 surfaced / 0 qualifying; CCO ~8 surfaced / 0 verified (all aggregator-only). Thin SVP/EVP/COO/CCO depth is a real market/index gap, not skipped searching.",
+"Re-verification: 27 tracked postings re-fetched. 21 confirmed live; Deltek, Kinaxis, Antithesis, Cvent, Rimini Street returned no usable status (carried forward, flagged); Booz Allen blocked (HTTP 406) but already applied. No tracked posting was found dead this run.",
+"New this run: Wavelo VP PS, AWS Director Global Delivery, Symplr VP PS (Primary); Decision Lens SVP CX, ST6, ConvergeOne, Slalom MD CX GTM, Hitachi Solutions VP Enterprise Client Engagement (Secondary). Fit/desirability numbers on new roles are agent estimates from the posting text. Considered but below the bar: OpenAI Support Delivery Lead Gov (est. fit 55, DC hybrid, $284K–$315K, greenfield but wants technical-support background), Neocol VP PS (68/45, consulting-billable, Greenhouse page rate-limited), Seismic VP CS (likely stale 2025 req), Constant Contact, Appcues, Wayvia, Scale AI Sr Director FDE (needs 12+ yrs engineering).",
+"Dropped as dead/closed/out of scope this run: DataRails, Amperity, CloudZero, Convey, Bridgeway, Elastic, Backbase (Amsterdam), Matomo (NZ/AU), Proxima (UK), Roofr (Canada), Pilot, Nue.io, Cohere, West Monroe, Google Delivery Executive, ServiceNow/Snowflake/Hitachi Vantara/Databricks reqs. Search index skewed stale and the fetch proxy rate-limited a few times — coverage gap worth a browser-assisted pass in a live session.",
+"Coverage gaps noted: Accenture/Deloitte/KPMG/PwC/EY searches returned only Manager/Senior Manager reqs; Databricks, Salesforce, Oracle, Microsoft surfaced no open senior leader reqs via search. LinkedIn-only digest items from 9/29 (Slalom, Chartis, AWS SWAT, Ladders VP Global Practices, Icertis, EXL, Foundever, Roboyo, MissionSquare) were not re-checked and remain unconfirmed. Equifax, Deloitte and Marriott were not re-verified this run.",
+"Applied (Job Tracking): Vanta, Navan, Booz Allen, OpenAI Enablement Lead, Anthropic S&O Applied AI, Range — no new application details reported. No base-resume drift check due this run.",
+"LinkedIn connections remain on-request only — ask about a specific company any time. Resume & cover letter generation is on-demand only.",
+  ];
+  document.getElementById('setup-notes').innerHTML = '<ul>' + items.map(i=>`<li>${i}</li>`).join('') + '</ul>';
+}
+
+// ---- Working On tab ----
+function renderWorkingOn(){
+  const cols = [
+    {key:'title', label:'Title / Role', sortable:true},
+    {key:'company', label:'Company', sortable:true},
+    {key:'notes', label:'Notes', sortable:false},
+    {key:'salary', label:'Salary', sortable:false},
+  ];
+  renderTableHeader('table-workingon', cols);
+  const tbody = document.querySelector('#table-workingon tbody');
+  if(WORKINGON.length===0){
+    tbody.innerHTML = `<tr><td colspan="4">Nothing in progress right now.</td></tr>`;
+  } else {
+    tbody.innerHTML = WORKINGON.map(j => `
+      <tr>
+        <td>${esc(j.title)}${j.dead?'<span class="badge-dead">Dead</span>':''}</td>
+        <td>${esc(j.company)}</td>
+        <td>${esc(j.notes)}</td>
+        <td>${esc(j.salary)}</td>
+      </tr>`).join('');
   }
+  const cardsC = document.getElementById('cards-workingon');
+  cardsC.innerHTML = WORKINGON.map(j => `
+    <div class="card">
+      <div class="card-head">
+        <div>
+          <div class="card-title">${esc(j.title)}${j.dead?'<span class="badge-dead">Dead</span>':''}</div>
+          <div class="card-company">${esc(j.company)}</div>
+        </div>
+      </div>
+      <div class="stats">
+        <span>Salary <b>${esc(j.salary)}</b></span>
+        <span>Location <b>${esc(j.location)}</b></span>
+      </div>
+      <div class="honest">${esc(j.notes)}</div>
+    </div>`).join('');
+}
 
-  function renderSummaryTable() {
-    const state = loadState();
-    const tbody = document.getElementById("summary-tbody");
-    tbody.innerHTML = "";
-    // Applied postings move to Job Tracking; Working-On postings move to the Working On tab.
-    // Every posting lives in exactly one of the three tabs.
-    const visibleJobs = JOBS.filter(job => !getJobState(state, job.id).applied && !job.workingOn);
-    const sortedJobs = applySort(visibleJobs, state, "summary");
-    sortedJobs.forEach(job => {
-      const js = getJobState(state, job.id);
-      const fitClass = job.fit >= 70 ? "high" : "mid";
-      const tierLabel = job.tier === "secondary" ? "Secondary" : "Primary";
-      const daysActive = daysActiveLabel(job.postedDate);
-      const tr = document.createElement("tr");
-      const titleCell = job.linkedinLink
-        ? `<a class="jdlink" href="${job.linkedinLink}" target="_blank">${job.title}</a>`
-        : job.title;
-      tr.innerHTML = `
+// ---- Job Tracking tab ----
+function renderTracking(){
+  const cols = [
+    {key:'title', label:'Title / Role', sortable:true},
+    {key:'company', label:'Company', sortable:true},
+    {key:'dateApplied', label:'Date Applied', sortable:true},
+    {key:'responded', label:'Responded', sortable:true},
+    {key:'reportedToVEC', label:'Reported to VEC', sortable:true},
+    {key:'connectionReachOut', label:'Personal Connection Reach Out', sortable:true},
+    {key:'throughWho', label:'Through Who?', sortable:true},
+    {key:'notes', label:'Notes', sortable:true},
+  ];
+  renderTableHeader('table-tracking', cols);
+  let rows = TRACKING.slice();
+  const st = sortState.tracking;
+  if(st.key){ rows.sort((a,b)=> cmp(a[st.key], b[st.key]) * st.dir); }
+  const tbody = document.querySelector('#table-tracking tbody');
+  if(rows.length===0){
+    tbody.innerHTML = `<tr><td colspan="8">Nothing marked "Applied" yet.</td></tr>`;
+  } else {
+    tbody.innerHTML = rows.map(t => {
+      const link = t.linkedinLink || t.jdLink;
+      const titleCell = link ? `<a href="${link}" target="_blank" rel="noopener" class="linklike">${esc(t.title)}</a>` : `${esc(t.title)} <span class="nolink">(link not on file)</span>`;
+      return `<tr>
         <td>${titleCell}</td>
-        <td>${job.company}</td>
-        <td><span class="tier-badge ${job.tier}">${tierLabel}</span></td>
-        <td>${job.category}</td>
-        <td class="fitscore ${fitClass}">${job.fit}%</td>
-        <td class="notecell">${job.flag ? job.flag : "<span class='empty'>—</span>"}</td>
-        <td>${daysActive}</td>
-        <td>${job.salary}</td>
-        <td><a class="jdlink" href="${job.jdLink}" target="_blank">Apply</a></td>
-        <td>
-          <label class="applied-check">
-            <input type="checkbox" data-jobid="${job.id}" ${js.applied ? "checked" : ""} onchange="toggleApplied(this)">
-            Applied
-          </label>
-        </td>
-      `;
-      tbody.appendChild(tr);
-    });
-    updateArrows("summary");
+        <td>${esc(t.company)}</td>
+        <td><input type="text" value="${esc(t.dateApplied)}" onchange="localOnly(this)"></td>
+        <td><input type="text" value="${esc(t.responded)}" onchange="localOnly(this)"></td>
+        <td><input type="text" value="${esc(t.reportedToVEC)}" onchange="localOnly(this)"></td>
+        <td><input type="text" value="${esc(t.connectionReachOut)}" onchange="localOnly(this)"></td>
+        <td><input type="text" value="${esc(t.throughWho)}" onchange="localOnly(this)"></td>
+        <td><input type="text" value="${esc(t.notes)}" onchange="localOnly(this)"></td>
+      </tr>`;
+    }).join('');
   }
+}
+function localOnly(el){ /* same-session convenience only; not persisted */ }
 
-  function renderWorkingOnTable() {
-    const state = loadState();
-    const tbody = document.getElementById("workingon-tbody");
-    const table = document.getElementById("workingon-table");
-    const emptyMsg = document.getElementById("workingon-empty");
-    tbody.innerHTML = "";
-    // Postings with materials in progress but not yet applied. Once "Applied" is checked here,
-    // toggleApplied() moves the posting straight to Job Tracking — same one-tab-only rule.
-    const jobs = JOBS.filter(job => job.workingOn && !getJobState(state, job.id).applied);
-    if (jobs.length === 0) {
-      table.style.display = "none";
-      emptyMsg.style.display = "block";
-      return;
-    }
-    table.style.display = "table";
-    emptyMsg.style.display = "none";
-    const sortedJobs = applySort(jobs, state, "workingon");
-    sortedJobs.forEach(job => {
-      const js = getJobState(state, job.id);
-      const fitClass = (job.fit || 0) >= 70 ? "high" : "mid";
-      const tierLabel = job.tier === "secondary" ? "Secondary" : "Primary";
-      const daysActive = daysActiveLabel(job.postedDate);
-      const tr = document.createElement("tr");
-      const titleCell = job.linkedinLink
-        ? `<a class="jdlink" href="${job.linkedinLink}" target="_blank">${job.title}</a>`
-        : (job.jdLink ? `<a class="jdlink" href="${job.jdLink}" target="_blank">${job.title}</a>` : `${job.title} <span class="linknote">(link not on file)</span>`);
-      tr.innerHTML = `
-        <td>${titleCell}</td>
-        <td>${job.company}</td>
-        <td><span class="tier-badge ${job.tier}">${tierLabel}</span></td>
-        <td>${job.category}</td>
-        <td class="fitscore ${fitClass}">${job.fit != null ? job.fit + "%" : "—"}</td>
-        <td class="notecell">${job.flag ? job.flag : "<span class='empty'>—</span>"}</td>
-        <td>${daysActive}</td>
-        <td>${job.salary}</td>
-        <td><a class="jdlink" href="${job.jdLink || job.linkedinLink}" target="_blank">Apply</a></td>
-        <td>
-          <label class="applied-check">
-            <input type="checkbox" data-jobid="${job.id}" ${js.applied ? "checked" : ""} onchange="toggleApplied(this)">
-            Applied
-          </label>
-        </td>
-      `;
-      tbody.appendChild(tr);
-    });
-    updateArrows("workingon");
-  }
+function attachSort(tableId, key, renderFn){
+  document.getElementById(tableId).addEventListener('click', (e)=>{
+    const th = e.target.closest('th.sortable');
+    if(!th) return;
+    const k = th.dataset.key;
+    const st = sortState[key];
+    if(st.key === k){ st.dir *= -1; } else { st.key = k; st.dir = 1; }
+    document.querySelectorAll(`#${tableId} th .arrow`).forEach(a=>a.textContent='');
+    th.querySelector('.arrow').textContent = st.dir===1 ? '▲' : '▼';
+    renderFn();
+  });
+}
 
-  function toggleApplied(checkbox) {
-    const id = checkbox.getAttribute("data-jobid");
-    const state = loadState();
-    const js = getJobState(state, id);
-    js.applied = checkbox.checked;
-    if (checkbox.checked && !js.dateApplied) {
-      const t = new Date();
-      js.dateApplied = t.toISOString().slice(0, 10);
-    }
-    state[id] = js;
-    saveState(state);
-    renderSummaryTable();
-    renderWorkingOnTable();
-    renderTrackingTable();
-  }
+document.querySelectorAll('.tab').forEach(tab=>{
+  tab.addEventListener('click', ()=>{
+    document.querySelectorAll('.tab').forEach(t=>t.classList.remove('active'));
+    document.querySelectorAll('.panel').forEach(p=>p.classList.remove('active'));
+    tab.classList.add('active');
+    document.getElementById('panel-'+tab.dataset.tab).classList.add('active');
+  });
+});
 
-  function updateField(id, field, value) {
-    const state = loadState();
-    const js = getJobState(state, id);
-    js[field] = value;
-    state[id] = js;
-    saveState(state);
-  }
-
-  function unapply(id) {
-    const state = loadState();
-    const js = getJobState(state, id);
-    js.applied = false;
-    state[id] = js;
-    saveState(state);
-    renderSummaryTable();
-    renderWorkingOnTable();
-    renderTrackingTable();
-  }
-
-  function renderTrackingTable() {
-    const state = loadState();
-    const appliedJobs = JOBS.filter(job => getJobState(state, job.id).applied);
-    const applied = applySort(appliedJobs, state, "tracking");
-    const table = document.getElementById("tracking-table");
-    const emptyMsg = document.getElementById("tracking-empty");
-    const tbody = document.getElementById("tracking-tbody");
-    tbody.innerHTML = "";
-
-    if (applied.length === 0) {
-      table.style.display = "none";
-      emptyMsg.style.display = "block";
-      return;
-    }
-    table.style.display = "table";
-    emptyMsg.style.display = "none";
-
-    const esc = v => (v || "").toString().replace(/"/g, "&quot;");
-    const ynSelect = (id, field, value) => `
-      <select class="notes" data-jobid="${id}" onchange="updateField(this.getAttribute('data-jobid'), '${field}', this.value)">
-        <option value="" ${!value ? "selected" : ""}></option>
-        <option value="Y" ${value === "Y" ? "selected" : ""}>Y</option>
-        <option value="N" ${value === "N" ? "selected" : ""}>N</option>
-        <option value="Auto" ${value === "Auto" ? "selected" : ""}>Auto</option>
-      </select>`;
-
-    applied.forEach(job => {
-      const js = getJobState(state, job.id);
-      const tr = document.createElement("tr");
-      const jdUrl = job.linkedinLink || job.jdLink;
-      const titleCell = jdUrl
-        ? `<a class="jdlink" href="${jdUrl}" target="_blank">${job.title}</a>`
-        : `${job.title} <span class="linknote">(link not on file)</span>`;
-      tr.innerHTML = `
-        <td>${titleCell}</td>
-        <td>${job.company}</td>
-        <td><input class="notes" type="date" value="${esc(js.dateApplied)}" data-jobid="${job.id}" onchange="updateField(this.getAttribute('data-jobid'), 'dateApplied', this.value)"></td>
-        <td>${ynSelect(job.id, "responded", js.responded)}</td>
-        <td>${ynSelect(job.id, "reportedToVEC", js.reportedToVEC)}</td>
-        <td>${ynSelect(job.id, "connectionReachOut", js.connectionReachOut)}</td>
-        <td><input class="notes" type="text" value="${esc(js.throughWho)}" placeholder="e.g. Bobby Long" data-jobid="${job.id}" onchange="updateField(this.getAttribute('data-jobid'), 'throughWho', this.value)"></td>
-        <td><input class="notes" type="text" value="${esc(js.notes)}" placeholder="e.g. waiting to hear back" data-jobid="${job.id}" onchange="updateField(this.getAttribute('data-jobid'), 'notes', this.value)"></td>
-        <td><button class="unapply-btn" onclick="unapply('${job.id}')">Remove</button></td>
-      `;
-      tbody.appendChild(tr);
-    });
-    updateArrows("tracking");
-  }
-
-  function showTab(name) {
-    document.querySelectorAll(".tab-panel").forEach(p => p.classList.remove("active"));
-    document.querySelectorAll(".tab-btn").forEach(b => b.classList.remove("active"));
-    document.getElementById("tab-" + name).classList.add("active");
-    document.getElementById("tab-btn-" + name).classList.add("active");
-  }
-
-  renderSummaryTable();
-  renderWorkingOnTable();
-  renderTrackingTable();
+renderMatchesTable();
+renderCards();
+renderSetupNotes();
+renderWorkingOn();
+renderTracking();
+attachSort('table-matches','matches',()=>{renderMatchesTable();});
+attachSort('table-tracking','tracking',()=>{renderTracking();});
 </script>
 </body>
 </html>
