@@ -178,6 +178,8 @@ function renderMatchesTable(){
       let av, bv;
       if(st.key==='days'){ av = a.postedDate ? new Date(a.postedDate) : new Date(0); bv = b.postedDate ? new Date(b.postedDate) : new Date(0); }
       else { av = a[st.key]; bv = b[st.key]; }
+      const an=(av===null||av===undefined), bn=(bv===null||bv===undefined);
+      if(an||bn) return an&&bn?0:(an?1:-1);
       return cmp(av,bv) * st.dir;
     });
   }
