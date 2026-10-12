@@ -128,6 +128,16 @@
   .extra-box h3{font-size:18px; color:var(--accent-2);}
   .extra-box ul{margin:10px 0 0; padding-left:20px;}
   .extra-box li{margin-bottom:10px; font-size:15.5px;}
+  .card-grid{display:grid; grid-template-columns:repeat(auto-fill,minmax(260px,1fr)); gap:16px; margin-bottom:28px;}
+  .hike-card{border:1px solid var(--line); border-radius:14px; padding:18px 20px; background:var(--pale);}
+  .hike-card h4{font-size:17px; margin:0 0 4px; color:var(--primary-deep);}
+  .hike-card h4 a{color:inherit;}
+  .hike-card p{margin:6px 0 8px; font-size:14.5px; color:var(--ink);}
+  .hike-card .trail-meta{margin-top:0;}
+  .hike-group-label{font-family:'IBM Plex Mono', monospace; font-weight:700; font-size:14px; text-transform:uppercase; letter-spacing:.05em; color:var(--accent-2); margin:28px 0 12px; border-bottom:1px solid var(--line); padding-bottom:8px;}
+  .hike-group-label:first-child{margin-top:0;}
+  .hike-tag{display:inline-block; font-family:'IBM Plex Mono', monospace; font-size:11.5px; text-transform:uppercase; letter-spacing:.03em; background:rgba(74,103,65,0.14); color:var(--accent-2); border-radius:6px; padding:2px 8px; margin-bottom:8px;}
+  .hike-tag.unconfirmed{background:rgba(139,58,58,0.12); color:var(--accent-3);}
   .prop-card{border:1px solid var(--line); border-radius:16px; padding:22px 24px; margin-bottom:18px; background:var(--pale);}
   .prop-card h3{font-size:19px; color:var(--primary-deep); margin-bottom:10px;}
   .prop-card p{margin:6px 0;}
@@ -169,6 +179,7 @@
 
   <nav class="tabs">
     <button class="tab-btn active" onclick="showTab('itinerary', event)">Itinerary</button>
+    <button class="tab-btn" onclick="showTab('hikes', event)">Hikes</button>
     <button class="tab-btn" onclick="showTab('property', event)">Property Details</button>
   </nav>
 
@@ -182,7 +193,7 @@
       <div class="day-group">
         <div class="day-label">Day 1 · Monday, October 12</div>
         <h3>Depart McLean → Blackwater Falls &amp; Dolly Sods Cabin</h3>
-        <div class="day-weather">⛈️ As of Oct 10: 90% chance of rain (heaviest in the morning), windy with gusts to 40 mph, high ~60°F, easing some by afternoon · sunset ~6:42 PM <span class="badge">Forecast — recheck closer to the day</span></div>
+        <div class="day-weather">🌦️ As of Oct 11 (AccuWeather): 65% chance of rain, but only ~1 hr total — spotty drizzle early morning, then sun and clouds by afternoon. High 59°F, winds a mild W 6 mph (remnants of Tropical Rainstorm Isaias clear out by ~6am, well before you're on the road) · sunset ~6:42 PM <span class="badge">Forecast — recheck closer to the day</span></div>
         <div class="meal-row">
           <span class="meal-chip filled">☕ Breakfast — at home before you go</span>
           <span class="meal-chip filled">🍲 Lunch — Smokehouse at the Lodge</span>
@@ -209,7 +220,7 @@
           <div class="sub-card-title"><span class="num">2</span>Hikes &amp; falls — Blackwater Falls State Park</div>
           <ul class="tl-items">
             <li><b>Heads up on timing:</b> arriving ~11:45 AM–12:00 PM leaves roughly 4–4.25 hrs before the 4pm check-in. Boardwalk + Lindy Point + a sit-down lunch comfortably fit, and Elakala Falls still fits after — but a real lunch (not sandwiches in the car) eats more of the window than the old plan did, so treat the two Pendleton/Pace overlooks as a stretch, not an expectation, and Elakala as the one to shorten or skip first if you're running behind by mid-afternoon. It's also worth knowing it doesn't get properly dark in Davis until ~7:10pm, so there's real daylight buffer even if the day runs long.</li>
-            <li><b>Heads up on weather:</b> the forecast as of Oct 10 has Monday at 90% rain with gusts to 40 mph. The Boardwalk/Gentle Trail is paved and short, so it's the one that holds up fine in rough weather. Lindy Point, Pendleton, and Pace Point are all exposed cliff-edge overlooks — not just unpleasant but genuinely not worth the wind risk in a 40 mph gust, and the canyon views are likely socked in by cloud anyway. If Monday's as rough as forecast, do the Boardwalk, skip the overlooks and Elakala Falls, and pick them up Tuesday instead — see the note on Tuesday's plan.</li>
+            <li><b>Heads up on weather:</b> this has improved a lot since earlier in the week — AccuWeather (as of Oct 11) now has Monday at 65% rain but only ~1 hr total, confined to early morning, with winds a mild 6 mph (not the 40 mph gusts the forecast showed a day earlier). If that holds, the wind-safety concern on Lindy Point, Pendleton, and Pace Point mostly goes away, and clouds should clear enough for real views by the time you're hiking. Given how much this forecast has already swung in two days, still worth a real check the morning of — if it somehow reverts to windy, treat the Boardwalk as the fallback and push the overlooks/Elakala to Tuesday per the weather-swap note there.</li>
             <li><b><a class="dir" href="https://www.google.com/maps/dir/?api=1&amp;destination=Blackwater+Falls+State+Park%2C+Davis%2C+WV" target="_blank" rel="noopener">Blackwater Falls Boardwalk / Gentle Trail</a></b> — paved path + 200+ step boardwalk down to the main falls overlook; starts at the Trading Post parking area.
               <span class="trail-meta">0.25 mi round trip · easy · ~15–20 min · ★4.7 (1,115 Tripadvisor reviews, park-wide)</span>
               <span class="poi-actions"><a class="dir" href="https://www.google.com/maps/dir/?api=1&amp;destination=Blackwater+Falls+State+Park%2C+Davis%2C+WV" target="_blank" rel="noopener">Directions →</a></span>
@@ -266,7 +277,7 @@
       <div class="day-card">
         <div class="day-label">Day 2 · Tuesday, October 13</div>
         <h3>Sunrise → one more WV trail → late lunch &amp; home</h3>
-        <div class="day-weather">☀️ As of Oct 10: mostly sunny, no rain expected by day, high ~74°F — a real improvement on Monday · sunrise ~7:24 AM, sunset ~6:40 PM <span class="badge">Forecast — recheck closer to the day</span></div>
+        <div class="day-weather">☀️ As of Oct 11 (AccuWeather): partly sunny and warmer, just 2% chance of rain, high ~76°F — a real improvement on Monday · sunrise ~7:24 AM, sunset ~6:40 PM <span class="badge">Forecast — recheck closer to the day</span></div>
         <div class="meal-row">
           <span class="meal-chip filled">🍳 Breakfast — at the cabin</span>
           <span class="meal-chip filled">🥪 Lunch — Capo Deli sandwiches, after the hike</span>
@@ -308,6 +319,101 @@
         <a class="gmaps-btn" href="https://www.google.com/maps/dir/?api=1&amp;origin=239+Shamrock+Dr%2C+Maysville%2C+WV&amp;destination=McLean%2C+VA&amp;waypoints=Fisher+Spring+Run+Trailhead%2C+WV|Trout+Pond+Recreation+Area%2C+WV" target="_blank" rel="noopener">Send Day 2 route to Google Maps →</a>
       </div>
 
+    </section>
+
+    <!-- HIKES -->
+    <section id="tab-hikes" class="section">
+      <div class="section-title">Hikes</div>
+      <div class="section-sub">Every trail in play across the trip — confirmed plan, bonus picks, and backups — with rating, difficulty, and time in one place.</div>
+
+      <div class="hike-group-label">Monday — Blackwater Falls State Park</div>
+      <div class="card-grid">
+        <div class="hike-card">
+          <h4><a class="dir" href="https://www.google.com/maps/dir/?api=1&amp;destination=Blackwater+Falls+State+Park%2C+Davis%2C+WV" target="_blank" rel="noopener">Blackwater Falls Boardwalk / Gentle Trail</a></h4>
+          <span class="trail-meta">0.25 mi RT · easy · ~15–20 min · ★4.7 (1,115 reviews, park-wide)</span>
+          <p>Paved path + 200+ step boardwalk down to the main falls overlook. Holds up fine in any weather — the fallback if conditions turn.</p>
+          <span class="poi-actions"><a class="dir" href="https://www.google.com/maps/dir/?api=1&amp;destination=Blackwater+Falls+State+Park%2C+Davis%2C+WV" target="_blank" rel="noopener">Directions →</a></span>
+        </div>
+        <div class="hike-card">
+          <h4><a class="dir" href="https://www.google.com/maps/dir/?api=1&amp;destination=Lindy+Point+Observation+Deck%2C+Davis%2C+WV" target="_blank" rel="noopener">Lindy Point Trail</a></h4>
+          <span class="trail-meta">0.6 mi RT · easy-moderate · ~20–30 min · ★4.7 (1,115, park-wide)</span>
+          <p>One of the park's best views — Blackwater Canyon from 3,000 ft. Cliff-edge overlook; check wind before you go.</p>
+          <span class="poi-actions"><a class="dir" href="https://www.google.com/maps/dir/?api=1&amp;destination=Lindy+Point+Observation+Deck%2C+Davis%2C+WV" target="_blank" rel="noopener">Directions →</a></span>
+        </div>
+        <div class="hike-card">
+          <span class="hike-tag">Top bonus pick</span>
+          <h4><a class="dir" href="https://www.google.com/maps/dir/?api=1&amp;destination=Blackwater+Falls+Lodge%2C+Davis%2C+WV" target="_blank" rel="noopener">Elakala Falls + Balanced Rock Loop</a></h4>
+          <span class="trail-meta">2.8 mi loop · moderate · 375 ft gain · ~1.5–2 hrs · ★4.7 (park-wide)</span>
+          <p>Right from the Lodge parking lot (same as the Smokehouse lunch spot). Your only shot at this one — Tuesday's open hiking time is back near the cabin.</p>
+          <span class="poi-actions"><a class="dir" href="https://www.google.com/maps/dir/?api=1&amp;destination=Blackwater+Falls+Lodge%2C+Davis%2C+WV" target="_blank" rel="noopener">Directions →</a></span>
+        </div>
+        <div class="hike-card">
+          <h4><a class="dir" href="https://www.google.com/maps/dir/?api=1&amp;destination=Pendleton+Point+Overlook%2C+Blackwater+Falls+State+Park%2C+WV" target="_blank" rel="noopener">Pendleton Point Overlook</a></h4>
+          <span class="trail-meta">&lt;0.2 mi · easy · ~10 min · ★4.7 (park-wide)</span>
+          <p>Easy, family-friendly, right by the Nature Center. A stretch goal now that lunch is sit-down — the one most likely to still fit.</p>
+          <span class="poi-actions"><a class="dir" href="https://www.google.com/maps/dir/?api=1&amp;destination=Pendleton+Point+Overlook%2C+Blackwater+Falls+State+Park%2C+WV" target="_blank" rel="noopener">Directions →</a></span>
+        </div>
+        <div class="hike-card">
+          <h4><a class="dir" href="https://www.google.com/maps/dir/?api=1&amp;destination=Pace+Point+Overlook%2C+Blackwater+Falls+State+Park%2C+WV" target="_blank" rel="noopener">Pace Point Overlook</a></h4>
+          <span class="trail-meta">~3 mi RT · moderate · ~1.25–1.5 hrs · ★4.7 (park-wide)</span>
+          <p>Along the Canyon Rim Trail from Pendleton Lake. The first one to drop if the day's running long.</p>
+          <span class="poi-actions"><a class="dir" href="https://www.google.com/maps/dir/?api=1&amp;destination=Pace+Point+Overlook%2C+Blackwater+Falls+State+Park%2C+WV" target="_blank" rel="noopener">Directions →</a></span>
+        </div>
+      </div>
+
+      <div class="hike-group-label">Tuesday — Dolly Sods</div>
+      <div class="card-grid">
+        <div class="hike-card">
+          <span class="hike-tag">Hosts' #1 pick</span>
+          <h4><a class="dir" href="https://www.google.com/maps/dir/?api=1&amp;destination=Bear+Rocks+Preserve%2C+Davis%2C+WV" target="_blank" rel="noopener">Bear Rocks Preserve</a></h4>
+          <span class="trail-meta">~1 mi easy walking loop · ~30–45 min · ★5.0 (5 Tripadvisor reviews — small sample)</span>
+          <p>2 mi / ~5 min from the cabin. Sunrise spot — the hosts' most-repeated "don't miss."</p>
+          <span class="poi-actions"><a class="dir" href="https://www.google.com/maps/dir/?api=1&amp;destination=Bear+Rocks+Preserve%2C+Davis%2C+WV" target="_blank" rel="noopener">Directions →</a></span>
+        </div>
+        <div class="hike-card">
+          <span class="hike-tag">Hosts' personal favorite</span>
+          <h4><a class="dir" href="https://www.google.com/maps/dir/?api=1&amp;destination=Fisher+Spring+Run+Trailhead%2C+WV" target="_blank" rel="noopener">Rohrbaugh Plains Trail → Rohrbaugh Cliffs</a></h4>
+          <span class="trail-meta">~4.6–5 mi RT (out-and-back) · moderate · ~820 ft gain · ~2.5–3 hrs</span>
+          <p>From Fisher Spring Run Trailhead, ~20 min from the cabin — this is the one Devon &amp; Jenna call their own favorite. <b>Naming note:</b> this is the same destination AllTrails lists as "Rohrbaugh Overlook via Wildlife Trail" — but that's the longer loop version (~8.9 mi, ~3.5 hrs), returning via the Wildlife Trail instead of backtracking. AllTrails' separate "Fisher Spring Run Trail to Red Creek" is a <i>different</i> hike from the same trailhead, heading down to Red Creek instead of up to the cliffs — not this one. Turn around at the cliffs (mile ~2.6) rather than looping back via Wildlife Trail to stay at the ~4.6–5 mi figure used in the itinerary; loop back via Wildlife Trail if you want the longer version instead.</p>
+          <span class="poi-actions"><a class="dir" href="https://www.google.com/maps/dir/?api=1&amp;destination=Fisher+Spring+Run+Trailhead%2C+WV" target="_blank" rel="noopener">Directions →</a></span>
+        </div>
+        <div class="hike-card">
+          <h4><a class="dir" href="https://www.google.com/maps/dir/?api=1&amp;destination=Spruce+Knob+Observation+Tower%2C+WV" target="_blank" rel="noopener">Spruce Knob Observation Tower</a></h4>
+          <span class="trail-meta">Short paved loop at the top · easy · 45 min–1 hr drive each way from the cabin</span>
+          <p>West Virginia's highest point (4,863 ft), 360° views. Trade the hike for a drive-up view if you'd rather.</p>
+          <span class="poi-actions"><a class="dir" href="https://www.google.com/maps/dir/?api=1&amp;destination=Spruce+Knob+Observation+Tower%2C+WV" target="_blank" rel="noopener">Directions →</a></span>
+        </div>
+      </div>
+
+      <div class="hike-group-label">Backups — either day</div>
+      <div class="card-grid">
+        <div class="hike-card">
+          <span class="hike-tag unconfirmed">Unconfirmed specifics</span>
+          <h4><a class="search" href="https://www.google.com/search?q=Stack+Rock+Dolly+Sods+WV" target="_blank" rel="noopener">Stack Rock</a></h4>
+          <span class="trail-meta">On your saved map, near Dolly Sods</span>
+          <p>Couldn't independently pin down distance/difficulty with confidence. Worth asking locally rather than planning around it sight-unseen.</p>
+          <span class="poi-actions"><a class="search" href="https://www.google.com/search?q=Stack+Rock+Dolly+Sods+WV" target="_blank" rel="noopener">Search →</a></span>
+        </div>
+        <div class="hike-card">
+          <h4><a class="dir" href="https://www.google.com/maps/dir/?api=1&amp;destination=Table+Rock+Trailhead%2C+Canaan+Loop+Road%2C+Davis%2C+WV" target="_blank" rel="noopener">Table Rock Trail</a></h4>
+          <span class="trail-meta">2.4 mi RT · easy · ~195 ft elevation change · flat but rocky/muddy underfoot</span>
+          <p>Canaan Backcountry, off Canaan Loop Road (FR 13). Good low-effort swap if you want something gentler than Rohrbaugh Plains or Spruce Knob.</p>
+          <span class="poi-actions"><a class="dir" href="https://www.google.com/maps/dir/?api=1&amp;destination=Table+Rock+Trailhead%2C+Canaan+Loop+Road%2C+Davis%2C+WV" target="_blank" rel="noopener">Directions →</a></span>
+        </div>
+        <div class="hike-card">
+          <span class="hike-tag unconfirmed">Unconfirmed distance</span>
+          <h4><a class="dir" href="https://www.google.com/maps/dir/?api=1&amp;destination=39.033415,-79.31432" target="_blank" rel="noopener">Blackbird Knob</a></h4>
+          <span class="trail-meta">Sources cite 14.2 mi loop (moderate, ~1,787 ft gain) — likely overstated for a short visit</span>
+          <p>Right at the Dolly Sods Wilderness boundary off FR 75, close to the cabin. That 14.2 mi figure likely combines connecting trails into a longer backcountry loop — ask locally before planning around a specific distance.</p>
+          <span class="poi-actions"><a class="dir" href="https://www.google.com/maps/dir/?api=1&amp;destination=39.033415,-79.31432" target="_blank" rel="noopener">Directions →</a></span>
+        </div>
+        <div class="hike-card">
+          <h4><a class="dir" href="https://www.google.com/maps/dir/?api=1&amp;destination=Canaan+Loop+Road%2C+Davis%2C+WV" target="_blank" rel="noopener">Canaan Loop Trail / Rd</a></h4>
+          <span class="trail-meta">Scenic gravel loop road · ~1 hr if driven</span>
+          <p>More a backcountry drive (popular with mountain bikers/OHVs) than a hike. Nice with a spare hour, not a day-builder.</p>
+          <span class="poi-actions"><a class="dir" href="https://www.google.com/maps/dir/?api=1&amp;destination=Canaan+Loop+Road%2C+Davis%2C+WV" target="_blank" rel="noopener">Directions →</a></span>
+        </div>
+      </div>
     </section>
 
     <!-- PROPERTY DETAILS -->
