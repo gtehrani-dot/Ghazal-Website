@@ -75,6 +75,9 @@
   .linklike{color:var(--ink);font-weight:600}
   .more-toggle{display:block;margin:-12px 0 24px;padding:10px 18px;font-size:17px;font-weight:600;border:1px solid var(--line);border-radius:8px;background:var(--panel);color:var(--primary);cursor:pointer}
   .more-toggle:hover{background:var(--bg)}
+  /* Job Tracking: narrow Personal Connection column so Company has room (2026-10-19) */
+  #table-tracking th:nth-child(7), #table-tracking td:nth-child(7){width:120px;max-width:120px;white-space:normal}
+  #table-tracking td:nth-child(2){min-width:150px}
   .nolink{color:var(--muted);font-style:italic;font-size:16px}
 </style>
 </head>
@@ -340,7 +343,7 @@ function renderTracking(){
     {key:'responded', label:'Responded', sortable:true},
     {key:'interviewed', label:'Interviewed', sortable:true},
     {key:'reportedToVEC', label:'Reported to VEC', sortable:true},
-    {key:'connectionReachOut', label:'Personal Connection Reach Out', sortable:true},
+    {key:'connectionReachOut', label:'Personal Connection', sortable:true},
     {key:'throughWho', label:'Through Who?', sortable:true},
     {key:'notes', label:'Notes', sortable:true},
   ];
