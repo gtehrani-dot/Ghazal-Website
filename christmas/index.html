@@ -79,7 +79,7 @@
   .pill { flex-shrink: 0; font-size: 0.7rem; font-weight: 600; letter-spacing: 0.03em; padding: 3px 9px; border-radius: 999px; white-space: nowrap; }
   .pill.idea { background: var(--gold-soft); color: var(--gold); }
   .pill.ordered { background: #e5ecf5; color: #2c4f7c; }
-  .pill.have { background: var(--pine-soft); color: var(--pine); }
+  .pill.arrived { background: var(--pine-soft); color: var(--pine); }
   .pill.wrapped { background: var(--pine); color: #fff; }
   .pill.todo { background: var(--berry-soft); color: var(--berry); }
 
@@ -114,7 +114,7 @@
 <!--
   ============================================================
   GIFT DATA — edit this block to update the page.
-  status: "idea" | "ordered" | "have" | "wrapped"
+  status: "idea" | "ordered" | "arrived" | "wrapped"
   Optional fields per item: note, where, price
   ============================================================
 -->
@@ -125,18 +125,18 @@ const GIFTS = {
     {
       name: "Ella",
       main: [
-        { item: "Snow boots", status: "have" },
-        { item: "Letterboard", status: "have" }
+        { item: "Snow boots", status: "ordered" },
+        { item: "Letterboard", status: "ordered" }
       ],
       stocking: [
-        { item: "Lavender spray", status: "have" },
-        { item: "Laneige mini lip gloss", status: "have" },
-        { item: "Sol de Janeiro body spray", status: "have" },
-        { item: "Laneige hydrating lip mask", status: "have" },
-        { item: "Summer Fridays minis", status: "have" },
-        { item: "Eyelash curler", status: "have" },
-        { item: "Herbivore Pink Cloud Jelly Facial Cleanser (3.4 oz)", status: "have" },
-        { item: "UGG socks", status: "have" }
+        { item: "Lavender spray", status: "ordered" },
+        { item: "Laneige mini lip gloss", status: "ordered" },
+        { item: "Sol de Janeiro body spray", status: "ordered" },
+        { item: "Laneige hydrating lip mask", status: "ordered" },
+        { item: "Summer Fridays minis", status: "ordered" },
+        { item: "Eyelash curler", status: "ordered" },
+        { item: "Herbivore Pink Cloud Jelly Facial Cleanser (3.4 oz)", status: "ordered" },
+        { item: "UGG socks", status: "ordered" }
       ]
     },
     {
@@ -176,7 +176,7 @@ const GIFTS = {
     <p>Gifts for Ella and Liam, plus one each for the rest of the family.</p>
     <div class="stats">
       <div class="stat red"><div class="num" id="s-days">–</div><div class="lbl">Days to Christmas</div></div>
-      <div class="stat green"><div class="num" id="s-have">–</div><div class="lbl">Gifts in hand</div></div>
+      <div class="stat green"><div class="num" id="s-have">–</div><div class="lbl">Arrived</div></div>
       <div class="stat"><div class="num" id="s-pending">–</div><div class="lbl">Ideas / ordered</div></div>
       <div class="stat red"><div class="num" id="s-todo">–</div><div class="lbl">People still to buy for</div></div>
     </div>
@@ -184,7 +184,7 @@ const GIFTS = {
       <span>Status:</span>
       <span class="pill idea">Idea</span>
       <span class="pill ordered">Ordered</span>
-      <span class="pill have">Have it</span>
+      <span class="pill arrived">Arrived</span>
       <span class="pill wrapped">Wrapped</span>
       <span class="pill todo">Need a gift</span>
     </div>
@@ -201,8 +201,8 @@ const GIFTS = {
 
 <script>
 (function () {
-  const LABEL = { idea: "Idea", ordered: "Ordered", have: "Have it", wrapped: "Wrapped", todo: "Need a gift" };
-  const inHand = s => s === "have" || s === "wrapped";
+  const LABEL = { idea: "Idea", ordered: "Ordered", arrived: "Arrived", wrapped: "Wrapped", todo: "Need a gift" };
+  const inHand = s => s === "arrived" || s === "wrapped";
   const esc = s => String(s).replace(/[&<>"']/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]));
   const pill = s => `<span class="pill ${s}">${LABEL[s] || s}</span>`;
 
@@ -212,7 +212,7 @@ const GIFTS = {
   }
   function group(title, list, emptyText) {
     const got = list.filter(i => inHand(i.status)).length;
-    return `<div class="group"><h4><span>${title}</span><span>${list.length ? got + " / " + list.length + " in hand" : ""}</span></h4>${
+    return `<div class="group"><h4><span>${title}</span><span>${list.length ? got + " / " + list.length + " arrived" : ""}</span></h4>${
       list.length ? `<ul class="items">${list.map(itemRow).join("")}</ul>` : `<div class="empty">${emptyText}</div>`}</div>`;
   }
 
@@ -226,7 +226,7 @@ const GIFTS = {
     const pct = all.length ? Math.round(got / all.length * 100) : 0;
     return `<article class="kid">
       <div class="kid-head"><h3>${esc(k.name)}</h3>
-        <div class="count">${all.length} gift${all.length === 1 ? "" : "s"} · ${got} in hand<div class="bar"><span style="width:${pct}%"></span></div></div>
+        <div class="count">${all.length} gift${all.length === 1 ? "" : "s"} · ${got} arrived<div class="bar"><span style="width:${pct}%"></span></div></div>
       </div>
       ${group("Main presents", k.main, "Nothing yet")}
       ${group("Stocking stuffers", k.stocking, "Nothing yet")}
