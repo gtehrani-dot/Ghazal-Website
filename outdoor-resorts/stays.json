@@ -3270,6 +3270,7 @@
    ],
    "near_park": "Coconino National Forest (Red Rock)",
    "type": [
+    "Adults only",
     "Couples"
    ],
    "amenities": [
@@ -3285,7 +3286,7 @@
    "rating": null,
    "status": "Open",
    "highlights": "Glass atriums on stilts with 576 sq ft private terraces, a daybed and fire pit, and an indoor hinoki tub.",
-   "fit_note": "No private hot tub or plunge pool found (the hinoki tub is indoors). No sauna confirmed. 40 units.",
+   "fit_note": "No private hot tub or plunge pool found (the hinoki tub is indoors). No sauna confirmed. 40 units. Adults 18+ only per the official FAQ.",
    "source": "new",
    "notes": "Checked as requested: no plunge pool is mentioned on the official Stay page. There is an on-site pool and the Velvet Spa.",
    "listing_kind": "Larger resort / lodge",
@@ -5675,6 +5676,594 @@
    "added": "2026-10-20",
    "meets_bar_override": true,
    "notes": "Facts from her Iceland Blue Lagoon trip page + official site."
+  },
+  {
+   "name": "A-frame Near Zion & Bryce · Hot Tub & Cold Plunge",
+   "url": "https://www.airbnb.com/rooms/961889293773410134",
+   "location": "Glendale, UT, USA",
+   "address": "Address after booking (Glendale, Kane County, UT)",
+   "lat": 37.32,
+   "lng": -112.596,
+   "coord_precision": "town",
+   "region": "Mountain West US",
+   "format": "Modern A-frame (2BR, loft)",
+   "units": 1,
+   "setting": [
+    "Mountain View",
+    "Near National Park",
+    "Dark Sky"
+   ],
+   "near_park": "Zion NP (~25 min to east entrance)",
+   "type": [
+    "Families",
+    "Couples"
+   ],
+   "amenities": [
+    "Private hot tub",
+    "Cold plunge"
+   ],
+   "price_from": null,
+   "price_weekend": null,
+   "price_range": null,
+   "currency_note": "USD; check listing",
+   "image": null,
+   "rating": "4.91 Airbnb (224)",
+   "status": "Open",
+   "highlights": "A-frame with a private hot tub and cold plunge between Zion and Bryce; Guest Favorite.",
+   "fit_note": null,
+   "source": "new",
+   "added": "2026-10-20",
+   "listing_kind": "Single rental"
+  },
+  {
+   "name": "Zion Luxury A-Frame · Hot Tub, Sauna & Cold Plunge",
+   "url": "https://www.airbnb.com/rooms/1544299168733315286",
+   "location": "East Zion, UT, USA",
+   "address": "Address after booking (Kane County, UT)",
+   "lat": 37.25,
+   "lng": -112.88,
+   "coord_precision": "town",
+   "region": "Mountain West US",
+   "format": "Luxury A-frame (3BR)",
+   "units": 1,
+   "setting": [
+    "Mountain View",
+    "Near National Park"
+   ],
+   "near_park": "Zion NP (5-min walk to east boundary)",
+   "type": [
+    "Families"
+   ],
+   "amenities": [
+    "Private hot tub",
+    "Private sauna",
+    "Cold plunge"
+   ],
+   "price_from": null,
+   "price_weekend": null,
+   "price_range": null,
+   "currency_note": "USD; check listing",
+   "image": null,
+   "rating": "5.0 Airbnb (37) — thin",
+   "status": "Open",
+   "highlights": "The full wellness trio steps from Zion’s east side.",
+   "fit_note": "3BR house sleeping 9 — bigger than the compact brief; thin review count.",
+   "source": "new",
+   "added": "2026-10-20",
+   "listing_kind": "Single rental"
+  },
+  {
+   "name": "Zion Oasis Premium Suite",
+   "url": "https://www.airbnb.com/rooms/1024110569754302817",
+   "location": "Hurricane, UT, USA",
+   "address": "Address after booking (Hurricane, UT)",
+   "lat": 37.1753,
+   "lng": -113.2899,
+   "coord_precision": "town",
+   "region": "Mountain West US",
+   "format": "Tiny-home suite",
+   "units": 1,
+   "setting": [
+    "Desert",
+    "Near National Park"
+   ],
+   "near_park": "Zion NP (~20 min)",
+   "type": [
+    "Families"
+   ],
+   "amenities": [
+    "Private hot tub"
+   ],
+   "price_from": null,
+   "price_weekend": null,
+   "price_range": null,
+   "currency_note": "USD; check listing",
+   "image": null,
+   "rating": "4.97 Airbnb (516)",
+   "status": "Open",
+   "highlights": "Tiny-home suite with a private gated hot tub, closest to Springdale.",
+   "fit_note": "Part of a multi-unit property; less design-forward.",
+   "source": "new",
+   "added": "2026-10-20",
+   "listing_kind": "Single rental"
+  },
+  {
+   "name": "Stone Canyon Inn (Bryce)",
+   "url": "https://stonecanyoninn.com/accommodations/",
+   "location": "Tropic, UT, USA",
+   "address": "1380 W Stone Canyon Ln, Tropic, UT 84776",
+   "lat": 37.62227,
+   "lng": -112.10704,
+   "coord_precision": "town",
+   "region": "Mountain West US",
+   "format": "Cabins, treehouses and bungalows",
+   "units": 15,
+   "setting": [
+    "Mountain View",
+    "Near National Park",
+    "Dark Sky"
+   ],
+   "near_park": "Bryce Canyon NP (~15 min)",
+   "type": [
+    "Families",
+    "Couples"
+   ],
+   "amenities": [
+    "Private hot tub (2BR cabins)",
+    "On-site restaurant"
+   ],
+   "price_from": 360,
+   "price_weekend": null,
+   "price_range": null,
+   "currency_note": "USD; posted season rate for the 2BR cabin",
+   "image": null,
+   "rating": "8.7/10 Kayak (178)",
+   "status": "Open",
+   "highlights": "Micro-resort with private deck hot tubs and the Fodor’s Choice Stone Hearth Grille on site.",
+   "fit_note": "Inn rating under the 4.7 bar; cabins are classic rather than sleek.",
+   "source": "new",
+   "added": "2026-10-20",
+   "listing_kind": null
+  },
+  {
+   "name": "Skyview Hotel Torrey",
+   "url": "https://www.skyviewtorrey.com/",
+   "location": "Torrey, UT, USA",
+   "address": "876 W Highway 24, Torrey, UT 84775",
+   "lat": 38.3007,
+   "lng": -111.4426,
+   "coord_precision": "town",
+   "region": "Mountain West US",
+   "format": "Small modern hotel (20 rooms) + domes",
+   "units": 20,
+   "setting": [
+    "Desert",
+    "Dark Sky",
+    "Near National Park"
+   ],
+   "near_park": "Capitol Reef NP (~10 min)",
+   "type": [
+    "Families",
+    "Couples"
+   ],
+   "amenities": [
+    "Private hot tub (Premium Hot Tub rooms)",
+    "Rooftop stargazing deck"
+   ],
+   "price_from": 165,
+   "price_weekend": null,
+   "price_range": null,
+   "currency_note": "USD; fall weeknight seen on Hotels.com",
+   "image": null,
+   "rating": "10/10 Hotels.com (376)",
+   "status": "Open",
+   "highlights": "2023 modern hotel with private patio hot-tub rooms and a rooftop for stargazing.",
+   "fit_note": "Book the hard-walled hot-tub rooms; the property’s domes are out.",
+   "source": "new",
+   "added": "2026-10-20",
+   "listing_kind": "Micro-resort"
+  },
+  {
+   "name": "The Pinyon House at Capitol Reef",
+   "url": "https://www.airbnb.com/rooms/51709748",
+   "location": "Torrey, UT, USA",
+   "address": "Address after booking (Torrey, UT)",
+   "lat": 38.299,
+   "lng": -111.4,
+   "coord_precision": "town",
+   "region": "Mountain West US",
+   "format": "Modern cabin (3BR)",
+   "units": 1,
+   "setting": [
+    "Desert",
+    "Mountain View",
+    "Near National Park"
+   ],
+   "near_park": "Capitol Reef NP",
+   "type": [
+    "Families"
+   ],
+   "amenities": [
+    "Private hot tub"
+   ],
+   "price_from": null,
+   "price_weekend": null,
+   "price_range": null,
+   "currency_note": "USD; check listing",
+   "image": null,
+   "rating": "4.97 Airbnb (274)",
+   "status": "Open",
+   "highlights": "Hot tub on a red-rock bluff between Torrey and the park.",
+   "fit_note": "3BR sleeps 8 — larger than the compact brief.",
+   "source": "new",
+   "added": "2026-10-20",
+   "listing_kind": "Single rental"
+  },
+  {
+   "name": "“Balcony House” guest suite, Page",
+   "url": "https://www.airbnb.com/rooms/26787227",
+   "location": "Page, AZ, USA",
+   "address": "Address after booking (Page, AZ)",
+   "lat": 36.9147,
+   "lng": -111.4558,
+   "coord_precision": "town",
+   "region": "Texas & Southwest US",
+   "format": "Guest suite with private entrance",
+   "units": 1,
+   "setting": [
+    "Desert",
+    "Near National Park"
+   ],
+   "near_park": "Glen Canyon NRA / Lake Powell",
+   "type": [
+    "Families"
+   ],
+   "amenities": [
+    "Private hot tub"
+   ],
+   "price_from": null,
+   "price_weekend": null,
+   "price_range": null,
+   "currency_note": "USD; check listing",
+   "image": null,
+   "rating": "4.87 Airbnb (536)",
+   "status": "Open",
+   "highlights": "Private balcony hot tub minutes from Antelope Canyon and Horseshoe Bend.",
+   "fit_note": "A suite in a home, not design-forward; best of a thin Page market.",
+   "source": "new",
+   "added": "2026-10-20",
+   "listing_kind": "Single rental"
+  },
+  {
+   "name": "A-Frame: Milky Way + Desert Views (Grand Canyon)",
+   "url": "https://www.airbnb.com/rooms/1471157180485071432",
+   "location": "Williams, AZ, USA",
+   "address": "Address after booking (Williams/Valle area, AZ)",
+   "lat": 35.55,
+   "lng": -112.15,
+   "coord_precision": "town",
+   "region": "Texas & Southwest US",
+   "format": "Solar A-frame (2BR)",
+   "units": 1,
+   "setting": [
+    "Desert",
+    "Dark Sky",
+    "Near National Park"
+   ],
+   "near_park": "Grand Canyon NP South Rim (~30 mi)",
+   "type": [
+    "Families",
+    "Couples"
+   ],
+   "amenities": [
+    "Private sauna"
+   ],
+   "price_from": null,
+   "price_weekend": null,
+   "price_range": null,
+   "currency_note": "USD; check listing",
+   "image": null,
+   "rating": "4.75 Airbnb (79)",
+   "status": "Open",
+   "highlights": "Off-grid design A-frame with a private cedar sauna under dark skies.",
+   "fit_note": "Hot tub mentioned in text but not in amenities — confirm.",
+   "source": "new",
+   "added": "2026-10-20",
+   "listing_kind": "Single rental"
+  },
+  {
+   "name": "Grand Canyon Tiny Home Retreat + Hot Tub",
+   "url": "https://www.airbnb.com/rooms/1001528545506150709",
+   "location": "Williams, AZ, USA",
+   "address": "Address after booking (Williams, AZ)",
+   "lat": 35.2495,
+   "lng": -112.191,
+   "coord_precision": "town",
+   "region": "Texas & Southwest US",
+   "format": "Tiny home",
+   "units": 1,
+   "setting": [
+    "Forest",
+    "Near National Park"
+   ],
+   "near_park": "Grand Canyon NP (~1 hr)",
+   "type": [
+    "Couples",
+    "Families"
+   ],
+   "amenities": [
+    "Private hot tub"
+   ],
+   "price_from": null,
+   "price_weekend": null,
+   "price_range": null,
+   "currency_note": "USD; check listing",
+   "image": null,
+   "rating": "4.88 Airbnb (221)",
+   "status": "Open",
+   "highlights": "Tiny home with a 24-hr private hot tub and a retro pool house.",
+   "fit_note": "Host says best for 2.",
+   "source": "new",
+   "added": "2026-10-20",
+   "listing_kind": "Single rental"
+  },
+  {
+   "name": "“Oasis” homestead cottage, Oak Creek Canyon",
+   "url": "https://www.airbnb.com/rooms/22650202",
+   "location": "Sedona, AZ, USA",
+   "address": "Address after booking (Oak Creek Canyon, AZ)",
+   "lat": 34.9,
+   "lng": -111.74,
+   "coord_precision": "town",
+   "region": "Texas & Southwest US",
+   "format": "Remodeled homestead cottage (2BR)",
+   "units": 1,
+   "setting": [
+    "Creekside",
+    "Forest",
+    "Desert"
+   ],
+   "near_park": "Coconino NF / Red Rock",
+   "type": [
+    "Families",
+    "Couples"
+   ],
+   "amenities": [
+    "Private hot tub",
+    "Spring-fed creek"
+   ],
+   "price_from": null,
+   "price_weekend": null,
+   "price_range": null,
+   "currency_note": "USD; check listing",
+   "image": null,
+   "rating": "4.97 Airbnb (606)",
+   "status": "Open",
+   "highlights": "Private patio hot tub, semi-private springs and a lawn in Oak Creek Canyon.",
+   "fit_note": "Charming artisan style rather than sleek modern.",
+   "source": "new",
+   "added": "2026-10-20",
+   "listing_kind": "Single rental"
+  },
+  {
+   "name": "Enchantment Resort",
+   "url": "https://www.enchantmentresort.com/sedona-accommodation/pool-suites/",
+   "location": "Sedona, AZ, USA",
+   "address": "525 Boynton Canyon Rd, Sedona, AZ 86336",
+   "lat": 34.91466,
+   "lng": -111.8543,
+   "coord_precision": "town",
+   "region": "Texas & Southwest US",
+   "format": "Casitas and pool suites in Boynton Canyon",
+   "units": null,
+   "setting": [
+    "Desert",
+    "Mountain View",
+    "Dark Sky"
+   ],
+   "near_park": "Coconino NF / Red Rock",
+   "type": [
+    "Families",
+    "Couples"
+   ],
+   "amenities": [
+    "Private pool (Pool Suites)",
+    "Spa services",
+    "Shared sauna"
+   ],
+   "price_from": null,
+   "price_weekend": null,
+   "price_range": null,
+   "currency_note": "USD; Pool Suites by phone (855-441-2126)",
+   "image": null,
+   "rating": "9.1/10 Kayak (373)",
+   "status": "Open",
+   "highlights": "Iconic red-rock canyon resort; Pool Suites have their own pool, plus the Mii amo spa.",
+   "fit_note": "Larger resort; standard casitas have no private hot tub.",
+   "source": "new",
+   "added": "2026-10-20",
+   "listing_kind": "Larger resort / lodge"
+  },
+  {
+   "name": "Yosemite Pink Cottage",
+   "url": "https://www.airbnb.com/rooms/1389296323448414507",
+   "location": "Oakhurst, CA, USA",
+   "address": "Address after booking (Oakhurst, CA)",
+   "lat": 37.328,
+   "lng": -119.649,
+   "coord_precision": "town",
+   "region": "West Coast US",
+   "format": "Design-forward cottage (2BR)",
+   "units": 1,
+   "setting": [
+    "Forest",
+    "Mountain View",
+    "Near National Park"
+   ],
+   "near_park": "Yosemite NP (~30 min to South Entrance)",
+   "type": [
+    "Families",
+    "Couples"
+   ],
+   "amenities": [
+    "Private hot tub",
+    "Private sauna"
+   ],
+   "price_from": null,
+   "price_weekend": null,
+   "price_range": null,
+   "currency_note": "USD; check listing",
+   "image": null,
+   "rating": "5.0 Airbnb (107)",
+   "status": "Open",
+   "highlights": "Boutique-styled cottage with a private cedar hot tub and barrel sauna on the deck.",
+   "fit_note": null,
+   "source": "new",
+   "added": "2026-10-20",
+   "listing_kind": "Single rental"
+  },
+  {
+   "name": "Modern Cabin with Private Jacuzzi (Ahwahnee)",
+   "url": "https://www.airbnb.com/rooms/715281255541267233",
+   "location": "Ahwahnee, CA, USA",
+   "address": "Address after booking (Ahwahnee, CA)",
+   "lat": 37.366,
+   "lng": -119.726,
+   "coord_precision": "town",
+   "region": "West Coast US",
+   "format": "Modern 1BR cabin",
+   "units": 1,
+   "setting": [
+    "Forest",
+    "Near National Park"
+   ],
+   "near_park": "Yosemite NP (~40 min)",
+   "type": [
+    "Couples"
+   ],
+   "amenities": [
+    "Private hot tub"
+   ],
+   "price_from": 250,
+   "price_weekend": null,
+   "price_range": null,
+   "currency_note": "USD; ~$250 (PureWow, 2024)",
+   "image": null,
+   "rating": "4.98 Airbnb (306)",
+   "status": "Open",
+   "highlights": "Modern cabin with a private jacuzzi near Yosemite’s south gate.",
+   "fit_note": "Sleeps 3 max; third bed is a fold-down couch.",
+   "source": "new",
+   "added": "2026-10-20",
+   "listing_kind": "Single rental"
+  },
+  {
+   "name": "Convict Lake Resort",
+   "url": "https://www.convictlake.com/",
+   "location": "Mammoth Lakes, CA, USA",
+   "address": "2000 Convict Lake Rd, Mammoth Lakes, CA 93546",
+   "lat": 37.598,
+   "lng": -118.8496,
+   "coord_precision": "town",
+   "region": "West Coast US",
+   "format": "Lakeside cabins (incl. spa cabins) and houses",
+   "units": 31,
+   "setting": [
+    "Lakeside",
+    "Mountain View"
+   ],
+   "near_park": "Inyo NF (near Mammoth)",
+   "type": [
+    "Families",
+    "Couples"
+   ],
+   "amenities": [
+    "Hot tub (spa cabins; confirm private)",
+    "On-site restaurant",
+    "Marina"
+   ],
+   "price_from": 429,
+   "price_weekend": null,
+   "price_range": "$429 Mon–Wed / $519 Thu–Sun (spa cabins)",
+   "currency_note": "USD; 2026 summer rates",
+   "image": null,
+   "rating": "9.2/10 Hotels.com (315)",
+   "status": "Open",
+   "highlights": "Spa cabins steps from a dramatic alpine lake, with a 4.9-rated restaurant on site.",
+   "fit_note": "Classic cabin style, not sleek modern; private outdoor tub not confirmed per cabin.",
+   "source": "new",
+   "added": "2026-10-20",
+   "listing_kind": "Micro-resort"
+  },
+  {
+   "name": "Cozy Cabin in the Woods w/ Private Hot Tub (Mammoth)",
+   "url": "https://www.airbnb.com/rooms/1219081425806140990",
+   "location": "Mammoth Lakes, CA, USA",
+   "address": "Address after booking (Mammoth Lakes, CA)",
+   "lat": 37.638,
+   "lng": -118.972,
+   "coord_precision": "town",
+   "region": "West Coast US",
+   "format": "Small cabin on a private acre",
+   "units": 1,
+   "setting": [
+    "Forest",
+    "Mountain View"
+   ],
+   "near_park": "Inyo NF / Devils Postpile",
+   "type": [
+    "Families",
+    "Couples"
+   ],
+   "amenities": [
+    "Private hot tub"
+   ],
+   "price_from": null,
+   "price_weekend": null,
+   "price_range": null,
+   "currency_note": "USD; check listing",
+   "image": null,
+   "rating": "4.95 Airbnb (39) — thin",
+   "status": "Open",
+   "highlights": "~600 sq ft cabin on a private pine acre with a 24/7 private hot tub.",
+   "fit_note": "Thin review count.",
+   "source": "new",
+   "added": "2026-10-20",
+   "listing_kind": "Single rental"
+  },
+  {
+   "name": "2024 Remodel Townhome w/ Private Hot Tub (Mammoth)",
+   "url": "https://www.airbnb.com/rooms/1050215683791955948",
+   "location": "Mammoth Lakes, CA, USA",
+   "address": "Address after booking (Mammoth Lakes, CA)",
+   "lat": 37.645,
+   "lng": -118.975,
+   "coord_precision": "town",
+   "region": "West Coast US",
+   "format": "Renovated townhome (2BR)",
+   "units": 1,
+   "setting": [
+    "Mountain View"
+   ],
+   "near_park": "Inyo NF",
+   "type": [
+    "Families"
+   ],
+   "amenities": [
+    "Private hot tub"
+   ],
+   "price_from": null,
+   "price_weekend": null,
+   "price_range": null,
+   "currency_note": "USD; check listing",
+   "image": null,
+   "rating": "4.97 Airbnb (140)",
+   "status": "Open",
+   "highlights": "Fully remodeled in 2024 with a private hot tub in a solarium.",
+   "fit_note": "Townhome in town — less immersive.",
+   "source": "new",
+   "added": "2026-10-20",
+   "listing_kind": "Single rental"
   }
  ]
 }
