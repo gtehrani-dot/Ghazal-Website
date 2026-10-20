@@ -382,7 +382,7 @@ function renderTracking(){
 // Like the Family Hub: each edit is sent to a Google Apps Script web app that writes it to the
 // "Job Tracking Edits" Google Sheet, so it follows Ghazal across devices and the weekly scan folds it
 // into seen_postings.json. A local copy is kept too; with TRK_URL blank it saves in this browser only.
-var TRK_URL='';
+var TRK_URL='https://script.google.com/macros/s/AKfycbxsFfEDJsoJO8o2n7yokir5uO-H367aDE0aRnMVxqPZQg4EorSlumODzN3iAmL_Cbsk/exec';
 const TRK_FIELDS=[['dateApplied','Date Applied'],['responded','Responded'],['interviewed','Interviewed'],['reportedToVEC','Reported to VEC'],['connectionReachOut','Personal Connection'],['throughWho','Through Who'],['notes','Notes']];
 const TRK_KEY='jobTrackingEdits.v1';
 let trkStatus='';
