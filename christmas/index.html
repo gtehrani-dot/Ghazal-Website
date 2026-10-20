@@ -83,6 +83,8 @@
   .pill.wrapped { background: var(--pine); color: #fff; }
   .pill.todo { background: var(--berry-soft); color: var(--berry); }
 
+  .both { background: var(--card); border: 1px solid var(--rule); border-radius: 14px; overflow: hidden; margin: -16px 0 36px; }
+  .both .kid-head { border-top: 4px solid var(--gold); }
   .others { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; margin-bottom: 48px; }
   .person { background: var(--card); border: 1px solid var(--rule); border-radius: 12px; padding: 16px 18px; display: flex; flex-direction: column; gap: 8px; }
   .person.todo { border-style: dashed; }
@@ -151,6 +153,10 @@ const GIFTS = {
       ]
     }
   ],
+  // Gifts for both Ella and Liam together
+  both: [
+    { item: "Engraver", status: "ordered" }
+  ],
   // One gift each. Leave gift "" until decided.
   others: [
     { name: "Ayden",        gift: "", status: "" },
@@ -193,6 +199,7 @@ const GIFTS = {
 
   <h2 class="section">Ella &amp; Liam</h2>
   <div class="kids" id="kids"></div>
+  <article class="both" id="both"></article>
 
   <h2 class="section">Everyone else</h2>
   <div class="others" id="others"></div>
@@ -233,6 +240,13 @@ const GIFTS = {
       ${group("Stocking stuffers", k.stocking, "Nothing yet")}
     </article>`;
   }).join("");
+
+  const both = GIFTS.both || [];
+  const bothGot = both.filter(i => inHand(i.status)).length;
+  have += bothGot; pending += both.length - bothGot;
+  document.getElementById("both").innerHTML = `<div class="kid-head"><h3>Both</h3>
+      <div class="count">For Ella &amp; Liam together · ${both.length} gift${both.length === 1 ? "" : "s"} · ${bothGot} arrived</div></div>
+    ${group("Shared gifts", both, "Nothing yet")}`;
 
   document.getElementById("others").innerHTML = GIFTS.others.map(p => {
     const status = p.gift ? (p.status || "idea") : "todo";
