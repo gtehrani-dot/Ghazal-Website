@@ -4,7 +4,8 @@
   "next_refresh": "Jan 1, 2027",
   "baseline_date": "2026-10-20",
   "prices_checked": "Oct 2026",
-  "hero_image": "https://darklightcollection.com/img/bryce/bryce_night_010_md.webp"
+  "hero_image": "https://images.unsplash.com/photo-1783313207203-3d039ba6d2a5?w=2400&q=75&auto=format&fit=crop",
+  "hero_credit": "Photo: Gantavya Bhatt / Unsplash"
  },
  "stays": [
   {
@@ -4038,6 +4039,1453 @@
    "stayed": true,
    "notes": "Benchmark Ghazal named.",
    "added": "2026-10-20"
+  },
+  {
+   "name": "Dog-Friendly Cabin with Hot Tub, Fireplace & WiFi",
+   "url": "https://www.airbnb.com/rooms/1920394",
+   "location": "Ashford, WA, USA",
+   "address": null,
+   "lat": 46.74137,
+   "lng": -121.92141,
+   "coord_precision": "listing",
+   "region": "West Coast US",
+   "format": "Cabin (2BR)",
+   "units": 1,
+   "setting": [
+    "Forest",
+    "Near National Park"
+   ],
+   "near_park": "Mount Rainier NP",
+   "type": [
+    "Couples",
+    "Families",
+    "Pets"
+   ],
+   "amenities": [
+    "Private hot tub"
+   ],
+   "price_from": null,
+   "price_weekend": null,
+   "price_range": null,
+   "currency_note": "Airbnb shows prices only with dates",
+   "image": "https://a0.muscache.com/im/pictures/bda2cfeb-8a3e-45e8-bf9d-5342a9dc4229.jpg",
+   "rating": "4.93 Airbnb",
+   "status": "Open",
+   "highlights": "From your Airbnb “Pacific Northwest” board.",
+   "fit_note": null,
+   "source": "board",
+   "listing_kind": "Single rental",
+   "added": "2026-10-20",
+   "notes": "Scraped from her wishlist; amenities from listing text."
+  },
+  {
+   "name": "Moss Hill – Cozy Cabin w/ Hot Tub",
+   "url": "https://www.airbnb.com/rooms/7145469",
+   "location": "Berkeley Springs (Bath), WV, USA",
+   "address": null,
+   "lat": 39.51455,
+   "lng": -78.21433,
+   "coord_precision": "listing",
+   "region": "Mid-Atlantic US",
+   "format": "Cabin (2BR)",
+   "units": 1,
+   "setting": [
+    "Forest"
+   ],
+   "near_park": null,
+   "type": [
+    "Couples",
+    "Families"
+   ],
+   "amenities": [
+    "Private hot tub"
+   ],
+   "price_from": null,
+   "price_weekend": null,
+   "price_range": null,
+   "currency_note": "Airbnb shows prices only with dates",
+   "image": "https://a0.muscache.com/im/pictures/90629258/cd857680_original.jpg",
+   "rating": "4.93 Airbnb",
+   "status": "Open",
+   "highlights": "From your Airbnb “Berkeley Springs” board.",
+   "fit_note": null,
+   "source": "board",
+   "listing_kind": "Single rental",
+   "added": "2026-10-20",
+   "notes": "Scraped from her wishlist; amenities from listing text."
+  },
+  {
+   "name": "The Little Owl Cabin at Mt. Rainier",
+   "url": "https://www.airbnb.com/rooms/14471479",
+   "location": "Packwood, WA, USA",
+   "address": null,
+   "lat": 46.64503,
+   "lng": -121.61287,
+   "coord_precision": "listing",
+   "region": "West Coast US",
+   "format": "Cabin (2BR)",
+   "units": 1,
+   "setting": [
+    "Forest",
+    "Near National Park"
+   ],
+   "near_park": "Mount Rainier NP",
+   "type": [
+    "Couples",
+    "Families"
+   ],
+   "amenities": [
+    "Private hot tub",
+    "Private sauna"
+   ],
+   "price_from": null,
+   "price_weekend": null,
+   "price_range": null,
+   "currency_note": "Airbnb shows prices only with dates",
+   "image": "https://a0.muscache.com/im/pictures/prohost-api/Hosting-14471479/original/ed7102c4-7c6d-4685-bdad-9f994191ba5a.jpeg",
+   "rating": "4.94 Airbnb",
+   "status": "Open",
+   "highlights": "From your Airbnb “Pacific Northwest” board.",
+   "fit_note": null,
+   "source": "board",
+   "listing_kind": "Single rental",
+   "added": "2026-10-20",
+   "notes": "Scraped from her wishlist; amenities from listing text."
+  },
+  {
+   "name": "The Joshua Tree House",
+   "url": "https://www.airbnb.com/rooms/19362266",
+   "location": "Bridgewater, VA, USA",
+   "address": null,
+   "lat": 38.39152,
+   "lng": -78.98147,
+   "coord_precision": "listing",
+   "region": "Mid-Atlantic US",
+   "format": "Treehouse (1BR)",
+   "units": 1,
+   "setting": [
+    "Forest"
+   ],
+   "near_park": null,
+   "type": [
+    "Couples"
+   ],
+   "amenities": [
+    "Hot tub (verify on listing)"
+   ],
+   "price_from": null,
+   "price_weekend": null,
+   "price_range": null,
+   "currency_note": "Airbnb shows prices only with dates",
+   "image": "https://a0.muscache.com/im/pictures/e696dbeb-e3a9-412f-afae-210212ba41d1.jpg",
+   "rating": "4.99 Airbnb",
+   "status": "Open",
+   "highlights": "From your Airbnb “Massanutten” board.",
+   "fit_note": "Hot tub mentioned only briefly on listing — confirm",
+   "source": "board",
+   "listing_kind": "Single rental",
+   "added": "2026-10-20",
+   "notes": "Scraped from her wishlist; amenities from listing text."
+  },
+  {
+   "name": "Riverfront Cabin with New Hot Tub",
+   "url": "https://www.airbnb.com/rooms/20036825",
+   "location": "Luray, VA, USA",
+   "address": null,
+   "lat": 38.77599,
+   "lng": -78.42274,
+   "coord_precision": "listing",
+   "region": "Mid-Atlantic US",
+   "format": "Cabin (2BR)",
+   "units": 1,
+   "setting": [
+    "Riverside",
+    "Forest",
+    "Near National Park"
+   ],
+   "near_park": "Shenandoah NP",
+   "type": [
+    "Couples",
+    "Families"
+   ],
+   "amenities": [
+    "Private hot tub"
+   ],
+   "price_from": null,
+   "price_weekend": null,
+   "price_range": null,
+   "currency_note": "Airbnb shows prices only with dates",
+   "image": "https://a0.muscache.com/im/pictures/hosting/Hosting-20036825/original/943cb8d5-64c8-4ac2-a627-e5610675ed60.jpeg",
+   "rating": "4.82 Airbnb",
+   "status": "Open",
+   "highlights": "From your Airbnb “Upper Shenandoah” board.",
+   "fit_note": null,
+   "source": "board",
+   "listing_kind": "Single rental",
+   "added": "2026-10-20",
+   "notes": "Scraped from her wishlist; amenities from listing text."
+  },
+  {
+   "name": "Charming Sunnyside Cabin with Sauna",
+   "url": "https://www.airbnb.com/rooms/37423548",
+   "location": "Tahoe City, CA, USA",
+   "address": null,
+   "lat": 39.14097,
+   "lng": -120.1586,
+   "coord_precision": "listing",
+   "region": "West Coast US",
+   "format": "Cabin (2BR)",
+   "units": 1,
+   "setting": [
+    "Forest"
+   ],
+   "near_park": null,
+   "type": [
+    "Couples",
+    "Families"
+   ],
+   "amenities": [
+    "Private sauna"
+   ],
+   "price_from": null,
+   "price_weekend": null,
+   "price_range": null,
+   "currency_note": "Airbnb shows prices only with dates",
+   "image": "https://a0.muscache.com/im/pictures/a5ac52b8-5ba1-417b-a8ce-1cb2fe7cd0b6.jpg",
+   "rating": "4.95 Airbnb",
+   "status": "Open",
+   "highlights": "From your Airbnb “Northern CA” board.",
+   "fit_note": null,
+   "source": "board",
+   "listing_kind": "Single rental",
+   "added": "2026-10-20",
+   "notes": "Scraped from her wishlist; amenities from listing text."
+  },
+  {
+   "name": "Tiny House w/ Outdoor Barrel Sauna & Scenic Views",
+   "url": "https://www.airbnb.com/rooms/45311194",
+   "location": "Baker, WV, USA",
+   "address": null,
+   "lat": 39.00357,
+   "lng": -78.82613,
+   "coord_precision": "listing",
+   "region": "Mid-Atlantic US",
+   "format": "Tiny home (1BR)",
+   "units": 1,
+   "setting": [
+    "Forest",
+    "Mountain View"
+   ],
+   "near_park": null,
+   "type": [
+    "Couples"
+   ],
+   "amenities": [
+    "Private sauna"
+   ],
+   "price_from": null,
+   "price_weekend": null,
+   "price_range": null,
+   "currency_note": "Airbnb shows prices only with dates",
+   "image": "https://a0.muscache.com/im/pictures/8bf63bda-d708-4110-bf9c-8a37259a2b08.jpg",
+   "rating": "4.99 Airbnb",
+   "status": "Open",
+   "highlights": "From your Airbnb “Berkeley Springs” board.",
+   "fit_note": null,
+   "source": "board",
+   "listing_kind": "Single rental",
+   "added": "2026-10-20",
+   "notes": "Scraped from her wishlist; amenities from listing text."
+  },
+  {
+   "name": "MICA – Panoramic View and Spa near Quebec City",
+   "url": "https://www.airbnb.com/rooms/46695796",
+   "location": "Lac-Beauport, QC, Canada",
+   "address": null,
+   "lat": 46.9771,
+   "lng": -71.251,
+   "coord_precision": "listing",
+   "region": "Canada",
+   "format": "Tiny home (2BR)",
+   "units": 1,
+   "setting": [
+    "Forest",
+    "Mountain View"
+   ],
+   "near_park": null,
+   "type": [
+    "Couples",
+    "Families"
+   ],
+   "amenities": [
+    "Private hot tub"
+   ],
+   "price_from": null,
+   "price_weekend": null,
+   "price_range": null,
+   "currency_note": "Airbnb shows prices only with dates",
+   "image": "https://a0.muscache.com/im/pictures/hosting/Hosting-U3RheVN1cHBseUxpc3Rpbmc6NDY2OTU3OTY=/original/401ba812-01ee-48dc-829b-22d04812ad62.jpeg",
+   "rating": "4.99 Airbnb",
+   "status": "Open",
+   "highlights": "From your Airbnb “Canada” board.",
+   "fit_note": null,
+   "source": "board",
+   "listing_kind": "Single rental",
+   "added": "2026-10-20",
+   "notes": "Scraped from her wishlist; amenities from listing text."
+  },
+  {
+   "name": "Hawk's Nest",
+   "url": "https://www.airbnb.com/rooms/49853769",
+   "location": "Great Cacapon, WV, USA",
+   "address": null,
+   "lat": 39.5807,
+   "lng": -78.3801,
+   "coord_precision": "listing",
+   "region": "Mid-Atlantic US",
+   "format": "Cabin (2BR)",
+   "units": 1,
+   "setting": [
+    "Forest"
+   ],
+   "near_park": "Cacapon Resort SP",
+   "type": [
+    "Couples",
+    "Families"
+   ],
+   "amenities": [
+    "Private hot tub"
+   ],
+   "price_from": null,
+   "price_weekend": null,
+   "price_range": null,
+   "currency_note": "Airbnb shows prices only with dates",
+   "image": "https://a0.muscache.com/im/pictures/hosting/Hosting-49853769/original/a9cd7f54-a685-4812-adc1-e7faa029cb61.jpeg",
+   "rating": "5.0 Airbnb",
+   "status": "Open",
+   "highlights": "From your Airbnb “Berkeley Springs” board.",
+   "fit_note": null,
+   "source": "board",
+   "listing_kind": "Single rental",
+   "added": "2026-10-20",
+   "notes": "Scraped from her wishlist; amenities from listing text."
+  },
+  {
+   "name": "Private Treehouse with Hot Tub and Views",
+   "url": "https://www.airbnb.com/rooms/52133141",
+   "location": "Monteverde, Costa Rica",
+   "address": null,
+   "lat": 10.29502,
+   "lng": -84.83385,
+   "coord_precision": "listing",
+   "region": "Mexico & Latin America",
+   "format": "Treehouse (1BR)",
+   "units": 1,
+   "setting": [
+    "Forest",
+    "Mountain View"
+   ],
+   "near_park": "Monteverde Cloud Forest",
+   "type": [
+    "Couples"
+   ],
+   "amenities": [
+    "Private hot tub"
+   ],
+   "price_from": null,
+   "price_weekend": null,
+   "price_range": null,
+   "currency_note": "Airbnb shows prices only with dates",
+   "image": "https://a0.muscache.com/im/pictures/hosting/Hosting-U3RheVN1cHBseUxpc3Rpbmc6NTIxMzMxNDE%3D/original/e2344c2f-af0f-40cc-a64e-d67157b7fb72.jpeg",
+   "rating": "4.96 Airbnb",
+   "status": "Open",
+   "highlights": "From your Airbnb “Costa Rica” board.",
+   "fit_note": null,
+   "source": "board",
+   "listing_kind": "Single rental",
+   "added": "2026-10-20",
+   "notes": "Scraped from her wishlist; amenities from listing text."
+  },
+  {
+   "name": "Mountaintop Retreat with Wood-Fired Hot Tub",
+   "url": "https://www.airbnb.com/rooms/52907934",
+   "location": "Front Royal, VA, USA",
+   "address": null,
+   "lat": 38.97364,
+   "lng": -78.02374,
+   "coord_precision": "listing",
+   "region": "Mid-Atlantic US",
+   "format": "Cabin (1BR)",
+   "units": 1,
+   "setting": [
+    "Forest",
+    "Mountain View",
+    "Near National Park"
+   ],
+   "near_park": "Shenandoah NP",
+   "type": [
+    "Couples"
+   ],
+   "amenities": [
+    "Private hot tub"
+   ],
+   "price_from": null,
+   "price_weekend": null,
+   "price_range": null,
+   "currency_note": "Airbnb shows prices only with dates",
+   "image": "https://a0.muscache.com/im/pictures/hosting/Hosting-52907934/original/66968796-40c6-4df1-9073-601a8e2b8cf6.jpeg",
+   "rating": "4.99 Airbnb",
+   "status": "Open",
+   "highlights": "From your Airbnb “Upper Shenandoah” board.",
+   "fit_note": null,
+   "source": "board",
+   "listing_kind": "Single rental",
+   "added": "2026-10-20",
+   "notes": "Scraped from her wishlist; amenities from listing text."
+  },
+  {
+   "name": "Dreamtime – Modern A-Frame Cabin w/ Hot Tub",
+   "url": "https://www.airbnb.com/rooms/53114961",
+   "location": "Berkeley Springs (Bath), WV, USA",
+   "address": null,
+   "lat": 39.58564,
+   "lng": -78.26586,
+   "coord_precision": "listing",
+   "region": "Mid-Atlantic US",
+   "format": "Cabin (2BR)",
+   "units": 1,
+   "setting": [
+    "Forest"
+   ],
+   "near_park": null,
+   "type": [
+    "Couples",
+    "Families"
+   ],
+   "amenities": [
+    "Private hot tub"
+   ],
+   "price_from": null,
+   "price_weekend": null,
+   "price_range": null,
+   "currency_note": "Airbnb shows prices only with dates",
+   "image": "https://a0.muscache.com/im/pictures/miso/Hosting-53114961/original/9a24409a-f823-439d-ae2f-b410b88f38a0.jpeg",
+   "rating": "4.97 Airbnb",
+   "status": "Open",
+   "highlights": "From your Airbnb “Berkeley Springs” board.",
+   "fit_note": null,
+   "source": "board",
+   "listing_kind": "Single rental",
+   "added": "2026-10-20",
+   "notes": "Scraped from her wishlist; amenities from listing text."
+  },
+  {
+   "name": "Modern A-Frame w/ Hot Tub, Sauna & Stunning Views",
+   "url": "https://www.airbnb.com/rooms/1318309179101051189",
+   "location": "Stanley, VA, USA",
+   "address": null,
+   "lat": 38.55881,
+   "lng": -78.49576,
+   "coord_precision": "listing",
+   "region": "Mid-Atlantic US",
+   "format": "Tiny home (1BR)",
+   "units": 1,
+   "setting": [
+    "Forest",
+    "Mountain View",
+    "Near National Park"
+   ],
+   "near_park": "Shenandoah NP",
+   "type": [
+    "Couples"
+   ],
+   "amenities": [
+    "Private hot tub",
+    "Private sauna"
+   ],
+   "price_from": null,
+   "price_weekend": null,
+   "price_range": null,
+   "currency_note": "Airbnb shows prices only with dates",
+   "image": "https://a0.muscache.com/im/pictures/hosting/Hosting-U3RheVN1cHBseUxpc3Rpbmc6MTMxODMwOTE3OTEwMTA1MTE4OQ%3D%3D/original/ffe3c684-dd6b-49ff-ac88-66b3b778a351.jpeg",
+   "rating": "4.93 Airbnb",
+   "status": "Open",
+   "highlights": "From your Airbnb “Upper Shenandoah” board.",
+   "fit_note": null,
+   "source": "board",
+   "listing_kind": "Single rental",
+   "added": "2026-10-20",
+   "notes": "Scraped from her wishlist; amenities from listing text."
+  },
+  {
+   "name": "The Bird's Nest – Cabin by the River",
+   "url": "https://www.airbnb.com/rooms/938675348374388236",
+   "location": "Woodstock, VA, USA",
+   "address": null,
+   "lat": 38.8895,
+   "lng": -78.4516,
+   "coord_precision": "listing",
+   "region": "Mid-Atlantic US",
+   "format": "Cabin (studio)",
+   "units": 1,
+   "setting": [
+    "Riverside",
+    "Forest"
+   ],
+   "near_park": null,
+   "type": [
+    "Couples"
+   ],
+   "amenities": [
+    "Private hot tub"
+   ],
+   "price_from": null,
+   "price_weekend": null,
+   "price_range": null,
+   "currency_note": "Airbnb shows prices only with dates",
+   "image": "https://a0.muscache.com/im/pictures/miso/Hosting-938675348374388236/original/2a60d05b-f562-4698-8ebf-ac5a87df4c30.jpeg",
+   "rating": "5.0 Airbnb",
+   "status": "Open",
+   "highlights": "From your Airbnb “Upper Shenandoah” board.",
+   "fit_note": null,
+   "source": "board",
+   "listing_kind": "Single rental",
+   "added": "2026-10-20",
+   "notes": "Scraped from her wishlist; amenities from listing text."
+  },
+  {
+   "name": "Sweeping Valley Views – Dog-Friendly Cabin",
+   "url": "https://www.airbnb.com/rooms/1428850396266268043",
+   "location": "Stanley, VA, USA",
+   "address": null,
+   "lat": 38.6154,
+   "lng": -78.6005,
+   "coord_precision": "listing",
+   "region": "Mid-Atlantic US",
+   "format": "Cabin (2BR)",
+   "units": 1,
+   "setting": [
+    "Forest",
+    "Mountain View",
+    "Near National Park"
+   ],
+   "near_park": "Shenandoah NP",
+   "type": [
+    "Couples",
+    "Families",
+    "Pets"
+   ],
+   "amenities": [
+    "Private hot tub"
+   ],
+   "price_from": null,
+   "price_weekend": null,
+   "price_range": null,
+   "currency_note": "Airbnb shows prices only with dates",
+   "image": "https://a0.muscache.com/im/pictures/hosting/Hosting-1428850396266268043/original/d27ed4e3-4cc4-47ce-9dd8-731ede60078f.jpeg",
+   "rating": "4.96 Airbnb",
+   "status": "Open",
+   "highlights": "From your Airbnb “Upper Shenandoah” board.",
+   "fit_note": null,
+   "source": "board",
+   "listing_kind": "Single rental",
+   "added": "2026-10-20",
+   "notes": "Scraped from her wishlist; amenities from listing text."
+  },
+  {
+   "name": "Timber Creek: Falls – A Shenandoah Cabin",
+   "url": "https://www.airbnb.com/rooms/804936298026769149",
+   "location": "Bentonville, VA, USA",
+   "address": null,
+   "lat": 38.77225,
+   "lng": -78.26615,
+   "coord_precision": "listing",
+   "region": "Mid-Atlantic US",
+   "format": "Cabin (1BR)",
+   "units": 1,
+   "setting": [
+    "Creekside",
+    "Forest",
+    "Near National Park"
+   ],
+   "near_park": "Shenandoah NP",
+   "type": [
+    "Couples"
+   ],
+   "amenities": [
+    "Private hot tub"
+   ],
+   "price_from": null,
+   "price_weekend": null,
+   "price_range": null,
+   "currency_note": "Airbnb shows prices only with dates",
+   "image": "https://a0.muscache.com/im/pictures/hosting/Hosting-U3RheVN1cHBseUxpc3Rpbmc6ODA0OTM2Mjk4MDI2NzY5MTQ5/original/62a94144-310a-4267-be1d-d544b351866f.jpeg",
+   "rating": "4.95 Airbnb",
+   "status": "Open",
+   "highlights": "From your Airbnb “Upper Shenandoah” board.",
+   "fit_note": null,
+   "source": "board",
+   "listing_kind": "Single rental",
+   "added": "2026-10-20",
+   "notes": "Scraped from her wishlist; amenities from listing text."
+  },
+  {
+   "name": "The Sparrow Luxury A-Frame w/ Hot Tub",
+   "url": "https://www.airbnb.com/rooms/935800937088550875",
+   "location": "Luray, VA, USA",
+   "address": null,
+   "lat": 38.6604,
+   "lng": -78.554,
+   "coord_precision": "listing",
+   "region": "Mid-Atlantic US",
+   "format": "Cabin (2BR)",
+   "units": 1,
+   "setting": [
+    "Forest",
+    "Near National Park"
+   ],
+   "near_park": "Shenandoah NP",
+   "type": [
+    "Couples",
+    "Families"
+   ],
+   "amenities": [
+    "Private hot tub"
+   ],
+   "price_from": null,
+   "price_weekend": null,
+   "price_range": null,
+   "currency_note": "Airbnb shows prices only with dates",
+   "image": "https://a0.muscache.com/im/pictures/miso/Hosting-935800937088550875/original/b74a3937-309c-4183-88b7-785ec1ebb213.jpeg",
+   "rating": "4.95 Airbnb",
+   "status": "Open",
+   "highlights": "From your Airbnb “Upper Shenandoah” board.",
+   "fit_note": null,
+   "source": "board",
+   "listing_kind": "Single rental",
+   "added": "2026-10-20",
+   "notes": "Scraped from her wishlist; amenities from listing text."
+  },
+  {
+   "name": "The Veranda – Views, Hot Tub & Sauna",
+   "url": "https://www.airbnb.com/rooms/1755520048295055633",
+   "location": "Shenandoah, VA, USA",
+   "address": null,
+   "lat": 38.5798,
+   "lng": -78.5994,
+   "coord_precision": "listing",
+   "region": "Mid-Atlantic US",
+   "format": "Cabin (2BR)",
+   "units": 1,
+   "setting": [
+    "Forest",
+    "Mountain View",
+    "Near National Park"
+   ],
+   "near_park": "Shenandoah NP",
+   "type": [
+    "Couples",
+    "Families"
+   ],
+   "amenities": [
+    "Private hot tub",
+    "Private sauna"
+   ],
+   "price_from": null,
+   "price_weekend": null,
+   "price_range": null,
+   "currency_note": "Airbnb shows prices only with dates",
+   "image": "https://a0.muscache.com/im/pictures/hosting/Hosting-1755520048295055633/original/21aac699-9432-46d7-979c-dcf8517ec8dc.jpeg",
+   "rating": "4.94 Airbnb",
+   "status": "Open",
+   "highlights": "From your Airbnb “Lower Shenandoah” board.",
+   "fit_note": null,
+   "source": "board",
+   "listing_kind": "Single rental",
+   "added": "2026-10-20",
+   "notes": "Scraped from her wishlist; amenities from listing text."
+  },
+  {
+   "name": "Blue Ridge Retreat 2 w/ Hot Tub, Sauna & Cold Plunge",
+   "url": "https://www.airbnb.com/rooms/1071176109117690196",
+   "location": "Shenandoah, VA, USA",
+   "address": null,
+   "lat": 38.57968,
+   "lng": -78.60124,
+   "coord_precision": "listing",
+   "region": "Mid-Atlantic US",
+   "format": "Cabin (1BR)",
+   "units": 1,
+   "setting": [
+    "Forest",
+    "Near National Park"
+   ],
+   "near_park": "Shenandoah NP",
+   "type": [
+    "Couples"
+   ],
+   "amenities": [
+    "Private hot tub",
+    "Private sauna",
+    "Cold plunge"
+   ],
+   "price_from": null,
+   "price_weekend": null,
+   "price_range": null,
+   "currency_note": "Airbnb shows prices only with dates",
+   "image": "https://a0.muscache.com/im/pictures/prohost-api/Hosting-1071176109117690196/original/91eb6e0d-16a8-4d84-83b5-c6fb0685657d.jpeg",
+   "rating": "4.92 Airbnb",
+   "status": "Open",
+   "highlights": "From your Airbnb “Lower Shenandoah” board.",
+   "fit_note": null,
+   "source": "board",
+   "listing_kind": "Single rental",
+   "added": "2026-10-20",
+   "notes": "Scraped from her wishlist; amenities from listing text."
+  },
+  {
+   "name": "CloudPointe Retreat",
+   "url": "https://www.airbnb.com/rooms/929254331226732448",
+   "location": "Stanardsville, VA, USA",
+   "address": null,
+   "lat": 38.30865,
+   "lng": -78.50843,
+   "coord_precision": "listing",
+   "region": "Mid-Atlantic US",
+   "format": "Treehouse (1BR)",
+   "units": 1,
+   "setting": [
+    "Forest",
+    "Near National Park"
+   ],
+   "near_park": "Shenandoah NP",
+   "type": [
+    "Couples"
+   ],
+   "amenities": [
+    "Private hot tub"
+   ],
+   "price_from": null,
+   "price_weekend": null,
+   "price_range": null,
+   "currency_note": "Airbnb shows prices only with dates",
+   "image": "https://a0.muscache.com/im/pictures/miso/Hosting-929254331226732448/original/da8c3587-728e-4cc3-b615-832f7641e98b.jpeg",
+   "rating": "4.98 Airbnb",
+   "status": "Open",
+   "highlights": "From your Airbnb “Lower Shenandoah” board.",
+   "fit_note": null,
+   "source": "board",
+   "listing_kind": "Single rental",
+   "added": "2026-10-20",
+   "notes": "Scraped from her wishlist; amenities from listing text."
+  },
+  {
+   "name": "Private Cabin: Shenandoah Mountain Views, Hot Tub",
+   "url": "https://www.airbnb.com/rooms/560216685020996964",
+   "location": "Stanardsville, VA, USA",
+   "address": null,
+   "lat": 38.40259,
+   "lng": -78.42953,
+   "coord_precision": "listing",
+   "region": "Mid-Atlantic US",
+   "format": "Cabin (2BR)",
+   "units": 1,
+   "setting": [
+    "Forest",
+    "Mountain View",
+    "Near National Park"
+   ],
+   "near_park": "Shenandoah NP",
+   "type": [
+    "Couples",
+    "Families"
+   ],
+   "amenities": [
+    "Private hot tub"
+   ],
+   "price_from": null,
+   "price_weekend": null,
+   "price_range": null,
+   "currency_note": "Airbnb shows prices only with dates",
+   "image": "https://a0.muscache.com/im/pictures/prohost-api/Hosting-560216685020996964/original/a3fb2acd-5a75-4942-8075-9c31b65c54d7.jpeg",
+   "rating": "4.99 Airbnb",
+   "status": "Open",
+   "highlights": "From your Airbnb “Lower Shenandoah” board.",
+   "fit_note": null,
+   "source": "board",
+   "listing_kind": "Single rental",
+   "added": "2026-10-20",
+   "notes": "Scraped from her wishlist; amenities from listing text."
+  },
+  {
+   "name": "Cozy Wine Trail Cottage w/ Hot Tub & Fire Pit",
+   "url": "https://www.airbnb.com/rooms/1673346958685636522",
+   "location": "Nellysford, VA, USA",
+   "address": null,
+   "lat": 37.88744,
+   "lng": -78.89397,
+   "coord_precision": "listing",
+   "region": "Mid-Atlantic US",
+   "format": "Cottage (2BR)",
+   "units": 1,
+   "setting": [
+    "Forest"
+   ],
+   "near_park": null,
+   "type": [
+    "Couples",
+    "Families"
+   ],
+   "amenities": [
+    "Private hot tub",
+    "Fire pit"
+   ],
+   "price_from": null,
+   "price_weekend": null,
+   "price_range": null,
+   "currency_note": "Airbnb shows prices only with dates",
+   "image": "https://a0.muscache.com/im/pictures/hosting/Hosting-1673346958685636522/original/85091683-c67e-4149-a696-e758b21e934a.jpeg",
+   "rating": "4.92 Airbnb",
+   "status": "Open",
+   "highlights": "From your Airbnb “GW Forest” board.",
+   "fit_note": null,
+   "source": "board",
+   "listing_kind": "Single rental",
+   "added": "2026-10-20",
+   "notes": "Scraped from her wishlist; amenities from listing text."
+  },
+  {
+   "name": "The Base Camp @ Ice Mountain – Hot Tub & Creek",
+   "url": "https://www.airbnb.com/rooms/1552348011167228840",
+   "location": "Capon Bridge, WV, USA",
+   "address": null,
+   "lat": 39.33655,
+   "lng": -78.49461,
+   "coord_precision": "listing",
+   "region": "Mid-Atlantic US",
+   "format": "Cabin (2BR)",
+   "units": 1,
+   "setting": [
+    "Creekside",
+    "Forest",
+    "Mountain View"
+   ],
+   "near_park": "Ice Mountain Preserve",
+   "type": [
+    "Couples",
+    "Families"
+   ],
+   "amenities": [
+    "Private hot tub"
+   ],
+   "price_from": null,
+   "price_weekend": null,
+   "price_range": null,
+   "currency_note": "Airbnb shows prices only with dates",
+   "image": "https://a0.muscache.com/im/pictures/hosting/Hosting-1552348011167228840/original/a2df82d1-b360-43a7-935a-20d75326ccb3.png",
+   "rating": "5.0 Airbnb",
+   "status": "Open",
+   "highlights": "From your Airbnb “Berkeley Springs” board.",
+   "fit_note": null,
+   "source": "board",
+   "listing_kind": "Single rental",
+   "added": "2026-10-20",
+   "notes": "Scraped from her wishlist; amenities from listing text."
+  },
+  {
+   "name": "Foxtrot Mökki – Secluded Getaway 2 Hours from DC",
+   "url": "https://www.airbnb.com/rooms/1151614190878967937",
+   "location": "Winchester, VA, USA",
+   "address": null,
+   "lat": 39.38762,
+   "lng": -78.25593,
+   "coord_precision": "listing",
+   "region": "Mid-Atlantic US",
+   "format": "Cabin (2BR)",
+   "units": 1,
+   "setting": [
+    "Forest"
+   ],
+   "near_park": null,
+   "type": [
+    "Couples",
+    "Families"
+   ],
+   "amenities": [
+    "Hot tub (verify on listing)"
+   ],
+   "price_from": null,
+   "price_weekend": null,
+   "price_range": null,
+   "currency_note": "Airbnb shows prices only with dates",
+   "image": "https://a0.muscache.com/im/pictures/hosting/Hosting-U3RheVN1cHBseUxpc3Rpbmc6MTE1MTYxNDE5MDg3ODk2NzkzNw%3D%3D/original/992b5fbc-01a5-46a1-9254-5c90d8ba6ad7.jpeg",
+   "rating": "4.96 Airbnb",
+   "status": "Open",
+   "highlights": "From your Airbnb “Berkeley Springs” board.",
+   "fit_note": "Hot tub mentioned only briefly on listing — confirm",
+   "source": "board",
+   "listing_kind": "Single rental",
+   "added": "2026-10-20",
+   "notes": "Scraped from her wishlist; amenities from listing text."
+  },
+  {
+   "name": "Romantic A-Frame for 2 w/ Hot Tub + Fire Pit",
+   "url": "https://www.airbnb.com/rooms/876321894911569519",
+   "location": "Unionville, VA, USA",
+   "address": null,
+   "lat": 38.28161,
+   "lng": -77.95687,
+   "coord_precision": "listing",
+   "region": "Mid-Atlantic US",
+   "format": "A-frame (1BR)",
+   "units": 1,
+   "setting": [
+    "Forest"
+   ],
+   "near_park": null,
+   "type": [
+    "Couples"
+   ],
+   "amenities": [
+    "Private hot tub",
+    "Fire pit"
+   ],
+   "price_from": null,
+   "price_weekend": null,
+   "price_range": null,
+   "currency_note": "Airbnb shows prices only with dates",
+   "image": "https://a0.muscache.com/im/pictures/hosting/Hosting-876321894911569519/original/fd08bcd8-771c-4ecd-bf81-4457678bef5c.jpeg",
+   "rating": "4.89 Airbnb",
+   "status": "Open",
+   "highlights": "From your Airbnb “Charlottesville” board.",
+   "fit_note": null,
+   "source": "board",
+   "listing_kind": "Single rental",
+   "added": "2026-10-20",
+   "notes": "Scraped from her wishlist; amenities from listing text."
+  },
+  {
+   "name": "Cozy Designer Cabin with Hot Tub & Fire Pit",
+   "url": "https://www.airbnb.com/rooms/1074624618157293076",
+   "location": "Hedgesville, WV, USA",
+   "address": null,
+   "lat": 39.5761,
+   "lng": -78.10362,
+   "coord_precision": "listing",
+   "region": "Mid-Atlantic US",
+   "format": "Cabin (2BR)",
+   "units": 1,
+   "setting": [
+    "Forest"
+   ],
+   "near_park": null,
+   "type": [
+    "Couples",
+    "Families"
+   ],
+   "amenities": [
+    "Private hot tub",
+    "Fire pit"
+   ],
+   "price_from": null,
+   "price_weekend": null,
+   "price_range": null,
+   "currency_note": "Airbnb shows prices only with dates",
+   "image": "https://a0.muscache.com/im/pictures/hosting/Hosting-U3RheVN1cHBseUxpc3Rpbmc6MTA3NDYyNDYxODE1NzI5MzA3Ng%3D%3D/original/b3888bfd-efad-4446-9d34-bbeef7e332af.jpeg",
+   "rating": "4.96 Airbnb",
+   "status": "Open",
+   "highlights": "From your Airbnb “Berkeley Springs” board.",
+   "fit_note": null,
+   "source": "board",
+   "listing_kind": "Single rental",
+   "added": "2026-10-20",
+   "notes": "Scraped from her wishlist; amenities from listing text."
+  },
+  {
+   "name": "Modern Cabin Retreat w/ Hot Tub, Sauna & Fire Pit",
+   "url": "https://www.airbnb.com/rooms/1655760156146026704",
+   "location": "Great Cacapon, WV, USA",
+   "address": null,
+   "lat": 39.58145,
+   "lng": -78.36116,
+   "coord_precision": "listing",
+   "region": "Mid-Atlantic US",
+   "format": "Chalet (1BR)",
+   "units": 1,
+   "setting": [
+    "Forest"
+   ],
+   "near_park": "Cacapon Resort SP",
+   "type": [
+    "Couples"
+   ],
+   "amenities": [
+    "Private hot tub",
+    "Private sauna",
+    "Fire pit"
+   ],
+   "price_from": null,
+   "price_weekend": null,
+   "price_range": null,
+   "currency_note": "Airbnb shows prices only with dates",
+   "image": "https://a0.muscache.com/im/pictures/hosting/Hosting-1655760156146026704/original/80f73876-6ae4-4a84-a977-c3416b4f816a.jpeg",
+   "rating": "4.9 Airbnb",
+   "status": "Open",
+   "highlights": "From your Airbnb “Berkeley Springs” board.",
+   "fit_note": null,
+   "source": "board",
+   "listing_kind": "Single rental",
+   "added": "2026-10-20",
+   "notes": "Scraped from her wishlist; amenities from listing text."
+  },
+  {
+   "name": "Dreamtime Hillside Cabin w/ Hot Tub",
+   "url": "https://www.airbnb.com/rooms/1089777913713427764",
+   "location": "Hedgesville, WV, USA",
+   "address": null,
+   "lat": 39.63229,
+   "lng": -78.10482,
+   "coord_precision": "listing",
+   "region": "Mid-Atlantic US",
+   "format": "Cabin (2BR)",
+   "units": 1,
+   "setting": [
+    "Forest"
+   ],
+   "near_park": null,
+   "type": [
+    "Couples",
+    "Families"
+   ],
+   "amenities": [
+    "Private hot tub"
+   ],
+   "price_from": null,
+   "price_weekend": null,
+   "price_range": null,
+   "currency_note": "Airbnb shows prices only with dates",
+   "image": "https://a0.muscache.com/im/pictures/hosting/Hosting-U3RheVN1cHBseUxpc3Rpbmc6MTA4OTc3NzkxMzcxMzQyNzc2NA==/original/26690797-259a-42bd-86c2-ec163f50a2cf.jpeg",
+   "rating": "4.94 Airbnb",
+   "status": "Open",
+   "highlights": "From your Airbnb “Berkeley Springs” board.",
+   "fit_note": null,
+   "source": "board",
+   "listing_kind": "Single rental",
+   "added": "2026-10-20",
+   "notes": "Scraped from her wishlist; amenities from listing text."
+  },
+  {
+   "name": "Riverfront Designer Cabin – Hot Tub & Fire Pit",
+   "url": "https://www.airbnb.com/rooms/1715449173025243646",
+   "location": "Great Cacapon, WV, USA",
+   "address": null,
+   "lat": 39.5099,
+   "lng": -78.3626,
+   "coord_precision": "listing",
+   "region": "Mid-Atlantic US",
+   "format": "Cabin (2BR)",
+   "units": 1,
+   "setting": [
+    "Riverside",
+    "Forest"
+   ],
+   "near_park": "Cacapon Resort SP",
+   "type": [
+    "Couples",
+    "Families"
+   ],
+   "amenities": [
+    "Private hot tub",
+    "Fire pit"
+   ],
+   "price_from": null,
+   "price_weekend": null,
+   "price_range": null,
+   "currency_note": "Airbnb shows prices only with dates",
+   "image": "https://a0.muscache.com/im/pictures/hosting/Hosting-1715449173025243646/original/c9158fe0-7413-4368-9729-6e764ce5bd8a.jpeg",
+   "rating": "5.0 Airbnb",
+   "status": "Open",
+   "highlights": "From your Airbnb “Berkeley Springs” board.",
+   "fit_note": null,
+   "source": "board",
+   "listing_kind": "Single rental",
+   "added": "2026-10-20",
+   "notes": "Scraped from her wishlist; amenities from listing text."
+  },
+  {
+   "name": "The Cabin & Spa – Hot Tub, Sauna & Views",
+   "url": "https://www.airbnb.com/rooms/1578998898838968253",
+   "location": "Great Cacapon, WV, USA",
+   "address": null,
+   "lat": 39.58682,
+   "lng": -78.37214,
+   "coord_precision": "listing",
+   "region": "Mid-Atlantic US",
+   "format": "Cabin (1BR)",
+   "units": 1,
+   "setting": [
+    "Forest",
+    "Mountain View"
+   ],
+   "near_park": "Cacapon Resort SP",
+   "type": [
+    "Couples"
+   ],
+   "amenities": [
+    "Private hot tub",
+    "Private sauna"
+   ],
+   "price_from": null,
+   "price_weekend": null,
+   "price_range": null,
+   "currency_note": "Airbnb shows prices only with dates",
+   "image": "https://a0.muscache.com/im/pictures/hosting/Hosting-1578998898838968253/original/39981a45-22b1-422c-8f18-1f1ca41b09c5.png",
+   "rating": "4.99 Airbnb",
+   "status": "Open",
+   "highlights": "From your Airbnb “Berkeley Springs” board.",
+   "fit_note": null,
+   "source": "board",
+   "listing_kind": "Single rental",
+   "added": "2026-10-20",
+   "notes": "Scraped from her wishlist; amenities from listing text."
+  },
+  {
+   "name": "Dolly Sods Modern Cabin (Devon & Jenna)",
+   "url": "https://www.airbnb.com/rooms/631678984781419347",
+   "location": "Maysville (Dolly Sods), WV, USA",
+   "address": "239 Shamrock Dr, Maysville, WV",
+   "lat": 39.05144,
+   "lng": -79.29054,
+   "coord_precision": "listing",
+   "region": "Mid-Atlantic US",
+   "format": "Cabin (1BR)",
+   "units": 1,
+   "setting": [
+    "Forest",
+    "Dark Sky",
+    "Mountain View"
+   ],
+   "near_park": "Dolly Sods Wilderness",
+   "type": [
+    "Couples"
+   ],
+   "amenities": [
+    "Private sauna",
+    "EV charging",
+    "Kitchen"
+   ],
+   "price_from": null,
+   "price_weekend": null,
+   "price_range": null,
+   "currency_note": "Airbnb shows prices only with dates",
+   "image": "https://a0.muscache.com/im/pictures/miso/Hosting-631678984781419347/original/d5d79a00-4f5a-4994-9bfe-3b3e717d423c.jpeg",
+   "rating": "5.0 Airbnb (284)",
+   "status": "Open",
+   "highlights": "Your Oct 12–13, 2026 stay: modern cabin with a private Finnish sauna off the deck, ~30 min from Davis & Blackwater Falls.",
+   "fit_note": null,
+   "source": "board",
+   "listing_kind": "Single rental",
+   "added": "2026-10-20",
+   "notes": "Scraped from her wishlist; amenities from listing text.",
+   "stayed": true
+  },
+  {
+   "name": "Timber Hollow Retreat – Sauna + Forest Trail",
+   "url": "https://www.airbnb.com/rooms/1743484273440159097",
+   "location": "Berkeley Springs (Bath), WV, USA",
+   "address": null,
+   "lat": 39.6571,
+   "lng": -78.1443,
+   "coord_precision": "listing",
+   "region": "Mid-Atlantic US",
+   "format": "Cabin (2BR)",
+   "units": 1,
+   "setting": [
+    "Forest"
+   ],
+   "near_park": null,
+   "type": [
+    "Couples",
+    "Families"
+   ],
+   "amenities": [
+    "Private sauna"
+   ],
+   "price_from": null,
+   "price_weekend": null,
+   "price_range": null,
+   "currency_note": "Airbnb shows prices only with dates",
+   "image": "https://a0.muscache.com/im/pictures/hosting/Hosting-1743484273440159097/original/36e29018-3f94-4728-950b-0f331f498346.jpeg",
+   "rating": "5.0 Airbnb",
+   "status": "Open",
+   "highlights": "From your Airbnb “Berkeley Springs” board.",
+   "fit_note": null,
+   "source": "board",
+   "listing_kind": "Single rental",
+   "added": "2026-10-20",
+   "notes": "Scraped from her wishlist; amenities from listing text."
+  },
+  {
+   "name": "Tree House Resort Spa with Sauna",
+   "url": "https://www.airbnb.com/rooms/1134729945146115360",
+   "location": "Rosedale, MD, USA",
+   "address": null,
+   "lat": 39.34714,
+   "lng": -76.50281,
+   "coord_precision": "listing",
+   "region": "Mid-Atlantic US",
+   "format": "Tiny home (1BR)",
+   "units": 1,
+   "setting": [
+    "Forest"
+   ],
+   "near_park": null,
+   "type": [
+    "Couples"
+   ],
+   "amenities": [
+    "Hot tub (verify on listing)",
+    "Private sauna"
+   ],
+   "price_from": null,
+   "price_weekend": null,
+   "price_range": null,
+   "currency_note": "Airbnb shows prices only with dates",
+   "image": "https://a0.muscache.com/im/pictures/hosting/Hosting-1134729945146115360/original/c4ff350b-d5dc-4935-ac44-480d1d2cf8cd.jpeg",
+   "rating": "5.0 Airbnb",
+   "status": "Open",
+   "highlights": "From your Airbnb “Mid-Atlantic Other” board.",
+   "fit_note": "Suburban Baltimore setting rather than wilderness; Hot tub mentioned only briefly on listing — confirm",
+   "source": "board",
+   "listing_kind": "Single rental",
+   "added": "2026-10-20",
+   "notes": "Scraped from her wishlist; amenities from listing text."
+  },
+  {
+   "name": "Le Petite Chateau – Lake View Cabin & Spa",
+   "url": "https://www.airbnb.com/rooms/1691023090226883049",
+   "location": "Kings Beach, CA, USA",
+   "address": null,
+   "lat": 39.2327,
+   "lng": -120.0135,
+   "coord_precision": "listing",
+   "region": "West Coast US",
+   "format": "Cabin (1BR)",
+   "units": 1,
+   "setting": [
+    "Forest",
+    "Mountain View",
+    "Lakeside"
+   ],
+   "near_park": null,
+   "type": [
+    "Couples",
+    "Pets"
+   ],
+   "amenities": [
+    "Private hot tub",
+    "Private sauna"
+   ],
+   "price_from": null,
+   "price_weekend": null,
+   "price_range": null,
+   "currency_note": "Airbnb shows prices only with dates",
+   "image": "https://a0.muscache.com/im/pictures/hosting/Hosting-1691023090226883049/original/142a4e45-1bff-4fa3-a413-7402b0f56300.png",
+   "rating": "4.93 Airbnb",
+   "status": "Open",
+   "highlights": "From your Airbnb “Northern CA” board.",
+   "fit_note": null,
+   "source": "board",
+   "listing_kind": "Single rental",
+   "added": "2026-10-20",
+   "notes": "Scraped from her wishlist; amenities from listing text."
+  },
+  {
+   "name": "Sphere in the Rocks – 2 Min to Park Entry",
+   "url": "https://www.airbnb.com/rooms/1131387956858883609",
+   "location": "Joshua Tree, CA, USA",
+   "address": null,
+   "lat": 34.0996,
+   "lng": -116.2676,
+   "coord_precision": "listing",
+   "region": "West Coast US",
+   "format": "Home (2BR)",
+   "units": 1,
+   "setting": [
+    "Desert",
+    "Dark Sky",
+    "Near National Park"
+   ],
+   "near_park": "Joshua Tree NP",
+   "type": [
+    "Couples",
+    "Families"
+   ],
+   "amenities": [
+    "Private hot tub"
+   ],
+   "price_from": null,
+   "price_weekend": null,
+   "price_range": null,
+   "currency_note": "Airbnb shows prices only with dates",
+   "image": "https://a0.muscache.com/im/pictures/hosting/Hosting-U3RheVN1cHBseUxpc3Rpbmc6MTEzMTM4Nzk1Njg1ODg4MzYwOQ==/original/fc7acbc8-9c87-4ffa-9cca-d61bc86dbfc7.jpeg",
+   "rating": "5.0 Airbnb",
+   "status": "Open",
+   "highlights": "From your Airbnb “Southern CA” board.",
+   "fit_note": null,
+   "source": "board",
+   "listing_kind": "Single rental",
+   "added": "2026-10-20",
+   "notes": "Scraped from her wishlist; amenities from listing text."
+  },
+  {
+   "name": "Here Now Haven – Pool, Hot Tub, Near JT Park",
+   "url": "https://www.airbnb.com/rooms/596418346488133065",
+   "location": "Joshua Tree, CA, USA",
+   "address": null,
+   "lat": 34.0945,
+   "lng": -116.2876,
+   "coord_precision": "listing",
+   "region": "West Coast US",
+   "format": "Home (2BR)",
+   "units": 1,
+   "setting": [
+    "Desert",
+    "Dark Sky",
+    "Near National Park"
+   ],
+   "near_park": "Joshua Tree NP",
+   "type": [
+    "Couples",
+    "Families"
+   ],
+   "amenities": [
+    "Private hot tub",
+    "Pool"
+   ],
+   "price_from": null,
+   "price_weekend": null,
+   "price_range": null,
+   "currency_note": "Airbnb shows prices only with dates",
+   "image": "https://a0.muscache.com/im/pictures/prohost-api/Hosting-596418346488133065/original/b0e4c63b-8dc7-4ba9-bf39-186a15236598.jpeg",
+   "rating": "4.92 Airbnb",
+   "status": "Open",
+   "highlights": "From your Airbnb “Southern CA” board.",
+   "fit_note": null,
+   "source": "board",
+   "listing_kind": "Single rental",
+   "added": "2026-10-20",
+   "notes": "Scraped from her wishlist; amenities from listing text."
+  },
+  {
+   "name": "Loft with Jacuzzi & Arenal Views",
+   "url": "https://www.airbnb.com/rooms/1434353604335505246",
+   "location": "La Fortuna, Costa Rica",
+   "address": null,
+   "lat": 10.5015,
+   "lng": -84.6976,
+   "coord_precision": "listing",
+   "region": "Mexico & Latin America",
+   "format": "Loft (1BR)",
+   "units": 1,
+   "setting": [
+    "Forest",
+    "Mountain View",
+    "Near National Park"
+   ],
+   "near_park": "Arenal Volcano NP",
+   "type": [
+    "Couples"
+   ],
+   "amenities": [
+    "Private hot tub"
+   ],
+   "price_from": null,
+   "price_weekend": null,
+   "price_range": null,
+   "currency_note": "Airbnb shows prices only with dates",
+   "image": "https://a0.muscache.com/im/pictures/hosting/Hosting-1434353604335505246/original/79d89884-d630-41ab-b995-d4f5fdc3db3f.png",
+   "rating": "5.0 Airbnb",
+   "status": "Open",
+   "highlights": "From your Airbnb “Costa Rica” board.",
+   "fit_note": null,
+   "source": "board",
+   "listing_kind": "Single rental",
+   "added": "2026-10-20",
+   "notes": "Scraped from her wishlist; amenities from listing text."
+  },
+  {
+   "name": "Charming Volcano Retreat w/ Hot Tub & Deck",
+   "url": "https://www.airbnb.com/rooms/1426300075369695749",
+   "location": "La Fortuna, Costa Rica",
+   "address": null,
+   "lat": 10.47056,
+   "lng": -84.64469,
+   "coord_precision": "listing",
+   "region": "Mexico & Latin America",
+   "format": "Cabin (1BR)",
+   "units": 1,
+   "setting": [
+    "Forest",
+    "Near National Park"
+   ],
+   "near_park": "Arenal Volcano NP",
+   "type": [
+    "Couples"
+   ],
+   "amenities": [
+    "Private hot tub"
+   ],
+   "price_from": null,
+   "price_weekend": null,
+   "price_range": null,
+   "currency_note": "Airbnb shows prices only with dates",
+   "image": "https://a0.muscache.com/im/pictures/prohost-api/Hosting-1426300075369695749/original/d2fc7613-c8d2-4e19-8943-2d8f44f028a5.jpeg",
+   "rating": "4.97 Airbnb",
+   "status": "Open",
+   "highlights": "From your Airbnb “Costa Rica” board.",
+   "fit_note": null,
+   "source": "board",
+   "listing_kind": "Single rental",
+   "added": "2026-10-20",
+   "notes": "Scraped from her wishlist; amenities from listing text."
+  },
+  {
+   "name": "Jungle Treehouse, Private Preserve, 5 Min to Beach",
+   "url": "https://www.airbnb.com/rooms/670315256371448651",
+   "location": "Quepos (Manuel Antonio), Costa Rica",
+   "address": null,
+   "lat": 9.41771,
+   "lng": -84.15576,
+   "coord_precision": "listing",
+   "region": "Mexico & Latin America",
+   "format": "Treehouse (2BR)",
+   "units": 1,
+   "setting": [
+    "Forest",
+    "Near National Park"
+   ],
+   "near_park": "Manuel Antonio NP",
+   "type": [
+    "Couples",
+    "Families"
+   ],
+   "amenities": [
+    "Private hot tub"
+   ],
+   "price_from": null,
+   "price_weekend": null,
+   "price_range": null,
+   "currency_note": "Airbnb shows prices only with dates",
+   "image": "https://a0.muscache.com/im/pictures/miso/Hosting-670315256371448651/original/f05a123e-25d1-41d7-aed5-4c035b54c6a2.jpeg",
+   "rating": "4.98 Airbnb",
+   "status": "Open",
+   "highlights": "From your Airbnb “Costa Rica” board.",
+   "fit_note": null,
+   "source": "board",
+   "listing_kind": "Single rental",
+   "added": "2026-10-20",
+   "notes": "Scraped from her wishlist; amenities from listing text."
   }
  ]
 }
