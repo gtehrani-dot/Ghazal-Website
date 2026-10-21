@@ -1,6 +1,6 @@
 {
  "meta": {
-  "last_refresh": "Oct 20, 2026",
+  "last_refresh": "Oct 21, 2026",
   "next_refresh": "Jan 1, 2027",
   "baseline_date": "2026-10-20",
   "prices_checked": "Oct 2026",
@@ -6461,6 +6461,50 @@
    "highlights": "The no-transatlantic-flight aurora option: inland Alaska's clear, dry skies seen from bed through a 16-foot clear dome, with aurora wake-up calls and a sauna.",
    "tier": "Average luxury",
    "listing_kind": "Larger resort / lodge"
+  },
+  {
+   "name": "Ascent by Unwind",
+   "url": "https://book.ascentbyunwind.com/",
+   "location": "Meadow River Valley, near Fayetteville, WV, USA (exact address not published)",
+   "address": null,
+   "lat": 38.03,
+   "lng": -80.98,
+   "coord_precision": "approximate (Meadow River area, ~20 min from Fayetteville)",
+   "region": "Mid-Atlantic US",
+   "format": "2 ÖÖD mirrored glass cabins at the cliff edge, 5 forest suites under a 25-ft cliff wall, 1 forest chalet",
+   "units": 8,
+   "setting": [
+    "Forest",
+    "Creekside",
+    "Waterfall",
+    "Near National Park",
+    "Dark Sky"
+   ],
+   "near_park": "New River Gorge National Park (~15 min)",
+   "type": [
+    "Couples"
+   ],
+   "amenities": [
+    "Wood-fired hot tub (select units)",
+    "Ensuite bath",
+    "Waterfall & creek trail",
+    "Stargazing"
+   ],
+   "price_from": null,
+   "price_weekend": null,
+   "price_range": null,
+   "currency_note": "Prices not yet published; launch-list signup gives a discount",
+   "image": "https://platformadmin.nyc3.cdn.digitaloceanspaces.com/landing_pages/unwind-3445/5050/Invicta2-A1.png",
+   "rating": null,
+   "status": "Opening soon",
+   "highlights": "8-unit micro-resort on a private ridge above the Meadow River: mirrored glass cabins, waterfall, wood-fired hot tubs.",
+   "fit_note": null,
+   "source": "user",
+   "tier": "Average luxury",
+   "snow": false,
+   "aurora": false,
+   "added": "2026-10-21",
+   "book_note": "Pre-launch: page says opening \"this October\" (year not stated). Sign up on the site for launch pricing."
   }
  ]
 }
