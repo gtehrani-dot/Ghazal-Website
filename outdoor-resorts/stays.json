@@ -6342,6 +6342,125 @@
    "highlights": "Just two panoramic glass lodges more than 200 miles above the Arctic Circle, sold as part of an Off the Map Travel aurora itinerary (Dec–Mar).",
    "tier": "Premium luxury",
    "listing_kind": "Micro-resort"
+  },
+  {
+   "address": null,
+   "coord_precision": "town",
+   "near_park": "Abisko NP; Aurora Sky Station minutes away",
+   "price_weekend": null,
+   "price_range": null,
+   "currency_note": null,
+   "rating": null,
+   "status": "Open",
+   "fit_note": "No private sauna or hot tub listed — a pick for the clearest skies, not the cabin",
+   "source": "new",
+   "added": "2026-10-21",
+   "snow": true,
+   "aurora": true,
+   "price_from": null,
+   "image": null,
+   "name": "Abisko Mountain Lodge",
+   "url": "https://www.offthemap.travel/accommodation/abisko-mountain-lodge",
+   "location": "Abisko, Swedish Lapland, Sweden",
+   "lat": 68.35,
+   "lng": 18.83,
+   "region": "Europe",
+   "format": "Family-run timber lodge rooms",
+   "units": null,
+   "setting": [
+    "Mountain View",
+    "Lakeside",
+    "Dark Sky",
+    "Near National Park"
+   ],
+   "type": [
+    "Couples",
+    "Families"
+   ],
+   "amenities": [],
+   "highlights": "Cozy timber lodge minutes from the Aurora Sky Station in Abisko, famous for a clear patch of sky that often stays open when the region around it is cloudy. About 1 hr from Narvik for the Norway leg.",
+   "tier": "Average luxury",
+   "listing_kind": "Micro-resort",
+   "notes": "Price on request via Off the Map Travel."
+  },
+  {
+   "address": null,
+   "coord_precision": "town",
+   "near_park": null,
+   "price_weekend": null,
+   "price_range": null,
+   "currency_note": null,
+   "rating": null,
+   "status": "Open",
+   "fit_note": "Private sauna or hot tub not confirmed; a one-night experience rather than a cabin retreat",
+   "source": "new",
+   "added": "2026-10-21",
+   "snow": true,
+   "aurora": true,
+   "price_from": null,
+   "image": "https://www.icehotel.com/media/1381",
+   "name": "Icehotel",
+   "url": "https://www.icehotel.com/",
+   "location": "Jukkasjärvi (near Kiruna), Swedish Lapland, Sweden",
+   "lat": 67.85,
+   "lng": 20.59,
+   "region": "Europe",
+   "format": "Ice rooms and art suites (Dec–Apr) plus year-round Icehotel 365 suites and Arctic cabins",
+   "units": null,
+   "setting": [
+    "Riverside",
+    "Forest",
+    "Dark Sky"
+   ],
+   "type": [
+    "Couples",
+    "Families"
+   ],
+   "amenities": [
+    "Spa services"
+   ],
+   "highlights": "The original ice hotel on the Torne River, rebuilt by artists every winter, 15 minutes from Kiruna airport. Best as a one-night splurge before Abisko.",
+   "tier": "Premium luxury",
+   "listing_kind": "Larger resort / lodge"
+  },
+  {
+   "address": "2640 Himalaya Rd, Fairbanks, AK",
+   "coord_precision": "town",
+   "near_park": null,
+   "price_weekend": null,
+   "price_range": "2-night packages ~$1,990–$6,661",
+   "currency_note": "Sold as packages, not per night (Nov 15–Apr 10)",
+   "rating": null,
+   "status": "Open",
+   "fit_note": "Shared sauna only; package pricing",
+   "source": "new",
+   "added": "2026-10-21",
+   "snow": true,
+   "aurora": true,
+   "price_from": null,
+   "image": null,
+   "name": "Borealis Basecamp",
+   "url": "https://www.alaska.org/detail/borealis-basecamp",
+   "location": "Fairbanks (45–60 min out on a ridge), Alaska, USA",
+   "lat": 64.97,
+   "lng": -147.25,
+   "region": "Alaska",
+   "format": "Domed igloos with 16-ft clear ceilings + aurora cubes",
+   "units": 45,
+   "setting": [
+    "Forest",
+    "Dark Sky"
+   ],
+   "type": [
+    "Couples",
+    "Families"
+   ],
+   "amenities": [
+    "Shared sauna"
+   ],
+   "highlights": "The no-transatlantic-flight aurora option: inland Alaska's clear, dry skies seen from bed through a 16-foot clear dome, with aurora wake-up calls and a sauna.",
+   "tier": "Average luxury",
+   "listing_kind": "Larger resort / lodge"
   }
  ]
 }
