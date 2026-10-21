@@ -48,7 +48,8 @@
    "notes": "The official site confirms private hot tubs, heated waterfalls and a Sandstone Falls sauna photo. The 'pool' is a natural sandstone swimming area that is seasonal and can get algae (unearththevoyage.com article). The site does not state a unit count; the dwelling types are Cantwell Lodge (sleeps 18), a 3BR Bungalow, 2BR Bungalows and Sandstone Falls. The FAQ does not show answers on rates or the pet/kid policy. No rating found.",
    "added": "2026-10-20",
    "tier": "Average luxury",
-   "snow": false
+   "snow": false,
+   "aurora": false
   },
   {
    "name": "Mirror Villas",
@@ -88,7 +89,8 @@
    "notes": "Axios (Sep 2024) reports a private hot tub, a wood barrel sauna and a fire pit at each villa, priced at $699/night with a $419 October sale. Washingtonian (Sep 2025) says only the Deluxe villas have a sauna. The unit count of 4 comes from Ghazal's spreadsheet; no fetched source states it. No current prices or aggregate rating found. Modern Escapes also runs AVA Shenandoah (100 Dina Ln, Stanley, VA), which is not researched here.",
    "added": "2026-10-20",
    "tier": "Average luxury",
-   "snow": false
+   "snow": false,
+   "aurora": false
   },
   {
    "name": "Firefly Treehouses",
@@ -128,7 +130,8 @@
    "notes": "The four units named in the house rules are On the Rocks, Reel Simple, Wanderlust and Wild Soul. No pets, and no kids (the treehouse is 15 ft up). The booking widget shows $200 accommodation but does not clearly say it is per night; StyleBlueprint says from $350/night. The rating is for the Wanderlust Airbnb listing (45016629). Wild Soul has 10/10 on Travelocity/Vrbo (3 reviews). Host is Mitzi, the same host as Starlight Retreats.",
    "added": "2026-10-20",
    "tier": "Average luxury",
-   "snow": false
+   "snow": false,
+   "aurora": false
   },
   {
    "name": "Starlight Retreats",
@@ -166,7 +169,8 @@
    "notes": "The Airbnb title is 'Romantic cabin retreat with hot tub on the lake' (sleeps 2). Host is Mitzi (Superhost), the same as Firefly. No sauna listed. Airbnb did not show a price without dates.",
    "added": "2026-10-20",
    "tier": "Average luxury",
-   "snow": false
+   "snow": false,
+   "aurora": false
   },
   {
    "name": "Live Oak Lake",
@@ -207,7 +211,8 @@
    "notes": "The spreadsheet says 'Sold', but no evidence of a sale or closure was found. book.liveoaklake.com still lists all 7 cabins (Lakeside East/South/North, Cedar Brook, Shadow Bend, White Rock, Forest Edge). Expedia/Vrbo shows reviews through Mar 2026 and quotes a Nov 2026 rate. It may have changed owners and still operate; that could not be confirmed. The Expedia listing contradicts itself on a hot tub (amenity tag vs FAQ 'no spa tub').",
    "added": "2026-10-20",
    "tier": "Average luxury",
-   "snow": false
+   "snow": false,
+   "aurora": false
   },
   {
    "name": "Out of Bounds Retreats",
@@ -248,7 +253,8 @@
    "notes": "The mountain units are Firefly, Skywatch, Aframe Cabin and The Glass Cabin (the Glass Cabin's location is not stated). Two other units, Gone Coastal and Walking on Sunshine, are at Holden Beach, NC and are not counted here. The official site says every cabin has a private hot tub. A sauna is confirmed only for Skywatch (Expedia/Vrbo listing; 1BR, sleeps 2, no children, pets $85). No prices without dates.",
    "added": "2026-10-20",
    "tier": "Average luxury",
-   "snow": false
+   "snow": false,
+   "aurora": false
   },
   {
    "name": "Bolt Farm Treehouse – Tennessee",
@@ -291,7 +297,8 @@
    "listing_kind": "Larger resort / lodge",
    "added": "2026-10-20",
    "tier": "Premium luxury",
-   "snow": false
+   "snow": false,
+   "aurora": false
   },
   {
    "name": "Bolt Farm Treehouse – The Majestic Treehouse (South Carolina)",
@@ -329,7 +336,8 @@
    "notes": "Islands.com says this is Bolt Farm's only South Carolina unit. The current boltfarmtreehouse.com does not mention South Carolina, so it may now be marketed only on Airbnb (hosts Seth & Tori). Pricing is from the Islands.com article; dates were not checked. Two-night weekday minimum, three-night weekend minimum.",
    "added": "2026-10-20",
    "tier": "Average luxury",
-   "snow": false
+   "snow": false,
+   "aurora": false
   },
   {
    "name": "Stellara",
@@ -370,7 +378,8 @@
    "notes": "The official site lists treehouses Saiph, Sirius and Rigel and mirror houses Polaris and Regulus. Expedia also lists a Canopus Mirror House 'owned and operated by Stellara', so there are at least 6 units, with some still under construction per reviews. Saunas are confirmed for the mirror houses; hot tubs for all. Canopus: no pets, kids allowed, minimum age 25. No prices found.",
    "added": "2026-10-20",
    "tier": "Average luxury",
-   "snow": false
+   "snow": false,
+   "aurora": false
   },
   {
    "name": "The UtopiA @ Paradise Lake",
@@ -409,7 +418,8 @@
    "notes": "paradiselakeohio.com/properties/the-utopia now redirects (302) to brandywinegrove.com, which lists Paradise Lake (The Lodge, BellA, UtopiA, Olive, Zen Garden, American Nights) beside the Brandywine Grove cabins. Islands.com puts the general range at $500–$700/night with a two-night minimum. No pets.",
    "added": "2026-10-20",
    "tier": "Premium luxury",
-   "snow": false
+   "snow": false,
+   "aurora": false
   },
   {
    "name": "Treetop Escapes",
@@ -449,7 +459,8 @@
    "notes": "The page says 'five modern treehouse-style cabins' but lists 13 rentals. Guests get free weekday passes to the Paradise Pointe indoor pool and hot tub, about 30 min away. Images on the page are generic thumbnails shared across the operator's site, so no image is given. No prices.",
    "added": "2026-10-20",
    "tier": "Average luxury",
-   "snow": false
+   "snow": false,
+   "aurora": false
   },
   {
    "name": "High Top at Saluda Grade Cabins",
@@ -484,7 +495,8 @@
    "notes": "This was the only other Enjoy Unique Stays unit that met the sauna/hot-tub rule. Cabins in the Clouds has only one hot tub and no sauna; the other properties are cottages or lofts. Bedrooms, prices and a unit-specific image could not be found.",
    "added": "2026-10-20",
    "tier": "Average luxury",
-   "snow": false
+   "snow": false,
+   "aurora": false
   },
   {
    "name": "Treebox Stays",
@@ -522,7 +534,8 @@
    "notes": "Properties: Meraki House (Dover), Treehouse Village (5 treehouses, Winesburg), Orchard House (Walnut Creek, sleeps 10–12), and Forest Havens (2 container units, Ela and Otium, Walnut Creek). A 'Treebox Spa' is linked without details. Some Airbnb reviewers call the soaking tub a hot tub. No usable property photo found on the official page.",
    "added": "2026-10-20",
    "tier": "Average luxury",
-   "snow": false
+   "snow": false,
+   "aurora": false
   },
   {
    "name": "Cypress Resort",
@@ -565,7 +578,8 @@
    "notes": "get.cypressresort.com says 'We're Launching Soon' (25+ planned units, development 2024–2029). Modern Campground (Sep 2024) reported a May 2025 opening that evidently slipped. cypressresort.com now shows 3 villas with 'Book Now' and waitlist buttons but no opening date, prices or reviews, so whether it is actually open is unconfirmed. Founders are Tanner and Melissa Cummings (Indiegogo-funded).",
    "added": "2026-10-20",
    "tier": "Average luxury",
-   "snow": false
+   "snow": false,
+   "aurora": false
   },
   {
    "name": "Onera Fredericksburg",
@@ -605,7 +619,8 @@
    "notes": "The official site says 12 suites on 13 acres; Expedia says 24 rooms, including the Great Lodge buyout. A sauna appears in Expedia's amenity list only. Private hot tubs are in 'several units', not all. Dogs allowed (1, $95). Minimum check-in age 21.",
    "added": "2026-10-20",
    "tier": "Average luxury",
-   "snow": false
+   "snow": false,
+   "aurora": false
   },
   {
    "name": "Onera Wimberley",
@@ -644,7 +659,8 @@
    "notes": "Breakdown: 12 treehouse-style units and 16 Greenhouse units. No sauna or cold plunge listed. Select suites are dog-friendly ($99). Minimum check-in age 21.",
    "added": "2026-10-20",
    "tier": "Average luxury",
-   "snow": false
+   "snow": false,
+   "aurora": false
   },
   {
    "name": "Brandywine Grove",
@@ -684,7 +700,8 @@
    "notes": "Cabins: The Highland, Treehouse, Overlook, Forty-Five, Bunker, Valen and Golf House. The same operator also runs the Paradise Lake units (see UtopiA). No pets except The Olive at Paradise Lake.",
    "added": "2026-10-20",
    "tier": "Average luxury",
-   "snow": false
+   "snow": false,
+   "aurora": false
   },
   {
    "name": "Water's Edge at Stanley Creek",
@@ -724,7 +741,8 @@
    "notes": "Identified by its listing text ('Directly on Stanley Creek in the Aska Adventure Area') and Instagram handle @watersedgeatstanleycreek. A guest review names Escape to Blue Ridge as the manager. Up to 2 dogs at $19/dog/night. No direct-booking site found. Airbnb 8341663 ('Water's Edge | Blue Ridge') is a different pond-front property in Cashes Valley, not this one.",
    "added": "2026-10-20",
    "tier": "Average luxury",
-   "snow": false
+   "snow": false,
+   "aurora": false
   },
   {
    "name": "Terramor Outdoor Resort",
@@ -764,7 +782,8 @@
    "notes": "The official site gives no unit count, prices or season dates, but the resort is seasonal (typically late spring to fall). No sauna or cold plunge listed.",
    "added": "2026-10-20",
    "tier": "Average luxury",
-   "snow": false
+   "snow": false,
+   "aurora": false
   },
   {
    "name": "Rivière Resort",
@@ -799,7 +818,8 @@
    "notes": "exclusive.riviereresort.com would not fetch; riviereresort.com was used instead. It is in Oakdale, about 1 hr west of Knoxville and 2 hrs from Nashville, not 'near Nashville'. No 'Reverie' name appears anywhere. The site sells VIP/Founding Member memberships (37% savings) and gives no opening date or prices.",
    "added": "2026-10-20",
    "tier": "Average luxury",
-   "snow": false
+   "snow": false,
+   "aurora": false
   },
   {
    "name": "Darklight Collection – Bryce Canyon",
@@ -837,7 +857,8 @@
    "notes": "Pre-launch with founding deposits open; up to 25 units here. Expected opening 2027. No prices, deposit amount or exact site. Coordinates are approximate (Bryce Canyon City area). The site lists a 'private spa / hot tub' but does not say every pyramid has one.",
    "added": "2026-10-20",
    "tier": "Average luxury",
-   "snow": true
+   "snow": true,
+   "aurora": false
   },
   {
    "name": "Darklight Collection – Glacier",
@@ -875,7 +896,8 @@
    "notes": "Pre-launch with founding deposits open; up to 24 units here. Expected opening 2027. Coordinates are approximate (West Glacier area). No prices.",
    "added": "2026-10-20",
    "tier": "Average luxury",
-   "snow": true
+   "snow": true,
+   "aurora": false
   },
   {
    "name": "Raus Lodge am See",
@@ -914,7 +936,8 @@
    "notes": "Official page says 17 cabins (tourism board says 14). Each sleeps 2 adults + 1 toddler. No pets. Price shown as 'Fetching price' on official site; tourism-board figure used.",
    "added": "2026-10-20",
    "tier": "Average luxury",
-   "snow": false
+   "snow": false,
+   "aurora": false
   },
   {
    "name": "Raus Lodge Landsitz",
@@ -954,7 +977,8 @@
    "notes": "Dogs allowed. Price not rendered on page. Image is the sauna photo from the official gallery.",
    "added": "2026-10-20",
    "tier": "Average luxury",
-   "snow": false
+   "snow": false,
+   "aurora": false
   },
   {
    "name": "Unyoked Kawakawa Bay",
@@ -993,7 +1017,8 @@
    "notes": "Unyoked brand site, booking pages and journal never mention sauna/hot tub; brand still trades as 'Unyoked' (no 'Into the Wild' rebrand found — that phrase appears only as an article headline). Expanding with 30 Forestry England cabins from 2026. Image from aucklandnz.com, not the official site.",
    "added": "2026-10-20",
    "tier": "Average luxury",
-   "snow": false
+   "snow": false,
+   "aurora": false
   },
   {
    "name": "Cabin One (Home One trial stays)",
@@ -1023,7 +1048,8 @@
    "notes": "cabin-one.com now redirects to home-one.com, a prefab home builder. Its 'Probewohnen' trial stays say cabins are being reworked and available again from mid-2027. No bookable Cabin One resort in Germany/Austria found. Recommend dropping.",
    "added": "2026-10-20",
    "tier": "Average luxury",
-   "snow": false
+   "snow": false,
+   "aurora": false
   },
   {
    "name": "Anupaya Cabin Co.",
@@ -1063,7 +1089,8 @@
    "notes": "Hot tub detail from GOODLAND (tub maker) article; official site doesn't list hot tub/sauna. Image from GOODLAND article (hot tub on cabin deck).",
    "added": "2026-10-20",
    "tier": "Average luxury",
-   "snow": true
+   "snow": true,
+   "aurora": false
   },
   {
    "name": "Shou Sugi Ban House",
@@ -1101,7 +1128,8 @@
    "listing_kind": "Larger resort / lodge",
    "added": "2026-10-20",
    "tier": "Premium luxury",
-   "snow": false
+   "snow": false,
+   "aurora": false
   },
   {
    "name": "Scandinave Spa Blue Mountain",
@@ -1142,7 +1170,8 @@
    "listing_kind": "Larger resort / lodge",
    "added": "2026-10-20",
    "tier": "Average luxury",
-   "snow": true
+   "snow": true,
+   "aurora": false
   },
   {
    "name": "Our Habitas AlUla",
@@ -1181,7 +1210,8 @@
    "listing_kind": "Larger resort / lodge",
    "added": "2026-10-20",
    "tier": "Premium luxury",
-   "snow": false
+   "snow": false,
+   "aurora": false
   },
   {
    "name": "Paradero Todos Santos",
@@ -1222,7 +1252,8 @@
    "listing_kind": "Larger resort / lodge",
    "added": "2026-10-20",
    "tier": "Premium luxury",
-   "snow": false
+   "snow": false,
+   "aurora": false
   },
   {
    "name": "Primland (Tree Houses), Auberge Resorts Collection",
@@ -1264,7 +1295,8 @@
    "listing_kind": "Larger resort / lodge",
    "added": "2026-10-20",
    "tier": "Premium luxury",
-   "snow": false
+   "snow": false,
+   "aurora": false
   },
   {
    "name": "ÖÖD Mirror House Alliklepa (Airbnb)",
@@ -1301,7 +1333,8 @@
    "notes": "ÖÖD Hötels Rõuge (stayood.com) checked but sauna not confirmed there. No price shown without dates.",
    "added": "2026-10-20",
    "tier": "Average luxury",
-   "snow": false
+   "snow": false,
+   "aurora": false
   },
   {
    "name": "Manshausen Island Resort",
@@ -1340,7 +1373,8 @@
    "notes": "7 Sea Cabins + 2 Sea Towers. Prices via checkfront booking only.",
    "added": "2026-10-20",
    "tier": "Premium luxury",
-   "snow": true
+   "snow": true,
+   "aurora": true
   },
   {
    "name": "Panorama Glass Lodge (South Iceland)",
@@ -1378,7 +1412,8 @@
    "notes": "Sauna shared between two lodges. Sister site in Akranes, West Iceland (3 lodges; Frigg has a private sauna).",
    "added": "2026-10-20",
    "tier": "Average luxury",
-   "snow": false
+   "snow": false,
+   "aurora": true
   },
   {
    "name": "Bergdorf Priesteregg",
@@ -1419,7 +1454,8 @@
    "notes": "8 chalets + 7 Seevillas + 3 villas. Pool = shared Priesteregg Bad (assumed pool—not itemized). No JPG chalet photo URL obtainable (lazy-loaded).",
    "added": "2026-10-20",
    "tier": "Premium luxury",
-   "snow": true
+   "snow": true,
+   "aurora": false
   },
   {
    "name": "Arctic Bath",
@@ -1460,7 +1496,8 @@
    "notes": "6 floating + 6 land cabins/suites (suites sleep up to 5). Image from Audley Travel (official images are WebP: https://arcticbath.se/app/uploads/2026/04/2021_08_swedish_lapland_dji_0038-1024x1024.webp).",
    "added": "2026-10-20",
    "tier": "Premium luxury",
-   "snow": true
+   "snow": true,
+   "aurora": true
   },
   {
    "name": "Treehotel",
@@ -1501,7 +1538,8 @@
    "listing_kind": "Larger resort / lodge",
    "added": "2026-10-20",
    "tier": "Premium luxury",
-   "snow": true
+   "snow": true,
+   "aurora": true
   },
   {
    "name": "Chewton Glen Treehouses",
@@ -1542,7 +1580,8 @@
    "listing_kind": "Larger resort / lodge",
    "added": "2026-10-20",
    "tier": "Premium luxury",
-   "snow": false
+   "snow": false,
+   "aurora": false
   },
   {
    "name": "Les Løges — Chalet thermal en forêt",
@@ -1581,7 +1620,8 @@
    "notes": "Chalet count and prices not on site (booking calendar only). ~20 min south of Magog.",
    "added": "2026-10-20",
    "tier": "Average luxury",
-   "snow": true
+   "snow": true,
+   "aurora": false
   },
   {
    "name": "Repère Boréal",
@@ -1624,7 +1664,8 @@
    "listing_kind": "Larger resort / lodge",
    "added": "2026-10-20",
    "tier": "Average luxury",
-   "snow": true
+   "snow": true,
+   "aurora": false
   },
   {
    "name": "Wander The Resort",
@@ -1665,7 +1706,8 @@
    "notes": "Also one 5BR Wander Haus. Image is site's social-share image (content not confirmed). Condé Nast Traveler 2021 Hot List.",
    "added": "2026-10-20",
    "tier": "Average luxury",
-   "snow": false
+   "snow": false,
+   "aurora": false
   },
   {
    "name": "Fogo Island Inn",
@@ -1706,7 +1748,8 @@
    "listing_kind": "Larger resort / lodge",
    "added": "2026-10-20",
    "tier": "Premium luxury",
-   "snow": true
+   "snow": true,
+   "aurora": false
   },
   {
    "name": "Nimmo Bay Wilderness Resort",
@@ -1747,7 +1790,8 @@
    "notes": "Currently closed for winter, booking May–Oct 2027. Image filename suggests a screenshot; may be low quality.",
    "added": "2026-10-20",
    "tier": "Premium luxury",
-   "snow": false
+   "snow": false,
+   "aurora": false
   },
   {
    "name": "CABN X Kangaroo Island (Cape St Albans)",
@@ -1785,7 +1829,8 @@
    "notes": "Page says 'one of five' but header says '4 x CABN X'. Other CABN sites with private sauna: CABN X Seppeltsfield (Barossa), CABN X William (McLaren Vale).",
    "added": "2026-10-20",
    "tier": "Average luxury",
-   "snow": false
+   "snow": false,
+   "aurora": false
   },
   {
    "name": "Crafters Cabins Crackenback",
@@ -1825,7 +1870,8 @@
    "added": "2026-10-20",
    "tier": "Average luxury",
    "snow": true,
-   "snow_note": "Snow Jun–Sep (southern winter)"
+   "snow_note": "Snow Jun–Sep (southern winter)",
+   "aurora": false
   },
   {
    "name": "Kimo Estate Ecohuts",
@@ -1863,7 +1909,8 @@
    "notes": "Tubs listed per hut (privacy implied). URL path says 'glamping' but units are hard-sided huts.",
    "added": "2026-10-20",
    "tier": "Average luxury",
-   "snow": false
+   "snow": false,
+   "aurora": false
   },
   {
    "name": "Luxury Dark Sky Hideaway Cabin A (Airbnb)",
@@ -1901,7 +1948,8 @@
    "notes": "Price requires dates. 'Cabin A' implies sister cabin(s).",
    "added": "2026-10-20",
    "tier": "Average luxury",
-   "snow": false
+   "snow": false,
+   "aurora": false
   },
   {
    "name": "Minaret Station Alpine Lodge",
@@ -1940,7 +1988,8 @@
    "added": "2026-10-20",
    "tier": "Premium luxury",
    "snow": true,
-   "snow_note": "Snow Jun–Sep (southern winter)"
+   "snow_note": "Snow Jun–Sep (southern winter)",
+   "aurora": false
   },
   {
    "name": "Nayara Springs",
@@ -1982,7 +2031,8 @@
    "listing_kind": "Larger resort / lodge",
    "added": "2026-10-20",
    "tier": "Premium luxury",
-   "snow": false
+   "snow": false,
+   "aurora": false
   },
   {
    "name": "El Silencio Lodge & Spa",
@@ -2023,7 +2073,8 @@
    "notes": "Outdoor whirlpool tubs listed (Ultimate Travel Co.); official site confirms porch hot tubs in photos and 2 private heated jet pools for Riverside Villa, but not that every suite has one.",
    "added": "2026-10-20",
    "tier": "Premium luxury",
-   "snow": false
+   "snow": false,
+   "aurora": false
   },
   {
    "name": "Awasi Patagonia",
@@ -2062,7 +2113,8 @@
    "notes": "Hot tub in villas per i-escape and official galleries; not explicitly stated for every villa type.",
    "added": "2026-10-20",
    "tier": "Premium luxury",
-   "snow": false
+   "snow": false,
+   "aurora": false
   },
   {
    "name": "Blue Ridge Retreat (Landon's Mini Lux Retreats)",
@@ -2106,7 +2158,8 @@
    "stayed": true,
    "added": "2026-10-20",
    "tier": "Average luxury",
-   "snow": false
+   "snow": false,
+   "aurora": false
   },
   {
    "name": "Hart's Overlook",
@@ -2145,7 +2198,8 @@
    "notes": "Same host as Blue Ridge Retreat (Landon / BNB Breeze). No pets. Exact address shared after booking.",
    "added": "2026-10-20",
    "tier": "Average luxury",
-   "snow": false
+   "snow": false,
+   "aurora": false
   },
   {
    "name": "Valley View Cabin Resort",
@@ -2184,7 +2238,8 @@
    "notes": "Number of cabins and prices not on the site. No rating found.",
    "added": "2026-10-20",
    "tier": "Average luxury",
-   "snow": false
+   "snow": false,
+   "aurora": false
   },
   {
    "name": "River Bend Retreat (Virginia Wellness Cabins)",
@@ -2223,7 +2278,8 @@
    "notes": "Named one of Hipcamp's best stays for 2026. No pets. $170 may be the lowest unit's price; per-unit prices not shown.",
    "added": "2026-10-20",
    "tier": "Average luxury",
-   "snow": false
+   "snow": false,
+   "aurora": false
   },
   {
    "name": "Royal Oak Retreat – Wellness A-Frame",
@@ -2264,7 +2320,8 @@
    "notes": "2BR (king plus loft queen), sleeps 4. One dog under 50 lb allowed ($100). Address sent after booking.",
    "added": "2026-10-20",
    "tier": "Average luxury",
-   "snow": false
+   "snow": false,
+   "aurora": false
   },
   {
    "name": "Iris Inn & Cabins",
@@ -2304,7 +2361,8 @@
    "notes": "Washingtonian (May 2026) says 6 cabins, 6 rooms and 3 cottages. Image is an aerial of the inn and cabins. Children welcome.",
    "added": "2026-10-20",
    "tier": "Average luxury",
-   "snow": false
+   "snow": false,
+   "aurora": false
   },
   {
    "name": "Ohiopyle Luxury Treehouse",
@@ -2342,7 +2400,8 @@
    "notes": "Sleeps 6. No pets. visitPA describes the hot tub as wood-fired.",
    "added": "2026-10-20",
    "tier": "Average luxury",
-   "snow": false
+   "snow": false,
+   "aurora": false
   },
   {
    "name": "Eastwind Windham",
@@ -2382,7 +2441,8 @@
    "notes": "7 Lushna Cabins and 3 Lushna Suites among 21 units. Pets $50/night in most units. Prices only via the booking engine.",
    "added": "2026-10-20",
    "tier": "Average luxury",
-   "snow": false
+   "snow": false,
+   "aurora": false
   },
   {
    "name": "Eastwind Lake Placid",
@@ -2420,7 +2480,8 @@
    "listing_kind": "Larger resort / lodge",
    "added": "2026-10-20",
    "tier": "Average luxury",
-   "snow": true
+   "snow": true,
+   "aurora": false
   },
   {
    "name": "Wildflower Farms, Auberge Collection",
@@ -2463,7 +2524,8 @@
    "listing_kind": "Larger resort / lodge",
    "added": "2026-10-20",
    "tier": "Premium luxury",
-   "snow": false
+   "snow": false,
+   "aurora": false
   },
   {
    "name": "Piaule Catskill",
@@ -2503,7 +2565,8 @@
    "notes": "Cabin count and prices not on the site.",
    "added": "2026-10-20",
    "tier": "Premium luxury",
-   "snow": false
+   "snow": false,
+   "aurora": false
   },
   {
    "name": "Prospect Berkshires",
@@ -2544,7 +2607,8 @@
    "listing_kind": "Larger resort / lodge",
    "added": "2026-10-20",
    "tier": "Average luxury",
-   "snow": false
+   "snow": false,
+   "aurora": false
   },
   {
    "name": "Lumen Nature Retreat",
@@ -2585,7 +2649,8 @@
    "notes": "Official site lumenretreat.com blocks fetching, so details are from Expedia and the AAA Northeast article. Sauna listed as an amenity; whether it is private or shared is unclear. Dogs allowed ($50).",
    "added": "2026-10-20",
    "tier": "Average luxury",
-   "snow": true
+   "snow": true,
+   "aurora": false
   },
   {
    "name": "Littlefield Retreat (treehouses and hobbit houses)",
@@ -2628,7 +2693,8 @@
    "listing_kind": "Micro-resort",
    "added": "2026-10-20",
    "tier": "Average luxury",
-   "snow": false
+   "snow": false,
+   "aurora": false
   },
   {
    "name": "Dunlap Ridge",
@@ -2667,7 +2733,8 @@
    "notes": "Site gives no street address or exact town; coordinates are approximate (Logan area). Image is an unlabeled carousel photo. No prices or ratings on the site.",
    "added": "2026-10-20",
    "tier": "Average luxury",
-   "snow": false
+   "snow": false,
+   "aurora": false
   },
   {
    "name": "Idyll Reserve",
@@ -2707,7 +2774,8 @@
    "notes": "Hot tub and sauna confirmed for The North only; the other units weren't checked. The $449 weekend figure is the top of the published range, not a quote for specific dates.",
    "added": "2026-10-20",
    "tier": "Average luxury",
-   "snow": false
+   "snow": false,
+   "aurora": false
   },
   {
    "name": "The Everwoods",
@@ -2745,7 +2813,8 @@
    "notes": "No prices or ratings on the site.",
    "added": "2026-10-20",
    "tier": "Average luxury",
-   "snow": false
+   "snow": false,
+   "aurora": false
   },
   {
    "name": "Ski Hill Cabins and Saunas",
@@ -2783,7 +2852,8 @@
    "notes": "Cabin count, prices and pet/kid policy not on the site (bookings via RezStream).",
    "added": "2026-10-20",
    "tier": "Average luxury",
-   "snow": true
+   "snow": true,
+   "aurora": false
   },
   {
    "name": "Canoe Bay (Relais & Châteaux)",
@@ -2823,7 +2893,8 @@
    "listing_kind": "Larger resort / lodge",
    "added": "2026-10-20",
    "tier": "Premium luxury",
-   "snow": true
+   "snow": true,
+   "aurora": false
   },
   {
    "name": "Firelight at Shope Creek",
@@ -2863,7 +2934,8 @@
    "notes": "Details come from one Airbnb listing (Cabin #22, sleeps 2). Other Firelight cabins on Airbnb (48186575, 978981008238381486) list the same hot tub and sauna. Total cabin count and prices were not shown.",
    "added": "2026-10-20",
    "tier": "Average luxury",
-   "snow": false
+   "snow": false,
+   "aurora": false
   },
   {
    "name": "Treehouse Grove at Norton Creek",
@@ -2904,7 +2976,8 @@
    "notes": "8 named treehouses plus pods. The site says it is dog-friendly. No prices or ratings were found on the site.",
    "added": "2026-10-20",
    "tier": "Average luxury",
-   "snow": false
+   "snow": false,
+   "aurora": false
   },
   {
    "name": "The Glamping Collective (Glass Cabins)",
@@ -2942,7 +3015,8 @@
    "notes": "21 units total per a GoNomad article (9 glass cabins, 12 domes). An Airbnb listing of one dome mentions a sauna, but the sauna is not confirmed for the glass cabins. A second location near Chattanooga (Trenton, GA) has domes only.",
    "added": "2026-10-20",
    "tier": "Average luxury",
-   "snow": false
+   "snow": false,
+   "aurora": false
   },
   {
    "name": "Apex Treehouse",
@@ -2980,7 +3054,8 @@
    "notes": "New on Glamping Hub with no reviews yet, so it doesn't yet meet the 4.7+ bar. It may have reviews on other platforms.",
    "added": "2026-10-20",
    "tier": "Average luxury",
-   "snow": false
+   "snow": false,
+   "aurora": false
   },
   {
    "name": "Afterglow on the Ridge",
@@ -3020,7 +3095,8 @@
    "notes": "Listed on Vrbo/Expedia. Only 2 reviews. No price was shown without dates.",
    "added": "2026-10-20",
    "tier": "Average luxury",
-   "snow": false
+   "snow": false,
+   "aurora": false
   },
   {
    "name": "Moody A-frame with Hot Tub (Red River Gorge)",
@@ -3059,7 +3135,8 @@
    "notes": "2 bedrooms, sleeps 4. Pet policy not shown. A nearby alternative with a hot tub and barrel sauna (Expedia h117644243, Campton KY) is a 3-bedroom that sleeps 7, so I left it out as too big.",
    "added": "2026-10-20",
    "tier": "Average luxury",
-   "snow": false
+   "snow": false,
+   "aurora": false
   },
   {
    "name": "Romantic Treehouse (Pamoon)",
@@ -3097,7 +3174,8 @@
    "notes": "Airbnb Guest Favorite (top 10%). No price was shown without dates.",
    "added": "2026-10-20",
    "tier": "Average luxury",
-   "snow": false
+   "snow": false,
+   "aurora": false
   },
   {
    "name": "Intimate Cabin Escape (Mentone)",
@@ -3134,7 +3212,8 @@
    "notes": "No price was shown without dates.",
    "added": "2026-10-20",
    "tier": "Average luxury",
-   "snow": false
+   "snow": false,
+   "aurora": false
   },
   {
    "name": "NowHere",
@@ -3173,7 +3252,8 @@
    "notes": "$179 is the cabin rate and $315 the Hammock Lodge rate, both from the official site. Sauna sessions cost extra. Pets allowed per Airbnb.",
    "added": "2026-10-20",
    "tier": "Average luxury",
-   "snow": false
+   "snow": false,
+   "aurora": false
   },
   {
    "name": "Modern A-Frame Tucked in Nature (Wimberley)",
@@ -3213,7 +3293,8 @@
    "notes": "Sleeps 4. Pet fee $50 per pet.",
    "added": "2026-10-20",
    "tier": "Average luxury",
-   "snow": false
+   "snow": false,
+   "aurora": false
   },
   {
    "name": "Castle Hot Springs",
@@ -3253,7 +3334,8 @@
    "listing_kind": "Larger resort / lodge",
    "added": "2026-10-20",
    "tier": "Premium luxury",
-   "snow": false
+   "snow": false,
+   "aurora": false
   },
   {
    "name": "Ten Thousand Waves (Houses of the Moon)",
@@ -3293,7 +3375,8 @@
    "listing_kind": "Larger resort / lodge",
    "added": "2026-10-20",
    "tier": "Average luxury",
-   "snow": false
+   "snow": false,
+   "aurora": false
   },
   {
    "name": "Amangiri",
@@ -3336,7 +3419,8 @@
    "added": "2026-10-20",
    "meets_bar_override": true,
    "tier": "Premium luxury",
-   "snow": false
+   "snow": false,
+   "aurora": false
   },
   {
    "name": "Ambiente, A Landscape Hotel",
@@ -3377,7 +3461,8 @@
    "listing_kind": "Larger resort / lodge",
    "added": "2026-10-20",
    "tier": "Average luxury",
-   "snow": false
+   "snow": false,
+   "aurora": false
   },
   {
    "name": "Marble Canyon Lodge by Terra Vi",
@@ -3419,7 +3504,8 @@
    "listing_kind": "Larger resort / lodge",
    "added": "2026-10-20",
    "tier": "Average luxury",
-   "snow": false
+   "snow": false,
+   "aurora": false
   },
   {
    "name": "Grand Canyon Nature Lodge by Terra Vi",
@@ -3455,7 +3541,8 @@
    "notes": "Only source is an AFAR article (reopening 2027; 'across the street' from Marble Canyon Lodge). Exact site and details unconfirmed.",
    "added": "2026-10-20",
    "tier": "Average luxury",
-   "snow": false
+   "snow": false,
+   "aurora": false
   },
   {
    "name": "Dunton Hot Springs",
@@ -3499,7 +3586,8 @@
    "notes": "Cabin count is 12 or 13 depending on the source. 'Private hot tub' means the private hot-spring baths in some cabins, such as Well House. Sauna per the MICHELIN page. Rates not published. I did not fetch the official URL; it is the known domain.",
    "added": "2026-10-20",
    "tier": "Premium luxury",
-   "snow": true
+   "snow": true,
+   "aurora": false
   },
   {
    "name": "Colorado Cabin Escape",
@@ -3540,7 +3628,8 @@
    "notes": "Dogs only with pre-approval. No price was shown without dates.",
    "added": "2026-10-20",
    "tier": "Average luxury",
-   "snow": true
+   "snow": true,
+   "aurora": false
   },
   {
    "name": "Fireside Resort",
@@ -3580,7 +3669,8 @@
    "notes": "Official site not fetched. Hotels.com shows one hot tub without saying whether it's private.",
    "added": "2026-10-20",
    "tier": "Average luxury",
-   "snow": true
+   "snow": true,
+   "aurora": false
   },
   {
    "name": "Brooks Lake Lodge & Spa",
@@ -3621,7 +3711,8 @@
    "listing_kind": "Larger resort / lodge",
    "added": "2026-10-20",
    "tier": "Average luxury",
-   "snow": true
+   "snow": true,
+   "aurora": false
   },
   {
    "name": "Whitefish 9-Cabin Micro-Resort (full buyout)",
@@ -3661,7 +3752,8 @@
    "listing_kind": "Micro-resort",
    "added": "2026-10-20",
    "tier": "Premium luxury",
-   "snow": true
+   "snow": true,
+   "aurora": false
   },
   {
    "name": "Boundary by Terra Vi",
@@ -3699,7 +3791,8 @@
    "listing_kind": "Larger resort / lodge",
    "added": "2026-10-20",
    "tier": "Average luxury",
-   "snow": true
+   "snow": true,
+   "aurora": false
   },
   {
    "name": "Terra Vi Lodge Glacier (announced)",
@@ -3732,7 +3825,8 @@
    "listing_kind": "Larger resort / lodge",
    "added": "2026-10-20",
    "tier": "Average luxury",
-   "snow": true
+   "snow": true,
+   "aurora": false
   },
   {
    "name": "Terra Vi Lodge Yosemite",
@@ -3766,7 +3860,8 @@
    "listing_kind": "Larger resort / lodge",
    "added": "2026-10-20",
    "tier": "Average luxury",
-   "snow": false
+   "snow": false,
+   "aurora": false
   },
   {
    "name": "Wellspring Spa & Woodland Retreat",
@@ -3808,7 +3903,8 @@
    "notes": "The image is Grace West. No rating found.",
    "added": "2026-10-20",
    "tier": "Average luxury",
-   "snow": false
+   "snow": false,
+   "aurora": false
   },
   {
    "name": "Stormking Cabins & Spa",
@@ -3847,7 +3943,8 @@
    "notes": "The FAQ says each cabin has a 'hot tub or sauna'. Guests 21+ per FAQ, though another answer says families are welcome.",
    "added": "2026-10-20",
    "tier": "Average luxury",
-   "snow": false
+   "snow": false,
+   "aurora": false
   },
   {
    "name": "The Society Hotel Bingen (Cabin Ring)",
@@ -3889,7 +3986,8 @@
    "listing_kind": "Larger resort / lodge",
    "added": "2026-10-20",
    "tier": "Average luxury",
-   "snow": false
+   "snow": false,
+   "aurora": false
   },
   {
    "name": "WildSpring Guest Habitat",
@@ -3927,7 +4025,8 @@
    "notes": "Limited dog-friendly cabins. The rate pages didn't show nightly prices, and no image URLs were found.",
    "added": "2026-10-20",
    "tier": "Average luxury",
-   "snow": false
+   "snow": false,
+   "aurora": false
   },
   {
    "name": "Post Ranch Inn",
@@ -3968,7 +4067,8 @@
    "listing_kind": "Larger resort / lodge",
    "added": "2026-10-20",
    "tier": "Premium luxury",
-   "snow": false
+   "snow": false,
+   "aurora": false
   },
   {
    "name": "Architect's Off-Grid Stargazing Cabin",
@@ -4009,7 +4109,8 @@
    "notes": "Sleeps 4, 3 small bedrooms. No price was shown without dates.",
    "added": "2026-10-20",
    "tier": "Average luxury",
-   "snow": false
+   "snow": false,
+   "aurora": false
   },
   {
    "name": "Luxurious Secluded Romantic Treehouse",
@@ -4049,7 +4150,8 @@
    "notes": "From your Airbnb Tiny Homes board.",
    "added": "2026-10-20",
    "tier": "Average luxury",
-   "snow": false
+   "snow": false,
+   "aurora": false
   },
   {
    "name": "The Forestry House (Modern Treehouse Retreat)",
@@ -4091,7 +4193,8 @@
    "notes": "From your Airbnb Tiny Homes board; 2 guests max.",
    "added": "2026-10-20",
    "tier": "Average luxury",
-   "snow": false
+   "snow": false,
+   "aurora": false
   },
   {
    "name": "Treetop Hideaways – Luna Loft",
@@ -4131,7 +4234,8 @@
    "notes": "From your Airbnb Treehouses board.",
    "added": "2026-10-20",
    "tier": "Average luxury",
-   "snow": false
+   "snow": false,
+   "aurora": false
   },
   {
    "name": "Trillium Treehouse",
@@ -4172,7 +4276,8 @@
    "notes": "From your Airbnb Treehouses board (also on Upper Shenandoah – Fall).",
    "added": "2026-10-20",
    "tier": "Average luxury",
-   "snow": false
+   "snow": false,
+   "aurora": false
   },
   {
    "name": "The Pond House",
@@ -4213,7 +4318,8 @@
    "notes": "From your Airbnb Treehouses board.",
    "added": "2026-10-20",
    "tier": "Average luxury",
-   "snow": false
+   "snow": false,
+   "aurora": false
   },
   {
    "name": "Postcard Cabins Shenandoah (formerly Getaway)",
@@ -4255,7 +4361,8 @@
    "notes": "Benchmark Ghazal named.",
    "added": "2026-10-20",
    "tier": "Average luxury",
-   "snow": false
+   "snow": false,
+   "aurora": false
   },
   {
    "name": "Dog-Friendly Cabin with Hot Tub, Fireplace & WiFi",
@@ -4295,7 +4402,8 @@
    "added": "2026-10-20",
    "notes": "Scraped from her wishlist; amenities from listing text.",
    "tier": "Average luxury",
-   "snow": false
+   "snow": false,
+   "aurora": false
   },
   {
    "name": "Moss Hill – Cozy Cabin w/ Hot Tub",
@@ -4333,7 +4441,8 @@
    "added": "2026-10-20",
    "notes": "Scraped from her wishlist; amenities from listing text.",
    "tier": "Average luxury",
-   "snow": false
+   "snow": false,
+   "aurora": false
   },
   {
    "name": "The Little Owl Cabin at Mt. Rainier",
@@ -4373,7 +4482,8 @@
    "added": "2026-10-20",
    "notes": "Scraped from her wishlist; amenities from listing text.",
    "tier": "Average luxury",
-   "snow": false
+   "snow": false,
+   "aurora": false
   },
   {
    "name": "The Joshua Tree House",
@@ -4410,7 +4520,8 @@
    "added": "2026-10-20",
    "notes": "Scraped from her wishlist; amenities from listing text.",
    "tier": "Average luxury",
-   "snow": false
+   "snow": false,
+   "aurora": false
   },
   {
    "name": "Riverfront Cabin with New Hot Tub",
@@ -4450,7 +4561,8 @@
    "added": "2026-10-20",
    "notes": "Scraped from her wishlist; amenities from listing text.",
    "tier": "Average luxury",
-   "snow": false
+   "snow": false,
+   "aurora": false
   },
   {
    "name": "Charming Sunnyside Cabin with Sauna",
@@ -4488,7 +4600,8 @@
    "added": "2026-10-20",
    "notes": "Scraped from her wishlist; amenities from listing text.",
    "tier": "Average luxury",
-   "snow": true
+   "snow": true,
+   "aurora": false
   },
   {
    "name": "Tiny House w/ Outdoor Barrel Sauna & Scenic Views",
@@ -4526,7 +4639,8 @@
    "added": "2026-10-20",
    "notes": "Scraped from her wishlist; amenities from listing text.",
    "tier": "Average luxury",
-   "snow": false
+   "snow": false,
+   "aurora": false
   },
   {
    "name": "MICA – Panoramic View and Spa near Quebec City",
@@ -4565,7 +4679,8 @@
    "added": "2026-10-20",
    "notes": "Scraped from her wishlist; amenities from listing text.",
    "tier": "Average luxury",
-   "snow": true
+   "snow": true,
+   "aurora": false
   },
   {
    "name": "Hawk's Nest",
@@ -4603,7 +4718,8 @@
    "added": "2026-10-20",
    "notes": "Scraped from her wishlist; amenities from listing text.",
    "tier": "Average luxury",
-   "snow": false
+   "snow": false,
+   "aurora": false
   },
   {
    "name": "Private Treehouse with Hot Tub and Views",
@@ -4641,7 +4757,8 @@
    "added": "2026-10-20",
    "notes": "Scraped from her wishlist; amenities from listing text.",
    "tier": "Average luxury",
-   "snow": false
+   "snow": false,
+   "aurora": false
   },
   {
    "name": "Mountaintop Retreat with Wood-Fired Hot Tub",
@@ -4680,7 +4797,8 @@
    "added": "2026-10-20",
    "notes": "Scraped from her wishlist; amenities from listing text.",
    "tier": "Average luxury",
-   "snow": false
+   "snow": false,
+   "aurora": false
   },
   {
    "name": "Dreamtime – Modern A-Frame Cabin w/ Hot Tub",
@@ -4718,7 +4836,8 @@
    "added": "2026-10-20",
    "notes": "Scraped from her wishlist; amenities from listing text.",
    "tier": "Average luxury",
-   "snow": false
+   "snow": false,
+   "aurora": false
   },
   {
    "name": "Modern A-Frame w/ Hot Tub, Sauna & Stunning Views",
@@ -4758,7 +4877,8 @@
    "added": "2026-10-20",
    "notes": "Scraped from her wishlist; amenities from listing text.",
    "tier": "Average luxury",
-   "snow": false
+   "snow": false,
+   "aurora": false
   },
   {
    "name": "The Bird's Nest – Cabin by the River",
@@ -4796,7 +4916,8 @@
    "added": "2026-10-20",
    "notes": "Scraped from her wishlist; amenities from listing text.",
    "tier": "Average luxury",
-   "snow": false
+   "snow": false,
+   "aurora": false
   },
   {
    "name": "Sweeping Valley Views – Dog-Friendly Cabin",
@@ -4837,7 +4958,8 @@
    "added": "2026-10-20",
    "notes": "Scraped from her wishlist; amenities from listing text.",
    "tier": "Average luxury",
-   "snow": false
+   "snow": false,
+   "aurora": false
   },
   {
    "name": "Timber Creek: Falls – A Shenandoah Cabin",
@@ -4876,7 +4998,8 @@
    "added": "2026-10-20",
    "notes": "Scraped from her wishlist; amenities from listing text.",
    "tier": "Average luxury",
-   "snow": false
+   "snow": false,
+   "aurora": false
   },
   {
    "name": "The Sparrow Luxury A-Frame w/ Hot Tub",
@@ -4915,7 +5038,8 @@
    "added": "2026-10-20",
    "notes": "Scraped from her wishlist; amenities from listing text.",
    "tier": "Average luxury",
-   "snow": false
+   "snow": false,
+   "aurora": false
   },
   {
    "name": "The Veranda – Views, Hot Tub & Sauna",
@@ -4956,7 +5080,8 @@
    "added": "2026-10-20",
    "notes": "Scraped from her wishlist; amenities from listing text.",
    "tier": "Average luxury",
-   "snow": false
+   "snow": false,
+   "aurora": false
   },
   {
    "name": "Blue Ridge Retreat 2 w/ Hot Tub, Sauna & Cold Plunge",
@@ -4996,7 +5121,8 @@
    "added": "2026-10-20",
    "notes": "Scraped from her wishlist; amenities from listing text.",
    "tier": "Average luxury",
-   "snow": false
+   "snow": false,
+   "aurora": false
   },
   {
    "name": "CloudPointe Retreat",
@@ -5034,7 +5160,8 @@
    "added": "2026-10-20",
    "notes": "Scraped from her wishlist; amenities from listing text.",
    "tier": "Average luxury",
-   "snow": false
+   "snow": false,
+   "aurora": false
   },
   {
    "name": "Private Cabin: Shenandoah Mountain Views, Hot Tub",
@@ -5074,7 +5201,8 @@
    "added": "2026-10-20",
    "notes": "Scraped from her wishlist; amenities from listing text.",
    "tier": "Average luxury",
-   "snow": false
+   "snow": false,
+   "aurora": false
   },
   {
    "name": "Cozy Wine Trail Cottage w/ Hot Tub & Fire Pit",
@@ -5113,7 +5241,8 @@
    "added": "2026-10-20",
    "notes": "Scraped from her wishlist; amenities from listing text.",
    "tier": "Average luxury",
-   "snow": false
+   "snow": false,
+   "aurora": false
   },
   {
    "name": "The Base Camp @ Ice Mountain – Hot Tub & Creek",
@@ -5153,7 +5282,8 @@
    "added": "2026-10-20",
    "notes": "Scraped from her wishlist; amenities from listing text.",
    "tier": "Average luxury",
-   "snow": false
+   "snow": false,
+   "aurora": false
   },
   {
    "name": "Foxtrot Mökki – Secluded Getaway 2 Hours from DC",
@@ -5191,7 +5321,8 @@
    "added": "2026-10-20",
    "notes": "Scraped from her wishlist; amenities from listing text.",
    "tier": "Average luxury",
-   "snow": false
+   "snow": false,
+   "aurora": false
   },
   {
    "name": "Romantic A-Frame for 2 w/ Hot Tub + Fire Pit",
@@ -5229,7 +5360,8 @@
    "added": "2026-10-20",
    "notes": "Scraped from her wishlist; amenities from listing text.",
    "tier": "Average luxury",
-   "snow": false
+   "snow": false,
+   "aurora": false
   },
   {
    "name": "Cozy Designer Cabin with Hot Tub & Fire Pit",
@@ -5268,7 +5400,8 @@
    "added": "2026-10-20",
    "notes": "Scraped from her wishlist; amenities from listing text.",
    "tier": "Average luxury",
-   "snow": false
+   "snow": false,
+   "aurora": false
   },
   {
    "name": "Modern Cabin Retreat w/ Hot Tub, Sauna & Fire Pit",
@@ -5307,7 +5440,8 @@
    "added": "2026-10-20",
    "notes": "Scraped from her wishlist; amenities from listing text.",
    "tier": "Average luxury",
-   "snow": false
+   "snow": false,
+   "aurora": false
   },
   {
    "name": "Dreamtime Hillside Cabin w/ Hot Tub",
@@ -5345,7 +5479,8 @@
    "added": "2026-10-20",
    "notes": "Scraped from her wishlist; amenities from listing text.",
    "tier": "Average luxury",
-   "snow": false
+   "snow": false,
+   "aurora": false
   },
   {
    "name": "Riverfront Designer Cabin – Hot Tub & Fire Pit",
@@ -5385,7 +5520,8 @@
    "added": "2026-10-20",
    "notes": "Scraped from her wishlist; amenities from listing text.",
    "tier": "Average luxury",
-   "snow": false
+   "snow": false,
+   "aurora": false
   },
   {
    "name": "The Cabin & Spa – Hot Tub, Sauna & Views",
@@ -5424,7 +5560,8 @@
    "added": "2026-10-20",
    "notes": "Scraped from her wishlist; amenities from listing text.",
    "tier": "Average luxury",
-   "snow": false
+   "snow": false,
+   "aurora": false
   },
   {
    "name": "Dolly Sods Modern Cabin (Devon & Jenna)",
@@ -5466,7 +5603,8 @@
    "notes": "Scraped from her wishlist; amenities from listing text.",
    "stayed": true,
    "tier": "Average luxury",
-   "snow": false
+   "snow": false,
+   "aurora": false
   },
   {
    "name": "Timber Hollow Retreat – Sauna + Forest Trail",
@@ -5504,7 +5642,8 @@
    "added": "2026-10-20",
    "notes": "Scraped from her wishlist; amenities from listing text.",
    "tier": "Average luxury",
-   "snow": false
+   "snow": false,
+   "aurora": false
   },
   {
    "name": "Tree House Resort Spa with Sauna",
@@ -5542,7 +5681,8 @@
    "added": "2026-10-20",
    "notes": "Scraped from her wishlist; amenities from listing text.",
    "tier": "Average luxury",
-   "snow": false
+   "snow": false,
+   "aurora": false
   },
   {
    "name": "Le Petite Chateau – Lake View Cabin & Spa",
@@ -5583,7 +5723,8 @@
    "added": "2026-10-20",
    "notes": "Scraped from her wishlist; amenities from listing text.",
    "tier": "Average luxury",
-   "snow": true
+   "snow": true,
+   "aurora": false
   },
   {
    "name": "Sphere in the Rocks – 2 Min to Park Entry",
@@ -5623,7 +5764,8 @@
    "added": "2026-10-20",
    "notes": "Scraped from her wishlist; amenities from listing text.",
    "tier": "Average luxury",
-   "snow": false
+   "snow": false,
+   "aurora": false
   },
   {
    "name": "Here Now Haven – Pool, Hot Tub, Near JT Park",
@@ -5664,7 +5806,8 @@
    "added": "2026-10-20",
    "notes": "Scraped from her wishlist; amenities from listing text.",
    "tier": "Average luxury",
-   "snow": false
+   "snow": false,
+   "aurora": false
   },
   {
    "name": "Loft with Jacuzzi & Arenal Views",
@@ -5703,7 +5846,8 @@
    "added": "2026-10-20",
    "notes": "Scraped from her wishlist; amenities from listing text.",
    "tier": "Average luxury",
-   "snow": false
+   "snow": false,
+   "aurora": false
   },
   {
    "name": "Charming Volcano Retreat w/ Hot Tub & Deck",
@@ -5741,7 +5885,8 @@
    "added": "2026-10-20",
    "notes": "Scraped from her wishlist; amenities from listing text.",
    "tier": "Average luxury",
-   "snow": false
+   "snow": false,
+   "aurora": false
   },
   {
    "name": "Jungle Treehouse, Private Preserve, 5 Min to Beach",
@@ -5780,7 +5925,8 @@
    "added": "2026-10-20",
    "notes": "Scraped from her wishlist; amenities from listing text.",
    "tier": "Average luxury",
-   "snow": false
+   "snow": false,
+   "aurora": false
   },
   {
    "name": "The Retreat at Blue Lagoon",
@@ -5823,7 +5969,8 @@
    "added": "2026-10-20",
    "meets_bar_override": true,
    "notes": "Facts from her Iceland Blue Lagoon trip page + official site.",
-   "snow": false
+   "snow": false,
+   "aurora": true
   },
   {
    "name": "Emerald Lake Lodge",
@@ -5865,7 +6012,336 @@
    "listing_kind": "Larger resort / lodge",
    "tier": "Average luxury",
    "added": "2026-10-21",
-   "snow": true
+   "snow": true,
+   "aurora": false
+  },
+  {
+   "address": null,
+   "coord_precision": "town",
+   "units": 10,
+   "near_park": null,
+   "price_weekend": null,
+   "price_range": null,
+   "currency_note": "Mr & Mrs Smith, incl. taxes, all-inclusive (EUR 15,473)",
+   "rating": null,
+   "status": "Open",
+   "fit_note": null,
+   "source": "new",
+   "added": "2026-10-21",
+   "snow": true,
+   "aurora": true,
+   "name": "Octola Private Wilderness",
+   "url": "https://www.mrandmrssmith.com/luxury-hotels/octola-private-wilderness",
+   "location": "Near Rovaniemi, Finnish Lapland, Finland (exact site private)",
+   "lat": 66.5,
+   "lng": 25.73,
+   "region": "Europe",
+   "format": "Exclusive-use wilderness lodge + 2BR villa on a private estate",
+   "setting": [
+    "Forest",
+    "Dark Sky"
+   ],
+   "type": [
+    "Couples",
+    "Families"
+   ],
+   "amenities": [
+    "Private sauna (villa)",
+    "Private hot tub (villa)",
+    "Shared sauna",
+    "Pool",
+    "Spa services"
+   ],
+   "price_from": 17374,
+   "image": null,
+   "highlights": "The benchmark: a private Arctic estate with glass-walled rooms for watching auroras from bed, private chef and 78 activities.",
+   "tier": "Premium luxury",
+   "listing_kind": "Larger resort / lodge"
+  },
+  {
+   "address": null,
+   "coord_precision": null,
+   "units": 2,
+   "near_park": null,
+   "price_weekend": null,
+   "price_range": null,
+   "currency_note": null,
+   "rating": null,
+   "status": "Open",
+   "fit_note": null,
+   "source": "new",
+   "added": "2026-10-21",
+   "snow": true,
+   "aurora": true,
+   "name": "Octola II – Supersuite Villa",
+   "url": "https://www.scottdunn.com/us/finland/hotels/octola-ii-finnish-lapland",
+   "location": "Finnish Lapland, Finland (exact site private)",
+   "lat": null,
+   "lng": null,
+   "region": "Europe",
+   "format": "Ultra-private lodge (5 suites) + 2BR Supersuite Villa",
+   "setting": [
+    "Forest",
+    "Dark Sky"
+   ],
+   "type": [
+    "Couples"
+   ],
+   "amenities": [
+    "Private sauna",
+    "Private hot tub",
+    "Spa services"
+   ],
+   "price_from": null,
+   "image": "https://images.scottdunn.com/c_fill,f_auto,q_auto,h_772,w_1920/finland/accommodation/octola-ii/87830828112025.jpg",
+   "highlights": "Octola's newer sibling: each villa bedroom has its own sauna and outdoor hot tub behind panoramic glass, with an aurora-viewing room in the lodge.",
+   "tier": "Premium luxury",
+   "listing_kind": "Micro-resort",
+   "notes": "Price on request; transfer-only access."
+  },
+  {
+   "address": null,
+   "coord_precision": null,
+   "units": 1,
+   "near_park": null,
+   "price_weekend": null,
+   "price_range": null,
+   "currency_note": null,
+   "rating": null,
+   "status": "Open",
+   "fit_note": null,
+   "source": "new",
+   "added": "2026-10-21",
+   "snow": true,
+   "aurora": true,
+   "name": "Loggers Lodge",
+   "url": "https://www.offthemap.travel/accommodation/loggers-lodge/",
+   "location": "Swedish Lapland, Sweden (exact site shared on booking)",
+   "lat": null,
+   "lng": null,
+   "region": "Europe",
+   "format": "Ultra-luxury log cabin for two, exclusive use",
+   "setting": [
+    "Forest",
+    "Dark Sky"
+   ],
+   "type": [
+    "Couples",
+    "Adults only"
+   ],
+   "amenities": [
+    "Private sauna",
+    "Private hot tub",
+    "Glass-roof aurora lounge",
+    "Private chef"
+   ],
+   "price_from": null,
+   "image": null,
+   "highlights": "Octola-style surroundings for two: deep, private Swedish Lapland forest under aurora skies, with a whole log lodge to yourselves, a glass-roofed lounge, private sauna, hot tub and chef.",
+   "tier": "Premium luxury",
+   "listing_kind": "Single rental",
+   "notes": "Booked through Off the Map Travel; price on request."
+  },
+  {
+   "address": null,
+   "coord_precision": "town",
+   "units": 16,
+   "near_park": "Urho Kekkonen NP (adjacent)",
+   "price_weekend": null,
+   "price_range": null,
+   "currency_note": "From £300/nt (Coolstays) converted to ~USD",
+   "rating": null,
+   "status": "Open",
+   "fit_note": "Part of a larger resort; price shown is for the classic igloos — Kelo-Glass units cost more",
+   "source": "new",
+   "added": "2026-10-21",
+   "snow": true,
+   "aurora": true,
+   "name": "Kakslauttanen Kelo-Glass Igloos",
+   "url": "https://www.coolstays.com/property/kakslauttanen-glass-igloos/17924",
+   "location": "Kakslauttanen (near Saariselkä), Finnish Lapland, Finland",
+   "lat": 68.34,
+   "lng": 27.34,
+   "region": "Europe",
+   "format": "Log cabin joined to a glass-roofed igloo bedroom",
+   "setting": [
+    "Forest",
+    "Dark Sky",
+    "Near National Park"
+   ],
+   "type": [
+    "Couples"
+   ],
+   "amenities": [
+    "Private sauna",
+    "Fireplace",
+    "Kitchenette"
+   ],
+   "price_from": 400,
+   "image": "https://img.coolstays.com/27313.jpg",
+   "highlights": "Watch the auroras from bed under a glass dome, then warm up in your own sauna by the fire — 250 km above the Arctic Circle.",
+   "tier": "Average luxury",
+   "listing_kind": "Micro-resort"
+  },
+  {
+   "address": null,
+   "coord_precision": "town",
+   "units": null,
+   "near_park": null,
+   "price_weekend": null,
+   "price_range": null,
+   "currency_note": null,
+   "rating": null,
+   "status": "Open",
+   "fit_note": null,
+   "source": "new",
+   "added": "2026-10-21",
+   "snow": true,
+   "aurora": true,
+   "name": "Wilderness Hotel Muotka – Aurora Cabins",
+   "url": "https://www.nathab.com/accommodations/wilderness-hotel-muotka",
+   "location": "Muotka (15 min from Saariselkä), Finnish Lapland, Finland",
+   "lat": 68.36,
+   "lng": 27.38,
+   "region": "Europe",
+   "format": "Glass-roofed aurora cabins + riverside log cabins",
+   "setting": [
+    "Forest",
+    "Riverside",
+    "Dark Sky"
+   ],
+   "type": [
+    "Couples",
+    "Families"
+   ],
+   "amenities": [
+    "Private sauna (some cabins)",
+    "Shared sauna",
+    "Fireplace (some)"
+   ],
+   "price_from": null,
+   "image": "https://images.ctfassets.net/1mle4fbytmpl/5GSKCMEC1hJMlC8a3jVN6S/77073979937ccd89984f8be792bee737/04-aurora-cabin.jpg?w=960&fm=webp",
+   "highlights": "Remote riverside wilderness hotel with heated glass-roof aurora cabins, wood-fired saunas and river plunges.",
+   "tier": "Average luxury",
+   "listing_kind": "Micro-resort"
+  },
+  {
+   "address": null,
+   "coord_precision": "town",
+   "units": null,
+   "near_park": "Lofoten ~2 hrs",
+   "price_weekend": null,
+   "price_range": null,
+   "currency_note": "From £249/nt (Host Unusual) converted to ~USD",
+   "rating": null,
+   "status": "Open",
+   "fit_note": null,
+   "source": "new",
+   "added": "2026-10-21",
+   "snow": true,
+   "aurora": true,
+   "name": "WonderINN Arctic",
+   "url": "https://hostunusual.com/property/wonderinn-arctic/",
+   "location": "Borkenes, Troms, Norway",
+   "lat": 68.77,
+   "lng": 16.17,
+   "region": "Europe",
+   "format": "Glass and mirror cabins for two",
+   "setting": [
+    "Mountain View",
+    "Coastal",
+    "Dark Sky"
+   ],
+   "type": [
+    "Couples"
+   ],
+   "amenities": [
+    "Private hot tub",
+    "Shared sauna (bookable)"
+   ],
+   "price_from": 330,
+   "image": "https://media2.hostunusual.com/cdn-cgi/image/quality=82,format=auto/https://hostunusual.s3.eu-west-2.amazonaws.com/wp-content/uploads/2025/06/24131442/wonderinn-arctic-ext2.webp",
+   "highlights": "Arctic Norway glass-and-mirror cabins for two, each with its own hot tub for watching the northern lights over the fjord.",
+   "tier": "Average luxury",
+   "listing_kind": "Micro-resort"
+  },
+  {
+   "address": null,
+   "coord_precision": "town",
+   "units": 1,
+   "near_park": null,
+   "price_weekend": null,
+   "price_range": null,
+   "currency_note": "Airbnb shows prices only with dates",
+   "rating": "4.91 Airbnb (180)",
+   "status": "Open",
+   "fit_note": "4 bedrooms (sleeps 9), bigger than the usual target",
+   "source": "new",
+   "added": "2026-10-21",
+   "snow": true,
+   "aurora": true,
+   "name": "Designer Lodge with Sea-side Sauna & Hot Tub",
+   "url": "https://www.airbnb.com/rooms/2682075",
+   "location": "Dåfjord (1 hr from Tromsø), Troms, Norway",
+   "lat": 69.96,
+   "lng": 19.33,
+   "region": "Europe",
+   "format": "Designer fjord-side lodge (4BR)",
+   "setting": [
+    "Coastal",
+    "Mountain View",
+    "Dark Sky"
+   ],
+   "type": [
+    "Families"
+   ],
+   "amenities": [
+    "Private sauna",
+    "Private hot tub"
+   ],
+   "price_from": null,
+   "image": "https://a0.muscache.com/im/pictures/b2c21fea-924a-4299-a790-07f4ca8b2bba.jpg",
+   "highlights": "Wood-fired sauna and saltwater hot tub on the edge of the fjord, with the host recommending you skip aurora tours: the lights come to you.",
+   "tier": "Average luxury",
+   "listing_kind": "Single rental"
+  },
+  {
+   "address": null,
+   "coord_precision": null,
+   "units": 2,
+   "near_park": null,
+   "price_weekend": null,
+   "price_range": null,
+   "currency_note": null,
+   "rating": null,
+   "status": "Open",
+   "fit_note": "No sauna or hot tub confirmed",
+   "source": "new",
+   "added": "2026-10-21",
+   "snow": true,
+   "aurora": true,
+   "name": "AERA nord Panorama Glass Lodges",
+   "url": "https://www.urbandaddy.com/articles/43981/hunt-the-aurora-borealis-from-a-luxe-glass-lodge-in-norway",
+   "location": "North of Tromsø, Norway (remote)",
+   "lat": null,
+   "lng": null,
+   "region": "Europe",
+   "format": "Two glass lodges with glass walls and ceilings",
+   "setting": [
+    "Coastal",
+    "Dark Sky"
+   ],
+   "type": [
+    "Couples"
+   ],
+   "amenities": [
+    "Kitchenette"
+   ],
+   "price_from": null,
+   "image": null,
+   "highlights": "Just two panoramic glass lodges more than 200 miles above the Arctic Circle, sold as part of an Off the Map Travel aurora itinerary (Dec–Mar).",
+   "tier": "Premium luxury",
+   "listing_kind": "Micro-resort"
   }
  ]
 }
