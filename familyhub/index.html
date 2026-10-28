@@ -1527,5 +1527,57 @@ document.querySelectorAll('.tab-btn').forEach(btn=>{
   });
 })();
 </script>
+<script>
+(function(){
+  var modal = document.getElementById('recipe-modal');
+  var modalCat = document.getElementById('modal-cat');
+  var modalTitle = document.getElementById('modal-title');
+  var modalSrc = document.getElementById('modal-src');
+  var modalBody = document.getElementById('modal-body');
+  var recipesPanel = document.getElementById('recipes');
+  if (!modal || !recipesPanel) return;
+
+  window.closeRecipeModal = function(){
+    modal.classList.remove('open');
+  };
+
+  function openCard(card){
+    var sec = card.closest('.recipe-cat');
+    var catLabel = '';
+    if (sec) {
+      var t = sec.querySelector('.recipe-cat-title');
+      if (t) catLabel = (t.textContent || '').replace(/\s*\(\d+\)\s*$/, '').trim();
+    }
+    var titleLink = card.querySelector('.recipe-title-link');
+    var titleText = titleLink ? (titleLink.textContent || '').trim() : '';
+    var href = (titleLink && titleLink.tagName === 'A') ? titleLink.getAttribute('href') : null;
+    var srcEl = card.querySelector('.recipe-src');
+    var srcText = srcEl ? (srcEl.textContent || '').trim() : '';
+    var notesEl = card.querySelector('.recipe-notes');
+    var notesHtml = notesEl ? notesEl.innerHTML : '';
+
+    modalCat.textContent = catLabel;
+    modalTitle.textContent = titleText;
+    modalSrc.textContent = srcText;
+    modalBody.innerHTML = '<div class="modal-recipe-text">' + notesHtml + '</div>' +
+      (href ? '<div class="modal-link-row"><a href="' + href + '" target="_blank" rel="noopener">Open full recipe ↗</a></div>' : '');
+
+    modal.classList.add('open');
+  }
+
+  recipesPanel.addEventListener('click', function(e){
+    var link = e.target.closest('a');
+    if (link) return; // let real links navigate normally, don't also open the modal
+    var card = e.target.closest('.recipe-card');
+    if (!card) return;
+    openCard(card);
+  });
+
+  document.addEventListener('keydown', function(e){
+    if (e.key === 'Escape') window.closeRecipeModal();
+  });
+})();
+</script>
+
 </body>
 </html>
