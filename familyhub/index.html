@@ -89,12 +89,13 @@
   .recipe-cat:first-child .recipe-cat-title{margin-top:4px;}
   .recipe-count{color:var(--muted);font-size:15px;font-weight:400;}
   .recipe-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:12px;}
-  .recipe-card{background:var(--card);border:1px solid var(--border-light);border-radius:10px;padding:12px 14px;box-shadow:var(--shadow);}
+  .recipe-card{background:var(--card);border:1px solid var(--border-light);border-radius:10px;padding:12px 14px;box-shadow:var(--shadow);cursor:pointer;transition:box-shadow .15s,transform .1s;}
+  .recipe-card:hover{box-shadow:0 4px 14px rgba(20,20,20,.1);transform:translateY(-2px);}
   .recipe-title{font-weight:600;font-size:16.5px;margin-bottom:3px;}
   .recipe-title-link{color:inherit;text-decoration:none;}
   .recipe-title-link:hover{text-decoration:underline;}
   .recipe-src{font-size:14.5px;color:var(--muted);margin-bottom:6px;}
-  .recipe-notes{font-size:16px;color:var(--text);white-space:pre-line;max-height:140px;overflow:auto;}
+  .recipe-notes{font-size:15.5px;color:var(--muted);line-height:1.45;white-space:pre-line;display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden;}
   footer.buildnote{text-align:center;color:var(--muted);font-size:12.5px;margin-top:24px;}
 
 .pb-sub{margin:16px 0 8px;font-size:14px;text-transform:uppercase;letter-spacing:.05em;color:var(--blue-text);}
@@ -124,6 +125,25 @@ body.fh-show li.fh-hidden{display:list-item;}
   .pinterest-card{display:block;margin-bottom:18px;padding:12px 14px;border:1px solid var(--border-light);border-radius:10px;background:var(--card);color:var(--text);text-decoration:none;font-size:16px;box-shadow:var(--shadow);}
   .pinterest-card:hover{border-color:var(--blue-accent);}
   .recipe-cat.cat-hidden,.recipe-card.card-hidden{display:none !important;}
+
+  /* Recipe modal (restored Oct 28 2026) */
+  .recipe-modal{position:fixed;inset:0;z-index:1000;display:flex;pointer-events:none;}
+  .recipe-modal.open{pointer-events:all;}
+  .modal-overlay{position:absolute;inset:0;background:rgba(0,0,0,.4);opacity:0;transition:opacity .2s;cursor:pointer;}
+  .recipe-modal.open .modal-overlay{opacity:1;}
+  .modal-panel{position:absolute;right:0;top:0;bottom:0;width:min(560px,100vw);background:var(--card);box-shadow:-4px 0 32px rgba(0,0,0,.18);display:flex;flex-direction:column;transform:translateX(100%);transition:transform .25s;overflow:hidden;}
+  .recipe-modal.open .modal-panel{transform:translateX(0);}
+  .modal-header{padding:24px 28px 18px;border-bottom:1px solid var(--border-light);position:relative;flex-shrink:0;}
+  .modal-close{position:absolute;top:16px;right:18px;border:none;background:var(--border-light);border-radius:50%;width:32px;height:32px;font-size:18px;cursor:pointer;color:var(--muted);}
+  .modal-close:hover{background:var(--blue-accent);color:#fff;}
+  .modal-cat-badge{font-size:14px;font-weight:700;text-transform:uppercase;letter-spacing:.06em;color:var(--blue-accent);margin-bottom:6px;}
+  .modal-title{font-size:23px;font-weight:700;line-height:1.3;padding-right:36px;}
+  .modal-src{font-size:15.5px;color:var(--muted);margin-top:6px;}
+  .modal-body{padding:22px 28px 30px;overflow-y:auto;flex:1;}
+  .modal-recipe-text{font-size:17px;line-height:1.75;color:var(--text);white-space:pre-wrap;}
+  .modal-link-row{margin-top:20px;padding-top:16px;border-top:1px solid var(--border-light);}
+  .modal-link-row a{font-size:16px;color:var(--blue-accent);text-decoration:none;font-weight:600;}
+  .modal-link-row a:hover{text-decoration:underline;}
 </style>
 </head>
 <body>
@@ -175,6 +195,7 @@ body.fh-show li.fh-hidden{display:list-item;}
   <h2>🔴 Focus this week — deadlines, conflicts &amp; replies that need you now</h2>
   <ul>
     <li class="dismissable">🗓️ <strong><a href="https://my.sportngin.com/user/schedule" target="_blank">Calendar changes waiting for your OK</a></strong> — one difference between a live source and the family calendar (nothing was changed): <strong>Liam's flag football, Sun Nov 8 (Cowboys at Commanders), 4:00–5:30 PM</strong> — calendar location is "6520 Georgetown Pike, McLean (Field 1)"; SportsEngine now says <strong>1239 Spring Hill Road, McLean, Field 3 - 3</strong> (time unchanged). Reply "approve" to update that one calendar entry, or ignore to leave it.</li>
+    <li class="dismissable">🏫 <strong>2-Hour Early Release — End of Quarter 1 (Fri, Oct 30) — both kids</strong> — district-wide: Ella and Liam are both dismissed 2 hours early. Ella: no after-school program at Longfellow (<a href="https://mail.google.com/mail/u/0/#all/1a157010f6ed2e94" target="_blank">Lancer Times Oct 19</a>). Liam: Story Book Character Day at Franklin Sherman, released to SACC at 2:00 PM (<a href="https://mail.google.com/mail/u/0/#all/1a10d351527c4a8b" target="_blank">Panda Press</a>). <a class="add-cal-btn" href="https://calendar.google.com/calendar/render?action=TEMPLATE&amp;text=2-Hour+Early+Release+%E2%80%94+End+of+Quarter+1+%28Ella+%26+Liam%29&amp;dates=20261030/20261031&amp;location=FCPS" target="_blank">📅 Add to Calendar</a></li>
     
     
     
@@ -241,12 +262,6 @@ body.fh-show li.fh-hidden{display:list-item;}
         <div class="event-meta">Wed, Nov 4 · 7:30–8:30 PM · Dance Academy of Virginia, McLean (weekly Wednesdays)</div>
       </div></div>
 
-
-<div class="event-row"><div class="event-dot ella"></div><div>
-        <div class="event-title"><a href="https://mail.google.com/mail/u/0/#all/1a0e99bb830fdfb6" target="_blank">🏫 2-Hour Early Release — End of Quarter 1</a></div>
-        <div class="event-meta">Fri, Oct 30 · no after-school program that day (Lancer Times Oct 19)</div>
-        <a class="add-cal-btn" href="https://calendar.google.com/calendar/render?action=TEMPLATE&amp;text=Longfellow+2-Hour+Early+Release+%28End+of+Quarter+2%29&amp;dates=20261030/20261031&amp;location=Longfellow+Middle+School" target="_blank">📅 Add to Calendar</a>
-      </div></div>
 
       <div class="event-row"><div class="event-dot ella"></div><div>
         <div class="event-title"><a href="https://www.google.com/calendar/event?eid=XzY4b2tjaGk1OGNvNDZiYTE2a3IzZWI5azcwcTNpYjlwNm9vM2FiOWc2Z3JqaWNhMzY4c2s2ZDFnNmMgZmFtaWx5MTAxMjgyMjU5MTAxODIwMzgwMTRAZw" target="_blank">⚽ Soccer (game) — Fire Girls</a></div>
@@ -344,10 +359,10 @@ body.fh-show li.fh-hidden{display:list-item;}
         <div class="event-meta">Fri, Oct 30 · 8:00–9:00 AM · Franklin Sherman</div>
       </div></div>
 <div class="event-row"><div class="event-dot liam"></div><div>
-        <div class="event-title"><a href="https://mail.google.com/mail/u/0/#all/1a10d351527c4a8b" target="_blank">🏫 End of Quarter 1 — 2-hour early release (leaves at 2:00 PM) + Story Book Character Day</a></div>
-        <div class="event-meta">Fri, Oct 30 · Franklin Sherman</div>
+        <div class="event-title"><a href="https://mail.google.com/mail/u/0/#all/1a10d351527c4a8b" target="_blank">🎭 Story Book Character Day — Franklin Sherman</a></div>
+        <div class="event-meta">Fri, Oct 30 · Franklin Sherman · 2-hour early release day (see shared notice above)</div>
         <div class="event-extra">Students are encouraged to dress up as a favorite story book character. Liam is in SACC: <a href="https://mail.google.com/mail/u/0/#all/1a165b9b977a690b" target="_blank">Spooktacular Festival details (Oct 22)</a> — released to SACC at 2:00 PM, open until 6:15 PM, costumes welcome, movie in the second half.</div>
-        <a class="add-cal-btn" href="https://calendar.google.com/calendar/render?action=TEMPLATE&amp;text=Franklin+Sherman+2-hour+early+release+%2B+Story+Book+Character+Day&amp;dates=20261030/20261031&amp;location=Franklin+Sherman+Elementary&amp;details=End+of+Quarter+1%3A+2%3A00+PM+dismissal." target="_blank">📅 Add to Calendar</a>
+        <a class="add-cal-btn" href="https://calendar.google.com/calendar/render?action=TEMPLATE&amp;text=Franklin+Sherman+Story+Book+Character+Day&amp;dates=20261030/20261031&amp;location=Franklin+Sherman+Elementary&amp;details=Costume+day%3B+SACC+released+at+2%3A00+PM." target="_blank">📅 Add to Calendar</a>
       </div></div>
 
       <div class="event-row"><div class="event-dot liam"></div><div>
@@ -429,22 +444,14 @@ body.fh-show li.fh-hidden{display:list-item;}
       <div class="event-extra dismissable">📖 <strong>Parent-Student Book Club</strong> — meets Nov 12 at 6 PM; interest form due Mon Oct 26.</div>
       <div class="event-extra dismissable">🚌 <strong><a href="https://mail.google.com/mail/u/0/#all/1a12277e45ba7c05" target="_blank">Longfellow notice (Oct 9): racial slurs used toward a student on a school bus</a></strong> — Principal Butzer says FCPS does not tolerate hate speech; steps include counselor support, check-ins and classroom lessons on respectful language. The email lists family resources for talking with kids about slurs and bias. Informational — no reply requested.</div>
       <div class="newsletter-link">📰 <a href="https://mail.google.com/mail/u/0/#all/1a179e03609651a3" target="_blank">Longfellow Lancer Times — Oct 26</a> (final week of Quarter 1)</div>
-      <div class="newsletter-link">📰 <a href="https://mail.google.com/mail/u/0/#all/1a16064435447ee3" target="_blank">Longfellow — VIP Camp 2026 Reunion &amp; Lights On After-School, Oct 21</a> (Tue Oct 27, 6–8 PM at Rachel Carson MS)</div>
-      <div class="newsletter-link">📰 <a href="https://mail.google.com/mail/u/0/#all/1a160b4a41644942" target="_blank">FCPS This Week — Oct 21</a> (Impact Aid survey, ParentVUE outage Oct 30–Nov 9, TJHSST deadlines, Youth Survey window)</div>
-      <div class="newsletter-link">📰 <a href="https://mail.google.com/mail/u/0/#all/1a157010f6ed2e94" target="_blank">Longfellow Lancer Times — Oct 19</a> (Distinguished School recognition; Oct 30 early release; no school Nov 2–3)</div>
-      <div class="newsletter-link">📰 <a href="https://mail.google.com/mail/u/0/#all/1a15a44c9b57a734" target="_blank">FCPS — Federal Impact Aid survey, Oct 20</a> (division-wide family survey; optional)</div>
+            <div class="newsletter-link">📰 <a href="https://mail.google.com/mail/u/0/#all/1a160b4a41644942" target="_blank">FCPS This Week — Oct 21</a> (Impact Aid survey, ParentVUE outage Oct 30–Nov 9, TJHSST deadlines, Youth Survey window)</div>
+            <div class="newsletter-link">📰 <a href="https://mail.google.com/mail/u/0/#all/1a15a44c9b57a734" target="_blank">FCPS — Federal Impact Aid survey, Oct 20</a> (division-wide family survey; optional)</div>
       <div class="newsletter-link">📰 <a href="https://mail.google.com/mail/u/0/#all/1a1464b6397037d9" target="_blank">FCPS message — "Reflections on the Tragedy in Oregon," Oct 16</a> (division-wide statement; informational)</div>
       <div class="newsletter-link">📰 <a href="https://mail.google.com/mail/u/0/#all/1a146054e4af0fb8" target="_blank">FCPS Facility Improvements (Renovation Queue) Survey — Oct 16</a> (optional family survey)</div>
-      <div class="newsletter-link">📰 <a href="https://mail.google.com/mail/u/0/#all/1a13af27de67fe43" target="_blank">Longfellow — "Great News" (recognized Distinguished under Virginia's school framework), Oct 14</a></div>
-      <div class="newsletter-link">📰 <a href="https://mail.google.com/mail/u/0/#all/1a136883dacf382b" target="_blank">Longfellow MS PTA Information — Oct 13</a> (PTA budget approved, 172 members)</div>
-      <div class="newsletter-link">📰 <a href="https://mail.google.com/mail/u/0/#all/1a131b4132565e79" target="_blank">Longfellow Lancer Times — Oct 12</a></div>
-      <div class="newsletter-link">📰 <a href="https://mail.google.com/mail/u/0/#all/1a1216edaba14d32" target="_blank">Fairfax County Health Department letter — Oct 8</a> (respiratory-illness season guidance)</div>
+            <div class="newsletter-link">📰 <a href="https://mail.google.com/mail/u/0/#all/1a136883dacf382b" target="_blank">Longfellow MS PTA Information — Oct 13</a> (PTA budget approved, 172 members)</div>
+            <div class="newsletter-link">📰 <a href="https://mail.google.com/mail/u/0/#all/1a1216edaba14d32" target="_blank">Fairfax County Health Department letter — Oct 8</a> (respiratory-illness season guidance)</div>
       <div class="newsletter-link">📰 <a href="https://mail.google.com/mail/u/0/#all/1a13ca77d7b00cec" target="_blank">FCPS family news roundup — Oct 14</a> (Purple Star Division, facilities &amp; travel feedback)</div>
-      <div class="newsletter-link">📰 <a href="https://mail.google.com/mail/u/0/#all/1a11c4028cddec82" target="_blank">FCPS family news roundup — Oct 8</a> (immunization events, pedestrian safety tips)</div>
-      <div class="newsletter-link">📰 <a href="https://mail.google.com/mail/u/0/#all/1a10da7dd3fb299c" target="_blank">Longfellow Lancer Times — Oct 5</a></div>
-      <div class="newsletter-link">📰 <a href="https://mail.google.com/mail/u/0/#all/1a0e99bb830fdfb6" target="_blank">Longfellow Lancer Times — Sep 28</a></div>
-      <div class="newsletter-link">📰 <a href="https://mail.google.com/mail/u/0/#all/1a0cad05caa28ccb" target="_blank">Longfellow Lancer Times — Sep 22</a></div>
-
+                        
       <div class="subhead">🍽 Cafeteria — recent lunches</div>
       <div class="cafeteria-item">Balance: <strong>$4.80</strong> as of 10/19 (AutoPay On — $20 reload per child below $5.00, Mastercard ending 7118). School data last updated Oct 19, 1:56 PM.</div>
       <div class="cafeteria-item">10/19 11:49 AM · French Toast Sticks w/ Chik'n Bite, PBJ Power Pack — $6.00 charged</div>
@@ -479,29 +486,12 @@ body.fh-show li.fh-hidden{display:list-item;}
       <div class="event-extra dismissable">📬 <strong><a href="https://families.talkingpts.org" target="_blank">AAP orientation (Sep 25) — missed, not recorded</a></strong> — see red box above.</div>
       <div class="event-extra dismissable">🧀 <strong><a href="https://mail.google.com/mail/u/0/#all/1a136d4d167b5254" target="_blank">FSES grilled cheese staff lunch — Mon Nov 9</a></strong> — PTA asks parents to bring something to the front office by Fri Nov 6 (sign-up link in the newsletter). Optional. Also: FSES Spring Auction Sat Mar 13, 2027, 7–10 PM at the McLean Community Center (committee form in the newsletter). <a class="add-cal-btn" href="https://calendar.google.com/calendar/render?action=TEMPLATE&amp;text=FSES+Spring+Auction&amp;dates=20270313T190000%2F20270313T220000&amp;location=McLean+Community+Center&amp;details=First+FSES+PTA+auction+since+2019." target="_blank">📅 Add to Calendar</a></div>
       <div class="newsletter-link">📰 <a href="https://mail.google.com/mail/u/0/#all/1a1797d568e95137" target="_blank">FSES PTA Newsletter — Oct 26</a> (Seussical auditions Wed; Movie Night this Fri Oct 30, pizza orders due Thu noon; volunteer opportunities)</div>
-      <div class="newsletter-link">📰 <a href="https://mail.google.com/mail/u/0/#all/1a179699ec9b9d1e" target="_blank">Ms. Eaton — Children's Artwalk Reception, Oct 26</a> (Tue Oct 27, 4–6:30 PM)</div>
-      <div class="newsletter-link">📰 <a href="https://mail.google.com/mail/u/0/#all/1a1797b188664f4d" target="_blank">Miss McCombs — Jamestown chaperones, Oct 26</a> (first 4 replies)</div>
-      <div class="newsletter-link">📰 <a href="https://families.talkingpts.org/home" target="_blank">Mrs. Essimi (Library) — Book Fair announcements, TalkingPoints Oct 21</a> (self-checkout; open all week; Academic Night Thu Oct 22 until 7 PM)</div>
-      <div class="newsletter-link">📰 <a href="https://mail.google.com/mail/u/0/#all/1a16471936215e2b" target="_blank">FSES PTA Newsletter — Oct 22</a> ("See you TONIGHT": PTA meeting, Academic Showcase and Book Fair family night — all passed after tonight; no new dated items)</div>
-      <div class="newsletter-link">📰 <a href="https://mail.google.com/mail/u/0/#all/1a16461b927a188b" target="_blank">Miss McCombs — 4th grade Jamestown field trip, Oct 22</a> (Fri Dec 11; permission form due Oct 30)</div>
+            <div class="newsletter-link">📰 <a href="https://mail.google.com/mail/u/0/#all/1a1797b188664f4d" target="_blank">Miss McCombs — Jamestown chaperones, Oct 26</a> (first 4 replies)</div>
+                  <div class="newsletter-link">📰 <a href="https://mail.google.com/mail/u/0/#all/1a16461b927a188b" target="_blank">Miss McCombs — 4th grade Jamestown field trip, Oct 22</a> (Fri Dec 11; permission form due Oct 30)</div>
       <div class="newsletter-link">📰 <a href="https://mail.google.com/mail/u/0/#all/1a165b9b977a690b" target="_blank">SACC — Spooktacular Festival, Oct 22</a> (Fri Oct 30; SACC open until 6:15 PM)</div>
       <div class="newsletter-link">📰 <a href="https://mail.google.com/mail/u/0/#all/1a15f77aec1633b4" target="_blank">Panda Press — Oct 21</a> (PTA meeting + Academic Night tonight; Picture Day Oct 22; Oct 30 2-hour early release + Story Book Character Day; SACC closed Nov 11; AAP office hours; Monster Mash Dash Sunday)</div>
-      <div class="newsletter-link">📰 <a href="https://mail.google.com/mail/u/0/#all/1a15558cf3761298" target="_blank">FSES PTA Newsletter — Oct 19</a> (Movie Night rescheduled Fri Oct 30; PTA meeting + Academic Night and Picture Day Thu Oct 22; Monster Mash Dash Sunday; Spring Auction; grilled cheese lunch Nov 9)</div>
-      <div class="newsletter-link">📰 <a href="https://mail.google.com/mail/u/0/#all/1a14585e3fa23ea9" target="_blank">FSES PTA Newsletter — Oct 16</a> (Movie Night cancelled; tentative reschedule Fri Oct 30)</div>
-      <div class="newsletter-link">📰 <a href="https://mail.google.com/mail/u/0/#all/1a14031ecc69c276" target="_blank">FSES PTA Newsletter — Oct 15</a> (last call for Movie Night pizza; Movie Night Fri Oct 16)</div>
-      <div class="newsletter-link">📰 <a href="https://mail.google.com/mail/u/0/#all/1a13a719b3a93b1e" target="_blank">Panda Press — Oct 14</a></div>
-      <div class="newsletter-link">📰 <a href="https://mail.google.com/mail/u/0/#all/1a136d4d167b5254" target="_blank">FSES PTA Newsletter — Oct 13</a> (Movie Night Fri, Science Olympiad sign-up deadline Thu, Oct 22 PTA meeting + Academic Night, Picture Day volunteers, grilled cheese lunch Nov 9, Spring Auction, Monster Mash Dash, Seussical auditions Oct 28)</div>
-      <div class="newsletter-link">📰 <a href="https://mail.google.com/mail/u/0/#all/1a121b6baca7796e" target="_blank">FCPS letter — Franklin Sherman recognized "Distinguished" (Oct 9)</a></div>
-      <div class="newsletter-link">📰 <a href="https://mail.google.com/mail/u/0/#all/1a1216edaba14d32" target="_blank">Fairfax County Health Department letter — Oct 8</a> (respiratory-illness season guidance)</div>
-      <div class="newsletter-link">📰 <a href="https://mail.google.com/mail/u/0/#all/1a10d351527c4a8b" target="_blank">Panda Press — Oct 5</a></div>
-      <div class="newsletter-link">📰 <a href="https://mail.google.com/mail/u/0/#all/1a117eab18434222" target="_blank">FSES PTA Newsletter — Oct 7</a> (Vote for the Movie Night movie — link in the email; Save the Date Oct 22: Picture Day, PTA Meeting, Academic Showcase; no school Mon Oct 12)</div>
-      <div class="newsletter-link">📰 <a href="https://mail.google.com/mail/u/0/#all/1a10d13214af72f4" target="_blank">FSES PTA Newsletter — Oct 5</a> (Volunteers for Movie Night, Monster Mash Dash sign-up)</div>
-      <div class="newsletter-link">📰 <a href="https://mail.google.com/mail/u/0/#all/1a0f2c01fdc2ca0f" target="_blank">FSES PTA Newsletter — Sep 30</a> (Food Bus training Fri, Coat Drive final week, Counselor wish list)</div>
-      <div class="newsletter-link">📰 <a href="https://mail.google.com/mail/u/0/#all/1a0e911a4949e4b5" target="_blank">Panda Press — Sep 28</a></div>
-      <div class="newsletter-link">📰 <a href="https://mail.google.com/mail/u/0/#all/1a0e8b413b683d6f" target="_blank">FSES PTA Newsletter — Sep 28</a> (Panda Fund 3 days left, Movie Night volunteers, Monster Mash Dash)</div>
-      <div class="newsletter-link">📰 <a href="https://mail.google.com/mail/u/0/#all/1a0cac819a19c0ab" target="_blank">Panda Press — Sep 22</a></div>
-      <div class="newsletter-link">📰 <a href="https://mail.google.com/mail/u/0/#all/1a0ca9f377add5b4" target="_blank">FSES PTA Newsletter — Sep 22</a></div>
-
+                                          <div class="newsletter-link">📰 <a href="https://mail.google.com/mail/u/0/#all/1a1216edaba14d32" target="_blank">Fairfax County Health Department letter — Oct 8</a> (respiratory-illness season guidance)</div>
+                                                
       <div class="subhead">🍽 Cafeteria — recent lunches</div>
       <div class="cafeteria-item">Balance: $27.20 (AutoPay On, as of 09/10).</div>
       <div class="cafeteria-item">09/10 12:47 PM · Reimbursable Lunch Meal, Cookie, Nachos with Cheese Sauce, Cucumber Slices, Milk (Fat Free Chocolate) — $3.75 charged</div>
@@ -580,6 +570,19 @@ body.fh-show li.fh-hidden{display:list-item;}
 </div>
 <div class="cat-bar" id="cat-bar"></div>
 <a class="pinterest-card" href="https://pin.it/1tE78g5ou" target="_blank" rel="noopener">📌 Browse all recipes on Pinterest</a>
+
+<div id="recipe-modal" class="recipe-modal">
+  <div class="modal-overlay" onclick="closeRecipeModal()"></div>
+  <div class="modal-panel">
+    <div class="modal-header">
+      <button class="modal-close" onclick="closeRecipeModal()">✕</button>
+      <div class="modal-cat-badge" id="modal-cat"></div>
+      <div class="modal-title" id="modal-title"></div>
+      <div class="modal-src" id="modal-src"></div>
+    </div>
+    <div class="modal-body" id="modal-body"></div>
+  </div>
+</div>
 
 <section class="recipe-cat" data-cat="breakfast">
 <h3 class="recipe-cat-title">Breakfast <span class="recipe-count">(7)</span></h3>
@@ -1310,6 +1313,32 @@ body.fh-show li.fh-hidden{display:list-item;}
   <div class="recipe-notes">• 2 egg yolks<br>• 1 1/2 cups ice water<br>• 1 3/4 cups flour, sifted<br>• ½ teaspoon salt<br><br>Directions:<br>In a large bowl place the egg yolks.<br>Add iced water gradually, stirring (preferably with hashi(chopsticks)) and blending well.<br>Add flour all at once, stir BRIEFLY; that is well enough to coat but leave the lumps and bumps!</div>
 </div>
 </div></section>
+
+<section class="recipe-cat" data-cat="gut">
+<h3 class="recipe-cat-title">Gut Health <span class="recipe-count">(4)</span></h3>
+<div class="recipe-grid">
+<div class="recipe-card">
+  <div class="recipe-title"><a href="https://mail.google.com/mail/u/0/#all/1947933f12bfa399" target="_blank" rel="noopener" class="recipe-title-link">Ginger Intention Tonic</a></div>
+  <div class="recipe-src">Gmail — The Sacred Science (Jan 18)</div>
+  <div class="recipe-notes">Ingredients: 1 tbsp finely grated ginger (peeled), &#x2BC; cup mint/basil/lemongrass, 1&#x2013;2 pinches Himalayan salt, 2&#x2013;3 tsp lime or lemon juice, 2&#x2013;3 tsp raw honey.<br><br>Preparation: Boil 8 cups water, add ginger and herbs, simmer uncovered ~15 min until reduced to about 5 cups. Cool 5&#x2013;10 min, stir in salt, then juice, then honey. Strain and serve warm (or chilled with a pinch of roasted ground cumin).</div>
+</div>
+<div class="recipe-card">
+  <div class="recipe-title"><a href="https://mail.google.com/mail/u/0/#all/17ce5d1ef7d0cdda" target="_blank" rel="noopener" class="recipe-title-link">Elderberry Syrup</a></div>
+  <div class="recipe-src">Gmail — The Sacred Science (Nov 3, 2021)</div>
+  <div class="recipe-notes">Ingredients: 1 cup dried elderberries (or 2 cups fresh), 4 cups water, &#x2153; cup honey.<br><br>Preparation: Simmer berries in water for 1 hour, then strain. Return the juice to the pot and simmer, stirring in honey until dissolved. Bottle and refrigerate &#x2014; keeps about 4 weeks.</div>
+</div>
+<div class="recipe-card">
+  <div class="recipe-title"><a href="https://thesacredscience.com/coffee-alternative-recipe" target="_blank" rel="noopener" class="recipe-title-link">Energizing Coffee Alternative</a></div>
+  <div class="recipe-src">Email teaser &#x2014; full recipe on The Sacred Science blog</div>
+  <div class="recipe-notes">This one's a teaser in the email &#x2014; the full recipe lives on the source blog. Click through for the complete ingredient list and steps.</div>
+</div>
+<div class="recipe-card">
+  <div class="recipe-title"><a href="https://mail.google.com/mail/u/0/#all/16fddef506f9e8fa" target="_blank" rel="noopener" class="recipe-title-link">Maya Hot Chocolate</a></div>
+  <div class="recipe-src">Gmail — The Sacred Science (Jan 25, 2020)</div>
+  <div class="recipe-notes">Ingredients (makes 1 serving): 1 cup organic goat or cow milk (almond/oat milk for vegan), 2 tbsp raw cacao powder, &#x00BC; tsp ground cinnamon, &#x215B; tsp ground nutmeg, &#x00BC; tsp ground chili pepper, 1&#x2013;2 tbsp honey.<br><br>Preparation: Stir cacao and spices in a bowl, whisk in a little milk to form a paste. Gently heat the remaining milk (just under boiling), whisk in the paste, and simmer until slightly thickened. Pour into a mug and sweeten with honey to taste.</div>
+</div>
+</div>
+</section>
 </div>
 
 <footer class="buildnote">Family Hub · built for Ghazal Moore · sources link on each item's own title</footer>
@@ -1452,6 +1481,50 @@ document.querySelectorAll('.tab-btn').forEach(btn=>{
   window.filterRecipesDOM = applyFilters;
   renderPills();
   applyFilters();
+})();
+</script>
+<script>
+(function(){
+  var modal = document.getElementById('recipe-modal');
+  var modalCat = document.getElementById('modal-cat');
+  var modalTitle = document.getElementById('modal-title');
+  var modalSrc = document.getElementById('modal-src');
+  var modalBody = document.getElementById('modal-body');
+  var recipesPanel = document.getElementById('recipes');
+  if (!modal || !recipesPanel) return;
+
+  window.closeRecipeModal = function(){
+    modal.classList.remove('open');
+  };
+
+  function openRecipeFromCard(card, catLabel){
+    var titleEl = card.querySelector('.recipe-title');
+    var linkEl = titleEl ? titleEl.querySelector('a') : null;
+    var srcEl = card.querySelector('.recipe-src');
+    var notesEl = card.querySelector('.recipe-notes');
+    modalCat.textContent = catLabel || '';
+    modalTitle.textContent = titleEl ? titleEl.textContent.trim() : '';
+    modalSrc.textContent = srcEl ? srcEl.textContent.trim() : '';
+    var bodyHtml = '<div class="modal-recipe-text">' + (notesEl ? notesEl.innerHTML : '') + '</div>';
+    if (linkEl) {
+      bodyHtml += '<div class="modal-link-row"><a href="' + linkEl.getAttribute('href') + '" target="_blank" rel="noopener">→ Open full source</a></div>';
+    }
+    modalBody.innerHTML = bodyHtml;
+    modal.classList.add('open');
+  }
+
+  var sections = Array.prototype.slice.call(recipesPanel.querySelectorAll('.recipe-cat'));
+  sections.forEach(function(sec){
+    var titleEl = sec.querySelector('.recipe-cat-title');
+    var catLabel = titleEl ? titleEl.textContent.replace(/\s*\(\d+\)\s*$/, '').trim() : '';
+    var cards = Array.prototype.slice.call(sec.querySelectorAll('.recipe-card'));
+    cards.forEach(function(card){
+      card.addEventListener('click', function(e){
+        if (e.target.closest('a')) return; // let real links navigate normally
+        openRecipeFromCard(card, catLabel);
+      });
+    });
+  });
 })();
 </script>
 </body>
