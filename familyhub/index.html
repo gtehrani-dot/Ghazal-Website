@@ -112,6 +112,18 @@ body.fh-show li.fh-hidden{display:list-item;}
   .fh-more{position:absolute;left:0;right:0;bottom:0;height:48px;display:flex;align-items:center;justify-content:center;background:var(--card);border-top:1px solid var(--border-light)}
   .fh-more button,.fh-less button{font:inherit;font-weight:600;font-size:15px;padding:8px 18px;border-radius:20px;border:1px solid var(--border-light);background:#fff;cursor:pointer}
   .fh-less{text-align:center;padding-top:12px}
+
+  /* ══ RECIPES: search + category filter (restored Oct 28 2026) ══ */
+  .recipe-controls{display:flex;align-items:center;gap:12px;margin-bottom:14px;flex-wrap:wrap;}
+  .recipe-search{flex:1;min-width:180px;border:1px solid var(--border-light);border-radius:8px;padding:9px 12px;font-size:16.5px;font-family:inherit;color:var(--text);background:var(--card);}
+  .recipe-search:focus{border-color:var(--blue-accent);outline:none;}
+  .cat-bar{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:18px;}
+  .cat-pill{border:1.5px solid var(--border-light);border-radius:20px;padding:5px 14px;font-size:15.5px;font-weight:500;cursor:pointer;background:var(--card);color:var(--muted);transition:all .15s;white-space:nowrap;font-family:inherit;}
+  .cat-pill:hover{border-color:var(--blue-accent);color:var(--blue-accent);}
+  .cat-pill.active{background:var(--blue-accent);color:#fff;border-color:var(--blue-accent);}
+  .pinterest-card{display:block;margin-bottom:18px;padding:12px 14px;border:1px solid var(--border-light);border-radius:10px;background:var(--card);color:var(--text);text-decoration:none;font-size:16px;box-shadow:var(--shadow);}
+  .pinterest-card:hover{border-color:var(--blue-accent);}
+  .recipe-cat.cat-hidden,.recipe-card.card-hidden{display:none !important;}
 </style>
 </head>
 <body>
@@ -563,6 +575,12 @@ body.fh-show li.fh-hidden{display:list-item;}
 </div>
 
 <div id="recipes" class="tab-panel">
+<div class="recipe-controls">
+  <input type="text" class="recipe-search" id="recipe-search" placeholder="Search recipes…" oninput="window.filterRecipesDOM && window.filterRecipesDOM()">
+</div>
+<div class="cat-bar" id="cat-bar"></div>
+<a class="pinterest-card" href="https://pin.it/1tE78g5ou" target="_blank" rel="noopener">📌 Browse all recipes on Pinterest</a>
+
 <section class="recipe-cat" data-cat="breakfast">
 <h3 class="recipe-cat-title">Breakfast <span class="recipe-count">(7)</span></h3>
 <div class="recipe-grid">
@@ -1387,5 +1405,54 @@ document.querySelectorAll('.tab-btn').forEach(btn=>{
 })();
 </script>
 
+<script>
+(function(){
+  var catBar = document.getElementById('cat-bar');
+  var searchInput = document.getElementById('recipe-search');
+  var recipesPanel = document.getElementById('recipes');
+  if (!catBar || !searchInput || !recipesPanel) return;
+  var sections = Array.prototype.slice.call(recipesPanel.querySelectorAll('.recipe-cat'));
+  var pills = [{slug:'all', label:'All'}].concat(sections.map(function(s){
+    var titleEl = s.querySelector('.recipe-cat-title');
+    var label = s.dataset.cat;
+    if (titleEl) {
+      label = (titleEl.textContent || '').replace(/\s*\(\d+\)\s*$/, '').trim() || label;
+    }
+    return {slug: s.dataset.cat, label: label};
+  }));
+  var activeCat = 'all';
+  function renderPills(){
+    catBar.innerHTML = pills.map(function(p){
+      return '<button type="button" class="cat-pill' + (p.slug === activeCat ? ' active' : '') + '" data-cat="' + p.slug + '">' + p.label + '</button>';
+    }).join('');
+    Array.prototype.forEach.call(catBar.querySelectorAll('.cat-pill'), function(btn){
+      btn.addEventListener('click', function(){
+        activeCat = btn.getAttribute('data-cat');
+        renderPills();
+        applyFilters();
+      });
+    });
+  }
+  function applyFilters(){
+    var q = (searchInput.value || '').toLowerCase().trim();
+    sections.forEach(function(sec){
+      var matchesCat = activeCat === 'all' || sec.dataset.cat === activeCat;
+      var cards = Array.prototype.slice.call(sec.querySelectorAll('.recipe-card'));
+      var visibleCount = 0;
+      cards.forEach(function(card){
+        var text = (card.textContent || '').toLowerCase();
+        var matchesQ = !q || text.indexOf(q) !== -1;
+        var show = matchesCat && matchesQ;
+        card.classList.toggle('card-hidden', !show);
+        if (show) visibleCount++;
+      });
+      sec.classList.toggle('cat-hidden', !(matchesCat && visibleCount > 0));
+    });
+  }
+  window.filterRecipesDOM = applyFilters;
+  renderPills();
+  applyFilters();
+})();
+</script>
 </body>
 </html>
