@@ -3470,5 +3470,632 @@
     "why": "DC's benchmark for serious, old-school Japanese craftsmanship, from the sushi counter to the tasting-menu room upstairs."
    }
   ]
+ },
+ "seeMore": {
+  "high_end_dc": [
+   {
+    "name": "Bresca",
+    "neighborhood": "Logan Circle, DC",
+    "link": "https://brescadc.com/",
+    "cuisine": "Contemporary French",
+    "priceLevel": "$$$$",
+    "rating": {
+     "tripadvisor": {
+      "score": 4.1,
+      "count": 109
+     }
+    },
+    "compositeScore": 4.1,
+    "reviewCount": 109,
+    "meetsBar": false,
+    "reservationDifficulty": {
+     "label": "Hard",
+     "note": "One Michelin star since 2019; book 2-3 weeks out for weekend tasting-menu seats."
+    },
+    "reservationLink": "https://www.exploretock.com/bresca/",
+    "reservationNote": "Book online.",
+    "imageUrl": "https://images.getbento.com/accounts/f7efa3ac70fc351a1aa21cbd6bbe24c6/media/accounts/media/WX2bp9eRWSZt1sS77xwA_brescalogo2.png?w=1200&fit=fill&auto=compress,format&cs=origin&h=600&bg=f1a81c&pad=100",
+    "imageKind": "logo",
+    "imageTries": 0,
+    "adjustedRating": 4.274,
+    "foodSignal": 5.0,
+    "rankScore": 5.274,
+    "pickBasis": "expert",
+    "matchedSources": [
+     "Michelin Guide DC (1 star)",
+     "James Beard Awards (finalist, 2026)"
+    ],
+    "isChain": false,
+    "why": "A one-Michelin-star tasting menu built on foraged, hyper-seasonal ingredients — more personal and less scene-y than DC's bigger fine-dining names.",
+    "seeMoreReason": "Was in the top 5 — bumped by a newer pick",
+    "seeMoreSince": "2026-11-02"
+   },
+   {
+    "name": "Dōgon",
+    "neighborhood": "Southwest Waterfront, DC",
+    "link": "https://www.marriott.com/en-us/hotels/waswf-the-potomac-hotel-autograph-collection/dining/",
+    "cuisine": "Afro-Caribbean",
+    "priceLevel": "$$$$",
+    "rating": {
+     "tripadvisor": {
+      "score": 5.0,
+      "count": 3
+     },
+     "google": {
+      "score": 4.4,
+      "count": 562
+     }
+    },
+    "compositeScore": 4.4,
+    "reviewCount": 562,
+    "meetsBar": false,
+    "reservationDifficulty": {
+     "label": "Hard",
+     "note": "Top-10 Washingtonian and North America's 50 Best buzz; prime weekend tables go 2–3 weeks out on Resy."
+    },
+    "reservationLink": null,
+    "reservationNote": "Book on Resy (search 'Dōgon'); Tue–Sat 5–10 PM, closed Sun–Mon.",
+    "imageUrl": null,
+    "imageKind": "none",
+    "imageTries": 0,
+    "adjustedRating": 4.4,
+    "foodSignal": 1.5,
+    "rankScore": 4.7,
+    "pickBasis": "critic",
+    "matchedSources": [
+     "Washingtonian Top 100 (#8)",
+     "Tripadvisor"
+    ],
+    "isChain": false,
+    "why": "Kwame Onwuachi threads DC itself through Afro-Caribbean cooking — hoe crab in a Peruvian-chicken-style sauce, curried branzino, buttery Mom Dukes shrimp — with a confidence few kitchens in town can match.",
+    "seeMoreReason": "Critic favorite — just missed the 4.5 rating bar",
+    "seeMoreSince": "2026-11-02"
+   }
+  ],
+  "moderate_nova": [
+   {
+    "name": "Mama Chang",
+    "neighborhood": "Fairfax City, VA",
+    "link": "https://www.google.com/maps/search/?api=1&query=Mama+Chang+3251+Old+Lee+Hwy+Fairfax+VA",
+    "cuisine": "Chinese home-style (Hunan, Sichuan, Hubei)",
+    "priceLevel": "$$",
+    "rating": {
+     "tripadvisor": {
+      "score": 4.1,
+      "count": 79
+     },
+     "google": {
+      "score": 4.3,
+      "count": 1734
+     }
+    },
+    "compositeScore": 4.3,
+    "reviewCount": 1734,
+    "meetsBar": false,
+    "reservationDifficulty": {
+     "label": "Easy",
+     "note": "Large, casual dining room; waits only at weekend peak."
+    },
+    "reservationLink": null,
+    "reservationNote": "Walk-in; expect a short wait Fri/Sat evenings — call ahead for groups.",
+    "imageUrl": null,
+    "imageKind": "none",
+    "imageTries": 0,
+    "adjustedRating": 4.308,
+    "foodSignal": 2.4,
+    "rankScore": 4.788,
+    "pickBasis": "expert",
+    "matchedSources": [
+     "Washingtonian Top 100 (#81)",
+     "Northern Virginia Magazine 50 Best (2026 #9)"
+    ],
+    "isChain": false,
+    "why": "Peter Chang's tribute to the women cooks of his family — numbing Sichuan heat, smoky Hunan stir-fries and homey dumplings — delivers the group's most soulful, least showy cooking.",
+    "seeMoreReason": "Critic favorite — just missed the 4.5 rating bar",
+    "seeMoreSince": "2026-11-02"
+   }
+  ],
+  "happy_hour_dc": [
+   {
+    "name": "Boqueria (Dupont)",
+    "neighborhood": "Dupont Circle, DC",
+    "link": "https://boqueriarestaurant.com/",
+    "cuisine": "Spanish Tapas",
+    "priceLevel": "$$-$$$",
+    "rating": {
+     "tripadvisor": {
+      "score": 4.2,
+      "count": 505
+     }
+    },
+    "compositeScore": 4.2,
+    "reviewCount": 505,
+    "meetsBar": false,
+    "reservationDifficulty": {
+     "label": "Easy",
+     "note": "Bar seating usually available; book ahead for tables on weekends."
+    },
+    "reservationLink": "https://resy.com/cities/washington-dc/venues/boqueria-dupont",
+    "reservationNote": "Book online.",
+    "imageUrl": "https://boqueriarestaurant.com/wp-content/uploads/2018/04/home-header.jpg",
+    "imageKind": "photo",
+    "imageTries": 0,
+    "adjustedRating": 4.246,
+    "foodSignal": 0.3,
+    "rankScore": 4.306,
+    "pickBasis": "crowd",
+    "matchedSources": [
+     "Tripadvisor"
+    ],
+    "isChain": false,
+    "why": "$2-12 tapas and $9 wine turn happy hour into a full sangria-and-jamón tapas crawl without leaving the table.",
+    "seeMoreReason": "Was in the top 5 — bumped by a newer pick",
+    "seeMoreSince": "2026-11-02"
+   }
+  ],
+  "italian_dc": [
+   {
+    "name": "Piccolina",
+    "neighborhood": "Penn Quarter / CityCenterDC",
+    "link": "https://piccolinadc.com/",
+    "cuisine": "Northern Italian",
+    "priceLevel": "$$$",
+    "rating": {
+     "tripadvisor": {
+      "score": 4.6,
+      "count": 17
+     }
+    },
+    "compositeScore": 4.6,
+    "reviewCount": 17,
+    "meetsBar": true,
+    "reservationDifficulty": {
+     "label": "Moderate",
+     "note": "Small room; book ahead for weekend dinners."
+    },
+    "reservationLink": "https://www.opentable.com/r/piccolina-da-centrolina-washington",
+    "reservationNote": "Book online.",
+    "imageUrl": null,
+    "imageKind": "none",
+    "imageTries": 0,
+    "adjustedRating": 4.42,
+    "foodSignal": 0.3,
+    "rankScore": 4.48,
+    "pickBasis": "crowd",
+    "matchedSources": [
+     "Tripadvisor"
+    ],
+    "isChain": false,
+    "why": "Chef Amy Brandwein's polished little sister to Centrolina — precise, seasonal pastas and crudo in a sleek CityCenter room.",
+    "seeMoreReason": "Was in the top 5 — bumped by a newer pick",
+    "seeMoreSince": "2026-11-02"
+   },
+   {
+    "name": "Masseria",
+    "neighborhood": "Union Market, DC",
+    "link": "https://www.masseria-dc.com/",
+    "cuisine": "Southern Italian (Puglian) tasting menu",
+    "priceLevel": "$$$$",
+    "rating": {
+     "tripadvisor": {
+      "score": 4.0,
+      "count": 171
+     },
+     "google": {
+      "score": 4.3,
+      "count": 579
+     }
+    },
+    "compositeScore": 4.3,
+    "reviewCount": 579,
+    "meetsBar": false,
+    "reservationDifficulty": {
+     "label": "Moderate",
+     "note": "Michelin-starred but tasting-menu pricing keeps same-week tables usually available."
+    },
+    "reservationLink": "https://www.opentable.com/masseria",
+    "reservationNote": "Book online (OpenTable; Tock also used for prepaid tasting). Tue–Sat dinner, closed Sun–Mon.",
+    "imageUrl": null,
+    "imageKind": "none",
+    "imageTries": 0,
+    "adjustedRating": 4.321,
+    "foodSignal": 3.3,
+    "rankScore": 4.981,
+    "pickBasis": "expert",
+    "matchedSources": [
+     "Michelin Guide DC (1 star)",
+     "Tripadvisor"
+    ],
+    "isChain": false,
+    "why": "Nicholas Stefanelli's Puglian tasting menu turns pristine seafood and handmade pasta into a polished, coastal-Italian progression in a surprisingly serene Union Market courtyard.",
+    "seeMoreReason": "Critic favorite — just missed the 4.5 rating bar",
+    "seeMoreSince": "2026-11-02"
+   },
+   {
+    "name": "Sfoglina (Downtown)",
+    "neighborhood": "Downtown, DC",
+    "link": "https://www.sfoglina.com/",
+    "cuisine": "Regional Italian / House-made Pasta",
+    "priceLevel": "$$$",
+    "rating": {
+     "tripadvisor": {
+      "score": 4.2,
+      "count": 483
+     }
+    },
+    "compositeScore": 4.2,
+    "reviewCount": 483,
+    "meetsBar": false,
+    "reservationDifficulty": {
+     "label": "Moderate",
+     "note": "Book ahead for weekend dinners."
+    },
+    "reservationLink": "https://www.opentable.com/r/sfoglina-downtown-washington",
+    "reservationNote": "Book online.",
+    "imageUrl": null,
+    "imageKind": "none",
+    "imageTries": 0,
+    "adjustedRating": 4.247,
+    "foodSignal": 2.5,
+    "rankScore": 4.747,
+    "pickBasis": "expert",
+    "matchedSources": [
+     "Michelin Guide DC"
+    ],
+    "isChain": false,
+    "why": "House-made pasta rolled and cut daily is the whole case for Fabio and Maria Trabocchi's standing Washingtonian favorite.",
+    "seeMoreReason": "Was in the top 5 — bumped by a newer pick",
+    "seeMoreSince": "2026-11-02"
+   },
+   {
+    "name": "Officina",
+    "neighborhood": "The Wharf, DC",
+    "link": "https://www.officinadc.com/",
+    "cuisine": "Italian Market / Restaurant",
+    "priceLevel": "$$$",
+    "rating": {
+     "tripadvisor": {
+      "score": 3.6,
+      "count": 114
+     }
+    },
+    "compositeScore": 3.6,
+    "reviewCount": 114,
+    "meetsBar": false,
+    "reservationDifficulty": {
+     "label": "Moderate",
+     "note": "Multi-level space; easier to get a table than the rating alone suggests."
+    },
+    "reservationLink": "https://www.opentable.com/r/officina-at-the-wharf-washington",
+    "reservationNote": "Book online.",
+    "imageUrl": "https://static-content.owner.com/funnel/images/c9414521-7c73-41f1-8bf0-60f5af9eb344?v=6428562618",
+    "imageKind": "photo",
+    "imageTries": 0,
+    "adjustedRating": 4.055,
+    "foodSignal": 0.3,
+    "rankScore": 4.115,
+    "pickBasis": "crowd",
+    "matchedSources": [
+     "Tripadvisor"
+    ],
+    "isChain": false,
+    "why": "Michelin-starred chef Nicholas Stefanelli's ambitious waterfront Italian food hall — more spectacle than intimacy, and the weakest of this month's Italian picks.",
+    "seeMoreReason": "Was in the top 5 — bumped by a newer pick",
+    "seeMoreSince": "2026-11-02"
+   }
+  ],
+  "italian_mclean_tysons": [
+   {
+    "name": "Pulcinella",
+    "neighborhood": "McLean, VA",
+    "link": "https://www.google.com/maps/search/?api=1&query=Pulcinella+1310+Chain+Bridge+Rd+McLean+VA",
+    "cuisine": "Southern Italian-American",
+    "priceLevel": "$$",
+    "rating": {
+     "tripadvisor": {
+      "score": 4.1,
+      "count": 220
+     },
+     "google": {
+      "score": 4.4,
+      "count": 548
+     }
+    },
+    "compositeScore": 4.4,
+    "reviewCount": 548,
+    "meetsBar": false,
+    "reservationDifficulty": {
+     "label": "Easy",
+     "note": "Large casual room; walk-ins fine except Friday/Saturday peak."
+    },
+    "reservationLink": null,
+    "reservationNote": "Walk-in; call ahead for large groups.",
+    "imageUrl": null,
+    "imageKind": "none",
+    "imageTries": 0,
+    "adjustedRating": 4.4,
+    "foodSignal": 0.3,
+    "rankScore": 4.46,
+    "pickBasis": "crowd",
+    "matchedSources": [
+     "Tripadvisor"
+    ],
+    "isChain": false,
+    "why": "Generous red-sauce classics — veal marsala, eggplant parm, wood-oven pizzas — in a family-friendly room that's been a McLean fixture for decades.",
+    "seeMoreReason": "Strong local pick — just missed the 4.5 rating bar",
+    "seeMoreSince": "2026-11-02"
+   }
+  ],
+  "italian_nova": [
+   {
+    "name": "The Italian Store",
+    "neighborhood": "Lyon Village, Arlington, VA",
+    "link": "https://www.italianstore.com/",
+    "cuisine": "Italian deli / pizza",
+    "priceLevel": "$",
+    "rating": {
+     "tripadvisor": {
+      "score": 4.5,
+      "count": 478
+     }
+    },
+    "compositeScore": 4.5,
+    "reviewCount": 478,
+    "meetsBar": true,
+    "reservationDifficulty": {
+     "label": "Easy",
+     "note": "Counter/deli-style, no reservations; grab a sub or a pizza and go."
+    },
+    "reservationLink": null,
+    "reservationNote": "Walk-in only — market/deli, not a sit-down restaurant.",
+    "imageUrl": "https://www.italianstore.com/uploads/1/1/0/7/110790979/title9.png",
+    "imageKind": "logo",
+    "imageTries": 0,
+    "adjustedRating": 4.476,
+    "foodSignal": 0.3,
+    "rankScore": 4.536,
+    "pickBasis": "crowd",
+    "matchedSources": [
+     "Tripadvisor"
+    ],
+    "isChain": false,
+    "why": "An Arlington institution since 1980 — the sub sandwiches and NY-style pizza slices are a genuine Northern Virginia rite of passage.",
+    "seeMoreReason": "Was in the top 5 — bumped by a newer pick",
+    "seeMoreSince": "2026-11-02"
+   }
+  ],
+  "japanese_asian": [
+   {
+    "name": "Moon Rabbit",
+    "neighborhood": "Penn Quarter, DC",
+    "link": "https://www.moonrabbitdc.com/",
+    "cuisine": "Modern Vietnamese",
+    "priceLevel": "$$$",
+    "rating": {
+     "tripadvisor": {
+      "score": 4.5,
+      "count": 26
+     },
+     "google": {
+      "score": 4.4,
+      "count": 1133
+     }
+    },
+    "compositeScore": 4.4,
+    "reviewCount": 1133,
+    "meetsBar": false,
+    "reservationDifficulty": {
+     "label": "Moderate",
+     "note": "Popular post-James Beard win, but tables typically open 1–8 days ahead on OpenTable."
+    },
+    "reservationLink": "https://www.opentable.com/r/moon-rabbit-by-kevin-tien-washington",
+    "reservationNote": "Book online via OpenTable; Mon–Sat 4:30–9:30 PM, closed Sun.",
+    "imageUrl": null,
+    "imageKind": "none",
+    "imageTries": 0,
+    "adjustedRating": 4.4,
+    "foodSignal": 4.5,
+    "rankScore": 5.3,
+    "pickBasis": "expert",
+    "matchedSources": [
+     "James Beard Awards (winner, 2026)",
+     "Washingtonian Top 100 (#3)",
+     "Tripadvisor"
+    ],
+    "isChain": false,
+    "why": "Kevin Tien's Vietnamese cooking, sharpened with Cajun detours — duck-sausage-stuffed quail over Viet-Cajun tomato rice — ends with desserts good enough to have won a James Beard award.",
+    "seeMoreReason": "Critic favorite — just missed the 4.5 rating bar",
+    "seeMoreSince": "2026-11-02"
+   },
+   {
+    "name": "Sushi Taro",
+    "neighborhood": "Dupont Circle, DC",
+    "link": "https://sushitaro.com/",
+    "cuisine": "Traditional Edomae Sushi / Kaiseki",
+    "priceLevel": "$$$$",
+    "rating": {
+     "tripadvisor": {
+      "score": 4.2,
+      "count": 359
+     }
+    },
+    "compositeScore": 4.2,
+    "reviewCount": 359,
+    "meetsBar": false,
+    "reservationDifficulty": {
+     "label": "Hard",
+     "note": "Kaiseki counter books out weeks ahead; downstairs izakaya easier to get into."
+    },
+    "reservationLink": "https://resy.com/cities/washington-dc/venues/sushi-taro",
+    "reservationNote": "Book online.",
+    "imageUrl": null,
+    "imageKind": "none",
+    "imageTries": 1,
+    "adjustedRating": 4.259,
+    "foodSignal": 4.0,
+    "rankScore": 5.059,
+    "pickBasis": "expert",
+    "matchedSources": [
+     "Michelin Guide DC",
+     "Washingtonian Top 100 (#24)",
+     "Tripadvisor"
+    ],
+    "isChain": false,
+    "why": "DC's benchmark for serious, old-school Japanese craftsmanship, from the sushi counter to the tasting-menu room upstairs.",
+    "seeMoreReason": "Was in the top 5 — bumped by a newer pick",
+    "seeMoreSince": "2026-11-02"
+   },
+   {
+    "name": "Toki Underground",
+    "neighborhood": "H Street NE, DC",
+    "link": "https://www.tokiunderground.com/",
+    "cuisine": "Taiwanese-inflected Ramen",
+    "priceLevel": "$$",
+    "rating": {
+     "tripadvisor": {
+      "score": 4.4,
+      "count": 245
+     }
+    },
+    "compositeScore": 4.4,
+    "reviewCount": 245,
+    "meetsBar": false,
+    "reservationDifficulty": {
+     "label": "Moderate",
+     "note": "No reservations for most seats — expect a line; Resy releases limited tables."
+    },
+    "reservationLink": "https://resy.com/cities/washington-dc/venues/toki-underground",
+    "reservationNote": "Book online.",
+    "imageUrl": "https://appfront-cdn-prod.s3.amazonaws.com/businesses/68f8ff8e6f53636683419a48/new-website/home-hero-desktop-1762930186104.",
+    "imageKind": "photo",
+    "imageTries": 0,
+    "adjustedRating": 4.4,
+    "foodSignal": 2.5,
+    "rankScore": 4.9,
+    "pickBasis": "expert",
+    "matchedSources": [
+     "Michelin Guide DC (Bib Gourmand)"
+    ],
+    "isChain": false,
+    "why": "The scrappy shop that put H Street ramen on the map and still packs a line out the door.",
+    "seeMoreReason": "Was in the top 5 — bumped by a newer pick",
+    "seeMoreSince": "2026-11-02"
+   }
+  ],
+  "mexican": [
+   {
+    "name": "Amparo Fondita",
+    "neighborhood": "Dupont Circle, DC",
+    "link": "https://amparofondita.com",
+    "cuisine": "Contemporary Mexican, seafood-leaning",
+    "priceLevel": "$$",
+    "rating": {
+     "tripadvisor": {
+      "score": 4.0,
+      "count": 10
+     }
+    },
+    "compositeScore": 4.0,
+    "reviewCount": 10,
+    "meetsBar": false,
+    "reservationDifficulty": {
+     "label": "Moderate",
+     "note": "Bib Gourmand draw; weekend dinners book several days out, weeknights easier."
+    },
+    "reservationLink": null,
+    "reservationNote": "Book on Resy (search 'Amparo Fondita'); weekend brunch Sat–Sun, closed Mon.",
+    "imageUrl": null,
+    "imageKind": "none",
+    "imageTries": 0,
+    "adjustedRating": 4.375,
+    "foodSignal": 4.0,
+    "rankScore": 5.175,
+    "pickBasis": "expert",
+    "matchedSources": [
+     "Michelin Guide DC (Bib Gourmand)",
+     "Washingtonian Top 100 (#56)",
+     "Tripadvisor"
+    ],
+    "isChain": false,
+    "why": "Christian Irabién's in-house nixtamalized tortillas anchor a wide, shareable menu of bright, seafood-forward Mexican cooking that tastes rooted rather than trendy.",
+    "seeMoreReason": "Critic favorite — just missed the 4.5 rating bar",
+    "seeMoreSince": "2026-11-02"
+   },
+   {
+    "name": "Pascual",
+    "neighborhood": "Capitol Hill, DC",
+    "link": "https://pascualdc.com",
+    "cuisine": "Contemporary Mexico City-style, wood-fired",
+    "priceLevel": "$$$",
+    "rating": {
+     "google": {
+      "score": 4.3,
+      "count": 153
+     }
+    },
+    "compositeScore": 4.3,
+    "reviewCount": 153,
+    "meetsBar": false,
+    "reservationDifficulty": {
+     "label": "Very Hard",
+     "note": "Resy releases at noon on a rolling 30-day window; prime weekend two-tops gone ~30 days out."
+    },
+    "reservationLink": null,
+    "reservationNote": "Book on Resy (noon, 30 days out); walk-in bar seats and two tables held nightly at 5 PM.",
+    "imageUrl": null,
+    "imageKind": "none",
+    "imageTries": 0,
+    "adjustedRating": 4.35,
+    "foodSignal": 1.2,
+    "rankScore": 4.59,
+    "pickBasis": "critic",
+    "matchedSources": [
+     "Washingtonian Top 100 (#13)"
+    ],
+    "isChain": false,
+    "why": "Isabel Coss and Matt Conroy cook Mexico City over live fire — smoky tetelas, tlayudas, and a cinnamon-sugar buñuelo — with a pastry chef's precision and real soul.",
+    "seeMoreReason": "Critic favorite — just missed the 4.5 rating bar",
+    "seeMoreSince": "2026-11-02"
+   }
+  ],
+  "sushi": [
+   {
+    "name": "Yume Sushi",
+    "neighborhood": "East Falls Church, Arlington, VA",
+    "link": "http://www.yumesushiva.com/",
+    "cuisine": "Japanese sushi & omakase",
+    "priceLevel": "$$$",
+    "rating": {
+     "tripadvisor": {
+      "score": 4.2,
+      "count": 30
+     }
+    },
+    "compositeScore": 4.2,
+    "reviewCount": 30,
+    "meetsBar": false,
+    "reservationDifficulty": {
+     "label": "Moderate",
+     "note": "Well booked (~19 OpenTable bookings/day); tasting menus need a deposit and fill ahead."
+    },
+    "reservationLink": "https://www.opentable.com/r/yume-sushi-arlington",
+    "reservationNote": "Book online via OpenTable; 10-course tasting (~$185pp) Sun–Thu needs $25pp deposit. Phone (703) 269-5064.",
+    "imageUrl": null,
+    "imageKind": "none",
+    "imageTries": 0,
+    "adjustedRating": 4.367,
+    "foodSignal": 1.5,
+    "rankScore": 4.667,
+    "pickBasis": "critic",
+    "matchedSources": [
+     "Northern Virginia Magazine 50 Best (2026 #8)",
+     "Tripadvisor"
+    ],
+    "isChain": false,
+    "why": "An ambitious neighborhood sushi bar whose 10-course tasting delivers omakase-level nigiri and creative small plates without leaving Arlington.",
+    "seeMoreReason": "Critic favorite — just missed the 4.5 rating bar",
+    "seeMoreSince": "2026-11-02"
+   }
+  ]
  }
 }
