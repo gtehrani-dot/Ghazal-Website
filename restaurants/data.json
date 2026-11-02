@@ -1,9 +1,9 @@
 {
- "schemaVersion": "5",
+ "schemaVersion": "6",
  "lastRefresh": "2026-11-02",
  "sources": [
   "Tripadvisor",
-  "Washingtonian Best 40",
+  "Washington Post 40 Best",
   "Washingtonian Top 100",
   "Northern Virginia Magazine 50 Best",
   "Eater DC",
@@ -54,13 +54,14 @@
     "imageKind": "photo",
     "imageTries": 0,
     "adjustedRating": 4.657,
-    "foodSignal": 7.2,
-    "rankScore": 6.097,
+    "foodSignal": 8.4,
+    "rankScore": 6.337,
     "pickBasis": "expert",
     "matchedSources": [
      "Michelin Guide DC (1 star)",
      "James Beard Awards (Best Chef, 2024)",
-     "Washingtonian Top 100 (#1)"
+     "Washingtonian Top 100 (#1)",
+     "Washington Post 40 Best (#1)"
     ],
     "isChain": false,
     "why": "Michael Rafidi's live-fire Palestinian tasting menu is the most emotionally resonant fine dining in the city — Michelin star, James Beard win, and Washingtonian's top spot two years running."
@@ -90,12 +91,13 @@
     "imageKind": "photo",
     "imageTries": 0,
     "adjustedRating": 4.619,
-    "foodSignal": 4.2,
-    "rankScore": 5.459,
+    "foodSignal": 5.4,
+    "rankScore": 5.699,
     "pickBasis": "expert",
     "matchedSources": [
      "Michelin Guide DC (1 star)",
-     "Washingtonian Top 100 (#4)"
+     "Washingtonian Top 100 (#4)",
+     "Washington Post 40 Best (#19)"
     ],
     "isChain": false,
     "why": "Nakazawa-trained Ricky Wang's counter moves from sweet shrimp in smoked uni sauce to hay-smoked mackerel nigiri with exacting rice and fish — the city's most thrilling omakase at its price."
@@ -125,12 +127,13 @@
     "imageKind": "logo",
     "imageTries": 0,
     "adjustedRating": 4.532,
-    "foodSignal": 4.2,
-    "rankScore": 5.372,
+    "foodSignal": 5.4,
+    "rankScore": 5.612,
     "pickBasis": "expert",
     "matchedSources": [
      "Michelin Guide DC (2 stars)",
-     "Washingtonian Top 100 (#2)"
+     "Washingtonian Top 100 (#2)",
+     "Washington Post 40 Best (#14)"
     ],
     "isChain": false,
     "why": "A blink-and-you'll-miss-it counter earning two Michelin stars for technically dazzling French-meets-Japanese courses in a room that seats barely a dozen."
@@ -160,12 +163,13 @@
     "imageKind": "logo",
     "imageTries": 0,
     "adjustedRating": 4.486,
-    "foodSignal": 4.2,
-    "rankScore": 5.326,
+    "foodSignal": 4.5,
+    "rankScore": 5.386,
     "pickBasis": "expert",
     "matchedSources": [
      "Michelin Guide DC (1 star)",
-     "Washingtonian Top 100 (#64)"
+     "Washingtonian Top 100 (#64)",
+     "Tripadvisor"
     ],
     "isChain": false,
     "why": "Fabio Trabocchi's marble-and-crystal dining room delivers hand-rolled-pasta grandeur with a nearly thousand-review track record of consistency."
@@ -195,11 +199,12 @@
     "imageKind": "logo",
     "imageTries": 0,
     "adjustedRating": 4.455,
-    "foodSignal": 3.0,
-    "rankScore": 5.055,
+    "foodSignal": 3.3,
+    "rankScore": 5.115,
     "pickBasis": "expert",
     "matchedSources": [
-     "Michelin Guide DC (2 stars)"
+     "Michelin Guide DC (2 stars)",
+     "Tripadvisor"
     ],
     "isChain": false,
     "why": "José Andrés's original theater-of-the-absurd tasting counter still out-imagines every other kitchen in the city."
@@ -231,12 +236,13 @@
     "imageKind": "photo",
     "imageTries": 0,
     "adjustedRating": 4.655,
-    "foodSignal": 2.4,
-    "rankScore": 5.135,
+    "foodSignal": 2.7,
+    "rankScore": 5.195,
     "pickBasis": "expert",
     "matchedSources": [
      "Washingtonian Top 100 (#86)",
-     "Northern Virginia Magazine 50 Best (2026)"
+     "Northern Virginia Magazine 50 Best (2026)",
+     "Tripadvisor"
     ],
     "isChain": false,
     "why": "A century-old Alsatian institution in a Great Falls farmhouse that still out-romances every newer tasting menu in the region."
@@ -300,11 +306,12 @@
     "imageKind": "photo",
     "imageTries": 0,
     "adjustedRating": 4.475,
-    "foodSignal": 1.2,
-    "rankScore": 4.715,
+    "foodSignal": 1.5,
+    "rankScore": 4.775,
     "pickBasis": "critic",
     "matchedSources": [
-     "Northern Virginia Magazine 50 Best (2026 #6)"
+     "Northern Virginia Magazine 50 Best (2026 #6)",
+     "Tripadvisor"
     ],
     "isChain": false,
     "why": "Tableside saganaki flames and whole grilled fish turn a Tysons office-park address into the DMV's most convincing Athens stand-in."
@@ -334,11 +341,12 @@
     "imageKind": "logo",
     "imageTries": 0,
     "adjustedRating": 4.417,
-    "foodSignal": 1.2,
-    "rankScore": 4.657,
+    "foodSignal": 1.5,
+    "rankScore": 4.717,
     "pickBasis": "critic",
     "matchedSources": [
-     "Arlington Magazine"
+     "Arlington Magazine",
+     "Tripadvisor"
     ],
     "isChain": false,
     "why": "Ex-Nobu chef Chico Dator serves Hokkaido uni and soy-cured bluefin with Tokyo-grade precision, and his miso black cod is juicier and less cloying than the dish it riffs on."
@@ -372,14 +380,89 @@
     "imageKind": "photo",
     "imageTries": 0,
     "adjustedRating": 4.325,
-    "foodSignal": 1.2,
-    "rankScore": 4.565,
+    "foodSignal": 1.5,
+    "rankScore": 4.625,
     "pickBasis": "critic",
     "matchedSources": [
-     "Northern Virginia Magazine 50 Best (2026)"
+     "Northern Virginia Magazine 50 Best (2026)",
+     "Tripadvisor"
     ],
     "isChain": false,
     "why": "Chef Yo Matsuzaki runs an izakaya with real backbone, from rich ramen to robata-style small plates and an 18–20-course omakase, 14 floors above Tysons."
+   }
+  ],
+  "high_end_reston": [
+   {
+    "name": "Heirloom",
+    "neighborhood": "Reston Town Center, Reston, VA",
+    "link": "https://heirloomreston.com/",
+    "cuisine": "Refined American with Mediterranean influence (speakeasy)",
+    "priceLevel": "$$$",
+    "rating": {
+     "google": {
+      "score": 4.6,
+      "count": 284
+     },
+     "tripadvisor": {
+      "score": 3.5,
+      "count": 8
+     }
+    },
+    "compositeScore": 4.6,
+    "reviewCount": 284,
+    "meetsBar": true,
+    "reservationDifficulty": {
+     "label": "Moderate",
+     "note": "Small speakeasy room; weekend prime time books a few days ahead."
+    },
+    "reservationLink": "https://www.opentable.com/r/heirloom-reston",
+    "reservationNote": "Book on OpenTable.",
+    "imageUrl": "https://resizer.otstatic.com/v4/photos/54404150-2?width=800",
+    "imageKind": "photo",
+    "imageTries": 0,
+    "adjustedRating": 4.531,
+    "foodSignal": 0.3,
+    "rankScore": 4.591,
+    "pickBasis": "crowd",
+    "matchedSources": [
+     "Tripadvisor"
+    ],
+    "isChain": false,
+    "why": "A hidden speakeasy upstairs from Open Road where chef Dane Sewlall's wagyu meatballs and short-rib plates are cooked with far more care than the clubby setting suggests."
+   },
+   {
+    "name": "The Simon at Reston Station",
+    "neighborhood": "Reston Station (JW Marriott), Reston, VA",
+    "link": "https://www.thesimonrestonstation.com/",
+    "cuisine": "Mid-Atlantic New American",
+    "priceLevel": "$$$",
+    "rating": {
+     "tripadvisor": {
+      "score": 4.4,
+      "count": 12
+     }
+    },
+    "compositeScore": 4.4,
+    "reviewCount": 12,
+    "meetsBar": false,
+    "reservationDifficulty": {
+     "label": "Easy",
+     "note": "Hotel dining room; OpenTable shows same-day and next-day slots most nights."
+    },
+    "reservationLink": "https://www.opentable.com/r/the-simon",
+    "reservationNote": "Book on OpenTable; Schar Bar for walk-ins.",
+    "imageUrl": "https://resizer.otstatic.com/v4/photos/93719705-2?width=800",
+    "imageKind": "photo",
+    "imageTries": 0,
+    "adjustedRating": 4.4,
+    "foodSignal": 0.3,
+    "rankScore": 4.46,
+    "pickBasis": "crowd",
+    "matchedSources": [
+     "Tripadvisor"
+    ],
+    "isChain": false,
+    "why": "Tableside duck à la presse and a roaming cheese cart make this the most theatrical, special-occasion cooking in Reston, rooted in Mid-Atlantic ingredients."
    }
   ],
   "high_end_nova": [
@@ -412,11 +495,12 @@
     "imageKind": "photo",
     "imageTries": 0,
     "adjustedRating": 4.62,
-    "foodSignal": 1.2,
-    "rankScore": 4.86,
+    "foodSignal": 1.5,
+    "rankScore": 4.92,
     "pickBasis": "critic",
     "matchedSources": [
-     "Washingtonian Top 100 (#12)"
+     "Washingtonian Top 100 (#12)",
+     "Tripadvisor"
     ],
     "isChain": false,
     "why": "Ginza-trained Yuh Shimomura's seven-course menu — pristine sashimi, spiny-lobster cake, soy-maple duck — is quiet, exacting Japanese cooking at a price that feels like a misprint."
@@ -456,6 +540,41 @@
     "why": "A 30-seat speakeasy tasting counter where a chef at the top of his game turns a strip-mall address into the most intentional five courses in Fairfax."
    },
    {
+    "name": "Le Refuge",
+    "neighborhood": "Old Town Alexandria, VA",
+    "link": "https://lerefugealexandria.com/",
+    "cuisine": "French",
+    "priceLevel": "$$$$",
+    "rating": {
+     "tripadvisor": {
+      "score": 4.5,
+      "count": 426
+     }
+    },
+    "compositeScore": 4.5,
+    "reviewCount": 426,
+    "meetsBar": true,
+    "reservationDifficulty": {
+     "label": "Moderate",
+     "note": "Small, snug dining room; call ahead for weekend evenings."
+    },
+    "reservationLink": null,
+    "reservationNote": "Phone/walk-in only — call ahead, no online booking.",
+    "imageUrl": "https://static.wixstatic.com/media/821d0f_892017ace06344828ac67cba35d7d255~mv2.jpg/v1/fill/w_919,h_544,al_c,q_85,enc_avif,quality_auto/821d0f_892017ace06344828ac67cba35d7d255~mv2.jpg",
+    "imageKind": "photo",
+    "imageTries": 0,
+    "adjustedRating": 4.474,
+    "foodSignal": 1.5,
+    "rankScore": 4.774,
+    "pickBasis": "critic",
+    "matchedSources": [
+     "Northern Virginia Magazine 50 Best",
+     "Tripadvisor"
+    ],
+    "isChain": false,
+    "why": "Unapologetically old-school bouillabaisse-and-duck-a-l'orange cooking that has outlasted every trend in Old Town for three decades."
+   },
+   {
     "name": "Clarity",
     "neighborhood": "Vienna, VA",
     "link": "https://clarityvienna.com/",
@@ -490,43 +609,9 @@
     "why": "A kitchen that treats a Vienna strip-mall storefront as a stage for genuine special-occasion cooking, plated like still-lifes."
    },
    {
-    "name": "Le Refuge",
-    "neighborhood": "Old Town Alexandria, VA",
-    "link": "https://lerefugealexandria.com/",
-    "cuisine": "French",
-    "priceLevel": "$$$$",
-    "rating": {
-     "tripadvisor": {
-      "score": 4.5,
-      "count": 426
-     }
-    },
-    "compositeScore": 4.5,
-    "reviewCount": 426,
-    "meetsBar": true,
-    "reservationDifficulty": {
-     "label": "Moderate",
-     "note": "Small, snug dining room; call ahead for weekend evenings."
-    },
-    "reservationLink": null,
-    "reservationNote": "Phone/walk-in only — call ahead, no online booking.",
-    "imageUrl": "https://static.wixstatic.com/media/821d0f_892017ace06344828ac67cba35d7d255~mv2.jpg/v1/fill/w_919,h_544,al_c,q_85,enc_avif,quality_auto/821d0f_892017ace06344828ac67cba35d7d255~mv2.jpg",
-    "imageKind": "photo",
-    "imageTries": 0,
-    "adjustedRating": 4.474,
-    "foodSignal": 1.2,
-    "rankScore": 4.714,
-    "pickBasis": "critic",
-    "matchedSources": [
-     "Northern Virginia Magazine 50 Best"
-    ],
-    "isChain": false,
-    "why": "Unapologetically old-school bouillabaisse-and-duck-a-l'orange cooking that has outlasted every trend in Old Town for three decades."
-   },
-   {
     "name": "Harrimans Grill",
     "neighborhood": "Salamander Middleburg, Middleburg, VA",
-    "link": "https://www.opentable.com/r/harrimans-grill-middleburg",
+    "link": "https://salamanderresort.com/dining/harrimans",
     "cuisine": "Farm-to-table American grill",
     "priceLevel": "$$$$",
     "rating": {
@@ -548,15 +633,16 @@
     },
     "reservationLink": "https://www.opentable.com/r/harrimans-grill-middleburg",
     "reservationNote": "Book on OpenTable 2–3 weeks out for weekend dinner; dinner Wed–Sun 5–9:30 PM.",
-    "imageUrl": null,
-    "imageKind": "none",
+    "imageUrl": "https://resizer.otstatic.com/v4/photos/77670174-2?width=800",
+    "imageKind": "photo",
     "imageTries": 0,
     "adjustedRating": 4.156,
-    "foodSignal": 1.2,
-    "rankScore": 4.396,
+    "foodSignal": 1.5,
+    "rankScore": 4.456,
     "pickBasis": "critic",
     "matchedSources": [
-     "Northern Virginia Magazine 50 Best (2026 #1)"
+     "Northern Virginia Magazine 50 Best (2026 #1)",
+     "Tripadvisor"
     ],
     "isChain": false,
     "why": "Hunt-country sourcing meets serious grill technique — wood-fired local beef and Chesapeake seafood plated with resort-level polish, making it the most complete destination dinner in Loudoun."
@@ -592,16 +678,53 @@
     "imageKind": "logo",
     "imageTries": 0,
     "adjustedRating": 4.483,
-    "foodSignal": 5.7,
-    "rankScore": 5.623,
+    "foodSignal": 6.0,
+    "rankScore": 5.683,
     "pickBasis": "expert",
     "matchedSources": [
      "Michelin Guide DC (Bib Gourmand)",
      "James Beard Awards (finalist, 2026)",
-     "Washingtonian Top 100 (#57)"
+     "Washingtonian Top 100 (#57)",
+     "Tripadvisor"
     ],
     "isChain": false,
     "why": "Turns Indian comfort food into a genuinely exciting tasting menu at a price that still lets you order a second round of naan without flinching."
+   },
+   {
+    "name": "Tapori",
+    "neighborhood": "H Street Corridor, DC",
+    "link": "https://www.taporidc.com/",
+    "cuisine": "Indian street food",
+    "priceLevel": "$$",
+    "rating": {
+     "google": {
+      "score": 4.6,
+      "count": 223
+     }
+    },
+    "compositeScore": 4.6,
+    "reviewCount": 223,
+    "meetsBar": true,
+    "reservationDifficulty": {
+     "label": "Moderate",
+     "note": "Resy books out on weekends but midweek tables and walk-in bar seats are attainable."
+    },
+    "reservationLink": "https://resy.com/cities/washington-dc/venues/tapori",
+    "reservationNote": "Book online.",
+    "imageUrl": "https://static1.squarespace.com/static/672a68cc369f5c33d73c030d/t/6784245870e5186746b4a10b/1736713304250/Tapori_Wordmark_Solid-Red+%281%29.png?format=1500w",
+    "imageKind": "logo",
+    "imageTries": 0,
+    "adjustedRating": 4.52,
+    "foodSignal": 4.4,
+    "rankScore": 5.4,
+    "pickBasis": "expert",
+    "matchedSources": [
+     "James Beard Awards (finalist, 2026)",
+     "Washingtonian Top 100 (#43)",
+     "Washington Post 40 Best (#31)"
+    ],
+    "isChain": false,
+    "why": "South Asian street food as serious craft — chaat and kathi rolls sharp enough to make you forget you're paying moderate-tier prices."
    },
    {
     "name": "Reveler's Hour",
@@ -639,41 +762,6 @@
     "why": "A tiny, glowing wine bar turning out pasta good enough to anchor a splurge-adjacent date night without the splurge-adjacent bill."
    },
    {
-    "name": "Tapori",
-    "neighborhood": "H Street Corridor, DC",
-    "link": "https://www.taporidc.com/",
-    "cuisine": "Indian street food",
-    "priceLevel": "$$",
-    "rating": {
-     "google": {
-      "score": 4.6,
-      "count": 223
-     }
-    },
-    "compositeScore": 4.6,
-    "reviewCount": 223,
-    "meetsBar": true,
-    "reservationDifficulty": {
-     "label": "Moderate",
-     "note": "Resy books out on weekends but midweek tables and walk-in bar seats are attainable."
-    },
-    "reservationLink": "https://resy.com/cities/washington-dc/venues/tapori",
-    "reservationNote": "Book online.",
-    "imageUrl": "https://static1.squarespace.com/static/672a68cc369f5c33d73c030d/t/6784245870e5186746b4a10b/1736713304250/Tapori_Wordmark_Solid-Red+%281%29.png?format=1500w",
-    "imageKind": "logo",
-    "imageTries": 0,
-    "adjustedRating": 4.52,
-    "foodSignal": 3.2,
-    "rankScore": 5.16,
-    "pickBasis": "expert",
-    "matchedSources": [
-     "James Beard Awards (finalist, 2026)",
-     "Washingtonian Top 100 (#43)"
-    ],
-    "isChain": false,
-    "why": "South Asian street food as serious craft — chaat and kathi rolls sharp enough to make you forget you're paying moderate-tier prices."
-   },
-   {
     "name": "Anju",
     "neighborhood": "Dupont Circle, DC",
     "link": "https://www.anjurestaurant.com/",
@@ -702,12 +790,13 @@
     "imageKind": "photo",
     "imageTries": 0,
     "adjustedRating": 4.489,
-    "foodSignal": 3.2,
-    "rankScore": 5.129,
+    "foodSignal": 3.5,
+    "rankScore": 5.189,
     "pickBasis": "expert",
     "matchedSources": [
      "James Beard Awards (finalist, 2026)",
-     "Washingtonian Top 100 (#73)"
+     "Washingtonian Top 100 (#73)",
+     "Tripadvisor"
     ],
     "isChain": false,
     "why": "Soulful, funky-fermented Korean plates and the city's best banchan spread make this the rare date-night spot that never feels like it's trying too hard."
@@ -741,11 +830,12 @@
     "imageKind": "photo",
     "imageTries": 0,
     "adjustedRating": 4.487,
-    "foodSignal": 1.2,
-    "rankScore": 4.727,
+    "foodSignal": 1.5,
+    "rankScore": 4.787,
     "pickBasis": "critic",
     "matchedSources": [
-     "Washingtonian Top 100 (#85)"
+     "Washingtonian Top 100 (#85)",
+     "Tripadvisor"
     ],
     "isChain": false,
     "why": "Char-blistered pies, punchy pastas, and a smart natural-wine list make this Shaw stalwart the platonic ideal of a neighborhood Italian date-night spot."
@@ -818,15 +908,55 @@
     "imageKind": "photo",
     "imageTries": 0,
     "adjustedRating": 4.503,
-    "foodSignal": 2.4,
-    "rankScore": 4.983,
+    "foodSignal": 2.7,
+    "rankScore": 5.043,
     "pickBasis": "expert",
     "matchedSources": [
      "Washingtonian Top 100",
-     "Arlington Magazine"
+     "Arlington Magazine",
+     "Tripadvisor"
     ],
     "isChain": false,
     "why": "A quietly extraordinary Afghan kitchen turning kabuli pulao and mantu into date-night food, at a price that makes fine-dining rivals look silly."
+   },
+   {
+    "name": "Agora Tysons",
+    "neighborhood": "Tysons, VA",
+    "link": "http://tysons.agorarestaurants.net/",
+    "cuisine": "Turkish / Eastern Mediterranean mezze",
+    "priceLevel": "$$",
+    "rating": {
+     "tripadvisor": {
+      "score": 4.0,
+      "count": 30
+     },
+     "google": {
+      "score": 4.7,
+      "count": 2568
+     }
+    },
+    "compositeScore": 4.7,
+    "reviewCount": 2568,
+    "meetsBar": true,
+    "reservationDifficulty": {
+     "label": "Moderate",
+     "note": "Book a few days out for weekend dinner. The bottomless brunch fills up."
+    },
+    "reservationLink": null,
+    "reservationNote": "OpenTable lists it as not bookable there. Call the restaurant or book through its own site.",
+    "imageUrl": "https://resizer.otstatic.com/v4/photos/26600882-4?width=800",
+    "imageKind": "photo",
+    "imageTries": 0,
+    "adjustedRating": 4.683,
+    "foodSignal": 1.5,
+    "rankScore": 4.983,
+    "pickBasis": "critic",
+    "matchedSources": [
+     "Northern Virginia Magazine 50 Best (2026)",
+     "Tripadvisor"
+    ],
+    "isChain": false,
+    "why": "A long, generous table of Turkish mezze: smoky spreads, kofte, crisp Brussels sprouts and puffy bread from the oven, done with more care than most Tysons dining rooms."
    },
    {
     "name": "Patsy's American",
@@ -857,11 +987,12 @@
     "imageKind": "photo",
     "imageTries": 0,
     "adjustedRating": 4.495,
-    "foodSignal": 1.2,
-    "rankScore": 4.735,
+    "foodSignal": 1.5,
+    "rankScore": 4.795,
     "pickBasis": "critic",
     "matchedSources": [
-     "Arlington Magazine"
+     "Arlington Magazine",
+     "Tripadvisor"
     ],
     "isChain": false,
     "why": "Great American Restaurants' greatest hits, from baby back ribs to smoked-salmon salad, executed with the group's trademark consistency and served until 1am."
@@ -899,40 +1030,118 @@
     ],
     "isChain": false,
     "why": "The casual sibling of L'Auberge Chez François, serving hearty French brasserie cooking from the same classically trained kitchen at a fraction of the formality and price."
-   },
+   }
+  ],
+  "moderate_reston": [
    {
-    "name": "Our Mom Eugenia",
-    "neighborhood": "Great Falls, VA",
-    "link": "http://www.ourmomeugenia.com/",
-    "cuisine": "Greek home cooking",
+    "name": "Red's Table",
+    "neighborhood": "South Lakes Village Center, Reston, VA",
+    "link": "https://www.redstableva.com/",
+    "cuisine": "New American, farm-to-table",
     "priceLevel": "$$",
     "rating": {
-     "tripadvisor": {
+     "google": {
       "score": 4.6,
-      "count": 131
+      "count": 2204
+     },
+     "tripadvisor": {
+      "score": 4.1,
+      "count": 291
      }
     },
     "compositeScore": 4.6,
-    "reviewCount": 131,
+    "reviewCount": 2204,
     "meetsBar": true,
     "reservationDifficulty": {
-     "label": "Moderate",
-     "note": "Book a few days ahead for Saturday dinner, which has live Greek music; weekday lunch is easy."
+     "label": "Easy",
+     "note": "Neighborhood spot; weekend brunch is the only crunch."
     },
-    "reservationLink": "https://www.opentable.com/r/our-mom-eugenia-great-falls-great-falls",
-    "reservationNote": "Book online (OpenTable) or call (703) 870-7807. Wine Wednesdays: half-price bottles with $30pp in food.",
-    "imageUrl": "https://static.wixstatic.com/media/a66788_1cc9aa00bbfb4c709ab21f2e626b2ba5~mv2.jpg/v1/fill/w_1202,h_802,al_c/a66788_1cc9aa00bbfb4c709ab21f2e626b2ba5~mv2.jpg",
-    "imageKind": "photo",
+    "reservationLink": null,
+    "reservationNote": "Book online via the restaurant or walk in.",
+    "imageUrl": "https://images.getbento.com/accounts/abf6671cf01bd9b39c565d4d588ca77e/media/images/ilustracion.png",
+    "imageKind": "logo",
     "imageTries": 0,
-    "adjustedRating": 4.493,
+    "adjustedRating": 4.587,
     "foodSignal": 0.3,
-    "rankScore": 4.553,
+    "rankScore": 4.647,
     "pickBasis": "crowd",
     "matchedSources": [
      "Tripadvisor"
     ],
     "isChain": false,
-    "why": "Family-recipe Greek cooking with a real home-kitchen touch, from mezze to slow-cooked lamb and grilled fish, in a room that comes alive with live Greek music on Saturdays."
+    "why": "A lakeside neighborhood kitchen that sources locally and cooks honest, well-seasoned American plates — the locals' pick away from Town Center."
+   },
+   {
+    "name": "Cafe Montmartre",
+    "neighborhood": "Lake Anne Plaza, Reston, VA",
+    "link": "https://www.google.com/maps/search/?api=1&query=Cafe+Montmartre+Lake+Anne+Reston",
+    "cuisine": "French bistro",
+    "priceLevel": "$$",
+    "rating": {
+     "google": {
+      "score": 4.4,
+      "count": 252
+     },
+     "tripadvisor": {
+      "score": 4.2,
+      "count": 60
+     }
+    },
+    "compositeScore": 4.4,
+    "reviewCount": 252,
+    "meetsBar": false,
+    "reservationDifficulty": {
+     "label": "Easy",
+     "note": "Small lakeside bistro; call a day ahead for weekend dinner."
+    },
+    "reservationLink": null,
+    "reservationNote": "Phone reservations recommended; walk-ins at lunch.",
+    "imageUrl": null,
+    "imageKind": "none",
+    "imageTries": 0,
+    "adjustedRating": 4.4,
+    "foodSignal": 0.3,
+    "rankScore": 4.46,
+    "pickBasis": "crowd",
+    "matchedSources": [
+     "Tripadvisor"
+    ],
+    "isChain": false,
+    "why": "Lake Anne's long-running bistro turns out unfussy French classics on the plaza — the closest thing Reston has to a neighborhood Paris café."
+   },
+   {
+    "name": "Corsica Wine Bar",
+    "neighborhood": "Reston Town Center, Reston, VA",
+    "link": "https://www.corsicawinebar.com/reston/home",
+    "cuisine": "Corsican / Riviera Mediterranean small plates",
+    "priceLevel": "$$$",
+    "rating": {
+     "tripadvisor": {
+      "score": 4.3,
+      "count": 8
+     }
+    },
+    "compositeScore": 4.3,
+    "reviewCount": 8,
+    "meetsBar": false,
+    "reservationDifficulty": {
+     "label": "Easy",
+     "note": "Tock shows open tables most nights; bar is walk-in."
+    },
+    "reservationLink": "https://www.exploretock.com/corsica-wine-bar-reston",
+    "reservationNote": "Book on Tock (parties 1–20) or walk in to the bar.",
+    "imageUrl": "https://cdn.prod.website-files.com/68dac53d4fffba26a5461e3c/69408e475af6dbfdd5215bf0_Corsica-Saber-Web-KV-9.jpg",
+    "imageKind": "photo",
+    "imageTries": 0,
+    "adjustedRating": 4.395,
+    "foodSignal": 0.3,
+    "rankScore": 4.455,
+    "pickBasis": "crowd",
+    "matchedSources": [
+     "Tripadvisor"
+    ],
+    "isChain": false,
+    "why": "From the Barcelona Wine Bar team, a daily-printed menu of truffled farro 'risotto,' saffron-lobster mussels and pork Milanese built to match a 200-bottle, award-recognized wine list."
    }
   ],
   "moderate_nova": [
@@ -961,12 +1170,13 @@
     "imageKind": "photo",
     "imageTries": 0,
     "adjustedRating": 4.43,
-    "foodSignal": 2.4,
-    "rankScore": 4.91,
+    "foodSignal": 2.7,
+    "rankScore": 4.97,
     "pickBasis": "expert",
     "matchedSources": [
      "Washingtonian Top 100 (#30)",
-     "Northern Virginia Magazine 50 Best (2026)"
+     "Northern Virginia Magazine 50 Best (2026)",
+     "Tripadvisor"
     ],
     "isChain": false,
     "why": "Precise, wood-fired, ingredient-forward American cooking in a small Falls Church spot regional critics have called Michelin-worthy."
@@ -974,7 +1184,7 @@
    {
     "name": "Osteria Marzano",
     "neighborhood": "Franconia, Alexandria, VA",
-    "link": "https://www.opentable.com/osteria-marzano",
+    "link": "https://www.osteriamarzano.com/",
     "cuisine": "Italian (pasta, brick-oven pizza)",
     "priceLevel": "$$",
     "rating": {
@@ -996,15 +1206,16 @@
     },
     "reservationLink": "https://www.opentable.com/osteria-marzano",
     "reservationNote": "Book on OpenTable a few days ahead for weekends.",
-    "imageUrl": null,
-    "imageKind": "none",
+    "imageUrl": "https://resizer.otstatic.com/v4/photos/25099826-1?width=800",
+    "imageKind": "photo",
     "imageTries": 0,
     "adjustedRating": 4.582,
-    "foodSignal": 1.2,
-    "rankScore": 4.822,
+    "foodSignal": 1.5,
+    "rankScore": 4.882,
     "pickBasis": "critic",
     "matchedSources": [
-     "Northern Virginia Magazine 50 Best (2026)"
+     "Northern Virginia Magazine 50 Best (2026)",
+     "Tripadvisor"
     ],
     "isChain": false,
     "why": "An office-park surprise turning out handmade pastas and blistered brick-oven pies with the generosity and technique of a true neighborhood osteria."
@@ -1034,11 +1245,12 @@
     "imageKind": "photo",
     "imageTries": 0,
     "adjustedRating": 4.48,
-    "foodSignal": 1.2,
-    "rankScore": 4.72,
+    "foodSignal": 1.5,
+    "rankScore": 4.78,
     "pickBasis": "critic",
     "matchedSources": [
-     "Arlington Magazine"
+     "Arlington Magazine",
+     "Tripadvisor"
     ],
     "isChain": true,
     "why": "An unlimited small-plates Balkan blowout of stroganoff, lamb, and pickled everything that turns a weeknight into an occasion without wrecking the budget.",
@@ -1069,55 +1281,58 @@
     "imageKind": "photo",
     "imageTries": 0,
     "adjustedRating": 4.408,
-    "foodSignal": 1.2,
-    "rankScore": 4.648,
+    "foodSignal": 1.5,
+    "rankScore": 4.708,
     "pickBasis": "critic",
     "matchedSources": [
-     "Northern Virginia Magazine 50 Best (2026)"
+     "Northern Virginia Magazine 50 Best (2026)",
+     "Tripadvisor"
     ],
     "isChain": false,
     "why": "A cozy, ingredient-forward newcomer to Church Street that plays it fresh and unfussy — exactly the low-key-special dinner Vienna needed."
    },
    {
-    "name": "Ruthie's All-Day",
-    "neighborhood": "Arlington Heights, Arlington, VA",
-    "link": "https://ruthiesallday.com/",
-    "cuisine": "Southern / Barbecue",
+    "name": "Chef Tan",
+    "neighborhood": "Vienna, VA",
+    "link": "https://chef-tan.com/",
+    "cuisine": "Hunan Chinese",
     "priceLevel": "$$",
     "rating": {
      "tripadvisor": {
-      "score": 4.4,
-      "count": 70
+      "score": 5.0,
+      "count": 2
      }
     },
-    "compositeScore": 4.4,
-    "reviewCount": 70,
-    "meetsBar": false,
+    "compositeScore": 5.0,
+    "reviewCount": 2,
+    "meetsBar": true,
     "reservationDifficulty": {
      "label": "Moderate",
-     "note": "Popular neighborhood spot; weekend dinners benefit from a reservation."
+     "note": "Waitlist-driven since the WaPo 3-star review; arrive at opening or expect a wait at weekend dinner."
     },
-    "reservationLink": "https://www.opentable.com/r/ruthies-all-day-arlington",
-    "reservationNote": "Book online.",
-    "imageUrl": "https://images.getbento.com/accounts/1dd3aa1f249196f5f2db5d7bd7ec0f16/media/images/72646Ruthies-All-Day_1.png?w=1200&fit=fill&auto=compress,format&cs=origin&h=600&bg=f4ebdb&pad=100",
-    "imageKind": "logo",
+    "reservationLink": null,
+    "reservationNote": "No online booking found — join the waitlist in person; lunch 11am-3:30pm is easier.",
+    "imageUrl": "https://chef-tan.com/assets/hero/hero_main.jpg",
+    "imageKind": "photo",
     "imageTries": 0,
-    "adjustedRating": 4.4,
-    "foodSignal": 1.2,
-    "rankScore": 4.64,
+    "adjustedRating": 4.408,
+    "foodSignal": 1.5,
+    "rankScore": 4.708,
     "pickBasis": "critic",
     "matchedSources": [
-     "Northern Virginia Magazine 50 Best (2026)"
+     "Washington Post 40 Best (#35)",
+     "Tripadvisor"
     ],
-    "isChain": false,
-    "why": "Whole-hog, cornbread-and-sorghum Southern cooking that turned a retro diner room into an Arlington institution."
+    "isChain": true,
+    "why": "Smoky cured pork, pepper-blistered stir-fries and chile-slicked fish deliver Hunan's sour-hot, wok-charred intensity with a fidelity rare outside New York.",
+    "chainRationale": "Small New Jersey-based Hunan group; the Vienna outpost earned a 3-star WaPo review, No. 6 on WaPo's best new restaurants and No. 35 on the 40 Best — cooking quality well beyond chain norms."
    }
   ],
   "casual_dc": [
    {
     "name": "Taqueria Habanero",
     "neighborhood": "Petworth, DC",
-    "link": "https://www.tripadvisor.com/Restaurant_Review-g28970-d10264390-Reviews-Taqueria_Habanero-Washington_DC_District_of_Columbia.html",
+    "link": "https://www.senorramon.com/",
     "cuisine": "Mexican",
     "priceLevel": "$",
     "rating": {
@@ -1152,7 +1367,7 @@
    {
     "name": "Keren Restaurant",
     "neighborhood": "Adams Morgan, DC",
-    "link": "https://www.tripadvisor.com/Restaurant_Review-g28970-d3320481-Reviews-Keren_Restaurant-Washington_DC_District_of_Columbia.html",
+    "link": "https://www.kerendc.com/",
     "cuisine": "Eritrean/Ethiopian",
     "priceLevel": "$",
     "rating": {
@@ -1172,7 +1387,7 @@
     "reservationNote": "Walk-in only — casual counter service.",
     "imageUrl": null,
     "imageKind": "none",
-    "imageTries": 0,
+    "imageTries": 1,
     "adjustedRating": 4.535,
     "foodSignal": 0.3,
     "rankScore": 4.595,
@@ -1186,7 +1401,7 @@
    {
     "name": "Dog Tag Bakery",
     "neighborhood": "Georgetown, DC",
-    "link": "https://www.tripadvisor.com/Restaurant_Review-g28970-d7162281-Reviews-Dog_Tag_Bakery-Washington_DC_District_of_Columbia.html",
+    "link": "https://www.dogtaginc.org/",
     "cuisine": "American Bakery/Cafe",
     "priceLevel": "$",
     "rating": {
@@ -1204,8 +1419,8 @@
     },
     "reservationLink": null,
     "reservationNote": "Walk-in only — cafe/counter service.",
-    "imageUrl": null,
-    "imageKind": "none",
+    "imageUrl": "https://www.dogtaginc.org/cdn/shop/files/DTB_SummerMenu_002_1230x800.jpg",
+    "imageKind": "photo",
     "imageTries": 0,
     "adjustedRating": 4.505,
     "foodSignal": 0.3,
@@ -1254,7 +1469,7 @@
    {
     "name": "El Rinconcito Cafe",
     "neighborhood": "Mount Vernon Square/Shaw, DC",
-    "link": "https://www.tripadvisor.com/Restaurant_Review-g28970-d3303409-Reviews-El_Rinconcito_Cafe-Washington_DC_District_of_Columbia.html",
+    "link": "https://www.elrinconcitocafe.com/",
     "cuisine": "Salvadoran/Central American",
     "priceLevel": "$",
     "rating": {
@@ -1272,8 +1487,8 @@
     },
     "reservationLink": null,
     "reservationNote": "Walk-in only — casual counter service.",
-    "imageUrl": null,
-    "imageKind": "none",
+    "imageUrl": "https://www.elrinconcitocafe.com/assets/images/box-item/about-3.jpg",
+    "imageKind": "photo",
     "imageTries": 0,
     "adjustedRating": 4.464,
     "foodSignal": 0.3,
@@ -1290,7 +1505,7 @@
    {
     "name": "Listrani's Italian Gourmet & Pizzeria",
     "neighborhood": "McLean, VA",
-    "link": "https://www.google.com/maps/search/?api=1&query=Listrani%27s+6808+Old+Dominion+Dr+McLean+VA",
+    "link": "https://listranismclean.com/",
     "cuisine": "Italian (scratch cooking, Neapolitan pizza)",
     "priceLevel": "$$",
     "rating": {
@@ -1312,8 +1527,8 @@
     },
     "reservationLink": null,
     "reservationNote": "Walk-in or order ahead; open daily 11 AM.",
-    "imageUrl": null,
-    "imageKind": "none",
+    "imageUrl": "https://img1.wsimg.com/isteam/ip/9882e7c3-46ef-448b-a8be-816d30d9c2b4/blob-b4406fd.png",
+    "imageKind": "logo",
     "imageTries": 0,
     "adjustedRating": 4.539,
     "foodSignal": 0.3,
@@ -1468,6 +1683,122 @@
     ],
     "isChain": false,
     "why": "The chelo kabob McLean regulars measure every other Persian grill against — simple, classic, and consistently right."
+   }
+  ],
+  "casual_reston": [
+   {
+    "name": "Señor Ramón Taqueria",
+    "neighborhood": "Reston (Baron Cameron Ave), VA",
+    "link": "https://www.senorramon.com/",
+    "cuisine": "Mexican taqueria",
+    "priceLevel": "$",
+    "rating": {
+     "google": {
+      "score": 4.5,
+      "count": 354
+     },
+     "tripadvisor": {
+      "score": 4.0,
+      "count": 10
+     }
+    },
+    "compositeScore": 4.5,
+    "reviewCount": 354,
+    "meetsBar": true,
+    "reservationDifficulty": {
+     "label": "Easy",
+     "note": "Counter service."
+    },
+    "reservationLink": null,
+    "reservationNote": "Walk-in only — counter service.",
+    "imageUrl": null,
+    "imageKind": "none",
+    "imageTries": 1,
+    "adjustedRating": 4.47,
+    "foodSignal": 0.3,
+    "rankScore": 4.53,
+    "pickBasis": "crowd",
+    "matchedSources": [
+     "Tripadvisor"
+    ],
+    "isChain": false,
+    "why": "A strip-mall taqueria serving straightforward, well-griddled tacos at prices that feel like a secret."
+   },
+   {
+    "name": "Cafesano",
+    "neighborhood": "South Lakes Village Center, Reston, VA",
+    "link": "https://cafesano.com/",
+    "cuisine": "Mediterranean café",
+    "priceLevel": "$",
+    "rating": {
+     "google": {
+      "score": 4.3,
+      "count": 955
+     },
+     "tripadvisor": {
+      "score": 4.4,
+      "count": 381
+     }
+    },
+    "compositeScore": 4.3,
+    "reviewCount": 955,
+    "meetsBar": false,
+    "reservationDifficulty": {
+     "label": "Easy",
+     "note": "Counter service."
+    },
+    "reservationLink": null,
+    "reservationNote": "Walk-in only — counter service.",
+    "imageUrl": "https://cafesano.com/wp-content/uploads/2022/09/Hero-Banner.jpg",
+    "imageKind": "photo",
+    "imageTries": 0,
+    "adjustedRating": 4.314,
+    "foodSignal": 0.3,
+    "rankScore": 4.374,
+    "pickBasis": "crowd",
+    "matchedSources": [
+     "Tripadvisor"
+    ],
+    "isChain": false,
+    "why": "Fresh, lemony Mediterranean plates and wraps that have quietly been feeding South Lakes for years."
+   },
+   {
+    "name": "Pollo Peru",
+    "neighborhood": "Reston (Reston Pkwy), VA",
+    "link": "https://www.google.com/maps/search/?api=1&query=Pollo+Peru+Reston",
+    "cuisine": "Peruvian rotisserie chicken",
+    "priceLevel": "$",
+    "rating": {
+     "google": {
+      "score": 4.3,
+      "count": 1000
+     },
+     "tripadvisor": {
+      "score": 4.0,
+      "count": 55
+     }
+    },
+    "compositeScore": 4.3,
+    "reviewCount": 1000,
+    "meetsBar": false,
+    "reservationDifficulty": {
+     "label": "Easy",
+     "note": "Counter service."
+    },
+    "reservationLink": null,
+    "reservationNote": "Walk-in only — counter service.",
+    "imageUrl": null,
+    "imageKind": "none",
+    "imageTries": 0,
+    "adjustedRating": 4.313,
+    "foodSignal": 0.3,
+    "rankScore": 4.373,
+    "pickBasis": "crowd",
+    "matchedSources": [
+     "Tripadvisor"
+    ],
+    "isChain": false,
+    "why": "Charcoal-blistered pollo a la brasa with the requisite green sauce — the NoVA staple done well."
    }
   ],
   "casual_nova": [
@@ -1708,11 +2039,12 @@
     "imageKind": "photo",
     "imageTries": 0,
     "adjustedRating": 4.474,
-    "foodSignal": 2.5,
-    "rankScore": 4.974,
+    "foodSignal": 2.8,
+    "rankScore": 5.034,
     "pickBasis": "expert",
     "matchedSources": [
-     "Michelin Guide DC (Bib Gourmand)"
+     "Michelin Guide DC (Bib Gourmand)",
+     "Tripadvisor"
     ],
     "isChain": false,
     "why": "Half-price wood-grilled and raw oysters paired with a serious cocktail list make this the rare happy hour where the bar program and the kitchen are equally worth showing up for."
@@ -1742,11 +2074,12 @@
     "imageKind": "photo",
     "imageTries": 0,
     "adjustedRating": 4.473,
-    "foodSignal": 2.5,
-    "rankScore": 4.973,
+    "foodSignal": 2.8,
+    "rankScore": 5.033,
     "pickBasis": "expert",
     "matchedSources": [
-     "Michelin Guide DC (Bib Gourmand)"
+     "Michelin Guide DC (Bib Gourmand)",
+     "Tripadvisor"
     ],
     "isChain": false,
     "why": "A Bib Gourmand kitchen turning out chopped-cheeseburger fries alongside a genuinely well-built cocktail list is exactly what this category demands."
@@ -1810,13 +2143,13 @@
     "imageKind": "photo",
     "imageTries": 0,
     "adjustedRating": 4.4,
-    "foodSignal": 3.6,
-    "rankScore": 5.12,
+    "foodSignal": 2.7,
+    "rankScore": 4.94,
     "pickBasis": "expert",
     "matchedSources": [
      "Washingtonian Top 100 (#47)",
-     "Washingtonian Best 40",
-     "Eater DC"
+     "Eater DC",
+     "Tripadvisor"
     ],
     "isChain": false,
     "why": "The 'L'Apéro' zinc-bar hour — wine, Ricard, oysters — is the most convincing Parisian pre-dinner ritual in the city."
@@ -1893,14 +2226,93 @@
     "imageKind": "photo",
     "imageTries": 0,
     "adjustedRating": 4.456,
-    "foodSignal": 1.2,
-    "rankScore": 4.696,
+    "foodSignal": 1.5,
+    "rankScore": 4.756,
     "pickBasis": "critic",
     "matchedSources": [
-     "Arlington Magazine"
+     "Arlington Magazine",
+     "Tripadvisor"
     ],
     "isChain": false,
     "why": "David Guas brings Bayou Bakery's Louisiana soul to McLean: wood-oven oysters, a bone-in pork chop with black-eyed peas, and Bayou pimento cheese that makes the bar feel like a Gulf Coast neighbor."
+   },
+   {
+    "name": "The Capital Grille (Tysons)",
+    "neighborhood": "Tysons, VA",
+    "link": "https://www.thecapitalgrille.com/locations/va/mclean/tysons-corner/8014",
+    "cuisine": "Steakhouse",
+    "priceLevel": "$$$$",
+    "rating": {
+     "tripadvisor": {
+      "score": 4.3,
+      "count": 337
+     },
+     "google": {
+      "score": 4.7,
+      "count": 1339
+     }
+    },
+    "compositeScore": 4.7,
+    "reviewCount": 1339,
+    "meetsBar": true,
+    "reservationDifficulty": {
+     "label": "Easy",
+     "note": "Happy hour is walk-in in the lounge. Dining-room tables are usually open same-week."
+    },
+    "reservationLink": "https://www.opentable.com/the-capital-grille-tysons-corner",
+    "reservationNote": "Walk in for happy hour in the lounge. Book dinner online or call (703) 448-3900.",
+    "imageUrl": "https://resizer.otstatic.com/v4/photos/98392623-1?width=800",
+    "imageKind": "photo",
+    "imageTries": 0,
+    "adjustedRating": 4.67,
+    "foodSignal": 0.3,
+    "rankScore": 4.73,
+    "pickBasis": "crowd",
+    "matchedSources": [
+     "Tripadvisor"
+    ],
+    "isChain": true,
+    "why": "Dry-aged steak at lounge prices: porcini-rubbed lamb lollipops, garlic shrimp and petite filet sliders with a properly made Old Fashioned.",
+    "chainRationale": "Ghazal's pick — she vouches for the Tysons lounge happy hour and the kitchen."
+   },
+   {
+    "name": "Ometeo",
+    "neighborhood": "Tysons, VA",
+    "link": "https://www.ometeotexmex.com/",
+    "cuisine": "Tex-Mex",
+    "priceLevel": "$$",
+    "rating": {
+     "tripadvisor": {
+      "score": 3.3,
+      "count": 11
+     },
+     "google": {
+      "score": 4.4,
+      "count": 672
+     }
+    },
+    "compositeScore": 4.4,
+    "reviewCount": 672,
+    "meetsBar": false,
+    "reservationDifficulty": {
+     "label": "Easy",
+     "note": "A large room. Same-day tables and bar seats are usually open."
+    },
+    "reservationLink": "https://www.opentable.com/r/ometeo-tysons",
+    "reservationNote": "Book online (OpenTable). Happy hour is at the bar only.",
+    "imageUrl": "https://resizer.otstatic.com/v4/photos/57041316-3?width=800",
+    "imageKind": "photo",
+    "imageTries": 0,
+    "adjustedRating": 4.4,
+    "foodSignal": 1.5,
+    "rankScore": 4.7,
+    "pickBasis": "critic",
+    "matchedSources": [
+     "Northern Virginia Magazine 50 Best (2026)",
+     "Tripadvisor"
+    ],
+    "isChain": false,
+    "why": "Gabe Erales's Tex-Mex treats live fire seriously. Fajitas over a raised flame, a chorizo-verde clam 'tamal' and a pastry-chef tres leches lift it well above mall margaritas."
    },
    {
     "name": "Wren",
@@ -1931,155 +2343,96 @@
     "imageKind": "photo",
     "imageTries": 0,
     "adjustedRating": 4.325,
-    "foodSignal": 1.2,
-    "rankScore": 4.565,
+    "foodSignal": 1.5,
+    "rankScore": 4.625,
     "pickBasis": "critic",
     "matchedSources": [
-     "Northern Virginia Magazine 50 Best (2026)"
+     "Northern Virginia Magazine 50 Best (2026)",
+     "Tripadvisor"
     ],
     "isChain": false,
     "why": "Chef Yo Matsuzaki runs an izakaya with real backbone, from rich ramen to robata-style small plates and an 18–20-course omakase, 14 floors above Tysons."
-   },
+   }
+  ],
+  "happy_hour_reston": [
    {
-    "name": "The Old Brogue",
-    "neighborhood": "Great Falls, VA",
-    "link": "https://oldbrogue.com/",
-    "cuisine": "Irish pub",
+    "name": "Jackson's Mighty Fine Food & Lucky Lounge",
+    "neighborhood": "Reston Town Center, Reston, VA",
+    "link": "https://www.jacksonsva.com/",
+    "cuisine": "American (Great American Restaurants)",
     "priceLevel": "$$",
     "rating": {
+     "google": {
+      "score": 4.6,
+      "count": 3403
+     },
      "tripadvisor": {
       "score": 4.3,
-      "count": 317
+      "count": 900
      }
     },
-    "compositeScore": 4.3,
-    "reviewCount": 317,
-    "meetsBar": false,
+    "compositeScore": 4.6,
+    "reviewCount": 3403,
+    "meetsBar": true,
     "reservationDifficulty": {
-     "label": "Easy",
-     "note": "Walk-in pub; only St. Patrick's Day and live-music weekend nights get truly packed."
+     "label": "Moderate",
+     "note": "Packed weekend nights; reserve dinner, bar is walk-in."
     },
     "reservationLink": null,
-    "reservationNote": "Walk-in — (703) 759-3309 for larger groups.",
-    "imageUrl": "https://static.showit.co/1600/8_7WlCr3QUSs8YYc8whfIw/230638/js_l6878.jpg",
+    "reservationNote": "Book through Great American Restaurants' online reservations or walk in to the Lucky Lounge bar.",
+    "imageUrl": "https://cdn.prod.website-files.com/6405ff0971327756f8379efd/6570e9902822e7e487fd0351_jacksons-web-social.jpg",
     "imageKind": "photo",
     "imageTries": 0,
-    "adjustedRating": 4.332,
+    "adjustedRating": 4.592,
     "foodSignal": 0.3,
-    "rankScore": 4.392,
+    "rankScore": 4.652,
     "pickBasis": "crowd",
     "matchedSources": [
      "Tripadvisor"
     ],
     "isChain": false,
-    "why": "A 40-plus-year Great Falls institution with a 150-bottle whiskey shelf, a proper pint of Guinness and honest fish and chips — the after-hike drink everyone in the village ends up having."
+    "why": "Great American Restaurants' polish — sushi, wood-grilled fish, famously good burgers — paired with a buzzing Lucky Lounge bar that has been Reston's after-work default for two decades."
    },
    {
-    "name": "Härth",
-    "neighborhood": "Tysons (Hilton McLean Tysons Corner), VA",
-    "link": "https://www.harthrestaurant.com/",
-    "cuisine": "Modern American, farm-to-table",
+    "name": "PassionFish Reston",
+    "neighborhood": "Reston Town Center, Reston, VA",
+    "link": "https://www.passionfishreston.com/",
+    "cuisine": "Seafood & sushi",
     "priceLevel": "$$$",
     "rating": {
+     "google": {
+      "score": 4.4,
+      "count": 1365
+     },
      "tripadvisor": {
-      "score": 4.2,
-      "count": 251
+      "score": 4.3,
+      "count": 653
      }
     },
-    "compositeScore": 4.2,
-    "reviewCount": 251,
+    "compositeScore": 4.4,
+    "reviewCount": 1365,
     "meetsBar": false,
     "reservationDifficulty": {
-     "label": "Easy",
-     "note": "Bar seats are walk-in; OpenTable tables are open same-day most nights."
+     "label": "Moderate",
+     "note": "Weekend dinner books a few days out; bar/patio walk-in for HH."
     },
-    "reservationLink": "https://www.opentable.com/r/harth-mclean",
-    "reservationNote": "Book on OpenTable or walk in to the bar.",
-    "imageUrl": null,
-    "imageKind": "none",
-    "imageTries": 1,
-    "adjustedRating": 4.275,
+    "reservationLink": "https://www.opentable.com/r/passionfish-reston-va-reston",
+    "reservationNote": "Book on OpenTable; bar is walk-in.",
+    "imageUrl": "https://images.getbento.com/accounts/d82909b9740cb9f1efd2a9092b7a9d02/media/images/59022passionfish.png",
+    "imageKind": "logo",
+    "imageTries": 0,
+    "adjustedRating": 4.4,
     "foodSignal": 0.3,
-    "rankScore": 4.335,
+    "rankScore": 4.46,
     "pickBasis": "crowd",
     "matchedSources": [
      "Tripadvisor"
     ],
     "isChain": false,
-    "why": "A fireplace-lit lounge with its own rooftop beehives behind the honey cocktails — the most grown-up after-work bar in Tysons, with a regional-farm kitchen that's better than a hotel address suggests."
+    "why": "Chef Chris Clime's raw bar, dedicated sushi station and global coastal menu make this the best seafood cooking in Reston — and its happy hour plates are the real dishes, not afterthoughts."
    }
   ],
   "happy_hour_nova": [
-   {
-    "name": "Smyrna",
-    "neighborhood": "Hayfield, Alexandria, VA",
-    "link": "https://www.tripadvisor.com/Restaurant_Review-g30226-d25236017-Reviews-Smyrna_Restaurant_aegean_kitchen-Alexandria_Virginia.html",
-    "cuisine": "Greek / Turkish (Aegean)",
-    "priceLevel": "$$",
-    "rating": {
-     "tripadvisor": {
-      "score": 4.7,
-      "count": 25
-     }
-    },
-    "compositeScore": 4.7,
-    "reviewCount": 25,
-    "meetsBar": true,
-    "reservationDifficulty": {
-     "label": "Moderate",
-     "note": "Small dining room; bar seats for happy hour are the easier ask."
-    },
-    "reservationLink": "https://restaurantsmyrna.com/reservation",
-    "reservationNote": "Book online.",
-    "imageUrl": null,
-    "imageKind": "none",
-    "imageTries": 0,
-    "adjustedRating": 4.443,
-    "foodSignal": 1.5,
-    "rankScore": 4.743,
-    "pickBasis": "critic",
-    "matchedSources": [
-     "Northern Virginia Magazine 50 Best (2026)",
-     "Tripadvisor"
-    ],
-    "isChain": false,
-    "why": "Aegean mezze and a tight, well-chosen wine-and-ouzo list turn a modest Old Town storefront into a genuine happy-hour destination."
-   },
-   {
-    "name": "Carbonara",
-    "neighborhood": "Virginia Square, Arlington, VA",
-    "link": "https://www.tripadvisor.com/Restaurant_Review-g30242-d27930905-Reviews-Carbonara-Arlington_Virginia.html",
-    "cuisine": "Italian",
-    "priceLevel": "$$-$$$",
-    "rating": {
-     "tripadvisor": {
-      "score": 4.7,
-      "count": 23
-     }
-    },
-    "compositeScore": 4.7,
-    "reviewCount": 23,
-    "meetsBar": true,
-    "reservationDifficulty": {
-     "label": "Moderate",
-     "note": "Bar seats often available even when the dining room is full."
-    },
-    "reservationLink": "https://resy.com/cities/arlington-va/venues/carbonara",
-    "reservationNote": "Book online.",
-    "imageUrl": null,
-    "imageKind": "none",
-    "imageTries": 0,
-    "adjustedRating": 4.44,
-    "foodSignal": 1.5,
-    "rankScore": 4.74,
-    "pickBasis": "critic",
-    "matchedSources": [
-     "Northern Virginia Magazine 50 Best (2026)",
-     "Tripadvisor"
-    ],
-    "isChain": false,
-    "why": "Tableside cheese-wheel carbonara at the bar is one of the best cheap thrills in Arlington, happy hour or not."
-   },
    {
     "name": "Ambar Clarendon",
     "neighborhood": "Clarendon, Arlington, VA",
@@ -2105,20 +2458,91 @@
     "imageKind": "photo",
     "imageTries": 0,
     "adjustedRating": 4.48,
-    "foodSignal": 1.2,
-    "rankScore": 4.72,
+    "foodSignal": 1.5,
+    "rankScore": 4.78,
     "pickBasis": "critic",
     "matchedSources": [
-     "Arlington Magazine"
+     "Arlington Magazine",
+     "Tripadvisor"
     ],
     "isChain": true,
     "why": "An unlimited small-plates Balkan blowout of stroganoff, lamb, and pickled everything that turns a weeknight into an occasion without wrecking the budget.",
     "chainRationale": "Small local Balkan group (three DMV rooms) with Washingtonian and Arlington Magazine recognition — a destination, not a convenience chain."
    },
    {
+    "name": "Smyrna",
+    "neighborhood": "Hayfield, Alexandria, VA",
+    "link": "https://restaurantsmyrna.com/",
+    "cuisine": "Greek / Turkish (Aegean)",
+    "priceLevel": "$$",
+    "rating": {
+     "tripadvisor": {
+      "score": 4.7,
+      "count": 25
+     }
+    },
+    "compositeScore": 4.7,
+    "reviewCount": 25,
+    "meetsBar": true,
+    "reservationDifficulty": {
+     "label": "Moderate",
+     "note": "Small dining room; bar seats for happy hour are the easier ask."
+    },
+    "reservationLink": "https://restaurantsmyrna.com/reservation",
+    "reservationNote": "Book online.",
+    "imageUrl": "https://i.vimeocdn.com/video/2010893230-8421cd672d55f2579d298cc5478393dd1f8448b3e65e5703911610a484de9982-d_1920x1080",
+    "imageKind": "photo",
+    "imageTries": 0,
+    "adjustedRating": 4.443,
+    "foodSignal": 1.5,
+    "rankScore": 4.743,
+    "pickBasis": "critic",
+    "matchedSources": [
+     "Northern Virginia Magazine 50 Best (2026)",
+     "Tripadvisor"
+    ],
+    "isChain": false,
+    "why": "Aegean mezze and a tight, well-chosen wine-and-ouzo list turn a modest Old Town storefront into a genuine happy-hour destination."
+   },
+   {
+    "name": "Carbonara",
+    "neighborhood": "Virginia Square, Arlington, VA",
+    "link": "https://carbonarava.com/arlington/menus",
+    "cuisine": "Italian",
+    "priceLevel": "$$-$$$",
+    "rating": {
+     "tripadvisor": {
+      "score": 4.7,
+      "count": 23
+     }
+    },
+    "compositeScore": 4.7,
+    "reviewCount": 23,
+    "meetsBar": true,
+    "reservationDifficulty": {
+     "label": "Moderate",
+     "note": "Bar seats often available even when the dining room is full."
+    },
+    "reservationLink": "https://resy.com/cities/arlington-va/venues/carbonara",
+    "reservationNote": "Book online.",
+    "imageUrl": "https://carbonarava.com/media/hero-table-1600.webp",
+    "imageKind": "photo",
+    "imageTries": 0,
+    "adjustedRating": 4.44,
+    "foodSignal": 1.5,
+    "rankScore": 4.74,
+    "pickBasis": "critic",
+    "matchedSources": [
+     "Northern Virginia Magazine 50 Best (2026)",
+     "Tripadvisor"
+    ],
+    "isChain": false,
+    "why": "Tableside cheese-wheel carbonara at the bar is one of the best cheap thrills in Arlington, happy hour or not."
+   },
+   {
     "name": "The Commentary",
     "neighborhood": "Ballston, Arlington, VA",
-    "link": "https://www.tripadvisor.com/Restaurant_Review-g30242-d19713097-Reviews-The_Commentary-Arlington_Virginia.html",
+    "link": "https://thecommentaryarl.com/",
     "cuisine": "New American",
     "priceLevel": "$$",
     "rating": {
@@ -2136,8 +2560,8 @@
     },
     "reservationLink": "https://thecommentaryarl.com/reservations/",
     "reservationNote": "Book online.",
-    "imageUrl": null,
-    "imageKind": "none",
+    "imageUrl": "https://thecommentaryarl.com/wp-content/uploads/2024/12/output-onlinegiftools-1.gif",
+    "imageKind": "photo",
     "imageTries": 0,
     "adjustedRating": 4.491,
     "foodSignal": 0.3,
@@ -2152,7 +2576,7 @@
    {
     "name": "Carlyle",
     "neighborhood": "Shirlington, Arlington, VA",
-    "link": "https://www.tripadvisor.com/Restaurant_Review-g30242-d465228-Reviews-Carlyle-Arlington_Virginia.html",
+    "link": "https://www.carlyleva.com/",
     "cuisine": "New American brasserie",
     "priceLevel": "$$",
     "rating": {
@@ -2170,8 +2594,8 @@
     },
     "reservationLink": "https://resy.com/cities/washington-dc/venues/carlyle",
     "reservationNote": "Book online.",
-    "imageUrl": null,
-    "imageKind": "none",
+    "imageUrl": "https://cdn.prod.website-files.com/65a1a6bac4340e01831b0931/65a6f14249832306c6daecf6_Carlyle%20Upstairs%20Dining.jpg",
+    "imageKind": "photo",
     "imageTries": 0,
     "adjustedRating": 4.489,
     "foodSignal": 0.3,
@@ -2185,6 +2609,47 @@
    }
   ],
   "italian_dc": [
+   {
+    "name": "2 Amys",
+    "neighborhood": "Cathedral Heights, DC",
+    "link": "http://www.2amyspizza.com/",
+    "cuisine": "Neapolitan pizza & Italian small plates",
+    "priceLevel": "$$",
+    "rating": {
+     "tripadvisor": {
+      "score": 4.2,
+      "count": 536
+     },
+     "google": {
+      "score": 4.5,
+      "count": 1785
+     }
+    },
+    "compositeScore": 4.5,
+    "reviewCount": 1785,
+    "meetsBar": true,
+    "reservationDifficulty": {
+     "label": "Easy",
+     "note": "Walk-in; weekend family-dinner waits of 30-45 min are normal."
+    },
+    "reservationLink": null,
+    "reservationNote": "Walk-in only — call (202) 885-5700 for large parties.",
+    "imageUrl": "https://static1.squarespace.com/static/54ee02c4e4b0d577cb6eaa46/t/64231470caab9f2a62f7fca0/1680020592691/Copy+of+Copy+of+Add+a+subheading.jpg",
+    "imageKind": "photo",
+    "imageTries": 0,
+    "adjustedRating": 4.492,
+    "foodSignal": 4.7,
+    "rankScore": 5.432,
+    "pickBasis": "expert",
+    "matchedSources": [
+     "James Beard Awards (finalist, 2026)",
+     "Washingtonian Top 100 (#20)",
+     "Washington Post 40 Best (#32)",
+     "Tripadvisor"
+    ],
+    "isChain": false,
+    "why": "Peter Pastan's DOC-certified pies — blistered, soupy-centered Neapolitan rounds — plus a cicchetti board of deviled eggs and suppli have set DC's pizza benchmark for 25 years."
+   },
    {
     "name": "Fiola",
     "neighborhood": "Penn Quarter, DC",
@@ -2210,12 +2675,13 @@
     "imageKind": "logo",
     "imageTries": 0,
     "adjustedRating": 4.486,
-    "foodSignal": 4.2,
-    "rankScore": 5.326,
+    "foodSignal": 4.5,
+    "rankScore": 5.386,
     "pickBasis": "expert",
     "matchedSources": [
      "Michelin Guide DC (1 star)",
-     "Washingtonian Top 100 (#64)"
+     "Washingtonian Top 100 (#64)",
+     "Tripadvisor"
     ],
     "isChain": false,
     "why": "Fabio Trabocchi's marble-and-crystal dining room delivers hand-rolled-pasta grandeur with a nearly thousand-review track record of consistency."
@@ -2329,41 +2795,6 @@
     ],
     "isChain": false,
     "why": "The 40-layer short-rib lasagna is a genuine DC set piece, and the wood-fired grill and pizza oven back it up with bold, never-underseasoned cooking at a Bib Gourmand price."
-   },
-   {
-    "name": "Reveler's Hour",
-    "neighborhood": "Adams Morgan, DC",
-    "link": "https://www.revelershour.com/",
-    "cuisine": "Italian wine bar",
-    "priceLevel": "$$$",
-    "rating": {
-     "google": {
-      "score": 4.5,
-      "count": 385
-     }
-    },
-    "compositeScore": 4.5,
-    "reviewCount": 385,
-    "meetsBar": true,
-    "reservationDifficulty": {
-     "label": "Hard",
-     "note": "Small wine-bar footprint means Resy tables disappear almost instantly; expect a wait or an early walk-in."
-    },
-    "reservationLink": "https://www.revelershour.com/reservations",
-    "reservationNote": "Book online.",
-    "imageUrl": "https://images.squarespace-cdn.com/content/v1/5dbdc3c0238618542744153c/2a7db93a-504d-49ee-83c6-9deae6cabeaf/1000010302.jpg",
-    "imageKind": "photo",
-    "imageTries": 0,
-    "adjustedRating": 4.472,
-    "foodSignal": 3.7,
-    "rankScore": 5.212,
-    "pickBasis": "expert",
-    "matchedSources": [
-     "Michelin Guide DC",
-     "Washingtonian Top 100 (#58)"
-    ],
-    "isChain": false,
-    "why": "A tiny, glowing wine bar turning out pasta good enough to anchor a splurge-adjacent date night without the splurge-adjacent bill."
    }
   ],
   "italian_mclean_tysons": [
@@ -2408,7 +2839,7 @@
    {
     "name": "Listrani's Italian Gourmet & Pizzeria",
     "neighborhood": "McLean, VA",
-    "link": "https://www.google.com/maps/search/?api=1&query=Listrani%27s+6808+Old+Dominion+Dr+McLean+VA",
+    "link": "https://listranismclean.com/",
     "cuisine": "Italian (scratch cooking, Neapolitan pizza)",
     "priceLevel": "$$",
     "rating": {
@@ -2430,8 +2861,8 @@
     },
     "reservationLink": null,
     "reservationNote": "Walk-in or order ahead; open daily 11 AM.",
-    "imageUrl": null,
-    "imageKind": "none",
+    "imageUrl": "https://img1.wsimg.com/isteam/ip/9882e7c3-46ef-448b-a8be-816d30d9c2b4/blob-b4406fd.png",
+    "imageKind": "logo",
     "imageTries": 0,
     "adjustedRating": 4.539,
     "foodSignal": 0.3,
@@ -2446,7 +2877,7 @@
    {
     "name": "Dante Ristorante",
     "neighborhood": "Great Falls, VA",
-    "link": "https://www.opentable.com/dante-ristorante",
+    "link": "https://danteristorante.com/",
     "cuisine": "Italian",
     "priceLevel": "$$$",
     "rating": {
@@ -2468,8 +2899,8 @@
     },
     "reservationLink": "https://www.opentable.com/dante-ristorante",
     "reservationNote": "Book on OpenTable; closed Sundays.",
-    "imageUrl": null,
-    "imageKind": "none",
+    "imageUrl": "https://resizer.otstatic.com/v4/photos/23687719-1?width=800",
+    "imageKind": "photo",
     "imageTries": 0,
     "adjustedRating": 4.47,
     "foodSignal": 0.3,
@@ -2484,7 +2915,7 @@
    {
     "name": "The Italian Oven",
     "neighborhood": "McLean, VA",
-    "link": "https://www.google.com/maps/search/?api=1&query=The+Italian+Oven+6852+Old+Dominion+Dr+McLean+VA",
+    "link": "https://theitalianovenmclean.com/",
     "cuisine": "Italian (wood-fired pizza, pasta, classic entrées)",
     "priceLevel": "$$",
     "rating": {
@@ -2506,8 +2937,8 @@
     },
     "reservationLink": null,
     "reservationNote": "Walk-in; call ahead for groups (has event space).",
-    "imageUrl": null,
-    "imageKind": "none",
+    "imageUrl": "https://theitalianovenmclean.com/assets/home-bruschetta.png",
+    "imageKind": "photo",
     "imageTries": 0,
     "adjustedRating": 4.465,
     "foodSignal": 0.3,
@@ -2558,11 +2989,86 @@
     "why": "A 20-plus-year McLean standby whose clams, fried calamari and classic veal and seafood plates are cooked with steady, old-school Italian hands."
    }
   ],
+  "italian_reston": [
+   {
+    "name": "Gregorio's Trattoria",
+    "neighborhood": "North Point Village Center, Reston, VA",
+    "link": "https://gregoriostrattoria.com/locations/reston",
+    "cuisine": "Italian trattoria",
+    "priceLevel": "$$",
+    "rating": {
+     "google": {
+      "score": 4.6,
+      "count": 1132
+     },
+     "tripadvisor": {
+      "score": 4.2,
+      "count": 156
+     }
+    },
+    "compositeScore": 4.6,
+    "reviewCount": 1132,
+    "meetsBar": true,
+    "reservationDifficulty": {
+     "label": "Easy",
+     "note": "Neighborhood trattoria; same-day OpenTable slots usual."
+    },
+    "reservationLink": "https://www.opentable.com/gregorios-trattoria-reston",
+    "reservationNote": "Book on OpenTable.",
+    "imageUrl": "https://gregoriostrattoria.com/images/social_card.jpg",
+    "imageKind": "photo",
+    "imageTries": 0,
+    "adjustedRating": 4.577,
+    "foodSignal": 0.3,
+    "rankScore": 4.637,
+    "pickBasis": "crowd",
+    "matchedSources": [
+     "Tripadvisor"
+    ],
+    "isChain": false,
+    "why": "A family-style trattoria of red-sauce classics and house pastas that Reston's north side has relied on for years — genuinely Italian, not a concept."
+   },
+   {
+    "name": "Pupatella (Reston)",
+    "neighborhood": "Reston Station / Wiehle Ave, Reston, VA",
+    "link": "https://www.pupatella.com/location-virginia-reston",
+    "cuisine": "Neapolitan pizza",
+    "priceLevel": "$",
+    "rating": {
+     "tripadvisor": {
+      "score": 3.9,
+      "count": 15
+     }
+    },
+    "compositeScore": 3.9,
+    "reviewCount": 15,
+    "meetsBar": false,
+    "reservationDifficulty": {
+     "label": "Easy",
+     "note": "Counter service."
+    },
+    "reservationLink": null,
+    "reservationNote": "Walk-in only — counter service; order ahead online.",
+    "imageUrl": "https://static.wixstatic.com/media/7dd33a_5e5ce0b0929249f5a801337c2a815686~mv2.jpg/v1/fill/w_900,h_600,al_c,q_85/7dd33a_5e5ce0b0929249f5a801337c2a815686~mv2.jpg",
+    "imageKind": "photo",
+    "imageTries": 0,
+    "adjustedRating": 4.355,
+    "foodSignal": 0.3,
+    "rankScore": 4.415,
+    "pickBasis": "crowd",
+    "matchedSources": [
+     "Tripadvisor"
+    ],
+    "isChain": true,
+    "why": "Blistered, soupy-centered Neapolitan pies from a wood-fired oven — the most authentic pizza in Reston.",
+    "chainRationale": "Small local Neapolitan group (Arlington original was a Washingtonian Cheap Eats staple); VPN-style wood-fired pies are genuinely Italian."
+   }
+  ],
   "italian_nova": [
    {
     "name": "Osteria Marzano",
     "neighborhood": "Franconia, Alexandria, VA",
-    "link": "https://www.opentable.com/osteria-marzano",
+    "link": "https://www.osteriamarzano.com/",
     "cuisine": "Italian (pasta, brick-oven pizza)",
     "priceLevel": "$$",
     "rating": {
@@ -2584,15 +3090,16 @@
     },
     "reservationLink": "https://www.opentable.com/osteria-marzano",
     "reservationNote": "Book on OpenTable a few days ahead for weekends.",
-    "imageUrl": null,
-    "imageKind": "none",
+    "imageUrl": "https://resizer.otstatic.com/v4/photos/25099826-1?width=800",
+    "imageKind": "photo",
     "imageTries": 0,
     "adjustedRating": 4.582,
-    "foodSignal": 1.2,
-    "rankScore": 4.822,
+    "foodSignal": 1.5,
+    "rankScore": 4.882,
     "pickBasis": "critic",
     "matchedSources": [
-     "Northern Virginia Magazine 50 Best (2026)"
+     "Northern Virginia Magazine 50 Best (2026)",
+     "Tripadvisor"
     ],
     "isChain": false,
     "why": "An office-park surprise turning out handmade pastas and blistered brick-oven pies with the generosity and technique of a true neighborhood osteria."
@@ -2600,7 +3107,7 @@
    {
     "name": "Carbonara",
     "neighborhood": "Virginia Square, Arlington, VA",
-    "link": "https://www.tripadvisor.com/Restaurant_Review-g30242-d27930905-Reviews-Carbonara-Arlington_Virginia.html",
+    "link": "https://carbonarava.com/arlington/menus",
     "cuisine": "Italian",
     "priceLevel": "$$-$$$",
     "rating": {
@@ -2618,8 +3125,8 @@
     },
     "reservationLink": "https://resy.com/cities/arlington-va/venues/carbonara",
     "reservationNote": "Book online.",
-    "imageUrl": null,
-    "imageKind": "none",
+    "imageUrl": "https://carbonarava.com/media/hero-table-1600.webp",
+    "imageKind": "photo",
     "imageTries": 0,
     "adjustedRating": 4.44,
     "foodSignal": 1.5,
@@ -2948,16 +3455,57 @@
     "imageKind": "logo",
     "imageTries": 0,
     "adjustedRating": 4.483,
-    "foodSignal": 5.7,
-    "rankScore": 5.623,
+    "foodSignal": 6.0,
+    "rankScore": 5.683,
     "pickBasis": "expert",
     "matchedSources": [
      "Michelin Guide DC (Bib Gourmand)",
      "James Beard Awards (finalist, 2026)",
-     "Washingtonian Top 100 (#57)"
+     "Washingtonian Top 100 (#57)",
+     "Tripadvisor"
     ],
     "isChain": false,
     "why": "Turns Indian comfort food into a genuinely exciting tasting menu at a price that still lets you order a second round of naan without flinching."
+   },
+   {
+    "name": "Menya Hosaki",
+    "neighborhood": "Petworth, DC",
+    "link": "https://www.menyahosakidc.com",
+    "cuisine": "Japanese ramen",
+    "priceLevel": "$$",
+    "rating": {
+     "tripadvisor": {
+      "score": 4.8,
+      "count": 4
+     },
+     "google": {
+      "score": 4.7,
+      "count": 648
+     }
+    },
+    "compositeScore": 4.7,
+    "reviewCount": 648,
+    "meetsBar": true,
+    "reservationDifficulty": {
+     "label": "Moderate",
+     "note": "Tiny shop open only ~4 days a week (Tue lunch, Wed-Fri dinner); lines form at opening."
+    },
+    "reservationLink": null,
+    "reservationNote": "Walk-in — arrive at opening; closed Sat-Mon. (301) 818-7650.",
+    "imageUrl": "https://static1.squarespace.com/static/5f539ae22077884476490860/t/5f53a74b35cfcb0f5ccc4606/1599317842302/Screen+Shot+2020-08-21+at+4.53.35+PM.png",
+    "imageKind": "photo",
+    "imageTries": 0,
+    "adjustedRating": 4.644,
+    "foodSignal": 4.0,
+    "rankScore": 5.444,
+    "pickBasis": "expert",
+    "matchedSources": [
+     "Michelin Guide DC (Bib Gourmand)",
+     "Washington Post 40 Best (#29)",
+     "Tripadvisor"
+    ],
+    "isChain": false,
+    "why": "House-made thin, springy noodles in a layered tonkotsu-chintan-dashi broth, plus a standout truffle shoyu, make this the most refined bowl of ramen in the city."
    },
    {
     "name": "Anju",
@@ -2988,12 +3536,13 @@
     "imageKind": "photo",
     "imageTries": 0,
     "adjustedRating": 4.489,
-    "foodSignal": 3.2,
-    "rankScore": 5.129,
+    "foodSignal": 3.5,
+    "rankScore": 5.189,
     "pickBasis": "expert",
     "matchedSources": [
      "James Beard Awards (finalist, 2026)",
-     "Washingtonian Top 100 (#73)"
+     "Washingtonian Top 100 (#73)",
+     "Tripadvisor"
     ],
     "isChain": false,
     "why": "Soulful, funky-fermented Korean plates and the city's best banchan spread make this the rare date-night spot that never feels like it's trying too hard."
@@ -3061,55 +3610,22 @@
     "imageKind": "photo",
     "imageTries": 0,
     "adjustedRating": 4.62,
-    "foodSignal": 1.2,
-    "rankScore": 4.86,
+    "foodSignal": 1.5,
+    "rankScore": 4.92,
     "pickBasis": "critic",
     "matchedSources": [
-     "Washingtonian Top 100 (#12)"
-    ],
-    "isChain": false,
-    "why": "Ginza-trained Yuh Shimomura's seven-course menu — pristine sashimi, spiny-lobster cake, soy-maple duck — is quiet, exacting Japanese cooking at a price that feels like a misprint."
-   },
-   {
-    "name": "Present Restaurant",
-    "neighborhood": "Falls Church, VA",
-    "link": "https://www.tripadvisor.com/Restaurant_Review-g57722-d1382480-Reviews-Present_Restaurant-Falls_Church_Virginia.html",
-    "cuisine": "Vietnamese",
-    "priceLevel": "$$",
-    "rating": {
-     "tripadvisor": {
-      "score": 4.6,
-      "count": 202
-     }
-    },
-    "compositeScore": 4.6,
-    "reviewCount": 202,
-    "meetsBar": true,
-    "reservationDifficulty": {
-     "label": "Moderate",
-     "note": "Popular with locals; reserve ahead for weekend dinner."
-    },
-    "reservationLink": "https://www.opentable.com/r/present-restaurant-falls-church",
-    "reservationNote": "Book online.",
-    "imageUrl": null,
-    "imageKind": "none",
-    "imageTries": 0,
-    "adjustedRating": 4.515,
-    "foodSignal": 0.3,
-    "rankScore": 4.575,
-    "pickBasis": "crowd",
-    "matchedSources": [
+     "Washingtonian Top 100 (#12)",
      "Tripadvisor"
     ],
     "isChain": false,
-    "why": "A Falls Church Vietnamese kitchen turning out pho and shaking beef precise enough to make the drive from DC worth it."
+    "why": "Ginza-trained Yuh Shimomura's seven-course menu — pristine sashimi, spiny-lobster cake, soy-maple duck — is quiet, exacting Japanese cooking at a price that feels like a misprint."
    }
   ],
   "mexican": [
    {
     "name": "Taqueria Habanero",
     "neighborhood": "Petworth, DC",
-    "link": "https://www.tripadvisor.com/Restaurant_Review-g28970-d10264390-Reviews-Taqueria_Habanero-Washington_DC_District_of_Columbia.html",
+    "link": "https://www.senorramon.com/",
     "cuisine": "Mexican",
     "priceLevel": "$",
     "rating": {
@@ -3181,6 +3697,44 @@
     "why": "Victor Albisu's hometown taqueria empire never lost the plot — the grilled-guac-and-chorizo taco still tastes handmade, not franchised. This is the pre-approved chain exception: real critical acclaim, not just convenience."
    },
    {
+    "name": "Taco Zocalo",
+    "neighborhood": "Reston, VA",
+    "link": "https://zocalotaco.com/location?slug=reston",
+    "cuisine": "Mexican taqueria",
+    "priceLevel": "$",
+    "rating": {
+     "google": {
+      "score": 4.7,
+      "count": 1330
+     },
+     "tripadvisor": {
+      "score": 4.6,
+      "count": 35
+     }
+    },
+    "compositeScore": 4.7,
+    "reviewCount": 1330,
+    "meetsBar": true,
+    "reservationDifficulty": {
+     "label": "Easy",
+     "note": "Counter service."
+    },
+    "reservationLink": null,
+    "reservationNote": "Walk-in only — counter service.",
+    "imageUrl": "https://zocalotaco.com/uploads/brand/badge.webp",
+    "imageKind": "logo",
+    "imageTries": 0,
+    "adjustedRating": 4.67,
+    "foodSignal": 0.3,
+    "rankScore": 4.73,
+    "pickBasis": "crowd",
+    "matchedSources": [
+     "Tripadvisor"
+    ],
+    "isChain": false,
+    "why": "Chef Basir's food-truck-born taqueria turns out birria, brisket and fish tacos with real depth — a true office-park hidden gem."
+   },
+   {
     "name": "Chaia",
     "neighborhood": "Georgetown, DC",
     "link": "https://www.chaiatacos.com/",
@@ -3248,43 +3802,45 @@
     ],
     "isChain": false,
     "why": "A Loudoun County sleeper with a perfect Tripadvisor score and real tapas-meets-taqueria ambition well beyond its strip-mall address."
-   },
-   {
-    "name": "Taco Zocalo",
-    "neighborhood": "Reston, VA",
-    "link": "https://zocalotaco.com/location/reston",
-    "cuisine": "Mexican",
-    "priceLevel": "$",
-    "rating": {
-     "tripadvisor": {
-      "score": 4.6,
-      "count": 35
-     }
-    },
-    "compositeScore": 4.6,
-    "reviewCount": 35,
-    "meetsBar": true,
-    "reservationDifficulty": {
-     "label": "Easy",
-     "note": "Counter-service, walk-in only."
-    },
-    "reservationLink": null,
-    "reservationNote": "Walk-in only — fast-casual counter service.",
-    "imageUrl": "https://zocalotaco.com/uploads/locations/zocalotaco_Catering_service.webp",
-    "imageKind": "photo",
-    "imageTries": 0,
-    "adjustedRating": 4.438,
-    "foodSignal": 0.3,
-    "rankScore": 4.498,
-    "pickBasis": "crowd",
-    "matchedSources": [
-     "Tripadvisor"
-    ],
-    "isChain": true,
-    "why": "A small NoVA taco group with genuinely well-reviewed, made-to-order tacos — earns its spot on quality, not just proximity."
    }
   ],
   "sushi": [
+   {
+    "name": "Omakase at Barracks Row",
+    "neighborhood": "Capitol Hill (Barracks Row), DC",
+    "link": "https://omakasedc.com/",
+    "cuisine": "Edomae sushi omakase",
+    "priceLevel": "$$$$",
+    "rating": {
+     "google": {
+      "score": 4.9,
+      "count": 117
+     }
+    },
+    "compositeScore": 4.9,
+    "reviewCount": 117,
+    "meetsBar": true,
+    "reservationDifficulty": {
+     "label": "Very Hard",
+     "note": "Small counter, Michelin star and Washingtonian #4 — book 4–6 weeks ahead."
+    },
+    "reservationLink": "https://resy.com/cities/washington-dc/venues/omakase-barracks-row",
+    "reservationNote": "Book on Resy; Tue–Sat 5:30–11 PM, closed Sun–Mon. Phone (202) 481-1640.",
+    "imageUrl": "https://img1.wsimg.com/isteam/ip/d7482202-7d13-45eb-bbfb-4cb7144e278f/CR3_4401.jpg",
+    "imageKind": "photo",
+    "imageTries": 0,
+    "adjustedRating": 4.619,
+    "foodSignal": 5.4,
+    "rankScore": 5.699,
+    "pickBasis": "expert",
+    "matchedSources": [
+     "Michelin Guide DC (1 star)",
+     "Washingtonian Top 100 (#4)",
+     "Washington Post 40 Best (#19)"
+    ],
+    "isChain": false,
+    "why": "Nakazawa-trained Ricky Wang's counter moves from sweet shrimp in smoked uni sauce to hay-smoked mackerel nigiri with exacting rice and fish — the city's most thrilling omakase at its price."
+   },
    {
     "name": "Sushi Nakazawa",
     "neighborhood": "Penn Quarter, DC",
@@ -3327,41 +3883,6 @@
     "chainRationale": "Second location of Daisuke Nakazawa's NYC original, but it holds its own Michelin star and Washingtonian Top 100 ranking — a chef-driven two-location omakase, not a chain experience."
    },
    {
-    "name": "Omakase at Barracks Row",
-    "neighborhood": "Capitol Hill (Barracks Row), DC",
-    "link": "https://omakasedc.com/",
-    "cuisine": "Edomae sushi omakase",
-    "priceLevel": "$$$$",
-    "rating": {
-     "google": {
-      "score": 4.9,
-      "count": 117
-     }
-    },
-    "compositeScore": 4.9,
-    "reviewCount": 117,
-    "meetsBar": true,
-    "reservationDifficulty": {
-     "label": "Very Hard",
-     "note": "Small counter, Michelin star and Washingtonian #4 — book 4–6 weeks ahead."
-    },
-    "reservationLink": "https://resy.com/cities/washington-dc/venues/omakase-barracks-row",
-    "reservationNote": "Book on Resy; Tue–Sat 5:30–11 PM, closed Sun–Mon. Phone (202) 481-1640.",
-    "imageUrl": "https://img1.wsimg.com/isteam/ip/d7482202-7d13-45eb-bbfb-4cb7144e278f/CR3_4401.jpg",
-    "imageKind": "photo",
-    "imageTries": 0,
-    "adjustedRating": 4.619,
-    "foodSignal": 4.2,
-    "rankScore": 5.459,
-    "pickBasis": "expert",
-    "matchedSources": [
-     "Michelin Guide DC (1 star)",
-     "Washingtonian Top 100 (#4)"
-    ],
-    "isChain": false,
-    "why": "Nakazawa-trained Ricky Wang's counter moves from sweet shrimp in smoked uni sauce to hay-smoked mackerel nigiri with exacting rice and fish — the city's most thrilling omakase at its price."
-   },
-   {
     "name": "Modan",
     "neighborhood": "Tysons, VA",
     "link": "http://www.modanrestaurant.com/",
@@ -3386,91 +3907,98 @@
     "imageKind": "logo",
     "imageTries": 0,
     "adjustedRating": 4.417,
-    "foodSignal": 1.2,
-    "rankScore": 4.657,
+    "foodSignal": 1.5,
+    "rankScore": 4.717,
     "pickBasis": "critic",
     "matchedSources": [
-     "Arlington Magazine"
+     "Arlington Magazine",
+     "Tripadvisor"
     ],
     "isChain": false,
     "why": "Ex-Nobu chef Chico Dator serves Hokkaido uni and soy-cured bluefin with Tokyo-grade precision, and his miso black cod is juicier and less cloying than the dish it riffs on."
    },
    {
-    "name": "Yama Japanese Restaurant (Sushi Yama)",
-    "neighborhood": "Vienna, VA",
-    "link": "https://sushiyama.menu11.com/",
+    "name": "Ariake Japanese Restaurant",
+    "neighborhood": "Hunters Woods, Reston, VA",
+    "link": "https://ariakerestaurant.com/",
     "cuisine": "Japanese / sushi",
     "priceLevel": "$$",
     "rating": {
-     "tripadvisor": {
-      "score": 4.6,
-      "count": 88
-     },
      "google": {
       "score": 4.6,
-      "count": 510
+      "count": 1748
+     },
+     "tripadvisor": {
+      "score": 4.5,
+      "count": 163
      }
     },
     "compositeScore": 4.6,
-    "reviewCount": 510,
+    "reviewCount": 1748,
     "meetsBar": true,
     "reservationDifficulty": {
-     "label": "Easy",
-     "note": "Strip-mall neighborhood spot; walk-ins generally seated, short weekend waits."
+     "label": "Moderate",
+     "note": "Small room fills on weekends; reserve or arrive early."
     },
     "reservationLink": null,
-    "reservationNote": "Phone-only — (703) 242-7703; OpenTable listing does not take reservations.",
+    "reservationNote": "Phone reservations recommended; walk-ins at lunch.",
     "imageUrl": null,
     "imageKind": "none",
     "imageTries": 1,
-    "adjustedRating": 4.555,
+    "adjustedRating": 4.584,
     "foodSignal": 0.3,
-    "rankScore": 4.615,
+    "rankScore": 4.644,
     "pickBasis": "crowd",
     "matchedSources": [
      "Tripadvisor"
     ],
     "isChain": false,
-    "why": "A quietly excellent, family-run sushi bar where fresh, cleanly cut fish and well-seasoned rice outclass the modest setting and gentle prices."
+    "why": "Pristine fish — the toro especially — and careful nigiri make this neighborhood sushi bar the best raw-fish destination in Reston."
    },
    {
-    "name": "Sushi Taro",
-    "neighborhood": "Dupont Circle, DC",
-    "link": "https://sushitaro.com/",
-    "cuisine": "Traditional Edomae Sushi / Kaiseki",
-    "priceLevel": "$$$$",
+    "name": "Tachibana",
+    "neighborhood": "McLean, VA",
+    "link": "http://tachibana.us/sushi/",
+    "cuisine": "Japanese / sushi",
+    "priceLevel": "$$",
     "rating": {
      "tripadvisor": {
-      "score": 4.2,
-      "count": 359
+      "score": 4.3,
+      "count": 213
+     },
+     "google": {
+      "score": 4.6,
+      "count": 1266
      }
     },
-    "compositeScore": 4.2,
-    "reviewCount": 359,
-    "meetsBar": false,
+    "compositeScore": 4.6,
+    "reviewCount": 1266,
+    "meetsBar": true,
     "reservationDifficulty": {
-     "label": "Hard",
-     "note": "Kaiseki counter books out weeks ahead; downstairs izakaya easier to get into."
+     "label": "Moderate",
+     "note": "Long-running local favorite. Weekend dinner fills up, so arrive early or call ahead."
     },
-    "reservationLink": "https://resy.com/cities/washington-dc/venues/sushi-taro",
-    "reservationNote": "Book online.",
-    "imageUrl": null,
-    "imageKind": "none",
-    "imageTries": 1,
-    "adjustedRating": 4.259,
-    "foodSignal": 4.0,
-    "rankScore": 5.059,
-    "pickBasis": "expert",
+    "reservationLink": null,
+    "reservationNote": "Call the restaurant to reserve. Walk-ins are fine early on weeknights.",
+    "imageUrl": "https://tachibana.us/sushi/wp-content/uploads/tachibanainside.jpg",
+    "imageKind": "photo",
+    "imageTries": 0,
+    "adjustedRating": 4.579,
+    "foodSignal": 0.3,
+    "rankScore": 4.639,
+    "pickBasis": "crowd",
     "matchedSources": [
-     "Michelin Guide DC",
-     "Washingtonian Top 100 (#24)",
      "Tripadvisor"
     ],
     "isChain": false,
-    "why": "DC's benchmark for serious, old-school Japanese craftsmanship, from the sushi counter to the tasting-menu room upstairs."
+    "why": "An old-school McLean sushi bar where the fish is pristine and the cuts are generous. It has been doing it right for decades without chasing trends."
    }
   ]
  },
+ "ownerPicks": [
+  "Timber Pizza Co. (McLean)",
+  "The Capital Grille (Tysons)"
+ ],
  "seeMore": {
   "high_end_dc": [
    {
@@ -3498,12 +4026,13 @@
     "imageKind": "logo",
     "imageTries": 0,
     "adjustedRating": 4.274,
-    "foodSignal": 5.0,
-    "rankScore": 5.274,
+    "foodSignal": 5.3,
+    "rankScore": 5.334,
     "pickBasis": "expert",
     "matchedSources": [
      "Michelin Guide DC (1 star)",
-     "James Beard Awards (finalist, 2026)"
+     "James Beard Awards (finalist, 2026)",
+     "Tripadvisor"
     ],
     "isChain": false,
     "why": "A one-Michelin-star tasting menu built on foraged, hyper-seasonal ingredients — more personal and less scene-y than DC's bigger fine-dining names.",
@@ -3535,8 +4064,8 @@
     },
     "reservationLink": null,
     "reservationNote": "Book on Resy (search 'Dōgon'); Tue–Sat 5–10 PM, closed Sun–Mon.",
-    "imageUrl": null,
-    "imageKind": "none",
+    "imageUrl": "https://cache.marriott.com/is/image/marriotts7prod/ak-waswf-dogon-39494:Pano-Hor?wid=900&fit=constrain",
+    "imageKind": "photo",
     "imageTries": 0,
     "adjustedRating": 4.4,
     "foodSignal": 1.5,
@@ -3549,6 +4078,187 @@
     "isChain": false,
     "why": "Kwame Onwuachi threads DC itself through Afro-Caribbean cooking — hoe crab in a Peruvian-chicken-style sauce, curried branzino, buttery Mom Dukes shrimp — with a confidence few kitchens in town can match.",
     "seeMoreReason": "Critic favorite — just missed the 4.5 rating bar",
+    "seeMoreSince": "2026-11-02"
+   }
+  ],
+  "high_end_reston": [
+   {
+    "name": "Clarity (Reston)",
+    "neighborhood": "Reston Town Center, Reston, VA",
+    "link": "https://www.google.com/maps/search/?api=1&query=Clarity+1996+Opportunity+Way+Reston+VA",
+    "cuisine": "New American",
+    "priceLevel": "$$$$",
+    "rating": {},
+    "compositeScore": null,
+    "reviewCount": 0,
+    "meetsBar": false,
+    "reservationDifficulty": {
+     "label": "Moderate",
+     "note": "New 175-seat room; weekends fill a few days out, weeknights generally open."
+    },
+    "reservationLink": null,
+    "reservationNote": "OpenTable listing for Reston still shows 'coming soon' and isn't bookable; call the restaurant or book via its website.",
+    "imageUrl": "https://clarityvienna.com/pluto-videos/2QzwgYSF4xke/abecb3ebc7fbe1bbeebc/poster.jpg",
+    "imageKind": "photo",
+    "imageTries": 0,
+    "adjustedRating": 4.4,
+    "foodSignal": 0,
+    "rankScore": 4.4,
+    "pickBasis": "crowd",
+    "matchedSources": [],
+    "isChain": false,
+    "why": "The Reston offshoot of Vienna's Clarity carries over the five-spice short rib, foie gras and steaks-and-chops repertoire that put the original on NoVA's best lists, plus a six-course tasting menu for occasions.",
+    "seeMoreReason": "Critic favorite — no Google/Tripadvisor rating found yet",
+    "seeMoreSince": "2026-11-02"
+   }
+  ],
+  "moderate_mclean_tysons": [
+   {
+    "name": "Café Tatti",
+    "neighborhood": "McLean, VA",
+    "link": "https://www.cafetatti.com/",
+    "cuisine": "French bistro",
+    "priceLevel": "$$$",
+    "rating": {
+     "tripadvisor": {
+      "score": 4.3,
+      "count": 119
+     },
+     "google": {
+      "score": 4.6,
+      "count": 186
+     }
+    },
+    "compositeScore": 4.6,
+    "reviewCount": 186,
+    "meetsBar": true,
+    "reservationDifficulty": {
+     "label": "Moderate",
+     "note": "A tiny room, so book a few days ahead for weekend dinners."
+    },
+    "reservationLink": "https://www.opentable.com/r/cafe-tatti-mclean",
+    "reservationNote": "Book online (OpenTable).",
+    "imageUrl": "https://resizer.otstatic.com/v4/photos/94476980-2?width=800",
+    "imageKind": "photo",
+    "imageTries": 0,
+    "adjustedRating": 4.511,
+    "foodSignal": 0.3,
+    "rankScore": 4.571,
+    "pickBasis": "crowd",
+    "matchedSources": [
+     "Tripadvisor"
+    ],
+    "isChain": false,
+    "why": "A tiny, lace-curtain French bistro serving honest classics, from sole meunière to escargots, cooked by a kitchen that has never had to raise its voice.",
+    "seeMoreReason": "Clears the bar — ranked just outside the top 5",
+    "seeMoreSince": "2026-11-02"
+   },
+   {
+    "name": "Our Mom Eugenia",
+    "neighborhood": "Great Falls, VA",
+    "link": "http://www.ourmomeugenia.com/",
+    "cuisine": "Greek home cooking",
+    "priceLevel": "$$",
+    "rating": {
+     "tripadvisor": {
+      "score": 4.6,
+      "count": 131
+     }
+    },
+    "compositeScore": 4.6,
+    "reviewCount": 131,
+    "meetsBar": true,
+    "reservationDifficulty": {
+     "label": "Moderate",
+     "note": "Book a few days ahead for Saturday dinner, which has live Greek music; weekday lunch is easy."
+    },
+    "reservationLink": "https://www.opentable.com/r/our-mom-eugenia-great-falls-great-falls",
+    "reservationNote": "Book online (OpenTable) or call (703) 870-7807. Wine Wednesdays: half-price bottles with $30pp in food.",
+    "imageUrl": "https://static.wixstatic.com/media/a66788_1cc9aa00bbfb4c709ab21f2e626b2ba5~mv2.jpg/v1/fill/w_1202,h_802,al_c/a66788_1cc9aa00bbfb4c709ab21f2e626b2ba5~mv2.jpg",
+    "imageKind": "photo",
+    "imageTries": 0,
+    "adjustedRating": 4.493,
+    "foodSignal": 0.3,
+    "rankScore": 4.553,
+    "pickBasis": "crowd",
+    "matchedSources": [
+     "Tripadvisor"
+    ],
+    "isChain": false,
+    "why": "Family-recipe Greek cooking with a real home-kitchen touch, from mezze to slow-cooked lamb and grilled fish, in a room that comes alive with live Greek music on Saturdays.",
+    "seeMoreReason": "Clears the bar — ranked just outside the top 5",
+    "seeMoreSince": "2026-11-02"
+   },
+   {
+    "name": "Kazan Restaurant",
+    "neighborhood": "McLean, VA",
+    "link": "https://www.kazanrestaurant.com/",
+    "cuisine": "Turkish",
+    "priceLevel": "$$",
+    "rating": {
+     "tripadvisor": {
+      "score": 4.4,
+      "count": 259
+     },
+     "google": {
+      "score": 4.5,
+      "count": 461
+     }
+    },
+    "compositeScore": 4.5,
+    "reviewCount": 461,
+    "meetsBar": true,
+    "reservationDifficulty": {
+     "label": "Easy",
+     "note": "Quiet, old-guard dining room. Same-day tables are usually available."
+    },
+    "reservationLink": "https://www.opentable.com/r/kazan-restaurant-mclean",
+    "reservationNote": "Book online (OpenTable).",
+    "imageUrl": "https://static.wixstatic.com/media/66f9a6_f55f76269a754cad82e47030bd20bfd6~mv2_d_4288_2848_s_4_2.jpg/v1/fill/w_900,h_600,al_c,q_85/66f9a6_f55f76269a754cad82e47030bd20bfd6~mv2_d_4288_2848_s_4_2.jpg",
+    "imageKind": "photo",
+    "imageTries": 0,
+    "adjustedRating": 4.475,
+    "foodSignal": 0.3,
+    "rankScore": 4.535,
+    "pickBasis": "crowd",
+    "matchedSources": [
+     "Tripadvisor"
+    ],
+    "isChain": false,
+    "why": "Classic Turkish cooking with a light touch: doner, Iskender kebab and stuffed eggplant made the way McLean's diplomats have trusted for over 40 years.",
+    "seeMoreReason": "Clears the bar — ranked just outside the top 5",
+    "seeMoreSince": "2026-11-02"
+   },
+   {
+    "name": "Sorn Thai",
+    "neighborhood": "McLean (Chesterbrook), VA",
+    "link": "https://www.sornthaiva.com/",
+    "cuisine": "Thai (Southern Thai / family recipes)",
+    "priceLevel": "$$",
+    "rating": {},
+    "compositeScore": null,
+    "reviewCount": 0,
+    "meetsBar": false,
+    "reservationDifficulty": {
+     "label": "Moderate",
+     "note": "A neighborhood favorite since its 2025 opening. Book same-week for weekend dinner."
+    },
+    "reservationLink": null,
+    "reservationNote": "Book on Resy (Sorn Thai, McLean) or call (703) 564-0630.",
+    "imageUrl": "https://static1.squarespace.com/static/66a5372d9ec9d702c74a177b/t/67a65525ac578d0b391a6e71/1738954021302/Sorn.png",
+    "imageKind": "logo",
+    "imageTries": 0,
+    "adjustedRating": 4.4,
+    "foodSignal": 2.4,
+    "rankScore": 4.88,
+    "pickBasis": "expert",
+    "matchedSources": [
+     "Northern Virginia Magazine 50 Best (2026)",
+     "Arlington Magazine"
+    ],
+    "isChain": false,
+    "why": "Grandmother-style Southern Thai cooking with real depth: a slow pork-belly moo hong, coconut-red-curry mussels and a lobster chu chee that justify the drive.",
+    "seeMoreReason": "Critic favorite — no Google/Tripadvisor rating found yet",
     "seeMoreSince": "2026-11-02"
    }
   ],
@@ -3582,15 +4292,232 @@
     "imageKind": "none",
     "imageTries": 0,
     "adjustedRating": 4.308,
-    "foodSignal": 2.4,
-    "rankScore": 4.788,
+    "foodSignal": 3.9,
+    "rankScore": 5.088,
     "pickBasis": "expert",
     "matchedSources": [
      "Washingtonian Top 100 (#81)",
-     "Northern Virginia Magazine 50 Best (2026 #9)"
+     "Washington Post 40 Best (#27)",
+     "Northern Virginia Magazine 50 Best (2026 #9)",
+     "Tripadvisor"
     ],
     "isChain": false,
     "why": "Peter Chang's tribute to the women cooks of his family — numbing Sichuan heat, smoky Hunan stir-fries and homey dumplings — delivers the group's most soulful, least showy cooking.",
+    "seeMoreReason": "Critic favorite — just missed the 4.5 rating bar",
+    "seeMoreSince": "2026-11-02"
+   },
+   {
+    "name": "Ruthie's All-Day",
+    "neighborhood": "Arlington Heights, Arlington, VA",
+    "link": "https://ruthiesallday.com/",
+    "cuisine": "Southern / Barbecue",
+    "priceLevel": "$$",
+    "rating": {
+     "tripadvisor": {
+      "score": 4.4,
+      "count": 70
+     }
+    },
+    "compositeScore": 4.4,
+    "reviewCount": 70,
+    "meetsBar": false,
+    "reservationDifficulty": {
+     "label": "Moderate",
+     "note": "Popular neighborhood spot; weekend dinners benefit from a reservation."
+    },
+    "reservationLink": "https://www.opentable.com/r/ruthies-all-day-arlington",
+    "reservationNote": "Book online.",
+    "imageUrl": "https://images.getbento.com/accounts/1dd3aa1f249196f5f2db5d7bd7ec0f16/media/images/72646Ruthies-All-Day_1.png?w=1200&fit=fill&auto=compress,format&cs=origin&h=600&bg=f4ebdb&pad=100",
+    "imageKind": "logo",
+    "imageTries": 0,
+    "adjustedRating": 4.4,
+    "foodSignal": 1.5,
+    "rankScore": 4.7,
+    "pickBasis": "critic",
+    "matchedSources": [
+     "Northern Virginia Magazine 50 Best (2026)",
+     "Tripadvisor"
+    ],
+    "isChain": false,
+    "why": "Whole-hog, cornbread-and-sorghum Southern cooking that turned a retro diner room into an Arlington institution.",
+    "seeMoreReason": "Was in the top 5 — bumped by a newer pick",
+    "seeMoreSince": "2026-11-02"
+   }
+  ],
+  "casual_mclean_tysons": [
+   {
+    "name": "Timber Pizza Co. (McLean)",
+    "neighborhood": "McLean, VA",
+    "link": "https://www.timberpizza.com/mclean",
+    "cuisine": "Wood-fired pizza",
+    "priceLevel": "$",
+    "rating": {},
+    "compositeScore": null,
+    "reviewCount": 0,
+    "meetsBar": false,
+    "reservationDifficulty": {
+     "label": "Easy",
+     "note": "Fast-casual; walk in or order ahead on Toast, with an early-evening rush on weekends."
+    },
+    "reservationLink": null,
+    "reservationNote": "Walk-in only (fast-casual). Order ahead online.",
+    "imageUrl": "https://static.wixstatic.com/media/985cc1_9a9f18eaf10b4d83bab2b3dbe2cc33b3~mv2.png/v1/fit/w_1200,h_800,al_c/985cc1_9a9f18eaf10b4d83bab2b3dbe2cc33b3~mv2.png",
+    "imageKind": "logo",
+    "imageTries": 0,
+    "adjustedRating": 4.4,
+    "foodSignal": 0.0,
+    "rankScore": 4.4,
+    "pickBasis": "crowd",
+    "matchedSources": [
+     "Ghazal's pick"
+    ],
+    "isChain": true,
+    "why": "A blistered, smoky-edged crust from a real wood fire, with bright green-sauce pies that need no tricks. It is the best casual pizza in downtown McLean.",
+    "chainRationale": "Small local group, not a national chain. It started as a Petworth (DC) farmers-market truck and now has roughly 8 to 10 shops (DC, Ballston, DCA airport, McLean, Annapolis, Raleigh, Durham, Charleston). The DC original was a Michelin Bib Gourmand (2020 and 2021) and a Washingtonian 100 Very Best pick (2017, 2019, 2020). McLean uses the same wood-fired dough and menu. The owner named it as a win.",
+    "seeMoreReason": "Ghazal's pick — no Google/Tripadvisor rating found yet",
+    "seeMoreSince": "2026-11-02"
+   }
+  ],
+  "casual_reston": [
+   {
+    "name": "Call Your Mother (Reston)",
+    "neighborhood": "North Point Village Center, Reston, VA",
+    "link": "https://www.callyourmotherdeli.com/reston-va-call-your-mother-deli",
+    "cuisine": "Jewish-ish deli / bagels",
+    "priceLevel": "$",
+    "rating": {},
+    "compositeScore": null,
+    "reviewCount": 0,
+    "meetsBar": false,
+    "reservationDifficulty": {
+     "label": "Easy",
+     "note": "Counter service; weekend morning lines move fast."
+    },
+    "reservationLink": null,
+    "reservationNote": "Walk-in only — counter service; order ahead online.",
+    "imageUrl": "https://static1.squarespace.com/static/63e3ca88a615473a4345cd65/t/6941b56726a87274e552d706/1776876450036/img_4196_52835829090_o.jpg",
+    "imageKind": "photo",
+    "imageTries": 0,
+    "adjustedRating": 4.4,
+    "foodSignal": 0,
+    "rankScore": 4.4,
+    "pickBasis": "crowd",
+    "matchedSources": [],
+    "isChain": true,
+    "why": "Wood-fired, honey-glossed bagels piled into inventive sandwiches — still the best bagel north of the Toll Road.",
+    "chainRationale": "Local DC group with many locations, but a 2026 RAMMY finalist (Casual Restaurant of the Year) and a long-time Washingtonian favorite for its wood-fired bagels.",
+    "seeMoreReason": "Critic favorite — no Google/Tripadvisor rating found yet",
+    "seeMoreSince": "2026-11-02"
+   }
+  ],
+  "casual_nova": [
+   {
+    "name": "Chaatwala",
+    "neighborhood": "Herndon, VA",
+    "link": "https://chaatwala.com/",
+    "cuisine": "Indian street food (chaat)",
+    "priceLevel": "$",
+    "rating": {
+     "tripadvisor": {
+      "score": 5.0,
+      "count": 3
+     }
+    },
+    "compositeScore": 5.0,
+    "reviewCount": 3,
+    "meetsBar": true,
+    "reservationDifficulty": {
+     "label": "Easy",
+     "note": "Counter-service snack shop; no bookings needed."
+    },
+    "reservationLink": null,
+    "reservationNote": "Walk-in only — counter service; closed Mondays.",
+    "imageUrl": "https://fleksa-cdn-v3.s3.eu-central-1.amazonaws.com/b11e454d-3565-497e-b790-c7d31ff49b4a/background/1705501633753_2023_01_31_jpg",
+    "imageKind": "photo",
+    "imageTries": 0,
+    "adjustedRating": 4.412,
+    "foodSignal": 1.5,
+    "rankScore": 4.712,
+    "pickBasis": "critic",
+    "matchedSources": [
+     "Washington Post 40 Best (#36)",
+     "Tripadvisor"
+    ],
+    "isChain": false,
+    "why": "Crackling pani puri, tangy papdi chaat and buttery pav bhaji hit the sweet-sour-crunchy notes of Mumbai street snacks with real verve.",
+    "seeMoreReason": "Clears the bar — ranked just outside the top 5",
+    "seeMoreSince": "2026-11-02"
+   },
+   {
+    "name": "Truong Tien",
+    "neighborhood": "Eden Center, Falls Church, VA",
+    "link": "https://edencenter.com/stores/truong-tien-restaurant/",
+    "cuisine": "Vietnamese (Hue-style)",
+    "priceLevel": "$",
+    "rating": {},
+    "compositeScore": null,
+    "reviewCount": 0,
+    "meetsBar": false,
+    "reservationDifficulty": {
+     "label": "Easy",
+     "note": "Walk-in Eden Center dining room; expect a short weekend-lunch wait since the WaPo No. 10 ranking."
+    },
+    "reservationLink": null,
+    "reservationNote": "Walk-in only — closed Thursdays; (703) 216-2868.",
+    "imageUrl": "https://edencenter.com/wp-content/uploads/2023/05/truong-tien.jpg",
+    "imageKind": "photo",
+    "imageTries": 0,
+    "adjustedRating": 4.4,
+    "foodSignal": 2.4,
+    "rankScore": 4.88,
+    "pickBasis": "expert",
+    "matchedSources": [
+     "Washingtonian Top 100 (#94)",
+     "Washington Post 40 Best (#10)"
+    ],
+    "isChain": false,
+    "why": "The kitchen's central-Vietnamese repertoire — delicate steamed rice cakes and chewy tapioca dumplings, then a fiery, lemongrass-perfumed bun bo Hue — is about as precise as Eden Center cooking gets.",
+    "seeMoreReason": "Critic favorite — no Google/Tripadvisor rating found yet",
+    "seeMoreSince": "2026-11-02"
+   },
+   {
+    "name": "Lighthouse Tofu (Vit Goel Tofu)",
+    "neighborhood": "Annandale, VA",
+    "link": "https://lighthousetofu.shop/",
+    "cuisine": "Korean soft-tofu stew (soondubu)",
+    "priceLevel": "$$",
+    "rating": {
+     "tripadvisor": {
+      "score": 4.1,
+      "count": 76
+     },
+     "google": {
+      "score": 4.3,
+      "count": 1163
+     }
+    },
+    "compositeScore": 4.3,
+    "reviewCount": 1163,
+    "meetsBar": false,
+    "reservationDifficulty": {
+     "label": "Easy",
+     "note": "Large walk-in room open 10am-11pm daily; dinner-hour waits are short."
+    },
+    "reservationLink": null,
+    "reservationNote": "Walk-in only.",
+    "imageUrl": "https://static3.grubbio.com/74670g-albums-1.jpg",
+    "imageKind": "photo",
+    "imageTries": 0,
+    "adjustedRating": 4.311,
+    "foodSignal": 1.5,
+    "rankScore": 4.611,
+    "pickBasis": "critic",
+    "matchedSources": [
+     "Washington Post 40 Best (#22)",
+     "Tripadvisor"
+    ],
+    "isChain": false,
+    "why": "Bubbling stone pots of silken, house-style soondubu, its chile broth dialed to your heat level and cracked open with a raw egg, alongside a generous banchan spread make this Annandale's definitive comfort meal.",
     "seeMoreReason": "Critic favorite — just missed the 4.5 rating bar",
     "seeMoreSince": "2026-11-02"
    }
@@ -3633,7 +4560,160 @@
     "seeMoreSince": "2026-11-02"
    }
   ],
+  "happy_hour_mclean_tysons": [
+   {
+    "name": "The Old Brogue",
+    "neighborhood": "Great Falls, VA",
+    "link": "https://oldbrogue.com/",
+    "cuisine": "Irish pub",
+    "priceLevel": "$$",
+    "rating": {
+     "tripadvisor": {
+      "score": 4.3,
+      "count": 317
+     }
+    },
+    "compositeScore": 4.3,
+    "reviewCount": 317,
+    "meetsBar": false,
+    "reservationDifficulty": {
+     "label": "Easy",
+     "note": "Walk-in pub; only St. Patrick's Day and live-music weekend nights get truly packed."
+    },
+    "reservationLink": null,
+    "reservationNote": "Walk-in — (703) 759-3309 for larger groups.",
+    "imageUrl": "https://static.showit.co/1600/8_7WlCr3QUSs8YYc8whfIw/230638/js_l6878.jpg",
+    "imageKind": "photo",
+    "imageTries": 0,
+    "adjustedRating": 4.332,
+    "foodSignal": 0.3,
+    "rankScore": 4.392,
+    "pickBasis": "crowd",
+    "matchedSources": [
+     "Tripadvisor"
+    ],
+    "isChain": false,
+    "why": "A 40-plus-year Great Falls institution with a 150-bottle whiskey shelf, a proper pint of Guinness and honest fish and chips — the after-hike drink everyone in the village ends up having.",
+    "seeMoreReason": "Strong local pick — just missed the 4.5 rating bar",
+    "seeMoreSince": "2026-11-02"
+   },
+   {
+    "name": "Härth",
+    "neighborhood": "Tysons (Hilton McLean Tysons Corner), VA",
+    "link": "https://www.harthrestaurant.com/",
+    "cuisine": "Modern American, farm-to-table",
+    "priceLevel": "$$$",
+    "rating": {
+     "tripadvisor": {
+      "score": 4.2,
+      "count": 251
+     }
+    },
+    "compositeScore": 4.2,
+    "reviewCount": 251,
+    "meetsBar": false,
+    "reservationDifficulty": {
+     "label": "Easy",
+     "note": "Bar seats are walk-in; OpenTable tables are open same-day most nights."
+    },
+    "reservationLink": "https://www.opentable.com/r/harth-mclean",
+    "reservationNote": "Book on OpenTable or walk in to the bar.",
+    "imageUrl": null,
+    "imageKind": "none",
+    "imageTries": 1,
+    "adjustedRating": 4.275,
+    "foodSignal": 0.3,
+    "rankScore": 4.335,
+    "pickBasis": "crowd",
+    "matchedSources": [
+     "Tripadvisor"
+    ],
+    "isChain": false,
+    "why": "A fireplace-lit lounge with its own rooftop beehives behind the honey cocktails — the most grown-up after-work bar in Tysons, with a regional-farm kitchen that's better than a hotel address suggests.",
+    "seeMoreReason": "Strong local pick — just missed the 4.5 rating bar",
+    "seeMoreSince": "2026-11-02"
+   }
+  ],
   "italian_dc": [
+   {
+    "name": "Reveler's Hour",
+    "neighborhood": "Adams Morgan, DC",
+    "link": "https://www.revelershour.com/",
+    "cuisine": "Italian wine bar",
+    "priceLevel": "$$$",
+    "rating": {
+     "google": {
+      "score": 4.5,
+      "count": 385
+     }
+    },
+    "compositeScore": 4.5,
+    "reviewCount": 385,
+    "meetsBar": true,
+    "reservationDifficulty": {
+     "label": "Hard",
+     "note": "Small wine-bar footprint means Resy tables disappear almost instantly; expect a wait or an early walk-in."
+    },
+    "reservationLink": "https://www.revelershour.com/reservations",
+    "reservationNote": "Book online.",
+    "imageUrl": "https://images.squarespace-cdn.com/content/v1/5dbdc3c0238618542744153c/2a7db93a-504d-49ee-83c6-9deae6cabeaf/1000010302.jpg",
+    "imageKind": "photo",
+    "imageTries": 0,
+    "adjustedRating": 4.472,
+    "foodSignal": 3.7,
+    "rankScore": 5.212,
+    "pickBasis": "expert",
+    "matchedSources": [
+     "Michelin Guide DC",
+     "Washingtonian Top 100 (#58)"
+    ],
+    "isChain": false,
+    "why": "A tiny, glowing wine bar turning out pasta good enough to anchor a splurge-adjacent date night without the splurge-adjacent bill.",
+    "seeMoreReason": "Was in the top 5 — bumped by a newer pick",
+    "seeMoreSince": "2026-11-02"
+   },
+   {
+    "name": "Caruso's Grocery",
+    "neighborhood": "Capitol Hill, DC",
+    "link": "https://www.carusosgrocery.com",
+    "cuisine": "Italian-American red sauce",
+    "priceLevel": "$$",
+    "rating": {
+     "tripadvisor": {
+      "score": 4.3,
+      "count": 16
+     },
+     "google": {
+      "score": 4.6,
+      "count": 510
+     }
+    },
+    "compositeScore": 4.6,
+    "reviewCount": 510,
+    "meetsBar": true,
+    "reservationDifficulty": {
+     "label": "Hard",
+     "note": "Small room on OpenTable (4.9 from 1,600+ diners) — prime weekend slots go 1-2 weeks out."
+    },
+    "reservationLink": "https://www.opentable.com/r/carusos-grocery-dc-washington",
+    "reservationNote": "Book on OpenTable; closed Mondays.",
+    "imageUrl": "https://static.wixstatic.com/media/ea7e5d_78936f2ef78f48b585bae30ee8928901~mv2.jpg/v1/fill/w_900,h_600,al_c,q_85/ea7e5d_78936f2ef78f48b585bae30ee8928901~mv2.jpg",
+    "imageKind": "photo",
+    "imageTries": 0,
+    "adjustedRating": 4.555,
+    "foodSignal": 2.7,
+    "rankScore": 5.095,
+    "pickBasis": "expert",
+    "matchedSources": [
+     "Washingtonian Top 100 (#39)",
+     "Washington Post 40 Best (#34)",
+     "Tripadvisor"
+    ],
+    "isChain": false,
+    "why": "Matt Adler's ode to the red-sauce joint — garlic bread, a towering chicken parm, lemony scampi — is executed with fine-dining technique and zero irony.",
+    "seeMoreReason": "Clears the bar — ranked just outside the top 5",
+    "seeMoreSince": "2026-11-02"
+   },
    {
     "name": "Piccolina",
     "neighborhood": "Penn Quarter / CityCenterDC",
@@ -3655,8 +4735,8 @@
     },
     "reservationLink": "https://www.opentable.com/r/piccolina-da-centrolina-washington",
     "reservationNote": "Book online.",
-    "imageUrl": null,
-    "imageKind": "none",
+    "imageUrl": "https://static1.squarespace.com/static/5cb92f287a1fbd40b6e09824/t/5cf48c3f11165e00019d2afe/1559530568931/PiccolinaDaCentrolina+FINAL.png",
+    "imageKind": "logo",
     "imageTries": 0,
     "adjustedRating": 4.42,
     "foodSignal": 0.3,
@@ -3695,8 +4775,8 @@
     },
     "reservationLink": "https://www.opentable.com/masseria",
     "reservationNote": "Book online (OpenTable; Tock also used for prepaid tasting). Tue–Sat dinner, closed Sun–Mon.",
-    "imageUrl": null,
-    "imageKind": "none",
+    "imageUrl": "https://static1.squarespace.com/static/597a191bbebafb0a625278ea/t/59920e51e45a7c17d1fadf35/1760363367406/masseria-icon.jpg",
+    "imageKind": "logo",
     "imageTries": 0,
     "adjustedRating": 4.321,
     "foodSignal": 3.3,
@@ -3708,6 +4788,43 @@
     ],
     "isChain": false,
     "why": "Nicholas Stefanelli's Puglian tasting menu turns pristine seafood and handmade pasta into a polished, coastal-Italian progression in a surprisingly serene Union Market courtyard.",
+    "seeMoreReason": "Critic favorite — just missed the 4.5 rating bar",
+    "seeMoreSince": "2026-11-02"
+   },
+   {
+    "name": "Bar del Monte",
+    "neighborhood": "Mount Pleasant, DC",
+    "link": "https://www.bardelmonte.com",
+    "cuisine": "Italian trattoria / wine bar",
+    "priceLevel": "$$",
+    "rating": {
+     "google": {
+      "score": 4.4,
+      "count": 170
+     }
+    },
+    "compositeScore": 4.4,
+    "reviewCount": 170,
+    "meetsBar": false,
+    "reservationDifficulty": {
+     "label": "Moderate",
+     "note": "No reservations in a 38-seat room — arrive at 5pm opening on weekends or expect a wait."
+    },
+    "reservationLink": null,
+    "reservationNote": "Walk-in only — closed Tue & Wed.",
+    "imageUrl": null,
+    "imageKind": "none",
+    "imageTries": 1,
+    "adjustedRating": 4.4,
+    "foodSignal": 2.4,
+    "rankScore": 4.88,
+    "pickBasis": "expert",
+    "matchedSources": [
+     "Washingtonian Top 100 (#51)",
+     "Washington Post 40 Best (#4)"
+    ],
+    "isChain": false,
+    "why": "Oliver Pastan's ever-changing menu — ricotta ravioli under lamb ragù, butter-and-sage tagliolini, bubbly-crusted pizzas — is Italian cooking of disarming simplicity and exactness.",
     "seeMoreReason": "Critic favorite — just missed the 4.5 rating bar",
     "seeMoreSince": "2026-11-02"
    },
@@ -3734,13 +4851,14 @@
     "reservationNote": "Book online.",
     "imageUrl": null,
     "imageKind": "none",
-    "imageTries": 0,
+    "imageTries": 1,
     "adjustedRating": 4.247,
-    "foodSignal": 2.5,
-    "rankScore": 4.747,
+    "foodSignal": 2.8,
+    "rankScore": 4.807,
     "pickBasis": "expert",
     "matchedSources": [
-     "Michelin Guide DC"
+     "Michelin Guide DC",
+     "Tripadvisor"
     ],
     "isChain": false,
     "why": "House-made pasta rolled and cut daily is the whole case for Fabio and Maria Trabocchi's standing Washingtonian favorite.",
@@ -3788,7 +4906,7 @@
    {
     "name": "Pulcinella",
     "neighborhood": "McLean, VA",
-    "link": "https://www.google.com/maps/search/?api=1&query=Pulcinella+1310+Chain+Bridge+Rd+McLean+VA",
+    "link": "https://pulcinella-restaurant.com/",
     "cuisine": "Southern Italian-American",
     "priceLevel": "$$",
     "rating": {
@@ -3812,7 +4930,7 @@
     "reservationNote": "Walk-in; call ahead for large groups.",
     "imageUrl": null,
     "imageKind": "none",
-    "imageTries": 0,
+    "imageTries": 1,
     "adjustedRating": 4.4,
     "foodSignal": 0.3,
     "rankScore": 4.46,
@@ -3830,7 +4948,7 @@
    {
     "name": "The Italian Store",
     "neighborhood": "Lyon Village, Arlington, VA",
-    "link": "https://www.italianstore.com/",
+    "link": "https://theitalianovenmclean.com/",
     "cuisine": "Italian deli / pizza",
     "priceLevel": "$",
     "rating": {
@@ -3866,6 +4984,42 @@
   ],
   "japanese_asian": [
    {
+    "name": "Present Restaurant",
+    "neighborhood": "Falls Church, VA",
+    "link": "https://presentrestaurant.com/",
+    "cuisine": "Vietnamese",
+    "priceLevel": "$$",
+    "rating": {
+     "tripadvisor": {
+      "score": 4.6,
+      "count": 202
+     }
+    },
+    "compositeScore": 4.6,
+    "reviewCount": 202,
+    "meetsBar": true,
+    "reservationDifficulty": {
+     "label": "Moderate",
+     "note": "Popular with locals; reserve ahead for weekend dinner."
+    },
+    "reservationLink": "https://www.opentable.com/r/present-restaurant-falls-church",
+    "reservationNote": "Book online.",
+    "imageUrl": "https://static-content.owner.com/funnel/images/4e1bd381-656f-4d36-a56e-22d845c938e9",
+    "imageKind": "photo",
+    "imageTries": 0,
+    "adjustedRating": 4.515,
+    "foodSignal": 0.3,
+    "rankScore": 4.575,
+    "pickBasis": "crowd",
+    "matchedSources": [
+     "Tripadvisor"
+    ],
+    "isChain": false,
+    "why": "A Falls Church Vietnamese kitchen turning out pho and shaking beef precise enough to make the drive from DC worth it.",
+    "seeMoreReason": "Was in the top 5 — bumped by a newer pick",
+    "seeMoreSince": "2026-11-02"
+   },
+   {
     "name": "Moon Rabbit",
     "neighborhood": "Penn Quarter, DC",
     "link": "https://www.moonrabbitdc.com/",
@@ -3890,16 +5044,17 @@
     },
     "reservationLink": "https://www.opentable.com/r/moon-rabbit-by-kevin-tien-washington",
     "reservationNote": "Book online via OpenTable; Mon–Sat 4:30–9:30 PM, closed Sun.",
-    "imageUrl": null,
-    "imageKind": "none",
+    "imageUrl": "https://static1.squarespace.com/static/665fa5ef5f9b2f5702a68ccb/t/68a38ad3ffa52e7d9eae09a2/1755548371116/Exterior+-+Roy+Arguelles.jpg",
+    "imageKind": "photo",
     "imageTries": 0,
     "adjustedRating": 4.4,
-    "foodSignal": 4.5,
-    "rankScore": 5.3,
+    "foodSignal": 5.7,
+    "rankScore": 5.54,
     "pickBasis": "expert",
     "matchedSources": [
      "James Beard Awards (winner, 2026)",
      "Washingtonian Top 100 (#3)",
+     "Washington Post 40 Best (#37)",
      "Tripadvisor"
     ],
     "isChain": false,
@@ -3970,15 +5125,58 @@
     "imageKind": "photo",
     "imageTries": 0,
     "adjustedRating": 4.4,
-    "foodSignal": 2.5,
-    "rankScore": 4.9,
+    "foodSignal": 2.8,
+    "rankScore": 4.96,
     "pickBasis": "expert",
     "matchedSources": [
-     "Michelin Guide DC (Bib Gourmand)"
+     "Michelin Guide DC (Bib Gourmand)",
+     "Tripadvisor"
     ],
     "isChain": false,
     "why": "The scrappy shop that put H Street ramen on the map and still packs a line out the door.",
     "seeMoreReason": "Was in the top 5 — bumped by a newer pick",
+    "seeMoreSince": "2026-11-02"
+   },
+   {
+    "name": "Izakaya Seki",
+    "neighborhood": "U Street, DC",
+    "link": "https://www.sekidc.com",
+    "cuisine": "Japanese izakaya",
+    "priceLevel": "$$$",
+    "rating": {
+     "tripadvisor": {
+      "score": 4.4,
+      "count": 76
+     },
+     "google": {
+      "score": 4.4,
+      "count": 615
+     }
+    },
+    "compositeScore": 4.4,
+    "reviewCount": 615,
+    "meetsBar": false,
+    "reservationDifficulty": {
+     "label": "Hard",
+     "note": "Tiny two-floor space; demand spiked after WaPo critic Sontag's first-ever 4-star review — plan 1-3 weeks out."
+    },
+    "reservationLink": null,
+    "reservationNote": "Book via the restaurant's own system at sekidc.com/reservations-1 or call (202) 588-5841; closed Mondays.",
+    "imageUrl": "https://static1.squarespace.com/static/578f02e6cd0f68cb49b7565e/t/5793a662c534a514ed123cfd/1469294178992/izakaya_wood_narrow_header_brushed.jpg",
+    "imageKind": "photo",
+    "imageTries": 0,
+    "adjustedRating": 4.4,
+    "foodSignal": 2.7,
+    "rankScore": 4.94,
+    "pickBasis": "expert",
+    "matchedSources": [
+     "Washingtonian Top 100 (#40)",
+     "Washington Post 40 Best (#3)",
+     "Tripadvisor"
+    ],
+    "isChain": false,
+    "why": "Father-and-daughter team Hiroshi and Cizuka Seki turn out pristine sashimi, delicate simmered dishes and offal skewers with the quiet rigor of a Tokyo neighborhood izakaya.",
+    "seeMoreReason": "Critic favorite — just missed the 4.5 rating bar",
     "seeMoreSince": "2026-11-02"
    }
   ],
@@ -4004,8 +5202,8 @@
     },
     "reservationLink": null,
     "reservationNote": "Book on Resy (search 'Amparo Fondita'); weekend brunch Sat–Sun, closed Mon.",
-    "imageUrl": null,
-    "imageKind": "none",
+    "imageUrl": "https://static1.squarespace.com/static/5b18899f70e802e523553734/t/5d77e2a06723583bf7206201/1568137894666/Amparo_R1%402x.png",
+    "imageKind": "logo",
     "imageTries": 0,
     "adjustedRating": 4.375,
     "foodSignal": 4.0,
@@ -4042,15 +5240,16 @@
     },
     "reservationLink": null,
     "reservationNote": "Book on Resy (noon, 30 days out); walk-in bar seats and two tables held nightly at 5 PM.",
-    "imageUrl": null,
-    "imageKind": "none",
+    "imageUrl": "https://static.wixstatic.com/media/23f43b_2df5e5c332c84a8ba19e5c8ba5d15441~mv2.jpg/v1/fill/w_1080,h_720,al_c/23f43b_2df5e5c332c84a8ba19e5c8ba5d15441~mv2.jpg",
+    "imageKind": "photo",
     "imageTries": 0,
     "adjustedRating": 4.35,
-    "foodSignal": 1.2,
-    "rankScore": 4.59,
-    "pickBasis": "critic",
+    "foodSignal": 2.4,
+    "rankScore": 4.83,
+    "pickBasis": "expert",
     "matchedSources": [
-     "Washingtonian Top 100 (#13)"
+     "Washingtonian Top 100 (#13)",
+     "Washington Post 40 Best (#24)"
     ],
     "isChain": false,
     "why": "Isabel Coss and Matt Conroy cook Mexico City over live fire — smoky tetelas, tlayudas, and a cinnamon-sugar buñuelo — with a pastry chef's precision and real soul.",
@@ -4059,6 +5258,84 @@
    }
   ],
   "sushi": [
+   {
+    "name": "Yama Japanese Restaurant (Sushi Yama)",
+    "neighborhood": "Vienna, VA",
+    "link": "https://sushiyama.menu11.com/",
+    "cuisine": "Japanese / sushi",
+    "priceLevel": "$$",
+    "rating": {
+     "tripadvisor": {
+      "score": 4.6,
+      "count": 88
+     },
+     "google": {
+      "score": 4.6,
+      "count": 510
+     }
+    },
+    "compositeScore": 4.6,
+    "reviewCount": 510,
+    "meetsBar": true,
+    "reservationDifficulty": {
+     "label": "Easy",
+     "note": "Strip-mall neighborhood spot; walk-ins generally seated, short weekend waits."
+    },
+    "reservationLink": null,
+    "reservationNote": "Phone-only — (703) 242-7703; OpenTable listing does not take reservations.",
+    "imageUrl": null,
+    "imageKind": "none",
+    "imageTries": 1,
+    "adjustedRating": 4.555,
+    "foodSignal": 0.3,
+    "rankScore": 4.615,
+    "pickBasis": "crowd",
+    "matchedSources": [
+     "Tripadvisor"
+    ],
+    "isChain": false,
+    "why": "A quietly excellent, family-run sushi bar where fresh, cleanly cut fish and well-seasoned rice outclass the modest setting and gentle prices.",
+    "seeMoreReason": "Clears the bar — ranked just outside the top 5",
+    "seeMoreSince": "2026-11-02"
+   },
+   {
+    "name": "Sushi Taro",
+    "neighborhood": "Dupont Circle, DC",
+    "link": "https://sushitaro.com/",
+    "cuisine": "Traditional Edomae Sushi / Kaiseki",
+    "priceLevel": "$$$$",
+    "rating": {
+     "tripadvisor": {
+      "score": 4.2,
+      "count": 359
+     }
+    },
+    "compositeScore": 4.2,
+    "reviewCount": 359,
+    "meetsBar": false,
+    "reservationDifficulty": {
+     "label": "Hard",
+     "note": "Kaiseki counter books out weeks ahead; downstairs izakaya easier to get into."
+    },
+    "reservationLink": "https://resy.com/cities/washington-dc/venues/sushi-taro",
+    "reservationNote": "Book online.",
+    "imageUrl": null,
+    "imageKind": "none",
+    "imageTries": 1,
+    "adjustedRating": 4.259,
+    "foodSignal": 4.0,
+    "rankScore": 5.059,
+    "pickBasis": "expert",
+    "matchedSources": [
+     "Michelin Guide DC",
+     "Washingtonian Top 100 (#24)",
+     "Tripadvisor"
+    ],
+    "isChain": false,
+    "why": "DC's benchmark for serious, old-school Japanese craftsmanship, from the sushi counter to the tasting-menu room upstairs.",
+    "seeMoreReason": "Critic favorite — just missed the 4.5 rating bar",
+    "seeMoreSince": "2026-11-02"
+   },
    {
     "name": "Yume Sushi",
     "neighborhood": "East Falls Church, Arlington, VA",
@@ -4080,8 +5357,8 @@
     },
     "reservationLink": "https://www.opentable.com/r/yume-sushi-arlington",
     "reservationNote": "Book online via OpenTable; 10-course tasting (~$185pp) Sun–Thu needs $25pp deposit. Phone (703) 269-5064.",
-    "imageUrl": null,
-    "imageKind": "none",
+    "imageUrl": "https://images.getbento.com/accounts/0b1d1b737f3731f3e0b0ad04ef276bcd/media/images/yume_heronew.png",
+    "imageKind": "photo",
     "imageTries": 0,
     "adjustedRating": 4.367,
     "foodSignal": 1.5,
