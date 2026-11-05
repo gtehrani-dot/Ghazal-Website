@@ -4321,7 +4321,8 @@
   "Bombay Velvet",
   "Lake Anne Coffee House & Wine Bar",
   "Cafe Montmartre",
-  "Heirloom"
+  "Heirloom",
+  "Barcelona Wine Bar"
  ],
  "seeMore": {
   "high_end_dc": [
@@ -4962,6 +4963,49 @@
     "isChain": false,
     "why": "A fireplace-lit lounge with its own rooftop beehives behind the honey cocktails — the most grown-up after-work bar in Tysons, with a regional-farm kitchen that's better than a hotel address suggests.",
     "seeMoreReason": "Strong local pick — just missed the 4.5 rating bar",
+    "seeMoreSince": "2026-11-02"
+   }
+  ],
+  "happy_hour_reston": [
+   {
+    "name": "Barcelona Wine Bar",
+    "neighborhood": "Reston Town Center, Reston, VA",
+    "link": "https://barcelonawinebar.com/location/reston/",
+    "cuisine": "Spanish tapas & wine bar",
+    "priceLevel": "$$",
+    "rating": {
+     "google": {
+      "score": 4.5,
+      "count": 2430
+     },
+     "tripadvisor": {
+      "score": 4.3,
+      "count": 311
+     }
+    },
+    "compositeScore": 4.5,
+    "reviewCount": 2430,
+    "meetsBar": true,
+    "reservationDifficulty": {
+     "label": "Moderate",
+     "note": "Weekend prime time a few days out; bar walk-in."
+    },
+    "reservationLink": "https://barcelonawinebar.com/location/reston/",
+    "reservationNote": "Book via Barcelona's website or walk in to the bar.",
+    "imageUrl": "https://barcelonawinebar.com/media/barteca_interiors_0097.jpg",
+    "imageKind": "photo",
+    "imageTries": 0,
+    "adjustedRating": 4.494,
+    "foodSignal": 0.3,
+    "rankScore": 4.554,
+    "pickBasis": "crowd",
+    "matchedSources": [
+     "Tripadvisor"
+    ],
+    "isChain": true,
+    "why": "Crisp tapas and a deep Spanish wine list, with a happy hour that puts oysters and coca on the bar for $5.",
+    "chainRationale": "Ghazal's pick: a regular for her family. Kept in See more because they already know it well.",
+    "seeMoreReason": "Ghazal's pick — a family regular, so it lives in See more",
     "seeMoreSince": "2026-11-02"
    }
   ],
