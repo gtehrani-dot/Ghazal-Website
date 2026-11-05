@@ -431,6 +431,38 @@
     "why": "A hidden speakeasy upstairs from Open Road where chef Dane Sewlall's wagyu meatballs and short-rib plates are cooked with far more care than the clubby setting suggests."
    },
    {
+    "name": "Clarity (Reston)",
+    "neighborhood": "Reston Town Center, Reston, VA",
+    "link": "https://clarityreston.com/",
+    "cuisine": "New American",
+    "priceLevel": "$$$$",
+    "rating": {
+     "google": {
+      "score": 4.7,
+      "count": 207
+     }
+    },
+    "compositeScore": 4.7,
+    "reviewCount": 207,
+    "meetsBar": true,
+    "reservationDifficulty": {
+     "label": "Moderate",
+     "note": "New 175-seat room; weekends fill a few days out, weeknights generally open."
+    },
+    "reservationLink": "https://clarityreston.com/",
+    "reservationNote": "Book on clarityreston.com or call the restaurant. Happy hour is walk-in at the bar.",
+    "imageUrl": "https://clarityreston.com/pluto-images/funnel/images/67e2343a-0f7d-4e48-b47e-3e270aabad5f",
+    "imageKind": "photo",
+    "imageTries": 0,
+    "adjustedRating": 4.574,
+    "foodSignal": 0,
+    "rankScore": 4.574,
+    "pickBasis": "crowd",
+    "matchedSources": [],
+    "isChain": false,
+    "why": "The Reston offshoot of Vienna's Clarity brings its five-spice short rib, foie gras and steaks-and-chops cooking to Reston Town Center, with a lunch and happy-hour program the original doesn't have."
+   },
+   {
     "name": "The Simon at Reston Station",
     "neighborhood": "Reston Station (JW Marriott), Reston, VA",
     "link": "https://www.thesimonrestonstation.com/",
@@ -463,6 +495,45 @@
     ],
     "isChain": false,
     "why": "Tableside duck à la presse and a roaming cheese cart make this the most theatrical, special-occasion cooking in Reston, rooted in Mid-Atlantic ingredients."
+   },
+   {
+    "name": "Davio's Northern Italian Steakhouse (Reston)",
+    "neighborhood": "Reston Station, Reston, VA",
+    "link": "https://davios.com/reston",
+    "cuisine": "Northern Italian steakhouse",
+    "priceLevel": "$$$$",
+    "rating": {
+     "google": {
+      "score": 4.3,
+      "count": 347
+     },
+     "tripadvisor": {
+      "score": 3.8,
+      "count": 14
+     }
+    },
+    "compositeScore": 4.3,
+    "reviewCount": 347,
+    "meetsBar": false,
+    "reservationDifficulty": {
+     "label": "Easy",
+     "note": "Big room at the Wiehle-Reston Metro; weeknights are walk-in friendly, weekends book a few days out."
+    },
+    "reservationLink": "https://davios.com/reston",
+    "reservationNote": "Book on davios.com or call (888) 995-4810; it no longer takes OpenTable bookings.",
+    "imageUrl": "https://davios.com/sites/default/files/styles/stripe_s/public/images/table_120_looking_down.jpg",
+    "imageKind": "photo",
+    "imageTries": 0,
+    "adjustedRating": 4.33,
+    "foodSignal": 0.3,
+    "rankScore": 4.39,
+    "pickBasis": "crowd",
+    "matchedSources": [
+     "Tripadvisor"
+    ],
+    "isChain": true,
+    "why": "Hand-rolled potato gnocchi, homemade pastas and 55-day prime-aged strip from an open display kitchen: Reston's grown-up steak-and-pasta night out.",
+    "chainRationale": "Ghazal's pick: she vouches for the Reston Station location."
    }
   ],
   "high_end_nova": [
@@ -1034,6 +1105,75 @@
   ],
   "moderate_reston": [
    {
+    "name": "Lantern House Kitchen & Bar",
+    "neighborhood": "Reston Station, Reston, VA",
+    "link": "https://lanternhousekitchenbar.com/",
+    "cuisine": "Vietnamese / Asian",
+    "priceLevel": "$$",
+    "rating": {
+     "google": {
+      "score": 4.8,
+      "count": 853
+     }
+    },
+    "compositeScore": 4.8,
+    "reviewCount": 853,
+    "meetsBar": true,
+    "reservationDifficulty": {
+     "label": "Easy",
+     "note": "Walk-in friendly; dinner on weekends can have a short wait."
+    },
+    "reservationLink": null,
+    "reservationNote": "Walk in, or order pickup on lanternhousekitchenbar.com.",
+    "imageUrl": "https://skipli.s3.amazonaws.com/shops/815855k/website/284209822920128497.webp",
+    "imageKind": "photo",
+    "imageTries": 0,
+    "adjustedRating": 4.74,
+    "foodSignal": 0.0,
+    "rankScore": 4.74,
+    "pickBasis": "crowd",
+    "matchedSources": [
+     "Yelp"
+    ],
+    "isChain": false,
+    "why": "A Reston Station find: signature stone-pot pho that keeps simmering at the table, pork belly buns and good cocktails, at casual prices."
+   },
+   {
+    "name": "Masti",
+    "neighborhood": "Hyatt Regency, Reston Town Center, VA",
+    "link": "https://mastiusa.com/",
+    "cuisine": "Indian",
+    "priceLevel": "$$$",
+    "rating": {
+     "google": {
+      "score": 4.7,
+      "count": 394
+     }
+    },
+    "compositeScore": 4.7,
+    "reviewCount": 394,
+    "meetsBar": true,
+    "reservationDifficulty": {
+     "label": "Moderate",
+     "note": "Book a few days ahead for weekend dinner."
+    },
+    "reservationLink": "https://mastiusa.com/",
+    "reservationNote": "Book through mastiusa.com or Google.",
+    "imageUrl": "https://d1w7312wesee68.cloudfront.net/HUmuHeRJh0wo7sAkXjpxk-EjBD7d_-tKRCH2VDAEjzw/ext:webp/quality:85/plain/s3://toast-sites-resources-prod/restaurantImages/c22bf66b-d142-47bc-b6e5-ef81d93326c5/pic2.jpg",
+    "imageKind": "photo",
+    "imageTries": 0,
+    "adjustedRating": 4.617,
+    "foodSignal": 0.3,
+    "rankScore": 4.677,
+    "pickBasis": "crowd",
+    "matchedSources": [
+     "Tripadvisor",
+     "Yelp"
+    ],
+    "isChain": false,
+    "why": "Inside the Hyatt at Reston Town Center: a trendy Indian room with a long menu, moist chicken tikka masala and excellent garlic naan."
+   },
+   {
     "name": "Red's Table",
     "neighborhood": "South Lakes Village Center, Reston, VA",
     "link": "https://www.redstableva.com/",
@@ -1110,38 +1250,42 @@
     "why": "Lake Anne's long-running bistro turns out unfussy French classics on the plaza — the closest thing Reston has to a neighborhood Paris café."
    },
    {
-    "name": "Corsica Wine Bar",
-    "neighborhood": "Reston Town Center, Reston, VA",
-    "link": "https://www.corsicawinebar.com/reston/home",
-    "cuisine": "Corsican / Riviera Mediterranean small plates",
+    "name": "Bombay Velvet",
+    "neighborhood": "RTC West, Reston, VA",
+    "link": "https://bombayvelvet.biryanigrill.com/",
+    "cuisine": "Modern Indian",
     "priceLevel": "$$$",
     "rating": {
+     "google": {
+      "score": 4.4,
+      "count": 2606
+     },
      "tripadvisor": {
-      "score": 4.3,
-      "count": 8
+      "score": 3.7,
+      "count": 30
      }
     },
-    "compositeScore": 4.3,
-    "reviewCount": 8,
+    "compositeScore": 4.4,
+    "reviewCount": 2606,
     "meetsBar": false,
     "reservationDifficulty": {
      "label": "Easy",
-     "note": "Tock shows open tables most nights; bar is walk-in."
+     "note": "Usually same-day; weekend dinner a day or two out."
     },
-    "reservationLink": "https://www.exploretock.com/corsica-wine-bar-reston",
-    "reservationNote": "Book on Tock (parties 1–20) or walk in to the bar.",
-    "imageUrl": "https://cdn.prod.website-files.com/68dac53d4fffba26a5461e3c/69408e475af6dbfdd5215bf0_Corsica-Saber-Web-KV-9.jpg",
+    "reservationLink": "https://bombayvelvet.biryanigrill.com/",
+    "reservationNote": "Book through the website or Google, or call.",
+    "imageUrl": "https://bombayvelvet.biryanigrill.com/images/storefront.jpg",
     "imageKind": "photo",
     "imageTries": 0,
-    "adjustedRating": 4.395,
+    "adjustedRating": 4.4,
     "foodSignal": 0.3,
-    "rankScore": 4.455,
+    "rankScore": 4.46,
     "pickBasis": "crowd",
     "matchedSources": [
      "Tripadvisor"
     ],
     "isChain": false,
-    "why": "From the Barcelona Wine Bar team, a daily-printed menu of truffled farro 'risotto,' saffron-lobster mussels and pork Milanese built to match a 200-bottle, award-recognized wine list."
+    "why": "Polished modern Indian next door to Tiki Thai, with tandoori and curries done with more finesse than the usual buffet spot."
    }
   ],
   "moderate_nova": [
@@ -1687,6 +1831,40 @@
   ],
   "casual_reston": [
    {
+    "name": "The Red Bird",
+    "neighborhood": "South Lakes Village Center, Reston, VA",
+    "link": "https://www.hotredbird.com/",
+    "cuisine": "Halal hot chicken",
+    "priceLevel": "$",
+    "rating": {
+     "google": {
+      "score": 4.9,
+      "count": 549
+     }
+    },
+    "compositeScore": 4.9,
+    "reviewCount": 549,
+    "meetsBar": true,
+    "reservationDifficulty": {
+     "label": "Easy",
+     "note": "Counter service; no reservations."
+    },
+    "reservationLink": null,
+    "reservationNote": "Walk in, or order ahead at order.theredbird.com.",
+    "imageUrl": "https://www.hotredbird.com/wp-content/uploads/2022/08/featured-image-home.jpg",
+    "imageKind": "photo",
+    "imageTries": 0,
+    "adjustedRating": 4.793,
+    "foodSignal": 0.0,
+    "rankScore": 4.793,
+    "pickBasis": "crowd",
+    "matchedSources": [
+     "Yelp"
+    ],
+    "isChain": false,
+    "why": "Reston's hidden-in-a-strip-mall gem: halal Nashville-style hot chicken sandwiches and tenders with properly crisp crust and heat you pick."
+   },
+   {
     "name": "Señor Ramón Taqueria",
     "neighborhood": "Reston (Baron Cameron Ave), VA",
     "link": "https://www.senorramon.com/",
@@ -1799,6 +1977,40 @@
     ],
     "isChain": false,
     "why": "Charcoal-blistered pollo a la brasa with the requisite green sauce — the NoVA staple done well."
+   },
+   {
+    "name": "Lake Anne Coffee House & Wine Bar",
+    "neighborhood": "Lake Anne Plaza, Reston, VA",
+    "link": "https://lakeannecoffeehouse.com/",
+    "cuisine": "Café & wine bar",
+    "priceLevel": "$$",
+    "rating": {
+     "google": {
+      "score": 4.2,
+      "count": 628
+     }
+    },
+    "compositeScore": 4.2,
+    "reviewCount": 628,
+    "meetsBar": false,
+    "reservationDifficulty": {
+     "label": "Easy",
+     "note": "Walk-in; patio seats go fast on market Saturdays."
+    },
+    "reservationLink": null,
+    "reservationNote": "Walk in. For wine dinners and events, book through lakeannecoffeehouse.com.",
+    "imageUrl": "https://lakeannecoffeehouse.com/wp-content/uploads/2016/12/home-slider.jpg",
+    "imageKind": "photo",
+    "imageTries": 0,
+    "adjustedRating": 4.239,
+    "foodSignal": 0.0,
+    "rankScore": 4.239,
+    "pickBasis": "crowd",
+    "matchedSources": [
+     "Yelp"
+    ],
+    "isChain": false,
+    "why": "Family-run lakeside café by day and wine bar by night: breakfast tacos and croque madame on the patio, then small plates and a thoughtful by-the-glass list upstairs."
    }
   ],
   "casual_nova": [
@@ -2394,6 +2606,77 @@
     "why": "Great American Restaurants' polish — sushi, wood-grilled fish, famously good burgers — paired with a buzzing Lucky Lounge bar that has been Reston's after-work default for two decades."
    },
    {
+    "name": "Clarity (Reston)",
+    "neighborhood": "Reston Town Center, Reston, VA",
+    "link": "https://clarityreston.com/",
+    "cuisine": "New American",
+    "priceLevel": "$$$$",
+    "rating": {
+     "google": {
+      "score": 4.7,
+      "count": 207
+     }
+    },
+    "compositeScore": 4.7,
+    "reviewCount": 207,
+    "meetsBar": true,
+    "reservationDifficulty": {
+     "label": "Moderate",
+     "note": "New 175-seat room; weekends fill a few days out, weeknights generally open."
+    },
+    "reservationLink": "https://clarityreston.com/",
+    "reservationNote": "Book on clarityreston.com or call the restaurant. Happy hour is walk-in at the bar.",
+    "imageUrl": "https://clarityreston.com/pluto-images/funnel/images/67e2343a-0f7d-4e48-b47e-3e270aabad5f",
+    "imageKind": "photo",
+    "imageTries": 0,
+    "adjustedRating": 4.574,
+    "foodSignal": 0,
+    "rankScore": 4.574,
+    "pickBasis": "crowd",
+    "matchedSources": [],
+    "isChain": false,
+    "why": "The Reston offshoot of Vienna's Clarity brings its five-spice short rib, foie gras and steaks-and-chops cooking to Reston Town Center, with a lunch and happy-hour program the original doesn't have."
+   },
+   {
+    "name": "Tiki Thai",
+    "neighborhood": "RTC West, Reston, VA",
+    "link": "https://tikithai.com/",
+    "cuisine": "Thai, tiki bar",
+    "priceLevel": "$$",
+    "rating": {
+     "google": {
+      "score": 4.2,
+      "count": 1201
+     },
+     "tripadvisor": {
+      "score": 4.0,
+      "count": 40
+     }
+    },
+    "compositeScore": 4.2,
+    "reviewCount": 1201,
+    "meetsBar": false,
+    "reservationDifficulty": {
+     "label": "Easy",
+     "note": "Walk-in; the bar fills on Friday and Saturday nights."
+    },
+    "reservationLink": null,
+    "reservationNote": "Walk in; call (571) 313-8055 for big groups.",
+    "imageUrl": "https://tikithai.com/wp-content/uploads/2024/11/9-2.png",
+    "imageKind": "photo",
+    "imageTries": 0,
+    "adjustedRating": 4.222,
+    "foodSignal": 1.5,
+    "rankScore": 4.522,
+    "pickBasis": "critic",
+    "matchedSources": [
+     "Northern Virginia Magazine review",
+     "Tripadvisor"
+    ],
+    "isChain": false,
+    "why": "From the Sense of Thai St. team: properly made rum drinks in custom tiki glassware alongside panang curry, Phuket rangoon and pineapple fried rice, in one of NoVA's best-looking rooms."
+   },
+   {
     "name": "PassionFish Reston",
     "neighborhood": "Reston Town Center, Reston, VA",
     "link": "https://www.passionfishreston.com/",
@@ -2430,6 +2713,40 @@
     ],
     "isChain": false,
     "why": "Chef Chris Clime's raw bar, dedicated sushi station and global coastal menu make this the best seafood cooking in Reston — and its happy hour plates are the real dishes, not afterthoughts."
+   },
+   {
+    "name": "Lake Anne Coffee House & Wine Bar",
+    "neighborhood": "Lake Anne Plaza, Reston, VA",
+    "link": "https://lakeannecoffeehouse.com/",
+    "cuisine": "Café & wine bar",
+    "priceLevel": "$$",
+    "rating": {
+     "google": {
+      "score": 4.2,
+      "count": 628
+     }
+    },
+    "compositeScore": 4.2,
+    "reviewCount": 628,
+    "meetsBar": false,
+    "reservationDifficulty": {
+     "label": "Easy",
+     "note": "Walk-in; patio seats go fast on market Saturdays."
+    },
+    "reservationLink": null,
+    "reservationNote": "Walk in. For wine dinners and events, book through lakeannecoffeehouse.com.",
+    "imageUrl": "https://lakeannecoffeehouse.com/wp-content/uploads/2016/12/home-slider.jpg",
+    "imageKind": "photo",
+    "imageTries": 0,
+    "adjustedRating": 4.239,
+    "foodSignal": 0.0,
+    "rankScore": 4.239,
+    "pickBasis": "crowd",
+    "matchedSources": [
+     "Yelp"
+    ],
+    "isChain": false,
+    "why": "Family-run lakeside café by day and wine bar by night: breakfast tacos and croque madame on the patio, then small plates and a thoughtful by-the-glass list upstairs."
    }
   ],
   "happy_hour_nova": [
@@ -3997,7 +4314,14 @@
  },
  "ownerPicks": [
   "Timber Pizza Co. (McLean)",
-  "The Capital Grille (Tysons)"
+  "The Capital Grille (Tysons)",
+  "Clarity (Reston)",
+  "Davio's Northern Italian Steakhouse (Reston)",
+  "Tiki Thai",
+  "Bombay Velvet",
+  "Lake Anne Coffee House & Wine Bar",
+  "Cafe Montmartre",
+  "Heirloom"
  ],
  "seeMore": {
   "high_end_dc": [
@@ -4078,37 +4402,6 @@
     "isChain": false,
     "why": "Kwame Onwuachi threads DC itself through Afro-Caribbean cooking — hoe crab in a Peruvian-chicken-style sauce, curried branzino, buttery Mom Dukes shrimp — with a confidence few kitchens in town can match.",
     "seeMoreReason": "Critic favorite — just missed the 4.5 rating bar",
-    "seeMoreSince": "2026-11-02"
-   }
-  ],
-  "high_end_reston": [
-   {
-    "name": "Clarity (Reston)",
-    "neighborhood": "Reston Town Center, Reston, VA",
-    "link": "https://www.google.com/maps/search/?api=1&query=Clarity+1996+Opportunity+Way+Reston+VA",
-    "cuisine": "New American",
-    "priceLevel": "$$$$",
-    "rating": {},
-    "compositeScore": null,
-    "reviewCount": 0,
-    "meetsBar": false,
-    "reservationDifficulty": {
-     "label": "Moderate",
-     "note": "New 175-seat room; weekends fill a few days out, weeknights generally open."
-    },
-    "reservationLink": null,
-    "reservationNote": "OpenTable listing for Reston still shows 'coming soon' and isn't bookable; call the restaurant or book via its website.",
-    "imageUrl": "https://clarityvienna.com/pluto-videos/2QzwgYSF4xke/abecb3ebc7fbe1bbeebc/poster.jpg",
-    "imageKind": "photo",
-    "imageTries": 0,
-    "adjustedRating": 4.4,
-    "foodSignal": 0,
-    "rankScore": 4.4,
-    "pickBasis": "crowd",
-    "matchedSources": [],
-    "isChain": false,
-    "why": "The Reston offshoot of Vienna's Clarity carries over the five-spice short rib, foie gras and steaks-and-chops repertoire that put the original on NoVA's best lists, plus a six-course tasting menu for occasions.",
-    "seeMoreReason": "Critic favorite — no Google/Tripadvisor rating found yet",
     "seeMoreSince": "2026-11-02"
    }
   ],
@@ -4259,6 +4552,44 @@
     "isChain": false,
     "why": "Grandmother-style Southern Thai cooking with real depth: a slow pork-belly moo hong, coconut-red-curry mussels and a lobster chu chee that justify the drive.",
     "seeMoreReason": "Critic favorite — no Google/Tripadvisor rating found yet",
+    "seeMoreSince": "2026-11-02"
+   }
+  ],
+  "moderate_reston": [
+   {
+    "name": "Corsica Wine Bar",
+    "neighborhood": "Reston Town Center, Reston, VA",
+    "link": "https://www.corsicawinebar.com/reston/home",
+    "cuisine": "Corsican / Riviera Mediterranean small plates",
+    "priceLevel": "$$$",
+    "rating": {
+     "tripadvisor": {
+      "score": 4.3,
+      "count": 8
+     }
+    },
+    "compositeScore": 4.3,
+    "reviewCount": 8,
+    "meetsBar": false,
+    "reservationDifficulty": {
+     "label": "Easy",
+     "note": "Tock shows open tables most nights; bar is walk-in."
+    },
+    "reservationLink": "https://www.exploretock.com/corsica-wine-bar-reston",
+    "reservationNote": "Book on Tock (parties 1–20) or walk in to the bar.",
+    "imageUrl": "https://cdn.prod.website-files.com/68dac53d4fffba26a5461e3c/69408e475af6dbfdd5215bf0_Corsica-Saber-Web-KV-9.jpg",
+    "imageKind": "photo",
+    "imageTries": 0,
+    "adjustedRating": 4.395,
+    "foodSignal": 0.3,
+    "rankScore": 4.455,
+    "pickBasis": "crowd",
+    "matchedSources": [
+     "Tripadvisor"
+    ],
+    "isChain": false,
+    "why": "From the Barcelona Wine Bar team, a daily-printed menu of truffled farro 'risotto,' saffron-lobster mussels and pork Milanese built to match a 200-bottle, award-recognized wine list.",
+    "seeMoreReason": "Was in the top 5 — bumped by a newer pick",
     "seeMoreSince": "2026-11-02"
    }
   ],
@@ -4983,6 +5314,42 @@
    }
   ],
   "japanese_asian": [
+   {
+    "name": "Lantern House Kitchen & Bar",
+    "neighborhood": "Reston Station, Reston, VA",
+    "link": "https://lanternhousekitchenbar.com/",
+    "cuisine": "Vietnamese / Asian",
+    "priceLevel": "$$",
+    "rating": {
+     "google": {
+      "score": 4.8,
+      "count": 853
+     }
+    },
+    "compositeScore": 4.8,
+    "reviewCount": 853,
+    "meetsBar": true,
+    "reservationDifficulty": {
+     "label": "Easy",
+     "note": "Walk-in friendly; dinner on weekends can have a short wait."
+    },
+    "reservationLink": null,
+    "reservationNote": "Walk in, or order pickup on lanternhousekitchenbar.com.",
+    "imageUrl": "https://skipli.s3.amazonaws.com/shops/815855k/website/284209822920128497.webp",
+    "imageKind": "photo",
+    "imageTries": 0,
+    "adjustedRating": 4.74,
+    "foodSignal": 0.0,
+    "rankScore": 4.74,
+    "pickBasis": "crowd",
+    "matchedSources": [
+     "Yelp"
+    ],
+    "isChain": false,
+    "why": "A Reston Station find: signature stone-pot pho that keeps simmering at the table, pork belly buns and good cocktails, at casual prices.",
+    "seeMoreReason": "Clears the bar — ranked just outside the top 5",
+    "seeMoreSince": "2026-11-02"
+   },
    {
     "name": "Present Restaurant",
     "neighborhood": "Falls Church, VA",
