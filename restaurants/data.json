@@ -1129,8 +1129,8 @@
     "imageKind": "photo",
     "imageTries": 0,
     "adjustedRating": 4.74,
-    "foodSignal": 0.0,
-    "rankScore": 4.74,
+    "foodSignal": 0.3,
+    "rankScore": 4.8,
     "pickBasis": "crowd",
     "matchedSources": [
      "Yelp"
@@ -1163,8 +1163,8 @@
     "imageKind": "photo",
     "imageTries": 0,
     "adjustedRating": 4.617,
-    "foodSignal": 0.3,
-    "rankScore": 4.677,
+    "foodSignal": 0.6,
+    "rankScore": 4.737,
     "pickBasis": "crowd",
     "matchedSources": [
      "Tripadvisor",
@@ -1855,8 +1855,8 @@
     "imageKind": "photo",
     "imageTries": 0,
     "adjustedRating": 4.793,
-    "foodSignal": 0.0,
-    "rankScore": 4.793,
+    "foodSignal": 0.3,
+    "rankScore": 4.853,
     "pickBasis": "crowd",
     "matchedSources": [
      "Yelp"
@@ -2003,8 +2003,8 @@
     "imageKind": "photo",
     "imageTries": 0,
     "adjustedRating": 4.239,
-    "foodSignal": 0.0,
-    "rankScore": 4.239,
+    "foodSignal": 0.3,
+    "rankScore": 4.299,
     "pickBasis": "crowd",
     "matchedSources": [
      "Yelp"
@@ -2739,8 +2739,8 @@
     "imageKind": "photo",
     "imageTries": 0,
     "adjustedRating": 4.239,
-    "foodSignal": 0.0,
-    "rankScore": 4.239,
+    "foodSignal": 0.3,
+    "rankScore": 4.299,
     "pickBasis": "crowd",
     "matchedSources": [
      "Yelp"
@@ -5383,8 +5383,8 @@
     "imageKind": "photo",
     "imageTries": 0,
     "adjustedRating": 4.74,
-    "foodSignal": 0.0,
-    "rankScore": 4.74,
+    "foodSignal": 0.3,
+    "rankScore": 4.8,
     "pickBasis": "crowd",
     "matchedSources": [
      "Yelp"
