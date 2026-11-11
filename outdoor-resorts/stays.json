@@ -7432,6 +7432,48 @@
    "snow": false,
    "aurora": false,
    "added": "2026-10-28"
+  },
+  {
+   "name": "BAYA Miami",
+   "url": "https://staybaya.com/",
+   "location": "Redland, FL, USA (~45 min south of Miami; address not published)",
+   "address": null,
+   "lat": 25.55,
+   "lng": -80.49,
+   "coord_precision": "approximate (Redland area)",
+   "region": "Southeast US",
+   "format": "Landscape resort: 20 private organic-shaped bungalows among exotic fruit groves on a 25-acre working farm",
+   "units": 20,
+   "setting": [
+    "Forest",
+    "Near National Park"
+   ],
+   "near_park": "Everglades National Park (~20 min) and Biscayne NP",
+   "type": [
+    "Couples"
+   ],
+   "amenities": [
+    "Sauna",
+    "Cold plunge",
+    "Grottos",
+    "Sound healing & open-air yoga",
+    "Farm café, juicery & chef dinners"
+   ],
+   "price_from": null,
+   "price_weekend": null,
+   "price_range": null,
+   "currency_note": "Prices not published; VIP sign-up for first stays",
+   "image": null,
+   "rating": null,
+   "status": "Opening soon",
+   "highlights": "Pre-launch farm 'landscape resort' near Miami: 20 sculptural bungalows in longan and papaya groves, with sauna, cold plunge and grottos. Opening 2027.",
+   "fit_note": "Fruit-farm setting rather than wild forest; site doesn't say whether the sauna/plunge are private. No hot tub mentioned.",
+   "source": "user",
+   "tier": "Average luxury",
+   "snow": false,
+   "aurora": false,
+   "added": "2026-11-11",
+   "book_note": "Pre-launch: 'Opening 2027'. Sign up at get.staybaya.com to be first to stay."
   }
  ]
 }
