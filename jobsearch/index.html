@@ -75,9 +75,20 @@
   .linklike{color:var(--ink);font-weight:600}
   .more-toggle{display:block;margin:-12px 0 24px;padding:10px 18px;font-size:17px;font-weight:600;border:1px solid var(--line);border-radius:8px;background:var(--panel);color:var(--primary);cursor:pointer}
   .more-toggle:hover{background:var(--bg)}
-  /* Job Tracking: narrow Personal Connection column so Company has room (2026-10-19) */
-  #table-tracking th:nth-child(8), #table-tracking td:nth-child(8){width:120px;max-width:120px;white-space:normal}
-  #table-tracking td:nth-child(2){min-width:150px}
+  /* Job Tracking column widths: wide Title, narrow Company and short-answer columns, room for Notes */
+  #table-tracking{table-layout:fixed;width:100%}
+  #table-tracking th,#table-tracking td{padding:8px 6px;vertical-align:top;white-space:normal}
+  #table-tracking td{overflow-wrap:anywhere}
+  #table-tracking th{font-size:15px;overflow-wrap:normal;word-break:normal}
+  #table-tracking th:nth-child(1){width:21%}
+  #table-tracking th:nth-child(2){width:11%}
+  #table-tracking th:nth-child(3),#table-tracking th:nth-child(6){width:8%}
+  #table-tracking th:nth-child(4),#table-tracking th:nth-child(5),#table-tracking th:nth-child(7){width:6%}
+  #table-tracking th:nth-child(8){width:8%}
+  #table-tracking th:nth-child(9),#table-tracking th:nth-child(10){width:10%}
+  #table-tracking th:nth-child(11){width:6%}
+  #table-tracking input[type=text]{font-size:14px;padding:4px 5px}
+  #table-tracking .scam-flag,#table-tracking .promote-btn{margin-right:6px}
   .trk-bar{display:flex;align-items:center;gap:14px;flex-wrap:wrap;margin:0 0 14px}
   .trk-hint{color:var(--muted);font-size:15px}
   input.edited{background:#fff4c2;border-color:#e0b100;color:#1f2328}
@@ -378,14 +389,14 @@ function renderTracking(){
     {key:'title', label:'Title / Role', sortable:true},
     {key:'company', label:'Company', sortable:true},
     {key:'dateApplied', label:'Date Applied', sortable:true},
-    {key:'responded', label:'Responded', sortable:true},
-    {key:'interviewed', label:'Interviewed', sortable:true},
-    {key:'reportedToVEC', label:'Reported to VEC', sortable:true},
+    {key:'responded', label:'Replied', sortable:true},
+    {key:'interviewed', label:'Interview', sortable:true},
+    {key:'reportedToVEC', label:'VEC Reported', sortable:true},
     {key:'vecWeek', label:'VEC Week', sortable:true},
-    {key:'connectionReachOut', label:'Personal Connection', sortable:true},
+    {key:'connectionReachOut', label:'Connection', sortable:true},
     {key:'throughWho', label:'Through Who?', sortable:true},
     {key:'notes', label:'Notes', sortable:true},
-    {key:'net', label:'Network 1st / 2nd', sortable:false},
+    {key:'net', label:'Network', sortable:false},
   ];
   renderTableHeader('table-tracking', cols);
   let rows = TRACKING.slice();
@@ -398,7 +409,7 @@ function renderTracking(){
   const rowHtml = (t, isScam) => {
       const link = t.linkedinLink || t.jdLink;
       const titleCell = link ? `<a href="${link}" target="_blank" rel="noopener" class="linklike">${esc(t.title)}</a>` : `${esc(t.title)}`;
-      const extra = isScam ? `<br><span class="scam-flag">⚠ ${esc(t.scamFlag||'Not verified')}</span><br><button type="button" class="promote-btn" data-id="${trkAttr(t.id)}" onclick="trkPromote(this)">Promote to Real</button>` : '';
+      const extra = isScam ? `<br><span class="scam-flag">⚠ ${esc(t.scamFlag||'Not verified')}</span> <button type="button" class="promote-btn" data-id="${trkAttr(t.id)}" onclick="trkPromote(this)">Promote to Real</button>` : '';
       return `<tr${isScam?' class="trk-scam"':''}>
         <td>${titleCell}${extra}</td>
         <td>${esc(t.company)}</td>
@@ -410,7 +421,7 @@ function renderTracking(){
         <td>${trkInput(t,'connectionReachOut')}</td>
         <td>${trkInput(t,'throughWho')}</td>
         <td>${trkInput(t,'notes')}</td>
-        <td>${(t.net1||t.net2)?esc(t.net1||'0')+' / '+esc(t.net2||'0'):'<span style="color:var(--muted)">not yet checked</span>'}</td>
+        <td>${(t.net1||t.net2)?esc(t.net1||'0')+' / '+esc(t.net2||'0'):'<span style="color:var(--muted)" title="Not yet checked">—</span>'}</td>
       </tr>`; };
   let html = real.length ? real.map(t=>rowHtml(t,false)).join('') : `<tr><td colspan="11">Nothing marked "Applied" yet.</td></tr>`;
   if(scam.length){
