@@ -528,7 +528,7 @@ function trkUpdateCount(){ const el=document.getElementById('trk-count'); if(!el
   const where = TRK_URL ? 'saved for you and picked up by the next weekly scan' : 'saved in this browser only until the shared save is connected';
   el.textContent = (n ? `${n} edit${n>1?'s':''} (highlighted yellow), ${where}.` : 'Type in any cell to update it.') + (trkStatus?'  '+trkStatus:''); }
 function trkSync(){ if(!TRK_URL) return;
-  fetch(TRK_URL).then(r=>r.json()).then(all=>{ trkSave(all||{}); renderTracking(); renderMatchesTable(); renderCards(); hideCount(); trkUpdateCount(); })
+  fetch(TRK_URL).then(r=>r.json()).then(all=>{ trkSave(all||{}); renderTracking(); renderMatchesTable(); renderCards(); hideCount(); trkUpdateCount(); renderNetwork(); })
     .catch(()=>{ trkStatus='⚠ Shared save unreachable — showing this device\'s edits'; trkUpdateCount(); }); }
 
 function attachSort(tableId, key, renderFn){
@@ -591,15 +591,28 @@ renderExperts();
 attachSort('table-experts','experts',()=>{renderExperts();});
 
 // ---- Network Opportunities tab (approved 2026-11-16) ----
+function netKey(t){ return 'net:'+t.name; }
+function netState(t){ const o=trkLoad(); const p=o[netKey(t)+'|pass'], l=o[netKey(t)+'|later'];
+  return { pass: !!(p&&p.value==='pass'), later: (l&&l.value) ? l.value : '' }; }
+function netAct(name, kind){ const t=(DATA.networkTargets||[]).find(x=>x.name===name); if(!t) return; const o=trkLoad();
+  const k=netKey(t)+'|'+kind, v = kind==='pass' ? 'pass' : (kind==='later' ? new Date().toISOString() : '');
+  if(kind==='restore'){ ['pass','later'].forEach(x=>{ o[netKey(t)+'|'+x]={seed:'',value:''}; trkPost({key:netKey(t)+'|'+x,value:'',seed:'',label:'Network — '+t.name}); }); }
+  else { o[k]={seed:'',value:v}; trkPost({key:k,value:v,seed:'',label:'Network — '+t.name+' ('+kind+')'}); }
+  trkSave(o); renderNetwork(); }
 function renderNetwork(){
   const esc=s=>String(s||'').replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
-  const T=(DATA.networkTargets||[]).filter(t=>t.status!=='connected');
-  const act=T.filter(t=>t.status==='active').sort((a,b)=>a.rank-b.rank).slice(0,5);
-  const bench=T.filter(t=>t.status==='bench').sort((a,b)=>a.rank-b.rank);
-  document.getElementById('net-note').innerHTML='There are always five targets here. When you tell me you have connected with one, the next person on the list moves up.';
-  document.getElementById('net-targets').innerHTML=act.map((t,i)=>`<div class="card"><h3>${i+1}. <a href="${esc(t.url)}" target="_blank" rel="noopener">${esc(t.name)}</a></h3><p><b>${esc(t.title)}</b></p><p><b>Where they are now:</b> ${esc(t.situation)}</p><p><b>How to start the conversation:</b> ${esc(t.opener)}</p></div>`).join('');
+  const T=(DATA.networkTargets||[]).filter(t=>t.status==='active'||t.status==='bench');
+  const base=T.slice().sort((a,b)=>(a.status===b.status?0:(a.status==='active'?-1:1))||a.rank-b.rank);
+  const passed=base.filter(t=>netState(t).pass);
+  const live=base.filter(t=>!netState(t).pass);
+  const fresh=live.filter(t=>!netState(t).later), later=live.filter(t=>netState(t).later).sort((a,b)=>netState(a).later.localeCompare(netState(b).later));
+  const queue=fresh.concat(later);
+  const act=queue.slice(0,5), bench=queue.slice(5);
+  document.getElementById('net-note').innerHTML='Five targets at a time. <b>Pass</b> removes someone; <b>Later</b> sends them to the back of the line. Either way the next person moves up. When you tell me you have connected with someone, they come off the list.'+(passed.length?` &nbsp;·&nbsp; ${passed.length} passed: `+passed.map(t=>`${esc(t.name)} (<a href="#" onclick="netAct(${JSON.stringify(t.name).replace(/"/g,'&quot;')},'restore');return false;">restore</a>)`).join(', '):'');
+  const btns=t=>{ const n=JSON.stringify(t.name).replace(/"/g,'&quot;'); return `<span style="float:right"><button type="button" class="hide-btn" onclick="netAct(${n},'later')">Later</button> <button type="button" class="hide-btn" onclick="netAct(${n},'pass')">Pass</button></span>`; };
+  document.getElementById('net-targets').innerHTML=act.length?act.map((t,i)=>`<div class="card">${btns(t)}<h3>${i+1}. <a href="${esc(t.url)}" target="_blank" rel="noopener">${esc(t.name)}</a>${netState(t).later?' <span class="badge-new" style="background:#eef">Back from Later</span>':''}</h3><p><b>${esc(t.title)}</b></p><p><b>Where they are now:</b> ${esc(t.situation)}</p><p><b>How to start the conversation:</b> ${esc(t.opener)}</p></div>`).join(''):'<div class="notes-box">No one left in the line. The next weekly scan adds more.</div>';
   document.getElementById('net-opps').innerHTML=(DATA.networkOpps||[]).map(o=>`<div class="card"><h3><a href="${esc(o.jdLink)}" target="_blank" rel="noopener">${esc(o.title)}</a> — ${esc(o.company)}</h3><p>${esc(o.location)} · ${esc(o.degree)} · ${esc(o.status)}</p><p><b>Why it fits:</b> ${esc(o.why)}</p><p><b>Honest read:</b> ${esc(o.gap)}</p></div>`).join('');
-  document.getElementById('net-bench').innerHTML=bench.map(t=>`<div class="prev"><a href="${esc(t.url)}" target="_blank" rel="noopener">${esc(t.name)}</a> — ${esc(t.title)}. <i>${esc(t.why)}</i></div>`).join('');
+  document.getElementById('net-bench').innerHTML=bench.length?bench.map(t=>`<div class="prev"><a href="${esc(t.url)}" target="_blank" rel="noopener">${esc(t.name)}</a> — ${esc(t.title)}. <i>${esc(t.why||'')}</i>${netState(t).later?' (Later)':''}</div>`).join(''):'<div class="prev">No one waiting. The next weekly scan adds more.</div>';
 }
 renderNetwork();
 </script>
