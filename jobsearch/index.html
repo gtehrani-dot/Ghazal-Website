@@ -127,23 +127,24 @@
 
 <div class="panel active" id="panel-matches">
   <h2 class="section">Top 3 best bets</h2>
-  <div class="trk-hint" style="margin:0 0 8px">Highest Fit and Likelihood together, with the fewest cons.</div>
+  <div class="trk-hint" style="margin:0 0 8px">The first three roles in the Primary table below (highest average of Fit and Likelihood).</div>
   <div id="top3"></div>
-  <h2 class="section">All matches: Primary, then Secondary</h2>
-  <div class="trk-hint" style="margin:0 0 6px">Primary = Fit 75%+ and Likelihood 60%+. Likelihood drops for postings over a month old, 1,000+ applicants, and a required domain you lack; it rises with first-degree connections and fresh postings. Network = 1st / 2nd-degree connections who work there (from LinkedIn search; "+" means more than shown).</div>
+  <h2 class="section">Primary matches</h2>
+  <div class="trk-hint" style="margin:0 0 6px">Primary = Fit 75%+ and Likelihood 60%+. Likelihood drops for postings over a month old, 1,000+ applicants, and a required domain you lack; it rises with first-degree connections and fresh postings. Network = 1st / 2nd-degree connections who work there (from LinkedIn search; "+" means more than shown). Ranked by the average of Fit and Likelihood; rows 1–3 are the Top 3 above.</div>
   <span class="trk-hint" id="hide-count" style="margin-left:12px"></span>
   <input id="match-filter" type="search" placeholder="Filter roles: type a word such as remote, travel, healthcare" oninput="renderMatchesTable()" style="width:100%;max-width:520px;padding:8px 10px;margin:8px 0;border:1px solid var(--line);border-radius:8px;font-size:16px">
   <div class="trk-hint" style="margin:8px 0">* May contain technical language: read the job description before applying.</div>
   <table id="table-matches"><thead><tr></tr></thead><tbody></tbody></table>
   <button class="more-toggle" id="toggle-matches" type="button"></button>
-  <h2 class="section">Match details — highest fit first</h2>
+  <h2 class="section">Secondary matches</h2>
+  <div class="trk-hint" style="margin:0 0 6px">Below the Primary bar (Fit 75%+ and Likelihood 60%+). "Why Secondary" says which bar it misses and the main reason.</div>
+  <table id="table-secondary"><thead><tr></tr></thead><tbody></tbody></table>
+  <button class="more-toggle" id="toggle-secondary" type="button"></button>
+  <h2 class="section">Match details — Primary, same order as the table</h2>
   <div id="cards-matches"></div>
   <button class="more-toggle" id="toggle-cards" type="button"></button>
   <h2 class="section">Proactive outreach opportunities</h2>
   <div class="notes-box"><b>No new company signals cleared the bar this week.</b> Two notes: <b>Spaulding Ridge</b> is hiring its first COO to evolve its delivery model and build "AI-enabled, globally integrated" delivery centers. That is a reorganization at a Salesforce/Snowflake/Anaplan consultancy, worth a direct note to the CEO's office alongside an application (see Job Tracking). <b>MatrixCare</b>: the VP Customer Delivery & Enablement role closed, but VP Customer Success is still open under the new PE owner and CEO. The Aura company-intelligence connector still isn't connected.</div>
-  <h2 class="section">Previously surfaced, still open (Secondary tier)</h2>
-  <div class="prevlist" id="prevlist"></div>
-  <button class="more-toggle" id="toggle-prev" type="button"></button>
   </div>
 
 <div class="panel" id="panel-workingon">
@@ -184,11 +185,15 @@ const DATA = {"jobs": [{"id": "ashby-global-head-ps", "title": "Global Head of P
 const JOBS = DATA.jobs;
 var showHidden=false;
 function isHidden(j){ try{ const o=JSON.parse(localStorage.getItem('jobTrackingEdits.v1')||'{}')[j.id+'|hidden']; return !!(o&&o.value==='hidden'); }catch(e){ return false; } }
+function plist(a){ a=(a||[]).filter(Boolean); return a.length?esc(a.join('; ')):'<span style="color:var(--muted)">none noted</span>'; }
+function avgScore(j){ return (j.fit==null||j.likelihood==null)?-1:(j.fit+j.likelihood)/2; }
+function byScore(a,b){ return avgScore(b)-avgScore(a) || (b.fit||0)-(a.fit||0); }
+function whySecondary(j){ const r=[]; if(j.fit==null) r.push('Fit not scored yet'); else if(j.fit<75) r.push('Fit '+j.fit+'% (needs 75%)'); if(j.likelihood==null) r.push('Likelihood not scored'); else if(j.likelihood<60) r.push('Likelihood '+j.likelihood+'% (needs 60%)'); const c=(j.consList||[]).filter(Boolean).slice(0,2).join('; '); return '<b>'+r.join(' · ')+'</b>'+(c?'<br>'+esc(c):''); }
 function ulist(a){ a=(a||[]).filter(Boolean); return a.length?'<ul class="pc">'+a.map(x=>'<li>'+esc(x)+'</li>').join('')+'</ul>':'<span style="color:var(--muted)">none noted</span>'; }
-function renderTop3(){ const el=document.getElementById('top3'); if(!el) return; const t=visJobs().filter(j=>j.top3);
+function renderTop3(){ const el=document.getElementById('top3'); if(!el) return; const t=visJobs().filter(j=>j.tier==='Primary').sort(byScore).slice(0,3);
   el.innerHTML = t.length ? t.map((j,i)=>`<div class="card"><div class="card-head"><div><div class="card-title">${i+1}. ${titleLinkHtml(j)}${tf(j)}</div><div class="card-company">${esc(j.company)}</div></div>${hideBtn(j)}</div>
   <div class="stats"><span>Fit <b>${fitStr(j.fit)}</b></span><span>Likelihood <b>${j.likelihood}%</b></span><span>Network <b>${esc(j.netLabel||'')}</b></span><span>Salary <b>${esc(j.salary)}</b></span><span>${applyLinkHtml(j)}</span></div>
-  <div class="pc-grid"><div><b>Pros</b>${ulist(j.prosList)}</div><div><b>Cons</b>${ulist(j.consList)}</div></div></div>`).join('') : '<div class="notes-box">No Primary role clears both bars with few cons right now.</div>'; }
+  <div class="pc-grid"><div><b>Pros</b>${ulist(j.prosList)}</div><div><b>Cons</b>${ulist(j.consList)}</div></div></div>`).join('') : '<div class="notes-box">No role clears the Primary bar right now.</div>'; }
 function visJobs(){ return JOBS.filter(j=> showHidden || !isHidden(j)); }
 function hideBtn(j){ return isHidden(j) ? `<button type="button" class="hide-btn" onclick="hideJob('${j.id}',false)">Unhide</button>` : `<button type="button" class="hide-btn" onclick="hideJob('${j.id}',true)">Hide</button>`; }
 function hideJob(id,hide){ const j=JOBS.find(x=>x.id===id); if(!j) return; const o=trkLoad(), k=id+'|hidden';
@@ -228,8 +233,8 @@ function renderTableHeader(tableId, cols){
 }
 
 // Show more / show less on the long Today's Matches lists (added 2026-10-09 at Ghazal's request)
-const COLLAPSED = {matches:10, cards:5, prev:10};
-let expanded = {matches:false, cards:false, prev:false};
+const COLLAPSED = {matches:10, cards:5, secondary:10};
+let expanded = {matches:false, cards:false, secondary:false};
 function limitRows(list, key){ return expanded[key] ? list : list.slice(0, COLLAPSED[key]); }
 function setToggle(btnId, key, total, noun, render){
   const btn = document.getElementById(btnId);
@@ -239,7 +244,7 @@ function setToggle(btnId, key, total, noun, render){
   btn.onclick = ()=>{ const wasOpen = expanded[key]; expanded[key] = !expanded[key]; render(); if(wasOpen){ btn.scrollIntoView({block:'nearest'}); } };
 }
 
-let sortState = {matches:{key:'fit',dir:-1}, workingon:{key:null,dir:1}, tracking:{key:null,dir:1}};
+let sortState = {matches:{key:null,dir:-1}, secondary:{key:null,dir:-1}, workingon:{key:null,dir:1}, tracking:{key:null,dir:1}};
 
 function cmp(a,b){
   if(a===null||a===undefined) return 1;
@@ -248,24 +253,8 @@ function cmp(a,b){
   return a - b;
 }
 
-function renderMatchesTable(){
-  const cols = [
-    {key:'title', label:'Title / Role', sortable:true},
-    {key:'company', label:'Company', sortable:true},
-    {key:'tier', label:'Match', sortable:true},
-    {key:'fit', label:'Fit %', sortable:true},
-    {key:'likelihood', label:'Likelihood %', sortable:true},
-    {key:'pros', label:'Pros', sortable:false},
-    {key:'cons', label:'Cons', sortable:false},
-    {key:'net1', label:'Network 1st / 2nd', sortable:true},
-    {key:'days', label:'Days Active', sortable:true},
-    {key:'salary', label:'Salary', sortable:false},
-    {key:'apply', label:'Apply', sortable:false},
-    {key:'hide', label:'', sortable:false},
-  ];
-  renderTableHeader('table-matches', cols);
-  let rows = visJobs();
-  const st = sortState.matches;
+function matchRows(tier, st){
+  let rows = visJobs().filter(j=>j.tier===tier);
   if(st.key){
     rows.sort((a,b)=>{
       let av, bv;
@@ -275,29 +264,59 @@ function renderMatchesTable(){
       if(an||bn) return an&&bn?0:(an?1:-1);
       return cmp(av,bv) * st.dir;
     });
-  }
+  } else { rows.sort(byScore); }
   const qf=(document.getElementById('match-filter')||{}).value||'';
-  if(qf.trim()){ const q=qf.toLowerCase(); rows=rows.filter(j=>[j.title,j.company,j.category,j.pros,j.cons,j.location,j.salary].join(' ').toLowerCase().includes(q)); }
-  const total = rows.length;
-  rows = limitRows(rows, 'matches');
-  setToggle('toggle-matches', 'matches', total, 'matches', renderMatchesTable);
-  const tbody = document.querySelector('#table-matches tbody');
-  tbody.innerHTML = rows.map(j => `
+  if(qf.trim()){ const q=qf.toLowerCase(); rows=rows.filter(j=>[j.title,j.company,j.category,(j.prosList||[]).join(' '),(j.consList||[]).join(' '),j.location,j.salary].join(' ').toLowerCase().includes(q)); }
+  return rows;
+}
+function rowHtml(j, second){
+  return `
     <tr>
       <td>${titleLinkHtml(j)}${tf(j)}${j.newBadge?'<span class="badge-new">New</span>':''}</td>
       <td>${esc(j.company).split(' — ')[0]}</td>
-      <td><span class="pill pill-${j.tier==='Primary'?'primary':'secondary'}">${j.tier}</span></td>
+      ${second?`<td>${whySecondary(j)}</td>`:''}
       <td>${fitStr(j.fit)}</td>
       <td>${j.likelihood!=null?j.likelihood+'%':'—'}</td>
-      <td>${ulist(j.prosList)}</td>
-      <td>${ulist(j.consList)}</td>
+      <td>${plist(j.prosList)}</td>
+      <td>${plist(j.consList)}</td>
       <td>${esc(j.netLabel||'')}</td>
       <td>${daysActive(j.postedDate)}</td>
       <td>${esc(j.salary)}</td>
       <td>${applyLinkHtml(j)}</td>
       <td>${hideBtn(j)}</td>
-    </tr>`).join('');
+    </tr>`;
+}
+function matchCols(second){
+  const c=[{key:'title', label:'Title / Role', sortable:true},{key:'company', label:'Company', sortable:true}];
+  if(second) c.push({key:'why', label:'Why Secondary', sortable:false});
+  return c.concat([
+    {key:'fit', label:'Fit %', sortable:true},
+    {key:'likelihood', label:'Likelihood %', sortable:true},
+    {key:'pros', label:'Pros', sortable:false},
+    {key:'cons', label:'Cons', sortable:false},
+    {key:'net1', label:'Network 1st / 2nd', sortable:true},
+    {key:'days', label:'Days Active', sortable:true},
+    {key:'salary', label:'Salary', sortable:false},
+    {key:'apply', label:'Apply', sortable:false},
+    {key:'hide', label:'', sortable:false}]);
+}
+function renderMatchesTable(){
+  renderTableHeader('table-matches', matchCols(false));
+  let rows = matchRows('Primary', sortState.matches);
+  const total = rows.length;
+  rows = limitRows(rows, 'matches');
+  setToggle('toggle-matches', 'matches', total, 'Primary matches', renderMatchesTable);
+  document.querySelector('#table-matches tbody').innerHTML = rows.map(j=>rowHtml(j,false)).join('');
+  renderSecondaryTable();
   renderTop3();
+}
+function renderSecondaryTable(){
+  renderTableHeader('table-secondary', matchCols(true));
+  let rows = matchRows('Secondary', sortState.secondary);
+  const total = rows.length;
+  rows = limitRows(rows, 'secondary');
+  setToggle('toggle-secondary', 'secondary', total, 'Secondary matches', renderSecondaryTable);
+  document.querySelector('#table-secondary tbody').innerHTML = rows.map(j=>rowHtml(j,true)).join('');
 }
 
 function copyResumeRequest(company, title, url){
@@ -322,7 +341,7 @@ function handleCreateClick(btn, company, title, url){
 }
 
 function renderCards(){
-  const primaryAll = visJobs().filter(j => j.tier === 'Primary').sort((a,b)=>(b.fit||0)-(a.fit||0));
+  const primaryAll = visJobs().filter(j => j.tier === 'Primary').sort(byScore);
   const primaryOrTop = limitRows(primaryAll, 'cards');
   setToggle('toggle-cards', 'cards', primaryAll.length, 'match details', renderCards);
   const container = document.getElementById('cards-matches');
@@ -350,16 +369,6 @@ function renderCards(){
       </div>
     </div>`).join('');
 
-  const prevAll = visJobs().filter(j => j.tier === 'Secondary').sort((a,b)=>(b.fit||0)-(a.fit||0));
-  const prev = limitRows(prevAll, 'prev');
-  setToggle('toggle-prev', 'prev', prevAll.length, 'previously surfaced', renderCards);
-  const prevContainer = document.getElementById('prevlist');
-  prevContainer.innerHTML = prev.map(j => `
-    <div class="row">
-      <b>${titleLinkHtml(j)}${tf(j)}</b> — ${esc(j.company)} (fit ${fitStr(j.fit)}, Secondary)${j.newBadge?'<span class="badge-new">New</span>':''} ${hideBtn(j)}<br>
-      <span style="color:var(--muted)">${esc(j.notes)}</span>
-      ${j.applyUrl ? ` &nbsp; <a href="${j.applyUrl}" target="_blank" rel="noopener">View posting →</a>` : ' &nbsp; <span class="nolink">no link on file</span>'}
-    </div>`).join('');
 }
 
 function renderSetupNotes(){
@@ -541,6 +550,7 @@ hideCount();
 renderWorkingOn();
 renderTracking();
 attachSort('table-matches','matches',()=>{renderMatchesTable();});
+attachSort('table-secondary','secondary',()=>{renderSecondaryTable();});
 attachSort('table-tracking','tracking',()=>{renderTracking(); trkUpdateCount();});
 trkUpdateCount();
 trkSync();
