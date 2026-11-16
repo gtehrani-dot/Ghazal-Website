@@ -108,6 +108,20 @@
   .pill-no{background:#f3f4f6;color:#4b5563}
   .pill-pending{background:#fef3c7;color:#92400e}
   #table-experts td{font-size:16px}
+  #table-matches{table-layout:fixed;width:100%}
+  #table-matches th,#table-matches td{overflow-wrap:break-word}
+  #table-matches th:nth-child(1){width:13%}
+  #table-matches th:nth-child(2){width:9%}
+  #table-matches th:nth-child(3){width:5%}
+  #table-matches th:nth-child(4){width:6%}
+  #table-matches th:nth-child(5){width:19%}
+  #table-matches th:nth-child(6){width:16%}
+  #table-matches th:nth-child(7){width:6%}
+  #table-matches th:nth-child(8){width:5%}
+  #table-matches th:nth-child(9){width:10%}
+  #table-matches th:nth-child(10){width:6%}
+  #table-matches th:nth-child(11){width:5%}
+  #table-matches td:nth-child(3),#table-matches td:nth-child(4),#table-matches td:nth-child(7),#table-matches td:nth-child(8),#table-matches td:nth-child(10){white-space:nowrap}
 </style>
 </head>
 <body>
@@ -130,7 +144,7 @@
   <div class="trk-hint" style="margin:0 0 8px">The first three roles in the Primary table below (highest average of Fit and Likelihood).</div>
   <div id="top3"></div>
   <h2 class="section">Primary matches</h2>
-  <div class="trk-hint" style="margin:0 0 6px">Only roles that clear every bar: Fit 75%+, Likelihood 60%+, posted within the last 30 days, and confirmed open on the employer's own job page. Ranked by the average of Fit and Likelihood; rows 1–3 are the Top 3 above. Network = 1st / 2nd-degree connections who work there.</div>
+  <div class="trk-hint" style="margin:0 0 6px">Only roles that clear every bar: Fit 75%+, Likelihood 60%+, posted within the last 30 days, and confirmed open on the employer's own job page. Ranked by the average of Fit and Likelihood; rows 1–3 are the Top 3 above. 1st / 2nd = your first- and second-degree connections who work there.</div>
   <span class="trk-hint" id="hide-count" style="margin-left:12px"></span>
   <input id="match-filter" type="search" placeholder="Filter roles: type a word such as remote, travel, healthcare" oninput="renderMatchesTable()" style="width:100%;max-width:520px;padding:8px 10px;margin:8px 0;border:1px solid var(--line);border-radius:8px;font-size:16px">
   <div class="trk-hint" style="margin:8px 0">* May contain technical language: read the job description before applying.</div>
@@ -287,10 +301,10 @@ function matchCols(second){
   if(second) c.push({key:'why', label:'Why Secondary', sortable:false});
   return c.concat([
     {key:'fit', label:'Fit %', sortable:true},
-    {key:'likelihood', label:'Likelihood %', sortable:true},
+    {key:'likelihood', label:'Likely %', sortable:true},
     {key:'pros', label:'Pros', sortable:false},
     {key:'cons', label:'Cons', sortable:false},
-    {key:'net1', label:'Network 1st / 2nd', sortable:true},
+    {key:'net1', label:'1st / 2nd', sortable:true},
     {key:'days', label:'Days Active', sortable:true},
     {key:'salary', label:'Salary', sortable:false},
     {key:'apply', label:'Apply', sortable:false},
