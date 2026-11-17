@@ -458,6 +458,7 @@ function renderWorkingOn(){
         <span>Location <b>${esc(j.location)}</b></span>
       </div>
       <div class="honest">${esc(j.notes)}</div>
+      ${(j.files||[]).length?'<div class="stats">'+j.files.map(f=>`<a href="${f[1]}">${esc(f[0])}</a>`).join(' · ')+'</div>':''}
     </div>`).join('');
 }
 
