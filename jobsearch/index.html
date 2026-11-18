@@ -546,9 +546,10 @@ function trkVal(t,f){ const e=trkLoad()[t.id+'|'+f]; return (e && e.seed===trkSe
 function trkAttr(s){ return String(s).replace(/&/g,'&amp;').replace(/"/g,'&quot;').replace(/</g,'&lt;'); }
 const TRK_LONG=['connectionReachOut','throughWho','notes'];
 function trkInput(t,f){ const v=trkVal(t,f); const ch=v!==trkSeed(t,f);
-  if(TRK_LONG.includes(f)) return `<textarea class="trk-long ${ch?'edited':''}" rows="2" data-id="${trkAttr(t.id)}" data-field="${f}" oninput="trkEdit(this);trkGrow(this)">${esc(v)}</textarea>`;
+  if(TRK_LONG.includes(f)) return `<textarea class="trk-long ${ch?'edited':''}" rows="${Math.max(2,Math.min(6,Math.ceil(String(v||'').length/(f==='notes'?30:22))))}" data-id="${trkAttr(t.id)}" data-field="${f}" oninput="trkEdit(this);trkGrow(this)">${esc(v)}</textarea>`;
   return `<input type="text" class="${ch?'edited':''}" data-id="${trkAttr(t.id)}" data-field="${f}" value="${trkAttr(v)}" oninput="trkEdit(this)">`; }
-function trkGrow(el){ el.style.height='auto'; el.style.height=Math.min(el.scrollHeight+2,260)+'px'; }
+function trkGrow(el){ if(!el.offsetParent) return; el.style.height='auto'; el.style.height=Math.min(el.scrollHeight+2,260)+'px'; }
+document.addEventListener('click',e=>{ if(e.target.closest('button')) setTimeout(()=>{ if(typeof trkGrowAll==='function') trkGrowAll(); },60); });
 function trkGrowAll(){ document.querySelectorAll('#table-tracking textarea.trk-long').forEach(trkGrow); }
 const trkTimers={};
 function trkEdit(el){ const t=TRACKING.find(x=>x.id===el.dataset.id); if(!t) return;
