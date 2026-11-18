@@ -84,14 +84,17 @@
   #table-tracking th,#table-tracking td{padding:8px 6px;vertical-align:top;white-space:normal}
   #table-tracking td{overflow-wrap:anywhere}
   #table-tracking th{font-size:15px;overflow-wrap:normal;word-break:normal}
-  #table-tracking th:nth-child(1){width:21%}
-  #table-tracking th:nth-child(2){width:11%}
-  #table-tracking th:nth-child(3),#table-tracking th:nth-child(6){width:8%}
-  #table-tracking th:nth-child(4),#table-tracking th:nth-child(5),#table-tracking th:nth-child(7){width:6%}
-  #table-tracking th:nth-child(8){width:8%}
-  #table-tracking th:nth-child(9),#table-tracking th:nth-child(10){width:10%}
-  #table-tracking th:nth-child(11){width:6%}
-  #table-tracking input[type=text]{font-size:14px;padding:4px 5px}
+  #table-tracking th:nth-child(1){width:18%}
+#table-tracking th:nth-child(2){width:10%}
+#table-tracking th:nth-child(3){width:8%}
+#table-tracking th:nth-child(4),#table-tracking th:nth-child(5),#table-tracking th:nth-child(7),#table-tracking th:nth-child(11){width:5%}
+#table-tracking th:nth-child(6){width:7%}
+#table-tracking th:nth-child(8){width:8%}
+#table-tracking th:nth-child(9){width:13%}
+#table-tracking th:nth-child(10){width:16%}
+#table-tracking textarea.trk-long{width:100%;box-sizing:border-box;font:inherit;font-size:14px;line-height:1.35;padding:4px 5px;resize:vertical;min-height:3.2em;overflow:auto;border:1px solid var(--line);border-radius:4px;color:inherit;background:#fff}
+#table-tracking textarea.trk-long.edited{background:#fff4c2;border-color:#e0b100}
+#table-tracking input[type=text]{font-size:14px;padding:4px 5px}
   #table-tracking .scam-flag,#table-tracking .promote-btn{margin-right:6px}
   .trk-bar{display:flex;align-items:center;gap:14px;flex-wrap:wrap;margin:0 0 14px}
   .trk-hint{color:var(--muted);font-size:15px}
@@ -510,6 +513,7 @@ function renderTracking(){
     html += scam.map(t=>rowHtml(t,true)).join('');
   }
   tbody.innerHTML = html;
+  setTimeout(trkGrowAll,0);
 }
 // Promote a "scam potential" row to the real list. Saved like any other cell edit (field "section").
 function trkPromote(btn){ const t=TRACKING.find(x=>x.id===btn.dataset.id); if(!t) return;
@@ -540,8 +544,12 @@ function trkSeed(t,f){ return (t[f]===null||t[f]===undefined) ? '' : String(t[f]
 // catches up after a rebuild, the old edit is ignored.
 function trkVal(t,f){ const e=trkLoad()[t.id+'|'+f]; return (e && e.seed===trkSeed(t,f)) ? e.value : trkSeed(t,f); }
 function trkAttr(s){ return String(s).replace(/&/g,'&amp;').replace(/"/g,'&quot;').replace(/</g,'&lt;'); }
+const TRK_LONG=['connectionReachOut','throughWho','notes'];
 function trkInput(t,f){ const v=trkVal(t,f); const ch=v!==trkSeed(t,f);
+  if(TRK_LONG.includes(f)) return `<textarea class="trk-long ${ch?'edited':''}" rows="2" data-id="${trkAttr(t.id)}" data-field="${f}" oninput="trkEdit(this);trkGrow(this)">${esc(v)}</textarea>`;
   return `<input type="text" class="${ch?'edited':''}" data-id="${trkAttr(t.id)}" data-field="${f}" value="${trkAttr(v)}" oninput="trkEdit(this)">`; }
+function trkGrow(el){ el.style.height='auto'; el.style.height=Math.min(el.scrollHeight+2,260)+'px'; }
+function trkGrowAll(){ document.querySelectorAll('#table-tracking textarea.trk-long').forEach(trkGrow); }
 const trkTimers={};
 function trkEdit(el){ const t=TRACKING.find(x=>x.id===el.dataset.id); if(!t) return;
   const f=el.dataset.field, seed=trkSeed(t,f), o=trkLoad(), k=t.id+'|'+f;
